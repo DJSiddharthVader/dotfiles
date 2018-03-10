@@ -1,0 +1,15 @@
+pane	opening	1	:bash	0	:-	1	:/home/sidreed/Documents/papers/igem	1	qpdfview	:qpdfview timPaper.pdf DNAOragamiForProteinAssembly.pdf fluxEnhancementWithScaffolding.pdf isothermalDNASStructureFormation.pdf ModellingKineticsInsideCells.pdf ProximityProgramableDNAAssemblyLine.pdf Stochastic modelling for systems biology.pdf 10.1126@science.aam5488.pdf
+pane	opening	2	:bash	1	:*	1	:/home/sidreed/Dropbox/MaciGEMII	1	bash	:
+pane	strainPicking	1	:running	0	:-M	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	strainPicking	2	:editing	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	vi	:vi -p pullFamilyData.py cleanFamilyData.py betterStackedBarPlot.py
+pane	strainPicking	3	:ipython	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/jsons	1	bash	:
+pane	strainPicking	4	:git	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	strainPicking	5	:libreoffice	1	:*	1	:/home/sidreed/adapsyn/nmutils/nmutils	1	vi	:vi -p chemutils.py exceptions.py generalutils.py genomeutils.py grapeutils.py __init__.py ioutils.py moleculeutils.py ms2utils.py oliveutils.py orfblastutils.py peakutils.py prismutils.py riboutils.py
+window	opening	1	0	:-	af7e,129x40,0,0,1
+window	opening	2	1	:*	af7f,129x40,0,0,2
+window	strainPicking	1	0	:-M	c8c0,152x47,0,0,3
+window	strainPicking	2	0	:	c8c1,152x47,0,0,4
+window	strainPicking	3	0	:	c8c2,152x47,0,0,5
+window	strainPicking	4	0	:	c8c3,152x47,0,0,6
+window	strainPicking	5	1	:*	c8c4,152x47,0,0,7
+state	strainPicking	

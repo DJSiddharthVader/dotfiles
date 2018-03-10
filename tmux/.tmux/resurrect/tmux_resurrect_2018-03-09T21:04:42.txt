@@ -1,0 +1,20 @@
+pane	5	1	:running	1	:*	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	vi	:vi danielChrisDiffPlot.py
+pane	5	1	:running	1	:*	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	0	bash	:
+pane	5	2	:editing	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	vi	:vi -p scripts/barPlotMethods.py scripts/stackbarplot.py
+pane	5	3	:ipython	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	0	python	:/usr/bin/python /usr/bin/ipython
+pane	5	3	:ipython	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	python	:/usr/bin/python /usr/bin/ipython
+pane	5	4	:git	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	9	1	:vi	1	:*	1	:/home/sidreed/Misc/goldingLabPresentation	1	vi	:vi presentation.tex
+pane	9	1	:vi	1	:*	2	:/home/sidreed/.vim/bundle	0	bash	:
+pane	music	1	:ncmpcpp	1	:*	1	:/home/sidreed	0	cava	:cava
+pane	music	1	:ncmpcpp	1	:*	2	:/home/sidreed	1	ncmpcpp	:ncmpcpp -b /home/sidreed/.ncmpcpp/bindings
+pane	music	2	:config	0	:-	1	:/home/sidreed/.ncmpcpp	1	vi	:vi config
+pane	music	2	:config	0	:-	2	:/usr/share/man	0	man	:man ncmpcpp
+window	5	1	1	:*	ffd8,135x40,0,0{67x40,0,0,4,67x40,68,0,14}
+window	5	2	0	:-	adc2,135x40,0,0,5
+window	5	3	0	:	ff0b,135x40,0,0{67x40,0,0,6,67x40,68,0,7}
+window	5	4	0	:	adc5,135x40,0,0,8
+window	9	1	1	:*	5b72,170x45,0,0{85x45,0,0,22,84x45,86,0,23}
+window	music	1	1	:*	bf4f,170x45,0,0[170x23,0,0,9,170x21,0,24,10]
+window	music	2	0	:-	96fe,170x45,0,0{84x45,0,0,11,85x45,85,0,12}
+state	9	

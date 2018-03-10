@@ -1,0 +1,16 @@
+pane	music	1	:cmus	1	:*	1	:/home/sidreed/cmus-visualizer	0	./cmusvis	:./cmusvis
+pane	music	1	:cmus	1	:*	2	:/home/sidreed	1	cmus	:cmus
+pane	music	2	:bash	0	:-	1	:/home/sidreed	1	bash	:bash /home/sidreed/pipes.sh/pipes.sh
+pane	strainPicking	1	:running	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	strainPicking	2	:editing	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	vi	:vi -p pullFamilyData.py cleanFamilyData.py betterStackedBarPlot.py
+pane	strainPicking	3	:ipython	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/jsons	1	bash	:
+pane	strainPicking	4	:git	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	strainPicking	5	:libreoffice	1	:*	1	:/home/sidreed/adapsyn/nmutils/nmutils	1	bash	:
+window	music	1	1	:*	fddf,152x47,0,0[152x24,0,0,35,152x22,0,25,39]
+window	music	2	0	:-	6497,152x47,0,0,37
+window	strainPicking	1	0	:-	c8c1,152x47,0,0,4
+window	strainPicking	2	0	:	c8c2,152x47,0,0,5
+window	strainPicking	3	0	:	c8c3,152x47,0,0,6
+window	strainPicking	4	0	:	c8c4,152x47,0,0,7
+window	strainPicking	5	1	:*	c8c5,152x47,0,0,8
+state	music	

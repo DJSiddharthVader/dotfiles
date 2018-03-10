@@ -1,0 +1,28 @@
+pane	0	1	:bash	1	:*	1	:/home/sidreed	1	bash	:
+pane	5	1	:running	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	python	:python scripts/stackbarplot.py jsons/dataWithoutUUgroups_050318SR/ Genus
+pane	5	1	:running	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	0	bash	:
+pane	5	2	:editing	1	:*	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	vi	:vi -p scripts/barPlotMethods.py scripts/stackbarplot.py
+pane	5	3	:ipython	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/jsons	1	python	:/usr/bin/python /usr/bin/ipython
+pane	5	4	:bash	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	music	1	:ncmpcpp	1	:*	1	:/home/sidreed/Music/songs	0	cava	:cava
+pane	music	1	:ncmpcpp	1	:*	2	:/home/sidreed	1	ncmpcpp	:ncmpcpp
+pane	music	2	:config	0	:-	1	:/home/sidreed/.ncmpcpp	1	vi	:vi config
+pane	music	2	:config	0	:-	2	:/usr/share/man	0	man	:man ncmpcpp
+pane	strainPicking	1	:running	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	strainPicking	2	:editing	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	vi	:vi -p pullFamilyData.py cleanFamilyData.py betterStackedBarPlot.py
+pane	strainPicking	3	:ipython	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/jsons	1	bash	:
+pane	strainPicking	4	:git	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	strainPicking	5	:libreoffice	1	:*	1	:/home/sidreed/adapsyn/nmutils/nmutils	1	bash	:
+window	0	1	1	:*	af7d,129x40,0,0,0
+window	5	1	0	:	10ae,158x47,0,0{54x47,0,0,18,103x47,55,0,19}
+window	5	2	1	:*	e60f,158x47,0,0,20
+window	5	3	0	:	e610,158x47,0,0,21
+window	5	4	0	:-	e611,158x47,0,0,22
+window	music	1	1	:*	5ee3,158x47,0,0[158x24,0,0,13,158x22,0,25,1]
+window	music	2	0	:-	a1ff,158x47,0,0{79x47,0,0,3,78x47,80,0,17}
+window	strainPicking	1	0	:-	af82,129x40,0,0,5
+window	strainPicking	2	0	:	af83,129x40,0,0,6
+window	strainPicking	3	0	:	af84,129x40,0,0,7
+window	strainPicking	4	0	:	af85,129x40,0,0,8
+window	strainPicking	5	1	:*	af86,129x40,0,0,9
+state	5	

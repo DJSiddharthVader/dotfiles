@@ -1,0 +1,19 @@
+pane	0	1	:bash	1	:*	1	:/home/sidreed	1	bash	:
+pane	5	1	:running	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	5	1	:running	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	0	bash	:
+pane	5	2	:editing	1	:*	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	vi	:vi -p scripts/barPlotMethods.py scripts/stackbarplot.py
+pane	5	3	:ipython	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/jsons	1	bash	:
+pane	5	3	:ipython	0	:-	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	0	vi	:vi jsons/uudata_060318SR.json
+pane	5	4	:bash	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	music	1	:ncmpcpp	1	:*	1	:/home/sidreed	1	cava	:cava
+pane	music	1	:ncmpcpp	1	:*	2	:/home/sidreed	0	ncmpcpp	:ncmpcpp -b /home/sidreed/.ncmpcpp/bindings
+pane	music	2	:config	0	:-	1	:/home/sidreed/.ncmpcpp	1	vi	:vi config
+pane	music	2	:config	0	:-	2	:/usr/share/man	0	man	:man ncmpcpp
+window	0	1	1	:*	cbbd,158x47,0,0,0
+window	5	1	0	:	0564,158x47,0,0{78x47,0,0,1,79x47,79,0,2}
+window	5	2	1	:*	cbc0,158x47,0,0,3
+window	5	3	0	:-	8571,158x47,0,0{78x47,0,0,4,79x47,79,0,5}
+window	5	4	0	:	cbc3,158x47,0,0,6
+window	music	1	1	:*	0ef5,158x47,0,0[158x24,0,0,7,158x22,0,25,8]
+window	music	2	0	:-	3d90,158x47,0,0{77x47,0,0,9,80x47,78,0,10}
+state	music	5
