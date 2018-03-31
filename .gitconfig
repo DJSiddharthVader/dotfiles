@@ -2,4 +2,9 @@
 	email = sidreed34@gmail.com
 	name = Sid Reed
 [push]
-	default = simple
+    default = simple
+	url = https://DJSiddharthVader@github.com/DJSiddharthVader/dotfiles.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
