@@ -87,10 +87,10 @@ set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
 " In many terminal emulators the mouse works just fine, thus enable it.
-if has('mouse')
-  set mouse=a
-endif
-
+"if has('mouse')
+"  set mouse=a
+"endif
+set mouse=
 "turns on spell check
 autocmd FileType latex,tex setlocal spell
 
@@ -140,44 +140,16 @@ set relativenumber
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
 syntax enable
-
-try
-    colorscheme fusion
-catch
-endtry
-
 set background=dark
-
-" Set extra options when running in GUI mode
-if has("gui_running")
-    set guioptions-=T
-    set guioptions-=e
-    set t_Co=256
-    set guitablabel=%M\ %t
-endif
-
-" Colorscheme
-if has("gui_running")
-    set background=dark
-    colorscheme tomorrow-night
-else
-    "colorscheme hybrid
-    colorscheme new-railscasts
-    let g:solarized_termcolors=256
-endif
-
+"colorscheme hybrid
+"colorscheme new-railscasts
+colorscheme angr
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
-
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
-
 " Set font according to system
-if has("mac") || has("macunix")
-    set gfn=Hack\ Source\ Code\ Pro:h15,Menlo:h15
-elseif has("win16") || has("win32")
-    set gfn=Hack\ Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
-elseif has("linux")
+if has("linux")
     set gfn=Hack\ Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
 elseif has("unix")
     set gfn=Monospace\ 11
@@ -368,7 +340,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 set laststatus=2
 
 " Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ %l,%c
+set statusline=\ %l,%c\ \ %{HasPaste()}%F%m%r%h\ %w "CWD:\ %r%{getcwd()}%h\ \
 
 " => vim-airline config (force color)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -414,13 +386,6 @@ nmap <M-j> mz:m+<cr>`z
 nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-if has("mac") || has("macunix")
-  nmap <D-j> <M-j>
-  nmap <D-k> <M-k>
-  vmap <D-j> <M-j>
-  vmap <D-k> <M-k>
-endif
 
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
