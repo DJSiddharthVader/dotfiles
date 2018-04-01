@@ -1,0 +1,28 @@
+pane	chartmaker	1	:kkplots	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	chartmaker	1	:kkplots	0	:-	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	0	vi	:vi scripts/kristaGenusNumbers.py
+pane	chartmaker	2	:pickplots	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	0	vi	:vi stackbarplot.py
+pane	chartmaker	2	:pickplots	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/jsons/allInternalGenera_080318SR	1	bash	:
+pane	chartmaker	3	:curl	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	bash	:
+pane	chartmaker	4	:daveCSV	1	:*Z	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification	1	python	:/usr/bin/python /usr/local/bin/ipython
+pane	chartmaker	4	:daveCSV	1	:*Z	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification	0	python	:/usr/bin/python /usr/local/bin/jupyter-notebook
+pane	chartmaker	4	:daveCSV	1	:*Z	3	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification	0	bash	:
+pane	chartmaker	5	:git	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff	1	bash	:
+pane	chartmaker	5	:git	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification	0	bash	:
+pane	music	1	:ncmpcpp	1	:*	1	:/home/sidreed	1	bash	:
+pane	music	1	:ncmpcpp	1	:*	2	:/home/sidreed	0	bash	:
+pane	music	2	:config	0	:	1	:/home/sidreed/.ncmpcpp	1	vi	:vi /home/sidreed/.tmux.conf
+pane	music	2	:config	0	:	2	:/usr/share/man	0	man	:man ncmpcpp
+pane	music	3	:bash	0	:-	1	:/home/sidreed/Pictures/Pics	1	bash	:
+pane	music	3	:bash	0	:-	2	:/home/sidreed/Pictures/Pics	0	bash	:
+pane	taxonomy	1	:bash	1	:*	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/weightedTaxonomyMatching	0	bash	:
+pane	taxonomy	1	:bash	1	:*	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/weightedTaxonomyMatching	1	bash	:
+window	chartmaker	1	0	:-	614e,99x51,0,0[99x25,0,0,2,99x25,0,26,22]
+window	chartmaker	2	0	:	b6a1,99x51,0,0{49x51,0,0,3,49x51,50,0,4}
+window	chartmaker	3	0	:	b122,99x51,0,0,5
+window	chartmaker	4	1	:*Z	9c9c,99x51,0,0{49x51,0,0,7,49x51,50,0[49x25,50,0,6,49x25,50,26,21]}
+window	chartmaker	5	0	:	9722,99x51,0,0{50x51,0,0,9,48x51,51,0,10}
+window	music	1	1	:*	85e6,199x53,0,0[199x35,0,0,11,199x17,0,36,12]
+window	music	2	0	:	e8fc,199x53,0,0{99x53,0,0,13,99x53,100,0,14}
+window	music	3	0	:-	e8ff,199x53,0,0{99x53,0,0,15,99x53,100,0,16}
+window	taxonomy	1	1	:*	e902,199x53,0,0{99x53,0,0,17,99x53,100,0,18}
+state	chartmaker	

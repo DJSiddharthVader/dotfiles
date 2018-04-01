@@ -1,0 +1,40 @@
+pane	0	1	:bash	1	:*	1	:/home/sidreed	1	bash	:
+pane	chartmaker	1	:running	1	:*	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	vi	:vi -p UUMethodComparison.py danielChrisDiffPlot.py
+pane	chartmaker	1	:running	1	:*	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	0	bash	:
+pane	chartmaker	2	:editing	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/csvs	1	bash	:
+pane	chartmaker	3	:ipython	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/jsons	0	bash	:
+pane	chartmaker	3	:ipython	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	chartmaker	4	:bash	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	bash	:
+pane	gramMols	1	:vi	1	:*	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification/scripts	0	vi	:vi checkstains.py
+pane	gramMols	1	:vi	1	:*	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification	1	bash	:
+pane	gramMols	1	:vi	1	:*	3	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification/jsons	0	bash	:
+pane	gramMols	2	:ipython	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification/jsons	1	bash	:
+pane	gramMols	2	:ipython	0	:	2	:/home/sidreed	0	bash	:
+pane	gramMols	2	:ipython	0	:	3	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification/jsons	0	bash	:
+pane	gramMols	3	:git	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification	1	bash	:
+pane	igemreport	1	:tex	1	:*	1	:/home/sidreed/Documents/igem2018Proposal	1	vi	:vi -p main.tex refs.bib
+pane	igemreport	2	:bash	0	:-	1	:/home/sidreed/Documents/igem2018Proposal	1	bash	:
+pane	music	1	:ncmpcpp	1	:*	1	:/home/sidreed	1	bash	:
+pane	music	1	:ncmpcpp	1	:*	2	:/home/sidreed	0	bash	:
+pane	music	2	:config	0	:	1	:/home/sidreed/.ncmpcpp	1	vi	:vi /home/sidreed/.tmux.conf
+pane	music	2	:config	0	:	2	:/usr/share/man	0	man	:man ncmpcpp
+pane	music	3	:bash	0	:-	1	:/home/sidreed/Pictures/Pics	1	bash	:
+pane	music	3	:bash	0	:-	2	:/home/sidreed/Pictures/Pics	0	bash	:
+pane	taxonomy	1	:python	1	:*M	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/weightedTaxonomyMatching	1	bash	:
+pane	taxonomy	1	:python	1	:*M	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/weightedTaxonomyMatching/treeDistanceScheme	0	bash	:
+pane	taxonomy	1	:python	1	:*M	3	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/weightedTaxonomyMatching/treeDistanceScheme	0	vi	:vi scripts/scoreStrainTaxonomy.py
+window	0	1	1	:*	bf3d,199x53,0,0,0
+window	chartmaker	1	1	:*	d751,199x53,0,0{99x53,0,0,1,99x53,100,0,2}
+window	chartmaker	2	0	:	bf40,199x53,0,0,3
+window	chartmaker	3	0	:	5759,199x53,0,0{99x53,0,0,4,99x53,100,0,5}
+window	chartmaker	4	0	:-	bf43,199x53,0,0,6
+window	gramMols	1	1	:*	8f6b,199x53,0,0{99x53,0,0,7,99x53,100,0[99x30,100,0,8,99x22,100,31,9]}
+window	gramMols	2	0	:	4367,199x53,0,0{99x53,0,0[99x30,0,0,10,99x22,0,31,11],99x53,100,0,12}
+window	gramMols	3	0	:-	5fd2,199x53,0,0,13
+window	igemreport	1	1	:*	5fd3,199x53,0,0,14
+window	igemreport	2	0	:-	5fd4,199x53,0,0,15
+window	music	1	1	:*	05ee,199x53,0,0[199x35,0,0,16,199x17,0,36,17]
+window	music	2	0	:	6904,199x53,0,0{99x53,0,0,18,99x53,100,0,19}
+window	music	3	0	:-	28f9,199x53,0,0{99x53,0,0,20,99x53,100,0,21}
+window	taxonomy	1	1	:*M	ccd6,199x53,0,0{94x53,0,0[94x27,0,0,22,94x25,0,28,24],104x53,95,0,23}
+state	chartmaker	

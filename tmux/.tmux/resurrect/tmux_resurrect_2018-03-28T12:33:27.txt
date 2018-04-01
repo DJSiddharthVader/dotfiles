@@ -1,0 +1,2 @@
+pane	chartmaker	1	:kkplots	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	vi	:vi -p UUMethodComparison.py danielChrisDiffPlot.py
+pane	chartmaker	1	:kkplots	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	0	bash	:

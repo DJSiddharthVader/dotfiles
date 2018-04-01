@@ -1,0 +1,30 @@
+pane	chartmaker	1	:kkplots	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	0	vi	:vi -p UUMethodComparison.py danielChrisDiffPlot.py
+pane	chartmaker	1	:kkplots	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	chartmaker	2	:ipython	0	:-	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/jsons	0	bash	:
+pane	chartmaker	2	:ipython	0	:-	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification/jsons	1	bash	:
+pane	chartmaker	3	:daveCSV	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification/scripts	0	vi	:vi -p checkstains.py stainMethods.py
+pane	chartmaker	3	:daveCSV	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/gramStainingQuatification	1	bash	:
+pane	chartmaker	4	:curl	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	1	bash	:
+pane	chartmaker	5	:pickplots	0	:	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/scripts	0	vi	:vi stackbarplot.py
+pane	chartmaker	5	:pickplots	0	:	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart	1	bash	:
+pane	chartmaker	6	:bash	1	:*	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff	0	bash	:
+pane	chartmaker	6	:bash	1	:*	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/familyBarChart/csvs	1	bash	:
+pane	music	1	:ncmpcpp	1	:*	1	:/home/sidreed	1	bash	:
+pane	music	1	:ncmpcpp	1	:*	2	:/home/sidreed	0	bash	:
+pane	music	2	:config	0	:	1	:/home/sidreed/.ncmpcpp	1	vi	:vi /home/sidreed/.tmux.conf
+pane	music	2	:config	0	:	2	:/usr/share/man	0	man	:man ncmpcpp
+pane	music	3	:bash	0	:-	1	:/home/sidreed/Pictures/Pics	1	bash	:
+pane	music	3	:bash	0	:-	2	:/home/sidreed/Pictures/Pics	0	bash	:
+pane	taxonomy	1	:bash	1	:*	1	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/weightedTaxonomyMatching	0	bash	:
+pane	taxonomy	1	:bash	1	:*	2	:/home/sidreed/adapsyn/strain_ordering/sidStuff/diversityRanking/weightedTaxonomyMatching	1	bash	:
+window	chartmaker	1	0	:	bfec,170x45,0,0{84x45,0,0,2,85x45,85,0,3}
+window	chartmaker	2	0	:-	bff5,170x45,0,0{84x45,0,0,4,85x45,85,0,5}
+window	chartmaker	3	0	:	bffe,170x45,0,0{84x45,0,0,6,85x45,85,0,7}
+window	chartmaker	4	0	:	c045,170x45,0,0,8
+window	chartmaker	5	0	:	2d4e,170x45,0,0{84x45,0,0,10,85x45,85,0,9}
+window	chartmaker	6	1	:*	1b76,170x45,0,0{85x45,0,0,33,84x45,86,0,34}
+window	music	1	1	:*	45ed,199x53,0,0[199x35,0,0,25,199x17,0,36,26]
+window	music	2	0	:	a903,199x53,0,0{99x53,0,0,27,99x53,100,0,28}
+window	music	3	0	:-	e901,199x53,0,0{99x53,0,0,29,99x53,100,0,30}
+window	taxonomy	1	1	:*	68fb,199x53,0,0{99x53,0,0,31,99x53,100,0,32}
+state	chartmaker	
