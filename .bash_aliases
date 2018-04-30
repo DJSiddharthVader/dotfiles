@@ -22,5 +22,5 @@ alias hon="~/.scripts/togglescreen.sh hdmi 1"
 alias voff="~/.scripts/togglescreen.sh vga 0"
 alias von="~/.scripts/togglescreen.sh vga 1"
 alias python="python3"
-
+alias shln="ls -la | grep '\->'"
 
