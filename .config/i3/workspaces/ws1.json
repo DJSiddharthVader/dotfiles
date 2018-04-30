@@ -1,0 +1,25 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 3,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 686,
+       "width": 787,
+       "x": 0,
+       "y": 0
+    },
+    "name": "ATP/OVERVIEW.pdf at master · magarveylab/ATP - Mozilla Firefox",
+    "percent": 1,
+    "swallows": [
+       {
+        "class": "^Firefox$",
+        "instance": "^Navigator$",
+        "title": "^ATP\\/OVERVIEW\\.pdf\\ at\\ master\\ ·\\ magarveylab\\/ATP\\ \\-\\ Mozilla\\ Firefox$",
+        "transient_for": "^$",
+        "window_role": "^browser$"
+       }
+    ],
+    "type": "con"
+}
+

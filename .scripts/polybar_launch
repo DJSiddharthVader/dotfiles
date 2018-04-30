@@ -1,0 +1,32 @@
+#!/bin/sh
+#!/usr/bin/env sh
+
+# Terminate already running bar instances
+killall -q polybar
+# Wait until the processes have been shut down
+while pgrep -x polybar >/dev/null; do sleep 1; done
+
+if type "xrandr"; then
+    for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+        MONITOR=$m polybar lap &
+    done
+else
+    polybar lap &
+fi
+#for i in $(polybar -m | awk -F: '{print $1}'); do MONITOR=$i polybar example -c ~/.config/polybar/config & done
+##feh --bg-scale ~/.config/wall.png
+#polybar lap --config ~/.config/polybar/config
+#polybar work --config ~/.config/polybar/config
+#
+#echo "Bars launched..."
+#for i in $(polybar -m | awk -F: '{print $1}');
+#    do
+#    if [ $i = 'HDMI-1' ]
+#    then
+#        echo $i
+#        polybar hdmi -c ~/.config/polybar/config &
+#    else
+#        MONITOR=$i polybar lap -c ~/.config/polybar/config &
+#    fi
+#done
+#echo "Bars launch1ed..."

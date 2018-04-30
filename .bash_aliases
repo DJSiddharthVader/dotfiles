@@ -1,0 +1,26 @@
+alias ls='ls --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias rs='source ~/.bashrc'
+alias rm='rm -i'
+alias gis='git status'
+alias gia='git add'
+alias gic='git commit'
+alias gip='git push'
+alias mc='mv'
+alias pdf='qpdfview'
+alias plx='pdflatex'
+alias tmux='tmux -2'
+alias grid='ssh -p 2207 reeds@magarveylab-gw.mcmaster.ca'
+alias mserv='ssh reeds@mserv.magarveylab.ca'
+alias top='htop'
+alias pipes='~/pipes.sh/pipes.sh'
+alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
+alias hoff="~/.scripts/togglescreen.sh hdmi 0"
+alias hon="~/.scripts/togglescreen.sh hdmi 1"
+alias voff="~/.scripts/togglescreen.sh vga 0"
+alias von="~/.scripts/togglescreen.sh vga 1"
+alias python="python3"
+
+

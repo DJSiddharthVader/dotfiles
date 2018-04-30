@@ -1,0 +1,12 @@
+ioctl failed for ioctl failed for wlan0, errno = wlan0, errno = 19 (19No such device) (No such device)
+
+ioctl failed for ioctl failed for wlp2s0, errno = 19 (No such devicewlp2s0, errno = 19 (No such device))
+
+ioctl failed for wlp3s0, errno = 19 (No such device)
+ioctl failed for wlp3s0, errno = 19 (No such device)
+ALSA lib pcm.c:2266:(snd_pcm_open_noupdate) Unknown PCM mic_call
+ALSA lib pcm.c:2266:(snd_pcm_open_noupdate) Unknown PCM call
+ALSA lib pcm.c:2266:(snd_pcm_open_noupdate) Unknown PCM mic_call
+ALSA lib pcm.c:2266:(snd_pcm_open_noupdate) Unknown PCM call
+ALSA lib pcm.c:2266:(snd_pcm_open_noupdate) Unknown PCM mic_call
+ALSA lib pcm.c:2266:(snd_pcm_open_noupdate) Unknown PCM call

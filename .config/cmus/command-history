@@ -1,0 +1,9 @@
+quit
+tmux -detach-client -s cmus
+bind -f common q tmux detach-client -s cmus
+bind -f common q !tmux detach-client -s cmus
+add ~/Music/songs/
+set dsp.alsa.device=
+add ~/Music/
+1
+q

@@ -1,2 +1,11 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =0
+let g:netrw_dirhist_cnt =9
+let g:netrw_dirhist_1='/home/sidreed/gitrepos/coursePlanning2017'
+let g:netrw_dirhist_2='/home/sidreed/gitrepos/PycharmProjects'
+let g:netrw_dirhist_3='/home/sidreed/adapsyn'
+let g:netrw_dirhist_4='/home/sidreed/.config/polybar'
+let g:netrw_dirhist_5='/home/sidreed/.mpd/playlists'
+let g:netrw_dirhist_6='/home/sidreed/.config/cmus'
+let g:netrw_dirhist_7='/home/sidreed/zscroll'
+let g:netrw_dirhist_8='/home/sidreed/cava'
+let g:netrw_dirhist_9='/home/sidreed/.config/cava'
