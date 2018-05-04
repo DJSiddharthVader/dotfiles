@@ -1,0 +1,10 @@
+.vim/view
+.tmux/resurrect
+*.pid
+.mpd/mpd.log
+.mpd/mpdstate
+.config/libreoffice
+.config/pulse/*.tdb
+.config/i3/syndaemon.pid
+python/profile_default/history.sqlite
+.ncmpcpp/error.log
