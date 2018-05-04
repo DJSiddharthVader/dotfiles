@@ -159,11 +159,12 @@ bindsym $mod+Shift+a		gaps inner current minus 5
 
 #bindsym $mod+a		[instance="math"] scratchpad show; [instance="math"] move position center
 #bindsym $mod+Shift+a		exec $term -e ncpamixer
+
 bindsym $mod+s          exec slack &
 
-
-bindsym $mod+d			exec dmenu_run
-bindsym $mod+Shift+d exec --no-startup-id xrandr --output --auto eDP-1 --output HDMI-1 auto --right-of eDP-1
+#bindsym $mod+d			exec dmenu_run
+bindsym $mod+d			exec rofi -show run
+#bindsym $mod+Shift+d exec --no-startup-id xrandr --output --auto eDP-1 --output HDMI-1 auto --right-of eDP-1
 
 bindsym $mod+f			fullscreen toggle
 ##bindsym $mod+Shift+f

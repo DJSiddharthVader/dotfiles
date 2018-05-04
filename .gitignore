@@ -8,3 +8,4 @@
 .config/i3/syndaemon.pid
 python/profile_default/history.sqlite
 .ncmpcpp/error.log
+.config/i3/screen.png
