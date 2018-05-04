@@ -335,8 +335,8 @@
        style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:10.66666667px;line-height:1.25;letter-spacing:0px;word-spacing:0px"
        selcue="1">
       <group
-         display_unit="0"
-         id="lineheight" />
+         id="lineheight"
+         display_unit="0" />
     </eventcontext>
     <eventcontext
        id="nodes"
@@ -424,12 +424,12 @@
        offset="0"
        offsetunits="cm" />
     <group
-       unit="mm"
-       offset="5"
-       scale="100"
-       precision="2"
+       id="measure"
        fontsize="10"
-       id="measure" />
+       precision="2"
+       scale="100"
+       offset="5"
+       unit="mm" />
   </group>
   <group
      id="palette">
@@ -680,10 +680,10 @@
        panel_border="0"
        x="0"
        y="0"
-       w="279"
-       h="407"
+       w="1"
+       h="1"
        visible="1"
-       state="2"
+       state="3"
        placement="1">
       <group
          id="exportarea"
@@ -692,8 +692,8 @@
          id="defaultxdpi"
          value="96" />
       <group
-         id="hideexceptselected"
-         value="1" />
+         value="1"
+         id="hideexceptselected" />
     </group>
     <group
        id="save_as"
@@ -808,22 +808,22 @@
        on-blur="0.50"
        animate-time="100" />
     <group
-       id="objectattr"
-       panel_ratio="100"
-       panel_size="1"
-       panel_mode="1"
-       panel_wrap="0"
-       panel_border="0"
-       x="0"
-       y="0"
-       w="233"
-       h="114"
-       visible="0"
+       placement="1"
        state="2"
-       placement="1">
+       visible="0"
+       h="114"
+       w="233"
+       y="0"
+       x="0"
+       panel_border="0"
+       panel_wrap="0"
+       panel_mode="1"
+       panel_size="1"
+       panel_ratio="100"
+       id="objectattr">
       <group
-         id=""
-         panel_size="0" />
+         panel_size="0"
+         id="" />
     </group>
   </group>
   <group
@@ -1137,9 +1137,9 @@
      id="desktop"
      style="line-height:1.25;fill:none;font-size:48px;-inkscape-font-specification:'Amiri Quran';font-family:'Amiri Quran';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;fill-opacity:1;stroke-width:1.51181102;stroke-miterlimit:4;stroke-dasharray:none;stroke:none;stroke-opacity:1;opacity:1;stroke-dashoffset:0">
     <group
-       width="1316"
+       width="648"
        height="683"
-       x="20"
+       x="688"
        y="55"
        fullscreen="0"
        id="geometry"
