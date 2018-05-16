@@ -57,7 +57,8 @@ set $biginc --no-startup-id amixer sset Master 5%+
 set $dec --no-startup-id amixer sset Master 2%-
 set $bigdec --no-startup-id amixer sset Master 5%-
 set $mute --no-startup-id amixer sset Master toggle
-#set $truemute --no-startup-id amixer sset Master mute
+set $micmute --no-startup-id amixer set Capture toggle
+set $truemute --no-startup-id amixer sset Master mute
 #set $screencast  --no-startup-id bash screencast_alsa.sh
 #set $audio --no-startup-id bash audio_alsa.sh
 #bar {
@@ -99,29 +100,25 @@ exec --no-startup-id ~/.fehbg
 # switch to output
 bindsym $mod+n focus output left
 bindsym $mod+Shift+n focus output right
-
-
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # #---Basic Bindings---# #
 bindsym $mod+Return 		exec $term
 #bindsym $mod+Shift+Return 	exec $term -e vim ~/vimwiki/index.wiki
-
+#
 bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
 
 bindsym $mod+Escape		workspace prev
 #bindsym $mod+Shift+Escape 	exec/.scripts/prompt "Are you sure you want to leave i3?" "i3-msg exit"
 
-# bindsym $mod+BackSpace
-bindsym $mod+Shift+BackSpace	exec ~/.scripts/prompt "Are you sure you want to reboot?" "$reboot"
+#STOP/HIDE EVERYTHING:
+bindsym $mod+BackSpace	exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+#bindsym $mod+Shift+BackSpace	exec ~/.scripts/prompt "Are you sure you want to reboot?" "$reboot"
 
 #bindsym $mod+grave
 #bindsym $mod+asciitilde
-
-#STOP/HIDE EVERYTHING:
-bindsym $mod+Shift+Delete	exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			kill
@@ -133,7 +130,6 @@ bindsym $mod+Shift+w exec --no-startup-id . ~/.scripts/wallpaper.sh
 
 
 bindsym $mod+r 			exec $term -e ranger
-#bindsym $mod+Shift+r		exec $term -e sudo ranger /
 bindsym $mod+Shift+r restart
 
 bindsym $mod+t		move workspace to output left
@@ -148,11 +144,11 @@ bindsym $mod+Shift+u		resize shrink height 10 px or 10 ppt
 
 bindsym $mod+Shift+i		resize grow height 10 px or 10 ppt
 
-bindsym $mod+o			sticky toggle
+#bindsym $mod+o			sticky toggle
 bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
 
 bindsym $mod+p			exec $pause
-#bindsym $mod+Shift+p		exec mypaint
+bindsym $mod+Shift+p		exec $trupause
 
 bindsym $mod+a      gaps inner current plus 5
 bindsym $mod+Shift+a		gaps inner current minus 5
@@ -162,7 +158,6 @@ bindsym $mod+Shift+a		gaps inner current minus 5
 
 bindsym $mod+s          exec slack &
 
-#bindsym $mod+d			exec dmenu_run
 bindsym $mod+d			exec rofi -show run
 #bindsym $mod+Shift+d exec --no-startup-id xrandr --output --auto eDP-1 --output HDMI-1 auto --right-of eDP-1
 
@@ -188,14 +183,13 @@ bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z		gaps outer current minus 5
 
 bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
-bindsym $mod+Shift+x		exec ~/.scripts/prompt "Are you sure you want to shutdown?" "$shutdown"
+#bindsym $mod+Shift+x		exec ~/.scripts/prompt "Are you sure you want to shutdown?" "$shutdown"
 
-#bindsym $mod+c			exec --no-startup-id camtoggle
 bindsym $mod+c			exec --no-startup-id st -e vi ~/.config/i3/config
 bindsym $mod+Shift+c restart # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 
-#bindsym $mod+v			exec $term -e cava
-#bindsym $mod+Shift+v		exec projectM-pulseaudio
+bindsym $mod+v			exec $term -e cava
+bindsym $mod+Shift+v    exec feh ~/dotfiles/wallpapers/vim-cheat-sheet.png
 
 bindsym $mod+b			floating toggle; sticky toggle; exec --no-startup-id bottomleft
 #bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
@@ -348,19 +342,19 @@ bindsym XF86AudioRewind		exec $lilbak
 bindsym XF86AudioForward	exec $lilfor
 bindsym XF86Reload		restart
 bindsym XF86AudioMicMute	exec $micmute
-bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
-bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
-bindsym XF86Close		kill
-bindsym XF86WebCam		exec --no-startup-id camtoggle
-bindsym XF86Mail		exec $term -e neomutt
-bindsym XF86Messenger		exec $term -e weechat
+#bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
+#bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
+#bindsym XF86Close		kill
+#bindsym XF86WebCam		exec --no-startup-id camtoggle
+#bindsym XF86Mail		exec $term -e neomutt
+#bindsym XF86Messenger		exec $term -e weechat
 bindsym XF86Search		exec $BROWSER https://duckduckgo.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id light -U 5
 bindsym XF86MonBrightnessUp	exec --no-startup-id light -A 5
 bindsym XF86AudioMedia		exec $music
 bindsym XF86Display		exec --no-startup-id arandr
 bindsym XF86Documents		exec $term -e ranger ~/Documents
-bindsym XF86WLAN		exec $netrefresh
+#bindsym XF86WLAN		exec $netrefresh
 #
 #
 #

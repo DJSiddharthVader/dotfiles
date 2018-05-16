@@ -24,4 +24,5 @@ alias von="~/.scripts/togglescreen.sh vga 1"
 alias python="python3.6"
 alias pip="pip3.6"
 alias shln="ls -la | grep '\->'"
-
+alias hg="history | grep"
+alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'

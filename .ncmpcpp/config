@@ -30,7 +30,7 @@
 #
 ## Needed for tag editor and file operations to work.
 ##
-#mpd_music_dir = ~/music
+mpd_music_dir = ~/Music
 #
 #mpd_crossfade_time = 5
 #
@@ -365,7 +365,7 @@ default_tag_editor_pattern =  %t
 #
 #generate_win32_compatible_filenames = yes
 #
-#allow_for_physical_item_deletion = no
+allow_for_physical_item_deletion = yes
 #
 ##
 ## Note: If you set this variable, ncmpcpp will try to get info from last.fm in

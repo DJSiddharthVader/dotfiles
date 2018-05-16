@@ -3,9 +3,14 @@
 *.pid
 .mpd/mpd.log
 .mpd/mpdstate
+.mpd/mpd.db
 .config/libreoffice
 .config/pulse/*.tdb
 .config/i3/syndaemon.pid
-python/profile_default/history.sqlite
+.ipython/profile_default/history.sqlite
 .ncmpcpp/error.log
 .config/i3/screen.png
+.config/Slack
+.config/transmission
+.config/menus/applications-merged
+

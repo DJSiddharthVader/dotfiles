@@ -20,33 +20,34 @@ alert = #bd2c40
 ;monitor = ${env:MONITOR:eDP-1}
 monitor = ${env:MONITOR:}
 width = 100%
-height = 27
+height = 28
 radius = 3.0
 fixed-center = true
 
 ;background = ${colors.background}
 background = #00000000
 foreground = ${colors.foreground}
+;foreground = #000000
 
-line-size = 3
+line-size = 2
 line-color = #f00
 
 border-size = 4
 border-color = #00000000
 
-padding-left = 0
-padding-right = 2
+padding-left = 1
+padding-right = 1
 
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Terminus (TTF):format=truetype:style=Mediumpixelsize=10;1
-font-1 = FontAwesome:fontformat=truetype:size=10:antialias=false;0
+font-0 = Terminus (TTF):format=truetype:style=Mediumpixelsize=12;1
+font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
 font-2 = Siji:pixelsize=10;1
 
 modules-left = i3
 modules-center = songnames
-modules-right = mpd volume backlight-acpi battery wlan date powermenu
+modules-right = mpd volume backlight-acpi battery memory cpu wlan date
 
 dim-value = 1
 tray-position =
@@ -62,8 +63,7 @@ type = internal/bspwm
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
 label-focused-underline = ${colors.primary}
-label-focused-padding = 1
-
+label-focused-padding = 0
 
 label-occupied = %index%
 label-occupied-padding = 1
@@ -86,9 +86,9 @@ wrapping-scroll = false
 ;ws-icon-1 = 2;
 
 ws-icon-0 = 1;
-ws-icon-1 = 2;
-ws-icon-2 = 3;
-ws-icon-3 = 4;
+ws-icon-1 = 2;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
 ws-icon-4 = 5;
 ws-icon-5 = 6;
 ws-icon-6 = 7;
@@ -133,7 +133,8 @@ interval = 0
 type = internal/mpd
 host=localhost
 port=6600
-format-online =  <bar-progress> <label-time> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random>
+;format-online =  <bar-progress> <label-time> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random>
+format-online =  <bar-progress> <label-time> <toggle> <icon-repeatone> <icon-random>
 format-online-underline = #9f78e1
 format-offline = MPD Offline
 
@@ -175,22 +176,17 @@ format-connected = %{A:st -e nmtui-connect&:}<ramp-signal> <label-connected>%{A}
 format-connected-underline = #339966
 ;format-connected-underline = #9f78e1
 label-connected =  %essid%
+label-connected-foreground = ${colors.foreground}
 
 format-disconnected = %{A:nm-connection-editor&:}disconnected%{A}
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected-foreground = ${colors.foreground}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
 ramp-signal-2 = 
 ramp-signal-3 = 
 ;ramp-signal-4 =
-ramp-signal-foreground = ${colors.foreground-alt}
-
-
-
+ramp-signal-foreground = ${colors.foreground}
 
 [module/date]
 type = internal/date
@@ -385,7 +381,8 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/cpu
 interval = 2
 ;format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground}
 format-underline = #f90000
 label = %percentage:2%%
 
@@ -393,7 +390,9 @@ label = %percentage:2%%
 type = internal/memory
 interval = 2
 ;format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " "
+
+format-prefix-foreground = ${colors.foreground}
 format-underline = #4bffdc
 label = %percentage_used%%
 ; vim:ft=dosini
