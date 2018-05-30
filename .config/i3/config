@@ -81,9 +81,9 @@ exec --no-startup-id compton
 #Launch Polybar where appropriate:
 exec_always --no-startup-id ~/.scripts/polybar_launch
 #Try to load VGA screen if available:
-exec --no-startup-id screen.sh v
+#exec --no-startup-id screen.sh v
 #Runs the key remapping scripts
-exec --no-startup-id ~/.scripts/remaps
+#exec --no-startup-id ~/.scripts/remaps
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
@@ -91,7 +91,9 @@ exec --no-startup-id nm-applet
 #disable touchpad when typing
 exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
 #set wallpaper on startup
-exec --no-startup-id ~/.fehbg
+#exec --no-startup-id ~/.fehbg
+exec --no-startup-id  wal -i $(tail -1 ~/.fehbg | cut -d' ' -f4 | tr -d "'")
+
 
 
 
@@ -124,13 +126,12 @@ bindsym $mod+BackSpace	exec $truemute ; exec $truepause ; workspace lmao ; exec 
 bindsym $mod+q			kill
 bindsym $mod+Shift+q		kill
 
-bindsym $mod+w		exec --no-startup-id $BROWSER
-bindsym $mod+Shift+w exec --no-startup-id . ~/.scripts/wallpaper.sh
-#bindsym $mod+Shift+w			exec $term -e sudo wifi-menu
+bindsym $mod+w		exec --no-startup-id firefox --browser
+bindsym $mod+Shift+w	exec firefox --private-window
 
 
 bindsym $mod+r 			exec $term -e ranger
-bindsym $mod+Shift+r restart
+bindsym $mod+Shift+r  exec $term; exec $term -e ranger; floating toggle
 
 bindsym $mod+t		move workspace to output left
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
@@ -186,13 +187,13 @@ bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
 #bindsym $mod+Shift+x		exec ~/.scripts/prompt "Are you sure you want to shutdown?" "$shutdown"
 
 bindsym $mod+c			exec --no-startup-id st -e vi ~/.config/i3/config
-bindsym $mod+Shift+c restart # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+c restart    #restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 
 bindsym $mod+v			exec $term -e cava
 bindsym $mod+Shift+v    exec feh ~/dotfiles/wallpapers/vim-cheat-sheet.png
 
 bindsym $mod+b			floating toggle; sticky toggle; exec --no-startup-id bottomleft
-#bindsym $mod+Shift+b		exec --no-startup-id blender; workspace $ws6
+bindsym $mod+Shift+b exec --no-startup-id ~/.scripts/wallpaper.sh
 
 bindsym $mod+m [instance="music"] scratchpad show; [instance="music"] move position center
 bindsym $mod+Shift+m		exec $mute

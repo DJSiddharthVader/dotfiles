@@ -15,6 +15,11 @@
 .config/dconf/user
 .config/gtk-2.0/gtkfilechooser.ini
 .config/user-dirs.dirs
+.config/skypeforlinux
+.config/qpdfview/
+.config/opera
+.config/mpv
+.config/QtProject.conf
 .ipython/profile_default/db/dhist
 .ipython/profile_default/history.sqlite
 .mpd/mpd.db

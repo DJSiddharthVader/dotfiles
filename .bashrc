@@ -280,25 +280,11 @@ function xep() {
 function jless() {
     jq . -C $1 | less -R;
 }
-function sethsize() {
-    dconf write /org/compiz/profiles/unity/plugins/core/hsize $1
+function jptt(){
+    ssh -N -f -L localhost:8890:localhost:8889 reeds@mserv.magarveylab.ca
 }
-function setvsize() {
-    dconf write /org/compiz/profiles/unity/plugins/core/vsize $1
-}
-function spjs () {
-    sed 's/\(}}\),/\1\n/g' $1 | sed 's/\(^\[\)\|\(\]$\)//g' > "$(basename $1 .json)""spjs.json"
-}
-
-function walp() {
-    FILE="\"file://$(readlink -e "$1" )\""
-    if [ "$FILE" != "file://" ]
-    then
-        echo "$FILE" w
-        gsettings set org.gnome.desktop.background picture-uri "$FILE"
-    else
-        echo "$FILE"
-    fi
+function kjptt(){
+    sudo netstat -lpn | grep :8890 | head -1 | grep -o '[0-9]\{4,\}' | tail -1
 }
 
     ## Top 10 Commands {{{

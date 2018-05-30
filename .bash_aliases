@@ -26,3 +26,5 @@ alias pip="pip3.6"
 alias shln="ls -la | grep '\->'"
 alias hg="history | grep"
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
+alias fhc="grep -c '^>'"
+alias mtdr="sudo mount /dev/sdb1 /media/1tbdrive/"

@@ -178,7 +178,7 @@ format-connected-underline = #339966
 label-connected =  %essid%
 label-connected-foreground = ${colors.foreground}
 
-format-disconnected = %{A:nm-connection-editor&:}disconnected%{A}
+format-disconnected = %{A:st -e nmtui-connect&:}disconnected%{A}
 label-disconnected-foreground = ${colors.foreground}
 
 ramp-signal-0 = 
@@ -253,7 +253,7 @@ format-discharging-underline = #ffb52a
 
 
 ;format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
+format-full-prefix-foreground = ${colors.foreground}
 format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = 
@@ -261,14 +261,14 @@ ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-;ramp-capacity-foreground = ${colors.foreground-alt}
+;ramp-capacity-foreground = ${colors.foreground}
 ;
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
-animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
 
 [module/powermenu]
