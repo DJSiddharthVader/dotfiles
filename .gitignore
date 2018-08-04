@@ -1,27 +1,27 @@
+*.pid
 .vim/view
 .tmux/resurrect
-*.pid
+.ncmpcpp/error.log
 .mpd/mpd.log
 .mpd/mpdstate
 .mpd/mpd.db
+.ipython/profile_default/db/dhist
+.ipython/profile_default/history.sqlite
+.config/mimeapps.list
+.config/QtProject.conf
+.config/i3/syndaemon.pid
+.config/i3/screen.png
 .config/libreoffice
 .config/pulse/*.tdb
-.config/i3/syndaemon.pid
-.ncmpcpp/error.log
-.config/i3/screen.png
 .config/Slack
 .config/transmission
 .config/menus/applications-merged
 .config/dconf/user
 .config/gtk-2.0/gtkfilechooser.ini
 .config/user-dirs.dirs
-.config/skypeforlinux
-.config/qpdfview/
+.config/skypeforlinux/
+.config/qpdfview/qpdfview.conf
 .config/opera
 .config/mpv
-.config/QtProject.conf
-.ipython/profile_default/db/dhist
-.ipython/profile_default/history.sqlite
-.mpd/mpd.db
 
 
