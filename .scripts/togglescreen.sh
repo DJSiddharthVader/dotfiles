@@ -20,4 +20,16 @@ then
     else
         xrandr --output HDMI-1 --off
     fi
+elif [ $1 = 'both' ]
+then
+    if [ $2 -eq 1 ];
+    then
+        xrandr --output eDP-1 --output HDMI-1 --mode 1920x1080 --right-of eDP-1
+        xrandr --output eDP-1 --output DP-2 --mode 1360x768 --above eDP-1
+        ~/.fehbg &
+        i3-msg restart
+    else
+        xrandr --output HDMI-1 --off
+        xrandr --output DP-2 --off
+    fi
 fi

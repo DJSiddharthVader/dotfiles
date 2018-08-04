@@ -133,7 +133,7 @@ bindsym $mod+Shift+w	exec firefox --private-window
 bindsym $mod+r 			exec $term -e ranger
 bindsym $mod+Shift+r  exec $term; exec $term -e ranger; floating toggle
 
-bindsym $mod+t		move workspace to output left
+bindsym $mod+t		move workspace to output up
 bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
 
 bindsym $mod+y 		move workspace to output right
