@@ -280,12 +280,6 @@ function xep() {
 function jless() {
     jq . -C $1 | less -R;
 }
-function jptt(){
-    ssh -N -f -L localhost:8890:localhost:8889 reeds@mserv.magarveylab.ca
-}
-function kjptt(){
-    sudo netstat -lpn | grep :8890 | head -1 | grep -o '[0-9]\{4,\}' | tail -1
-}
 
     ## Top 10 Commands {{{
 
@@ -639,3 +633,6 @@ PERL5LIB="/home/sidreed/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5L
 PERL_LOCAL_LIB_ROOT="/home/sidreed/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/sidreed/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/sidreed/perl5"; export PERL_MM_OPT;
+
+
+. /home/sidreed/anaconda3/etc/profile.d/conda.sh
