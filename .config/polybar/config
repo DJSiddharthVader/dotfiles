@@ -11,6 +11,7 @@
 background = #222
 background-alt = #444
 foreground = #dfdfdf
+;foreground = #000000
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
@@ -24,10 +25,9 @@ height = 28
 radius = 3.0
 fixed-center = true
 
-;background = ${colors.background}
-background = #00000000
+background = ${colors.background}
+;background = #00000000
 foreground = ${colors.foreground}
-;foreground = #000000
 
 line-size = 2
 line-color = #f00
@@ -46,16 +46,17 @@ font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
 font-2 = Siji:pixelsize=10;1
 
 modules-left = i3
-modules-center = songnames
-modules-right = mpd volume backlight-acpi battery memory cpu wlan date
+modules-center = songnames mpd
+modules-right = volume backlight-acpi battery memory wlan date
 
 dim-value = 1
-tray-position =
+;tray-position =
 tray-padding = 2
 tray-transparent = false
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+
 
 [module/bspwm]
 type = internal/bspwm
@@ -126,19 +127,19 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 [module/songnames]
 type = custom/script
 exec = ~/.scripts/mpdscroll.sh
+format-underline = #9f78e1
 tail = true
-interval = 0
 
 [module/mpd]
 type = internal/mpd
 host=localhost
 port=6600
-;format-online =  <bar-progress> <label-time> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random>
-format-online =  <bar-progress> <label-time> <toggle> <icon-repeatone> <icon-random>
+;format-online =  <label-song> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
+format-online =  <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
 format-online-underline = #9f78e1
 format-offline = MPD Offline
 
-label-song = %title% - %artist% : %album%
+label-song = ───|%artist% - %title%|───
 label-time = %elapsed%/%total%
 icon-play = 
 icon-pause = 
@@ -242,14 +243,12 @@ battery = BAT0
 adapter = AC
 full-at = 98
 
-format-charging = <animation-charging> <label-charging>
-;format-charging = <label-charging>
+;format-charging = <animation-charging> <label-charging>
+format-charging = <ramp-capacity> <label-charging>
 format-charging-underline = #55aa55
 
 format-discharging = <ramp-capacity> <label-discharging>
-;format-discharging = <label-discharging>
 format-discharging-underline = #ffb52a
-;${self.format-charging-underline}
 
 
 ;format-full-prefix = " "
@@ -270,6 +269,7 @@ animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
+
 
 [module/powermenu]
 type = custom/menu
@@ -329,12 +329,12 @@ format-warn-underline = ${self.format-underline}
 
 label = %temperature%
 label-warn = %temperature%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.foreground}
 
 ramp-0 = 
 ramp-1 = 
 ramp-2 = 
-ramp-foreground = ${colors.foreground-alt}
+ramp-foreground = ${colors.foreground}
 
 [settings]
 screenchange-reload = true
