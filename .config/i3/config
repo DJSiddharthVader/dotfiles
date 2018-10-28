@@ -18,7 +18,6 @@ set $hibernate sudo systemctl suspend
 #set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 set $netrefresh exec --no-startup-id st -e nmtui
 exec_always --no-startup-id xautolock -time 30 -locker ~/.config/i3/lock.sh -detectsleep
-#exec feh --bg-scale ~/Pictures/Pics/livingRoomFloor.jpg
 # First I have a tmux window used for background scripts.
 # I'll later bind this to mod+u.
 for_window [instance="dropdown"] resize set 625 400
@@ -59,13 +58,6 @@ set $bigdec --no-startup-id amixer sset Master 5%-
 set $mute --no-startup-id amixer sset Master toggle
 set $micmute --no-startup-id amixer set Capture toggle
 set $truemute --no-startup-id amixer sset Master mute
-#set $screencast  --no-startup-id bash screencast_alsa.sh
-#set $audio --no-startup-id bash audio_alsa.sh
-#bar {
-#        status_command py3status -c ~/.config/i3/status.conf
-#}
-
-
 
 # #---Starting External Scripts---# #
 #Increase key rate
@@ -91,8 +83,8 @@ exec --no-startup-id nm-applet
 #disable touchpad when typing
 exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
 #set wallpaper on startup
-#exec --no-startup-id ~/.fehbg
-exec --no-startup-id  wal -i $(tail -1 ~/.fehbg | cut -d' ' -f4 | tr -d "'")
+exec --no-startup-id ~/.fehbg
+#exec --no-startup-id  wal -i $(tail -1 ~/.fehbg | cut -d' ' -f4 | tr -d "'")
 
 
 
@@ -106,116 +98,108 @@ bindsym $mod+Shift+n focus output right
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # #---Basic Bindings---# #
-bindsym $mod+Return 		exec $term
-#bindsym $mod+Shift+Return 	exec $term -e vim ~/vimwiki/index.wiki
-#
-bindsym $mod+Shift+space 	floating toggle
 bindsym $mod+space		focus mode_toggle
-
+bindsym $mod+Shift+space 	floating toggle
+bindsym $mod+Return 	exec $term
 bindsym $mod+Escape		workspace prev
-#bindsym $mod+Shift+Escape 	exec/.scripts/prompt "Are you sure you want to leave i3?" "i3-msg exit"
-
 #STOP/HIDE EVERYTHING:
 bindsym $mod+BackSpace	exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
-#bindsym $mod+Shift+BackSpace	exec ~/.scripts/prompt "Are you sure you want to reboot?" "$reboot"
+# #---Letter Key Bindings---# #
+bindsym $mod+q			kill
+bindsym $mod+Shift+q    exec --no-startup-id qpdfview
 
+bindsym $mod+w		    exec --no-startup-id firefox --browser
+bindsym $mod+Shift+w	exec firefox --private-window
+
+bindsym $mod+r          exec rofi -show run
+bindsym $mod+Shift+r    exec $term -e ranger
+
+bindsym $mod+t		    move workspace to output up
+bindsym $mod+Shift+t	gaps inner current set 15; gaps outer current set 15
+
+bindsym $mod+y 		    move workspace to output right
+bindsym $mod+Shift+y	resize shrink width 10 px or 10ppt
+
+bindsym $mod+u          [instance="dropdown"] scratchpad show, move position center
+bindsym $mod+Shift+u	resize shrink height 10 px or 10 ppt
+
+bindsym $mod+i			exec --no-startup-id st -e vi ~/.config/i3/config
+bindsym $mod+Shift+i	resize grow height 10 px or 10 ppt
+
+bindsym $mod+o	        exec --no-startup-id qpdfview ~/thesis_SidReed/papers/*.pdf; workspace $ws6
+bindsym $mod+Shift+o	resize grow width 10 px or 10 ppt
+
+bindsym $mod+p			exec $pause
+bindsym $mod+Shift+p	exec $trupause
+
+bindsym $mod+a          gaps inner current plus 5
+bindsym $mod+Shift+a	gaps inner current minus 5
+
+bindsym $mod+f			fullscreen toggle
+bindsym $mod+Shift+f    exec ~/dotfiles/.scripts/wallpaper.sh 'font'
+
+bindsym $mod+g			workspace prev
+bindsym $mod+Shift+g	exec --no-startup-id lutris; workspace $ws7
+
+bindsym $mod+h			focus left
+bindsym $mod+Shift+h	move left 30
+
+bindsym $mod+j			focus down
+bindsym $mod+Shift+j	move down 30
+
+bindsym $mod+k			focus up
+bindsym $mod+Shift+k	move up 30
+
+bindsym $mod+l			focus right
+bindsym $mod+Shift+l	move right 30
+
+bindsym $mod+z			gaps outer current plus 5
+bindsym $mod+Shift+z	gaps outer current minus 5
+
+bindsym $mod+c			exec $term -e cava
+bindsym $mod+Shift+c    restart
+
+bindsym $mod+v			exec $term -e vi
+bindsym $mod+Shift+v    exec feh ~/dotfiles/wallpapers/vim-cheat-sheet.png
+
+bindsym $mod+b		    exec ~/dotfiles/.scripts/wallpaper.sh 'background'
+bindsym $mod+Shift+b    exec ~/dotfiles/.scripts/wallpaper.sh 'both'
+
+bindsym $mod+m          [instance="music"] scratchpad show; [instance="music"] move position center
+bindsym $mod+Shift+m	exec $mute
+
+bindsym $mod+d          exec --no-startup-id ~/.scripts/togglescreen.sh vga 1
+bindsym $mod+Shift+d    exec --no-startup-id ~/.scripts/togglescreen.sh vga 0
+
+bindsym $mod+s          exec --no-startup-id ~/.scripts/togglescreen.sh hdmi 1
+bindsym $mod+Shift+s    exec --no-startup-id ~/.scripts/togglescreen.sh hdmi 0
+
+bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
+bindsym $mod+Shift+x    exec $term -e tmux a -t vis
+
+#bindsym $mod+Shift+Return
+#bindsym $mod+Shift+Escape
+#bindsym $mod+Shift+BackSpace
 #bindsym $mod+grave
 #bindsym $mod+asciitilde
 
-# #---Letter Key Bindings---# #
-bindsym $mod+q			kill
-bindsym $mod+Shift+q		kill
-
-bindsym $mod+w		exec --no-startup-id firefox --browser
-bindsym $mod+Shift+w	exec firefox --private-window
-
-
-bindsym $mod+r 			exec $term -e ranger
-bindsym $mod+Shift+r  exec $term; exec $term -e ranger; floating toggle
-
-bindsym $mod+t		move workspace to output up
-bindsym $mod+Shift+t		gaps inner current set 15; gaps outer current set 15
-
-bindsym $mod+y 		move workspace to output right
-bindsym $mod+Shift+y		resize shrink width 10 px or 10ppt
-
-
-bindsym $mod+u  [instance="dropdown"] scratchpad show, move position center
-bindsym $mod+Shift+u		resize shrink height 10 px or 10 ppt
-
-bindsym $mod+Shift+i		resize grow height 10 px or 10 ppt
-
-#bindsym $mod+o			sticky toggle
-bindsym $mod+Shift+o		resize grow width 10 px or 10 ppt
-
-bindsym $mod+p			exec $pause
-bindsym $mod+Shift+p		exec $trupause
-
-bindsym $mod+a      gaps inner current plus 5
-bindsym $mod+Shift+a		gaps inner current minus 5
-
-#bindsym $mod+a		[instance="math"] scratchpad show; [instance="math"] move position center
-#bindsym $mod+Shift+a		exec $term -e ncpamixer
-
-bindsym $mod+s          exec slack &
-
-bindsym $mod+d			exec rofi -show run
-#bindsym $mod+Shift+d exec --no-startup-id xrandr --output --auto eDP-1 --output HDMI-1 auto --right-of eDP-1
-
-bindsym $mod+f			fullscreen toggle
-##bindsym $mod+Shift+f
-
-bindsym $mod+g			workspace prev
-#bindsym $mod+Shift+g		exec --no-startup-id gimp; workspace $ws5
-
-bindsym $mod+h			focus left
-bindsym $mod+Shift+h		move left 30
-
-bindsym $mod+j			focus down
-bindsym $mod+Shift+j		move down 30
-
-bindsym $mod+k			focus up
-bindsym $mod+Shift+k		move up 30
-
-bindsym $mod+l			focus right
-bindsym $mod+Shift+l		move right 30
-
-bindsym $mod+z			gaps outer current plus 5
-bindsym $mod+Shift+z		gaps outer current minus 5
-
-bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
-#bindsym $mod+Shift+x		exec ~/.scripts/prompt "Are you sure you want to shutdown?" "$shutdown"
-
-bindsym $mod+c			exec --no-startup-id st -e vi ~/.config/i3/config
-bindsym $mod+Shift+c restart    #restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-
-bindsym $mod+v			exec $term -e cava
-bindsym $mod+Shift+v    exec feh ~/dotfiles/wallpapers/vim-cheat-sheet.png
-
-bindsym $mod+b			floating toggle; sticky toggle; exec --no-startup-id bottomleft
-bindsym $mod+Shift+b exec --no-startup-id ~/.scripts/wallpaper.sh
-
-bindsym $mod+m [instance="music"] scratchpad show; [instance="music"] move position center
-bindsym $mod+Shift+m		exec $mute
-
-
 # #---Workspace Bindings---# #
-bindsym $mod+Home		workspace $ws1
+bindsym $mod+Home		    workspace $ws1
 bindsym $mod+Shift+Home		move container to workspace $ws1
-bindsym $mod+End		workspace $ws10
+bindsym $mod+End		    workspace $ws10
 bindsym $mod+Shift+End		move container to workspace $ws10
-bindsym $mod+Prior		workspace prev
+bindsym $mod+Prior		    workspace prev
 bindsym $mod+Shift+Prior	move container to workspace prev
-bindsym $mod+Next		workspace next
+bindsym $mod+Next		    workspace next
 bindsym $mod+Shift+Next		move container to workspace next
-bindsym $mod+Tab		workspace back_and_forth
+bindsym $mod+Tab		    workspace back_and_forth
 bindsym $mod+XF86Back		workspace prev
 ##bindsym $mod+Shift+XF86Back
 bindsym $mod+XF86Forward	workspace next
 ##bindsym $mod+Shift+XF86Forward
 bindsym $mod+semicolon		workspace next
 bindsym $mod+apostrophe		split horizontal ;; exec $term
-bindsym $mod+slash		split vertical ;; exec $term
+bindsym $mod+slash		    split vertical ;; exec $term
 bindsym $mod+Shift+slash	kill
 bindsym $mod+backslash		workspace back_and_forth
 
@@ -255,15 +239,6 @@ bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
 
 
-# Then I have a window running R I use for basic arithmetic
-# I'll later bind this to mod+a.
-for_window [instance="math"] floating enable
-for_window [instance="math"] resize set 800 300
-for_window [instance="math"] move scratchpad
-for_window [instance="math"] border pixel 5
-exec --no-startup-id $term -n math -f mono:pixelsize=24 -e dropdowncalc
-
-
 # #---Function Buttons---# #
 bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 bindsym $mod+F2		restart
@@ -272,7 +247,7 @@ bindsym $mod+F4		exec --no-startup-id $hibernate
 bindsym $mod+F5		exec --no-startup-id $netrefresh
 bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
 bindsym $mod+F7     exec -no-startup-id compton
-##bindsym $mod+F8
+#bindsym $mod+F8
 bindsym $mod+F9		exec --no-startup-id sudo mount -a
 #bindsym $mod+F10
 #bindsym $mod+F11
@@ -280,10 +255,10 @@ bindsym $mod+F9		exec --no-startup-id sudo mount -a
 
 
 # #---Arrow Keys---# #
-bindsym $mod+Left		focus left
-bindsym $mod+Down		focus down
-bindsym $mod+Up			focus up
-bindsym $mod+Right 		focus right
+bindsym $mod+Left		    focus left
+bindsym $mod+Down		    focus down
+bindsym $mod+Up			    focus up
+bindsym $mod+Right 		    focus right
 bindsym $mod+Shift+Left		move left
 bindsym $mod+Shift+Down		move down
 bindsym $mod+Shift+Up		move up
@@ -292,70 +267,62 @@ bindsym $mod+Shift+Right 	move right
 
 # #---Media Keys---# #
 # Volume keys
-bindsym $mod+equal exec $inc
-bindsym $mod+Shift+equal exec $biginc #mod shift equal
-bindsym $mod+minus 		exec $dec
+bindsym $mod+equal          exec $inc
+bindsym $mod+Shift+equal    exec $biginc
+bindsym $mod+minus 		    exec $dec
 bindsym $mod+Shift+minus	exec $bigdec
-bindsym $mod+less 		exec $prev
+bindsym $mod+less 	    	exec $prev
 bindsym $mod+Shift+less		exec $beg
 bindsym $mod+greater		exec $next
 bindsym $mod+Shift+greater	exec $repeatone
 
 # For advancing forward/backward in an mpd song
-bindsym $mod+bracketleft 	exec $lilbak
+bindsym $mod+bracketleft 	    exec $lilbak
 bindsym $mod+Shift+bracketleft 	exec $bigbak
-bindsym $mod+bracketright 	exec $lilfor
+bindsym $mod+bracketright 	    exec $lilfor
 bindsym $mod+Shift+bracketright exec $bigfor
 
 # Print screen takes a screenshot.
 # With shift, it takes one only of the given window.
-bindsym Print 			exec --no-startup-id scrot
-bindsym Shift+Print 		exec --no-startup-id scrot -u
-
-# For recording audio/video or stop recording. Also toggle screenkey for visual typing.
-#bindsym $mod+Print		exec --no-startup-id "killall screenkey || screenkey"
-#bindsym $mod+Scroll_Lock	exec $audio
-#bindsym $mod+Insert		exec $screencast
-#bindsym $mod+Pause		exec $video
-#bindsym $mod+Delete		exec $stoprec
-#bindsym XF86Launch1		exec $stoprec & xset dpms force off
+bindsym $mod+Print 			exec --no-startup-id scrot
+bindsym $mod+Shift+Print 	exec --no-startup-id scrot -u
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
-bindsym XF86AudioMute exec $mute
+bindsym XF86AudioMute           exec $mute
 bindsym XF86AudioLowerVolume	exec $dec
 bindsym XF86AudioRaiseVolume	exec $inc
-bindsym XF86PowerOff		exec/.scripts/prompt "Are you sure you want to shutdown?" "$shutdown"
-bindsym XF86Calculator		exec $term -e R -q
-bindsym XF86Sleep		exec sudo zzz
-bindsym XF86Explorer		exec $term -e ranger
-bindsym XF86WWW			exec --no-startup-id $BROWSER
-bindsym XF86ScreenSaver		exec --no-startup-id ~/.config/i3/lock.sh
-bindsym XF86MyComputer		exec $term -e ranger
-bindsym XF86Eject		exec sudo umount -R /mnt
-bindsym XF86Suspend exec --no-startup-id ~/.config/i3/lock.sh
-bindsym XF86AudioNext		exec $next
-bindsym XF86AudioPlay		exec $pause
-bindsym XF86AudioPrev		exec $prev
-bindsym XF86AudioStop		exec $pause
-bindsym XF86AudioRecord		exec $audio
-bindsym XF86AudioRewind		exec $lilbak
-bindsym XF86AudioForward	exec $lilfor
-bindsym XF86Reload		restart
-bindsym XF86AudioMicMute	exec $micmute
-#bindsym XF86TouchpadOn		exec --no-startup-id exec synclient TouchpadOff=0
+bindsym XF86PowerOff		    exec/.scripts/prompt "Are you sure you want to shutdown?" "$shutdown"
+bindsym XF86Calculator		    exec $term -e R -q
+bindsym XF86Sleep		        exec sudo zzz
+bindsym XF86Explorer		    exec $term -e ranger
+bindsym XF86WWW			        exec --no-startup-id $BROWSER
+bindsym XF86ScreenSaver		    exec --no-startup-id ~/.config/i3/lock.sh
+bindsym XF86MyComputer		    exec $term -e ranger
+bindsym XF86Eject		        exec sudo umount -R /mnt
+bindsym XF86Suspend             exec --no-startup-id ~/.config/i3/lock.sh
+bindsym XF86AudioNext		    exec $next
+bindsym XF86AudioPlay	    	exec $pause
+bindsym XF86AudioPrev		    exec $prev
+bindsym XF86AudioStop	    	exec $pause
+bindsym XF86AudioRecord		    exec $audio
+bindsym XF86AudioRewind		    exec $lilbak
+bindsym XF86AudioForward	    exec $lilfor
+bindsym XF86Reload		        restart
+bindsym XF86AudioMicMute	    exec $micmute
+#bindsym XF86TouchpadOn		    exec --no-startup-id exec synclient TouchpadOff=0
 #bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
-#bindsym XF86Close		kill
-#bindsym XF86WebCam		exec --no-startup-id camtoggle
-#bindsym XF86Mail		exec $term -e neomutt
-#bindsym XF86Messenger		exec $term -e weechat
-bindsym XF86Search		exec $BROWSER https://duckduckgo.com
+#bindsym XF86Close		        kill
+#bindsym XF86WebCam		        exec --no-startup-id camtoggle
+#bindsym XF86Mail		        exec $term -e neomutt
+#bindsym XF86Messenger		    exec $term -e weechat
+bindsym XF86Search		        exec $BROWSER https://duckduckgo.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id light -U 5
-bindsym XF86MonBrightnessUp	exec --no-startup-id light -A 5
-bindsym XF86AudioMedia		exec $music
-bindsym XF86Display		exec --no-startup-id arandr
-bindsym XF86Documents		exec $term -e ranger ~/Documents
-#bindsym XF86WLAN		exec $netrefresh
+bindsym XF86MonBrightnessUp	    exec --no-startup-id light -A 5
+bindsym XF86AudioMedia		    exec $music
+bindsym XF86Display		        exec --no-startup-id arandr
+bindsym XF86Documents		    exec $term -e ranger ~/Documents
+#bindsym XF86WLAN		        exec $netrefresh
 #
 #
 #
