@@ -1,5 +1,4 @@
 *.pid
-.vim/view
 .tmux/resurrect
 .ncmpcpp/error.log
 .mpd/mpd.log
@@ -23,5 +22,14 @@
 .config/qpdfview/qpdfview.conf
 .config/opera
 .config/mpv
-
-
+.config/syncthing
+.config/skypeforlinux
+.config/ibus
+.config/nautilus
+.config/compiz-1/
+.config/evolution/
+.config/gedit/
+.config/libaccounts-glib/
+.config/lutris/
+.config/unity/
+.config/vlc/
