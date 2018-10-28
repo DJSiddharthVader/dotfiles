@@ -32,7 +32,7 @@ fi
 # }}}
 
 #sources virtualenvwrapper automatically
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
 
 ## Exports {{{
 
@@ -74,13 +74,6 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswi
 #export QT_STYLE_OVERRIDE=GTK+
 export QT_QPA_PLATFORMTHEME=gtk2
 
-# Ruby support
-if which ruby &>/dev/null; then
-    GEM_DIR=$(ruby -rubygems -e 'puts Gem.user_dir')/bin
-    if [[ -d "$GEM_DIR" ]]; then
-        export PATH=$GEM_DIR:$PATH
-    fi
-fi
 
 # Python,VIM and UTF-8
 export PYTHONIOENCODING=utf-8
