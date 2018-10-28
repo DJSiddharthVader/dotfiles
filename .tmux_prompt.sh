@@ -21,6 +21,6 @@ setw -g window-status-activity-fg "colour109"
 setw -g window-status-separator ""
 setw -g window-status-bg "colour236"
 set -g status-left ""
-set -g status-right "#{prefix_highlight}#[fg=colour235,bg=colour109] #H | %m/%d | %H:%M "
+set -g status-right ' #{?client_prefix,#[bg=colour103]^A ,}#[fg=colour235,bg=colour109] #H | %m/%d | %H:%M '
 setw -g window-status-format "#[fg=colour250,bg=colour236] #I #[fg=colour250,bg=colour236]#W "
 setw -g window-status-current-format "#[fg=colour236,bg=colour239,nobold,nounderscore,noitalics]#[fg=colour250,bg=colour239] #W #[fg=colour239,bg=colour236,nobold,nounderscore,noitalics]"
