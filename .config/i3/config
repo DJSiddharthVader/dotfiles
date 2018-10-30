@@ -25,12 +25,6 @@ for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 8
 exec $term -n dropdown
-# Runs the tmuxinit script, which searches for an earlier tmux instance,
-# otherwise starts a new one (to prevent multiple dropdown sessions).
-# Runs neofetch on first tmux screen if installed.
-#exec_always --no-startup-id "tmux send-keys -t 0:0 'clear && neofetch 2>/dev/null' Enter"
-#
-#
 # For mpc:
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
 #exec --no-startup-id st -n music -e ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
@@ -72,10 +66,6 @@ exec --no-startup-id sudo mount -a
 exec --no-startup-id compton
 #Launch Polybar where appropriate:
 exec_always --no-startup-id ~/.scripts/polybar_launch
-#Try to load VGA screen if available:
-#exec --no-startup-id screen.sh v
-#Runs the key remapping scripts
-#exec --no-startup-id ~/.scripts/remaps
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
@@ -84,10 +74,11 @@ exec --no-startup-id nm-applet
 exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
 #set wallpaper on startup
 exec --no-startup-id ~/.fehbg
-#exec --no-startup-id  wal -i $(tail -1 ~/.fehbg | cut -d' ' -f4 | tr -d "'")
-
-
-
+#kill refular notification daemon so dunst runs
+exec --no-startup-id killall -q notify-osd
+exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
+#launch low battery notifier script
+exec --no-startup-id ~/.scripts/lowbattery.sh
 
 
 
@@ -106,10 +97,10 @@ bindsym $mod+Escape		workspace prev
 bindsym $mod+BackSpace	exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 # #---Letter Key Bindings---# #
 bindsym $mod+q			kill
-bindsym $mod+Shift+q    exec --no-startup-id qpdfview
+#bindsym $mod+Shift+q    exec --no-startup-id qpdfview
 
 bindsym $mod+w		    exec --no-startup-id firefox --browser
-bindsym $mod+Shift+w	exec firefox --private-window
+bindsym $mod+Shift+w	exec --no-startup-id firefox --private-window
 
 bindsym $mod+r          exec rofi -show run
 bindsym $mod+Shift+r    exec $term -e ranger
@@ -120,13 +111,13 @@ bindsym $mod+Shift+t	gaps inner current set 15; gaps outer current set 15
 bindsym $mod+y 		    move workspace to output right
 bindsym $mod+Shift+y	resize shrink width 10 px or 10ppt
 
-bindsym $mod+u          [instance="dropdown"] scratchpad show, move position center
+bindsym $mod+u          [instance="dropdown"] scratchpad show,move position center
 bindsym $mod+Shift+u	resize shrink height 10 px or 10 ppt
 
 bindsym $mod+i			exec --no-startup-id st -e vi ~/.config/i3/config
 bindsym $mod+Shift+i	resize grow height 10 px or 10 ppt
 
-bindsym $mod+o	        exec --no-startup-id qpdfview ~/thesis_SidReed/papers/*.pdf; workspace $ws6
+bindsym $mod+o	        exec --no-startup-id qpdfview
 bindsym $mod+Shift+o	resize grow width 10 px or 10 ppt
 
 bindsym $mod+p			exec $pause
@@ -156,8 +147,8 @@ bindsym $mod+Shift+l	move right 30
 bindsym $mod+z			gaps outer current plus 5
 bindsym $mod+Shift+z	gaps outer current minus 5
 
-bindsym $mod+c			exec $term -e cava
-bindsym $mod+Shift+c    restart
+bindsym $mod+c			restart
+bindsym $mod+Shift+c    exec $term -e cava
 
 bindsym $mod+v			exec $term -e vi
 bindsym $mod+Shift+v    exec feh ~/dotfiles/wallpapers/vim-cheat-sheet.png
