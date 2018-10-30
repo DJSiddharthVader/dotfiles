@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/sidreed/.local/share/jupyter/kernels/py_27_env'
-let g:netrw_dirhist_2='/home/sidreed/.local/share/jupyter/kernels/py_36_env'
-let g:netrw_dirhist_3='/home/sidreed/.local/share/jupyter/kernels/python3'
-let g:netrw_dirhist_4='/home/sidreed/.local/share/jupyter/kernels/py_27_env'
-let g:netrw_dirhist_5='/home/sidreed/.local/share/jupyter/kernels/py_36_env'
-let g:netrw_dirhist_6='/home/sidreed/iGEM2018/praetoriusBlenderPlugin/References'
-let g:netrw_dirhist_7='/home/sidreed/adapsyn/Chemical_Rarefaction/scripts/__pycache__'
