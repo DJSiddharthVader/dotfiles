@@ -9,10 +9,16 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 if type "xrandr"; then
     for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
         MONITOR=$m polybar lap &
+        MONITOR=$m polybar schedule &
+
     done
 else
     polybar lap &
+    polybar schedule &
 fi
+
+
+
 #for i in $(polybar -m | awk -F: '{print $1}'); do MONITOR=$i polybar example -c ~/.config/polybar/config & done
 ##feh --bg-scale ~/.config/wall.png
 #polybar lap --config ~/.config/polybar/config

@@ -1,10 +1,8 @@
 ;=====================================================
-;
 ;   To learn more about how to configure Polybar
 ;   go to https://github.com/jaagr/polybar
 ;
 ;   The README contains alot of information
-;
 ;=====================================================
 
 [colors]
@@ -21,7 +19,6 @@ foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
-
 [bar/lap]
 ;monitor = ${env:MONITOR:eDP-1}
 monitor = ${env:MONITOR:}
@@ -52,7 +49,7 @@ font-2 = Siji:pixelsize=10;1
 
 modules-left = i3
 modules-center = songnames mpd
-modules-right = volume backlight-acpi battery memory wlan date
+modules-right = volume backlight-acpi wlan battery date
 
 dim-value = 1
 ;tray-position =
@@ -61,7 +58,71 @@ tray-transparent = false
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+[bar/schedule]
+monitor = ${env:MONITOR:}
+width = 100%
+height = 28
+radius = 3.0
+fixed-center = true
 
+background = #00000000
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Terminus (TTF):format=truetype:style=Mediumpixelsize=12;1
+font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
+font-2 = Siji:pixelsize=10;1
+
+modules-left =
+modules-center = schedulep0 schedulep1 schedulep2 schedulep3
+modules-right = xkeyboard temperature cpu memory powermenu
+
+dim-value = 1
+;tray-position =
+bottom = true
+tray-padding = 2
+tray-transparent = false
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+;my custom modules
+[module/songnames]
+type = custom/script
+exec = ~/.scripts/mpdscroll.sh
+format-underline = #9f78e1
+tail = true
+[module/schedulem1]
+type = custom/script
+exec = ~/.scripts/sched.py -1
+tail = true
+[module/schedulep0]
+type = custom/script
+exec = ~/.scripts/sched.py 0
+format-underline = #9f78e1
+tail = true
+[module/schedulep1]
+type = custom/script
+exec = ~/.scripts/sched.py 1
+tail = true
+[module/schedulep2]
+type = custom/script
+exec = ~/.scripts/sched.py 2
+tail = true
+[module/schedulep3]
+type = custom/script
+exec = ~/.scripts/sched.py 3
+tail = true
 
 [module/bspwm]
 type = internal/bspwm
@@ -81,7 +142,6 @@ label-urgent-padding = 1
 label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 1
-
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
@@ -128,13 +188,6 @@ label-visible-padding = 1
 label-urgent = %index% %icon%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
-[module/songnames]
-type = custom/script
-exec = ~/.scripts/mpdscroll.sh
-format-underline = #9f78e1
-tail = true
-
 [module/mpd]
 type = internal/mpd
 host=localhost
@@ -275,12 +328,9 @@ animation-charging-4 = 
 animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
 
-
 [module/powermenu]
 type = custom/menu
-
 expand-right = true
-
 format-spacing = 1
 
 label-open = "  "
@@ -301,10 +351,10 @@ menu-1-0-exec = menu-open-0
 menu-1-1 = reboot
 menu-1-1-exec = sudo reboot
 
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+menu-2-0 = cancel
+menu-2-0-exec = menu-open-0
+menu-2-1 = power off
+menu-2-1-exec = sudo shutdown
 
 [module/eth]
 type = internal/network
@@ -360,12 +410,12 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-;format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+format-prefix-underline = #ffb52a
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+label-layout-underline = #ffb52a
 
 label-indicator-padding = 2
 label-indicator-margin = 1
