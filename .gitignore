@@ -18,7 +18,6 @@
 .config/dconf/user
 .config/gtk-2.0/gtkfilechooser.ini
 .config/user-dirs.dirs
-.config/skypeforlinux/
 .config/qpdfview/qpdfview.conf
 .config/opera
 .config/mpv
@@ -33,3 +32,7 @@
 .config/lutris/
 .config/unity/
 .config/vlc/
+.ipython/profile_default/db/rootmodules_cache
+.mpd/playlists/recent.m3u
+wallpapers/
+wallpapers.tar.gz
