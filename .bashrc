@@ -135,7 +135,7 @@ else
     #export TERM='screen-256color'
 fi
 
-export PS1="\[\033[1;37m\][\[\033[34m\]\u\[\033[1;37m\]:\[\033[31m\]\w\[\033[1;37m\]]\$(get_prompt_symbol) \[\033[31m\]"
+export PS1="\[\033[1;37m\][\[\033[34m\]\u\[\033[1;37m\]:\[\033[31m\]\w\[\033[1;37m\]]\[\033[32m\][$(~/apps/t/t.py --task-dir ~/dotfiles/tasks/ --l tasks | wc -l | sed -e"s/ *//")]\[\033[37m\]\$(get_prompt_symbol) \[\033[31m\]"
 # Use vim promptline as PS1
 #source $HOME/.shell_prompt.sh
 

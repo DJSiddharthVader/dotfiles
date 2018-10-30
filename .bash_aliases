@@ -34,6 +34,8 @@ alias cpdots='rsync -avzP ~/dotfiles/'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 alias matlab="/usr/local/MATLAB/R2018a/bin/matlab"
 alias reset-wifi='sudo /etc/init.d/network-manager restart'
+alias t='python ~/apps/t/t.py --task-dir ~/dotfiles/tasks --list tasks'
+alias tl='python ~/apps/t/t.py --task-dir ~/dotfiles/tasks --list tasks | sort -k3'
 
 alias grid='ssh -p 2207 reeds@magarveylab-gw.mcmaster.ca'
 alias mserv='ssh reeds@mserv.magarveylab.ca'
