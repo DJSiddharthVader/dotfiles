@@ -48,7 +48,7 @@ font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
 font-2 = Siji:pixelsize=10;1
 
 modules-left = i3
-modules-center = songnames mpd
+modules-center = mpd
 modules-right = volume backlight-acpi wlan battery date
 
 dim-value = 1
@@ -84,7 +84,7 @@ font-0 = Terminus (TTF):format=truetype:style=Mediumpixelsize=12;1
 font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
 font-2 = Siji:pixelsize=10;1
 
-modules-left =
+modules-left = taskcounter
 modules-center = schedulep0 schedulep1 schedulep2 schedulep3
 modules-right = xkeyboard temperature cpu memory powermenu
 
@@ -123,6 +123,13 @@ tail = true
 type = custom/script
 exec = ~/.scripts/sched.py 3
 tail = true
+[module/taskcounter]
+type = custom/script
+exec = ~/.scripts/task_counter.sh
+tail = true
+format-underline = #e60053
+
+
 
 [module/bspwm]
 type = internal/bspwm
@@ -192,8 +199,8 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 type = internal/mpd
 host=localhost
 port=6600
-;format-online =  <label-song> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
-format-online =  <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
+format-online =  <label-song> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
+;format-online =  <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
 format-online-underline = #9f78e1
 format-offline = MPD Offline
 
