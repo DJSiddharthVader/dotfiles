@@ -10,7 +10,7 @@ scrot ~/.config/i3/screen.png
 convert -scale 10% ~/.config/i3/screen.png ~/.config/i3/screen.png
 convert -scale 1000% ~/.config/i3/screen.png ~/.config/i3/screen.png
 # Add the lock to the blurred image:
-[[ -f ~/.config/i3/lock.png ]] && convert ~/.config/i3/screen.png ~/.config/i3/lock.png -geometry +620+320 -composite -matte ~/.config/i3/screen.png
+[[ -f ~/.config/i3/lock.png ]] && convert ~/.config/i3/screen.png ~/.scripts/lock.png -geometry +620+320 -composite -matte ~/.config/i3/screen.png
 
 # Pause music (mocp and mpd):
 mpc pause
