@@ -165,7 +165,7 @@ bindsym $mod+Shift+d    exec --no-startup-id ~/.scripts/togglescreen.sh vga 0
 bindsym $mod+s          exec --no-startup-id ~/.scripts/togglescreen.sh hdmi 1
 bindsym $mod+Shift+s    exec --no-startup-id ~/.scripts/togglescreen.sh hdmi 0
 
-bindsym $mod+x			exec --no-startup-id ~/.config/i3/lock.sh
+bindsym $mod+x			exec --no-startup-id ~/.scripts/lock.sh
 bindsym $mod+Shift+x    exec $term -e tmux a -t vis
 
 #bindsym $mod+Shift+Return
