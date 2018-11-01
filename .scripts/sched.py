@@ -89,7 +89,7 @@ def main(modtime):
     minn = cyclemin(minn,modtime)
     activity = getactivity(day,hour,minn)
     ftime = formathour(hour,minn)
-    return '-|{} {}|-'.format(ftime,activity)
+    return '{} {}'.format(ftime,activity)
 
 
 if __name__ == '__main__':
