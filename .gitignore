@@ -36,3 +36,6 @@
 .mpd/playlists/recent.m3u
 wallpapers/
 wallpapers.tar.gz
+.config/i3/bordered_background.png
+.config/pulse/
+Anaconda3-5.2.0-Linux-x86_64.sh
