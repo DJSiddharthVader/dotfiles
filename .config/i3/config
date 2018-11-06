@@ -274,9 +274,9 @@ bindsym $mod+bracketright 	    exec $lilfor
 bindsym $mod+Shift+bracketright exec $bigfor
 
 # Print screen takes a screenshot.
-# With shift, it takes one only of the given window.
-bindsym $mod+Print 			exec --no-startup-id scrot
-bindsym $mod+Shift+Print 	exec --no-startup-id scrot -u
+bindsym Print 	            exec --no-startup-id scrot
+bindsym $mod+Print 			exec --no-startup-id scrot -u
+bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.

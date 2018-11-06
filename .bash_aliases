@@ -4,8 +4,9 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias rs='source ~/.bashrc'
-alias shln="ls -la | grep '\->'"
-alias mtdr="sudo mount /dev/sdb1 /media/1tbdrive/"
+alias ha='pactl set-card-profile 0 output:analog-stereo'
+alias shln="ls -la | grep 'Assg/Paper\->'"
+alias mtdr="sudo mount /devAssg/Paper/sdb1 /media/1tbdrive/"
 alias umnt="umount /media/1tbdrive/"
 alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
 alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
