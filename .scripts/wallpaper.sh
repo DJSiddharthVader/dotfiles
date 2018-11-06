@@ -1,5 +1,6 @@
 #!/bin/sh
 imgname=`ls  ~/dotfiles/wallpapers | shuf -n 1` #pick rnd image
+#imgname='cyber_living_pod.png'
 walp="/home/sidreed/dotfiles/wallpapers/$imgname" #need abs paths or convert fails
 i3dir="/home/sidreed/dotfiles/.config/i3/" #store bordered image
 resolution="1366x768\!" #resolution, ignore aspect ratio
