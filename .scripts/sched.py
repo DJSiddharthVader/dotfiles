@@ -7,7 +7,7 @@ import pandas as pd
 mindayidx = 3
 dayidxs = {'Mon':3,'Tue':4,'Wed':5,'Thu':6,'Fri':7,'Sat':8,'Sun':9}
 idxday =  {3:'Mon',4:'Tue',5:'Wed',6:'Thu',7:'Fri',8:'Sat',9:'Sun'}
-schedule = pd.read_csv('~/.scripts/schedules/schedule.txt')
+schedule = pd.read_csv('~/.scripts/schedules/schedule.cln',delimiter=':')
 
 def scrapedate():
     now = datetime.datetime.now()
