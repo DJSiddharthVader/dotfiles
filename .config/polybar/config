@@ -48,7 +48,7 @@ font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
 font-2 = Siji:pixelsize=10;1
 
 modules-left = i3
-modules-center = mpd
+modules-center = songnames mpd
 modules-right = volume backlight-acpi wlan battery date
 
 dim-value = 1
@@ -199,8 +199,8 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 type = internal/mpd
 host=localhost
 port=6600
-format-online =  <label-song> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
-;format-online =  <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
+;format-online =  <label-song> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
+format-online =  <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
 format-online-underline = #9f78e1
 format-offline = MPD Offline
 
