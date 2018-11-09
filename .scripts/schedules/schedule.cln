@@ -29,10 +29,10 @@ hour:min:Mon:Tue:Wed:Thu:Fri:Sat:Sun
    13:  30:4DD3 Lecture:Thesis:Thesis:4DD3 Lecture:3MB3 Lecture:None:None
    14:   0:4DD3 Lecture:Thesis:Thesis:4DD3 Lecture:3MB3 Lecture:None:None
    14:  30:4DD3 Work:Break:Break:Thesis:Thesis:None:None
-   15:   0:4DD3 Work:4DD3 Study:Break:Thesis:Thesis:None:None
-   15:  30:4DD3 Work:4DD3 Study:Modelling:Break:Thesis:None:None
-   16:   0:4DD3 Work:4DD3 Study:Modelling:Thesis:Thesis:None:None
-   16:  30:4DD3 Work:4DD3 Study:Modelling:Thesis:Thesis:None:None
+   15:   0:4DD3 Work:Read Paper:Break:Thesis:Thesis:None:None
+   15:  30:4DD3 Work:Read Paper:Modelling:Break:Thesis:None:None
+   16:   0:4DD3 Work:Read Paper:Modelling:Thesis:Thesis:None:None
+   16:  30:4DD3 Work:Read Paper:Modelling:Thesis:Thesis:None:None
    17:   0:4DD3 Work:Break:Modelling:Thesis:Thesis:None:None
    17:  30:3B03 Lecture:Thesis:3B03 Lecture:3B03 Lecture:Thesis:None:None
    18:   0:3B03 Lecture:Thesis:3B03 Lecture:3B03 Lecture:Thesis:None:None
@@ -42,8 +42,8 @@ hour:min:Mon:Tue:Wed:Thu:Fri:Sat:Sun
    20:   0:Break:Break:4DD3 Study:Critique:Break:None:None
    20:  30:Thesis:Thesis:4DD3 Study:Critique:Break:None:None
    21:   0:Thesis:Thesis:4DD3 Study:Critique:Break:None:None
-   21:  30:Thesis:4DD3 Study:Break:Critique:Break:None:None
-   22:   0:Break:4DD3 Study:Thesis:Break:Break:None:None
-   22:  30:Thesis:4DD3 Study:Thesis:Critique:Break:None:None
-   23:   0:Thesis:4DD3 Study:Thesis:Critique:Break:None:None
+   21:  30:Thesis:Read Paper:Break:Critique:Break:None:None
+   22:   0:Break:Read Paper:Thesis:Break:Break:None:None
+   22:  30:Thesis:Read Paper:Thesis:Thesis:Break:None:None
+   23:   0:Thesis:Read Paper:Thesis:Thesis:Break:None:None
    23:  30:Thesis:Break:Thesis:Thesis:Break:None:None
