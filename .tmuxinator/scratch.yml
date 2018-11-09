@@ -1,0 +1,10 @@
+name: scratch
+root: ~/
+tmux_options: -f ~/dotfiles/.tmux.scratch.conf
+
+windows:
+    - tasks: tl
+    - math: cd ~/Documents/4thyear/modelling/Project
+    - jlab: unset $BROWSER; conda activate thesis; jupyter lab
+    - thesis: cd ~/thesis_SidReed
+

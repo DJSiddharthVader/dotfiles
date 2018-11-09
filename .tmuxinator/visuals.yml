@@ -1,0 +1,14 @@
+
+name: visuals
+root: ~/
+
+windows:
+    - editor:
+        layout: 6384,186x41,0,0{82x41,0,0[82x22,0,0,28,82x18,0,23,31],103x41,83,0[103x22,83,0,29,103x18,83,23,30]}
+        panes:
+            - neofetch
+            - ~/apps/pipes.sh/pipes.sh
+            - cava
+            - cmatrix
+
+
