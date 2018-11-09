@@ -12,12 +12,12 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinkeys=0{,0},0),:,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=sO:%\ -,mO:%\ \ ,eO:%%,:%
-setlocal commentstring=%%s
+setlocal comments=b:#,fb:-
+setlocal commentstring=#\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -27,14 +27,14 @@ setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal cursorline
-setlocal define=\\\\\\([egx]\\|char\\|mathchar\\|count\\|dimen\\|muskip\\|skip\\|toks\\)\\=def\\|\\\\font\\|\\\\\\(future\\)\\=let\\|\\\\new\\(count\\|dimen\\|skip\\|muskip\\|box\\|toks\\|read\\|write\\|fam\\|insert\\)
+setlocal define=
 setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'plaintex'
-setlocal filetype=plaintex
+if &filetype != 'python'
+setlocal filetype=python
 endif
 setlocal fixendofline
 setlocal foldcolumn=1
@@ -53,13 +53,13 @@ setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
-setlocal include=\\\\input
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal include=^\\s*\\(from\\|import\\)
+setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+setlocal indentexpr=GetPythonIndent(v:lnum)
+setlocal indentkeys=0{,0},:,!^F,o,O,e,<:>,=elif,=except
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
+setlocal keywordprg=pydoc
 setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
@@ -71,7 +71,7 @@ setlocal modifiable
 setlocal nrformats=bin,octal,hex
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=
+setlocal omnifunc=pythoncomplete#Complete
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -85,18 +85,18 @@ setlocal shiftwidth=4
 setlocal noshortname
 setlocal smartindent
 setlocal softtabstop=4
-setlocal spell
+setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=~/.vim/spell/en.utf-8.add
-setlocal spelllang=en_us
+setlocal spellfile=
+setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=.tex
+setlocal suffixesadd=.py
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'plaintex'
-setlocal syntax=plaintex
+if &syntax != 'python'
+setlocal syntax=python
 endif
-setlocal tabstop=4
+setlocal tabstop=8
 setlocal tagcase=
 setlocal tags=
 setlocal textwidth=0
@@ -108,29 +108,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2,8fold
-9,15fold
-16,19fold
-20,22fold
-20,22fold
-1,22fold
-24,25fold
-26,32fold
-23,34fold
-35,38fold
-40,45fold
-46,54fold
-63,67fold
-55,67fold
-68,76fold
-39,76fold
-77,82fold
-let s:l = 74 - ((73 * winheight(0) + 19) / 39)
+let s:l = 1 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-74
-normal! 01|
+1
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
