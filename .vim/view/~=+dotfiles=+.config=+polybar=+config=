@@ -21,7 +21,7 @@ setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
-setlocal completefunc=
+setlocal completefunc=youcompleteme#CompleteFunc
 setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
@@ -113,40 +113,52 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-6,14fold
-15,51fold
-52,89fold
-91,95fold
-96,99fold
-100,104fold
-105,108fold
-109,112fold
+7,22fold
+24,48fold
+52,59fold
+23,59fold
+61,85fold
+89,97fold
+60,97fold
+99,103fold
+104,107fold
+108,112fold
 113,116fold
-117,121fold
-123,140fold
-141,186fold
-187,213fold
-214,218fold
-219,222fold
-223,240fold
-241,255fold
-256,286fold
-287,317fold
-318,345fold
-346,361fold
-362,380fold
-381,387fold
-388,391fold
-392,395fold
-396,411fold
-412,421fold
-422,429fold
+117,120fold
+121,124fold
+125,129fold
+131,148fold
+149,194fold
+195,221fold
+222,226fold
+227,230fold
+231,248fold
+249,263fold
+264,294fold
+295,325fold
+326,353fold
+354,369fold
+370,388fold
+389,395fold
+396,399fold
+400,403fold
+404,419fold
+420,429fold
 430,437fold
-let s:l = 430 - ((289 * winheight(0) + 25) / 51)
+438,445fold
+23
+normal! zo
+23
+normal! zc
+60
+normal! zo
+60
+normal! zc
+let s:l = 6 - ((5 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-430
+6
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
