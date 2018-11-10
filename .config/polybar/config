@@ -3,22 +3,15 @@
 ;   go to https://github.com/jaagr/polybar
 ;
 ;   The README contains alot of information
-;=====================================================
-
 [colors]
-;background = #222
-;blakbar
 background = #00000000
-;transparent
-background-alt = #444
-foreground = #dfdfdf
-;white
+;foreground = ${xrdb:color7:#222}
 ;foreground = #000000
-;black/grey
-foreground-alt = #555
-primary = #ffb52a
-secondary = #e60053
-alert = #bd2c40
+foreground = #ffffff
+foreground-alt = ${xrdb:color7:#222}
+primary = ${xrdb:color1:#222}
+secondary = ${xrdb:color2:#222}
+alert = ${xrdb:color3:#222}
 [bar/lap]
 ;monitor = ${env:MONITOR:eDP-1}
 monitor = ${env:MONITOR:}
@@ -28,7 +21,6 @@ radius = 3.0
 fixed-center = true
 
 background = ${colors.background}
-;background = #00000000
 foreground = ${colors.foreground}
 
 line-size = 2
@@ -46,7 +38,6 @@ module-margin-right = 1
 font-0 = Terminus (TTF):format=truetype:style=Mediumpixelsize=12;1
 font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
 font-2 = Siji:pixelsize=10;1
-
 modules-left = i3
 modules-center = songnames mpd
 modules-right = volume backlight-acpi wlan battery date
@@ -54,7 +45,7 @@ modules-right = volume backlight-acpi wlan battery date
 dim-value = 1
 ;tray-position =
 tray-padding = 2
-tray-transparent = false
+tray-transparent = true
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -65,7 +56,7 @@ height = 28
 radius = 3.0
 fixed-center = true
 
-background = #00000000
+background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 2
@@ -92,7 +83,7 @@ dim-value = 1
 ;tray-position =
 bottom = true
 tray-padding = 2
-tray-transparent = false
+tray-transparent = true
 
 cursor-click = pointer
 cursor-scroll = ns-resize
@@ -100,7 +91,7 @@ cursor-scroll = ns-resize
 [module/songnames]
 type = custom/script
 exec = ~/.scripts/mpdscroll.sh
-format-underline = #9f78e1
+format-underline = ${colors.secondary}
 tail = true
 [module/schedulem1]
 type = custom/script
@@ -109,7 +100,7 @@ tail = true
 [module/schedulep0]
 type = custom/script
 exec = ~/.scripts/sched.py 0
-format-underline = #9f78e1
+format-underline = ${colors.secondary}
 tail = true
 [module/schedulep1]
 type = custom/script
@@ -127,9 +118,7 @@ tail = true
 type = custom/script
 exec = ~/.scripts/task_counter.sh
 tail = true
-format-underline = #e60053
-
-
+format-underline = ${colors.primary}
 
 [module/bspwm]
 type = internal/bspwm
@@ -178,7 +167,7 @@ label-mode-background = ${colors.primary}
 ; focused = Active workspace on focused monitor
 label-focused = %index% %icon%
 ;label-focused-background = ${module/bspwm.label-focused-background}
-label-focused-underline = #0a6cf5
+label-focused-underline = ${colors.alert}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 
 ; unfocused = Inactive workspace on any monitor
@@ -201,7 +190,7 @@ host=localhost
 port=6600
 ;format-online =  <label-song> <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
 format-online =  <icon-prev> <toggle> <icon-next> <icon-repeatone> <icon-random> <bar-progress> <label-time>
-format-online-underline = #9f78e1
+format-online-underline = ${colors.secondary}
 format-offline = MPD Offline
 
 label-song = ───|%artist% - %title%|───
@@ -215,32 +204,28 @@ icon-random = 
 icon-repeat = 
 icon-repeatone = 
 
-toggle-on-foreground = #ff
-toggle-off-foreground = #55
+toggle-on-foreground = ${colors.foreground}
+toggle-off-foreground = ${colors.secondary}
 
 bar-progress-width = 15
 bar-progress-indicator = |
 bar-progress-fill = ─
 bar-progress-empty = ─
-
 [module/xbacklight]
 type = internal/xbacklight
 format = <label>
 label =  %percentage%%
 format-underline = #ffffff
-
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
-
 [module/wlan]
 type = internal/network
 interface = wlp1s0
 interval = 3.0
 format-connected = %{A:st -e nmtui-connect&:}<ramp-signal> <label-connected>%{A}
-format-connected-underline = #339966
-;format-connected-underline = #9f78e1
+format-connected-underline = #9f78e1
 label-connected =  %essid%
 label-connected-foreground = ${colors.foreground}
 
@@ -253,7 +238,6 @@ ramp-signal-2 = 
 ramp-signal-3 = 
 ;ramp-signal-4 =
 ramp-signal-foreground = ${colors.foreground}
-
 [module/date]
 type = internal/date
 interval = 5
@@ -269,12 +253,11 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 
 label = %time%%date%
-
 [module/volume]
 type = internal/volume
 
 format-volume = <ramp-volume> <label-volume>
-format-volume-underline = #66ff33
+format-volume-underline = ${colors.primary}
 label-volume = %percentage%%
 label-volume-foreground = ${root.foreground}
 
@@ -301,7 +284,6 @@ ramp-volume-2 = 
 ;bar-volume-empty = ─
 ;bar-volume-empty-font = 2
 ;bar-volume-empty-foreground = ${colors.foreground-alt}
-
 [module/battery]
 type = internal/battery
 battery = BAT0
@@ -314,7 +296,6 @@ format-charging-underline = #55aa55
 
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = #ffb52a
-
 
 ;format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground}
@@ -334,7 +315,6 @@ animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-foreground = ${colors.foreground}
 animation-charging-framerate = 750
-
 [module/powermenu]
 type = custom/menu
 expand-right = true
@@ -445,16 +425,13 @@ interval = 2
 ;format-prefix = " "
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
-format-underline = #f90000
+format-underline = ${colors.primary}
 label = %percentage:2%%
-
 [module/memory]
 type = internal/memory
 interval = 2
 ;format-prefix = " "
 format-prefix = " "
-
 format-prefix-foreground = ${colors.foreground}
 format-underline = #4bffdc
 label = %percentage_used%%
-; vim:ft=dosini

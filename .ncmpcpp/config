@@ -71,7 +71,7 @@ mpd_music_dir = ~/Music
 ## that sane values start with >=10.
 ##
 #
-#visualizer_sync_interval = 30
+visualizer_sync_interval = 10
 #
 ##
 ## Note: To enable spectrum frequency visualization you need to compile ncmpcpp
@@ -80,7 +80,7 @@ mpd_music_dir = ~/Music
 #
 ## Available values: spectrum, wave, wave_filled, ellipse.
 ##
-#visualizer_type = wave
+visualizer_type = spectrum
 #
 #visualizer_look = ●▮
 #

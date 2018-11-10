@@ -20,6 +20,13 @@ set $netrefresh exec --no-startup-id st -e nmtui
 exec_always --no-startup-id xautolock -time 30 -locker ~/.config/i3/lock.sh -detectsleep
 # First I have a tmux window used for background scripts.
 # I'll later bind this to mod+u.
+for_window [instance="drop2"] resize set 625 400
+for_window [instance="drop2"] floating enable
+for_window [instance="drop2"] move scratchpad
+for_window [instance="drop2"] border pixel 8
+exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
+# First I have a tmux window used for background scripts.
+# I'll later bind this to mod+u.
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad

@@ -618,6 +618,7 @@ server() {
 # Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
+export PATH="${PATH}:${HOME}/.local/bin/"
 (cat ~/.cache/wal/sequences &)
 
 
@@ -629,3 +630,19 @@ PERL_MM_OPT="INSTALL_BASE=/home/sidreed/perl5"; export PERL_MM_OPT;
 
 
 . /home/sidreed/anaconda3/etc/profile.d/conda.sh
+# added by Anaconda3 5.3.0 installer
+# >>> conda init >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/sidreed/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    \eval "$__conda_setup"
+else
+    if [ -f "/home/sidreed/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/sidreed/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate base
+    else
+        \export PATH="/home/sidreed/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda init <<<

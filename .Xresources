@@ -1,20 +1,20 @@
 Rxvt.termName: rxvt
-URxvt.transparent: true
-URxvt.inheritPixmap: False
-URxvt.imLocale: pl_PL.UTF-8
-URxvt.scrollBar: false
-URxvt.saveLines: 500
-URxvt.urlLauncher:      firefox
-URxvt.cursorBlink: true
-URxvt.geometry: 80x20
-URxvt.fading: 25%
-urxvt.font:             xft:Bitstream Vera Sans Mono:pixelsize=12
+uRxvt.inheritPixmap: False
+uRxvt.imLocale: pl_PL.UTF-8
+uRxvt.scrollBar: false
+uRxvt.saveLines: 500
+uRxvt.urlLauncher:      firefox
+uRxvt.cursorBlink: true
+uRxvt.geometry: 80x20
+uRxvt.fading: 25%
+urxvt.font:             xft:Terminus:pixelsize=12
 urxvt.boldFont:         xft:Bitstream Vera Sans Mono:bold:pixelsize=10
-URxvt*background:      #303030
+uRxvt*background:      #303030
 urxvt.depth: 32
 urxvt.background: rgba:0000/0000/0000/bbbb
-URxvt.foreground: grey80
-URxvt.tintColor: #262626
-URxvt.borderLess: true
-URxvt.borderColor: #888888
-
+uRxvt.foreground: grey80
+uRxvt.tintColor: #262626
+uRxvt.borderLess: true
+uRxvt.borderColor: #888888
+urxvt*transparent: true
+urxvt*shading: 30

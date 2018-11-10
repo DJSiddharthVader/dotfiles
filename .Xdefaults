@@ -32,7 +32,7 @@
 URxvt.intensityStyles:	false
 URxvt.background:       [70]#000000
 URxvt.depth:		32
-URxvt.font: 		xft:monospace:size=11
+URxvt.font: 		Terminus:monospace:size=11
 URxvt.scrollBar:	false
 URxvt.cursorColor:	white
 
@@ -64,3 +64,5 @@ rofi.bw:		0
 rofi.opacity:		"10"
 rofi.hide-scrollbar:	true
 rofi.width:		30
+
+#include "/home/sidreed/.cache/wal/colors.Xresources"
