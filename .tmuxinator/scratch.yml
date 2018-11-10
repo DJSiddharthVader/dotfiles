@@ -3,8 +3,8 @@ root: ~/
 tmux_options: -f ~/dotfiles/.tmux.scratch.conf
 
 windows:
-    - tasks: wal -R -e -n; tl
-    - math: wal -R -e -n; cd ~/Documents/4thyear/modelling/Project
-    - jlab: wal -R -e -n; unset $BROWSER; conda activate thesis
-    - thesis: wal -R -e -n; cd ~/thesis_SidReed
+    - tasks: wal -R -e -n -q; tl
+    - math: wal -R -e -n -q; cd ~/Documents/4thyear/modelling/Project
+    - jlab: wal -R -e -n -q; unset $BROWSER; conda activate thesis
+    - thesis: wal -R -e -n -q; cd ~/thesis_SidReed
 

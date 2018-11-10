@@ -3,15 +3,23 @@
 ;   go to https://github.com/jaagr/polybar
 ;
 ;   The README contains alot of information
+;=====================================================
 [colors]
 background = #00000000
-;foreground = ${xrdb:color7:#222}
-;foreground = #000000
-foreground = #ffffff
-foreground-alt = ${xrdb:color7:#222}
-primary = ${xrdb:color1:#222}
-secondary = ${xrdb:color2:#222}
-alert = ${xrdb:color3:#222}
+grey = #ebdbb2
+dark_grey = #504945
+red = #cc241d
+green = #98971a
+yellow = #d79921
+blue = #458588
+orange = #d65d0e
+aqua = #689d6a
+white = #fbf1c7
+foreground = ${colors.grey}
+foreground-alt = ${colors.dark_grey}
+primary = ${colors.orange}
+secondary = ${colors.blue}
+alert = ${colors.red}
 [bar/lap]
 ;monitor = ${env:MONITOR:eDP-1}
 monitor = ${env:MONITOR:}
@@ -205,7 +213,7 @@ icon-repeat = 
 icon-repeatone = 
 
 toggle-on-foreground = ${colors.foreground}
-toggle-off-foreground = ${colors.secondary}
+toggle-off-foreground = ${colors.foreground-alt}
 
 bar-progress-width = 15
 bar-progress-indicator = |
@@ -215,7 +223,7 @@ bar-progress-empty = ─
 type = internal/xbacklight
 format = <label>
 label =  %percentage%%
-format-underline = #ffffff
+format-underline = ${colors.white}
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
@@ -225,12 +233,12 @@ type = internal/network
 interface = wlp1s0
 interval = 3.0
 format-connected = %{A:st -e nmtui-connect&:}<ramp-signal> <label-connected>%{A}
-format-connected-underline = #9f78e1
+format-connected-underline = ${colors.aqua}
 label-connected =  %essid%
 label-connected-foreground = ${colors.foreground}
 
 format-disconnected = %{A:st -e nmtui-connect&:}disconnected%{A}
-label-disconnected-foreground = ${colors.foreground}
+label-disconnected-foreground = ${colors.foreground-alt}
 
 ramp-signal-0 = 
 ramp-signal-1 = 
@@ -249,8 +257,8 @@ time =  %I:%M
 time-alt =  %I:%M
 
 ;format-prefix = '
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.blue}
 
 label = %time%%date%
 [module/volume]
@@ -292,10 +300,10 @@ full-at = 98
 
 ;format-charging = <animation-charging> <label-charging>
 format-charging = <ramp-capacity> <label-charging>
-format-charging-underline = #55aa55
+format-charging-underline = ${colors.green}
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = #ffb52a
+format-discharging-underline = ${colors.yellow}
 
 ;format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground}
@@ -365,7 +373,7 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #f50a4d
+format-underline = ${colors.red}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
@@ -399,10 +407,10 @@ blacklist-0 = num lock
 
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = #ffb52a
+format-prefix-underline = ${colors.yellow}
 
 label-layout = %layout%
-label-layout-underline = #ffb52a
+label-layout-underline = ${colors.yellow}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
@@ -433,5 +441,5 @@ interval = 2
 ;format-prefix = " "
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
-format-underline = #4bffdc
+format-underline = ${colors.aqua}
 label = %percentage_used%%
