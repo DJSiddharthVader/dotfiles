@@ -70,7 +70,7 @@ exec --no-startup-id mpd
 #Mount other drives:
 #exec --no-startup-id sudo mount -a
 #Composite manager:
-exec --no-startup-id compton --config ~/.config/compton.conf --opacity-rule "90:class_g"
+exec --no-startup-id compton --config ~/.config/compton.conf
 #Launch Polybar where appropriate:
 exec_always --no-startup-id ~/.scripts/polybar_launch
 #Unclutter makes the mouse invisible after a brief period
