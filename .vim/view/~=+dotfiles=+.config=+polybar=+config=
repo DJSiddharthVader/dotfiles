@@ -50,6 +50,7 @@ setlocal foldtext=foldtext()
 setlocal formatexpr=
 setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
@@ -64,6 +65,7 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
+setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
@@ -83,6 +85,7 @@ setlocal rightleftcmd=search
 setlocal noscrollbind
 setlocal shiftwidth=4
 setlocal noshortname
+setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
 setlocal nospell
@@ -99,6 +102,8 @@ endif
 setlocal tabstop=4
 setlocal tagcase=
 setlocal tags=
+setlocal termkey=
+setlocal termsize=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -108,52 +113,40 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-8,21fold
-23,49fold
-53,60fold
-22,60fold
-62,86fold
-90,98fold
-61,98fold
+6,14fold
+15,51fold
+52,89fold
+91,95fold
+96,99fold
 100,104fold
 105,108fold
-109,113fold
-114,117fold
-118,121fold
-122,125fold
-126,130fold
-134,151fold
-152,197fold
-198,225fold
-226,231fold
-232,236fold
-237,256fold
-257,272fold
-273,304fold
-305,337fold
-338,365fold
-366,381fold
-382,400fold
-401,407fold
-408,411fold
-412,415fold
-416,431fold
-432,441fold
-442,450fold
-451,460fold
-22
-normal! zo
-22
-normal! zc
-61
-normal! zo
-61
-normal! zc
-let s:l = 451 - ((333 * winheight(0) + 23) / 46)
+109,112fold
+113,116fold
+117,121fold
+123,140fold
+141,186fold
+187,213fold
+214,218fold
+219,222fold
+223,240fold
+241,255fold
+256,286fold
+287,317fold
+318,345fold
+346,361fold
+362,380fold
+381,387fold
+388,391fold
+392,395fold
+396,411fold
+412,421fold
+422,429fold
+430,437fold
+let s:l = 430 - ((289 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-451
+430
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
