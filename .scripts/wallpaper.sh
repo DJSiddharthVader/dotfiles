@@ -21,6 +21,7 @@ case "$1" in
         convert "$bgfile" -bordercolor Black -border 0x5% "$bgfile"
         feh --bg-scale "$bgfile"
         echo "feh --bg-scale $walp" >> .fehbg
+        echo "feh --bg-scale $bgfile" >> .fehbg
         ;;
     'both')
         wal -e -n -i $walp #font only
@@ -29,6 +30,7 @@ case "$1" in
         convert "$bgfile" -bordercolor Black -border 0x5% "$bgfile"
         feh --bg-scale "$bgfile"
         echo "feh --bg-scale $walp" >> .fehbg
+        echo "feh --bg-scale $bgfile" >> .fehbg
         ;;
     'sback')
         bgfile="$i3dir"bordered_background.png
@@ -36,6 +38,7 @@ case "$1" in
         convert "$bgfile" -bordercolor Black -border 0x5% "$bgfile"
         feh --bg-scale "$bgfile"
         echo "feh --bg-scale $walp" >> .fehbg
+        echo "feh --bg-scale $bgfile" >> .fehbg
         ;;
     *)
         echo "Usage: $0 {font|background|both|sback}"
