@@ -58,6 +58,7 @@ setlocal foldtext=foldtext()
 setlocal formatexpr=
 setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
+setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=2
 setlocal imsearch=2
@@ -72,6 +73,7 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
+setlocal makeencoding=
 setlocal makeprg=latex\ -interaction=nonstopmode\ -file-line-error-style\ $*
 setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
@@ -91,6 +93,7 @@ setlocal rightleftcmd=search
 setlocal noscrollbind
 setlocal shiftwidth=4
 setlocal noshortname
+setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
 setlocal nospell
@@ -107,6 +110,8 @@ endif
 setlocal tabstop=4
 setlocal tagcase=
 setlocal tags=
+setlocal termkey=
+setlocal termsize=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -116,12 +121,22 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 19) / 39)
+1,5fold
+6,17fold
+18,31fold
+32,43fold
+44,56fold
+57,71fold
+72,84fold
+32
+normal! zo
+let s:l = 43 - ((42 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
-normal! 015|
+43
+normal! 012|
+lcd ~/Documents/4thyear/modelling/Project/writeups
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
