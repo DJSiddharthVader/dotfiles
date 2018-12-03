@@ -2,14 +2,12 @@
 
 # #---Basic Definitions---# #
 #Needed for i3-gaps
-for_window [class="^.*"] border pixel 5
+for_window [class="^.*"] border pixel 2
 gaps inner 10
 gaps outer 10
 font Terminus
 set $mod Mod4
 set $term --no-startup-id st
-set $video --no-startup-id bash video.sh
-set $stoprec --no-startup-id killall ffmpeg
 set $BROWSER firefox
 #SYSTEMD
 set $shutdown --no-startup-id shutdown now
@@ -20,13 +18,6 @@ set $netrefresh exec --no-startup-id st -e nmtui
 exec_always --no-startup-id xautolock -time 30 -locker ~/.config/i3/lock.sh -detectsleep
 # First I have a tmux window used for background scripts.
 # I'll later bind this to mod+u.
-for_window [instance="drop2"] resize set 625 400
-for_window [instance="drop2"] floating enable
-for_window [instance="drop2"] move scratchpad
-for_window [instance="drop2"] border pixel 8
-exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
-# First I have a tmux window used for background scripts.
-# I'll later bind this to mod+u.
 for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
@@ -34,11 +25,10 @@ for_window [instance="dropdown"] border pixel 8
 exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
 # For mpc:
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
-#exec --no-startup-id st -n music -e ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
 for_window [instance="music"] resize set 600 600
 for_window [instance="music"] floating enable
 for_window [instance="music"] move scratchpad
-for_window [instance="music"] border pixel 10
+for_window [instance="music"] border pixel 8
 exec $term -n music -e $music
 #Music Commands
 set $pause --no-startup-id mpc toggle
@@ -63,8 +53,11 @@ set $truemute --no-startup-id amixer sset Master mute
 # #---Starting External Scripts---# #
 #Increase key rate
 exec --no-startup-id xset r rate 300 50
-#Music player daemon:
-exec --no-startup-id mpd
+#Music player daemon and sound:
+#exec --no-startup-id mpd
+exec --no-startup-id [ ! -s ~/.config/mpd/pid ] && mpd
+exec --no-startup-id pulseaudio --kill
+exec --no-startup-id pulseaudio --start
 #Torrent daemon:
 #exec --no-startup-id transmission-daemon
 #Mount other drives:
@@ -85,15 +78,9 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
-exec --no-startup-id ~/.scripts/lowbattery.sh
+exec --no-startup-id /home/sidreed/dotfiles/.scripts/lowbattery.sh &
 
 
-
-# switch to output
-bindsym $mod+n focus output left
-bindsym $mod+Shift+n focus output right
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # #---Basic Bindings---# #
 bindsym $mod+space		focus mode_toggle
@@ -105,23 +92,26 @@ bindsym $mod+BackSpace	exec $truemute ; exec $truepause ; workspace lmao ; exec 
 # #---Letter Key Bindings---# #
 bindsym $mod+q			kill
 #bindsym $mod+Shift+q    exec --no-startup-id qpdfview
-
+#
 bindsym $mod+w		    exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w	exec --no-startup-id firefox --private-window
 
-bindsym $mod+r          exec rofi -show run
-bindsym $mod+Shift+r    exec $term -e ranger
+bindsym $mod+e		    split toggle
+#bindsym $mod+Shift+e	split v
 
-bindsym $mod+t		    move workspace to output up
+bindsym $mod+r          exec rofi -show run
+bindsym $mod+Shift+r    exec $term -e wal -R -e -n -q;ranger
+
+bindsym $mod+t          move workspace to output right
 bindsym $mod+Shift+t	gaps inner current set 15; gaps outer current set 15
 
-bindsym $mod+y 		    move workspace to output right
+bindsym $mod+y          move workspace to output left
 bindsym $mod+Shift+y	resize shrink width 10 px or 10ppt
 
 bindsym $mod+u          [instance="dropdown"] scratchpad show,move position center
 bindsym $mod+Shift+u	resize shrink height 10 px or 10 ppt
 
-bindsym $mod+i			exec --no-startup-id st -e vi ~/.config/i3/config
+bindsym $mod+i          [instance="drop2"] scratchpad show,move position center
 bindsym $mod+Shift+i	resize grow height 10 px or 10 ppt
 
 bindsym $mod+o	        exec --no-startup-id qpdfview
@@ -132,6 +122,12 @@ bindsym $mod+Shift+p	exec $trupause
 
 bindsym $mod+a          gaps inner current plus 5
 bindsym $mod+Shift+a	gaps inner current minus 5
+
+bindsym $mod+s          gaps outer current plus 5
+bindsym $mod+Shift+s    gaps outer current minus 5
+
+bindsym $mod+d          exec ~/dotfiles/.scripts/monitor.sh 'on'
+bindsym $mod+Shift+d    exec ~/dotfiles/.scripts/monitor.sh 'off'
 
 bindsym $mod+f			fullscreen toggle
 bindsym $mod+Shift+f    exec ~/dotfiles/.scripts/wallpaper.sh 'font'
@@ -151,29 +147,26 @@ bindsym $mod+Shift+k	move up 30
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l	move right 30
 
-bindsym $mod+z			gaps outer current plus 5
-bindsym $mod+Shift+z	gaps outer current minus 5
+bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/togglebar.sh on
+bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/togglebar.sh off
+
+bindsym $mod+x			exec --no-startup-id ~/.scripts/lock.sh
+#bindsym $mod+Shift+x    exec
 
 bindsym $mod+c			restart
-bindsym $mod+Shift+c    exec $term -e cava
+bindsym $mod+Shift+c    exec $term -e vi ~/dotfiles/.config/i3/config
 
-bindsym $mod+v			exec $term -e vi
-bindsym $mod+Shift+v    exec feh ~/dotfiles/wallpapers/vim-cheat-sheet.png
+bindsym $mod+v			exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
+bindsym $mod+Shift+v    exec $term -e cava
 
 bindsym $mod+b		    exec ~/dotfiles/.scripts/wallpaper.sh 'background'
 bindsym $mod+Shift+b    exec ~/dotfiles/.scripts/wallpaper.sh 'both'
 
+bindsym $mod+n          focus output left
+bindsym $mod+Shift+n    focus output right
+
 bindsym $mod+m          [instance="music"] scratchpad show; [instance="music"] move position center
 bindsym $mod+Shift+m	exec $mute
-
-bindsym $mod+d          exec --no-startup-id ~/.scripts/togglescreen.sh vga 1
-bindsym $mod+Shift+d    exec --no-startup-id ~/.scripts/togglescreen.sh vga 0
-
-bindsym $mod+s          exec --no-startup-id ~/.scripts/togglescreen.sh hdmi 1
-bindsym $mod+Shift+s    exec --no-startup-id ~/.scripts/togglescreen.sh hdmi 0
-
-bindsym $mod+x			exec --no-startup-id ~/.scripts/lock.sh
-bindsym $mod+Shift+x    exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 
 #bindsym $mod+Shift+Return
 #bindsym $mod+Shift+Escape
@@ -238,15 +231,15 @@ bindsym $mod+Shift+0	move container to workspace $ws10
 
 
 # #---Function Buttons---# #
-bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
-bindsym $mod+F2		restart
-bindsym $mod+F3		exec --no-startup-id displayselect
+#bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
+#bindsym $mod+F2		restart
+#bindsym $mod+F3		exec --no-startup-id displayselect
 bindsym $mod+F4		exec --no-startup-id $hibernate
-bindsym $mod+F5		exec --no-startup-id $netrefresh
-bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
-bindsym $mod+F7     exec -no-startup-id compton
-#bindsym $mod+F8
-bindsym $mod+F9		exec --no-startup-id sudo mount -a
+#bindsym $mod+F5
+#bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
+#bindsym $mod+F7     exec -no-startup-id compton
+bindsym $mod+F8		exec --no-startup-id $netrefresh
+#bindsym $mod+F9		exec --no-startup-id sudo mount -a
 #bindsym $mod+F10
 #bindsym $mod+F11
 #bindsym $mod+F12
@@ -290,23 +283,23 @@ bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
 bindsym XF86AudioMute           exec $mute
 bindsym XF86AudioLowerVolume	exec $dec
 bindsym XF86AudioRaiseVolume	exec $inc
-bindsym XF86PowerOff		    exec/.scripts/prompt "Are you sure you want to shutdown?" "$shutdown"
-bindsym XF86Calculator		    exec $term -e R -q
-bindsym XF86Sleep		        exec sudo zzz
-bindsym XF86Explorer		    exec $term -e ranger
-bindsym XF86WWW			        exec --no-startup-id $BROWSER
-bindsym XF86ScreenSaver		    exec --no-startup-id ~/.config/i3/lock.sh
-bindsym XF86MyComputer		    exec $term -e ranger
-bindsym XF86Eject		        exec sudo umount -R /mnt
-bindsym XF86Suspend             exec --no-startup-id ~/.config/i3/lock.sh
-bindsym XF86AudioNext		    exec $next
-bindsym XF86AudioPlay	    	exec $pause
-bindsym XF86AudioPrev		    exec $prev
-bindsym XF86AudioStop	    	exec $pause
-bindsym XF86AudioRecord		    exec $audio
-bindsym XF86AudioRewind		    exec $lilbak
-bindsym XF86AudioForward	    exec $lilfor
-bindsym XF86Reload		        restart
+#bindsym XF86PowerOff		    exec/.scripts/prompt "Are you sure you want to shutdown?" "$shutdown"
+#bindsym XF86Calculator		    exec $term -e R -q
+#bindsym XF86Sleep		        exec sudo zzz
+#bindsym XF86Explorer		    exec $term -e ranger
+#bindsym XF86WWW			        exec --no-startup-id $BROWSER
+#bindsym XF86ScreenSaver		    exec --no-startup-id ~/.config/i3/lock.sh
+#bindsym XF86MyComputer		    exec $term -e ranger
+#bindsym XF86Eject		        exec sudo umount -R /mnt
+#bindsym XF86Suspend             exec --no-startup-id ~/.config/i3/lock.sh
+#bindsym XF86AudioNext		    exec $next
+#bindsym XF86AudioPlay	    	exec $pause
+#bindsym XF86AudioPrev		    exec $prev
+#bindsym XF86AudioStop	    	exec $pause
+#bindsym XF86AudioRecord		    exec $audio
+#bindsym XF86AudioRewind		    exec $lilbak
+#bindsym XF86AudioForward	    exec $lilfor
+#bindsym XF86Reload		        restart
 bindsym XF86AudioMicMute	    exec $micmute
 #bindsym XF86TouchpadOn		    exec --no-startup-id exec synclient TouchpadOff=0
 #bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
