@@ -9,7 +9,7 @@ background = #00000000
 grey = #ebdbb2
 dark_grey = #504945
 red = #cc241d
-green = #98971a
+green = #b8bb26
 yellow = #d79921
 blue = #458588
 orange = #d65d0e
@@ -95,6 +95,51 @@ tray-transparent = true
 
 cursor-click = pointer
 cursor-scroll = ns-resize
+[bar/minimal]
+monitor = ${env:MONITOR:eDP-1}
+width = 100%
+height = 22
+radius = 3.0
+fixed-center = true
+y-offset = 0
+wm-restack = i3
+border-left-size = 450
+border-right-size = 450
+border-top-size = 6
+border-bottom-size = 0
+border-right-color = #00000000
+border-left-color = #00000000
+border-bottom-color = #ffffff
+
+background = #000000
+foreground = ${colors.foreground}
+
+line-size = 2
+line-color = #f00
+
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Terminus (TTF):format=truetype:style=Mediumpixelsize=12;1
+font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
+font-2 = Siji:pixelsize=10;1
+
+modules-left = volume
+modules-center = i3
+modules-right = battery
+
+dim-value = 1
+;tray-position =
+bottom = false
+tray-padding = 2
+tray-transparent = true
+
+cursor-click = pointer
+cursor-scroll = ns-resize
 ;my custom modules
 [module/songnames]
 type = custom/script
@@ -126,7 +171,7 @@ tail = true
 type = custom/script
 exec = ~/.scripts/task_counter.sh
 tail = true
-format-underline = ${colors.primary}
+format-underline = ${colors.red}
 
 [module/bspwm]
 type = internal/bspwm
@@ -233,18 +278,18 @@ type = internal/network
 interface = wlp1s0
 interval = 3.0
 format-connected = %{A:st -e nmtui-connect&:}<ramp-signal> <label-connected>%{A}
-format-connected-underline = ${colors.aqua}
+format-connected-underline = ${colors.green}
 label-connected =  %essid%
 label-connected-foreground = ${colors.foreground}
 
 format-disconnected = %{A:st -e nmtui-connect&:}disconnected%{A}
 label-disconnected-foreground = ${colors.foreground-alt}
 
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-;ramp-signal-4 =
+ramp-signal-0 = ䷁
+ramp-signal-1 = ䷒
+ramp-signal-2 = ䷡
+ramp-signal-3 = ䷪
+ramp-signal-4 = ䷀
 ramp-signal-foreground = ${colors.foreground}
 [module/date]
 type = internal/date
@@ -300,7 +345,7 @@ full-at = 98
 
 ;format-charging = <animation-charging> <label-charging>
 format-charging = <ramp-capacity> <label-charging>
-format-charging-underline = ${colors.green}
+format-charging-underline = ${colors.aqua}
 
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${colors.yellow}
@@ -381,9 +426,12 @@ label = %temperature%
 label-warn = %temperature%
 label-warn-foreground = ${colors.foreground}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+;ramp-0 = 
+;ramp-1 = 
+;ramp-2 = 
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 ramp-foreground = ${colors.foreground}
 
 [settings]
@@ -394,8 +442,8 @@ screenchange-reload = true
 ;compositing-border = over
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 2
+margin-bottom = 2
 
 [module/xwindow]
 type = internal/xwindow
@@ -405,8 +453,8 @@ label = %title:0:30:...%
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = "⌨ "
+format-prefix-foreground = ${colors.foreground}
 format-prefix-underline = ${colors.yellow}
 
 label-layout = %layout%
