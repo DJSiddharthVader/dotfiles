@@ -33,7 +33,7 @@ gitstats() {
 }
 [[ -f $HOME/.dircolors_256 ]] && eval $(dircolors -b $HOME/.dircolors_256)
 #Foreground Colors
-end='\e[0m'
+end='\[\e[0m\]'
 F0='\[\e[30m\]'
 fb='\[\e[30m\]'
 F1='\[\e[31m\]'
@@ -56,23 +56,23 @@ B5='\[\e[45m\]'
 B6='\[\e[46m\]'
 B7='\[\e[47m\]'
 #Symbols
-top=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u250C\uE0B2\\]')
-par=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\uE0B0\\]')
-clk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u231B\\]')
-usr=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u23FF\\]')
-hst=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u26E9\\]')
-dir=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2316\\]')
-git=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2325\\]')
-snk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2440\\]')
-tsk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2713\\]')
-bot=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2514\\]')
-pen=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u0F3B\\]')
+top=$(echo -e '\u250C\uE0B2')
+par=$(echo -e '\uE0B0')
+clk=$(echo -e '\u231B')
+usr=$(echo -e '\u23FF')
+hst=$(echo -e '\u237E')
+dir=$(echo -e '\u26E9')
+git=$(echo -e '\u2325')
+snk=$(echo -e '\u2440')
+tsk=$(echo -e '\u2713')
+bot=$(echo -e '\u2514')
+pen=$(echo -e '\u0F3B')
 #Modules
 strt="$B0$Fb$top$end$B1$F0"
 time="$B1$Ft$clk\@$F1$B2$par"
 #user="$B2$F0$usr \u$F2$B3$par"
-host="$B2$F0$hst \h$F2$B3$par"
-dirc="$B3$fb$dir$F0\w$F3$B4$par"
+host="$B2$F0$hst\h$F2$B3$par"
+dirc="$B3$fb$dir $F0\w$F3$B4$par"
 task="$B4$F0$tsk\$(count_tasks)$F4$B5$par"
 cond="$B5$F0$snk\$(condaenv)$F5$B6$par"
 gits="$B6$F0\$(gitstats)$F6$B0$par"
