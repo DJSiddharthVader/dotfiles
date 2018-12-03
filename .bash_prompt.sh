@@ -16,7 +16,7 @@ msym='+'
 usym='⛬'   #'\u26EC' #three trig dots
 gitstats() {
     if [ -d .git ]; then
-        brnch=$(git status 2> /dev/null | grep 'On branch' | cut -d' ' -f3)
+        brnch=$(git branch 2> /dev/null | grep '\*' | cut -d' ' -f2)
         if [[ `git status 2> /dev/null | grep -o 'by [0-9]* commit'` = "" ]]; then
             cmmts='0'
         else
@@ -24,15 +24,15 @@ gitstats() {
         fi
         moded=$(git status -s 2> /dev/null | grep '^ M' | wc -l)
         untrk=$(git status -s 2> /dev/null | grep '^\?\?' | wc -l)
-        #echo -e "$bsym ($brnch) $csym$cmmts $msym$moded$usym $untrk"
-        echo -e "$bsym $csym$cmmts$msym$moded$usym $untrk"
+        echo -e "$bsym ($brnch) $csym$cmmts$msym$moded$usym $untrk"
+        #echo -e "$bsym $csym$cmmts$msym$moded$usym $untrk"
     else
         echo -e "$bsym "
     fi
 }
 [[ -f $HOME/.dircolors_256 ]] && eval $(dircolors -b $HOME/.dircolors_256)
 #Foreground Colors
-end='\e[0m'
+end='\[\e[0m\]'
 F0='\[\e[30m\]'
 fb='\[\e[30m\]'
 F1='\[\e[31m\]'
