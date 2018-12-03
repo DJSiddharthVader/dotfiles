@@ -335,10 +335,10 @@ setlocal noshortname
 setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
-setlocal spell
+setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
-setlocal spelllang=en
+setlocal spelllang=en_us
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=.tex,.sty,.cls
 setlocal noswapfile
@@ -360,46 +360,47 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2,39fold
-48,57fold
-46,57fold
-60,66fold
-68,72fold
-58,73fold
-78,87fold
-89,92fold
-74,94fold
-113,116fold
-95,119fold
-121,124fold
-120,131fold
-133,136fold
-132,139fold
-45,139fold
-141,142fold
-145,150fold
-143,151fold
-155,163fold
-165,172fold
-152,174fold
-180,212fold
-214,227fold
-231,234fold
-175,236fold
-239,243fold
-245,248fold
-251,254fold
-256,259fold
-237,261fold
-140,261fold
-264,265fold
-266,267fold
-262,267fold
-let s:l = 1 - ((0 * winheight(0) + 21) / 43)
+3,7fold
+8,10fold
+11,16fold
+17,19fold
+20,24fold
+25,38fold
+40,45fold
+47,48fold
+49,58fold
+59,64fold
+65,67fold
+68,73fold
+74,79fold
+80,82fold
+46,82fold
+84,95fold
+96,97fold
+98,103fold
+104,109fold
+110,116fold
+83,116fold
+119,120fold
+121,122fold
+117,122fold
+46
+normal! zo
+46
+normal! zc
+83
+normal! zo
+83
+normal! zc
+117
+normal! zo
+117
+normal! zc
+let s:l = 83 - ((44 * winheight(0) + 3) / 7)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
+83
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
