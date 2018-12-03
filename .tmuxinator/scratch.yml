@@ -1,10 +1,12 @@
 name: scratch
 root: ~/
 tmux_options: -f ~/dotfiles/.tmux.scratch.conf
+on_project_start: wal -R -e -n -q &
+on_project_exit: tmux kill-session -t scratch
 
 windows:
-    - tasks: wal -R -e -n -q; tl
-    - math: wal -R -e -n -q; cd ~/Documents/4thyear/modelling/Project
-    - jlab: wal -R -e -n -q; unset $BROWSER; conda activate thesis
-    - thesis: wal -R -e -n -q; cd ~/thesis_SidReed
+    - tasks: tl
+    - thesis: cd ~/thesis_SidReed
+    - lab: conda activate thesis; unset BROWSER; jupyter lab
+    - scratch: neofetch
 
