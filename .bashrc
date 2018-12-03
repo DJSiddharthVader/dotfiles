@@ -94,56 +94,9 @@ fi
 
 # }}}
 
-#set -o vi
-
-# Default PS1 {{{
-
+# Get Prompt Info
 [[ -f $HOME/.dircolors ]] && eval $(dircolors -b $HOME/.dircolors)
-if $_isxrunning; then
-    [[ -f $HOME/.dircolors_256 ]] && eval $(dircolors -b $HOME/.dircolors_256)
-
-    #export TERM='screen-256color'
-
-     B='\[\e[1;34m\]'
-    LB='\[\e[34m\]'
-    GY='\[\e[1;30m\]'
-     G='\[\e[30m\]'
-     P='\[\e[36m\]'
-    PP='\[\e[37m\]'
-     R='\[\e[35m\]'
-     Y='\[\e[0m\]'
-     W='\[\e[0m\]'
-
-     get_prompt_symbol() {
-      [[ $UID == 0 ]] && echo "#" || echo "\$"
-    }
-
-    if [[ $PS1 && -f /usr/share/git/git-prompt.sh ]]; then
-      source /usr/share/git/completion/git-completion.bash
-      source /usr/share/git/git-prompt.sh
-
-      export GIT_PS1_SHOWDIRTYSTATE=1
-      export GIT_PS1_SHOWSTASHSTATE=1
-      export GIT_PS1_SHOWUNTRACKEDFILES=0
-
-      export PS1="$GY[$Y\u$GY@$P\h$GY:$B\W\$(__git_ps1 \"$GY|$LB%s\")$GY]$W\$(get_prompt_symbol) "
-  else
-      export PS1="$GY[$P\u$GY:$R\w$GY]$W\$(get_prompt_symbol) "
-  fi
-else
-    echo 'No TERM var set'
-    #export TERM='screen-256color'
-fi
-
-export PS1="\[\033[1;37m\][\[\033[34m\]\u\[\033[1;37m\]:\[\033[31m\]\w\[\033[1;37m\]]\[\033[32m\][$(~/apps/t/t.py --task-dir ~/dotfiles/tasks/ --l tasks | wc -l | sed -e"s/ *//")]\[\033[37m\]\$(get_prompt_symbol) \[\033[31m\]"
-# Use vim promptline as PS1
-#source $HOME/.shell_prompt.sh
-
-# Automatically trim long paths in the prompt (requires Bash 4.x)
-  PROMPT_DIRTRIM=2
-
-  # }}}
-# }}}
+source $HOME/.bash_prompt.sh
 
 ## BASH Options {{{
 
@@ -621,6 +574,8 @@ server() {
 export PATH="${PATH}:${HOME}/.local/bin/"
 (cat ~/.cache/wal/sequences &)
 
+#for colorls
+source $(dirname $(gem which colorls))/tab_complete.sh
 
 PATH="/home/sidreed/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/sidreed/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
