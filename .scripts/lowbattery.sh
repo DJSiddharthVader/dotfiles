@@ -1,13 +1,26 @@
 #!/bin/bash
-while true
-do
-    battery_level=`acpi -b | grep -P -o '[0-9]+(?=%)'`
-    if [ [$battery_level -le 5 ]; then
-        notify-send "BATTERY AT 5% PLUG IN NOW" -u critical
-    elif [ [$battery_level -le 10 ]; then
-        notify-send "Battery at 10%!" "Charging: ${battery_level}%" -u critical
-    elif [ [$battery_level -le 15 ]; then
-        notify-send "Battery at 15%!" "Charging: ${battery_level}%"
+
+BATTINFO=`acpi -b`
+discharging=`acpi -b | grep -o Discharging`
+power=`acpi -b | cut -d' ' -f4 | cut -d'%' -f1`
+
+
+while true; do
+    if [[ "$discharging" = "Discharging" ]]; then
+        if (( $power < 5 )) ; then
+            notify-send "BATTERY AT 5% PLUG IN NOW" -u critical
+        elif (( $power < 10 )) ; then
+            notify-send "Battery < 10%!" -u critical
+        elif (( $power < 15 )) ; then
+            notify-send "Battery < 15%!" -u critical
+        fi
     fi
-    sleep 120
-done]]
+    sleep 60
+done
+
+#if [[ `echo $BATTINFO | grep Discharging` && `echo $BATTINFO | cut -d' ' -f 4 | cut -d'%' -f1` < 5 ]] ; then
+#    notify-send "BATTERY AT 5% PLUG IN NOW" -u critical
+#elif [[ `echo $BATTINFO | grep Discharging` && `echo $BATTINFO | cut -d' ' -f 4 | cut -d'%' -f1` < 10 ]] ; then
+#    notify-send "Battery at 10%!" "Charging: ${battery_level}%" -u critical
+#elif [[ `echo $BATTINFO | grep Discharging` && `echo $BATTINFO | cut -d' ' -f 4 | cut -d'%' -f1` < 15 ]] ; then
+#fi
