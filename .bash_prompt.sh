@@ -10,11 +10,10 @@ condaenv() {
     echo -e "$cond"
 }
 #git symbols
-bsym='\u2325'
-csym='\u21E1' #dotted up arrow
-#msym='\u2795' #bold plus
+bsym='⌥' #'\u2325'
+csym='⇡' #'\u21E1' #dotted up arrow
 msym='+'
-usym='\u26EC' #three trig dots
+usym='⛬'   #'\u26EC' #three trig dots
 gitstats() {
     if [ -d .git ]; then
         brnch=$(git status 2> /dev/null | grep 'On branch' | cut -d' ' -f3)
@@ -56,23 +55,31 @@ B5='\[\e[45m\]'
 B6='\[\e[46m\]'
 B7='\[\e[47m\]'
 #Symbols
-top=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u250C\uE0B2\\]')
-par=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\uE0B0\\]')
-clk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u231B\\]')
-usr=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u23FF\\]')
-hst=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u26E9\\]')
-dir=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2316\\]')
-git=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2325\\]')
-snk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2440\\]')
-tsk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2713\\]')
-bot=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2514\\]')
-pen=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u0F3B\\]')
+#top=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u250C\uE0B2\\]')
+#par=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\uE0B0\\]')
+#clk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u231B\\]')
+#usr=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u23FF\\]')
+#hst=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u26E9\\]')
+#dir=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2316\\]')
+#snk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2440\\]')
+#tsk=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2713\\]')
+#bot=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u2514\\]')
+#pen=$(echo -e '\\[`tput sc`\\]  \\[`tput rc`\\]\\[\u0F3B\\]')
+top='┌'
+par=''
+clk='⌛'
+hst='⍾'
+dir='⛩'
+snk='⑀'
+tsk='✓'
+bot='└'
+pen='༻'
 #Modules
 strt="$B0$Fb$top$end$B1$F0"
 time="$B1$Ft$clk\@$F1$B2$par"
 #user="$B2$F0$usr \u$F2$B3$par"
-host="$B2$F0$hst \h$F2$B3$par"
-dirc="$B3$fb$dir$F0\w$F3$B4$par"
+host="$B2$F0$hst\h$F2$B3$par"
+dirc="$B3$fb$dir $F0\w$F3$B4$par"
 task="$B4$F0$tsk\$(count_tasks)$F4$B5$par"
 cond="$B5$F0$snk\$(condaenv)$F5$B6$par"
 gits="$B6$F0\$(gitstats)$F6$B0$par"

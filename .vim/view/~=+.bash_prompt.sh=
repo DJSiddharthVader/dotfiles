@@ -4,7 +4,6 @@ setlocal keymap=
 setlocal noarabic
 setlocal autoindent
 setlocal backupcopy=
-setlocal balloonexpr=
 setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
@@ -36,7 +35,6 @@ setlocal expandtab
 if &filetype != 'sh'
 setlocal filetype=sh
 endif
-setlocal fixendofline
 setlocal foldcolumn=1
 setlocal foldenable
 setlocal foldexpr=0
@@ -50,7 +48,6 @@ setlocal foldtext=foldtext()
 setlocal formatexpr=
 setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
@@ -65,12 +62,11 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
-setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
 setlocal modifiable
-setlocal nrformats=bin,octal,hex
+setlocal nrformats=octal,hex
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
@@ -85,7 +81,6 @@ setlocal rightleftcmd=search
 setlocal noscrollbind
 setlocal shiftwidth=4
 setlocal noshortname
-setlocal signcolumn=auto
 setlocal nosmartindent
 setlocal softtabstop=4
 setlocal nospell
@@ -100,10 +95,7 @@ if &syntax != 'sh'
 setlocal syntax=sh
 endif
 setlocal tabstop=4
-setlocal tagcase=
 setlocal tags=
-setlocal termkey=
-setlocal termsize=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
@@ -113,25 +105,26 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-1,31fold
-33,46fold
-47,55fold
-56,67fold
-79,89fold
-78,101fold
-68,103fold
-68
+1,3fold
+4,11fold
+12,16fold
+17,32fold
+34,47fold
+48,56fold
+57,76fold
+77,86fold
+12
 normal! zo
-78
+17
 normal! zo
-78
-normal! zc
-let s:l = 75 - ((74 * winheight(0) + 12) / 24)
+77
+normal! zo
+let s:l = 12 - ((11 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-75
-normal! 0
+12
+normal! 06|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

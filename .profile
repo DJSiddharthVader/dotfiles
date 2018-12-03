@@ -18,3 +18,4 @@ fi
 
 # set PATH so it includes user's private bin directories
 PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+export LC_CTYPE=en_US.UTF-8

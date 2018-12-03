@@ -121,7 +121,7 @@ set mat=2
 " No annoying sound on errors
 set noerrorbells
 set novisualbell
-set t_vb=
+"set t_vb=
 set tm=500
 
 " Add a bit extra margin to the left
@@ -145,11 +145,12 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set term=xterm-256color
 " Enable syntax highlighting
 syntax enable
 set background=dark
 "colorscheme hybrid
-"colorscheme new-railscasts
+colorscheme new-railscasts
 colorscheme angr
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
