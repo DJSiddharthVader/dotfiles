@@ -29,14 +29,14 @@ printinfo () {
     info "WM" wm
     info "WM Theme" wmtheme
     #info "Theme" theme
-    #info "Icons" icons
+    info "Icons" icons
     info "Terminal" term
     info "Terminal Font" termfont
     info "CPU" cpu
     info "GPU" gpu
     info "Memory" memory
 
-     info "CPU Usage" cpu_usage
+     #info "CPU Usage" cpu_usage
      info "Disk" disk
      #info "Battery" battery
      info "Font" font
@@ -302,7 +302,7 @@ disk_display="off"
 
 # Image Source
 # --image wall, ascii, /path/to/img, /path/to/dir/, off
-image="wall"
+image="/home/sidreed/Pictures/aperture_science.jpg"
 
 # Thumbnail directory
 thumbnail_dir="$HOME/.cache/thumbnails/neofetch"
@@ -425,7 +425,8 @@ config="on"
 
 # Path to custom config file location
 # --config path/to/config
-config_file="${XDG_CONFIG_HOME:-${HOME}/.config}/neofetch/config"
+#config_file="${XDG_CONFIG_HOME:-${HOME}/.config}/neofetch/config"
+config_file="$HOME/.config/neofetch/config"
 
 
 # }}}
