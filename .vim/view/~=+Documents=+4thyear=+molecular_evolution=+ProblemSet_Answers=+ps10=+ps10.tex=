@@ -335,10 +335,10 @@ setlocal noshortname
 setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
-setlocal nospell
+setlocal spell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
-setlocal spelllang=en_us
+setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=.tex,.sty,.cls
 setlocal noswapfile
@@ -360,169 +360,45 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2,5fold
-6,15fold
-16,19fold
-20,30fold
-58,58fold
-35,58fold
-31,58fold
-61,65fold
-66,70fold
-71,75fold
-76,80fold
-81,85fold
-86,90fold
-91,95fold
-96,106fold
-59,106fold
-1,106fold
-109,112fold
-113,117fold
-119,123fold
-126,132fold
-133,138fold
-124,140fold
-143,150fold
-151,156fold
-141,158fold
-159,164fold
-118,164fold
-166,170fold
-173,178fold
-179,186fold
-171,188fold
-191,196fold
-197,202fold
-189,204fold
-205,212fold
-213,218fold
-165,218fold
-220,224fold
-226,232fold
-233,240fold
-225,242fold
-243,248fold
-249,254fold
-219,254fold
-256,260fold
-261,265fold
-266,278fold
-279,285fold
-288,292fold
-293,297fold
-288,299fold
-286,299fold
-255,299fold
-301,305fold
-307,309fold
-310,312fold
-306,313fold
-315,317fold
-318,320fold
-321,323fold
-314,324fold
-328,339fold
-340,353fold
-356,356fold
-325,356fold
-358,363fold
-364,366fold
-357,367fold
-372,381fold
-368,384fold
-385,387fold
-1
+2,12fold
+19,19fold
+19,20fold
+21,21fold
+21,23fold
+24,24fold
+24,29fold
+30,30fold
+30,31fold
+19
 normal! zo
-31
+19
 normal! zo
-35
-normal! zo
-58
-normal! zo
-35
+19
 normal! zc
-31
+21
+normal! zo
+21
+normal! zo
+21
 normal! zc
-59
+24
 normal! zo
-59
+24
+normal! zo
+24
 normal! zc
-1
+30
+normal! zo
+30
+normal! zo
+30
 normal! zc
-118
-normal! zo
-124
-normal! zo
-124
-normal! zc
-141
-normal! zo
-141
-normal! zc
-118
-normal! zc
-165
-normal! zo
-171
-normal! zo
-171
-normal! zc
-189
-normal! zo
-189
-normal! zc
-165
-normal! zc
-219
-normal! zo
-225
-normal! zo
-225
-normal! zc
-219
-normal! zc
-255
-normal! zo
-286
-normal! zo
-288
-normal! zo
-286
-normal! zc
-255
-normal! zc
-306
-normal! zo
-306
-normal! zc
-314
-normal! zo
-314
-normal! zc
-325
-normal! zo
-356
-normal! zo
-325
-normal! zc
-357
-normal! zo
-358
-normal! zo
-364
-normal! zo
-368
-normal! zo
-368
-normal! zc
-let s:l = 362 - ((361 * winheight(0) + 21) / 43)
+let s:l = 21 - ((19 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-362
-normal! 0118|
-lcd ~/thesis_SidReed/writing/presentation
+21
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
