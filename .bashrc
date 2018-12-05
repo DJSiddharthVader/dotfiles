@@ -577,26 +577,26 @@ export PATH="${PATH}:${HOME}/.local/bin/"
 #for colorls
 source $(dirname $(gem which colorls))/tab_complete.sh
 
-PATH="/home/sidreed/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/sidreed/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/sidreed/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/sidreed/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/sidreed/perl5"; export PERL_MM_OPT;
+PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
 
-. /home/sidreed/anaconda3/etc/profile.d/conda.sh
+. $HOME/anaconda3/etc/profile.d/conda.sh
 # added by Anaconda3 5.3.0 installer
 # >>> conda init >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '/home/sidreed/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+__conda_setup="$(CONDA_REPORT_ERRORS=false '$HOME/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
 if [ $? -eq 0 ]; then
     \eval "$__conda_setup"
 else
-    if [ -f "/home/sidreed/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/sidreed/anaconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate base
+    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "$HOME/anaconda3/etc/profile.d/conda.sh"
+        CONDA_CHANGEPS1=false conda activate thesis
     else
-        \export PATH="/home/sidreed/anaconda3/bin:$PATH"
+        \export PATH="$HOME/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
