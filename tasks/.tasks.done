@@ -1,5 +1,6 @@
 Thesis: reread HiDe for deciding on gene subsets (build tree from every gene, 1 per family, entire families?) | id:003efc685f47df026b3fb28531ac1398eb516776
 Misc: task counter by category polybar module | id:02ede90bf3c5ace43e27c6cbb43699d2c0eeb0df
+Thesis:downlaod gbk,gff files | id:06ac5bfd0d97934ec148582341878758ca6a6c57
 Thesis: modified_get_features.pl bug, pulling empty CDS nuc. sequences | id:0800ac39c681a501b95507347a26ea6781b6c037
 Evo: study for midterm | id:0a3eb7263f17cde1e25c5efaeb7455218829723b
 Thesis: email HiDe authors | id:0bf4b5271c26f1dc35b7e95556908203ca22d14c
@@ -7,6 +8,7 @@ Cell: Read paper for Friday | id:0c5de92d834151c148be92a4a731f7c1f93a6fec
 Misc: Undo wallpaper commit | id:0fb457be196d45cd1b8f21ca257e1fa5bee26b5d
 Thesis: Weekly Report | id:1d7065b6cd45e07c05292d2506dc8b1811c3d5e4
 Code:only toggle audio for hdmi not vga | id:26fe2682734a7e0ca3c4c91aa0da47636bde6d5f
+Thesis: Email Dr. Hynes about CRISPR | id:31c394fe3a0f85409a14b4be17c8466745c1647c
 Evo: assingment | id:31c8e9683471fd4e0ead6a01529c056f242136a9
 Code: Fix init-new-repo.sh, by setting up public key | id:35d7484c121f41707d163131e13bcd118a933f2d
 Code: Get sprite color data for pkmn | id:45214eb8173fcb0a42bf5077cdd01317471cba4d
@@ -17,6 +19,8 @@ Thesis: Go over MarkoPhylo,P/A scripts | id:4c4ac6900db85700694bbc83b0b2b7b5087c
 Cell:quiz | id:54804385a0dce9f8f3ed127e94afcfc8cea042d4
 Thesis: diamond working | id:5563da6809a8dd2ea56a44e82f9dec5650794034
 Math: Group Review | id:5669d26bbe21f3bee9271cf6e1d1ecbd17b40892
+Thesis: Partial/weighted CRISPR annotations? | id:6881d49a22b4f2ed5fb583335363c341e5f17f76
+Math: Assignment Nov. 30 | id:75c3575ee0fda0163c1c39ec2b06802054d12c46
 Thesis: 1 page summary | id:7a43526347f55c6d1bd1cbf591af437babe7a48e
 Math: assingment | id:7e17a914730102886ea9b8e17601d5007dae331c
 Life: buy beer | id:814e0fe6a3a4f0b3802cd54b6756fa59ceaa821e
@@ -31,6 +35,7 @@ tmptask | id:b574bb9cbec99b8a6689f88b019d16e5bdc72659
 Thesis: get exclusive NC genera | id:b733458ff62d91f5858898319e2ed454e32bf58a
 Code: Fix songname space padding | id:c0243123313745981510db202050fab1e4240794
 Cell: paper critique | id:c07a583d3462901fea28f1db3e89b1d0cac74297
+Life: study Math 3F03 Notes (earn email) | id:c0b6433eae184818206fa7db6f9ab79f6d714c14
 Code: redo i3 bindings | id:c1b1692d9df6dae45b6764f8cac969c5606b0248
 Thesis: Presentation | id:c1e7b3323bb043c61f48018999229c411bc4df29
 Thesis: Get network, Markophylo from a genus | id:c4736594b74621afa2fe77e3c93f3f6e7f1bd4c1
