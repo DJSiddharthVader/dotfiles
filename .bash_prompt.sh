@@ -68,7 +68,7 @@ tsk=$(echo -e '\u2713')
 bot=$(echo -e '\u2514')
 pen=$(echo -e '\u0F3B')
 #Modules
-strt="$B0$F1$top$end$B1"
+strt="$end$B0$Fb$top$end$B1"
 time="$B1$F0$clk\@$F1$B3$par"
 #user="$B2$F0$usr \u$F2$B3$par"
 #host="$B2$F0$hst\h$F2$B3$par"
