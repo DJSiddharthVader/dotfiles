@@ -4,17 +4,18 @@ Dependency:
   location: path
   string: skconvert
 
-Extension "XFIG Input" failed to load because a dependency was not met.
+Extension "LaTeX" failed to load because a dependency was not met.
 Dependency:
   type: executable
   location: path
-  string: fig2dev
+  string: pstoedit
 
-Extension "GIMP XCF" failed to load because a dependency was not met.
+Extension "DXF Output" failed to load because a dependency was not met.
 Dependency:
   type: executable
   location: path
-  string: gimp
+  string: pstoedit
+  description: pstoedit must be installed to run; see http://www.pstoedit.net/pstoedit
 
 Extension "Dia Input" failed to load because a dependency was not met.
 Dependency:
