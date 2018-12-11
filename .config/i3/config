@@ -78,7 +78,7 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
-exec --no-startup-id /home/sidreed/dotfiles/.scripts/lowbattery.sh &
+exec --no-startup-id /home/sidreed/dotfiles/.scripts/lowbattery.sh
 
 
 
@@ -159,7 +159,7 @@ bindsym $mod+Shift+c    exec $term -e vi ~/dotfiles/.config/i3/config
 bindsym $mod+v			exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 bindsym $mod+Shift+v    exec $term -e cava
 
-bindsym $mod+b		    exec ~/dotfiles/.scripts/wallpaper.sh 'background'
+bindsym $mod+b		    exec ~/dotfiles/.scripts/wallpaper.sh 'back'
 bindsym $mod+Shift+b    exec ~/dotfiles/.scripts/wallpaper.sh 'both'
 
 bindsym $mod+n          focus output left
