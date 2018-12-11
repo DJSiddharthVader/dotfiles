@@ -7,6 +7,6 @@ on_project_exit: tmux kill-session -t scratch
 windows:
     - tasks: tl
     - thesis: cd ~/thesis_SidReed
-    - lab: conda activate thesis; unset BROWSER; jupyter lab
+    - pkmn: cd ~/pokephylogeny
     - scratch: neofetch
 
