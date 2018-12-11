@@ -52,7 +52,8 @@ alias bgal='feh -g 640x480 -d /home/sidreed/Pictures/wallpapers/*'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias mon='~/.scripts/monitor.sh on'
-alias mof'=~/.scripts/monitor.sh off'
+alias mof='~/.scripts/monitor.sh off'
+alias wll='~/.scripts/wallpaper.sh back'
 
 alias hoff="~/.scripts/togglescreen.sh hdmi 0"
 alias hon="~/.scripts/togglescreen.sh hdmi 1"
