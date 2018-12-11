@@ -1,21 +1,18 @@
-        ...:oyym  NNNmdyo:..
-      .-sdMMMMMMy  NMMMMMMMd .
-     /dMMMMMMMMMMM  sNMMMMMM yd.
-    sddddddddhhhhhhh .oNMMMM hMd:
-                       .omMM hMMN+
-  oMMMMMMMMMm+          .om  hMMMMo
- oMMMMMMMMMm+            .om hMMMMMo
-.MMMMMMm+                  . hMMMMMN-
-hMMMMd                       hMMMMm
-NMMd  dy                      MMd  dm
-md  dMMh                         dMMN
+          .:oyy  mNNNmdyo:.
+       -sdMMMMMMy sNMMMMMMMd .
+    `/dMMMMMMMMMMM  sNMMMMMM yd/`
+   `sddddddddhhhhhhh  oNMMMM hMMd:
+                       `omMM hMMMN+
+ oMMMMMMMm+`             `om hMMMMMo
+-MMMMMMm+`                 ` hMMMMMN
+hMMMMd                       hMMMMm :
+NMMd  dy                     hMMd +dm
+md  dMMh                     yd +dMMN
   dMMMMh                       dMMMMy
-.MMMMMMh                    + MMMMMM-
- oMMMMMh m+               +mMMMMMMMo
-  oMMMMh MMm+           +hhhhhhhhhs.
-   :dMMh MMMMm+
-   :dMMh MMMMMm+    hhhhhhhhhhhhs.
-    .+dh MMMMMMNs  MMMMMMMMMMMd/.
-      .. mMMMMMMMNs  MMMMMMms-.
-          ./oydmNMMNo  yo/.
-
+-MMMMMMh                    +dMMMMMM-
+ oMMMMMh m+`              +mMMMMMMMo
+  oMMMMh MMm+`
+   :dMMh MMMMm+  hhhhhhhhhhhhhhhs`
+    `+dh MMMMMMNs hMMMMMMMMMMMd/`
+      `. mMMMMMMMNs hMMMMMMms-`
+          ./oydmNMMNo yyo/.
