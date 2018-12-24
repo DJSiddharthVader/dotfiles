@@ -30,6 +30,8 @@
 .config/systemd/
 .config/pulse/
 .config/pulse
+.config/pavucontrol.ini
+.scripts/schedules
 .mpd/sticker.sql
 .mpd/playlists/recent.m3u
 .mpd/mpd.log
@@ -41,3 +43,4 @@
 .tmux/resurrect
 .ncmpcpp/error.log
 Anaconda*
+tasks/
