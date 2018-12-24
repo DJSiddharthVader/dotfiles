@@ -76,7 +76,7 @@ dirc="$B3$F0$dir $F0\w$F3$B4$par"
 task="$B4$F0$tsk\$(count_tasks)$F4$B5$par"
 cond="$B5$F0$snk\$(condaenv)$F5$B6$par"
 gits="$B6$F0\$(gitstats)$F6$B0$par"
-endd="\n$B0$Fb$bot$end$F1$pen  $FB "
+endd="\n$B0$Fb$bot$end$F1$pen  $FB"
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 PROMPT_DIRTRIM=2
 #Set prompt
