@@ -335,10 +335,10 @@ setlocal noshortname
 setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
-setlocal spell
+setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
-setlocal spelllang=en
+setlocal spelllang=en_us
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=.tex,.sty,.cls
 setlocal noswapfile
@@ -361,14 +361,175 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 3,14fold
-3
+19,19fold
+20,20fold
+21,21fold
+22,22fold
+23,23fold
+24,24fold
+25,25fold
+26,26fold
+27,27fold
+28,28fold
+29,29fold
+30,30fold
+31,31fold
+17,43fold
+46,46fold
+47,47fold
+48,48fold
+49,49fold
+50,50fold
+51,51fold
+52,52fold
+53,53fold
+54,54fold
+55,55fold
+56,56fold
+57,57fold
+44,58fold
+61,61fold
+62,62fold
+63,63fold
+64,64fold
+65,65fold
+66,66fold
+67,67fold
+59,68fold
+71,71fold
+72,72fold
+73,73fold
+74,74fold
+75,75fold
+76,76fold
+77,77fold
+78,78fold
+79,79fold
+80,80fold
+81,81fold
+82,82fold
+83,83fold
+84,84fold
+85,85fold
+86,86fold
+87,87fold
+88,88fold
+69,89fold
+92,92fold
+93,93fold
+94,94fold
+95,95fold
+96,96fold
+97,97fold
+98,98fold
+99,99fold
+100,100fold
+101,101fold
+102,102fold
+103,103fold
+104,104fold
+90,105fold
+108,108fold
+109,109fold
+110,110fold
+111,111fold
+112,112fold
+113,113fold
+114,114fold
+115,115fold
+116,116fold
+117,117fold
+118,118fold
+119,119fold
+120,120fold
+121,121fold
+122,122fold
+123,123fold
+106,124fold
+127,127fold
+128,128fold
+129,129fold
+130,130fold
+131,131fold
+132,132fold
+133,133fold
+134,134fold
+135,135fold
+136,136fold
+137,137fold
+138,138fold
+139,139fold
+140,140fold
+141,141fold
+142,142fold
+143,143fold
+144,144fold
+145,145fold
+146,146fold
+147,147fold
+148,148fold
+125,150fold
+153,153fold
+154,154fold
+155,155fold
+156,156fold
+157,157fold
+158,158fold
+159,159fold
+160,160fold
+161,161fold
+162,162fold
+163,163fold
+164,164fold
+165,165fold
+166,166fold
+167,167fold
+168,168fold
+169,169fold
+170,170fold
+171,171fold
+172,172fold
+173,173fold
+174,174fold
+175,175fold
+176,176fold
+177,177fold
+178,178fold
+151,191fold
+194,194fold
+195,195fold
+196,196fold
+197,197fold
+198,198fold
+199,199fold
+200,200fold
+201,201fold
+202,202fold
+203,203fold
+204,204fold
+205,205fold
+206,206fold
+207,207fold
+208,208fold
+209,209fold
+210,210fold
+211,211fold
+192,212fold
+213,219fold
+221,240fold
+241,250fold
+220,250fold
+220
 normal! zo
-let s:l = 181 - ((4 * winheight(0) + 10) / 20)
+220
+normal! zc
+let s:l = 294 - ((21 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-181
-normal! 096|
+294
+normal! 094|
+lcd ~/Documents/4thyear/molecular_evolution
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
