@@ -96,8 +96,8 @@ bindsym $mod+q			kill
 bindsym $mod+w		    exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w	exec --no-startup-id firefox --private-window
 
-bindsym $mod+e		    split toggle
-#bindsym $mod+Shift+e	split v
+bindsym $mod+e		    split h
+bindsym $mod+Shift+e	split v
 
 bindsym $mod+r          exec rofi -show run
 bindsym $mod+Shift+r    exec $term -e wal -R -e -n -q;ranger
