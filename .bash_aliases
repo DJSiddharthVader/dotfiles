@@ -1,5 +1,5 @@
-alias ls='ls --color=auto'
-alias ll='ls -alF'
+alias ls='ls -X --color=auto --group-directories-first'
+alias ll='ls -alF --color=auto --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 alias lc='colorls -A --sd'
@@ -54,12 +54,6 @@ alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias mon='~/.scripts/monitor.sh on'
 alias mof='~/.scripts/monitor.sh off'
 alias wll='~/.scripts/wallpaper.sh back'
-
-alias hoff="~/.scripts/togglescreen.sh hdmi 0"
-alias hon="~/.scripts/togglescreen.sh hdmi 1"
-alias voff="~/.scripts/togglescreen.sh vga 0"
-alias von="~/.scripts/togglescreen.sh vga 1"
-alias boff="~/.scripts/togglescreen.sh both 0"
-alias bon="~/.scripts/togglescreen.sh both 1"
-
+alias bon='echo -e "power on\nconnect 00:1D:43:A0:36:0F" | bluetoothctl'
+alias boff='echo -e "power off\nquit" | bluetoothctl'
 
