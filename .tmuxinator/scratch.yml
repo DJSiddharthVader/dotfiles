@@ -1,12 +1,12 @@
 name: scratch
 root: ~/
-tmux_options: -f ~/dotfiles/.tmux.scratch.conf
+tmux_options: -f /home/sidreed/dotfiles/.tmux.scratch.conf
 on_project_start: wal -R -e -n -q &
 on_project_exit: tmux kill-session -t scratch
 
 windows:
     - tasks: tl
     - thesis: cd ~/thesis_SidReed
-    - pkmn: cd ~/pokephylogeny
+    - school: cd ~/Documents/4thyear
     - scratch: neofetch
 
