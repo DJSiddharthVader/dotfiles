@@ -1,12 +1,11 @@
 #!/bin/bash
 
-BATTINFO=`acpi -b`
-discharging=`acpi -b | grep -o Discharging`
-power=`acpi -b | cut -d' ' -f4 | cut -d'%' -f1`
 
 
 while true; do
+    discharging=`acpi -b | grep -o Discharging`
     if [[ "$discharging" = "Discharging" ]]; then
+        power=`acpi -b | cut -d' ' -f4 | cut -d'%' -f1`
         if (( $power < 5 )) ; then
             notify-send "BATTERY AT 5% PLUG IN NOW" -u critical
         elif (( $power < 10 )) ; then
