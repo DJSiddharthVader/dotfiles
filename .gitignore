@@ -44,3 +44,9 @@
 .ncmpcpp/error.log
 Anaconda*
 tasks/
+.config/MonoGame/
+.config/Open Sorcery/
+.config/RStudio/
+.config/enchant/
+.config/unity3d/
+
