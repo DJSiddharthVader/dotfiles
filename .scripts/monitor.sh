@@ -10,7 +10,7 @@ connectToMonitor() {
     xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
     ishdmi=`xrandr | grep ' connected' | tail -1`
     if [[ $ishdmi =~ 'HDMI' ]]; then
-        #pactl set-card-profile 0 output:hdmi-stereo
+        pactl set-card-profile 0 output:hdmi-stereo
         sleep 1
     fi
     feh --bg-scale /home/sidreed/dotfiles/.config/i3/bordered_background.png &
