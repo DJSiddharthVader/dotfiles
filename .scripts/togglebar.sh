@@ -10,6 +10,10 @@ elif [ "$1" = 'off' ]; then
     for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
         MONITOR=$m polybar minimal &
     done
+elif [ "$1" = 'none' ]; then
+    killall -q polybar
+    feh --bg-scale /home/sidreed/dotfiles/.config/i3/unbordered_background.png
+
 else
     echo "error: arg 1 is on or off"
 fi
