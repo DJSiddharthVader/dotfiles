@@ -18,34 +18,32 @@ printinfo () {
     info title
     info underline
 
-    info "Model" model
-    info "OS" distro
-    info "Kernel" kernel
     info "Uptime" uptime
-    info "Packages" packages
-    info "Shell" shell
-    info "Resolution" resolution
-    info "DE" de
-    info "WM" wm
-    info "WM Theme" wmtheme
-    #info "Theme" theme
-    info "Icons" icons
-    info "Terminal" term
-    info "Terminal Font" termfont
-    info "CPU" cpu
-    info "GPU" gpu
-    info "Memory" memory
-
-     #info "CPU Usage" cpu_usage
-     info "Disk" disk
-     #info "Battery" battery
-     info "Font" font
-     #info "Song" song
-     info "Local IP" localip
-    # info "Public IP" publicip
-     #info "Users" users
-     #info "Birthday" birthday
-
+#    info "Resolution" resolution
+#    info "Model" model
+#    info "OS" distro
+#    info "Kernel" kernel
+#    info "CPU" cpu
+#    info "GPU" gpu
+#    info "Disk" disk
+#    info "Memory" memory
+#    info "Terminal" term
+#    info "Terminal Font" termfont
+#    info "Shell" shell
+#    info "Packages" packages
+#    info "WM" wm
+#    info "Icons" icons
+#    info "WM Theme" wmtheme
+#    info "Local IP" localip
+#    info "Public IP" publicip
+#    info "Theme" theme
+#    info "DE" de
+#    info "CPU Usage" cpu_usage
+#    info "Battery" battery
+#    info "Font" font
+#    info "Song" song
+#    info "Users" users
+#    info "Birthday" birthday
     info linebreak
     info cols
 }
@@ -198,11 +196,9 @@ birthday_time="on"
 # --birthday_format "format"
 birthday_format="+%a %d %b %Y %l:%M %p"
 
-
 # }}}
 
 # Text Colors {{{
-
 
 # Text Colors
 # Each number represents a different part of
@@ -213,11 +209,9 @@ birthday_format="+%a %d %b %Y %l:%M %p"
 # fg (foreground color)
 colors=(distro)
 
-
 # }}}
 
 # Text Options {{{
-
 
 # Toggle bold text
 # --bold on/off
@@ -230,7 +224,6 @@ underline_enabled="on"
 # Underline character
 # --underline_char char
 underline_char="-"
-
 
 # }}}
 
@@ -248,11 +241,11 @@ color_blocks="on"
 
 # Color block width in spaces
 # --block_width num
-block_width=2
+block_width=3
 
 # Color block height in lines
 # --block_height num
-block_height=1
+block_height=2
 
 
 # }}}
@@ -262,8 +255,8 @@ block_height=1
 
 # Progress bar character
 # --progress_char elapsed_char total_char
-progress_char_elapsed="-"
-progress_char_total="="
+progress_char_elapsed="="
+progress_char_total=" "
 
 # Progress border
 # --progress_border on/off
@@ -290,15 +283,14 @@ progress_color_total="distro"
 # --memory_display bar/infobar/barinfo/off
 # --battery_display bar/infobar/barinfo/off
 # --disk_display bar/infobar/barinfo/off
-memory_display="off"
+memory_display="bar"
 battery_display="off"
-disk_display="off"
+disk_display="bar"
 
 
 # }}}
 
 # Image Options {{{
-
 
 # Image Source
 # --image wall, ascii, /path/to/img, /path/to/dir/, off
@@ -346,7 +338,6 @@ xoffset=0
 
 # Ascii Options {{{
 
-
 # Default ascii image to use
 # When this is set to distro it will use your
 # distro's logo as the ascii.
@@ -384,7 +375,6 @@ ascii_bold="off"
 
 # Scrot Options {{{
 
-
 # Whether or not to always take a screenshot
 # You can manually take a screenshot with "--scrot" or "-s"
 scrot="off"
@@ -418,15 +408,14 @@ imgur_client_id="0e8b44d15e9fc95"
 
 # Config Options {{{
 
-
 # Enable/Disable config file
 # --config off, none
 config="on"
 
 # Path to custom config file location
 # --config path/to/config
-#config_file="${XDG_CONFIG_HOME:-${HOME}/.config}/neofetch/config"
-config_file="$HOME/.config/neofetch/config"
+#config_file="${XDG_CONFIG_HOME:-${HOME}/.config/neofetch/config"
+config_file="${HOME}/dotfiles/.config/neofetch/config"
 
 
 # }}}
