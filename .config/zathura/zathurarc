@@ -1,0 +1,12 @@
+set selection-clipboard clipboard
+set window-title-basename true
+set statusbar-home-tilde true
+set adjust-open "best-fit"
+#unmap j
+#map j navigate next
+#unmap J
+#map J scroll down
+#unmap k
+#map k navigate previous
+#unmap K
+#map K scroll up
