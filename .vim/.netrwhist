@@ -1,9 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/etc/terminfo'
-let g:netrw_dirhist_2='/home/sidreed/dotfiles/.config/polybar'
-let g:netrw_dirhist_3='/home/sidreed/dotfiles/.config/neofetch'
-let g:netrw_dirhist_4='/home/sidreed/Documents/4thyear/modelling/Problem_set_3'
-let g:netrw_dirhist_5='/home/sidreed/.scripts'
-let g:netrw_dirhist_6='/home/sidreed/.ncmpcpp'
-let g:netrw_dirhist_7='/home/sidreed/dotfiles/.config/neofetch'
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/sidreed/thesis_SidReed/hide_program/etest'
+let g:netrw_dirhist_2='/home/sidreed/thesis_SidReed/hide_program/mtest'
+let g:netrw_dirhist_3='/home/sidreed/tmp/documents/research_proposal/sections'
+let g:netrw_dirhist_4='/home/sidreed/thesis_SidReed/writing/nontext/figures'
