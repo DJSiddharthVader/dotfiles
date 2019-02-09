@@ -369,6 +369,7 @@ nnoremap <silent> <leader>z :Goyo<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:pymode_python = 'python3'
 let g:syntastic_python_checkers=['pyflakes']
 let g:syntastic_javascript_checkers = ['jshint']
 
@@ -546,6 +547,9 @@ endfunc
 func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
+
+let g:vimtex_view_general_viewer = 'open'
+let g:vimtex_view_general_options = '-a zathura'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
