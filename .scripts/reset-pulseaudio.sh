@@ -1,5 +1,6 @@
 #!/bin/bash
-pulseaudio -k
+pulseaudio --kill
+pulseaudio --kill
+pulseaudio --kill
 pulseaudio --start
-killall -q polybar
-~/.scripts/polybar_launch
+~/.scripts/togglebar.sh "$(head -1 $HOME/.config/.bartoggle)"
