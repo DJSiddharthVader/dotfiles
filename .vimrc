@@ -1,10 +1,3 @@
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Disclaimer by LeoFa \O_o/
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Originally not my vimrc, but every function is well documented, wich is very nice! :D, still learning vim..,
-" credit to the original author! (sorry totally forgot your name :P)
-"
-" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -38,8 +31,6 @@ nmap <leader>w :w!<cr>
 " (useful for handling the permission-denied error)
 "command W w !sudo tee % > /dev/null
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
@@ -141,8 +132,6 @@ augroup autosave_buffer
     autocmd BufWinLeave *.* mkview
     autocmd BufWinEnter *.* silent loadview
 augroup END
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
@@ -161,8 +150,6 @@ if has("linux")
 elseif has("unix")
     set gfn=Monospace\ 11
 endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git etc anyway...
@@ -176,8 +163,6 @@ set noswapfile
 "set backupskip=/tmp/*,/private/tmp/*
 "set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 "set writebackup
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
@@ -205,8 +190,6 @@ set textwidth=0
 set formatoptions=cqt
 set noshiftround
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart mappings on the command line
@@ -236,17 +219,12 @@ imap ½ $
 command! -range Cc :<line1>,<line2>s/^/#/
 command! -range Uu :<line1>,<line2>s/^#//
 
-
-""""""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Parenthesis/bracket
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap $1 <esc>`>a)<esc>`<i(<esc>
@@ -265,8 +243,6 @@ inoremap $q ''<esc>i
 inoremap $e ""<esc>i
 inoremap $t <><esc>i
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Treat long lines as break lines (useful when moving around in them)
@@ -327,20 +303,12 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General abbreviations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Omni complete functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-
-
-""""""""""""""""""""""""""""""
 " => Status line
 """"""""""""""""""""""""""""""
 " Always show the status line
@@ -348,7 +316,6 @@ set laststatus=2
 
 " Format the status line
 set statusline=\ %l,%c\ \ %{HasPaste()}%F%m%r%h\ %w "CWD:\ %r%{getcwd()}%h\ \
-
 " => vim-airline config (force color)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline_theme="base16_eighties"
@@ -357,7 +324,6 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts=1
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vimroom
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:goyo_width=100
@@ -365,8 +331,6 @@ let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
 nnoremap <silent> <leader>z :Goyo<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Syntastic (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pymode_python = 'python3'
@@ -382,8 +346,6 @@ func! SyntasticCheckCoffeescript()
 endfunc
 nnoremap <silent> <leader>l :call SyntasticCheckCoffeescript()<cr>
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap VIM 0 to first non-blank character
@@ -404,8 +366,6 @@ endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ag searching and cope displaying
 "    requires ag.vim - it's much better than vimgrep/grep
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -434,8 +394,6 @@ map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 map <leader>n :cn<cr>
 map <leader>p :cp<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing ,ss will toggle and untoggle spell checking
@@ -447,8 +405,6 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
@@ -463,8 +419,6 @@ map <leader>x :e ~/buffer.md<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! CmdLine(str)
@@ -472,7 +426,6 @@ function! CmdLine(str)
     emenu Foo.Bar
     unmenu Foo
 endfunction
-
 function! VisualSelection(direction, extra_filter) range
     let l:saved_reg = @"
     execute "normal! vgvy"
@@ -493,8 +446,6 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
-
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
@@ -502,7 +453,6 @@ function! HasPaste()
     endif
     return ''
 endfunction
-
 " Don't close window, when deleting a buffer
 command! Bclose call <SID>BufcloseCloseIt()
 function! <SID>BufcloseCloseIt()
@@ -523,7 +473,6 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
-
 func! DeleteTillSlash()
     let g:cmd = getcmdline()
 
@@ -543,16 +492,12 @@ func! DeleteTillSlash()
 
     return g:cmd_edited
 endfunc
-
 func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
-
 let g:vimtex_view_general_viewer = 'open'
 let g:vimtex_view_general_options = '-a zathura'
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Custom header
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Startify plugin
