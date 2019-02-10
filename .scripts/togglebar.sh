@@ -18,7 +18,7 @@ function nobar() {
 function main() {
     #toggle or explicit
     if [ "$1" = 'toggle' ]; then
-        option=$(cat "$togglefile")
+        option=$(tail -1 "$togglefile")
     else
         option="$1"
     fi
@@ -26,15 +26,15 @@ function main() {
     case "$option" in
         full)
             fullbar
-            echo "mini" >| "$togglefile"
+            echo -e "full\nmini" >| "$togglefile"
             ;;
         mini)
             minibar
-            echo "none" >| "$togglefile"
+            echo -e "mini\nnone" >| "$togglefile"
             ;;
         none)
             nobar
-            echo "full" >| "$togglefile"
+            echo -e "none\nfull" >| "$togglefile"
             ;;
         *)
             echo "Usage: $0 {toggle|full||mini|none}"
