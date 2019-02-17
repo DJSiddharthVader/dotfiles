@@ -33,6 +33,7 @@ alias tmux='tmux -2'
 alias cfh="grep -c '^>'"
 alias bg='feh --bg-scale'
 alias pdf='tabbed -c zathura -e'
+alias ip="curl https://ifconfig.co"
 alias upm='~/.scripts/updatemusic.sh'
 alias rspb='~/.scripts/polybar_launch'
 alias pipes='~/apps/pipes.sh/pipes.sh'
