@@ -1,6 +1,7 @@
 #!/bin/bash
+mpc pause
 pulseaudio --kill
 pulseaudio --kill
 pulseaudio --kill
 pulseaudio --start
-~/.scripts/togglebar.sh "$(head -1 $HOME/.config/.bartoggle)"
+~/.scripts/togglebar.sh "$(head -1 $HOME/dotfiles/.config/.bartoggle)"
