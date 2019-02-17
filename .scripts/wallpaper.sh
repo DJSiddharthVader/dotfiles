@@ -4,9 +4,6 @@ i3dir='/home/sidreed/dotfiles/.config/i3/' #store bordered image
 picdir='/home/sidreed/Pictures/wallpapers' #dir with all wallpapers
 resolution='1366x768!' #resolution, ignore aspect ratio
 
-mode="$1"
-explicitBackgroundImage="$2"
-
 backgroundPath() { #pick background image
     if [ -n "$1" ]; then #string not null
         imgname=$(basename "$1")
@@ -17,25 +14,45 @@ backgroundPath() { #pick background image
     echo "$walp"
 }
 
+fullOrBordered() {
+    image="$1"
+    barmode="$(head -1 ~/dotfiles/.bartoggle)" #get bar status
+    bgfile="$i3dir"bordered_background.png
+    unbkbgfile="$i3dir"unbordered_background.png
+    echo "feh --bg-scale $image" >> ~/.scripts/.fehbg #record image in file
+    convert "$image" -resize "$resolution" -bordercolor Black -border 0x5% "$bgfile" #add borderes to image
+    cp "$image" "$unbkbgfile"
+
+    case "$barmode" in
+        full)
+            feh --bg-scale "$bgfile" #with borders
+            ;;
+        mini)
+            feh --bg-scale "$unbkbgfile" #without borders
+            ;;
+        none)
+            feh --bg-scale "$unbkbgfile" #without borders
+            ;;
+        *)
+            echo "usage {full|mini|none}"
+            exit 1
+            ;;
+    esac
+}
+
 main() {
-    case "$1" in
+    mode="$1"
+    imagefile="$2"
+    case "$mode" in
         'font')
-            wal -e -n -i $2 & #font only
+            wal -e -n -i "$imagefile" & #font only
             ;;
         'back')
-            echo "feh --bg-scale $2" >> ~/.scripts/.fehbg
-            bgfile="$i3dir"bordered_background.png
-            convert "$2" -resize "$resolution" -bordercolor Black -border 0x5% "$bgfile"
-            feh --bg-scale "$bgfile"
-            cp "$2" ~/dotfiles/.config/i3/unbordered_background.png
+            fullOrBordered "$imagefile"
             ;;
         'both')
-            echo "feh --bg-scale $2" >> ~/.scripts/.fehbg
-            bgfile="$i3dir"bordered_background.png
-            convert "$2" -resize "$resolution" -bordercolor Black -border 0x5% "$bgfile"
-            feh --bg-scale "$bgfile"
-            wal -e -n -i $2 & #font only
-            cp "$2" ~/dotfiles/.config/i3/unbordered_background.png
+            fullOrBordered "$imagefile"
+            wal -e -n -i "$imagefile" & #font only
             ;;
         *)
             echo "Usage: $0 {font|back|both}"
@@ -43,44 +60,10 @@ main() {
     esac
 }
 
+mode="$1"
+explicitBackgroundImage="$2"
 walp=$(backgroundPath "$explicitBackgroundImage")
 main "$mode" "$walp"
 
 
 
-#imgname=`ls  ~/Pictures/wallpapers | shuf -n 1` #pick rnd image if [ "$2" = "" ]; then
-#    imgname=`ls  ~/Pictures/wallpapers | shuf -n 1` #pick rnd image
-#else
-#    imgname=`basename "$2"`
-#fi
-#walp="$picdir/$imgname" #need abs paths or convert fails
-#
-#case "$1" in
-#    'font')
-#        wal -e -n -i $walp & #font only
-#        ;;
-#    'back')
-#        echo "feh --bg-scale $walp" >> ~/.scripts/.fehbg
-#        bgfile="$i3dir"bordered_background.png
-#        convert "$walp" -resize "$resolution" -bordercolor Black -border 0x5% "$bgfile"
-#        feh --bg-scale "$bgfile"
-#        cp "$walp" ~/dotfiles/.config/i3/unbordered_background.png
-#        ;;
-#    'both')
-#        echo "feh --bg-scale $walp" >> ~/.scripts/.fehbg
-#        bgfile="$i3dir"bordered_background.png
-#        convert "$walp" -resize "$resolution" -bordercolor Black -border 0x5% "$bgfile"
-#        feh --bg-scale "$bgfile"
-#        wal -e -n -i $walp & #font only
-#        cp "$walp" ~/dotfiles/.config/i3/unbordered_background.png
-#        ;;
-#    'sback')
-#        echo "feh --bg-scale $walp" >> ~/.scripts/.fehbg
-#        bgfile="$i3dir"bordered_background.png
-#        convert "$walp" -resize "$resolution" -bordercolor Black -border 0x5% "$bgfile"
-#        feh --bg-scale "$bgfile"
-#        ;;
-#    *)
-#        echo "Usage: $0 {font|back|both|sback}"
-#        exit 1
-#esac

@@ -21,7 +21,7 @@ function launchbar() {
             sleep 1
             ;;
         *)
-            echo "usage $0 {full|mini|none}"
+            echo "usage $0 {toggle|full|mini|none}"
             exit 1
             ;;
     esac
@@ -31,7 +31,7 @@ function main() {
     if [ -z "$1" ]; then #are args given
         launchbar "$(head -1 ~/.config/.bartoggle)"
     else
-        launchbar"$1"
+        launchbar "$1"
     fi
 }
 
