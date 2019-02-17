@@ -12,17 +12,17 @@ main() {
     case "$option" in
         full)
             feh --bg-scale ~/dotfiles/.config/i3/bordered_background.png
-            ~/.scripts/polybar_launch 'full'
+            ~/.scripts/polybar_launch.sh 'full'
             echo -e "full\nmini" >| "$togglefile"
             ;;
         mini)
             feh --bg-scale ~/dotfiles/.config/i3/unbordered_background.png
-            ~/.scripts/polybar_launch 'mini'
+            ~/.scripts/polybar_launch.sh 'mini'
             echo -e "mini\nnone" >| "$togglefile"
             ;;
         none)
             feh --bg-scale ~/dotfiles/.config/i3/unbordered_background.png
-            ~/.scripts/polybar_launch 'none'
+            ~/.scripts/polybar_launch.sh 'none'
             echo -e "none\nfull" >| "$togglefile"
             ;;
         *)
