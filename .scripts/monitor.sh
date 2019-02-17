@@ -1,20 +1,18 @@
 #!/bin/bash
 
-# $1 is 'on' or 'off'
-
 connectToMonitor() {
-    ishdmi=`xrandr | grep ' connected' | tail -1`
     monitor=`xrandr | grep ' connected' | tail -1 | cut -d' ' -f1`
-    #resolution=`xrandr | grep ' connected' | tail -1 | cut -d' ' -f3 | cut -d'+' -f1`
     resolution=`xrandr | grep -v 'primary' | pcregrep -M ' connected.*\n[0-9x ]' | grep -o '[0-9]\{3,4\}x[0-9]\{3,4\}'`
-    xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
     ishdmi=`xrandr | grep ' connected' | tail -1`
     if [[ $ishdmi =~ 'HDMI' ]]; then
+        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
         pactl set-card-profile 0 output:hdmi-stereo
         sleep 1
+    else
+        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --left-of eDP-1
     fi
-    feh --bg-scale /home/sidreed/dotfiles/.config/i3/bordered_background.png &
     i3-msg restart
+    ~/.scripts/togglebar.sh "$(head -1 $HOME/dotfiles/.config/.bartoggle)"
 }
 
 disconnectMonitor() {
@@ -27,13 +25,22 @@ disconnectMonitor() {
     fi
 }
 
-if [ "$1" = 'on' ]; then
-    connected=`xrandr | grep ' connected' | wc -l | cut -d' ' -f1`
-    if [ "$connected" -gt 1 ]; then #connected to a monitor
-        connectToMonitor
-    fi
-elif [ "$1" = 'off' ]; then
-    disconnectMonitor
-else
-    echo "invalid option, either on or off"
-fi
+function main() {
+    case "$1" in
+        on)
+            connected=`xrandr | grep ' connected' | wc -l | cut -d' ' -f1`
+            if [ "$connected" -gt 1 ]; then #connected to a monitor
+                connectToMonitor
+            fi
+            ;;
+        off)
+            disconnectMonitor
+            ;;
+        *)
+            echo "usage {on|off}"
+            exit 1
+            ;;
+    esac
+}
+
+main "$1"
