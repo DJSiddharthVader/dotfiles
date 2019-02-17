@@ -52,8 +52,8 @@ setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
+setlocal iminsert=2
+setlocal imsearch=2
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=GetShIndent()
@@ -113,17 +113,17 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-3,6fold
-7,13fold
-14,17fold
-19,24fold
-19
+3,28fold
+30,36fold
+3
 normal! zo
-let s:l = 35 - ((34 * winheight(0) + 23) / 46)
+30
+normal! zo
+let s:l = 38 - ((37 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-35
+38
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
