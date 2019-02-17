@@ -1,19 +1,16 @@
 #!/bin/bash
-togglefile="$HOME/.config/.bartoggle"
+togglefile="$HOME/dotfiles/.config/.bartoggle"
 function fullbar() {
     feh --bg-scale /home/sidreed/dotfiles/.config/i3/bordered_background.png
-    ~/.scripts/polybar_launch
+    ~/.scripts/polybar_launch 'full'
 }
 function minibar() {
-    killall -q polybar
     feh --bg-scale /home/sidreed/dotfiles/.config/i3/unbordered_background.png
-    for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-        MONITOR=$m polybar minimal &
-    done
+    ~/.scripts/polybar_launch 'mini'
 }
 function nobar() {
-    killall -q polybar
     feh --bg-scale /home/sidreed/dotfiles/.config/i3/unbordered_background.png
+    ~/.scripts/polybar_launch 'none'
 }
 function main() {
     #toggle or explicit
