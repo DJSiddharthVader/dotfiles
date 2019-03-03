@@ -11,16 +11,23 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 
 #git
-alias gir='git rm'
-alias gia='git add'
-alias gid='git diff'
-alias gip='git push'
-alias gic='git commit'
-alias gis='watch -n1 git status'
+alias grm='git rm'
+alias add='git add'
+alias diff='git diff'
+alias push='git push'
+alias pull='git pull'
+alias com='git commit'
+alias stat="git status | less"
+alias stwt="watch -n1 'git status | less'"
 
-#typos
+#Typos
 alias bi='vi'
 alias mc='mv'
+
+#Options
+alias top='htop'
+alias rm='rm -i'
+alias tmux='tmux -2'
 
 #My Scripts
 alias mon='~/.scripts/monitor.sh on'
@@ -30,18 +37,18 @@ alias upm='~/.scripts/updatemusic.sh'
 alias rspb='~/.scripts/polybar_launch.sh'
 alias pipes='~/apps/pipes.sh/pipes.sh'
 alias rspa='~/.scripts/reset-pulseaudio.sh'
+alias knit='~/.scripts/knitpdf.sh'
 
-#Shorten/Options
-alias top='htop'
-alias rm='rm -i'
+#Shorten
+alias ubf='feh --bg-scale ~/.config/i3/unbordered_background.png'
+alias bbf='feh --bg-scale ~/.config/i3/bordered_background.png'
 alias bat='acpi -b'
 alias plx='pdflatex'
-alias tmux='tmux -2'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
 alias ct='conda activate thesis'
 alias pdf='tabbed -c zathura -e'
-alias ip="curl https://ifconfig.co"
+alias ip="hostname -I | cut -d' ' -f1"
 alias umnt="umount /media/1tbdrive/"
 alias cpdots='rsync -avzP ~/dotfiles/'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'

@@ -95,13 +95,13 @@ xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
 nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
-xnoremap <buffer> <silent> <SNR>90_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>90_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>90_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>90_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>90_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-nnoremap <buffer> <SNR>90_(V) V
 nnoremap <buffer> <SNR>90_(v) v
+nnoremap <buffer> <SNR>90_(V) V
+xnoremap <buffer> <silent> <SNR>90_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>90_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>90_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>90_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>90_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
 nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
 vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
@@ -372,21 +372,30 @@ silent! normal! zE
 42,51fold
 31,51fold
 52,65fold
-67,71fold
-74,81fold
-82,88fold
-89,97fold
-98,102fold
+67,69fold
+73,77fold
+78,83fold
+85,89fold
+72,89fold
+91,93fold
+95,100fold
+108,112fold
 31
 normal! zo
-31
+72
+normal! zo
+85
+normal! zo
+72
 normal! zc
-let s:l = 110 - ((109 * winheight(0) + 21) / 43)
+91
+normal! zo
+let s:l = 84 - ((47 * winheight(0) + 23) / 46)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-110
-normal! 042|
+84
+normal! 01|
 lcd ~/Documents/resumes/latexStuff
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

@@ -6,14 +6,13 @@ windows:
     - git:
         layout: even-horizontal
         panes:
-            - cd ~/thesis_SidReed/scripts; git status | less
+            - cd ~/thesis_SidReed/scripts; watch -n1 git status
             - cd ~/thesis_SidReed/scripts
     - docs: vi -p docs.txt README.md
     - editing:
         layout: 8252,164x45,0,0{82x45,0,0,4,81x45,83,0[81x22,83,0,5,81x22,83,23,6]}
         panes:
             - cd ~/thesis_SidReed/scripts
-            -
             -
     - scratch:
 
