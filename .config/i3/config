@@ -1,7 +1,7 @@
 # vim: filetype=i3
 # #---Basic Definitions---# #
 #Needed for i3-gaps
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 6
 gaps inner 10
 gaps outer 10
 font Terminus
@@ -113,11 +113,11 @@ bindsym $mod+Shift+o	resize grow width 10 px or 10 ppt
 bindsym $mod+p			exec $pause
 bindsym $mod+Shift+p	exec $trupause
 
-bindsym $mod+a          gaps inner current plus 5
-bindsym $mod+Shift+a	gaps inner current minus 5
+bindsym $mod+a          gaps inner current minus 5
+bindsym $mod+Shift+a	gaps inner current plus 5
 
-bindsym $mod+s          gaps outer current plus 5
-bindsym $mod+Shift+s    gaps outer current minus 5
+bindsym $mod+s          gaps outer current minus 5
+bindsym $mod+Shift+s    gaps outer current plus 5
 
 bindsym $mod+d          exec ~/dotfiles/.scripts/monitor.sh 'on'
 bindsym $mod+Shift+d    exec ~/dotfiles/.scripts/monitor.sh 'off'
