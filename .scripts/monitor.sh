@@ -8,7 +8,6 @@ connectToMonitor() {
     if [[ $ishdmi =~ 'HDMI' ]]; then
         xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
         pactl set-card-profile 0 output:hdmi-stereo
-        sleep 1
     else
         xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --left-of eDP-1
     fi
@@ -41,7 +40,7 @@ function main() {
             exit 1
             ;;
     esac
-    ~/.scripts/polybar_launch.sh
+    ~/.scripts/togglebar.sh auto
 }
 
 main "$1"
