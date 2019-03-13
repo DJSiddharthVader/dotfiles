@@ -18,7 +18,6 @@ _isroot=false
 [[ $UID -eq 0 ]] && _isroot=true
 
 # }}}
-
 ## Linux TTY colors {{{
 
 if [ "$TERM" = "linux" ]; then
@@ -30,10 +29,6 @@ if [ "$TERM" = "linux" ]; then
 fi
 
 # }}}
-
-#sources virtualenvwrapper automatically
-#source /usr/local/bin/virtualenvwrapper.sh
-
 ## Exports {{{
 
 # set PATH variable
@@ -94,7 +89,7 @@ fi
 
 # }}}
 
-# Get Prompt Info
+#Get Prompt Info
 [[ -f $HOME/.dircolors ]] && eval $(dircolors -b $HOME/.dircolors)
 source $HOME/.bash_prompt.sh
 
@@ -112,7 +107,6 @@ source $HOME/.bash_prompt.sh
   # Use `>|` to force redirection to an existing file
 
   # }}}
-
 ## Completion {{{
 
 complete -cf sudo
@@ -124,7 +118,7 @@ fi
 bind "set completion-ignore-case on"
 
 # Treat hyphens and underscores as equivalent
-bind "set completion-map-case on"
+#bind "set completion-map-case on"
 
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
@@ -175,7 +169,6 @@ fi
 # }}}
 
 ## Functions
-
 ## Priviliged Acces {{{
 
 if ! $_isroot; then
@@ -227,8 +220,7 @@ function jless() {
     jq . -C $1 | less -R;
 }
 
-    ## Top 10 Commands {{{
-
+## Top 10 Commands {{{
 # copyright 2007 - 2010 Christopher Bratusek
 top10() { history | awk '{a[$2]++ } END{for(i in a){print a[i] " " i}}' | sort -rn | head; }
 
@@ -254,7 +246,6 @@ up() {
 # }}}
 
 ## Archive Extractor {{{
-
   extract() {
       clrstart="\033[1;34m"  # color codes
       clrend="\033[0m"
@@ -297,9 +288,6 @@ up() {
       fi
 
       filename=`basename "$1"`
-
-      # echo "${filename##*.}" debug
-
       case "${filename##*.}" in
         tar)
           echo -e "${clrstart}Extracting $1 to $DESTDIR: (uncompressed tar)${clrend}"
@@ -341,9 +329,7 @@ up() {
     }
 
 # }}}
-
 ## Archive Compress {{{
-
   compress() {
       if [[ -n "$1" ]]; then
         FILE=$1
@@ -384,7 +370,6 @@ up() {
 # }}}
 
 ## File & Strings Related Functions {{{
-
 ## Find a file with a pattern in name {{{
 
     ff() { find . -type f -iname '*'$*'*' -ls ; }
@@ -436,8 +421,7 @@ up() {
 
       # }}}
 
-    ## Finds directory sizes Fand lists them for the current directory {{{
-
+## Finds directory sizes Fand lists them for the current directory {{{
     dirsize () {
         du -shx * .[a-zA-Z0-9_]* 2> /dev/null | egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
         egrep '^ *[0-9.]*M' /tmp/list
@@ -447,8 +431,7 @@ up() {
 
       # }}}
 
-    ## Find and remove empty directories {{{
-
+## Find and remove empty directories {{{
     fared() {
         read -p "Delete all empty folders recursively [y/N]: " OPT
         [[ $OPT == y ]] && find . -type d -empty -exec rm -fr {} \; &> /dev/null
@@ -456,7 +439,7 @@ up() {
 
       # }}}
 
-    ## Find and remove all dotfiles {{{
+## Find and remove all dotfiles {{{
 
     farad () {
         read -p "Delete all dotfiles recursively [y/N]: " OPT
@@ -473,7 +456,6 @@ up() {
   # }}}
 
 ## Better directory navigation {{{
-
 # Prepend cd to directory names automatically
 shopt -s autocd 2> /dev/null
 # Correct spelling errors during tab-completion
@@ -484,21 +466,18 @@ shopt -s cdspell 2> /dev/null
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
-CDPATH=".:~:~/projects:/srv/archsrv/media"
+#CDPATH=".:~:~/projects:/srv/archsrv/media"
 
 # This allows you to bookmark your favorite places across the file system
 # Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
-shopt -s cdable_vars
-
-export  dot="$HOME/dotfiles"
-export   sh="$HOME/scripts"
-export   i3="$HOME/.i3"
-export  i3b="$HOME/.i3/blocklets"
-export  bin="$HOME/bin"
-export lbin="$HOME/.local/bin"
-export proj="$HOME/projects"
-export  doc="$HOME/docs"
-export sync="$HOME/sync"
+#shopt -s cdable_vars
+#
+#export  dot="$HOME/dotfiles"
+#export   sh="$HOME/scripts"
+#export   i3="$HOME/.i3"
+#export  bin="$HOME/bin"
+#export lbin="$HOME/.local/bin"
+#export sync="$HOME/sync"
 
 # }}}
 
@@ -577,13 +556,14 @@ export PATH="${PATH}:${HOME}/.local/bin/"
 #for colorls
 source $(dirname $(gem which colorls))/tab_complete.sh
 
+#Setting Path
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
-
+#Conda
 . $HOME/anaconda3/etc/profile.d/conda.sh
 # added by Anaconda3 5.3.0 installer
 # >>> conda init >>>
