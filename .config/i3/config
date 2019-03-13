@@ -140,8 +140,8 @@ bindsym $mod+Shift+k	move up 30
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l	move right 30
 
-bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/togglebar.sh toggle
-bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/togglebar.sh mini
+bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/togglebar.sh ftoggle
+bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/togglebar.sh rtoggle
 
 bindsym $mod+x			exec --no-startup-id ~/.scripts/lock.sh
 #bindsym $mod+Shift+x    exec
