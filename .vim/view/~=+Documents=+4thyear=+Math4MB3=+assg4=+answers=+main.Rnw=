@@ -182,6 +182,7 @@ nmap <buffer> <silent> ì <Plug>Tex_LeftRight
 vmap <buffer> <silent> ã <Plug>Tex_MathCal
 vmap <buffer> <silent> â <Plug>Tex_MathBF
 imap <buffer> <silent> ]] <Plug>(vimtex-delim-close)
+inoremap <buffer> <silent> `` `
 inoremap <buffer> <silent> <expr> `vr vimtex#imaps#wrap_math("`vr", '\varrho')
 inoremap <buffer> <silent> <expr> `vq vimtex#imaps#wrap_math("`vq", '\vartheta')
 inoremap <buffer> <silent> <expr> `vk vimtex#imaps#wrap_math("`vk", '\varkappa')
@@ -244,7 +245,6 @@ inoremap <buffer> <silent> <expr> `= vimtex#imaps#wrap_math("`=", '\equiv')
 inoremap <buffer> <silent> <expr> `8 vimtex#imaps#wrap_math("`8", '\infty')
 inoremap <buffer> <silent> <expr> `6 vimtex#imaps#wrap_math("`6", '\partial')
 inoremap <buffer> <silent> <expr> `0 vimtex#imaps#wrap_math("`0", '\emptyset')
-inoremap <buffer> <silent> `` `
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -360,22 +360,32 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-5,19fold
-21,33fold
-41,52fold
-39,56fold
-57,65fold
-66,74fold
-39
+4,16fold
+18,30fold
+31,36fold
+37,42fold
+48,58fold
+45,62fold
+63,71fold
+72,81fold
+43,82fold
+83,88fold
+18
 normal! zo
-57
+43
 normal! zo
-let s:l = 55 - ((19 * winheight(0) + 9) / 18)
+45
+normal! zo
+45
+normal! zc
+43
+normal! zc
+let s:l = 26 - ((7 * winheight(0) + 9) / 18)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-55
-normal! 011|
+26
+normal! 0
 lcd ~/Documents/4thyear/Math4MB3/assg4/answers/sections
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

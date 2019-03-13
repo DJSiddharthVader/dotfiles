@@ -116,10 +116,10 @@ silent! normal! zE
 3,26fold
 28,46fold
 48,84fold
-86,102fold
-104,123fold
-125,131fold
-let s:l = 125 - ((124 * winheight(0) + 21) / 42)
+86,101fold
+103,122fold
+124,146fold
+let s:l = 125 - ((98 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt

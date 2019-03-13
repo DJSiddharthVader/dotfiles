@@ -95,13 +95,34 @@ xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
 nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
-nnoremap <buffer> <SNR>87_(v) v
-nnoremap <buffer> <SNR>87_(V) V
-xnoremap <buffer> <silent> <SNR>87_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-xnoremap <buffer> <silent> <SNR>87_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>87_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>87_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+nnoremap <buffer> <SNR>122_(v) v
+nnoremap <buffer> <SNR>122_(V) V
+xnoremap <buffer> <silent> <SNR>122_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>122_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>122_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>122_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>122_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 xnoremap <buffer> <silent> <SNR>87_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>87_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>87_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>87_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>87_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>87_(V) V
+nnoremap <buffer> <SNR>87_(v) v
+xnoremap <buffer> <silent> <SNR>117_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>117_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>117_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>117_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>117_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>117_(V) V
+nnoremap <buffer> <SNR>117_(v) v
+xnoremap <buffer> <silent> <SNR>115_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>115_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>115_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>115_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>115_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>115_(V) V
+nnoremap <buffer> <SNR>115_(v) v
 nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
 nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
 vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
@@ -367,12 +388,14 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 4 - ((3 * winheight(0) + 9) / 18)
+20,27fold
+let s:l = 3 - ((2 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-4
-normal! 03|
+3
+normal! 08|
+lcd ~/Documents/4thyear/Math4MB3/assg4/answers/sections
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
