@@ -84,8 +84,7 @@ function launchbar_dep() {
 }
 
 function setWallPaper() {
-    bordered="$(head -1 $HOME/dotfiles/.bartoggle)"
-    case "$bordered" in
+    case "$1" in
         full)
             feh --bg-scale /home/sidreed/dotfiles/.config/i3/bordered_background.png
             ;;
@@ -103,7 +102,7 @@ function setWallPaper() {
 
 function launchbar() {
     killall -q polybar # Terminate already running bar instances
-    #while pgrep -x polybar >/dev/null; do sleep 1; done # Wait until the processes have been shut down
+    while pgrep -x polybar >/dev/null; do sleep 1; done # Wait until the processes have been shut down
     case "$1" in
         full)
             multiscreen full
@@ -119,15 +118,31 @@ function launchbar() {
             exit 1
             ;;
     esac
-    setWallPaper
+    setWallPaper "$1"
 }
 
 function main() {
-    if [ -z "$1" ]; then #are args given
+    use="$1"
+    if [ $# -eq 0 ]; then #are args given
         launchbar "$(head -1 ~/dotfiles/.bartoggle)"
     else
         launchbar "$1"
     fi
+    case "$use" in
+        full)
+            launchbar full
+            ;;
+        mini)
+            launchbar mini
+            ;;
+        none)
+            launchbar none
+            ;;
+        *)
+            echo "usage $0 {full|mini|none}"
+            exit 1
+            ;;
+    esac
 }
 
 main "$1"
