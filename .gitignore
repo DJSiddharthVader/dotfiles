@@ -40,7 +40,7 @@
 .ipython/profile_default/db/rootmodules_cache
 .ipython/profile_default/db/dhist
 .ipython/profile_default/history.sqlite
-.jupyter/lab/workspaces/
+.jupyter
 .tmux/resurrect
 .ncmpcpp/error.log
 Anaconda*
@@ -50,4 +50,5 @@ tasks/
 .config/RStudio/
 .config/enchant/
 .config/unity3d/
+.vim/bundle/Nvim-R/
 
