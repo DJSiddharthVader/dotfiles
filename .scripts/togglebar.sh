@@ -14,6 +14,15 @@ main() {
         auto)
             option="$(head -1 $togglefile)"
             ;;
+        full)
+            option="full"
+            ;;
+        mini)
+            option="mini"
+            ;;
+        none)
+            option="none"
+            ;;
         *)
             echo "Usage: $0 {ftoggle|rtoggle|auto|full||mini|none}"
             exit 1
