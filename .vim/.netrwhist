@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =9
 let g:netrw_dirhist_1='/home/sidreed/thesis_SidReed/hide_program/etest'
 let g:netrw_dirhist_2='/home/sidreed/thesis_SidReed/hide_program/mtest'
 let g:netrw_dirhist_3='/home/sidreed/tmp/documents/research_proposal/sections'
@@ -7,3 +7,5 @@ let g:netrw_dirhist_4='/home/sidreed/thesis_SidReed/writing/nontext/figures'
 let g:netrw_dirhist_5='/home/sidreed/dotfiles/.config/polybar'
 let g:netrw_dirhist_6='/home/sidreed/Documents/4thyear/Math4MB3/assg3/answers/sections'
 let g:netrw_dirhist_7='/home/sidreed/Documents/resumes/emails_2017'
+let g:netrw_dirhist_8='/home/sidreed/thesis_SidReed/writing/nontext/figures'
+let g:netrw_dirhist_9='/home/sidreed/Documents/4thyear/Math4MB3/project/Presentation'
