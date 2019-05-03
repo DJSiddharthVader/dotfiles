@@ -55,6 +55,167 @@ nmap <buffer> <silent> \lX <Plug>(vimtex-reload-state)
 nmap <buffer> <silent> \lx <Plug>(vimtex-reload)
 nmap <buffer> <silent> \lI <Plug>(vimtex-info-full)
 nmap <buffer> <silent> \li <Plug>(vimtex-info)
+noremap <buffer> <silent> \gN :call b:PreviousRChunk()
+noremap <buffer> <silent> \gn :call b:NextRChunk()
+noremap <buffer> <silent> \gt :call SyncTeX_forward(1)
+noremap <buffer> <silent> \gp :call SyncTeX_forward()
+vnoremap <buffer> <silent> \op :call ROpenPDF("Get Master")
+nnoremap <buffer> <silent> \op :call ROpenPDF("Get Master")
+onoremap <buffer> <silent> \op :call ROpenPDF("Get Master")
+noremap <buffer> <silent> \ca :call b:SendChunkToR("echo", "down")
+noremap <buffer> <silent> \cd :call b:SendChunkToR("silent", "down")
+noremap <buffer> <silent> \ce :call b:SendChunkToR("echo", "stay")
+noremap <buffer> <silent> \cc :call b:SendChunkToR("silent", "stay")
+vnoremap <buffer> <silent> \si :call RnwToggleIndentSty()
+nnoremap <buffer> <silent> \si :call RnwToggleIndentSty()
+onoremap <buffer> <silent> \si :call RnwToggleIndentSty()
+vnoremap <buffer> <silent> \kb :call RWeave("bibtex", 1, 1)
+nnoremap <buffer> <silent> \kb :call RWeave("bibtex", 1, 1)
+onoremap <buffer> <silent> \kb :call RWeave("bibtex", 1, 1)
+vnoremap <buffer> <silent> \kp :call RWeave("nobib", 1, 1)
+vnoremap <buffer> <silent> \kn :call RWeave("nobib", 1, 0)
+nnoremap <buffer> <silent> \kn :call RWeave("nobib", 1, 0)
+onoremap <buffer> <silent> \kn :call RWeave("nobib", 1, 0)
+vnoremap <buffer> <silent> \sb :call RWeave("bibtex", 0, 1)
+nnoremap <buffer> <silent> \sb :call RWeave("bibtex", 0, 1)
+onoremap <buffer> <silent> \sb :call RWeave("bibtex", 0, 1)
+vnoremap <buffer> <silent> \sp :call RWeave("nobib", 0, 1)
+nnoremap <buffer> <silent> \sp :call RWeave("nobib", 0, 1)
+onoremap <buffer> <silent> \sp :call RWeave("nobib", 0, 1)
+vnoremap <buffer> <silent> \sw :call RWeave("nobib", 0, 0)
+nnoremap <buffer> <silent> \sw :call RWeave("nobib", 0, 0)
+onoremap <buffer> <silent> \sw :call RWeave("nobib", 0, 0)
+vnoremap <buffer> <silent> \rd :call RSetWD()
+nnoremap <buffer> <silent> \rd :call RSetWD()
+onoremap <buffer> <silent> \rd :call RSetWD()
+vnoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
+nnoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
+onoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
+vnoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
+nnoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
+onoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
+vnoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
+nnoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
+onoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
+vnoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
+nnoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
+onoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
+nnoremap <buffer> <silent> \kp :call RWeave("nobib", 1, 1)
+onoremap <buffer> <silent> \kp :call RWeave("nobib", 1, 1)
+vnoremap <buffer> <silent> \kr :call RMakeRmd("default")
+nnoremap <buffer> <silent> \kr :call RMakeRmd("default")
+onoremap <buffer> <silent> \kr :call RMakeRmd("default")
+vnoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
+nnoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
+onoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
+vnoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
+nnoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
+onoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
+vnoremap <buffer> <silent> \ro :call RObjBrowser()
+nnoremap <buffer> <silent> \ro :call RObjBrowser()
+onoremap <buffer> <silent> \ro :call RObjBrowser()
+vnoremap <buffer> <silent> \rb :call RAction("plotsumm", "v")
+vnoremap <buffer> <silent> \rg :call RAction("plot", "v")
+vnoremap <buffer> <silent> \rs :call RAction("summary", "v")
+nnoremap <buffer> <silent> \rb :call RAction("plotsumm")
+onoremap <buffer> <silent> \rb :call RAction("plotsumm")
+nnoremap <buffer> <silent> \rg :call RAction("plot")
+onoremap <buffer> <silent> \rg :call RAction("plot")
+nnoremap <buffer> <silent> \rs :call RAction("summary")
+onoremap <buffer> <silent> \rs :call RAction("summary")
+vnoremap <buffer> <silent> \rh :call RAction("help")
+nnoremap <buffer> <silent> \rh :call RAction("help")
+onoremap <buffer> <silent> \rh :call RAction("help")
+vnoremap <buffer> <silent> \re :call RAction("example")
+nnoremap <buffer> <silent> \re :call RAction("example")
+onoremap <buffer> <silent> \re :call RAction("example")
+vnoremap <buffer> <silent> \ra :call RAction("args")
+nnoremap <buffer> <silent> \ra :call RAction("args")
+onoremap <buffer> <silent> \ra :call RAction("args")
+vnoremap <buffer> <silent> \tp :call RAction("printtab", "v")
+vnoremap <buffer> <silent> \td :call RAction("dputtab", "v")
+vnoremap <buffer> <silent> \rv :call RAction("viewdf", "v")
+vnoremap <buffer> <silent> \rt :call RAction("str", "v")
+vnoremap <buffer> <silent> \rn :call RAction("nvim.names", "v")
+vnoremap <buffer> <silent> \rp :call RAction("print", "v")
+nnoremap <buffer> <silent> \tp :call RAction("printtab")
+onoremap <buffer> <silent> \tp :call RAction("printtab")
+nnoremap <buffer> <silent> \td :call RAction("dputtab")
+onoremap <buffer> <silent> \td :call RAction("dputtab")
+nnoremap <buffer> <silent> \rv :call RAction("viewdf")
+onoremap <buffer> <silent> \rv :call RAction("viewdf")
+nnoremap <buffer> <silent> \rt :call RAction("str")
+onoremap <buffer> <silent> \rt :call RAction("str")
+nnoremap <buffer> <silent> \rn :call RAction("nvim.names")
+onoremap <buffer> <silent> \rn :call RAction("nvim.names")
+nnoremap <buffer> <silent> \rp :call RAction("print")
+onoremap <buffer> <silent> \rp :call RAction("print")
+vnoremap <buffer> <silent> \rm :call RClearAll()
+nnoremap <buffer> <silent> \rm :call RClearAll()
+onoremap <buffer> <silent> \rm :call RClearAll()
+vnoremap <buffer> <silent> \rr :call RClearConsole()
+nnoremap <buffer> <silent> \rr :call RClearConsole()
+onoremap <buffer> <silent> \rr :call RClearConsole()
+vnoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
+nnoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
+onoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
+noremap <buffer> <silent> \r<Right> :call RSendPartOfLine("right", 0)
+noremap <buffer> <silent> \r<Left> :call RSendPartOfLine("left", 0)
+vnoremap <buffer> <silent> \o :call RWarningMsg("This command does not work over a selection of lines.")
+nnoremap <buffer> <silent> \o :call SendLineToRAndInsertOutput()0
+onoremap <buffer> <silent> \o :call SendLineToRAndInsertOutput()0
+noremap <buffer> <silent> \d :call SendLineToR("down")0
+noremap <buffer> <silent> \l :call SendLineToR("stay")
+noremap <buffer> <silent> \ch :call SendFHChunkToR()
+noremap <buffer> <silent> \pa :call SendParagraphToR("echo", "down")
+noremap <buffer> <silent> \pd :call SendParagraphToR("silent", "down")
+noremap <buffer> <silent> \pe :call SendParagraphToR("echo", "stay")
+noremap <buffer> <silent> \pp :call SendParagraphToR("silent", "stay")
+vnoremap <buffer> <silent> \so :call SendSelectionToR("echo", "stay", "NewtabInsert")
+vnoremap <buffer> <silent> \sa :call SendSelectionToR("echo", "down")
+vnoremap <buffer> <silent> \sd :call SendSelectionToR("silent", "down")
+vnoremap <buffer> <silent> \se :call SendSelectionToR("echo", "stay")
+vnoremap <buffer> <silent> \ss :call SendSelectionToR("silent", "stay")
+vnoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
+nnoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
+onoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
+vnoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
+nnoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
+onoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
+vnoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
+nnoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
+onoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
+vnoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
+nnoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
+onoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
+noremap <buffer> <silent> \ba :call SendMBlockToR("echo", "down")
+noremap <buffer> <silent> \bd :call SendMBlockToR("silent", "down")
+noremap <buffer> <silent> \be :call SendMBlockToR("echo", "stay")
+noremap <buffer> <silent> \bb :call SendMBlockToR("silent", "stay")
+vnoremap <buffer> <silent> \; :call MovePosRCodeComment("selection")
+nnoremap <buffer> <silent> \; :call MovePosRCodeComment("normal")
+onoremap <buffer> <silent> \; :call MovePosRCodeComment("normal")
+vnoremap <buffer> <silent> \xu :call RSimpleCommentLine("selection", "u")
+nnoremap <buffer> <silent> \xu :call RSimpleCommentLine("normal", "u")
+onoremap <buffer> <silent> \xu :call RSimpleCommentLine("normal", "u")
+vnoremap <buffer> <silent> \xc :call RSimpleCommentLine("selection", "c")
+nnoremap <buffer> <silent> \xc :call RSimpleCommentLine("normal", "c")
+onoremap <buffer> <silent> \xc :call RSimpleCommentLine("normal", "c")
+vnoremap <buffer> <silent> \xx :call RComment("selection")
+nnoremap <buffer> <silent> \xx :call RComment("normal")
+onoremap <buffer> <silent> \xx :call RComment("normal")
+vnoremap <buffer> <silent> \rw :call RQuit('save')
+nnoremap <buffer> <silent> \rw :call RQuit('save')
+onoremap <buffer> <silent> \rw :call RQuit('save')
+vnoremap <buffer> <silent> \rq :call RQuit('nosave')
+nnoremap <buffer> <silent> \rq :call RQuit('nosave')
+onoremap <buffer> <silent> \rq :call RQuit('nosave')
+vnoremap <buffer> <silent> \rc :call StartR("custom")
+nnoremap <buffer> <silent> \rc :call StartR("custom")
+onoremap <buffer> <silent> \rc :call StartR("custom")
+vnoremap <buffer> <silent> \rf :call StartR("R")
+nnoremap <buffer> <silent> \rf :call StartR("R")
+onoremap <buffer> <silent> \rf :call StartR("R")
 omap <buffer> <silent> ][ <Plug>(vimtex-][)
 omap <buffer> <silent> ]] <Plug>(vimtex-]])
 xmap <buffer> <silent> ][ <Plug>(vimtex-][)
@@ -95,13 +256,20 @@ xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
 nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
-nnoremap <buffer> <SNR>120_(v) v
-nnoremap <buffer> <SNR>120_(V) V
-xnoremap <buffer> <silent> <SNR>120_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-xnoremap <buffer> <silent> <SNR>120_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>120_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>120_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+nnoremap <buffer> <SNR>88_(v) v
+nnoremap <buffer> <SNR>88_(V) V
+xnoremap <buffer> <silent> <SNR>88_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>88_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>88_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>88_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>88_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 xnoremap <buffer> <silent> <SNR>120_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>120_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>120_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>120_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>120_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>120_(V) V
+nnoremap <buffer> <SNR>120_(v) v
 nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
 nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
 vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
@@ -138,18 +306,18 @@ xnoremap <buffer> <silent> <Plug>(vimtex-ic) :call vimtex#text_obj#commands(1,
 nnoremap <buffer> <Plug>(vimtex-reload-state) :VimtexReloadState
 nnoremap <buffer> <Plug>(vimtex-toggle-main) :VimtexToggleMain
 nnoremap <buffer> <Plug>(vimtex-errors) :call vimtex#qf#toggle()
-xnoremap <buffer> <silent> <SNR>88_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
 nnoremap <buffer> <silent> <Plug>(vimtex-[[) :call vimtex#motion#next_section(0,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-[]) :call vimtex#motion#next_section(1,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-][) :call vimtex#motion#next_section(1,0,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-]]) :call vimtex#motion#next_section(0,0,0)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
 nnoremap <buffer> <silent> <Plug>(vimtex-%) :call vimtex#motion#find_matching_pair()
-nnoremap <buffer> <SNR>88_(V) V
-nnoremap <buffer> <SNR>88_(v) v
+nnoremap <buffer> <SNR>98_(V) V
+nnoremap <buffer> <SNR>98_(v) v
 nnoremap <buffer> <Plug>(vimtex-reload) :VimtexReload
 nnoremap <buffer> <Plug>(vimtex-log) :VimtexLog
 nnoremap <buffer> <Plug>(vimtex-labels-toggle) :call b:vimtex.labels.toggle()
@@ -185,10 +353,13 @@ xnoremap <buffer> <silent> <Plug>(vimtex-cmd-create) :call vimtex#cmd#create_a
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-create) :call vimtex#cmd#create_ask(0)
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-change) :call vimtex#cmd#change()
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-delete) :call vimtex#cmd#delete()
+inoremap <buffer> <silent>  =RCompleteArgs()
+inoremap <buffer> <silent> < :call RWriteChunk()a
 nmap <buffer> <silent> ì <Plug>Tex_LeftRight
 vmap <buffer> <silent> ã <Plug>Tex_MathCal
 vmap <buffer> <silent> â <Plug>Tex_MathBF
 imap <buffer> <silent> ]] <Plug>(vimtex-delim-close)
+inoremap <buffer> <silent> _ :call ReplaceUnderS()a
 inoremap <buffer> <silent> <expr> `vr vimtex#imaps#wrap_math("`vr", '\varrho')
 inoremap <buffer> <silent> <expr> `vq vimtex#imaps#wrap_math("`vq", '\vartheta')
 inoremap <buffer> <silent> <expr> `vk vimtex#imaps#wrap_math("`vk", '\varkappa')
@@ -251,6 +422,7 @@ inoremap <buffer> <silent> <expr> `= vimtex#imaps#wrap_math("`=", '\equiv')
 inoremap <buffer> <silent> <expr> `8 vimtex#imaps#wrap_math("`8", '\infty')
 inoremap <buffer> <silent> <expr> `6 vimtex#imaps#wrap_math("`6", '\partial')
 inoremap <buffer> <silent> <expr> `0 vimtex#imaps#wrap_math("`0", '\emptyset')
+inoremap <buffer> <silent> `` `
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -366,12 +538,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 7 - ((6 * winheight(0) + 11) / 23)
+let s:l = 67 - ((22 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-7
-normal! 0
+67
+normal! 04|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

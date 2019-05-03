@@ -95,6 +95,13 @@ xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
 nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
+nnoremap <buffer> <SNR>98_(v) v
+nnoremap <buffer> <SNR>98_(V) V
+xnoremap <buffer> <silent> <SNR>98_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>98_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 nnoremap <buffer> <SNR>88_(v) v
 nnoremap <buffer> <SNR>88_(V) V
 xnoremap <buffer> <silent> <SNR>88_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
@@ -102,6 +109,13 @@ xnoremap <buffer> <silent> <SNR>88_(vimtex-]]) :call vimtex#motion#next_sectio
 xnoremap <buffer> <silent> <SNR>88_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
 xnoremap <buffer> <silent> <SNR>88_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
 xnoremap <buffer> <silent> <SNR>88_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>119_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>119_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>119_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>119_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>119_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>119_(V) V
+nnoremap <buffer> <SNR>119_(v) v
 nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
 nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
 vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
@@ -138,18 +152,18 @@ xnoremap <buffer> <silent> <Plug>(vimtex-ic) :call vimtex#text_obj#commands(1,
 nnoremap <buffer> <Plug>(vimtex-reload-state) :VimtexReloadState
 nnoremap <buffer> <Plug>(vimtex-toggle-main) :VimtexToggleMain
 nnoremap <buffer> <Plug>(vimtex-errors) :call vimtex#qf#toggle()
-xnoremap <buffer> <silent> <SNR>119_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>119_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>119_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>119_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
 nnoremap <buffer> <silent> <Plug>(vimtex-[[) :call vimtex#motion#next_section(0,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-[]) :call vimtex#motion#next_section(1,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-][) :call vimtex#motion#next_section(1,0,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-]]) :call vimtex#motion#next_section(0,0,0)
-xnoremap <buffer> <silent> <SNR>119_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
 nnoremap <buffer> <silent> <Plug>(vimtex-%) :call vimtex#motion#find_matching_pair()
-nnoremap <buffer> <SNR>119_(V) V
-nnoremap <buffer> <SNR>119_(v) v
+nnoremap <buffer> <SNR>89_(V) V
+nnoremap <buffer> <SNR>89_(v) v
 nnoremap <buffer> <Plug>(vimtex-reload) :VimtexReload
 nnoremap <buffer> <Plug>(vimtex-log) :VimtexLog
 nnoremap <buffer> <Plug>(vimtex-labels-toggle) :call b:vimtex.labels.toggle()
@@ -189,7 +203,6 @@ nmap <buffer> <silent> ì <Plug>Tex_LeftRight
 vmap <buffer> <silent> ã <Plug>Tex_MathCal
 vmap <buffer> <silent> â <Plug>Tex_MathBF
 imap <buffer> <silent> ]] <Plug>(vimtex-delim-close)
-inoremap <buffer> <silent> `` `
 inoremap <buffer> <silent> <expr> `vr vimtex#imaps#wrap_math("`vr", '\varrho')
 inoremap <buffer> <silent> <expr> `vq vimtex#imaps#wrap_math("`vq", '\vartheta')
 inoremap <buffer> <silent> <expr> `vk vimtex#imaps#wrap_math("`vk", '\varkappa')
@@ -252,6 +265,7 @@ inoremap <buffer> <silent> <expr> `= vimtex#imaps#wrap_math("`=", '\equiv')
 inoremap <buffer> <silent> <expr> `8 vimtex#imaps#wrap_math("`8", '\infty')
 inoremap <buffer> <silent> <expr> `6 vimtex#imaps#wrap_math("`6", '\partial')
 inoremap <buffer> <silent> <expr> `0 vimtex#imaps#wrap_math("`0", '\emptyset')
+inoremap <buffer> <silent> `` `
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -367,164 +381,107 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2,5fold
-6,15fold
-16,19fold
-20,30fold
-58,58fold
-35,58fold
-31,58fold
-61,65fold
-66,70fold
-71,75fold
-76,80fold
-81,85fold
-86,90fold
-91,95fold
-96,106fold
-59,106fold
-1,106fold
-109,112fold
-113,117fold
-119,123fold
-126,132fold
-133,138fold
-124,140fold
-143,150fold
-151,156fold
-141,158fold
-159,164fold
-118,164fold
-166,170fold
-173,178fold
-179,186fold
-171,188fold
-191,196fold
-197,202fold
-189,204fold
-205,212fold
-213,218fold
-165,218fold
-220,224fold
-226,232fold
-233,240fold
-225,242fold
-243,248fold
-249,254fold
-219,254fold
-256,260fold
-261,265fold
-266,278fold
-279,285fold
-288,292fold
-293,297fold
-288,299fold
-286,299fold
-255,299fold
-301,305fold
-307,309fold
-310,312fold
-306,313fold
-315,317fold
-318,320fold
-321,323fold
-314,324fold
-328,339fold
-340,353fold
-356,356fold
-325,356fold
-357,367fold
-300,367fold
-372,381fold
-368,384fold
-385,387fold
+2,7fold
+8,17fold
+18,23fold
+24,33fold
+40,46fold
+47,53fold
+54,60fold
+39,62fold
+64,79fold
+80,99fold
+100,108fold
+63,108fold
+110,113fold
+114,117fold
+109,117fold
+34,117fold
+120,124fold
+125,129fold
+130,134fold
+135,139fold
+140,144fold
+145,149fold
+150,154fold
+155,159fold
+118,159fold
+160,171fold
+1,171fold
+175,178fold
+179,184fold
+186,191fold
+192,210fold
+211,216fold
+219,224fold
+225,232fold
+217,234fold
+235,240fold
+241,259fold
+260,265fold
+266,270fold
+271,284fold
+286,291fold
+292,302fold
+303,336fold
+338,343fold
+344,347fold
+348,352fold
+353,356fold
+357,360fold
+361,364fold
+365,368fold
+369,373fold
+375,380fold
+381,389fold
+390,399fold
+400,408fold
+409,444fold
+447,451fold
+452,456fold
+457,461fold
+462,464fold
+465,477fold
+478,482fold
+483,487fold
+488,490fold
+491,517fold
+518,525fold
+526,541fold
+542,547fold
+548,553fold
+554,559fold
+560,564fold
+565,568fold
 1
 normal! zo
-31
+34
 normal! zo
-35
+39
 normal! zo
-58
+63
 normal! zo
-35
+63
 normal! zc
-31
-normal! zc
-59
+109
 normal! zo
-59
+109
 normal! zc
-1
+34
 normal! zc
 118
 normal! zo
-124
-normal! zo
-124
-normal! zc
-141
-normal! zo
-141
-normal! zc
 118
 normal! zc
-165
+217
 normal! zo
-171
-normal! zo
-171
+217
 normal! zc
-189
-normal! zo
-189
-normal! zc
-165
-normal! zc
-219
-normal! zo
-225
-normal! zo
-225
-normal! zc
-219
-normal! zc
-255
-normal! zo
-286
-normal! zo
-288
-normal! zo
-286
-normal! zc
-255
-normal! zc
-300
-normal! zo
-306
-normal! zo
-306
-normal! zc
-314
-normal! zo
-314
-normal! zc
-325
-normal! zo
-356
-normal! zo
-325
-normal! zc
-300
-normal! zc
-368
-normal! zo
-368
-normal! zc
-let s:l = 300 - ((299 * winheight(0) + 24) / 49)
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-300
+1
 normal! 0
 lcd ~/thesis_SidReed/writing/presentation
 let &so = s:so_save | let &siso = s:siso_save

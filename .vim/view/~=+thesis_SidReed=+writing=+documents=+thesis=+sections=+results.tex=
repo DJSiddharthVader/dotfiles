@@ -95,6 +95,13 @@ xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
 nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
+nnoremap <buffer> <SNR>88_(v) v
+nnoremap <buffer> <SNR>88_(V) V
+xnoremap <buffer> <silent> <SNR>88_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>88_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>88_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>88_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>88_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
 nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
 vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
@@ -131,18 +138,18 @@ xnoremap <buffer> <silent> <Plug>(vimtex-ic) :call vimtex#text_obj#commands(1,
 nnoremap <buffer> <Plug>(vimtex-reload-state) :VimtexReloadState
 nnoremap <buffer> <Plug>(vimtex-toggle-main) :VimtexToggleMain
 nnoremap <buffer> <Plug>(vimtex-errors) :call vimtex#qf#toggle()
-xnoremap <buffer> <silent> <SNR>88_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
 nnoremap <buffer> <silent> <Plug>(vimtex-[[) :call vimtex#motion#next_section(0,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-[]) :call vimtex#motion#next_section(1,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-][) :call vimtex#motion#next_section(1,0,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-]]) :call vimtex#motion#next_section(0,0,0)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>89_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
 nnoremap <buffer> <silent> <Plug>(vimtex-%) :call vimtex#motion#find_matching_pair()
-nnoremap <buffer> <SNR>88_(V) V
-nnoremap <buffer> <SNR>88_(v) v
+nnoremap <buffer> <SNR>89_(V) V
+nnoremap <buffer> <SNR>89_(v) v
 nnoremap <buffer> <Plug>(vimtex-reload) :VimtexReload
 nnoremap <buffer> <Plug>(vimtex-log) :VimtexLog
 nnoremap <buffer> <Plug>(vimtex-labels-toggle) :call b:vimtex.labels.toggle()
@@ -360,18 +367,36 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2,8fold
-11,15fold
-17,21fold
-24,36fold
-11
-normal! zo
-let s:l = 12 - ((11 * winheight(0) + 21) / 43)
+2,3fold
+5,12fold
+13,17fold
+4,17fold
+18,25fold
+27,34fold
+35,38fold
+26,38fold
+40,47fold
+48,50fold
+39,50fold
+52,59fold
+60,62fold
+51,62fold
+64,71fold
+72,75fold
+63,75fold
+77,84fold
+85,87fold
+76,87fold
+89,96fold
+97,101fold
+88,101fold
+102,107fold
+let s:l = 1 - ((0 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-12
-normal! 089|
+1
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
