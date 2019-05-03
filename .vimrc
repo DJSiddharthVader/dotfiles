@@ -27,9 +27,17 @@ let g:mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
-" :W sudo saves the file
-" (useful for handling the permission-denied error)
-"command W w !sudo tee % > /dev/null
+"speed up marcors by not redrawing entire screen at once
+set lazyredraw
+
+"return to same line when reopening a file
+augroup line_return
+    au!
+        au BufReadPost *
+            \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \     execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
 
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -225,6 +233,10 @@ command! -range Uu :<line1>,<line2>s/^#//
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
+
+"press // to search for text highlighted in visual mode
+vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+
 " => Parenthesis/bracket
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vnoremap $1 <esc>`>a)<esc>`<i(<esc>
