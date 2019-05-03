@@ -1,6 +1,7 @@
 # vim: filetype=i3
 # #---Basic Definitions---# #
 #Needed for i3-gaps
+for_window [ title="^pdfpc - present" ] border none floating enable
 for_window [class="^.*"] border pixel 6
 gaps inner 10
 gaps outer 10
@@ -56,7 +57,7 @@ exec --no-startup-id pulseaudio --start
 #Composite manager:
 exec --no-startup-id compton --config ~/.config/compton.conf
 #Launch Polybar where appropriate:
-exec_always --no-startup-id ~/.scripts/polybar_launch.sh
+exec_always --no-startup-id ~/.scripts/polybar_launch.sh full
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
