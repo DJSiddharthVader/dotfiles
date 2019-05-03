@@ -21,9 +21,10 @@ alias com='git commit'
 alias brch='git branch'
 alias chk='git checkout'
 alias stat="git status | less"
-alias stwt="watch -n1 'git status | less'"
+alias stwt="watch -n1 'git status'"
 
 #Typos
+alias r,='rm'
 alias bi='vi'
 alias mc='mv'
 
@@ -46,12 +47,14 @@ alias knit='~/.scripts/knitpdf.sh'
 alias pdf='zathura'
 alias bat='acpi -b'
 alias plx='pdflatex'
+alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
 alias ct='conda activate thesis'
 alias umnt="umount /media/1tbdrive/"
 alias cpdots='rsync -avzP ~/dotfiles/'
 alias ip="hostname -I | cut -d' ' -f1"
+alias jpy='~/anaconda3/bin/jupyter-lab'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 alias mtdr="sudo mount /dev/sdb1 /media/1tbdrive/"
 alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
@@ -60,7 +63,6 @@ alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias reset-wifi='sudo /etc/init.d/network-manager restart'
 alias bbf='feh --bg-scale ~/.config/i3/bordered_background.png'
 alias ubf='feh --bg-scale ~/.config/i3/unbordered_background.png'
-alias madness='/home/sidreed/Misc/Need\ for\ Madness/Madness.sh & '
 alias mkst='cd ~/apps/st/; sudo make clean; make; sudo make install'
 alias thesis='tmuxinator start thesis -n thesis -p ~/dotfiles/.tmuxinator/thesis.yml'
 
