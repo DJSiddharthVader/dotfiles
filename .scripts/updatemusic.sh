@@ -6,5 +6,7 @@ youtube-dl  --audio-quality 0 \
             -x \
             --yes-playlist \
             -i \
+            --verbose \
             --download-archive /home/sidreed/dotfiles/.config/youtube-dl_downloads.txt \
             "https://www.youtube.com/playlist?list=PLMU-V2Iwwq69O1QA3kOtw_YTQ2q-sD-gT"
+            #"https://www.youtube.com/playlist?list=PLMU-V2Iwwq699kP0gmoOXyyk02eH4ZgEH"
