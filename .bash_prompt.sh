@@ -67,18 +67,37 @@ snk=$(echo -e '\u2440')
 tsk=$(echo -e '\u2713')
 bot=$(echo -e '\u2514')
 pen=$(echo -e '\u0F3B')
-#Modules
-strt="$end$B0$Fb$top$end$B1"
-time="$B1$F0$clk\@$F1$B3$par"
-#user="$B2$F0$usr \u$F2$B3$par"
-#host="$B2$F0$hst\h$F2$B3$par"
-dirc="$B3$F0$dir $F0\w$F3$B4$par"
-task="$B4$F0$tsk\$(count_tasks)$F4$B5$par"
-cond="$B5$F0$snk\$(condaenv)$F5$B6$par"
-gits="$B6$F0\$(gitstats)$F6$B0$par"
-endd="\n$B0$Fb$bot$end$F1$pen  $FB"
-# Automatically trim long paths in the prompt (requires Bash 4.x)
-PROMPT_DIRTRIM=2
-#Set prompt
-export PS1="$strt$time$dirc$task$cond$gits$endd"
-
+#Set prompt by terminal width
+function prompt_command() {
+    termwidth=${COLUMNS}
+    if [ "$termwidth" -gt "80" ]; then
+        #wide terminal
+        #Modules
+        strt="$end$B0$Fb$top$end$B1"
+        time="$B1$F0$clk\@$F1$B2$par"
+        user="$B2$F0$usr \u$F2$B3$par"
+        host="$B3$F0$hst\h$F3$B4$par"
+        dirc="$B4$F0$dir $F0\w$F4$B5$par"
+        #task="$B4$F0$tsk\$(count_tasks)$F4$B5$par"
+        cond="$B5$F0$snk\$(condaenv)$F5$B6$par"
+        gits="$B6$F0\$(gitstats)$F6$B0$par"
+        endd="\n$B0$Fb$bot$end$F1$pen  $FB"
+        PROMPT_DIRTRIM=99
+        export PS1="$strt$time$user$host$dirc$cond$gits$endd"
+    else
+        #small terminal
+        #Modules
+        strt="$end$B0$Fb$top$end$B1"
+        time="$B1$F0$clk\@$F1$B2$par"
+        #user="$B3$F0$usr \u$F3$B4$par"
+        host="$B2$F0$hst\h$F2$B5$par"
+        dirc="$B5$F0$dir $F0\w$F5$B4$par"
+        #task="$B4$F0$tsk\$(count_tasks)$F4$B5$par"
+        #cond="$B4$F0$snk\$(condaenv)$F4$B6$par"
+        gits="$B4$F0\$(gitstats)$F4$B0$par"
+        endd="\n$B0$Fb$bot$end$F1$pen  $FB"
+        PROMPT_DIRTRIM=2
+        export PS1="$strt$time$host$dirc$gits$endd"
+    fi
+}
+PROMPT_COMMAND=prompt_command
