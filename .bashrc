@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# vim: fdm=marker:noai:ts=4:sw=4
 
 ## Main Config
 
@@ -384,25 +383,6 @@ up() {
 
 ## Move filenames to lowercase {{{
 
-    lowercase() {
-        for file ; do
-          filename=${file##*/}
-          case "$filename" in
-          */* ) dirname==${file%/*} ;;
-            * ) dirname=.;;
-          esac
-          nf=$(echo $filename | tr A-Z a-z)
-          newname="${dirname}/${nf}"
-          if [[ "$nf" != "$filename" ]]; then
-            mv "$file" "$newname"
-            echo "lowercase: $file --> $newname"
-          else
-            echo "lowercase: $file not changed."
-          fi
-        done
-      }
-
-      # }}}
 
 ## Swap 2 filenames around, If they exist {{{
 
@@ -547,39 +527,47 @@ server() {
 
 # }}}
 
-# Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-export PATH="${PATH}:${HOME}/.local/bin/"
-(cat ~/.cache/wal/sequences &)
 
-#for colorls
-source $(dirname $(gem which colorls))/tab_complete.sh
-
-#Setting Path
-PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
-
-#Conda
-. $HOME/anaconda3/etc/profile.d/conda.sh
-# added by Anaconda3 5.3.0 installer
-# >>> conda init >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '$HOME/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    \eval "$__conda_setup"
-else
-    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/anaconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate thesis
-    else
-        \export PATH="$HOME/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+##Conda
+## . /scratch/anaconda3/etc/profile.d/conda.sh  # commented out by conda initialize
+## added by Anaconda3 5.3.0 installer
+## >>> conda init >>>
+## !! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$(CONDA_REPORT_ERRORS=false '/scratch/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    \eval "$__conda_setup"
+#else
+#    if [ -f "/scratch/anaconda3/etc/profile.d/conda.sh" ]; then
+## . "/scratch/anaconda3/etc/profile.d/conda.sh"  # commented out by conda initialize
+#        CONDA_CHANGEPS1=false
+#    else
+#        \export PATH="/scratch/anaconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
 # <<< conda init <<<
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$('/scratch/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/scratch/anaconda3/etc/profile.d/conda.sh" ]; then
+#        . "/scratch/anaconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/scratch/anaconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+## <<< conda initialize <<<
+
+# If not running interactively, don't do anything
+# This is required, otherwise  error at KDE login
+#   "Could not start D-bus. Can you call qdbus-qt5?"
+[ -z "$PS1" ] && return
+
+[[ ":$PATH:" =~ ":/scratch/anaconda3/bin:" ]] || PATH="/scratch/anaconda3/bin:$PATH"
+

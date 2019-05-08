@@ -31,7 +31,6 @@ alias mc='mv'
 #Options
 alias top='htop'
 alias rm='rm -i'
-alias tmux='tmux -2'
 
 #My Scripts
 alias mon='~/.scripts/monitor.sh on'
@@ -44,6 +43,7 @@ alias rspa='~/.scripts/reset-pulseaudio.sh'
 alias knit='~/.scripts/knitpdf.sh'
 
 #Shorten
+alias mordor='ssh -p 10022 sreed@mordor'
 alias pdf='zathura'
 alias bat='acpi -b'
 alias plx='pdflatex'
@@ -75,3 +75,4 @@ alias t='python ~/apps/t/t.py --task-dir ~/dotfiles/tasks --list tasks'
 alias tl='python ~/apps/t/t.py --task-dir ~/dotfiles/tasks --list tasks | sort -k3'
 alias neofetch='neofetch --ascii /home/sidreed/dotfiles/.config/neofetch/my_apreature.txt --config /home/sidreed/dotfiles/.config/neofetch/config'
 
+alias tmux='/scratch/tmux/tmux-2.7/tmux -2'
