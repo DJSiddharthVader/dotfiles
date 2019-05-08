@@ -11,7 +11,7 @@
 
 # set the installation directory
 
-target_dir="~/local"
+target_dir="/scratch/tmux"
 mkdir -p $target_dir
 
 # libevent installation
