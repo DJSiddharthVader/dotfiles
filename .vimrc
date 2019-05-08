@@ -124,7 +124,7 @@ set t_vb=
 set tm=500
 
 " Add a bit extra margin to the left
-set foldcolumn=1
+"set foldcolumn=1
 
 " Turn on syntax highlighting
 syntax on
