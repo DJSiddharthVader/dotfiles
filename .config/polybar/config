@@ -47,7 +47,8 @@ font-0 = Terminus (TTF):format=truetype:style=Mediumpixelsize=12;1
 font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
 font-2 = Siji:pixelsize=10;1
 modules-left = i3
-modules-center = songnames mpd
+;modules-center = songnames mpd
+modules-center =
 modules-right = volume backlight-acpi wlan battery date
 
 dim-value = 1
@@ -86,9 +87,9 @@ font-1 = FontAwesome:fontformat=truetype:style=Solid:size=10:antialias=false;0
 font-2 = Weather Icons:size=12;1
 
 modules-left = taskcounter
-modules-center = schedulep0 schedulep1 schedulep2
+;modules-center = schedulep0 schedulep1 schedulep2
+modules-center = songnames mpd
 modules-right = xkeyboard weather temperature cpu memory powermenu
-
 [bar/minimal]
 monitor = ${env:MONITOR:}
 width = 100%
