@@ -1,43 +1,43 @@
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 argglobal
-nnoremap <buffer> <silent> \rf :call StartR("R")
-nnoremap <buffer> <silent> \rc :call StartR("custom")
-nnoremap <buffer> <silent> \rq :call RQuit('nosave')
-nnoremap <buffer> <silent> \rw :call RQuit('save')
-nnoremap <buffer> <silent> \xx :call RComment("normal")
-nnoremap <buffer> <silent> \xc :call RSimpleCommentLine("normal", "c")
-nnoremap <buffer> <silent> \xu :call RSimpleCommentLine("normal", "u")
-nnoremap <buffer> <silent> \; :call MovePosRCodeComment("normal")
-nnoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
-nnoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
-nnoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
-nnoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
-nnoremap <buffer> <silent> \o :call SendLineToRAndInsertOutput()0
-nnoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
-nnoremap <buffer> <silent> \rr :call RClearConsole()
-nnoremap <buffer> <silent> \rm :call RClearAll()
-nnoremap <buffer> <silent> \rp :call RAction("print")
-nnoremap <buffer> <silent> \rn :call RAction("nvim.names")
-nnoremap <buffer> <silent> \rt :call RAction("str")
-nnoremap <buffer> <silent> \rv :call RAction("viewdf")
-nnoremap <buffer> <silent> \td :call RAction("dputtab")
-nnoremap <buffer> <silent> \tp :call RAction("printtab")
-nnoremap <buffer> <silent> \ra :call RAction("args")
-nnoremap <buffer> <silent> \re :call RAction("example")
-nnoremap <buffer> <silent> \rh :call RAction("help")
-nnoremap <buffer> <silent> \rs :call RAction("summary")
-nnoremap <buffer> <silent> \rg :call RAction("plot")
-nnoremap <buffer> <silent> \rb :call RAction("plotsumm")
-nnoremap <buffer> <silent> \ro :call RObjBrowser()
-nnoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
-nnoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
-nnoremap <buffer> <silent> \kr :call RMakeRmd("default")
-nnoremap <buffer> <silent> \kp :call RMakeRmd("pdf_document")
-nnoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
-nnoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
-nnoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
-nnoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
 nnoremap <buffer> <silent> \rd :call RSetWD()
+nnoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
+nnoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
+nnoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
+nnoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
+nnoremap <buffer> <silent> \kp :call RMakeRmd("pdf_document")
+nnoremap <buffer> <silent> \kr :call RMakeRmd("default")
+nnoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
+nnoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
+nnoremap <buffer> <silent> \ro :call RObjBrowser()
+nnoremap <buffer> <silent> \rb :call RAction("plotsumm")
+nnoremap <buffer> <silent> \rg :call RAction("plot")
+nnoremap <buffer> <silent> \rs :call RAction("summary")
+nnoremap <buffer> <silent> \rh :call RAction("help")
+nnoremap <buffer> <silent> \re :call RAction("example")
+nnoremap <buffer> <silent> \ra :call RAction("args")
+nnoremap <buffer> <silent> \tp :call RAction("printtab")
+nnoremap <buffer> <silent> \td :call RAction("dputtab")
+nnoremap <buffer> <silent> \rv :call RAction("viewdf")
+nnoremap <buffer> <silent> \rt :call RAction("str")
+nnoremap <buffer> <silent> \rn :call RAction("nvim.names")
+nnoremap <buffer> <silent> \rp :call RAction("print")
+nnoremap <buffer> <silent> \rm :call RClearAll()
+nnoremap <buffer> <silent> \rr :call RClearConsole()
+nnoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
+nnoremap <buffer> <silent> \o :call SendLineToRAndInsertOutput()0
+nnoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
+nnoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
+nnoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
+nnoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
+nnoremap <buffer> <silent> \; :call MovePosRCodeComment("normal")
+nnoremap <buffer> <silent> \xu :call RSimpleCommentLine("normal", "u")
+nnoremap <buffer> <silent> \xc :call RSimpleCommentLine("normal", "c")
+nnoremap <buffer> <silent> \xx :call RComment("normal")
+nnoremap <buffer> <silent> \rw :call RQuit('save')
+nnoremap <buffer> <silent> \rq :call RQuit('nosave')
+nnoremap <buffer> <silent> \rc :call StartR("custom")
+nnoremap <buffer> <silent> \rf :call StartR("R")
 vnoremap <buffer> <silent> \rd :call RSetWD()
 onoremap <buffer> <silent> \rd :call RSetWD()
 vnoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
@@ -214,7 +214,7 @@ setlocal modifiable
 setlocal nrformats=bin,octal,hex
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=
+setlocal omnifunc=CompleteR
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -254,37 +254,48 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-11,19fold
-20,31fold
-32,36fold
-37,40fold
-42,45fold
-46,48fold
-49,63fold
-41,71fold
-80,87fold
-88,95fold
-72,103fold
-104,116fold
-117,129fold
-131,142fold
-146,258fold
-41
+13,43fold
+44,69fold
+71,73fold
+75,84fold
+74,93fold
+94,99fold
+100,107fold
+108,121fold
+122,129fold
+130,135fold
+136,151fold
+154,157fold
+158,161fold
+152,180fold
+181,187fold
+189,201fold
+202,205fold
+207,223fold
+224,226fold
+227,244fold
+245,249fold
+253,261fold
+262,271fold
+272,285fold
+250,286fold
+288,370fold
+74
 normal! zo
-41
+74
 normal! zc
-72
+152
 normal! zo
-72
+152
 normal! zc
-131
+250
 normal! zo
-let s:l = 134 - ((133 * winheight(0) + 32) / 64)
+let s:l = 250 - ((114 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-134
-normal! 02|
+250
+normal! 086|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

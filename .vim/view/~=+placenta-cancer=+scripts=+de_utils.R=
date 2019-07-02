@@ -214,7 +214,7 @@ setlocal modifiable
 setlocal nrformats=bin,octal,hex
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=
+setlocal omnifunc=CompleteR
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -254,37 +254,18 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-11,19fold
-20,31fold
-32,36fold
-37,40fold
-42,45fold
-46,48fold
-49,63fold
-41,71fold
-80,87fold
-88,95fold
-72,103fold
-104,116fold
-117,129fold
-131,142fold
-146,258fold
-41
-normal! zo
-41
-normal! zc
-72
-normal! zo
-72
-normal! zc
-131
-normal! zo
-let s:l = 134 - ((133 * winheight(0) + 32) / 64)
+6,36fold
+37,62fold
+64,79fold
+80,98fold
+100,112fold
+113,116fold
+let s:l = 3 - ((2 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-134
-normal! 02|
+3
+normal! 020|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

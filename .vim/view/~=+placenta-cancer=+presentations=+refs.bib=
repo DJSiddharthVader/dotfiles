@@ -1,5 +1,13 @@
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 argglobal
+let s:cpo_save=&cpo
+set cpo&vim
+nmap <buffer> <silent> \lT <Plug>(vimtex-toc-toggle)
+nmap <buffer> <silent> \lt <Plug>(vimtex-toc-open)
+nnoremap <buffer> <Plug>(vimtex-toc-toggle) :call vimtex#toc#toggle()
+nnoremap <buffer> <Plug>(vimtex-toc-open) :call vimtex#toc#open()
+let &cpo=s:cpo_save
+unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -16,8 +24,8 @@ setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=#%s
+setlocal comments=sO:%\ -,mO:%\ \ ,eO:%%,:%
+setlocal commentstring=%\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
@@ -28,13 +36,13 @@ setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal cursorline
 setlocal define=
-setlocal dictionary=
+setlocal dictionary=/var/lib/vim/addons/ftplugin/latex-suite/dictionaries/dictionary
 setlocal nodiff
 setlocal equalprg=
-setlocal errorformat=
+setlocal errorformat=%*[^\"]\"%f\"%*\\D%l:\ %m,\"%f\"%*\\D%l:\ %m,%-G%f:%l:\ (Each\ undeclared\ identifier\ is\ reported\ only\ once,%-G%f:%l:\ for\ each\ function\ it\ appears\ in.),%-GIn\ file\ included\ from\ %f:%l:%c:,%-GIn\ file\ included\ from\ %f:%l:%c\\,,%-GIn\ file\ included\ from\ %f:%l:%c,%-GIn\ file\ included\ from\ %f:%l,%-G%*[\ ]from\ %f:%l:%c,%-G%*[\ ]from\ %f:%l:,%-G%*[\ ]from\ %f:%l\\,,%-G%*[\ ]from\ %f:%l,%f(%l):%m,\"%f\"\\,\ line\ %l%*\\D%c%*[^\ ]\ %m,%D%*\\a[%*\\d]:\ Entering\ directory\ %*[`']%f',%X%*\\a[%*\\d]:\ Leaving\ directory\ %*[`']%f',%D%*\\a:\ Entering\ directory\ %*[`']%f',%X%*\\a:\ Leaving\ directory\ %*[`']%f',%DMaking\ %*\\a\ in\ %f,%f|%l|\ %m,%-G%.%#Underfull%.%#,%-G%.%#Overfull%.%#,%-G%.%#specifier\ changed\ to%.%#,%-G%.%#You\ have\ requested%.%#,%-G%.%#Missing\ number%\\,\ treated\ as\ zero.%.%#,%-G%.%#There\ were\ undefined\ references%.%#,%-G%.%#Citation\ %.%#\ undefined%.%#,%E!\ LaTeX\ %trror:\ %m,%E!\ %m,%E%f:%l:\ %m,%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#,%+W%.%#\ at\ lines\ %l--%*\\d,%+WLaTeX\ %.%#Warning:\ %m,%-Cl.%l\ %m,%-Cl.%l\ ,%-C\ \ %m,%-C%.%#-%.%#,%-C%.%#[]%.%#,%-C[]%.%#,%-C%.%#%[{}\\]%.%#,%-C<%.%#>%m,%-GSee\ the\ LaTeX%m,%-GType\ \ H\ <return>%m,%-G\ ...%.%#,%-G%.%#\ (C)\ %.%#,%-G(see\ the\ transcript%.%#),%-G\\s%#,%-O(%*[^()])%r,%-P(%f%r,%-P\ %\\=(%f%r,%-P%*[^()](%f%r,%-P(%f%*[^()],%-P[%\\d%[^()]%#(%f%r,%-P%*[^()],%-Q)%r,%-Q%*[^()])%r,%-Q[%\\d%*[^()])%r,%-Q%*[^()],%-G%.%#
 setlocal expandtab
-if &filetype != 'sh'
-setlocal filetype=sh
+if &filetype != 'bib'
+setlocal filetype=bib
 endif
 setlocal fixendofline
 setlocal foldcolumn=1
@@ -52,12 +60,12 @@ setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
+setlocal iminsert=0
+setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=GetShIndent()
-setlocal indentkeys=0{,0},!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
+setlocal indentexpr=VimtexIndentBib()
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -66,7 +74,7 @@ setlocal nolisp
 setlocal lispwords=
 setlocal nolist
 setlocal makeencoding=
-setlocal makeprg=
+setlocal makeprg=latex\ -interaction=nonstopmode\ -file-line-error-style\ $*
 setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
 setlocal modifiable
@@ -86,18 +94,18 @@ setlocal noscrollbind
 setlocal shiftwidth=4
 setlocal noshortname
 setlocal signcolumn=auto
-setlocal nosmartindent
+setlocal smartindent
 setlocal softtabstop=4
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=
+setlocal suffixesadd=.tex,.sty,.cls
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'sh'
-setlocal syntax=sh
+if &syntax != 'bib'
+setlocal syntax=bib
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -113,12 +121,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 10) / 20)
+let s:l = 6 - ((5 * winheight(0) + 32) / 65)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 011|
+6
+normal! 0156|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
