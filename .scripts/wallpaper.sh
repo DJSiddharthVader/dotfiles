@@ -20,7 +20,8 @@ fullOrBordered() {
     bgfile="$i3dir"bordered_background.png
     unbkbgfile="$i3dir"unbordered_background.png
     echo "feh --bg-scale $image" >> ~/.scripts/.fehbg #record image in file
-    convert "$image" -resize "$resolution" -bordercolor Black -border 0x5% "$bgfile" #add borderes to image
+    #convert "$image" -resize "$resolution" -bordercolor Black -border 0x5% "$bgfile" #add borderes to image
+    convert "$image" -resize "$resolution" -bordercolor Black -border 0x40 "$bgfile" #add borderes to image
     cp "$image" "$unbkbgfile"
 
     case "$barmode" in
@@ -55,7 +56,7 @@ main() {
             wal -e -n -i "$imagefile" & #font only
             ;;
         *)
-            echo "Usage: $0 {font|back|both}"
+            echo "Usage: $0 {font|back|both} path/to/image (optional)"
             exit 1
     esac
 }
