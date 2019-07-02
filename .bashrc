@@ -4,6 +4,7 @@
 ## Main Config
 
 ## Overall Conditionals {{{
+export TERM='screen-256color'
 
 _islinux=false
 [[ "$(uname -s)" =~ Linux|GNU|GNU/* ]] && _islinux=true
@@ -574,7 +575,7 @@ if [ $? -eq 0 ]; then
 else
     if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
         . "$HOME/anaconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate thesis
+        CONDA_CHANGEPS1=false conda activate base
     else
         \export PATH="$HOME/anaconda3/bin:$PATH"
     fi
