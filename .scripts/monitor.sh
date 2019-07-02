@@ -9,7 +9,7 @@ connectToMonitor() {
         xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
         pactl set-card-profile 0 output:hdmi-stereo
     else
-        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --left-of eDP-1
+        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
     fi
 }
 
