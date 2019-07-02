@@ -5,8 +5,8 @@ on_project_start: wal -R -e -n -q &
 on_project_exit: tmux kill-session -t scratch
 
 windows:
-    - tasks: tl
+    - tasks: tl | grep Work
     - thesis: cd ~/thesis_SidReed
-    - school: cd ~/Documents/4thyear
+    - videos : cd ~/Videos
     - scratch: neofetch
 
