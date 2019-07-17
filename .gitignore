@@ -49,6 +49,7 @@ tasks/
 .config/Open Sorcery/
 .config/RStudio/
 .config/enchant/
+.config/opera/
 .config/unity3d/
 .vim/bundle/Nvim-R/
 
