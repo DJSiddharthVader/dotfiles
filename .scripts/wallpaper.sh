@@ -25,6 +25,9 @@ fullOrBordered() {
     cp "$image" "$unbkbgfile"
 
     case "$barmode" in
+        float)
+            feh --bg-scale "$unbkbgfile" #without borders
+            ;;
         full)
             feh --bg-scale "$bgfile" #with borders
             ;;
@@ -35,7 +38,7 @@ fullOrBordered() {
             feh --bg-scale "$unbkbgfile" #without borders
             ;;
         *)
-            echo "usage {full|mini|none}"
+            echo "usage {float|full|mini|none}"
             exit 1
             ;;
     esac
