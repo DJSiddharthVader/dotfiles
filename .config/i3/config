@@ -21,6 +21,12 @@ for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 8
 exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
+# tmux scratchpad floating terminal 2
+for_window [instance="drop2"] resize set 625 400
+for_window [instance="drop2"] floating enable
+for_window [instance="drop2"] move scratchpad
+for_window [instance="drop2"] border pixel 8
+exec $term -n drop2
 # For mpc:
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
 for_window [instance="music"] resize set 600 600
@@ -57,7 +63,7 @@ exec --no-startup-id pulseaudio --start
 #Composite manager:
 exec --no-startup-id compton --config ~/.config/compton.conf
 #Launch Polybar where appropriate:
-exec_always --no-startup-id ~/.scripts/polybar_launch.sh full
+exec_always --no-startup-id ~/.scripts/bar_manager.sh full
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
@@ -94,7 +100,7 @@ bindsym $mod+e		    split h
 bindsym $mod+Shift+e	split v
 
 bindsym $mod+r          exec rofi -show run
-bindsym $mod+Shift+r    exec $term -e wal -R -e -n -q;ranger
+bindsym $mod+Shift+r    exec $term -e ranger ~/Pictures/wallpapers
 
 bindsym $mod+t          move workspace to output right
 bindsym $mod+Shift+t	gaps inner current set 15; gaps outer current set 15
@@ -141,8 +147,8 @@ bindsym $mod+Shift+k	move up 30
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l	move right 30
 
-bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/togglebar.sh ftoggle
-bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/togglebar.sh rtoggle
+bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh ftoggle
+bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh rtoggle
 
 bindsym $mod+x			exec --no-startup-id ~/.scripts/lock.sh
 #bindsym $mod+Shift+x    exec
@@ -222,7 +228,6 @@ bindsym $mod+Shift+7	move container to workspace $ws7
 bindsym $mod+Shift+8	move container to workspace $ws8
 bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
-
 
 # #---Function Buttons---# #
 #bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
