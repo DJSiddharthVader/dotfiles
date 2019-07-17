@@ -1,52 +1,74 @@
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 argglobal
-vnoremap <buffer> <silent> \rd :call RSetWD()
+nnoremap <buffer> <silent> \rf :call StartR("R")
+nnoremap <buffer> <silent> \rc :call StartR("custom")
+nnoremap <buffer> <silent> \rq :call RQuit('nosave')
+nnoremap <buffer> <silent> \rw :call RQuit('save')
+nnoremap <buffer> <silent> \xx :call RComment("normal")
+nnoremap <buffer> <silent> \xc :call RSimpleCommentLine("normal", "c")
+nnoremap <buffer> <silent> \xu :call RSimpleCommentLine("normal", "u")
+nnoremap <buffer> <silent> \; :call MovePosRCodeComment("normal")
+nnoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
+nnoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
+nnoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
+nnoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
+nnoremap <buffer> <silent> \o :call SendLineToRAndInsertOutput()0
+nnoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
+nnoremap <buffer> <silent> \rr :call RClearConsole()
+nnoremap <buffer> <silent> \rm :call RClearAll()
+nnoremap <buffer> <silent> \rp :call RAction("print")
+nnoremap <buffer> <silent> \rn :call RAction("nvim.names")
+nnoremap <buffer> <silent> \rt :call RAction("str")
+nnoremap <buffer> <silent> \rv :call RAction("viewdf")
+nnoremap <buffer> <silent> \td :call RAction("dputtab")
+nnoremap <buffer> <silent> \tp :call RAction("printtab")
+nnoremap <buffer> <silent> \ra :call RAction("args")
+nnoremap <buffer> <silent> \re :call RAction("example")
+nnoremap <buffer> <silent> \rh :call RAction("help")
+nnoremap <buffer> <silent> \rs :call RAction("summary")
+nnoremap <buffer> <silent> \rg :call RAction("plot")
+nnoremap <buffer> <silent> \rb :call RAction("plotsumm")
+nnoremap <buffer> <silent> \ro :call RObjBrowser()
+nnoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
+nnoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
+nnoremap <buffer> <silent> \kr :call RMakeRmd("default")
+nnoremap <buffer> <silent> \kp :call RMakeRmd("pdf_document")
+nnoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
+nnoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
+nnoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
+nnoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
 nnoremap <buffer> <silent> \rd :call RSetWD()
+vnoremap <buffer> <silent> \rd :call RSetWD()
 onoremap <buffer> <silent> \rd :call RSetWD()
 vnoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
-nnoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
 onoremap <buffer> <silent> \ko :call RMakeRmd("odt_document")
 vnoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
-nnoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
 onoremap <buffer> <silent> \kh :call RMakeRmd("html_document")
 vnoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
-nnoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
 onoremap <buffer> <silent> \kw :call RMakeRmd("word_document")
 vnoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
-nnoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
 onoremap <buffer> <silent> \kl :call RMakeRmd("beamer_presentation")
 vnoremap <buffer> <silent> \kp :call RMakeRmd("pdf_document")
-nnoremap <buffer> <silent> \kp :call RMakeRmd("pdf_document")
 onoremap <buffer> <silent> \kp :call RMakeRmd("pdf_document")
 vnoremap <buffer> <silent> \kr :call RMakeRmd("default")
-nnoremap <buffer> <silent> \kr :call RMakeRmd("default")
 onoremap <buffer> <silent> \kr :call RMakeRmd("default")
 vnoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
-nnoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
 onoremap <buffer> <silent> \r- :call RBrOpenCloseLs(0)
 vnoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
-nnoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
 onoremap <buffer> <silent> \r= :call RBrOpenCloseLs(1)
 vnoremap <buffer> <silent> \ro :call RObjBrowser()
-nnoremap <buffer> <silent> \ro :call RObjBrowser()
 onoremap <buffer> <silent> \ro :call RObjBrowser()
 vnoremap <buffer> <silent> \rb :call RAction("plotsumm", "v")
 vnoremap <buffer> <silent> \rg :call RAction("plot", "v")
 vnoremap <buffer> <silent> \rs :call RAction("summary", "v")
-nnoremap <buffer> <silent> \rb :call RAction("plotsumm")
 onoremap <buffer> <silent> \rb :call RAction("plotsumm")
-nnoremap <buffer> <silent> \rg :call RAction("plot")
 onoremap <buffer> <silent> \rg :call RAction("plot")
-nnoremap <buffer> <silent> \rs :call RAction("summary")
 onoremap <buffer> <silent> \rs :call RAction("summary")
 vnoremap <buffer> <silent> \rh :call RAction("help")
-nnoremap <buffer> <silent> \rh :call RAction("help")
 onoremap <buffer> <silent> \rh :call RAction("help")
 vnoremap <buffer> <silent> \re :call RAction("example")
-nnoremap <buffer> <silent> \re :call RAction("example")
 onoremap <buffer> <silent> \re :call RAction("example")
 vnoremap <buffer> <silent> \ra :call RAction("args")
-nnoremap <buffer> <silent> \ra :call RAction("args")
 onoremap <buffer> <silent> \ra :call RAction("args")
 vnoremap <buffer> <silent> \tp :call RAction("printtab", "v")
 vnoremap <buffer> <silent> \td :call RAction("dputtab", "v")
@@ -54,33 +76,23 @@ vnoremap <buffer> <silent> \rv :call RAction("viewdf", "v")
 vnoremap <buffer> <silent> \rt :call RAction("str", "v")
 vnoremap <buffer> <silent> \rn :call RAction("nvim.names", "v")
 vnoremap <buffer> <silent> \rp :call RAction("print", "v")
-nnoremap <buffer> <silent> \tp :call RAction("printtab")
 onoremap <buffer> <silent> \tp :call RAction("printtab")
-nnoremap <buffer> <silent> \td :call RAction("dputtab")
 onoremap <buffer> <silent> \td :call RAction("dputtab")
-nnoremap <buffer> <silent> \rv :call RAction("viewdf")
 onoremap <buffer> <silent> \rv :call RAction("viewdf")
-nnoremap <buffer> <silent> \rt :call RAction("str")
 onoremap <buffer> <silent> \rt :call RAction("str")
-nnoremap <buffer> <silent> \rn :call RAction("nvim.names")
 onoremap <buffer> <silent> \rn :call RAction("nvim.names")
-nnoremap <buffer> <silent> \rp :call RAction("print")
 onoremap <buffer> <silent> \rp :call RAction("print")
 vnoremap <buffer> <silent> \rm :call RClearAll()
-nnoremap <buffer> <silent> \rm :call RClearAll()
 onoremap <buffer> <silent> \rm :call RClearAll()
 vnoremap <buffer> <silent> \rr :call RClearConsole()
-nnoremap <buffer> <silent> \rr :call RClearConsole()
 onoremap <buffer> <silent> \rr :call RClearConsole()
 vnoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
-nnoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
 onoremap <buffer> <silent> \rl :call g:SendCmdToR("ls()")
 let s:cpo_save=&cpo
 set cpo&vim
 noremap <buffer> <silent> \r<Right> :call RSendPartOfLine("right", 0)
 noremap <buffer> <silent> \r<Left> :call RSendPartOfLine("left", 0)
 vnoremap <buffer> <silent> \o :call RWarningMsg("This command does not work over a selection of lines.")
-nnoremap <buffer> <silent> \o :call SendLineToRAndInsertOutput()0
 onoremap <buffer> <silent> \o :call SendLineToRAndInsertOutput()0
 noremap <buffer> <silent> \d :call SendLineToR("down")0
 noremap <buffer> <silent> \l :call SendLineToR("stay")
@@ -94,16 +106,12 @@ vnoremap <buffer> <silent> \sd :call SendSelectionToR("silent", "down")
 vnoremap <buffer> <silent> \se :call SendSelectionToR("echo", "stay")
 vnoremap <buffer> <silent> \ss :call SendSelectionToR("silent", "stay")
 vnoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
-nnoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
 onoremap <buffer> <silent> \fa :call SendFunctionToR("echo", "down")
 vnoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
-nnoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
 onoremap <buffer> <silent> \fd :call SendFunctionToR("silent", "down")
 vnoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
-nnoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
 onoremap <buffer> <silent> \fe :call SendFunctionToR("echo", "stay")
 vnoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
-nnoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
 onoremap <buffer> <silent> \ff :call SendFunctionToR("silent", "stay")
 noremap <buffer> <silent> \ba :call SendMBlockToR("echo", "down")
 noremap <buffer> <silent> \bd :call SendMBlockToR("silent", "down")
@@ -114,28 +122,20 @@ noremap <buffer> <silent> \ao :call ShowRout()
 noremap <buffer> <silent> \ae :call SendFileToR("echo")
 noremap <buffer> <silent> \aa :call SendFileToR("silent")
 vnoremap <buffer> <silent> \; :call MovePosRCodeComment("selection")
-nnoremap <buffer> <silent> \; :call MovePosRCodeComment("normal")
 onoremap <buffer> <silent> \; :call MovePosRCodeComment("normal")
 vnoremap <buffer> <silent> \xu :call RSimpleCommentLine("selection", "u")
-nnoremap <buffer> <silent> \xu :call RSimpleCommentLine("normal", "u")
 onoremap <buffer> <silent> \xu :call RSimpleCommentLine("normal", "u")
 vnoremap <buffer> <silent> \xc :call RSimpleCommentLine("selection", "c")
-nnoremap <buffer> <silent> \xc :call RSimpleCommentLine("normal", "c")
 onoremap <buffer> <silent> \xc :call RSimpleCommentLine("normal", "c")
 vnoremap <buffer> <silent> \xx :call RComment("selection")
-nnoremap <buffer> <silent> \xx :call RComment("normal")
 onoremap <buffer> <silent> \xx :call RComment("normal")
 vnoremap <buffer> <silent> \rw :call RQuit('save')
-nnoremap <buffer> <silent> \rw :call RQuit('save')
 onoremap <buffer> <silent> \rw :call RQuit('save')
 vnoremap <buffer> <silent> \rq :call RQuit('nosave')
-nnoremap <buffer> <silent> \rq :call RQuit('nosave')
 onoremap <buffer> <silent> \rq :call RQuit('nosave')
 vnoremap <buffer> <silent> \rc :call StartR("custom")
-nnoremap <buffer> <silent> \rc :call StartR("custom")
 onoremap <buffer> <silent> \rc :call StartR("custom")
 vnoremap <buffer> <silent> \rf :call StartR("R")
-nnoremap <buffer> <silent> \rf :call StartR("R")
 onoremap <buffer> <silent> \rf :call StartR("R")
 inoremap <buffer> <silent>  =RCompleteArgs()
 inoremap <buffer> <silent> _ :call ReplaceUnderS()a
@@ -254,22 +254,26 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-4,34fold
-35,60fold
-62,77fold
-78,96fold
-98,100fold
-101,106fold
-107,120fold
-121,125fold
-126,147fold
-155,237fold
-let s:l = 4 - ((3 * winheight(0) + 16) / 32)
+8,38fold
+39,64fold
+66,81fold
+82,100fold
+102,104fold
+105,132fold
+133,135fold
+136,138fold
+139,149fold
+150,152fold
+153,181fold
+182,200fold
+201,252fold
+276,358fold
+let s:l = 1 - ((0 * winheight(0) + 32) / 64)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-4
-normal! 01|
+1
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

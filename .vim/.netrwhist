@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/home/sidreed/placenta-cancer'
 let g:netrw_dirhist_2='/home/sidreed/placenta-cancer/data'
+let g:netrw_dirhist_3='/home/sidreed/.scripts'
+let g:netrw_dirhist_4='/home/sidreed/dotfiles/.config/polybar'
