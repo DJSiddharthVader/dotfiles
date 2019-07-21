@@ -4,4 +4,4 @@ pulseaudio --kill
 pulseaudio --kill
 pulseaudio --kill
 pulseaudio --start
-~/.scripts/togglebar.sh auto
+~/.scripts/bar_manager.sh auto

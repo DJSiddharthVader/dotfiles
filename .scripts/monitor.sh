@@ -12,7 +12,6 @@ connectToMonitor() {
         xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
     fi
 }
-
 disconnectMonitor() {
     monitor=`xrandr | grep ' connected' | tail -1 | cut -d' ' -f1`
     xrandr --output "$monitor" --off
@@ -22,7 +21,6 @@ disconnectMonitor() {
         pactl set-card-profile 0 output:analog-stereo
     fi
 }
-
 function main() {
     case "$1" in
         on)
@@ -40,7 +38,7 @@ function main() {
             exit 1
             ;;
     esac
-    ~/.scripts/togglebar.sh auto
+    ~/.scripts/bar_manager.sh auto
 }
 
 main "$1"
