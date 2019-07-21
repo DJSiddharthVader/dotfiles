@@ -1,18 +1,40 @@
 #!/bin/bash
 
 # Take /tmp/screen.pnga screenshot:
-
-scrot ~/.config/i3/screen.png
-
-#pixelate by downscaling and upscaling
-convert -scale 10% ~/.config/i3/screen.png ~/.config/i3/screen.png
-convert -scale 1000% ~/.config/i3/screen.png ~/.config/i3/screen.png
-# Add the lock to the blurred image:
-[[ -f ~/.scripts/lock.png ]] && convert ~/.config/i3/screen.png ~/.scripts/lock.png -geometry +605+305 -composite -matte ~/.config/i3/screen.png
-
-#Pause music (mocp and mpd):
-mpc pause
-
-#Lock
-i3lock -e -f 0 -i ~/.config/i3/screen.png
+#colors
+insidecolor=00000000
+ringcolor=ffffffff
+keyhlcolor=d23c3dff
+bshlcolor=d23c3dff
+separatorcolor=00000000
+insidevercolor=00000000
+insidewrongcolor=d23c3dff
+ringvercolor=ffffffff
+ringwrongcolor=ffffffff
+verifcolor=ffffffff
+timecolor=ffffffff
+datecolor=ffffffff
+loginbox=00000066
+font='Terminus:style=Bold'
+locktext='Type password to unlock...'
+screensaverpath="/tmp/screen.png"
+scrot "$screensaverpath" && convert "$screensaverpath" -scale 20% convert -scale 500% "$screensaverpath"
+#lock command
+/home/sidreed/apps/i3lock-color/build/i3lock \
+    -i "$screensaverpath" \
+    --timepos='x+110:h-70' \
+    --datepos='x+43:h-45' \
+    --clock --date-align 1 --datestr "$locktext" \
+    --insidecolor=$insidecolor --ringcolor=$ringcolor --line-uses-inside \
+    --keyhlcolor=$keyhlcolor --bshlcolor=$bshlcolor \
+    --separatorcolor=$separatorcolor \
+    --insidevercolor=$insidevercolor --insidewrongcolor=$insidewrongcolor \
+    --ringvercolor=$ringvercolor --ringwrongcolor=$ringwrongcolor \
+    --indpos='x+280:h-70' \
+    --radius=20 --ring-width=4 --veriftext='' --wrongtext='' \
+    --verifcolor="$verifcolor" --timecolor="$timecolor" \
+    --datecolor="$datecolor" \
+    --time-font="$font" --date-font="$font" --layout-font="$font" \
+    --verif-font="$font" --wrong-font="$font" \
+    --noinputtext='' --force-clock
 
