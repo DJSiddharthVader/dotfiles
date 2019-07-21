@@ -130,7 +130,7 @@ bindsym $mod+d          exec ~/dotfiles/.scripts/monitor.sh 'on'
 bindsym $mod+Shift+d    exec ~/dotfiles/.scripts/monitor.sh 'off'
 
 bindsym $mod+f			fullscreen toggle
-bindsym $mod+Shift+f    exec ~/dotfiles/.scripts/wallpaper.sh 'font'
+bindsym $mod+Shift+f    exec ~/dotfiles/.scripts/wallpaper.sh 'font' 'next'
 
 bindsym $mod+g			workspace prev
 bindsym $mod+Shift+g	exec --no-startup-id lutris; workspace $ws7
@@ -159,8 +159,8 @@ bindsym $mod+Shift+c    exec $term -e vi ~/dotfiles/.config/i3/config
 bindsym $mod+v			exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 bindsym $mod+Shift+v    exec $term -e cava
 
-bindsym $mod+b		    exec ~/dotfiles/.scripts/wallpaper.sh 'back'
-bindsym $mod+Shift+b    exec ~/dotfiles/.scripts/wallpaper.sh 'both'
+bindsym $mod+b		    exec ~/dotfiles/.scripts/wallpaper.sh 'back' 'next'
+bindsym $mod+Shift+b    exec ~/dotfiles/.scripts/wallpaper.sh 'back' 'prev'
 
 bindsym $mod+n          focus output left
 bindsym $mod+Shift+n    focus output right
