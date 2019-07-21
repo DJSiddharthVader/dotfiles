@@ -54,6 +54,7 @@ alias ct='conda activate thesis'
 alias umnt="umount /media/1tbdrive/"
 alias cpdots='rsync -avzP ~/dotfiles/'
 alias ip="hostname -I | cut -d' ' -f1"
+alias saa='~/.scripts/set_album_art.sh'
 alias jpy='~/anaconda3/bin/jupyter-lab'
 alias kodos='ssh -x sreed@sshgw.uhnresearch.ca'
 alias slack='/home/sidreed/apps/sclack/app.py'
