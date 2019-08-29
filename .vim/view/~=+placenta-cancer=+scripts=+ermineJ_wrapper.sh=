@@ -17,11 +17,11 @@ setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
+setlocal commentstring=#%s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
 setlocal conceallevel=0
-setlocal completefunc=
+setlocal completefunc=youcompleteme#CompleteFunc
 setlocal nocopyindent
 setlocal cryptmethod=
 setlocal nocursorbind
@@ -33,8 +33,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != ''
-setlocal filetype=
+if &filetype != 'sh'
+setlocal filetype=sh
 endif
 setlocal fixendofline
 setlocal foldcolumn=1
@@ -56,8 +56,8 @@ setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal indentexpr=GetShIndent()
+setlocal indentkeys=0{,0},!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -86,7 +86,7 @@ setlocal noscrollbind
 setlocal shiftwidth=4
 setlocal noshortname
 setlocal signcolumn=auto
-setlocal smartindent
+setlocal nosmartindent
 setlocal softtabstop=4
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
@@ -96,8 +96,8 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != ''
-setlocal syntax=
+if &syntax != 'sh'
+setlocal syntax=sh
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -113,97 +113,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-7,11fold
-12,15fold
-16,21fold
-23,37fold
-38,43fold
-44,46fold
-47,55fold
-22,56fold
-58,71fold
-72,76fold
-77,79fold
-80,87fold
-57,88fold
-90,96fold
-97,104fold
-105,110fold
-111,118fold
-119,135fold
-89,136fold
-138,144fold
-145,152fold
-153,159fold
-160,165fold
-166,172fold
-173,178fold
-179,184fold
-137,185fold
-187,212fold
-213,219fold
-220,224fold
-225,240fold
-241,258fold
-259,287fold
-288,304fold
-305,346fold
-347,357fold
-358,382fold
-383,390fold
-391,409fold
-410,420fold
-421,424fold
-186,425fold
-427,432fold
-433,438fold
-439,444fold
-445,450fold
-451,456fold
-457,462fold
-463,468fold
-469,474fold
-475,480fold
-481,486fold
-487,492fold
-493,498fold
-499,504fold
-505,510fold
-511,516fold
-517,522fold
-523,528fold
-529,534fold
-426,535fold
-22
-normal! zo
-22
-normal! zc
-57
-normal! zo
-57
-normal! zc
-89
-normal! zo
-89
-normal! zc
-137
-normal! zo
-137
-normal! zc
-186
-normal! zo
-186
-normal! zc
-426
-normal! zo
-426
-normal! zc
-let s:l = 137 - ((134 * winheight(0) + 11) / 23)
+let s:l = 1 - ((0 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-137
-normal! 01|
+1
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

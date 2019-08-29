@@ -95,13 +95,6 @@ xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
 nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
-nnoremap <buffer> <SNR>88_(v) v
-nnoremap <buffer> <SNR>88_(V) V
-xnoremap <buffer> <silent> <SNR>88_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>88_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
 nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
 vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
@@ -251,6 +244,7 @@ inoremap <buffer> <silent> <expr> `= vimtex#imaps#wrap_math("`=", '\equiv')
 inoremap <buffer> <silent> <expr> `8 vimtex#imaps#wrap_math("`8", '\infty')
 inoremap <buffer> <silent> <expr> `6 vimtex#imaps#wrap_math("`6", '\partial')
 inoremap <buffer> <silent> <expr> `0 vimtex#imaps#wrap_math("`0", '\emptyset')
+inoremap <buffer> <silent> `` `
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
@@ -366,12 +360,68 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 21) / 43)
+3,8fold
+9,14fold
+15,25fold
+46,46fold
+47,47fold
+48,48fold
+32,55fold
+26,55fold
+56,65fold
+67,70fold
+72,87fold
+88,105fold
+106,106fold
+107,107fold
+108,108fold
+109,109fold
+110,110fold
+107,110fold
+111,111fold
+111,119fold
+121,132fold
+133,143fold
+144,163fold
+164,166fold
+167,169fold
+171,191fold
+192,204fold
+205,218fold
+219,227fold
+228,233fold
+234,236fold
+237,239fold
+240,246fold
+247,254fold
+255,283fold
+284,286fold
+289,316fold
+26
+normal! zo
+32
+normal! zo
+32
+normal! zc
+26
+normal! zc
+107
+normal! zo
+107
+normal! zc
+111
+normal! zo
+111
+normal! zc
+205
+normal! zo
+let s:l = 212 - ((146 * winheight(0) + 32) / 65)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+212
+normal! 0130|
+lcd ~/placenta-cancer/presentations/lab_meeting_07-08-2019
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
