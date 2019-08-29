@@ -1,5 +1,22 @@
 # vim: filetype=i3
-# #---Basic Definitions---# #
+##Set i3 to use pywal colors
+## Set colors from Xresources
+## Change 'color7' and 'color2' to whatever colors you want i3 to use
+## from the generated scheme.
+## NOTE: The '#f0f0f0' in the lines below is the color i3 will use if
+## it fails to get colors from Xresources.
+#set_from_resource $fg i3wm.color3 #f0f0f0
+#set_from_resource $bg i3wm.color2 #f0f0f0
+#
+## class                 border  backgr. text indicator child_border
+#client.focused          $bg     $bg     $fg  $bg       $bg
+#client.focused_inactive $bg     $bg     $fg  $bg       $bg
+#client.unfocused        $bg     $bg     $fg  $bg       $bg
+#client.urgent           $bg     $bg     $fg  $bg       $bg
+#client.placeholder      $bg     $bg     $fg  $bg       $bg
+#
+#client.background       $bg
+#
 #Needed for i3-gaps
 for_window [ title="^pdfpc - present" ] border none floating enable
 for_window [class="^.*"] border pixel 6
@@ -62,21 +79,21 @@ exec --no-startup-id pulseaudio --kill
 exec --no-startup-id pulseaudio --start
 #Composite manager:
 exec --no-startup-id compton --config ~/.config/compton.conf
-#Launch Polybar where appropriate:
-exec_always --no-startup-id ~/.scripts/bar_manager.sh full
+#Launch Polybar and set wallpaper
+exec_always --no-startup-id ~/dotfiles/.scripts/wallpaper.sh both stay
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
 #Network Manager applet
 exec --no-startup-id nm-applet
 #disable touchpad when typing
 exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
-#set wallpaper on startup
-exec --no-startup-id ~/.fehbg
 #kill refular notification daemon so dunst runs
 exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id /home/sidreed/dotfiles/.scripts/lowbattery.sh &
+#set wallpaper on startup
+#exec --no-startup-id ~/.fehbg
 #Torrent daemon:
 #exec --no-startup-id transmission-daemon
 #Mount other drives:
@@ -96,8 +113,8 @@ bindsym $mod+Shift+q    exec ~/dotfiles/.scripts/reset-pulseaudio.sh
 bindsym $mod+w		    exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w	exec --no-startup-id firefox --private-window
 
-bindsym $mod+e		    split h
-bindsym $mod+Shift+e	split v
+bindsym $mod+e		    exec ~/dotfiles/.scripts/wallpaper.sh 'back' 'next'
+bindsym $mod+Shift+e	exec ~/dotfiles/.scripts/wallpaper.sh 'back' 'prev'
 
 bindsym $mod+r          exec rofi -show run
 bindsym $mod+Shift+r    exec $term -e ranger ~/Pictures/wallpapers
@@ -130,10 +147,10 @@ bindsym $mod+d          exec ~/dotfiles/.scripts/monitor.sh 'on'
 bindsym $mod+Shift+d    exec ~/dotfiles/.scripts/monitor.sh 'off'
 
 bindsym $mod+f			fullscreen toggle
-bindsym $mod+Shift+f    exec ~/dotfiles/.scripts/wallpaper.sh 'font' 'next'
+bindsym $mod+Shift+f    split toggle
 
-bindsym $mod+g			workspace prev
-bindsym $mod+Shift+g	exec --no-startup-id lutris; workspace $ws7
+bindsym $mod+g			workspace next
+bindsym $mod+Shift+g    workspace prev
 
 bindsym $mod+h			focus left
 bindsym $mod+Shift+h	move left 30
@@ -147,20 +164,20 @@ bindsym $mod+Shift+k	move up 30
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l	move right 30
 
-bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh ftoggle
-bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh rtoggle
+bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh 'next'
+bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh 'prev'
 
-bindsym $mod+x			exec --no-startup-id ~/.scripts/lock.sh
-#bindsym $mod+Shift+x    exec
+bindsym $mod+x          exec --no-startup-id ~/.scripts/lock.sh
+bindsym $mod+Shift+x    exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
-bindsym $mod+c			restart
+bindsym $mod+c			exec ~/dotfiles/.scripts/wallpaper.sh 'both' 'stay'
 bindsym $mod+Shift+c    exec $term -e vi ~/dotfiles/.config/i3/config
 
 bindsym $mod+v			exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 bindsym $mod+Shift+v    exec $term -e cava
 
-bindsym $mod+b		    exec ~/dotfiles/.scripts/wallpaper.sh 'back' 'next'
-bindsym $mod+Shift+b    exec ~/dotfiles/.scripts/wallpaper.sh 'back' 'prev'
+bindsym $mod+b		    exec ~/dotfiles/.scripts/wallpaper.sh 'both' 'next'
+bindsym $mod+Shift+b    exec ~/dotfiles/.scripts/wallpaper.sh 'both' 'prev'
 
 bindsym $mod+n          focus output left
 bindsym $mod+Shift+n    focus output right
