@@ -1,14 +1,15 @@
 #!/bin/bash
 
 connectToMonitor() {
-    monitor=`xrandr | grep ' connected' | tail -1 | cut -d' ' -f1`
-    resolution=`xrandr | grep -v 'primary' | pcregrep -M ' connected.*\n[0-9x ]' | grep -o '[0-9]\{3,4\}x[0-9]\{3,4\}'`
-    ishdmi=`xrandr | grep ' connected' | tail -1`
-    echo "$monitor $resolution $ishdmi"
+    monitor="$(xrandr | grep ' connected' | tail -1 | cut -d' ' -f1)"
+    ishdmi="$(xrandr | grep ' connected' | tail -1)"
+    echo "$monitor $resolution"
     if [[ $ishdmi =~ 'HDMI' ]]; then
+    resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*')"
         xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
-        pactl set-card-profile 0 output:hdmi-stereo
+        #pactl set-card-profile 0 output:hdmi-stereo
     else
+        resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | head -1 | grep -ao '[0-9]*x[0-9]*')"
         xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
     fi
 }
@@ -38,7 +39,7 @@ function main() {
             exit 1
             ;;
     esac
-    ~/.scripts/bar_manager.sh auto
+    ~/dotfiles/.scripts/bar_manager.sh auto
 }
 
 main "$1"
