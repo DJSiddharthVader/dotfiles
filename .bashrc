@@ -92,7 +92,7 @@ fi
 
 #Get Prompt Info
 [[ -f $HOME/.dircolors ]] && eval $(dircolors -b $HOME/.dircolors)
-source $HOME/.bash_prompt.sh
+source $HOME/dotfiles/.scripts/bash_prompt.sh
 
 ## BASH Options {{{
 
@@ -553,6 +553,9 @@ server() {
 # ( ) # Hide shell job control messages.
 export PATH="${PATH}:${HOME}/.local/bin/"
 (cat ~/.cache/wal/sequences &)
+#(cat $HOME/.config/wpg/sequences &)
+#export QT_QPA_PLATFORMTHEME=gtk2
+
 
 #for colorls
 source $(dirname $(gem which colorls))/tab_complete.sh
