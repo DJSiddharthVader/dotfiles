@@ -1,6 +1,6 @@
 #!/bin/bash
-artdir='/home/sidreed/Pictures/albumart'
-musicdir='/home/sidreed/Music/songs/everything'
+artdir="$HOME/Pictures/albumart"
+musicdir="$HOME/Music/songs/everything"
 
 ##TODO:
 # - fetch album from album/artist name for song -> download -> name correctly
