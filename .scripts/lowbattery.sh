@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-
 while true; do
     discharging=`acpi -b | grep -o Discharging`
     if [[ "$discharging" = "Discharging" ]]; then
