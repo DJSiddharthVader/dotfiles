@@ -1,9 +1,0 @@
-[Added Associations]
-text/plain=gvim.desktop;
-application/pdf=qpdfview.desktop;
-application/vnd.debian.binary-package=gdebi.desktop;
-application/x-bittorrent=deluge.desktop;
-
-[Default Applications]
-application/pdf=qpdfview.desktop
-application/vnd.debian.binary-package=gdebi.desktop
