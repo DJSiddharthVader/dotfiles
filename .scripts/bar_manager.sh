@@ -1,25 +1,27 @@
 #!/bin/bash
 
-togglefile="$HOME/dotfiles/.bartoggle"
+togglefile="$HOME/dotfiles/.varfiles/bartoggle"
 declare -A modes_idxs
 modes_idxs=([float]=1 [full]=2 [mini]=3 [none]=4)
 modes_fwd=('padding' 'float' 'full' 'mini' 'none')
 modes_rev=('padding' 'mini' 'none' 'float' 'full')
+bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
+unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
 function launchBar() {
     mode="$1"
     killall -q polybar # Terminate already running bar instances
     for m in $(xrandr | grep ' connected' | cut -d' ' -f1); do
         case "$mode" in
             float)
-                MONITOR=$m polybar lapf -q &
-                MONITOR=$m polybar schedulef -q &
+                MONITOR=$m polybar lapf &
+                MONITOR=$m polybar schedulef &
                 ;;
             full)
-                MONITOR=$m polybar lap -q &
-                MONITOR=$m polybar schedule -q &
+                MONITOR=$m polybar lap &
+                MONITOR=$m polybar schedule &
                 ;;
             mini)
-                MONITOR=$m polybar minimal -q &
+                MONITOR=$m polybar minimal &
                 ;;
             none)
                 sleep 1
@@ -34,16 +36,16 @@ function launchBar() {
 function setWallPaper() {
     case "$1" in
         float)
-            feh --bg-scale /home/sidreed/dotfiles/.config/i3/unbordered_background.png
+            feh --bg-scale "$unbgfile"
             ;;
         full)
-            feh --bg-scale /home/sidreed/dotfiles/.config/i3/bordered_background.png
+            feh --bg-scale "$bgfile"
             ;;
         mini)
-            feh --bg-scale /home/sidreed/dotfiles/.config/i3/unbordered_background.png
+            feh --bg-scale "$unbgfile"
             ;;
         none)
-            feh --bg-scale /home/sidreed/dotfiles/.config/i3/unbordered_background.png
+            feh --bg-scale "$unbgfile"
             ;;
         *)
             echo "usage $0 {float|full|mini|none}"
@@ -52,16 +54,12 @@ function setWallPaper() {
     esac
 }
 function barWrapper() {
-    if [ $# -eq 0 ]; then #no args given
-        option='auto'
-    else
-        option="$1"
-    fi
+    option="$1"
     case "$option" in
-        ftoggle)
+        next)
             mode="$(head -2 $togglefile | tail -1)"
             ;;
-        rtoggle)
+        prev)
             mode="$(head -3 $togglefile | tail -1)"
             ;;
         auto)
@@ -80,7 +78,7 @@ function barWrapper() {
             mode="none"
             ;;
         *)
-            echo "Usage: $0 {ftoggle|rtoggle|auto|float|full||mini|none}"
+            echo "Usage: $0 {next|prev|auto|float|full||mini|none}"
             exit 1
             ;;
     esac
