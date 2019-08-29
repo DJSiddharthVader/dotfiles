@@ -1,12 +1,12 @@
 #!/bin/sh
 
-i3dir='/home/sidreed/dotfiles/.config/i3' #store bordered image
-bgfile="$i3dir"/bordered_background.png
-unbgfile="$i3dir"/unbordered_background.png
-picdir='/home/sidreed/Pictures/wallpapers' #dir with all wallpapers
-histfile='/home/sidreed/.scripts/.fehbg'
-idxfile='/home/sidreed/.scripts/.wallidx'
+bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
+unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
+picdir="$HOME/Pictures/wallpapers"
+histfile="$HOME/dotfiles/.varfiles/fehbg"
+idxfile="$HOME/dotfiles/.varfiles/wallidx"
 tmp='/tmp/histfile'
+bordercolor='Black'
 resolution='1366x768!' #resolution, ignore aspect ratio
 appendHist() {
     ls "$picdir" | shuf >> "$histfile"
@@ -20,7 +20,7 @@ updateImageIdx() {
     idx=$(cat "$idxfile")
     maxidx="$(wc -l "$histfile" | cut -d' ' -f1)"
     case "$mode" in
-        'expi')
+        'path')
             head -"$idx" "$histfile" >| "$tmp"
             echo "$(basename "$expimg")" >> "$tmp"
             remain="$(( $maxidx - $idx ))"
@@ -49,9 +49,8 @@ updateImageIdx() {
             echo "Usage: $0 {stay|path|next|prev} path/to/image (optional)"
             exit 1
     esac
-    echo $nidx >| "$idxfile"
-    echo $nidx
-
+    echo "$nidx" >| "$idxfile"
+    echo "$nidx"
 }
 idxToImage(){
     idx="$1"
@@ -61,12 +60,12 @@ idxToImage(){
 addBorderToImg() {
     image="$1"
     cp "$image" "$unbgfile"
-    convert "$unbgfile" -resize "$resolution" -bordercolor Black -border 0x40 "$bgfile" #add borderes to image
+    convert "$unbgfile" -resize "$resolution" -bordercolor "$bordercolor" -border 0x34 "$bgfile" #add borderes to image
 }
 setImg() {
     image="$1"
     addBorderToImg "$image"
-    barmode="$(head -1 ~/dotfiles/.bartoggle)" #get bar status
+    barmode="$(head -1 ~/dotfiles/.varfiles/bartoggle)" #get bar status
     case "$barmode" in
         float)
             feh --bg-scale "$unbgfile" #without borders
@@ -85,27 +84,35 @@ setImg() {
             exit 1
             ;;
     esac
-
 }
 main() {
     mode="$1"
     imode="$2"
-    image="$3"
-    cat "$idxfile"
+    image="$(basename "$3")"
+    if [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ]; then
+        resetHist
+    fi
     nidx=$(updateImageIdx "$imode" "$image")
-    echo "$nidx"
     image="$(idxToImage "$nidx")"
     echo "$image"
     case "$mode" in
         'font')
-            wal -e -n -i "$image" & #font only
+            #wpg -ns "$unbgfile"
+            wal -e -n -g -i "$image"  #font only
+            #wpg -A "$unbgfile"
+            ~/dotfiles/.scripts/bar_manager.sh auto >> /dev/null 2>&1
+            ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox #>> /dev/null 2>&1
             ;;
         'back')
             setImg "$image"
             ;;
         'both')
+            #wpg -ns "$image"
+            wal -e -n -g -i "$image"  #font only
+            #wpg -A "$image"
+            ~/dotfiles/.scripts/bar_manager.sh auto >> /dev/null 2>&1
             setImg "$image"
-            wal -e -n -i "$image" & #font only
+            ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox #>> /dev/null 2>&1
             ;;
         *)
             echo "Usage: $0 {font|back|both} {stay|path|next|prev} path/to/image (optional)"
@@ -113,5 +120,5 @@ main() {
     esac
 }
 
-#main back next
+#main mode position img
 main "$1" "$2" "$3"
