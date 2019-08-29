@@ -1,0 +1,17 @@
+NAME=wal
+BG={color1.strip}
+MENU_BG={color2.strip}
+SEL_BG={color3.strip}
+TXT_BG={color4.strip}
+BTN_BG={color5.strip}
+HDR_BTN_BG={color6.strip}
+FG={foreground.strip}
+MENU_FG={foreground.strip}
+SEL_FG={foreground.strip}
+TXT_FG={foreground.strip}
+BTN_FG={foreground.strip}
+HDR_BTN_FG={foreground.strip}
+GTK3_GENERATE_DARK=True
+ROUNDNESS=0
+SPACING=3
+GRADIENT=0.0
