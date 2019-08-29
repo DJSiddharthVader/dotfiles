@@ -4,4 +4,4 @@ pulseaudio --kill
 pulseaudio --kill
 pulseaudio --kill
 pulseaudio --start
-~/.scripts/bar_manager.sh auto
+~/dotfiles/.scripts/bar_manager.sh auto
