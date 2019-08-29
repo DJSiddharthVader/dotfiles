@@ -44,6 +44,7 @@ alias rspa='~/.scripts/reset-pulseaudio.sh'
 alias knit='~/.scripts/knitpdf.sh'
 
 #Shorten
+alias fuck='sudo !!'
 alias pdf='zathura'
 alias bat='acpi -b'
 alias plx='pdflatex'
@@ -56,9 +57,10 @@ alias cpdots='rsync -avzP ~/dotfiles/'
 alias ip="hostname -I | cut -d' ' -f1"
 alias saa='~/.scripts/set_album_art.sh'
 alias jpy='~/anaconda3/bin/jupyter-lab'
-alias kodos='ssh -x sreed@sshgw.uhnresearch.ca'
+alias cwp='~/.scripts/currentwallpaper.sh'
 alias slack='/home/sidreed/apps/sclack/app.py'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
+alias kodos='ssh -x sreed@sshgw.uhnresearch.ca'
 alias mtdr="sudo mount /dev/sdb1 /media/1tbdrive/"
 alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
