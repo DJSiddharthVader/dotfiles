@@ -44,7 +44,6 @@ alias rspa='~/.scripts/reset-pulseaudio.sh'
 alias knit='~/.scripts/knitpdf.sh'
 
 #Shorten
-alias fuck='sudo !!'
 alias pdf='zathura'
 alias bat='acpi -b'
 alias plx='pdflatex'
@@ -52,34 +51,36 @@ alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
 alias ct='conda activate thesis'
-alias umnt="umount /media/1tbdrive/"
+alias fuck='sudo $(history -p \!\!)'
+alias jpy='~/anaconda3/bin/jupyter-lab'
+alias mnt="sudo mount /dev/sdb1 /media/1tbdrive/"
+alias umt="sudo umount /media/1tbdrive/"
 alias cpdots='rsync -avzP ~/dotfiles/'
 alias ip="hostname -I | cut -d' ' -f1"
+alias bbf='feh --bg-scale ~/.config/i3/bordered_background.png'
+alias ubf='feh --bg-scale ~/.config/i3/unbordered_background.png'
 alias saa='~/.scripts/set_album_art.sh'
-alias jpy='~/anaconda3/bin/jupyter-lab'
 alias cwp='~/.scripts/currentwallpaper.sh'
-alias slack='/home/sidreed/apps/sclack/app.py'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
-alias kodos='ssh -x sreed@sshgw.uhnresearch.ca'
-alias mtdr="sudo mount /dev/sdb1 /media/1tbdrive/"
-alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias reset-wifi='sudo /etc/init.d/network-manager restart'
-alias uhn='ssh -t sreed@sshgw.uhnresearch.ca ssh mhoffman10'
-alias bbf='feh --bg-scale ~/.config/i3/bordered_background.png'
-alias ubf='feh --bg-scale ~/.config/i3/unbordered_background.png'
 alias mkst='cd ~/apps/st/; sudo make clean; make; sudo make install'
+alias torr='~/apps/torque/torque'
 alias thesis='tmuxinator start thesis -n thesis -p ~/dotfiles/.tmuxinator/thesis.yml'
+alias kodos='ssh -x sreed@sshgw.uhnresearch.ca'
+alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
+alias uhn='ssh -A -t sreed@sshgw.uhnresearch.ca ssh mordor'
 alias vpn='/opt/cisco/anyconnect/bin/vpn'
 alias vpnui='/opt/cisco/anyconnect/bin/vpnui'
+alias backup='tar -cvpzf /media/1tbdrive/homedir-14-10-2019.tar.gz --exclude=/home/sidreed/Videos --exclude=/home/sidreed/.cache --exclude=/home/sidreed/placenta-cancer --exclude=/home/sidreed/Music --exclude=/home/sidreed/Pictures'
 
 #Print
 alias cfh="grep -c '^>'"
 alias shln="ls -la | grep '\-\>'"
 alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
 alias bgal='feh -g 640x480 -d /home/sidreed/Pictures/wallpapers/*'
-alias t='python ~/apps/t/t.py --task-dir ~/dotfiles/tasks --list tasks'
-alias tl='python ~/apps/t/t.py --task-dir ~/dotfiles/tasks --list tasks | sort -k3'
+alias t='python ~/apps/t/t.py --task-dir ~/Personal/notes/tasks --list tasks'
+alias tl='python ~/apps/t/t.py --task-dir ~/Personal/notes/tasks --list tasks | sort -k3'
 alias neofetch='neofetch --ascii /home/sidreed/dotfiles/.config/neofetch/my_apreature.txt --config /home/sidreed/dotfiles/.config/neofetch/config'
 
