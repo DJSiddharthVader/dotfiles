@@ -89,34 +89,40 @@ main() {
     mode="$1"
     imode="$2"
     image="$(basename "$3")"
-    if [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ]; then
+    if [ "$mode" = 'rslist' ]; then
         resetHist
+        echo 1 >| "$idxfile"
+        exit 0
+    elif [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ]; then
+        resetHist
+        echo 1 >| "$idxfile"
     fi
     nidx=$(updateImageIdx "$imode" "$image")
+    echo "$nidx"
     image="$(idxToImage "$nidx")"
     echo "$image"
     case "$mode" in
         'font')
-            #wpg -ns "$unbgfile"
             wal -e -n -g -i "$image"  #font only
             #wpg -A "$unbgfile"
-            ~/dotfiles/.scripts/bar_manager.sh auto >> /dev/null 2>&1
-            ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox #>> /dev/null 2>&1
+            ~/dotfiles/.scripts/bar_manager.sh auto > /dev/null 2>&1
+            ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
+            timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
             ;;
         'back')
             setImg "$image"
             ;;
         'both')
-            #wpg -ns "$image"
-            wal -e -n -g -i "$image"  #font only
-            #wpg -A "$image"
-            ~/dotfiles/.scripts/bar_manager.sh auto >> /dev/null 2>&1
             setImg "$image"
-            ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox #>> /dev/null 2>&1
+            wal -e -n -g -i "$image"  #font only
+            ~/dotfiles/.scripts/bar_manager.sh auto >> /dev/null 2>&1
+            ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
+            timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
             ;;
         *)
             echo "Usage: $0 {font|back|both} {stay|path|next|prev} path/to/image (optional)"
             exit 1
+            ;;
     esac
 }
 
