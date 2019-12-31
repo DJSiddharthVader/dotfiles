@@ -1,5 +1,5 @@
 #!/bin/bash
-scdl --download-archive "$HOME/dotfiles/.varfiles/soundcloud_download_archive.txt" -c -l https://soundcloud.com/sid-reed-871359466/sets/likedsongs
+#scdl --download-archive "$HOME/dotfiles/.varfiles/soundcloud_download_archive.txt" -c -l https://soundcloud.com/sid-reed-871359466/sets/likedsongs
 youtube-dl  --audio-quality 0 \
             --audio-format mp3 \
             --prefer-ffmpeg \
