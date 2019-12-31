@@ -54,9 +54,12 @@ main() {
         mode)
             mode="$(changeMode "$mode")"
             ;;
-        current)
+        print)
             wallp="$(head -"$(cat $wallidfile)" "$wallpfile" | tail -1)"
             echo " $modeIcon$sep $wallp "
+            ;;
+        stay)
+            /home/sidreed/.scripts/wallpaper.sh "$mode" 'stay'
             ;;
         *)
             echo "Usage: $0 {prev|next|mode|current}"
