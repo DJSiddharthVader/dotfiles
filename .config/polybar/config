@@ -123,24 +123,24 @@ y-offset = 0
 wm-restack = i3
 border-left-size = 400
 border-right-size = 400
-background = ${colors.color3}
+background = ${colors.background}
 border-top-size = 6
 border-bottom-size = 0
 font-4 = Terminus:style=Regular:pixelsize=26;3
 tray-transparent = true
 
-modules-left = volume
+modules-left = volume sr3b
 modules-center = i3
-modules-right = battery
+modules-right = sl9b battery
 
 
 ;my modules
 [module/wall]
 type = custom/script
 interval = 3
-exec =  ~/dotfiles/.scripts/polywall.sh current
+exec =  ~/dotfiles/.scripts/polywall.sh print
 format-background = ${colors.color6}
-format = %{A1:~/dotfiles/.scripts/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.scripts/polywall.sh mode:}<label> %{A}%{A1:~/dotfiles/.scripts/polywall.sh next:} %{A}
+format = %{A1:~/dotfiles/.scripts/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.scripts/polywall.sh mode:}%{A1:~/dotfiles/.scripts/polywall.sh stay:} %{A}<label> %{A}%{A1:~/dotfiles/.scripts/polywall.sh next:} %{A}
 
 [module/uptime]
 type = custom/script
@@ -162,6 +162,7 @@ type = custom/script
 exec = ~/dotfiles/.scripts/cpumonitor.sh
 interval = 2
 format-background = ${colors.color11}
+tail=true
 
 [module/songnames]
 type = custom/script
@@ -448,30 +449,6 @@ content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color3}
 content-background = ${colors.color4}
-[module/sl4b]
-type = custom/text
-content = ${colors.leftpointsep}
-content-font = 5
-content-foreground = ${colors.color4}
-content-background = ${colors.background}
-[module/sr5b]
-type = custom/text
-content = ${colors.rightpointsep}
-content-font = 5
-content-foreground = ${colors.color5}
-content-background = ${colors.background}
-[module/sl5b]
-type = custom/text
-content = ${colors.leftpointsep}
-content-font = 5
-content-foreground = ${colors.color5}
-content-background = ${colors.background}
-[module/sr6b]
-type = custom/text
-content = ${colors.rightpointsep}
-content-font = 5
-content-foreground = ${colors.color6}
-content-background = ${colors.background}
 [module/sl79]
 type = custom/text
 content = ${colors.leftpointsep}
@@ -514,22 +491,52 @@ content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color14}
 content-background = ${colors.color15}
-[module/sl15b]
-type = custom/text
-content = ${colors.leftpointsep}
-content-font = 5
-content-foreground = ${colors.color15}
-content-background = ${colors.background}
 [module/sl158]
 type = custom/text
 content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color15}
 content-background = ${colors.color8}
+[module/sl4b]
+type = custom/text
+content = ${colors.leftpointsep}
+content-font = 5
+content-foreground = ${colors.color4}
+content-background = ${colors.background}
+[module/sl5b]
+type = custom/text
+content = ${colors.leftpointsep}
+content-font = 5
+content-foreground = ${colors.color5}
+content-background = ${colors.background}
 [module/sl9b]
 type = custom/text
 content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color9}
+content-background = ${colors.background}
+[module/sl15b]
+type = custom/text
+content = ${colors.leftpointsep}
+content-font = 5
+content-foreground = ${colors.color15}
+content-background = ${colors.background}
+[module/sr3b]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color3}
+content-background = ${colors.background}
+[module/sr6b]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color6}
+content-background = ${colors.background}
+[module/sr5b]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color5}
 content-background = ${colors.background}
 
