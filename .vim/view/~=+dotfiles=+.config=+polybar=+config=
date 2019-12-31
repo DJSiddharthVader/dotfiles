@@ -135,45 +135,46 @@ silent! normal! zE
 138,144fold
 145,152fold
 153,159fold
-160,165fold
-166,172fold
-173,178fold
-179,184fold
-137,185fold
-187,212fold
-213,219fold
-220,224fold
-225,240fold
-241,258fold
-259,287fold
-288,304fold
-305,346fold
-347,357fold
-358,382fold
-383,390fold
-391,409fold
-410,420fold
-421,424fold
-186,425fold
-427,432fold
-433,438fold
-439,444fold
-445,450fold
-451,456fold
-457,462fold
-463,468fold
-469,474fold
-475,480fold
-481,486fold
-487,492fold
-493,498fold
-499,504fold
-505,510fold
-511,516fold
-517,522fold
-523,528fold
-529,534fold
-426,535fold
+160,166fold
+167,173fold
+174,179fold
+180,185fold
+137,186fold
+188,213fold
+214,220fold
+221,225fold
+226,241fold
+242,259fold
+260,288fold
+289,305fold
+306,347fold
+348,358fold
+359,383fold
+384,391fold
+392,410fold
+411,421fold
+422,425fold
+187,426fold
+428,433fold
+434,439fold
+440,445fold
+446,451fold
+452,457fold
+458,463fold
+464,469fold
+470,475fold
+476,481fold
+482,487fold
+488,493fold
+494,499fold
+500,505fold
+506,511fold
+512,517fold
+518,523fold
+524,529fold
+530,535fold
+536,541fold
+427,542fold
 22
 normal! zo
 22
@@ -190,15 +191,15 @@ normal! zc
 normal! zo
 137
 normal! zc
-186
+187
 normal! zo
-186
+187
 normal! zc
-426
+427
 normal! zo
-426
+427
 normal! zc
-let s:l = 137 - ((134 * winheight(0) + 11) / 23)
+let s:l = 137 - ((131 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt

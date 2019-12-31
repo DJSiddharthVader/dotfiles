@@ -115,75 +115,47 @@ setlocal wrapmargin=0
 silent! normal! zE
 6,21fold
 22,32fold
-33,92fold
-93,96fold
-97,110fold
-111,128fold
-129,146fold
-147,163fold
-164,171fold
-173,186fold
-187,189fold
-190,193fold
-194,197fold
-198,200fold
-201,203fold
-204,206fold
-207,214fold
-215,219fold
-220,222fold
-172,223fold
-225,229fold
+33,89fold
+90,103fold
+104,118fold
+119,136fold
+137,153fold
+154,161fold
+163,176fold
+177,179fold
+180,183fold
+184,187fold
+188,190fold
+191,198fold
+199,201fold
+202,208fold
+209,222fold
+224,229fold
 230,248fold
-292,329fold
 249,332fold
 333,351fold
 352,359fold
 360,372fold
-374,379fold
-380,385fold
-386,407fold
-408,424fold
-425,434fold
-435,442fold
-443,452fold
-453,458fold
-373,458fold
-224,458fold
-172,458fold
-459,484fold
-485,527fold
-528,537fold
-538,550fold
-551,559fold
-560,562fold
-563,569fold
-570,587fold
-172
+373,378fold
+379,384fold
+385,406fold
+407,416fold
+417,423fold
+162,425fold
+426,453fold
+454,496fold
+497,505fold
+506,512fold
+513,531fold
+162
 normal! zo
-172
-normal! zo
-172
+162
 normal! zc
-224
-normal! zo
-249
-normal! zo
-249
-normal! zc
-373
-normal! zo
-373
-normal! zc
-224
-normal! zc
-172
-normal! zc
-let s:l = 555 - ((554 * winheight(0) + 21) / 43)
+let s:l = 104 - ((103 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-555
+104
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

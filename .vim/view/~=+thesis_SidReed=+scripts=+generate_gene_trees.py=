@@ -1,36 +1,36 @@
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 argglobal
-nnoremap <buffer> <silent> ,b :call pymode#breakpoint#operate(line('.'))
-vnoremap <buffer> <silent> ,r :PymodeRun
 nnoremap <buffer> <silent> ,r :PymodeRun
+vnoremap <buffer> <silent> ,r :PymodeRun
+nnoremap <buffer> <silent> ,b :call pymode#breakpoint#operate(line('.'))
 onoremap <buffer> C :call pymode#motion#select('^\s*class\s', 0)
-vnoremap <buffer> <silent> K :call pymode#doc#show(@*)
 nnoremap <buffer> <silent> K :call pymode#doc#find()
+vnoremap <buffer> <silent> K :call pymode#doc#show(@*)
 onoremap <buffer> M :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 0)
-onoremap <buffer> [C :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', 'b')
 nnoremap <buffer> [C :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', 'b')
+onoremap <buffer> [C :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', 'b')
 vnoremap <buffer> [M :call pymode#motion#vmove('^\s*\(async\s\+\)\=def\s', 'b')
 vnoremap <buffer> [[ :call pymode#motion#vmove('^\(class\|\%(async\s\+\)\=def\)\s', 'b')
 onoremap <buffer> [M :call pymode#motion#move('^\s*\(async\s\+\)\=def\s', 'b')
 onoremap <buffer> [[ :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', 'b')
 nnoremap <buffer> [M :call pymode#motion#move('^\s*\(async\s\+\)\=def\s', 'b')
 nnoremap <buffer> [[ :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', 'b')
-onoremap <buffer> ]C :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', '')
 nnoremap <buffer> ]C :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', '')
+onoremap <buffer> ]C :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', '')
 vnoremap <buffer> ]M :call pymode#motion#vmove('^\s*\(async\s\+\)\=def\s', '')
 vnoremap <buffer> ]] :call pymode#motion#vmove('^\(class\|\%(async\s\+\)\=def\)\s', '')
 onoremap <buffer> ]M :call pymode#motion#move('^\s*\(async\s\+\)\=def\s', '')
 onoremap <buffer> ]] :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', '')
 nnoremap <buffer> ]M :call pymode#motion#move('^\s*\(async\s\+\)\=def\s', '')
 nnoremap <buffer> ]] :call pymode#motion#move('^\(class\|\%(async\s\+\)\=def\)\s', '')
-vnoremap <buffer> aM :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 0)
-onoremap <buffer> aM :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 0)
-vnoremap <buffer> aC :call pymode#motion#select('^\s*class\s', 0)
 onoremap <buffer> aC :call pymode#motion#select('^\s*class\s', 0)
-vnoremap <buffer> iM :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 1)
-onoremap <buffer> iM :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 1)
-vnoremap <buffer> iC :call pymode#motion#select('^\s*class\s', 1)
+vnoremap <buffer> aC :call pymode#motion#select('^\s*class\s', 0)
+onoremap <buffer> aM :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 0)
+vnoremap <buffer> aM :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 0)
 onoremap <buffer> iC :call pymode#motion#select('^\s*class\s', 1)
+vnoremap <buffer> iC :call pymode#motion#select('^\s*class\s', 1)
+onoremap <buffer> iM :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 1)
+vnoremap <buffer> iM :call pymode#motion#select('^\s*\(async\s\+\)\=def\s', 1)
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
@@ -144,12 +144,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 46 - ((10 * winheight(0) + 11) / 23)
+let s:l = 82 - ((11 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-46
-normal! 012|
+82
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
