@@ -2,4 +2,6 @@
 
 wallidfile="$HOME/dotfiles/.varfiles/wallidx"
 wallpfile="$HOME/dotfiles/.varfiles/fehbg"
-head -"$(cat $wallidfile)" "$wallpfile" | tail -1
+picdir="$HOME/Pictures/wallpapers"
+name="$(head -"$(cat $wallidfile)" "$wallpfile" | tail -1)"
+echo "$picdir/$name"
