@@ -35,7 +35,7 @@ mpc pause
 /home/sidreed/apps/i3lock-color/build/i3lock \
     -i "$screensaverpath" \
     --timepos='x+115:h-80' \
-    --datepos='x+130:h-60' \
+    --datepos='x+145:h-60' \
     --indpos='x+290:h-80' \
     --clock --datestr "$locktext" \
     --insidecolor=$insidecolor --ringcolor=$ringcolor --line-uses-inside \
