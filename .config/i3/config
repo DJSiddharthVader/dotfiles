@@ -92,6 +92,8 @@ exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id /home/sidreed/dotfiles/.scripts/lowbattery.sh &
+#lock daemon to lock by listening to events
+exec --no-startup-id xss-lock -- /home/sidreed/dotfiles/.scripts/lock.sh
 #set wallpaper on startup
 #exec --no-startup-id ~/.fehbg
 #Torrent daemon:
@@ -167,8 +169,9 @@ bindsym $mod+Shift+l	move right 30
 bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh 'next'
 bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh 'prev'
 
-bindsym $mod+x          exec --no-startup-id ~/.scripts/lock.sh
-bindsym $mod+Shift+x    exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+bindsym $mod+x         exec --no-startup-id ~/dotfiles/.scripts/lock.sh
+bindsym $mod+Shift+x   exec --no-startup-id sleep 1 && xset dpms force suspend
+#bindsym $mod+Shift+x    exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 
 bindsym $mod+c			exec ~/dotfiles/.scripts/wallpaper.sh 'both' 'stay'
 bindsym $mod+Shift+c    exec $term -e vi ~/dotfiles/.config/i3/config
