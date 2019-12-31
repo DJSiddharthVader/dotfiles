@@ -80,19 +80,12 @@ export STEAM_RUNTIME=0
 # Ranger
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
-# change ls colours
-export LS_COLORS="di=0;36:*.py=0;37:*.csv;32:*.json;96"
-
 # Golang Support
 if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
     . $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
 fi
 
 # }}}
-
-#Get Prompt Info
-[[ -f $HOME/.dircolors ]] && eval $(dircolors -b $HOME/.dircolors)
-source $HOME/dotfiles/.scripts/bash_prompt.sh
 
 ## BASH Options {{{
 
@@ -117,9 +110,6 @@ fi
 
 # Perform file completion in a case insensitive fashion
 bind "set completion-ignore-case on"
-
-# Treat hyphens and underscores as equivalent
-#bind "set completion-map-case on"
 
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
@@ -170,7 +160,7 @@ fi
 # }}}
 
 ## Functions
-## Priviliged Acces {{{
+#Priviliged Acces {{{
 
 if ! $_isroot; then
       alias sudo='sudo '
@@ -198,12 +188,6 @@ function rs() {
 function hg() {
     history | grep $1
 }
-function rpy() {
-    \rm *.pyc
-}
-function rsw() {
-    \rm *.sw*
-}
 function ppp() {
 #    \rm $1.aux $1.bbl $1.blg
     pdflatex $1.tex
@@ -212,13 +196,29 @@ function ppp() {
     pdflatex $1.tex
     qpdfview $1.pdf
 }
-function xep() {
-    xelatex $1.tex
-    xelatex $1.tex
-    qpdfview $1.pdf
-}
 function jless() {
     jq . -C $1 | less -R;
+}
+function prog() {
+    local w=60 p=$1;  shift
+    # create a string of spaces, then change them to dots
+    printf -v dots "%*s" "$(( $p*$w/100 ))" ""; dots=${dots// /#};
+    # print those dots on a fixed-width space plus the percentage etc.
+    printf "\r\e[K|%-*s| %3d %% %s" "$w" "$dots" "$p" "$*";
+}
+function mvpr() {
+    dest="${@: -1}"
+    counter=0
+    total="$(echo $# -1 | bc -l)"
+    echo 'Moving files...'
+    for file in "${@: 1:$#-1}"; do
+        mv "$file" "$dest"
+        let counter++
+        prc="$(echo "100*$counter/$total" | bc -l)"
+        percent="$(printf "%.*f" 0 $prc )"
+        prog "$percent"
+    done
+    echo ''
 }
 
 ## Top 10 Commands {{{
@@ -370,7 +370,6 @@ up() {
 
 # }}}
 
-## File & Strings Related Functions {{{
 ## Find a file with a pattern in name {{{
 
     ff() { find . -type f -iname '*'$*'*' -ls ; }
@@ -405,23 +404,6 @@ up() {
 
       # }}}
 
-## Swap 2 filenames around, If they exist {{{
-
-    #(from Uzi's bashrc).
-    swap() {
-        local TMPFILE=tmp.$$
-
-        [[ $# -ne 2 ]] && echo "swap: 2 arguments needed" && return 1
-        [[ ! -e $1 ]] && echo "swap: $1 does not exist" && return 1
-        [[ ! -e $2 ]] && echo "swap: $2 does not exist" && return 1
-
-        mv "$1" $TMPFILE
-        mv "$2" "$1"
-        mv $TMPFILE "$2"
-      }
-
-      # }}}
-
 ## Finds directory sizes Fand lists them for the current directory {{{
     dirsize () {
         du -shx * .[a-zA-Z0-9_]* 2> /dev/null | egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
@@ -436,15 +418,6 @@ up() {
     fared() {
         read -p "Delete all empty folders recursively [y/N]: " OPT
         [[ $OPT == y ]] && find . -type d -empty -exec rm -fr {} \; &> /dev/null
-      }
-
-      # }}}
-
-## Find and remove all dotfiles {{{
-
-    farad () {
-        read -p "Delete all dotfiles recursively [y/N]: " OPT
-        [[ $OPT == y ]] && find . -name '.*' -type f -exec rm -rf {} \;
       }
 
       # }}}
@@ -475,10 +448,6 @@ shopt -s cdspell 2> /dev/null
 #
 #export  dot="$HOME/dotfiles"
 #export   sh="$HOME/scripts"
-#export   i3="$HOME/.i3"
-#export  bin="$HOME/bin"
-#export lbin="$HOME/.local/bin"
-#export sync="$HOME/sync"
 
 # }}}
 
@@ -525,30 +494,7 @@ fi
 
 # }}}
 
-## Docker Support {{{
-
-alias dfunc='vi ~/.docker.func'
-
-if [ -f ~/.docker.func ]; then
-    . $HOME/.docker.func
-fi
-
-# }}}
-
-## HTTP Server {{{
-
-# Start an HTTP server from a directory, optionally specifying the port
-server() {
-       local port="${1:-8000}"
-       sleep 1 && $BROWSER "http://localhost:${port}/" &
-       # Set the default Content-Type to `text/plain` instead of `application/octet-stream`
-       # And serve everything as UTF-8 (although not technically correct, this doesn’t break anything for binary files)
-       python2 -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
-}
-
-# }}}
-
-# Import colorscheme from 'wal' asynchronously
+## Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
 export PATH="${PATH}:${HOME}/.local/bin/"
@@ -557,17 +503,14 @@ export PATH="${PATH}:${HOME}/.local/bin/"
 #export QT_QPA_PLATFORMTHEME=gtk2
 
 
-#for colorls
-source $(dirname $(gem which colorls))/tab_complete.sh
-
-#Setting Path
+## Setting Path
 PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
-#Conda
+## Conda
 . $HOME/anaconda3/etc/profile.d/conda.sh
 # added by Anaconda3 5.3.0 installer
 # >>> conda init >>>
@@ -587,3 +530,5 @@ unset __conda_setup
 # <<< conda init <<<
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source $HOME/dotfiles/.scripts/bash_prompt.sh
+export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
