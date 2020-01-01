@@ -1,22 +1,28 @@
 #!/bin/bash
-tskfile="$HOME/dotfiles/tasks/tasks"
-task_cats=$(cut -d':' -f1 "$tskfile" | sort | uniq -c | sort -n)
-total=$(wc -l "$tskfile" | cut -d" " -f1)
-outp="Tasks:$total|"
-while read -r catg; do
-    catg=$(echo "$catg" | cut -d' ' -f2)
-    count=$(grep -c "^$catg" "$tskfile" | cut -d' ' -f2)
-    outp+="$catg:$count|"
-done <<< "$task_cats"
-echo "${outp::-1}|"
+task_file="$HOME/Personal/notes/tasks/tasks"
+#Task Icons
+#task_icon="Tasks"
+#task_icon=""
+#task_icon=""
+#task_icon=""
+task_icon=""
 
-#tskfile=~/dotfiles/tasks/tasks
-#task_cats=$(cat "$tskfile" | cut -d':' -f1 | sort | uniq -c | sort -n)
-#total=$(cat "$tskfile" | wc -l)
-#outp="Tasks:$total|"
-#while read -r catg; do
-#    catg=`echo "$catg" | cut -d' ' -f2`
-#    count=`grep "^$catg" "$tskfile" | wc -l | cut -d' ' -f2`
-#    outp+="$catg:$count|"
-#done <<< "$task_cats"
-#echo "${outp::-1}|"
+#Task Seperators
+#task_seperator=" "
+#task_seperator="|"
+#task_seperator=""
+#task_seperator=""
+#task_seperator=""
+task_seperator="  "
+
+
+task_categories=$(cut -d':' -f1 "$task_file" | sort | uniq -c | sort -n)
+total=$(wc -l "$task_file" | cut -d" " -f1)
+out=" $task_icon $total$task_seperator"
+while read -r task_count; do
+    catagory=$(echo "$task_count" | cut -d' ' -f2)
+    count=$(echo "$task_count" | cut -d' ' -f1)
+    out+="$catagory:$count$task_seperator"
+done <<< "$task_categories"
+echo "${out::-2} $task_icon"
+
