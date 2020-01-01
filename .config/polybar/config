@@ -97,9 +97,11 @@ modules-right = sl4b wlan sl34 volume sl23 backlight-acpi sl12 powermenu
 [bar/schedulef]
 inherit = section/float
 bottom = true
-modules-left = wall sr6b
-modules-center =
+;modules-left = wall sr6b
+;modules-center =
 ;modules-right = sl9b schedule sl89 taskcounter sl158 weather sl1415 uptime sl1314 xkeyboard sl1213 temperature sl1112 mycpu sl1011 memory sl910 battery sl89 date
+modules-left = taskcounter sr6b
+modules-center =
 modules-right = sl15b weather sl1415 uptime sl1314 xkeyboard sl1213 temperature sl1112 mycpu sl1011 memory sl910 battery sl79 date
 
 [bar/lap]
@@ -181,7 +183,7 @@ tail = true
 type = custom/script
 exec = ~/dotfiles/.scripts/task_counter.sh
 tail = true
-format-background = ${colors.color8}
+format-background = ${colors.color6}
 
 
 ;base modules
