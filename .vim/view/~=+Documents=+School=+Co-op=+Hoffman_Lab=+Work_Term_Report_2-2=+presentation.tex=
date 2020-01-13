@@ -360,21 +360,30 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2,54fold
-56,60fold
-64,74fold
-2
-normal! zo
-56
-normal! zo
-64
-normal! zo
-let s:l = 91 - ((16 * winheight(0) + 21) / 42)
+1,17fold
+18,22fold
+24,27fold
+29,35fold
+36,42fold
+43,49fold
+51,59fold
+60,71fold
+73,86fold
+87,100fold
+101,107fold
+108,114fold
+117,123fold
+124,131fold
+132,138fold
+139,151fold
+152,164fold
+let s:l = 1 - ((0 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-91
+1
 normal! 0
+lcd ~/Documents/School/Co-op/Hoffman_Lab/Work_Term_Report_2-2
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
