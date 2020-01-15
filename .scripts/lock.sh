@@ -1,6 +1,5 @@
 #!/bin/bash
 
-screensaverpath="/tmp/screen.png"
 #colors,text,font
 ringcolor=ffffffff
 keyhlcolor=3cc908ff
@@ -29,24 +28,40 @@ for RES in $SR; do
     rectangles+="rectangle $CX,$CY $((CX+300)),$((CY-80)) "
 done
 
-scrot "$screensaverpath" && convert "$screensaverpath" -scale 20% convert -scale 500% -draw "fill black fill-opacity 0.8 $rectangles" "$screensaverpath"
-mpc pause
+screensaverpath="/tmp/screen.png"
+scrot "$screensaverpath"
+convert "$screensaverpath" -scale 20% -scale 500% -draw "fill black fill-opacity 0.8 $rectangles" "$screensaverpath"
+mpc pause > /dev/null 2>&1
 #lock command
 /home/sidreed/apps/i3lock-color/build/i3lock \
-    -i "$screensaverpath" \
-    --timepos='x+115:h-80' \
-    --datepos='x+145:h-60' \
-    --indpos='x+290:h-80' \
-    --clock --datestr "$locktext" \
-    --insidecolor=$insidecolor --ringcolor=$ringcolor --line-uses-inside \
-    --keyhlcolor=$keyhlcolor --bshlcolor=$bshlcolor --separatorcolor=$separatorcolor \
-    --insidevercolor=$insidevercolor --insidewrongcolor=$insidewrongcolor \
-    --ringvercolor=$ringvercolor --ringwrongcolor=$ringwrongcolor \
-    --radius=20 --ring-width=4 --veriftext='' \
-    --wrongtext='' --wrongcolor="$wrongcolor" \
-    --verifcolor="$verifcolor" --timecolor="$timecolor" \
-    --datecolor="$datecolor" \
-    --time-font="$font" --date-font="$font" --layout-font="$font" \
-    --verif-font="$font" --wrong-font="$font" \
-    --noinputtext='' #--force-clock
+    -i "$screensaverpath"                \
+    --indpos='x+290:h-80'                \
+    --noinputtext=''                     \
+    --clock                              \
+    --timepos='x+115:h-80'               \
+    --timecolor="$timecolor"             \
+    --time-font="$font"                  \
+    --datestr "$locktext"                \
+    --datepos='x+145:h-60'               \
+    --datecolor="$datecolor"             \
+    --date-font="$font"                  \
+    --layout-font="$font"                \
+    --radius=25                          \
+    --ring-width=4                       \
+    --ringcolor=$ringcolor               \
+    --insidecolor=$insidecolor           \
+    --line-uses-inside                   \
+    --keyhlcolor=$keyhlcolor             \
+    --bshlcolor=$bshlcolor               \
+    --separatorcolor=$separatorcolor     \
+    --veriftext=''                       \
+    --verif-font="$font"                 \
+    --verifcolor="$verifcolor"           \
+    --ringvercolor=$ringvercolor         \
+    --insidevercolor=$insidevercolor     \
+    --wrongtext=''                       \
+    --wrong-font="$font"                 \
+    --wrongcolor="$wrongcolor"           \
+    --ringwrongcolor=$ringwrongcolor     \
+    --insidewrongcolor=$insidewrongcolor
 
