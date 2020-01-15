@@ -46,8 +46,9 @@ updateImageIdx() {
             nidx=$(( $idx + 1 ))
             ;;
         *)
-            echo "Usage: $0 {stay|path|next|prev} path/to/image (optional)"
+            echo "Usage: $0 {font|back|both} {stay|path|next|prev} path/to/image (optional)"
             exit 1
+            ;;
     esac
     echo "$nidx" >| "$idxfile"
     echo "$nidx"
