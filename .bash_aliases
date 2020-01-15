@@ -21,7 +21,7 @@ alias com='git commit'
 alias brch='git branch'
 alias chk='git checkout'
 alias stat="git status | less"
-alias stwt="watch -n1 'git status'"
+alias stwt="watch -n1 'git status | grep -v .vim/view'"
 
 #Typos
 alias r,='rm'
@@ -53,12 +53,9 @@ alias cof='conda deactivate'
 alias ct='conda activate thesis'
 alias fuck='sudo $(history -p \!\!)'
 alias jpy='~/anaconda3/bin/jupyter-lab'
-alias mnt="sudo mount /dev/sdb1 /media/1tbdrive/"
-alias umt="sudo umount /media/1tbdrive/"
-alias cpdots='rsync -avzP ~/dotfiles/'
+alias mnt="~/.scripts/mount.sh on"
+alias umt="~/.scripts/mount.sh off"
 alias ip="hostname -I | cut -d' ' -f1"
-alias bbf='feh --bg-scale ~/.config/i3/bordered_background.png'
-alias ubf='feh --bg-scale ~/.config/i3/unbordered_background.png'
 alias saa='~/.scripts/set_album_art.sh'
 alias cwp='~/.scripts/currentwallpaper.sh'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
@@ -66,14 +63,8 @@ alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias reset-wifi='sudo /etc/init.d/network-manager restart'
 alias mkst='cd ~/apps/st/; sudo make clean; make; sudo make install'
-alias torr='~/apps/torque/torque'
-alias thesis='tmuxinator start thesis -n thesis -p ~/dotfiles/.tmuxinator/thesis.yml'
-alias kodos='ssh -x sreed@sshgw.uhnresearch.ca'
 alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
-alias uhn='ssh -A -t sreed@sshgw.uhnresearch.ca ssh mordor'
-alias vpn='/opt/cisco/anyconnect/bin/vpn'
-alias vpnui='/opt/cisco/anyconnect/bin/vpnui'
-alias backup='tar -cvpzf /media/1tbdrive/homedir-14-10-2019.tar.gz --exclude=/home/sidreed/Videos --exclude=/home/sidreed/.cache --exclude=/home/sidreed/placenta-cancer --exclude=/home/sidreed/Music --exclude=/home/sidreed/Pictures'
+alias psync="rsync -e 'ssh -p 2222' -rP --ignore-existing --human-readable"
 
 #Print
 alias cfh="grep -c '^>'"
