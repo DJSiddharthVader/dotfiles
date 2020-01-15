@@ -140,13 +140,13 @@ modules-right = sl9b battery
 [module/wall]
 type = custom/script
 interval = 3
-exec =  ~/dotfiles/.scripts/polywall.sh print
+exec =  ~/dotfiles/.config/polybar/scripts/polywall.sh print
 format-background = ${colors.color6}
-format = %{A1:~/dotfiles/.scripts/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.scripts/polywall.sh mode:}%{A1:~/dotfiles/.scripts/polywall.sh stay:} %{A}<label> %{A}%{A1:~/dotfiles/.scripts/polywall.sh next:} %{A}
+format = %{A1:~/dotfiles/.config/polybar/scripts/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh mode:}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh stay:} %{A}<label> %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh next:} %{A}
 
 [module/uptime]
 type = custom/script
-exec = ~/dotfiles/.scripts/uptimemonitor.sh
+exec = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh
 interval = 600
 font = 1
 format = " <label>"
@@ -154,34 +154,34 @@ format-background = ${colors.color14}
 
 [module/weather]
 type = custom/script
-exec = ~/dotfiles/.scripts/openweathermap-simple.sh
+exec = ~/dotfiles/.config/polybar/scripts/openweathermap-simple.sh
 interval = 600
 label-font = 3
 format-background = ${colors.color15}
 
 [module/mycpu]
 type = custom/script
-exec = ~/dotfiles/.scripts/cpumonitor.sh
+exec = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh
 interval = 2
 format-background = ${colors.color11}
 tail=true
 
 [module/songnames]
 type = custom/script
-exec = ~/dotfiles/.scripts/mpdscroll.sh
+exec = ~/dotfiles/.config/polybar/scripts/mpdscroll.sh
 format = "  <label>  "
 format-background = ${colors.color5}
 tail = true
 
 [module/schedule]
 type = custom/script
-exec = ~/dotfiles/.scripts/sched.py 0 3
+exec = ~/dotfiles/.config/polybar/scripts/sched.py 0 3
 format-background = ${colors.color9}
 tail = true
 
 [module/taskcounter]
 type = custom/script
-exec = ~/dotfiles/.scripts/task_counter.sh
+exec = ~/dotfiles/.config/polybar/scripts/task_counter.sh
 tail = true
 format-background = ${colors.color6}
 
@@ -226,7 +226,7 @@ type = internal/backlight
 card = intel_backlight
 
 [module/volume]
-type = internal/volume
+type = internal/alsa
 
 format-volume = <ramp-volume> <label-volume>
 format-volume-background = ${colors.color3}
