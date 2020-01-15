@@ -93,11 +93,11 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id /home/sidreed/dotfiles/.scripts/lowbattery.sh &
 #lock daemon to lock by listening to events
-exec --no-startup-id xss-lock -- /home/sidreed/dotfiles/.scripts/lock.sh
-#set wallpaper on startup
-#exec --no-startup-id ~/.fehbg
+exec --no-startup-id xss-lock -- /home/sidreed/dotfiles/.scripts/lock.sh &
 #Torrent daemon:
-#exec --no-startup-id transmission-daemon
+exec --no-startup-id transmission-daemon
+#express vpn
+exec --no-startup-id expressvpn connect
 #Mount other drives:
 #exec --no-startup-id sudo mount -a
 
@@ -108,6 +108,7 @@ bindsym $mod+Return 	exec $term
 bindsym $mod+Escape		workspace prev
 #STOP/HIDE EVERYTHING:
 bindsym $mod+BackSpace	exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+
 # #---Letter Key Bindings---# #
 bindsym $mod+q			kill
 bindsym $mod+Shift+q    exec ~/dotfiles/.scripts/reset-pulseaudio.sh
@@ -195,6 +196,7 @@ bindsym $mod+Shift+m	exec $mute
 #bindsym $mod+asciitilde
 
 # #---Workspace Bindings---# #
+# Shortcuts
 bindsym $mod+Home		    workspace $ws1
 bindsym $mod+Shift+Home		move container to workspace $ws1
 bindsym $mod+End		    workspace $ws10
@@ -213,6 +215,7 @@ bindsym $mod+apostrophe		split horizontal ;; exec $term
 bindsym $mod+slash		    split vertical ;; exec $term
 bindsym $mod+Shift+slash	kill
 bindsym $mod+backslash		workspace back_and_forth
+
 #Set workspaces
 set $ws1 "1"
 set $ws2 "2"
@@ -248,6 +251,7 @@ bindsym $mod+Shift+7	move container to workspace $ws7
 bindsym $mod+Shift+8	move container to workspace $ws8
 bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
+
 
 # #---Function Buttons---# #
 #bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
@@ -290,11 +294,6 @@ bindsym $mod+Shift+bracketleft 	exec $bigbak
 bindsym $mod+bracketright 	    exec $lilfor
 bindsym $mod+Shift+bracketright exec $bigfor
 
-# Print screen takes a screenshot.
-bindsym Print 	            exec --no-startup-id scrot
-bindsym $mod+Print 			exec --no-startup-id scrot -u
-bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
-
 ##For spotify
 #set $music spotify
 #set $pause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
@@ -304,6 +303,7 @@ bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
 #set $prev dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
 #set $lilfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek
 #set $bigfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek(
+
 
 # #---Extra XF86 Keys---# #
 # These are the extra media keys that some keyboards have.
@@ -341,4 +341,9 @@ bindsym XF86AudioMedia		    exec $music
 bindsym XF86Display		        exec --no-startup-id arandr
 bindsym XF86Documents		    exec $term -e ranger ~/Documents
 #bindsym XF86WLAN		        exec $netrefresh
+
+# Print screen takes a screenshot.
+bindsym Print 	            exec --no-startup-id scrot
+bindsym $mod+Print 			exec --no-startup-id scrot -u
+bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
 
