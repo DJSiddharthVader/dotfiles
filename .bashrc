@@ -181,21 +181,6 @@ function fl() {
     # fine line $1 from file $2
     head -$1 $2 | tail -1;
 }
-function rs() {
-    #reloads shell if i make changes to bashrc
-    exec bash
-}
-function hg() {
-    history | grep $1
-}
-function ppp() {
-#    \rm $1.aux $1.bbl $1.blg
-    pdflatex $1.tex
-    bibtex $1.aux
-    pdflatex $1.tex
-    pdflatex $1.tex
-    qpdfview $1.pdf
-}
 function jless() {
     jq . -C $1 | less -R;
 }
@@ -431,7 +416,7 @@ up() {
 
 ## Better directory navigation {{{
 # Prepend cd to directory names automatically
-shopt -s autocd 2> /dev/null
+#shopt -s autocd 2> /dev/null
 # Correct spelling errors during tab-completion
 shopt -s dirspell
 # Correct spelling errors in arguments supplied to cd
