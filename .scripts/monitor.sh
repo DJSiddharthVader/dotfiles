@@ -3,15 +3,15 @@
 connectToMonitor() {
     monitor="$(xrandr | grep ' connected' | tail -1 | cut -d' ' -f1)"
     ishdmi="$(xrandr | grep ' connected' | tail -1)"
-    echo "$monitor $resolution"
     if [[ $ishdmi =~ 'HDMI' ]]; then
-    resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*')"
-        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
+        resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | grep -v i | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*')"
         #pactl set-card-profile 0 output:hdmi-stereo
+        sleep 1
     else
-        resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | head -1 | grep -ao '[0-9]*x[0-9]*')"
-        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
+        resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | head -1 | grep -ao '[0-9]*x[0-9]*')"
     fi
+    echo "$monitor $resolution"
+    xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
 }
 disconnectMonitor() {
     monitor=`xrandr | grep ' connected' | tail -1 | cut -d' ' -f1`
