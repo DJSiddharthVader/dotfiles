@@ -52,8 +52,8 @@ setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
-setlocal iminsert=2
-setlocal imsearch=2
+setlocal iminsert=0
+setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=GetShIndent()
@@ -113,24 +113,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-11,13fold
-14,16fold
-17,55fold
-56,60fold
-61,65fold
-66,88fold
-105,127fold
-89,128fold
-89
-normal! zo
-89
-normal! zc
-let s:l = 49 - ((43 * winheight(0) + 10) / 20)
+let s:l = 14 - ((13 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-49
-normal! 0
+14
+normal! 028|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
