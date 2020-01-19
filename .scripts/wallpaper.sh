@@ -104,9 +104,9 @@ main() {
     echo "$image"
     case "$mode" in
         'font')
-            wal -e -n -g -i "$image"  #font only
+            wal -e -n -i "$image"  #font only
             #wpg -A "$unbgfile"
-            ~/dotfiles/.scripts/bar_manager.sh auto > /dev/null 2>&1
+            ~/dotfiles/.scripts/bar-manager.sh auto > /dev/null 2>&1
             ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
             timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
             ;;
@@ -115,8 +115,8 @@ main() {
             ;;
         'both')
             setImg "$image"
-            wal -e -n -g -i "$image"  #font only
-            ~/dotfiles/.scripts/bar_manager.sh auto >> /dev/null 2>&1
+            wal -e -n -i "$image"  #font only
+            ~/dotfiles/.scripts/bar-manager.sh auto >> /dev/null 2>&1
             ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
             timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
             ;;
