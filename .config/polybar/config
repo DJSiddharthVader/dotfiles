@@ -92,17 +92,15 @@ inherit = section/float
 fixed-center = true
 modules-left = i3
 modules-center = sl5b songnames mpd sr5b
-modules-right = sl4b wlan sl34 volume sl23 backlight-acpi sl12 powermenu
+modules-right = sl5b expressvpn sl45 wlan sl34 volume sl23 backlight-acpi sl12 powermenu
 
 [bar/schedulef]
 inherit = section/float
 bottom = true
-;modules-left = wall sr6b
-;modules-center =
-;modules-right = sl9b schedule sl89 taskcounter sl158 weather sl1415 uptime sl1314 xkeyboard sl1213 temperature sl1112 mycpu sl1011 memory sl910 battery sl89 date
-modules-left = taskcounter sr6b
+modules-left = date sr79 mybattery sr910 memory sr1011 mycpu sr1112 mytemp sr1213 xkeyboard sr1314 uptime sr1415 weather sr158 taskcounter sr8b
 modules-center =
-modules-right = sl15b weather sl1415 uptime sl1314 xkeyboard sl1213 temperature sl1112 mycpu sl1011 memory sl910 battery sl79 date
+modules-right
+;modules-right = sl8b taskcounter sl158 weather sl1415 uptime sl1314 xkeyboard sl1213 temperature sl1112 mycpu sl1011 memory sl910 battery sl79 date
 
 [bar/lap]
 inherit = section/full
@@ -137,20 +135,49 @@ modules-right = sl9b battery
 
 
 ;my modules
-[module/wall]
+[module/songnames]
 type = custom/script
-interval = 3
-exec =  ~/dotfiles/.config/polybar/scripts/polywall.sh print
-format-background = ${colors.color6}
-format = %{A1:~/dotfiles/.config/polybar/scripts/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh mode:}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh stay:} %{A}<label> %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh next:} %{A}
+exec = ~/dotfiles/.config/polybar/scripts/mpdscroll.sh
+format = "  <label>  "
+format-background = ${colors.color5}
+tail = true
+
+[module/expressvpn]
+type = custom/script
+exec = ~/dotfiles/.config/polybar/scripts/expressvpn.sh status
+tail = true
+format-background = ${colors.color5}
+format = %{A1:~/dotfiles/.config/polybar/scripts/expressvpn.sh toggle:} <label>%{A}
+
+[module/mybattery]
+type = custom/script
+exec = ~/dotfiles/.config/polybar/scripts/battery.sh
+tail = true
+interval = 1
+format-background = ${colors.color9}
+format = %{A1:~/dotfiles/.config/polybar/scripts/battery.sh toggle:} <label>%{A}
+[module/mycpu]
+type = custom/script
+exec = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh
+interval = 2
+tail=true
+format-background = ${colors.color11}
+format = %{A1:~/dotfiles/.config/polybar/scripts/cpumonitor.sh toggle:} <label>%{A}
 
 [module/uptime]
 type = custom/script
 exec = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh
 interval = 600
 font = 1
-format = " <label>"
+format = "  <label>"
 format-background = ${colors.color14}
+
+[module/mytemp]
+type = custom/script
+exec = ~/dotfiles/.config/polybar/scripts/temperature.sh
+interval = 2
+format = <label>
+format-background = ${colors.color12}
 
 [module/weather]
 type = custom/script
@@ -159,31 +186,25 @@ interval = 600
 label-font = 3
 format-background = ${colors.color15}
 
-[module/mycpu]
+[module/taskcounter]
 type = custom/script
-exec = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh
-interval = 2
-format-background = ${colors.color11}
-tail=true
-
-[module/songnames]
-type = custom/script
-exec = ~/dotfiles/.config/polybar/scripts/mpdscroll.sh
-format = "  <label>  "
-format-background = ${colors.color5}
+exec = ~/dotfiles/.config/polybar/scripts/task_counter.sh
 tail = true
+format-background = ${colors.color8}
+format = %{A1:~/dotfiles/.config/polybar/scripts/task_counter.sh toggle:} <label>%{A}
+
+[module/wall]
+type = custom/script
+interval = 3
+exec =  ~/dotfiles/.config/polybar/scripts/polywall.sh print
+format-background = ${colors.color6}
+format = %{A1:~/dotfiles/.config/polybar/scripts/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh mode:}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh stay:} %{A}<label> %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh next:} %{A}
 
 [module/schedule]
 type = custom/script
 exec = ~/dotfiles/.config/polybar/scripts/sched.py 0 3
 format-background = ${colors.color9}
 tail = true
-
-[module/taskcounter]
-type = custom/script
-exec = ~/dotfiles/.config/polybar/scripts/task_counter.sh
-tail = true
-format-background = ${colors.color6}
 
 
 ;base modules
@@ -246,12 +267,13 @@ type = internal/network
 interface = wlp1s0
 interval = 3.0
 format-connected = %{A:st -e nmtui-connect&:}<ramp-signal><label-connected>%{A}
-format-connected-background = ${colors.color4}
 label-connected = " %essid%"
+;label-connected = " %essid%  %downspeed%  %upspeed%"
 label-connected-foreground = ${colors.foreground}
+format-connected-background = ${colors.color4}
 format-disconnected = %{A:st -e nmtui-connect&:}disconnected%{A}
-format-disconnected-background = ${colors.alert}
 label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected-background = ${colors.alert}
 ramp-signal-foreground = ${colors.foreground}
 ramp-signal-font = 6
 ramp-signal-0 =  
@@ -352,8 +374,8 @@ type = internal/date
 interval = 5
 date =
 date-alt = "  %A, %B %d"
-time = " %I:%M "
-time-alt =  %I:%M
+time = "  %I:%M "
+time-alt = "  %I:%M"
 format-prefix-foreground = ${colors.foreground}
 format-background = ${colors.color7}
 label = %time%%date%
@@ -363,6 +385,9 @@ type = internal/battery
 battery = BAT0
 adapter = AC
 full-at = 98
+format-full-prefix = " "
+format-charging-prefix = " "
+format-discharging-prefix = " "
 format-charging = <ramp-capacity> <label-charging>
 format-charging-underline = ${colors.green}
 format-charging-background = ${colors.color9}
@@ -386,7 +411,7 @@ animation-charging-framerate = 750
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
 format-background = ${colors.color10}
 label = %percentage_used%% %percentage_swap_used%%
@@ -397,8 +422,9 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
+format-prefix = " "
 format-background = ${colors.color12}
-format-warn = <ramp> <label-warn>
+format-warn = " <ramp> <label-warn>"
 format-warn-background = ${colors.alert}
 
 label = %temperature-c%
@@ -413,7 +439,7 @@ ramp-foreground = ${colors.foreground}
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
-format-prefix = " "
+format-prefix = "  "
 format-prefix-foreground = ${colors.foreground}
 format-background = ${colors.color13}
 label-layout = %layout%
@@ -451,6 +477,12 @@ content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color3}
 content-background = ${colors.color4}
+[module/sl45]
+type = custom/text
+content = ${colors.leftpointsep}
+content-font = 5
+content-foreground = ${colors.color4}
+content-background = ${colors.color5}
 [module/sl79]
 type = custom/text
 content = ${colors.leftpointsep}
@@ -499,6 +531,12 @@ content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color15}
 content-background = ${colors.color8}
+[module/sl1b]
+type = custom/text
+content = ${colors.leftpointsep}
+content-font = 5
+content-foreground = ${colors.color1}
+content-background = ${colors.background}
 [module/sl4b]
 type = custom/text
 content = ${colors.leftpointsep}
@@ -510,6 +548,12 @@ type = custom/text
 content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color5}
+content-background = ${colors.background}
+[module/sl8b]
+type = custom/text
+content = ${colors.leftpointsep}
+content-font = 5
+content-foreground = ${colors.color8}
 content-background = ${colors.background}
 [module/sl9b]
 type = custom/text
@@ -529,16 +573,72 @@ content = ${colors.rightpointsep}
 content-font = 5
 content-foreground = ${colors.color3}
 content-background = ${colors.background}
-[module/sr6b]
-type = custom/text
-content = ${colors.rightpointsep}
-content-font = 5
-content-foreground = ${colors.color6}
-content-background = ${colors.background}
 [module/sr5b]
 type = custom/text
 content = ${colors.rightpointsep}
 content-font = 5
 content-foreground = ${colors.color5}
 content-background = ${colors.background}
+[module/sr6b]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color6}
+content-background = ${colors.background}
+
+[module/sr79]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color7}
+content-background = ${colors.color9}
+[module/sr910]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color9}
+content-background = ${colors.color10}
+[module/sr1011]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color10}
+content-background = ${colors.color11}
+[module/sr1112]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color11}
+content-background = ${colors.color12}
+[module/sr1213]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color12}
+content-background = ${colors.color13}
+[module/sr1314]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color13}
+content-background = ${colors.color14}
+[module/sr1415]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color14}
+content-background = ${colors.color15}
+[module/sr158]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color15}
+content-background = ${colors.color8}
+[module/sr8b]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color8}
+content-background = ${colors.background}
+
 
