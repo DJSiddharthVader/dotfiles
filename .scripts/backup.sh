@@ -9,14 +9,15 @@ function rsyncBackup(){
         rsync -r \
               --info=progress2 \
               --human-readable \
-              $HOME/$dir $drive/$dir
+              $HOME/$dir/ $drive/$dir
     done
 }
 function tarBackup(){
     backupfile="$drive/backups/backup_$(date +"%H:%M-%d-%m-%Y").tar.gz"
     tar -cvpzf "$backupfile" \
-        --exclude=$HOME/dotfiles\
         --exclude=$HOME/.cache \
+        --exclude=$HOME/.steam \
+        --exclude=$HOME/dotfiles\
         --exclude=$HOME/Music \
         --exclude=$HOME/Videos \
         --exclude=$HOME/Pictures \
