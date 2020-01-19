@@ -91,7 +91,7 @@ exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
 exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
-exec --no-startup-id /home/sidreed/dotfiles/.scripts/lowbattery.sh &
+exec --no-startup-id /home/sidreed/dotfiles/.scripts/low-battery.sh &
 #lock daemon to lock by listening to events
 exec --no-startup-id xss-lock -- /home/sidreed/dotfiles/.scripts/lock.sh &
 #Torrent daemon:
@@ -167,8 +167,8 @@ bindsym $mod+Shift+k	move up 30
 bindsym $mod+l			focus right
 bindsym $mod+Shift+l	move right 30
 
-bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh 'next'
-bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/bar_manager.sh 'prev'
+bindsym $mod+z          exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh 'next'
+bindsym $mod+Shift+z    exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh 'prev'
 
 bindsym $mod+x         exec --no-startup-id ~/dotfiles/.scripts/lock.sh
 bindsym $mod+Shift+x   exec --no-startup-id sleep 1 && xset dpms force suspend
