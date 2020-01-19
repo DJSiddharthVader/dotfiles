@@ -1,4 +1,5 @@
 *.pid
+.config/autostart/
 .config/MonoGame/
 .config/UNDERTALE/
 .config/BraveSoftware
