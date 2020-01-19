@@ -10,6 +10,16 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 
+#Typos
+alias r,='rm'
+alias bi='vi'
+alias mc='mv'
+
+#Options
+alias top='htop'
+alias rm='rm -i'
+alias tmux='tmux -2'
+
 #Git
 alias grm='git rm'
 alias add='git add'
@@ -21,27 +31,17 @@ alias com='git commit'
 alias brch='git branch'
 alias chk='git checkout'
 alias stat="git status | less"
-alias stwt="watch -n1 'git status | grep -v .vim/view'"
-
-#Typos
-alias r,='rm'
-alias bi='vi'
-alias mc='mv'
-
-#Options
-alias top='htop'
-alias rm='rm -i'
-alias tmux='tmux -2'
+alias stwt="watch -n1 'git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf'"
 
 #My Scripts
 alias mon='~/.scripts/monitor.sh on'
 alias mof='~/.scripts/monitor.sh off'
 alias wll='~/.scripts/wallpaper.sh back'
-alias upm='~/.scripts/updatemusic.sh'
-alias rspb='~/.scripts/polybar_launch.sh'
+alias upm='~/.scripts/update-music.sh'
+alias rspb='~/.scripts/polybar-launch.sh'
 alias pipes='~/apps/pipes.sh/pipes.sh'
 alias rspa='~/.scripts/reset-pulseaudio.sh'
-alias knit='~/.scripts/knitpdf.sh'
+alias knit='~/.scripts/knit-pdf.sh'
 
 #Shorten
 alias pdf='zathura'
@@ -64,7 +64,7 @@ alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias reset-wifi='sudo /etc/init.d/network-manager restart'
 alias mkst='cd ~/apps/st/; sudo make clean; make; sudo make install'
 alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
-alias psync="rsync -e 'ssh -p 2222' -rP --ignore-existing --human-readable"
+alias psync="rsync -e 'ssh -p 2222' -rP --ignore-existing --human-readable --info=progress2"
 
 #Print
 alias cfh="grep -c '^>'"
