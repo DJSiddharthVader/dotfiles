@@ -24,12 +24,12 @@ get_icon() {
     echo $icon
 }
 
+API="https://api.openweathermap.org/data/2.5"
 KEY="f8411a3dd03e0674a17b8e736c2d0df5"
 CITY=""
 UNITS="metric"
 SYMBOL="°"
 
-API="https://api.openweathermap.org/data/2.5"
 
 if [ -n "$CITY" ]; then
     if [ "$CITY" -eq "$CITY" ] 2>/dev/null; then
@@ -54,5 +54,5 @@ if [ -n "$weather" ]; then
     weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
     weather_icon=$(echo "$weather" | jq -r ".weather[0].icon")
 
-    echo "$(get_icon "$weather_icon")" "$weather_temp$SYMBOL"
+    echo " $(get_icon "$weather_icon")" "$weather_temp$SYMBOL"
 fi
