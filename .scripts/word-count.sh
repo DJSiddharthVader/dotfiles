@@ -4,6 +4,6 @@ if [ $# -eq 0 ]; then
 else
     #words="$(detex $1 | grep -v "block" | grep -v "blank" | grep -v "draw" | grep -v "node" | grep -v "d[SIRW]" | wc -w)"
     #echo "Document has $words words"
-    words="$(sed -n '/begin{cvletter/,/end{cvletter/p' "$1" | grep -v '%' | wc -w)"
+    words="$(sed -n '/begin{cvletter/,/end{cvletter/p' "$1" | grep -v '%' | wc -cw)"
     echo "$words"
 fi
