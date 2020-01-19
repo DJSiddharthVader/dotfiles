@@ -1,17 +1,29 @@
 #!/bin/bash
 
 port=2222
-musicdir="$HOME/Music/songs/everything/"
-destdir="~/SDCard/Music/Songs/"
+#Dirs
+musicindir="$HOME/Music/songs/everything/"
+musicoutdir="~/SDCard/Music/Songs/"
+picindir="~/SDCard/{DCIM/,Pictures/}"
+picoutdir="$HOME/Pictures/phone/"
 
-ip="$1"
 
-if [[ $# -eq 0 ]]; then
-    echo 'Usage syncMusic.sh IP'
-    exit 1
-fi
+function syncdir() {
+    indir="$1"
+    outdir="$2"
+    rsync -e "ssh -p $port"     \
+          -r                    \
+          --human-readable      \
+          --info=progress2      \
+          $indir $outdir
+}
+function main() {
+    ip="$1"
+    echo Music
+    syncdir $musicindir $ip:$musicoutdir
+    echo Pictures
+    syncdir $ip:$picindir $picoutdir
+}
 
-rsync -e "ssh -p $port"     \
-      --human-readable      \
-      -rP                   \
-      $musicdir $ip:$destdir
+[[ $# -eq 0 ]] && echo "Usage $0 {phone ip}" && exit 1
+main "$1"
