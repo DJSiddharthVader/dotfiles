@@ -13,10 +13,22 @@ function main() {
     mode="$1"
     case $mode in
         'on')
-            sudo mount $mountnode $mountdir
+            if [[ $(lsblk | grep -c $mountdir | cut -d' ' -f1 ) -eq 0 ]]
+            then
+                sudo mount $mountnode $mountdir
+            else
+                echo 'Already mounted'
+                exit 0
+            fi
             ;;
         'off')
-            sudo umount $mountnode
+            if [[ $(lsblk | grep -c $mountdir | cut -d' ' -f1 ) -eq 0 ]]
+            then
+                echo 'Not connected'
+                exit 0
+            else
+                sudo umount $mountnode
+            fi
             ;;
         *)
             echo "Usage: $0 {on|off}"
