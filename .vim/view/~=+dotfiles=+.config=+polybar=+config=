@@ -132,32 +132,34 @@ silent! normal! zE
 111,118fold
 119,135fold
 89,136fold
-138,144fold
-145,151fold
-152,158fold
-159,166fold
-167,174fold
-175,181fold
-182,188fold
-189,194fold
-196,202fold
-203,208fold
-137,209fold
-211,236fold
-237,243fold
-244,248fold
-249,264fold
-265,283fold
-284,312fold
-313,329fold
-330,371fold
-372,382fold
-383,410fold
-411,418fold
-419,438fold
-439,449fold
-450,453fold
-210,454fold
+138,145fold
+146,152fold
+153,160fold
+161,168fold
+169,175fold
+176,182fold
+183,189fold
+190,196fold
+197,203fold
+204,209fold
+137,210fold
+212,237fold
+238,243fold
+244,247fold
+248,262fold
+263,280fold
+281,308fold
+309,324fold
+325,365fold
+366,375fold
+376,402fold
+403,409fold
+410,428fold
+429,438fold
+439,441fold
+211,442fold
+444,449fold
+450,455fold
 456,461fold
 462,467fold
 468,473fold
@@ -179,17 +181,15 @@ silent! normal! zE
 564,569fold
 570,575fold
 576,581fold
-582,588fold
-589,594fold
-595,600fold
-601,606fold
-607,612fold
-613,618fold
-619,624fold
-625,630fold
-631,636fold
-637,642fold
-455,643fold
+582,587fold
+588,593fold
+594,599fold
+600,605fold
+606,611fold
+612,617fold
+618,623fold
+624,629fold
+443,630fold
 22
 normal! zo
 22
@@ -206,19 +206,19 @@ normal! zc
 normal! zo
 137
 normal! zc
-210
+211
 normal! zo
-210
+211
 normal! zc
-455
+443
 normal! zo
-455
+443
 normal! zc
-let s:l = 137 - ((131 * winheight(0) + 10) / 20)
+let s:l = 211 - ((207 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-137
+211
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
