@@ -49,7 +49,7 @@ function showIcon() {
     esac
     echo "$icon"
 }
-function displayBattery(){
+function display(){
     mode="$1"
     case $mode in
         'short')
@@ -91,7 +91,7 @@ function main() {
             ;;
     esac
     mode="$(cat $mode_file)"
-    displayBattery $mode
+    display $mode
 }
 
 main "$1"

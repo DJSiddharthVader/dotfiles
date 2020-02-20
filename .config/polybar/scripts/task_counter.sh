@@ -33,7 +33,7 @@ function long() {
     done <<< "$task_categories"
     echo "$out"
 }
-function listTasks(){
+function display(){
     mode="$1"
     case $mode in
         'short')
@@ -74,7 +74,7 @@ function main() {
             ;;
     esac
     mode="$(cat $mode_file)"
-    listTasks $mode
+    display $mode
 }
 
 main "$1"
