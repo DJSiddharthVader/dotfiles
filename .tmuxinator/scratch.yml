@@ -5,7 +5,7 @@ on_project_start: wal -R -e -n -q &
 on_project_exit: tmux kill-session -t scratch
 
 windows:
-    - thesis: cd ~/Personal/Current_Projects/thesis_SidReed; tl | grep 'Paper:'
+    - thesis: cd ~/Documents/School/Year_5/Winter_2020/MolBiol_3I03/thesis_SidReed; tl | grep 'Paper:'
     - scratch:
     - read: cd ~/Documents/To_Read
     - fetch: neofetch
