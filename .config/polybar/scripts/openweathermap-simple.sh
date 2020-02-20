@@ -1,6 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 
-get_icon() {
+#Vars
+API="https://api.openweathermap.org/data/2.5"
+KEY="f8411a3dd03e0674a17b8e736c2d0df5"
+CITY=""
+UNITS="metric"
+SYMBOL="°"
+
+getIcon() {
     case $1 in
         01d) icon="";;
         01n) icon="";;
@@ -20,39 +27,45 @@ get_icon() {
         50n) icon="";;
         *) icon="";
     esac
-
     echo $icon
 }
-
-API="https://api.openweathermap.org/data/2.5"
-KEY="f8411a3dd03e0674a17b8e736c2d0df5"
-CITY=""
-UNITS="metric"
-SYMBOL="°"
-
-
-if [ -n "$CITY" ]; then
-    if [ "$CITY" -eq "$CITY" ] 2>/dev/null; then
-        CITY_PARAM="id=$CITY"
-    else
-        CITY_PARAM="q=$CITY"
-    fi
-
-    weather=$(curl -sf "$API/weather?appid=$KEY&$CITY_PARAM&units=$UNITS")
-else
+getWeather() {
     location=$(curl -sf https://location.services.mozilla.com/v1/geolocate?key=geoclue)
-
-    if [ -n "$location" ]; then
-        location_lat="$(echo "$location" | jq '.location.lat')"
-        location_lon="$(echo "$location" | jq '.location.lng')"
-
-        weather=$(curl -sf "$API/weather?appid=$KEY&lat=$location_lat&lon=$location_lon&units=$UNITS")
+    location_lat="$(echo "$location" | jq '.location.lat')"
+    location_lon="$(echo "$location" | jq '.location.lng')"
+    weather=$(curl -sf "$API/weather?appid=$KEY&lat=$location_lat&lon=$location_lon&units=$UNITS")
+    echo "$weather"
+}
+main() {
+    weather="$(getWeather)"
+    if [ -n "$weather" ]; then
+        weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
+        weather_icon=$(echo "$weather" | jq -r ".weather[0].icon")
+        echo " $(getIcon "$weather_icon")" "$weather_temp$SYMBOL"
     fi
-fi
+}
 
-if [ -n "$weather" ]; then
-    weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
-    weather_icon=$(echo "$weather" | jq -r ".weather[0].icon")
+main
 
-    echo " $(get_icon "$weather_icon")" "$weather_temp$SYMBOL"
-fi
+
+#DEPRECIATED
+#getWeather() {
+#    if [ -n "$CITY" ]; then
+#        if [ "$CITY" -eq "$CITY" ] 2>/dev/null; then
+#            CITY_PARAM="id=$CITY"
+#        else
+#            CITY_PARAM="q=$CITY"
+#        fi
+#        weather=$(curl -sf "$API/weather?appid=$KEY&$CITY_PARAM&units=$UNITS")
+#    else #no city set
+#        location=$(curl -sf https://location.services.mozilla.com/v1/geolocate?key=geoclue)
+#        if [ -n "$location" ]; then
+#            location_lat="$(echo "$location" | jq '.location.lat')"
+#            location_lon="$(echo "$location" | jq '.location.lng')"
+#
+#            weather=$(curl -sf "$API/weather?appid=$KEY&lat=$location_lat&lon=$location_lon&units=$UNITS")
+#        fi
+#    fi
+#    echo "$weather"
+#}
+
