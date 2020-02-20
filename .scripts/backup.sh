@@ -14,7 +14,8 @@ function rsyncBackup(){
 }
 function tarBackup(){
     backupfile="$drive/backups/backup_$(date +"%H:%M-%d-%m-%Y").tar.gz"
-    tar -cvpzf "$backupfile" \
+    sudo tar \
+        -zpcf "$backupfile" \
         --exclude=$HOME/.cache \
         --exclude=$HOME/.steam \
         --exclude=$HOME/dotfiles\
@@ -22,11 +23,11 @@ function tarBackup(){
         --exclude=$HOME/Videos \
         --exclude=$HOME/Pictures \
         --exclude=$HOME/Personal \
-        --exclude=/media \
-        --exclude=/var/log \
-        --exclude=/var/cache/apt \
-        --exclude=/usr/src/linux-headers* \
-        --one-file-system /
+        --one-file-system $HOME
+#        --exclude=/media \
+#        --exclude=/var/log \
+#        --exclude=/var/cache/apt \
+#        --exclude=/usr/src/linux-headers* \
 }
 function checkDrive(){
     mounts="$(lsblk | grep "$drive" | wc -l)"
@@ -39,8 +40,8 @@ function main(){
     mode="$1"
     case $mode in
         'both')
-            rsyncBackup
             tarBackup
+            rsyncBackup
             ;;
         'rsync')
             rsyncBackup
@@ -49,7 +50,7 @@ function main(){
             tarBackup
             ;;
         *)
-            echo "Usage $0 {both|rsyn|tar}"
+            echo "Usage $0 {both|rsync|tar}"
             exit 1
             ;;
     esac
