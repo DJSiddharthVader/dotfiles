@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
 unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
@@ -8,21 +8,28 @@ idxfile="$HOME/dotfiles/.varfiles/wallidx"
 tmp='/tmp/histfile'
 bordercolor='Black'
 resolution='1366x768!' #resolution, ignore aspect ratio
+
+usage() {
+    echo "Usage: $0 {font|back|both} {path/to/image|rs|prev|stay|next}"
+}
 appendHist() {
-    ls "$picdir" | shuf >> "$histfile"
+    find "$picdir" -maxdepth 99 >| "$histfile"
 }
 resetHist() {
-    ls "$picdir" | shuf >| "$histfile"
+    find "$picdir" -maxdepth 99 | shuf >| "$histfile"
 }
 updateImageIdx() {
-    mode="$1"
-    expimg="$2"
+    if [[ -f "$1" ]];then
+        mode="path"
+    else
+        mode="$1"
+    fi
     idx=$(cat "$idxfile")
     maxidx="$(wc -l "$histfile" | cut -d' ' -f1)"
     case "$mode" in
         'path')
             head -"$idx" "$histfile" >| "$tmp"
-            echo "$(basename "$expimg")" >> "$tmp"
+            echo "$(readlink -e "$1")" >> "$tmp"
             remain="$(( $maxidx - $idx ))"
             tail -"$remain" "$histfile" >> "$tmp"
             mv "$tmp" "$histfile"
@@ -46,7 +53,7 @@ updateImageIdx() {
             nidx=$(( $idx + 1 ))
             ;;
         *)
-            echo "Usage: $0 {font|back|both} {stay|path|next|prev} path/to/image (optional)"
+            usage
             exit 1
             ;;
     esac
@@ -55,7 +62,7 @@ updateImageIdx() {
 }
 idxToImage(){
     idx="$1"
-    image="$picdir/$(head -"$idx" "$histfile" | tail -1)"
+    image="$(head -"$idx" "$histfile" | tail -1)"
     echo "$image"
 }
 addBorderToImg() {
@@ -81,16 +88,21 @@ setImg() {
             feh --bg-scale "$unbgfile" #without borders
             ;;
         *)
-            echo "usage {float|full|mini|none}"
+            usage
             exit 1
             ;;
     esac
 }
+changeColors() {
+    image="$1"
+    wal -e -n -i "$image"  #font only
+    ~/dotfiles/.scripts/bar-manager.sh stay >> /dev/null 2>&1
+    ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
+    timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
+}
 main() {
     mode="$1"
-    imode="$2"
-    image="$(basename "$3")"
-    if [ "$mode" = 'rslist' ]; then
+    if [ "$mode" = 'rs' ]; then
         resetHist
         echo 1 >| "$idxfile"
         exit 0
@@ -98,34 +110,31 @@ main() {
         resetHist
         echo 1 >| "$idxfile"
     fi
-    nidx=$(updateImageIdx "$imode" "$image")
-    echo "$nidx"
+    image="$2"
+    nidx=$(updateImageIdx "$image")
     image="$(idxToImage "$nidx")"
-    echo "$image"
     case "$mode" in
         'font')
-            wal -e -n -i "$image"  #font only
-            #wpg -A "$unbgfile"
-            ~/dotfiles/.scripts/bar-manager.sh auto > /dev/null 2>&1
-            ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
-            timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
+            changeColors "$image"
             ;;
         'back')
             setImg "$image"
             ;;
         'both')
             setImg "$image"
-            wal -e -n -i "$image"  #font only
-            ~/dotfiles/.scripts/bar-manager.sh auto >> /dev/null 2>&1
-            ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
-            timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
+            changeColors "$image"
             ;;
         *)
-            echo "Usage: $0 {font|back|both} {stay|path|next|prev} path/to/image (optional)"
+            usage
             exit 1
             ;;
     esac
 }
 
 #main mode position img
-main "$1" "$2" "$3"
+if (( $# < 1 )); then
+    usage
+    exit 1
+else
+    main "$1" "$2" "$3"
+fi
