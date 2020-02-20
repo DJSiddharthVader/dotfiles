@@ -515,5 +515,5 @@ unset __conda_setup
 # <<< conda init <<<
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-source $HOME/dotfiles/.scripts/bash_prompt.sh
+source $HOME/dotfiles/.scripts/bash-prompt.sh
 export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
