@@ -7,9 +7,10 @@ modes_fwd=('padding' 'float' 'full' 'mini' 'none')
 modes_rev=('padding' 'mini' 'none' 'float' 'full')
 bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
 unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
+
 function launchBar() {
     mode="$1"
-    killall -q polybar # Terminate already running bar instances
+    killall -q polybar && sleep 0.00001 # Terminate already running bar instances
     for m in $(xrandr | grep ' connected' | cut -d' ' -f1); do
         case "$mode" in
             float)
@@ -62,7 +63,7 @@ function barWrapper() {
         prev)
             mode="$(head -3 $togglefile | tail -1)"
             ;;
-        auto)
+        stay)
             mode="$(head -1 $togglefile)"
             ;;
         float)
@@ -78,7 +79,7 @@ function barWrapper() {
             mode="none"
             ;;
         *)
-            echo "Usage: $0 {next|prev|auto|float|full||mini|none}"
+            echo "Usage: $0 {next|prev|stay|float|full||mini|none}"
             exit 1
             ;;
     esac
