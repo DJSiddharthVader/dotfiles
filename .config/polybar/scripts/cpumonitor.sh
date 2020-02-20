@@ -12,7 +12,7 @@ function long() {
 #sed -uEn 's/(^[0-9]*)\..*$/0\1\%/p' | #trim decimals, pad 0 if < 10, add % after
 #tr '\n' ' ' # join lines togethre
 }
-function cpuLoad() {
+function display() {
     mode="$1"
     case $mode in
         'short')
@@ -53,7 +53,7 @@ function main() {
             ;;
     esac
     mode="$(cat $mode_file)"
-    cpuLoad $mode
+    display $mode
 }
 
 main "$1"
