@@ -7,7 +7,7 @@ function displayStatus() {
             output="N/A"
             ;;
         *)
-            output="$(expressvpn status | head -1 | cut -d'-' -f2)"
+            output="$(expressvpn status | grep 'onnec' | head -1 | cut -d'-' -f2)"
             ;;
     esac
     echo "$output"
