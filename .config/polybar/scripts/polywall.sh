@@ -62,7 +62,7 @@ main() {
             /home/sidreed/.scripts/wallpaper.sh "$mode" 'stay'
             ;;
         *)
-            echo "Usage: $0 {prev|next|mode|current}"
+            echo "Usage: $0 {prev|next|mode|print}"
             exit 1
             ;;
     esac
