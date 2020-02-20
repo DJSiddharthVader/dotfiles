@@ -95,11 +95,11 @@ function prompt_command() {
         #host="$B2$F0$hst \h$F2$B5$par"
         dirc="$B2$F0$dir $F0\w$F2$B4$par"
         #task="$B4$F0$tsk\$(count_tasks)$F4$B5$par"
-        #cond="$B4$F0$snk\$(condaenv)$F4$B6$par"
-        gits="$B4$F0\$(gitstats)$F4$B0$par"
+        cond="$B4$F0$snk\$(condaenv)$F4$B5$par"
+        gits="$B5$F0\$(gitstats)$F5$B0$par"
         endd="\n$B0$Fb$bot$end$F1$pen$FB"
         PROMPT_DIRTRIM=2
-        export PS1="$strt$time$dirc$gits$endd"
+        export PS1="$strt$time$dirc$cond$gits$endd"
     fi
 }
 PROMPT_COMMAND=prompt_command
