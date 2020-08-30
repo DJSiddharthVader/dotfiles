@@ -8,13 +8,13 @@ ramp2=""
 
 
 function short() {
-    sensors | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
+    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
 }
 function long() {
-    sensors | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
+    sensors | grep -v 'ERROR' | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
 }
 function getTemp () {
-    sensors | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..'
+    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..'
 }
 function showIcon() {
     temp=$(getTemp)
@@ -45,7 +45,7 @@ function display(){
             exit 1
             ;;
     esac
-    echo $temp
+    echo $temp | grep -v 'ERROR'
 }
 function main() {
     mode="$1"
@@ -73,7 +73,7 @@ function main() {
             ;;
     esac
     mode="$(cat $mode_file)"
-    display $mode
+    display $mode | grep -v 'ERROR'
 }
 
 main "$1"
