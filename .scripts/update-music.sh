@@ -1,6 +1,7 @@
 #!/bin/bash
 #scdl --download-archive "$HOME/dotfiles/.varfiles/soundcloud_download_archive.txt" -c -l https://soundcloud.com/sid-reed-871359466/sets/likedsongs
 musicdir="$HOME/Music/songs/everything"
+sudo youtube-dl -U
 cd $musicdir
 youtube-dl  --audio-quality 0 \
             --audio-format mp3 \
@@ -12,4 +13,4 @@ youtube-dl  --audio-quality 0 \
             --download-archive "$HOME/dotfiles/.varfiles/youtube-dl_downloads.txt" \
             "https://www.youtube.com/playlist?list=PLMU-V2Iwwq69O1QA3kOtw_YTQ2q-sD-gT"
             #"https://www.youtube.com/playlist?list=PLMU-V2Iwwq699kP0gmoOXyyk02eH4ZgEH"
-cd -
+#cd -
