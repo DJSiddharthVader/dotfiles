@@ -7,12 +7,12 @@ connectToMonitor() {
         resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | grep -v i | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*')"
         #pactl set-card-profile 0 output:hdmi-stereo
         sleep 1
-        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --left-of eDP-1
+        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
     else
         resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | head -1 | grep -ao '[0-9]*x[0-9]*')"
         xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
     fi
-    echo "$monitor $resolution"
+    bash ~/.scripts/bar-manager.sh stay
 }
 disconnectMonitor() {
     monitor=`xrandr | grep ' connected' | tail -1 | cut -d' ' -f1`
