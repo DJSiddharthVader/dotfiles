@@ -30,7 +30,8 @@ alias pull='git pull'
 alias com='git commit'
 alias brch='git branch'
 alias chk='git checkout'
-alias stat="git status | less"
+alias statf="git status | less"
+alias stat="git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf"
 alias stwt="watch -n1 'git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf'"
 
 #My Scripts
