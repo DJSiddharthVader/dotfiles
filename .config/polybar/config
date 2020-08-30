@@ -100,7 +100,7 @@ bottom = true
 modules-left = date sr79 mybattery sr910 memory sr1011 mycpu sr1112 mytemp sr1213 xkeyboard sr1314 uptime sr1415 weather sr158 taskcounter sr8b
 modules-center =
 modules-right
-;modules-right = sl8b taskcounter sl158 weather sl1415 uptime sl1314 xkeyboard sl1213 temperature sl1112 mycpu sl1011 memory sl910 battery sl79 date
+;modules-right = sl158 weather sl1415 uptime sl1314 xkeyboard sl1213 temperature sl1112 mycpu sl1011 memory sl910 battery sl79 date
 
 [bar/lap]
 inherit = section/full
@@ -129,9 +129,9 @@ border-bottom-size = 0
 font-4 = Terminus:style=Regular:pixelsize=26;3
 tray-transparent = true
 
-modules-left = volume sr3b
-modules-center = i3
-modules-right = sl9b battery
+modules-left =
+modules-center = sl3b volume sl23 backlight-acpi sl132 xkeyboard i3 date sr79 mybattery sr910 memory sr10b
+modules-right =
 
 
 ;my modules
@@ -519,11 +519,23 @@ content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color15}
 content-background = ${colors.color8}
+[module/sl132]
+type = custom/text
+content = ${colors.leftpointsep}
+content-font = 5
+content-foreground = ${colors.color13}
+content-background = ${colors.color2}
 [module/sl1b]
 type = custom/text
 content = ${colors.leftpointsep}
 content-font = 5
 content-foreground = ${colors.color1}
+content-background = ${colors.background}
+[module/sl3b]
+type = custom/text
+content = ${colors.leftpointsep}
+content-font = 5
+content-foreground = ${colors.color3}
 content-background = ${colors.background}
 [module/sl4b]
 type = custom/text
@@ -572,6 +584,12 @@ type = custom/text
 content = ${colors.rightpointsep}
 content-font = 5
 content-foreground = ${colors.color6}
+content-background = ${colors.background}
+[module/sr10b]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color10}
 content-background = ${colors.background}
 [module/sr79]
 type = custom/text
