@@ -509,6 +509,12 @@ func! CurrentFileDir(cmd)
 endfunc
 let g:vimtex_view_general_viewer = 'open'
 let g:vimtex_view_general_options = '-a zathura'
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+let g:UltiSnipsSnippetDirectories=["UltiSnips","snips"]
 
 " => Custom header
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
