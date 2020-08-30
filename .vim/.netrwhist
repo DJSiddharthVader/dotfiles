@@ -1,8 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/home/sidreed/gitrepos/placenta-cancer/presentations/final_presentation_18-12-2019/svgs'
 let g:netrw_dirhist_2='/home/sidreed/gitrepos/placenta-cancer/presentations/final_presentation_18-12-2019'
 let g:netrw_dirhist_3='/home/sidreed/Documents/School/Co-op/Hoffman_Lab/Work_Term_Report_2-2/images'
 let g:netrw_dirhist_4='/home/sidreed/Documents/School/Co-op/Hoffman_Lab/Work_Term_Report_2-2/final_images/presentation'
 let g:netrw_dirhist_5='/media/1tbdrive/Videos/Texhnolyze-720p'
 let g:netrw_dirhist_6='/home/sidreed/dotfiles/.config/polybar/scripts'
+let g:netrw_dirhist_7='/home/sidreed/.config'
+let g:netrw_dirhist_8='/home/sidreed/Documents/Resume'

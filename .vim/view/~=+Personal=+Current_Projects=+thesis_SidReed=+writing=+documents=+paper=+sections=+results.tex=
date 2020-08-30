@@ -337,7 +337,7 @@ setlocal smartindent
 setlocal softtabstop=4
 setlocal spell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
+setlocal spellfile=~/.vim/spell/en.utf-8.add
 setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=.tex,.sty,.cls
@@ -360,25 +360,55 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-7,11fold
+10,16fold
+6,19fold
 20,24fold
-29,33fold
-42,46fold
-54,58fold
-66,70fold
-79,83fold
-91,95fold
-1,107fold
-1
+5,25fold
+27,35fold
+36,42fold
+26,42fold
+26,43fold
+45,52fold
+53,56fold
+44,57fold
+59,65fold
+66,69fold
+58,70fold
+72,80fold
+81,88fold
+71,89fold
+5
 normal! zo
-7
+6
 normal! zo
-let s:l = 9 - ((4 * winheight(0) + 10) / 20)
+6
+normal! zc
+5
+normal! zc
+26
+normal! zo
+26
+normal! zo
+26
+normal! zc
+44
+normal! zo
+44
+normal! zc
+58
+normal! zo
+58
+normal! zc
+71
+normal! zo
+72
+normal! zo
+let s:l = 77 - ((76 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-9
-normal! 0
+77
+normal! 0244|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
