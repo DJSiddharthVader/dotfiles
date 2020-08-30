@@ -5,6 +5,7 @@
 
 ## Overall Conditionals {{{
 export TERM='screen-256color'
+export HISTTIMEFORMAT="%m/%d - %H:%M:%S: "
 
 _islinux=false
 [[ "$(uname -s)" =~ Linux|GNU|GNU/* ]] && _islinux=true
@@ -495,25 +496,22 @@ PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
 PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
-## Conda
-. $HOME/anaconda3/etc/profile.d/conda.sh
-# added by Anaconda3 5.3.0 installer
-# >>> conda init >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(CONDA_REPORT_ERRORS=false '$HOME/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    \eval "$__conda_setup"
-else
-    if [ -f "$HOME/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOME/anaconda3/etc/profile.d/conda.sh"
-        CONDA_CHANGEPS1=false conda activate base
-    else
-        \export PATH="$HOME/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda init <<<
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 source $HOME/dotfiles/.scripts/bash-prompt.sh
 export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/sidreed/anaconda3/condabin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/sidreed/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/sidreed/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/sidreed/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
