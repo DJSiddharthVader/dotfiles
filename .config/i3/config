@@ -230,7 +230,7 @@ bindsym $mod+n         focus output left
 bindsym $mod+Shift+n   focus output right
 
 bindsym $mod+m         [instance="music"] scratchpad show; [instance="music"] move position center
-#bindsym $mod+Shift+m
+bindsym $mod+Shift+m   $mute
 
 #bindsym $mod+Shift+Return
 #bindsym $mod+Shift+Escape
