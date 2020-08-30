@@ -1,5 +1,5 @@
 #!/bin/bash
-task_file="$HOME/Personal/notes/tasks/tasks"
+task_file="$HOME/Documents/Notes/tasks/tasks"
 mode_file="$HOME/dotfiles/.varfiles/taskmode"
 #Task Icons
 #task_icon="Tasks"
