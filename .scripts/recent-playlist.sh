@@ -9,5 +9,9 @@ find $music_dir -maxdepth 99 -type f -printf "%T+\t%p\n" | sort -n | cut -f2- | 
 
 #all songs modified within mtime minutes (1 week)
 playlist="$HOME/.mpd/playlists/mostrecentadded.m3u"
-mtime=$((60*24*7))
+if [[ $# > 0 ]];then
+    mtime="$1"
+else
+    mtime=$((60*24*7)) #1 week in seconds
+fi
 find $music_dir -maxdepth 99 -type f -mmin -$mtime | cut -f2-  >| $playlist
