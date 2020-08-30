@@ -1,4 +1,8 @@
 *.pid
+.config/Epic
+.config/zoomus.conf
+.config/calibre
+.config/discord
 .config/autostart/
 .config/MonoGame/
 .config/UNDERTALE/
