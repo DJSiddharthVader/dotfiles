@@ -1,25 +1,57 @@
 #!/bin/bash
-#$1 is new repo name
-#$2 is a one sentence description in single quotes
 
-user='DJSIddharthVader'
+# Vars
+user='DJSiddharthVader'
+spacer=" "
+first_commit_msg="first commit"
 
-mkdir -p "$1"
-dflag='{"name":'"\"$1\""}
-curl -u "$user" https://api.github.com/user/repos -d "$dflag"
-echo "curl -u $user https://api.github.com/user/repos -d $dflag"
-cd "$1"
 
-git init
-#search="github.com"
-#replace="$user@github.com"
-#sed -i -e "s/$search/$replace/" ./.git/config
+function help(){
+    echo 'Usage ./init-new-gitrepo.sh $repo_name $repo_description'
+    exit 1
+}
+function createRemote(){
+    repo_name="$1"
+    repo_description="$2"
+    dflag="$(jq -nc \
+                --arg name "$repo_name" \
+                --arg description "$repo_description" \
+                --arg private "true" \
+                '{ $name, $description, $private }'
+            )"
+    curl -X POST \
+         -u "$user" \
+         -H "Accept: application/vnd.github.v3+json" \
+             https://api.github.com/user/repos \
+         -d "$dflag" \
+         -s #>> /dev/null 2>&1
+}
+function createLocal(){
+    repo_name="$1"
+    repo_description="$2"
+    echo "$repo_description" >| README.md
+    git init
+    git add README.md
+    git commit -m "$first_commit_msg"
+    git remote add origin "git@github.com:$user/$repo_name.git"
+    git push -u origin master
+    git config remote.origin.push HEAD
+}
+function main(){
+    repo_name="$1"
+    repo_description="$2"
+    mkdir -p "$repo_name"
+    createRemote "$repo_name" "$repo_description"
+    cd "$repo_name"
+    createLocal "$repo_name" "$repo_description"
+    cd -
+}
 
-echo "$2" > README.md
-git add README.md
-git commit -m "first commit"
-
-originurl="git@github.com:$user/$1.git"
-git remote add origin "$originurl"
-git push -u origin master
-git config remote.origin.push HEAD
+#Args
+if [[ $# -eq 2 ]];then
+    repo_name="$1"
+    repo_description="$2"
+else
+    help
+fi
+main "$repo_name" "$repo_description"
