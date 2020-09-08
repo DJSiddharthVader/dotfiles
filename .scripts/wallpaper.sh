@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Vars
 bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
 unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
 picdir="$HOME/Pictures/wallpapers"
@@ -9,15 +10,18 @@ tmp='/tmp/histfile'
 bordercolor='Black'
 resolution='1366x768!' #resolution, ignore aspect ratio
 
+
 usage() {
     echo "Usage: $0 {font|back|both} {path/to/image|rs|prev|stay|next}"
 }
+
 appendHist() {
     find "$picdir" -maxdepth 99 >| "$histfile"
 }
 resetHist() {
     find "$picdir" -maxdepth 99 | shuf >| "$histfile"
 }
+
 updateImageIdx() {
     if [[ -f "$1" ]];then
         mode="path"
@@ -65,6 +69,7 @@ idxToImage(){
     image="$(head -"$idx" "$histfile" | tail -1)"
     echo "$image"
 }
+
 addBorderToImg() {
     image="$1"
     cp "$image" "$unbgfile"
@@ -97,9 +102,11 @@ changeColors() {
     image="$1"
     wal -e -n -i "$image"  #font only
     ~/dotfiles/.scripts/bar-manager.sh stay >> /dev/null 2>&1
+    pywalfox update
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
     timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
 }
+
 main() {
     mode="$1"
     if [ "$mode" = 'rs' ]; then
