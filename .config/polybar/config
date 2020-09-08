@@ -97,7 +97,7 @@ modules-right = sl5b expressvpn sl45 wlan sl34 volume sl23 backlight-acpi sl12 p
 [bar/schedulef]
 inherit = section/float
 bottom = true
-modules-left = date sr79 mybattery sr910 memory sr1011 mycpu sr1112 mytemp sr1213 xkeyboard sr1314 uptime sr1415 weather sr158 taskcounter sr8b
+modules-left = date sr79 mybattery sr910 memory sr1011 mycpu sr1112 mytemp sr1213 xkeyboard sr1314 uptime sr1415 weather sr15b
 modules-center =
 modules-right
 ;modules-right = sl158 weather sl1415 uptime sl1314 xkeyboard sl1213 temperature sl1112 mycpu sl1011 memory sl910 battery sl79 date
@@ -639,6 +639,12 @@ content = ${colors.rightpointsep}
 content-font = 5
 content-foreground = ${colors.color15}
 content-background = ${colors.color8}
+[module/sr15b]
+type = custom/text
+content = ${colors.rightpointsep}
+content-font = 5
+content-foreground = ${colors.color15}
+content-background = ${colors.background}
 [module/sr8b]
 type = custom/text
 content = ${colors.rightpointsep}
