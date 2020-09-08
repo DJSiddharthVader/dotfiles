@@ -507,6 +507,10 @@ endfunc
 func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
+
+" => Plugin options
+" ===============================================
+
 let g:vimtex_view_general_viewer = 'open'
 let g:vimtex_view_general_options = '-a zathura'
 let g:tex_flavor='latex'
@@ -515,6 +519,8 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 let g:UltiSnipsSnippetDirectories=["UltiSnips","snips"]
+" Markdown
+ let g:markdown_fenced_languages = ['css','json=javascript', 'ruby', 'xml', 'python', 'go']
 
 " => Custom header
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
