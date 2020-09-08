@@ -45,7 +45,7 @@ alias rspa='~/.scripts/reset-pulseaudio.sh'
 alias knit='~/.scripts/knit-pdf.sh'
 
 #Shorten
-alias school='cd /home/sidreed/Documents/School/Year_5/Winter_2020/'
+alias school='cd /home/sidreed/Documents/CMU_MSCB/Courses/'
 alias pdf='zathura'
 alias bat='acpi -b'
 alias plx='pdflatex'
