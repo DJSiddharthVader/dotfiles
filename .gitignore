@@ -53,8 +53,13 @@
 .mpd/mpd.log
 .mpd/mpdstate
 .mpd/sticker.sql
+.mpd/playlists/mostrecent.m3u
+.mpd/playlists/mostrecentadded.m3u
 .ncmpcpp/error.log
 .scripts/schedules
 .tmux/resurrect
 .vim/bundle/Nvim-R/
+.vim/bundle/ultisnips
+.vim/bundle/vim-markdown
+.vim/.netrwhist
 Anaconda*
