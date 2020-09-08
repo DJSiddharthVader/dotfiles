@@ -33,9 +33,6 @@ fi
 # }}}
 ## Exports {{{
 
-# set PATH variable
-export PATH="/usr/local/bin:$HOME/bin:$HOME/bin:$HOME/.local/bin:$PATH"
-
 # Default browser
 if [ -n "$TERM" ]; then
     export BROWSER="firefox"
@@ -87,7 +84,6 @@ if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
 fi
 
 # }}}
-
 ## BASH Options {{{
 
   shopt -s cdspell                 # Correct cd typos
@@ -479,26 +475,30 @@ if which systemctl &>/dev/null; then
 fi
 
 # }}}
-
 ## Import colorscheme from 'wal' asynchronously
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
-export PATH="${PATH}:${HOME}/.local/bin/"
 (cat ~/.cache/wal/sequences &)
 #(cat $HOME/.config/wpg/sequences &)
 #export QT_QPA_PLATFORMTHEME=gtk2
 
+## Prompt
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+source $HOME/dotfiles/.scripts/bash-prompt.sh
+export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
 
-## Setting Path
-PATH="$HOME/perl5/bin${PATH:+:${PATH}}"; export PATH;
+## Set PATH variable
+
+export PATH="/usr/local/bin:$HOME/bin:$HOME/bin:$HOME/.local/bin:$PATH"
+export GOPATH="$HOME/Documents/CMU_MSCB/Courses/Programming-02601/Notes"
+export PATH=$PATH:/usr/local/go/bin:$GOPATH
+export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-source $HOME/dotfiles/.scripts/bash-prompt.sh
-export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
+PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}') #remove duplicate entries
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
