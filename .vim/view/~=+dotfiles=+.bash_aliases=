@@ -117,11 +117,11 @@ silent! normal! zE
 8,12fold
 13,17fold
 18,22fold
-23,35fold
-36,45fold
-46,68fold
-69,77fold
-let s:l = 34 - ((33 * winheight(0) + 21) / 42)
+23,36fold
+37,46fold
+47,70fold
+71,79fold
+let s:l = 34 - ((33 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
