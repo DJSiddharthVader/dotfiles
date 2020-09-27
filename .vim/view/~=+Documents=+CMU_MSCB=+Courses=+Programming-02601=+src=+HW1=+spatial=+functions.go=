@@ -113,10 +113,16 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-11,18fold
-19,35fold
-38,49fold
-50,56fold
+10,19fold
+20,31fold
+33,43fold
+44,63fold
+64,99fold
+101,111fold
+112,132fold
+133,153fold
+154,174fold
+175,185fold
 let s:l = 1 - ((0 * winheight(0) + 14) / 28)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l

@@ -116,55 +116,55 @@ silent! normal! zE
 3,11fold
 12,29fold
 2,30fold
-31,62fold
-64,70fold
-71,77fold
-63,78fold
-80,84fold
-85,92fold
-93,104fold
-105,113fold
-114,123fold
-124,129fold
-130,139fold
-79,140fold
-148,152fold
-141,153fold
-154,239fold
-241,260fold
-261,272fold
-273,284fold
-285,296fold
-240,297fold
-298,310fold
-311,324fold
-325,360fold
+31,64fold
+66,72fold
+73,79fold
+65,80fold
+82,86fold
+87,94fold
+95,106fold
+107,115fold
+116,125fold
+126,131fold
+132,141fold
+81,142fold
+150,154fold
+143,155fold
+156,241fold
+243,262fold
+263,274fold
+275,286fold
+287,298fold
+242,299fold
+300,312fold
+313,326fold
+327,362fold
 2
 normal! zo
 2
 normal! zc
-63
+65
 normal! zo
-63
+65
 normal! zc
-79
+81
 normal! zo
-79
+81
 normal! zc
-141
+143
 normal! zo
-141
+143
 normal! zc
-240
+242
 normal! zo
-240
+242
 normal! zc
-let s:l = 311 - ((309 * winheight(0) + 11) / 22)
+let s:l = 61 - ((60 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-311
-normal! 0
+61
+normal! 01|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
