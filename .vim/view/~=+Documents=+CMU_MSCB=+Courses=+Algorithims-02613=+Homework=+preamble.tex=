@@ -95,13 +95,13 @@ xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
 nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
-nnoremap <buffer> <SNR>107_(v) v
-nnoremap <buffer> <SNR>107_(V) V
-xnoremap <buffer> <silent> <SNR>107_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-xnoremap <buffer> <silent> <SNR>107_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>107_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>107_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
 xnoremap <buffer> <silent> <SNR>107_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>107_(V) V
+nnoremap <buffer> <SNR>107_(v) v
 nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
 nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
 vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
@@ -374,16 +374,55 @@ silent! normal! zE
 30,33fold
 34,37fold
 38,43fold
-48,55fold
-44,81fold
+49,56fold
+45,57fold
+58,62fold
+63,69fold
+44,70fold
+72,105fold
+113,125fold
+126,138fold
+112,139fold
+111,139fold
+142,154fold
+155,167fold
+168,177fold
+140,178fold
+106,184fold
+71,185fold
+187,203fold
 44
 normal! zo
-let s:l = 63 - ((44 * winheight(0) + 21) / 42)
+45
+normal! zo
+45
+normal! zc
+44
+normal! zc
+71
+normal! zo
+106
+normal! zo
+111
+normal! zo
+112
+normal! zo
+111
+normal! zc
+140
+normal! zo
+140
+normal! zc
+106
+normal! zc
+71
+normal! zc
+let s:l = 1 - ((0 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-63
-normal! 09|
+1
+normal! 0
 lcd ~/Documents/CMU_MSCB/Courses/Algorithims-02613/Homework/HW2
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

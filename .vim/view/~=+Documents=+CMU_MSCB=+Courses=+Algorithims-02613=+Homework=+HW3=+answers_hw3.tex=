@@ -360,24 +360,62 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-10,10fold
-11,11fold
-13,20fold
-7,23fold
-7
+14,31fold
+32,38fold
+8,39fold
+54,63fold
+64,73fold
+41,73fold
+76,79fold
+80,82fold
+83,86fold
+75,86fold
+40,87fold
+88,108fold
+110,115fold
+127,144fold
+116,147fold
+148,151fold
+109,152fold
+155,166fold
+167,180fold
+181,185fold
+153,186fold
+187,195fold
+8
 normal! zo
-10
-normal! zo
-11
-normal! zo
-7
+8
 normal! zc
-let s:l = 1 - ((0 * winheight(0) + 21) / 42)
+40
+normal! zo
+41
+normal! zo
+41
+normal! zc
+75
+normal! zo
+75
+normal! zc
+40
+normal! zc
+109
+normal! zo
+116
+normal! zo
+116
+normal! zc
+109
+normal! zc
+153
+normal! zo
+153
+normal! zc
+let s:l = 8 - ((7 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+8
+normal! 01|
 lcd ~/Documents/CMU_MSCB/Courses/Algorithims-02613/Homework/HW3
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
