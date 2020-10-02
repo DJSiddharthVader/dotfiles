@@ -244,7 +244,7 @@ setlocal nosmartindent
 setlocal softtabstop=4
 setlocal spell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
+setlocal spellfile=~/.vim/spell/en.utf-8.add
 setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
@@ -291,19 +291,28 @@ silent! normal! zE
 188,197fold
 198,220fold
 227,236fold
-221,237fold
-242,244fold
-247,252fold
-253,258fold
-259,264fold
-265,270fold
-271,276fold
-277,282fold
-283,288fold
-289,294fold
-295,300fold
-301,306fold
-245,312fold
+221,238fold
+239,265fold
+266,278fold
+279,293fold
+294,307fold
+308,323fold
+324,350fold
+351,364fold
+376,380fold
+381,385fold
+366,386fold
+389,394fold
+395,400fold
+401,406fold
+407,412fold
+413,418fold
+419,424fold
+425,430fold
+431,436fold
+437,442fold
+443,448fold
+387,449fold
 1
 normal! zo
 1
@@ -324,15 +333,19 @@ normal! zc
 normal! zo
 221
 normal! zc
-245
+366
 normal! zo
-245
+366
 normal! zc
-let s:l = 245 - ((244 * winheight(0) + 21) / 42)
+387
+normal! zo
+387
+normal! zc
+let s:l = 1 - ((0 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-245
+1
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

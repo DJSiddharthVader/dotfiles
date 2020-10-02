@@ -20,7 +20,7 @@ setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 setlocal commentstring=/*%s*/
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
-setlocal conceallevel=0
+setlocal conceallevel=1
 setlocal completefunc=
 setlocal nocopyindent
 setlocal cryptmethod=
@@ -116,112 +116,105 @@ silent! normal! zE
 7,11fold
 12,15fold
 16,21fold
-23,37fold
-38,43fold
-44,46fold
-47,55fold
 22,56fold
-58,71fold
-72,76fold
-77,79fold
-80,87fold
-57,88fold
-90,96fold
-97,104fold
-105,110fold
-111,118fold
-119,135fold
-89,136fold
-138,145fold
-146,152fold
-153,160fold
-161,168fold
-169,175fold
-176,182fold
-183,189fold
-190,196fold
-197,203fold
-204,209fold
-137,210fold
-212,237fold
-238,243fold
-244,247fold
-248,262fold
-263,280fold
-281,308fold
-309,324fold
-325,365fold
-366,375fold
-376,402fold
-403,409fold
-410,428fold
-429,438fold
-439,441fold
-211,442fold
-444,449fold
-450,455fold
-456,461fold
-462,467fold
-468,473fold
-474,479fold
-480,485fold
-486,491fold
-492,497fold
-498,503fold
-504,509fold
-510,515fold
-516,521fold
-528,533fold
-534,539fold
-540,545fold
-546,551fold
-552,557fold
-558,563fold
-564,569fold
-570,575fold
-576,581fold
-582,587fold
-588,593fold
-594,599fold
-600,605fold
-606,611fold
-612,617fold
-618,623fold
-624,629fold
-630,635fold
-636,641fold
-642,647fold
-443,648fold
-22
+57,87fold
+89,95fold
+96,103fold
+104,109fold
+110,116fold
+117,132fold
+88,133fold
+135,179fold
+180,187fold
+188,194fold
+195,202fold
+203,210fold
+211,217fold
+218,224fold
+225,231fold
+232,238fold
+239,245fold
+246,250fold
+134,251fold
+253,278fold
+279,284fold
+285,288fold
+289,303fold
+304,321fold
+322,349fold
+350,365fold
+366,408fold
+409,418fold
+419,445fold
+446,452fold
+453,471fold
+472,481fold
+482,484fold
+252,485fold
+487,492fold
+493,498fold
+499,504fold
+505,510fold
+511,516fold
+517,522fold
+523,528fold
+529,534fold
+535,540fold
+541,546fold
+547,552fold
+553,558fold
+559,564fold
+565,570fold
+571,576fold
+577,582fold
+583,588fold
+589,594fold
+595,600fold
+601,606fold
+607,612fold
+613,618fold
+619,624fold
+625,630fold
+631,636fold
+637,642fold
+643,648fold
+649,654fold
+655,660fold
+661,666fold
+667,672fold
+673,678fold
+679,684fold
+685,690fold
+691,696fold
+697,702fold
+703,708fold
+709,714fold
+715,720fold
+721,726fold
+727,732fold
+486,733fold
+88
 normal! zo
-22
+88
 normal! zc
-57
+134
 normal! zo
-57
+134
 normal! zc
-89
+252
 normal! zo
-89
+252
 normal! zc
-137
+486
 normal! zo
-137
+486
 normal! zc
-211
-normal! zo
-211
-normal! zc
-443
-normal! zo
-443
-normal! zc
-let s:l = 89 - ((84 * winheight(0) + 10) / 20)
+let s:l = 1 - ((0 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-89
-normal! 01|
+1
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

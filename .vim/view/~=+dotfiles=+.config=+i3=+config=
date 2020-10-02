@@ -20,7 +20,7 @@ setlocal comments=:#
 setlocal commentstring=#\ %s
 setlocal complete=.,w,b,u,t,i
 setlocal concealcursor=
-setlocal conceallevel=0
+setlocal conceallevel=1
 setlocal completefunc=youcompleteme#CompleteFunc
 setlocal nocopyindent
 setlocal cryptmethod=
@@ -113,58 +113,22 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-3,11fold
-12,29fold
-2,30fold
-31,64fold
-66,72fold
-73,79fold
-65,80fold
-82,86fold
-87,94fold
-95,106fold
-107,115fold
-116,125fold
-126,131fold
-132,141fold
-81,142fold
-150,154fold
-143,155fold
-156,241fold
-243,262fold
-263,274fold
-275,286fold
-287,298fold
-242,299fold
-300,312fold
-313,326fold
-327,362fold
-2
-normal! zo
-2
-normal! zc
-65
-normal! zo
-65
-normal! zc
-81
-normal! zo
-81
-normal! zc
-143
-normal! zo
-143
-normal! zc
-242
-normal! zo
-242
-normal! zc
-let s:l = 61 - ((60 * winheight(0) + 10) / 20)
+2,29fold
+30,63fold
+64,78fold
+79,139fold
+140,151fold
+152,236fold
+237,293fold
+294,307fold
+308,321fold
+322,357fold
+let s:l = 1 - ((0 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-61
-normal! 01|
+1
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

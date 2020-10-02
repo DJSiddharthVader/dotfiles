@@ -120,7 +120,7 @@ silent! normal! zE
 91,100fold
 91
 normal! zo
-let s:l = 91 - ((90 * winheight(0) + 21) / 42)
+let s:l = 91 - ((85 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
