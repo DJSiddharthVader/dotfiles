@@ -34,8 +34,8 @@ function createLocal(){
     git add README.md
     git commit -m "$first_commit_msg"
     git remote add origin "git@github.com:$user/$repo_name.git"
-    git push -u origin master
     git config remote.origin.push HEAD
+    git push -u origin master
 }
 function main(){
     repo_name="$1"
