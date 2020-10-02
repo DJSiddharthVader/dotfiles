@@ -1,39 +1,50 @@
 #!/bin/bash
 
+# Vars
 drive="/media/1tbdrive"
-rsyncdirs=(Documents dotfiles Music Personal Pictures)
-function rsyncBackup(){
-    for dir in "${rsyncdirs[@]}"
-    do
-        echo $dir
-        rsync -r \
-              --info=progress2 \
-              --human-readable \
-              $HOME/$dir/ $drive/$dir
-    done
-}
-function tarBackup(){
-    backupfile="$drive/backups/backup_$(date +"%H:%M-%d-%m-%Y").tar.gz"
-    sudo tar \
-        -zpcf "$backupfile" \
-        --exclude=$HOME/.cache \
-        --exclude=$HOME/.steam \
-        --exclude=$HOME/dotfiles\
-        --exclude=$HOME/Music \
-        --exclude=$HOME/Videos \
-        --exclude=$HOME/Pictures \
-        --exclude=$HOME/Personal \
-        --one-file-system $HOME
-#        --exclude=/media \
-#        --exclude=/var/log \
-#        --exclude=/var/cache/apt \
-#        --exclude=/usr/src/linux-headers* \
-}
+backupdir="$drive/BackUps"
+snapshotfile="$drive/tar-snapshot.file"
+rsyncdirs=(Documents dotfiles Games Music Projects Pictures)
+
+
 function checkDrive(){
     mounts="$(lsblk | grep "$drive" | wc -l)"
     [ $mounts -ne 1 ] && \
     echo "Nothing mounted to $drive" && \
     exit 1
+}
+function rsyncBackup(){
+    for dir in "${rsyncdirs[@]}"
+    do
+        echo $dir
+        rsync -ur                   \
+              --human-readable      \
+              --info=progress2      \
+              --delete              \
+               $HOME/$dir/ $drive/$dir
+    done
+}
+function tarBackup(){
+    backupfile="$backupdir/backup_$(date +"%F").tar.bz2"
+    sudo tar \
+        --exclude=$HOME/.cache               \
+        --exclude=$HOME/.steam               \
+        --exclude=$HOME/Documents            \
+        --exclude=$HOME/dotfiles             \
+        --exclude=$HOME/Games                \
+        --exclude=$HOME/Music                \
+        --exclude=$HOME/Projects             \
+        --exclude=$HOME/Pictures             \
+        --exclude=$HOME/Videos               \
+        --exclude=/media                     \
+        --exclude=/var/log                   \
+        --exclude=/var/cache/apt             \
+        --exclude=/usr/src/linux-headers*    \
+        --exclude=/swapfile                  \
+        --listed-incremental="$snapshotfile" \
+        -I pbzip2                            \
+        -cvf "$backupfile"                  \
+        --one-file-system /
 }
 function main(){
     checkDrive
