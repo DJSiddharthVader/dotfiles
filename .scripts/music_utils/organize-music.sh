@@ -1,6 +1,6 @@
 #!/bin/bash
-artdir="$HOME/Pictures/albumart"
-musicdir="$HOME/Music/songs/everything"
+art_dir="$HOME/Pictures/albumart"
+music_dir="$HOME/Music/songs/"
 
 ##TODO:
 # - fetch album from album/artist name for song -> download -> name correctly
@@ -23,7 +23,7 @@ musicdir="$HOME/Music/songs/everything"
 
 
 #utilities
-prog() {
+progress() {
     local w=60 p=$1;  shift
     # create a string of spaces, then change them to dots
     printf -v dots "%*s" "$(( $p*$w/100 ))" ""; dots=${dots// /#};
@@ -120,7 +120,7 @@ organizeMusicFiles() {
     while IFS='' read -r -d '' file; do
         renameSongFile "$file" 2> /dev/null
         percent=$(printf "%.*f" 0 "$(echo "100*$counter/$total" | bc -l)")
-        prog $percent
+        progress $percent
         let counter++
     done < <(find -L "$musicdir" -type f -name '*.mp3' -print0)
     find "$musicdir" -type d -empty -delete #delete empty directories
@@ -136,7 +136,7 @@ mainNonRecursive() {
     while IFS='' read -r -d '' file; do
         addToTrack "$file" 2> /dev/null
         percent=$(printf "%.*f" 0 "$(echo "100*$counter/$total" | bc -l)")
-        prog $percent
+        progress $percent
         let counter++
     done < <(find -L "$musicdir" -maxdepth 1 -type f -name '*.mp3' -print0)
 }
@@ -149,7 +149,7 @@ main() {
     while IFS='' read -r -d '' file; do
         addToTrack "$file" 2> /dev/null
         percent=$(printf "%.*f" 0 "$(echo "100*$counter/$total" | bc -l)")
-        prog $percent
+        progress $percent
         let counter++
     done < <(find -L "$musicdir" -type f -name '*.mp3' -print0)
     #find "$musicdir" -name '*.keep'  -exec sh -c 'mv "$0" "${0%.mp3.keep}.mp3"' {} \;
