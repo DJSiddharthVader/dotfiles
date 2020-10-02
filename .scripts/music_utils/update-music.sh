@@ -1,16 +1,21 @@
 #!/bin/bash
-#scdl --download-archive "$HOME/dotfiles/.varfiles/soundcloud_download_archive.txt" -c -l https://soundcloud.com/sid-reed-871359466/sets/likedsongs
-musicdir="$HOME/Music/songs/everything"
-sudo youtube-dl -U
-cd $musicdir
-youtube-dl  --audio-quality 0 \
-            --audio-format mp3 \
-            --prefer-ffmpeg \
-            -x \
-            --yes-playlist \
-            -i \
-            --verbose \
-            --download-archive "$HOME/dotfiles/.varfiles/youtube-dl_downloads.txt" \
-            "https://www.youtube.com/playlist?list=PLMU-V2Iwwq69O1QA3kOtw_YTQ2q-sD-gT"
-            #"https://www.youtube.com/playlist?list=PLMU-V2Iwwq699kP0gmoOXyyk02eH4ZgEH"
-#cd -
+source ~/dotfiles/.scripts/music_utils/variables.sh
+function updateMusic() {
+    sudo youtube-dl -U
+    cd $music_dir
+    youtube-dl  --audio-quality 0                      \
+                --audio-format "$format"               \
+                --prefer-ffmpeg                        \
+                --geo-bypass                           \
+                -x                                     \
+                -i                                     \
+                --yes-playlist                         \
+                --playlist-reverse                     \
+                --verbose                              \
+                --max-downloads 5                      \
+                --download-archive "$download_archive" \
+                -o "$youtubedl_format_str"             \
+                "$source_playlist"
+    cd -
+}
+updateMusic
