@@ -1,8 +1,23 @@
 #!/bin/bash
 
+function get_secondary_resolution() {
+        # get the  largest resolution of the first conncted monitor
+        resolution="$(
+            xrandr | grep -v 'primary' |
+            grep -Pzo '^ .* connected(.*\n)*' |
+            grep -a '^ ' |
+            sort -rn |
+            grep -Ev '[0-9]i|\*|i' |
+            head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*'
+            echo
+            )"
+        echo $resolution
+}
 connectToMonitor() {
     monitor="$(xrandr | grep ' connected' | tail -1 | cut -d' ' -f1)"
     ishdmi="$(xrandr | grep ' connected' | tail -1)"
+    echo $(get_secondary_resolution)
+    exit 1
     if [[ $ishdmi =~ 'HDMI' ]]; then
         resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | grep -v i | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*')"
         #pactl set-card-profile 0 output:hdmi-stereo
