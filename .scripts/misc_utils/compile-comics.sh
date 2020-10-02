@@ -36,9 +36,9 @@ function CbzToCbr(){
     cbz="$1"
     unziped="${cbz%.*}"
     cbr="$unziped".cbr
-    unzip $cbz -d "$unziped"
-    rar a $cbr $unziped
-    \rm -rf "$unziped" $cbz
+    unzip "$cbz" -d "$unziped"
+    rar a "$cbr" "$unziped"
+    \rm -rf "$unziped" "$cbz"
 }
 
 #makeChapter "$1"
