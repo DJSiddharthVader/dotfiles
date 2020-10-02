@@ -58,8 +58,5 @@
 .ncmpcpp/error.log
 .scripts/schedules
 .tmux/resurrect
-.vim/bundle/Nvim-R/
-.vim/bundle/ultisnips
-.vim/bundle/vim-markdown
 .vim/.netrwhist
 Anaconda*
