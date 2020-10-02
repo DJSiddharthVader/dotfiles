@@ -7,21 +7,18 @@ picdir="$HOME/Pictures/wallpapers"
 histfile="$HOME/dotfiles/.varfiles/fehbg"
 idxfile="$HOME/dotfiles/.varfiles/wallidx"
 tmp='/tmp/histfile'
-bordercolor='Black'
 resolution='1366x768!' #resolution, ignore aspect ratio
 
 
 usage() {
-    echo "Usage: $0 {font|back|both} {path/to/image|rs|prev|stay|next}"
+    echo "Usage: $0 {path/to/image|rs|prev|stay|next} {font|back|both}"
 }
-
 appendHist() {
-    find "$picdir" -maxdepth 99 >| "$histfile"
+    find "$picdir" -maxdepth 99 -type f >| "$histfile"
 }
 resetHist() {
-    find "$picdir" -maxdepth 99 | shuf >| "$histfile"
+    find "$picdir" -maxdepth 99 -type f | shuf >| "$histfile"
 }
-
 updateImageIdx() {
     if [[ -f "$1" ]];then
         mode="path"
@@ -69,10 +66,11 @@ idxToImage(){
     image="$(head -"$idx" "$histfile" | tail -1)"
     echo "$image"
 }
-
 addBorderToImg() {
     image="$1"
     cp "$image" "$unbgfile"
+    bordercolor="$(convert "$image" -colorspace Gray -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
+    bordercolor="$(convert "$image" -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
     convert "$unbgfile" -resize "$resolution" -bordercolor "$bordercolor" -border 0x34 "$bgfile" #add borderes to image
 }
 setImg() {
@@ -106,20 +104,21 @@ changeColors() {
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
     timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
 }
-
 main() {
-    mode="$1"
-    if [ "$mode" = 'rs' ]; then
-        resetHist
-        echo 1 >| "$idxfile"
-        exit 0
-    elif [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ]; then
+    method="$1"
+    if [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ]; then
         resetHist
         echo 1 >| "$idxfile"
     fi
-    image="$2"
-    nidx=$(updateImageIdx "$image")
-    image="$(idxToImage "$nidx")"
+    if [ "$method" = 'rs' ]; then
+        resetHist
+        echo 1 >| "$idxfile"
+        exit 0
+    else
+        nidx=$(updateImageIdx "$method")
+        image="$(idxToImage "$nidx")"
+    fi
+    mode="$2"
     case "$mode" in
         'font')
             changeColors "$image"
@@ -142,6 +141,11 @@ main() {
 if (( $# < 1 )); then
     usage
     exit 1
+elif (( $# == 1 )); then
+    image="$1"
+    mode="both"
 else
-    main "$1" "$2" "$3"
+    image="$1"
+    mode="$2"
 fi
+    main "$image" "$mode"
