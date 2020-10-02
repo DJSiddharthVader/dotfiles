@@ -2,12 +2,12 @@
 
 mode_file="$HOME/dotfiles/.varfiles/batmode"
 #icons
-charging=" "
-ramp0="  "
-ramp1="  "
-ramp2="  "
-ramp3="  "
-ramp4="  "
+charging=""
+ramp0=""
+ramp1=""
+ramp2=""
+ramp3=""
+ramp4=""
 
 
 function showPercent() {
@@ -51,19 +51,28 @@ function showIcon() {
 }
 function display(){
     mode="$1"
+    status="$(showStatus)"
     case $mode in
         'short')
-            bat="$(showStatus) $(showIcon) $(showPercent)"
+            if [[ -z $status ]]; then
+                bat="$(showIcon) $(showPercent)"
+            else
+                bat="$status $(showIcon) $(showPercent)"
+            fi
             ;;
         'long')
-            bat="$(showStatus) $(showIcon) $(showPercent) $(showTime)"
+            if [[ -z $status ]]; then
+                bat="$(showIcon) $(showPercent) $(showTime)"
+            else
+                bat="$status $(showIcon) $(showPercent) $(showTime)"
+            fi
             ;;
         *)
             echo "Usage $0 {short|long}"
             exit 1
             ;;
     esac
-    echo $bat
+    echo "$bat "
 }
 function main() {
     mode="$1"

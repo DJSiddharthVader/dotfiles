@@ -56,6 +56,7 @@ main() {
             ;;
         print)
             wallp="$(head -"$(cat $wallidfile)" "$wallpfile" | tail -1)"
+            wallp="$(echo $wallp | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/p')"
             echo " $modeIcon$sep $wallp "
             ;;
         stay)

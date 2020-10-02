@@ -29,20 +29,21 @@ function display() {
     case $mode in
         'short')
             total=$(($weeks*7*24 + $days*24 + $hours))
-            echo "H:$total"
+            uptime="H:$total"
             ;;
         'med')
             days=$((7*$weeks + $days))
-            echo "D:$days H:$hours"
+            uptime="D:$days H:$hours"
             ;;
         'long')
-            echo "W:$weeks D:$days H:$hours M:$minutes"
+            uptime="W:$weeks D:$days H:$hours M:$minutes"
             ;;
         *)
             echo "Usage $0 {short|med|long}"
             exit 1
             ;;
     esac
+    echo "$uptime "
 }
 function cycleMode() {
     printf '%s ' "${modes[${i:=0}]}"
