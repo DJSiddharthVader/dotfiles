@@ -519,8 +519,15 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 let g:UltiSnipsSnippetDirectories=["UltiSnips","snips"]
+let g:vim_markdown_math = 1
 " Markdown
- let g:markdown_fenced_languages = ['css','json=javascript', 'ruby', 'xml', 'python', 'go']
+let g:markdown_fenced_languages = ['css','json=javascript', 'ruby', 'xml', 'python', 'go','tex']
+let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby","literatehaskell=lhaskell", "bash=sh","go"]
+
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
+
 
 " => Custom header
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
