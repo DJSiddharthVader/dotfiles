@@ -1,0 +1,12 @@
+name: cmu
+root: ~/Documents/CMU_MSCB/Courses
+tmux_options: -f /home/sidreed/dotfiles/.tmux.scratch.conf
+on_project_start: wal -R -e -n -q &
+
+windows:
+    - prof_issues: cd ~/Documents/Resume && git branch prof_issues
+    - math: cd Math-02680
+    - algorithms: cd Algorithims-02613
+    - programming: cd Programming-02601
+
+

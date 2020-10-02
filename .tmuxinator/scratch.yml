@@ -2,7 +2,6 @@ name: scratch
 root: ~/
 tmux_options: -f /home/sidreed/dotfiles/.tmux.scratch.conf
 on_project_start: wal -R -e -n -q &
-on_project_exit: tmux kill-session -t scratch
 
 windows:
     - school: cd ~/Documents/CMU_MSCB/Courses
