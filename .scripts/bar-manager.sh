@@ -14,12 +14,12 @@ function launchBar() {
     for m in $(xrandr | grep ' connected' | cut -d' ' -f1); do
         case "$mode" in
             float)
-                MONITOR=$m polybar lapf &
-                MONITOR=$m polybar schedulef &
+                MONITOR=$m polybar floating_top &
+                MONITOR=$m polybar floating_bot &
                 ;;
             full)
-                MONITOR=$m polybar lap &
-                MONITOR=$m polybar schedule &
+                MONITOR=$m polybar bordered_top &
+                MONITOR=$m polybar bordered_bot &
                 ;;
             mini)
                 MONITOR=$m polybar minimal &
