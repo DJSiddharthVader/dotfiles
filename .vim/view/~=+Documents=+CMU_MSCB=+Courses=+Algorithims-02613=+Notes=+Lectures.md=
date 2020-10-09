@@ -84,12 +84,12 @@ vnoremap <buffer> j gj
 nnoremap <buffer> j gj
 vnoremap <buffer> k gk
 nnoremap <buffer> k gk
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-emphasis) :set opfunc=pandoc#keyboard#styles#ToggleEmphasisg@
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-strong) :set opfunc=pandoc#keyboard#styles#ToggleStrongg@
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-verbatim) :set opfunc=pandoc#keyboard#styles#ToggleVerbatimg@
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-strikeout) :set opfunc=pandoc#keyboard#styles#ToggleStrikeoutg@
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-superscript) :set opfunc=pandoc#keyboard#styles#ToggleSuperscriptg@
 nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-subscript) :set opfunc=pandoc#keyboard#styles#ToggleSubscriptg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-superscript) :set opfunc=pandoc#keyboard#styles#ToggleSuperscriptg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-strikeout) :set opfunc=pandoc#keyboard#styles#ToggleStrikeoutg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-verbatim) :set opfunc=pandoc#keyboard#styles#ToggleVerbatimg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-strong) :set opfunc=pandoc#keyboard#styles#ToggleStrongg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-emphasis) :set opfunc=pandoc#keyboard#styles#ToggleEmphasisg@
 nnoremap <buffer> <silent> <Plug>(pandoc-hypertext-goto-id) :call pandoc#hypertext#GotoID()
 nnoremap <buffer> <silent> <Plug>(pandoc-hypertext-open-system) :call pandoc#hypertext#OpenSystem()
 nnoremap <buffer> <silent> <Plug>(pandoc-hypertext-open-local) :call pandoc#hypertext#OpenLocal()
@@ -290,8 +290,10 @@ silent! normal! zE
 165,187fold
 188,197fold
 198,220fold
-227,236fold
+227,238fold
 221,238fold
+252,257fold
+258,264fold
 239,265fold
 266,278fold
 279,293fold
@@ -299,20 +301,19 @@ silent! normal! zE
 308,323fold
 324,350fold
 351,364fold
-376,380fold
+366,370fold
+371,380fold
 381,385fold
-366,386fold
-389,394fold
-395,400fold
-401,406fold
-407,412fold
-413,418fold
-419,424fold
-425,430fold
-431,436fold
-437,442fold
-443,448fold
-387,449fold
+388,393fold
+394,399fold
+400,405fold
+406,411fold
+412,417fold
+418,423fold
+424,429fold
+430,435fold
+436,441fold
+442,447fold
 1
 normal! zo
 1
@@ -323,30 +324,30 @@ normal! zo
 normal! zc
 102
 normal! zo
-102
-normal! zc
 165
 normal! zo
 165
 normal! zc
-221
+198
 normal! zo
 221
-normal! zc
-366
 normal! zo
-366
+221
 normal! zc
-387
+239
 normal! zo
-387
+239
 normal! zc
-let s:l = 1 - ((0 * winheight(0) + 12) / 25)
+412
+normal! zo
+436
+normal! zo
+let s:l = 198 - ((93 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+198
+normal! 03|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

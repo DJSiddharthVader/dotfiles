@@ -131,17 +131,17 @@ normal! zo
 normal! zo
 22
 normal! zc
-66
+46
 normal! zo
 103
 normal! zo
 103
 normal! zc
-let s:l = 74 - ((73 * winheight(0) + 21) / 42)
+let s:l = 46 - ((43 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-74
+46
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

@@ -118,103 +118,106 @@ silent! normal! zE
 16,21fold
 22,56fold
 57,87fold
-89,95fold
-96,103fold
-104,109fold
-110,116fold
-117,132fold
-88,133fold
-135,179fold
-180,187fold
-188,194fold
-195,202fold
-203,210fold
-211,217fold
-218,224fold
-225,231fold
-232,238fold
-239,245fold
-246,250fold
-134,251fold
-253,278fold
-279,284fold
-285,288fold
-289,303fold
-304,321fold
-322,349fold
-350,365fold
-366,408fold
-409,418fold
-419,445fold
-446,452fold
-453,471fold
-472,481fold
-482,484fold
-252,485fold
-487,492fold
-493,498fold
-499,504fold
-505,510fold
-511,516fold
-517,522fold
-523,528fold
-529,534fold
-535,540fold
-541,546fold
-547,552fold
-553,558fold
-559,564fold
-565,570fold
-571,576fold
-577,582fold
-583,588fold
-589,594fold
-595,600fold
-601,606fold
-607,612fold
-613,618fold
-619,624fold
-625,630fold
-631,636fold
-637,642fold
-643,648fold
-649,654fold
-655,660fold
-661,666fold
-667,672fold
-673,678fold
-679,684fold
-685,690fold
-691,696fold
-697,702fold
-703,708fold
-709,714fold
-715,720fold
-721,726fold
-727,732fold
-486,733fold
+89,96fold
+97,104fold
+105,110fold
+111,117fold
+118,133fold
+88,134fold
+136,180fold
+181,188fold
+189,195fold
+196,203fold
+204,211fold
+212,218fold
+219,225fold
+226,232fold
+233,239fold
+240,246fold
+247,251fold
+135,252fold
+254,279fold
+280,285fold
+286,289fold
+290,304fold
+305,322fold
+323,350fold
+351,366fold
+367,409fold
+410,419fold
+420,446fold
+447,453fold
+454,472fold
+473,482fold
+483,485fold
+253,486fold
+488,493fold
+494,499fold
+500,505fold
+506,511fold
+512,517fold
+518,523fold
+524,529fold
+530,535fold
+536,541fold
+542,547fold
+548,553fold
+554,559fold
+560,565fold
+566,571fold
+572,577fold
+578,583fold
+584,589fold
+590,595fold
+596,601fold
+602,607fold
+608,613fold
+614,619fold
+620,625fold
+626,631fold
+632,637fold
+638,643fold
+644,649fold
+650,655fold
+656,661fold
+662,667fold
+668,673fold
+674,679fold
+680,685fold
+686,691fold
+692,697fold
+698,703fold
+704,709fold
+710,715fold
+716,721fold
+722,727fold
+728,733fold
+734,739fold
+740,745fold
+746,751fold
+487,752fold
 88
 normal! zo
 88
 normal! zc
-134
+135
 normal! zo
-134
+135
 normal! zc
-252
+253
 normal! zo
-252
+253
 normal! zc
-486
+487
 normal! zo
-486
+487
 normal! zc
-let s:l = 1 - ((0 * winheight(0) + 10) / 20)
+let s:l = 135 - ((130 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+135
+normal! 01|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
