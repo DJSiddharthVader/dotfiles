@@ -52,8 +52,8 @@ setlocal formatoptions=croql
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
+setlocal iminsert=2
+setlocal imsearch=2
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=
@@ -113,22 +113,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2,29fold
-30,63fold
-64,78fold
-79,139fold
-140,151fold
-152,236fold
-237,293fold
-294,307fold
-308,321fold
-322,357fold
-let s:l = 1 - ((0 * winheight(0) + 21) / 43)
+let s:l = 217 - ((20 * winheight(0) + 21) / 42)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 0
+217
+normal! 038|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

@@ -118,16 +118,13 @@ silent! normal! zE
 13,28fold
 29,39fold
 40,48fold
-50,56fold
 29
 normal! zo
-40
-normal! zo
-let s:l = 38 - ((37 * winheight(0) + 21) / 42)
+let s:l = 31 - ((30 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-38
+31
 normal! 05|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
