@@ -113,19 +113,19 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-3,10fold
-11,13fold
-14,21fold
-22,27fold
-28,33fold
-34,42fold
-43,48fold
-let s:l = 43 - ((42 * winheight(0) + 14) / 28)
+3,9fold
+10,11fold
+12,18fold
+19,23fold
+24,28fold
+29,36fold
+37,42fold
+let s:l = 29 - ((28 * winheight(0) + 13) / 27)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-43
-normal! 0
+29
+normal! 01|
 lcd ~/CMU_MSCB/Courses/Programming-02601/src/HW2/barnes-hut
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

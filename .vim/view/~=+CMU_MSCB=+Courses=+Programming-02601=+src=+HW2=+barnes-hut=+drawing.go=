@@ -115,11 +115,11 @@ setlocal wrapmargin=0
 silent! normal! zE
 9,26fold
 27,50fold
-let s:l = 5 - ((4 * winheight(0) + 14) / 28)
+let s:l = 27 - ((25 * winheight(0) + 14) / 28)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-5
+27
 normal! 0
 lcd ~/CMU_MSCB/Courses/Programming-02601/src/HW2/barnes-hut
 let &so = s:so_save | let &siso = s:siso_save
