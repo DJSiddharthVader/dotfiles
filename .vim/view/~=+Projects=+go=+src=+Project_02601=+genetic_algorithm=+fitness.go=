@@ -115,15 +115,24 @@ setlocal wrapmargin=0
 silent! normal! zE
 9,17fold
 18,43fold
+44,54fold
 44,55fold
-57,61fold
-62,67fold
-let s:l = 68 - ((64 * winheight(0) + 13) / 27)
+56,61fold
+62,66fold
+68,101fold
+44
+normal! zo
+44
+normal! zo
+44
+normal! zc
+let s:l = 1 - ((0 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-68
+1
 normal! 0
+lcd ~/Projects/go/src/Project_02601/genetic_algorithm
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

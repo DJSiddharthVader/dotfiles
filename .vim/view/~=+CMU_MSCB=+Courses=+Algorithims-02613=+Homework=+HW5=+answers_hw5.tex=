@@ -337,7 +337,7 @@ setlocal smartindent
 setlocal softtabstop=4
 setlocal spell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
+setlocal spellfile=~/.vim/spell/en.utf-8.add
 setlocal spelllang=en
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=.tex,.sty,.cls
@@ -360,15 +360,131 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-1,18fold
-1
+9,18fold
+19,25fold
+26,35fold
+8,36fold
+38,43fold
+44,51fold
+52,60fold
+37,61fold
+63,70fold
+71,76fold
+77,85fold
+62,86fold
+90,97fold
+88,110fold
+111,122fold
+123,127fold
+87,128fold
+134,157fold
+130,160fold
+161,171fold
+172,180fold
+129,181fold
+193,202fold
+214,220fold
+182,222fold
+233,245fold
+246,257fold
+227,263fold
+276,290fold
+291,314fold
+270,320fold
+321,328fold
+329,338fold
+339,344fold
+224,345fold
+372,375fold
+386,389fold
+364,389fold
+391,395fold
+396,399fold
+400,409fold
+410,421fold
+390,421fold
+357,427fold
+349,428fold
+429,437fold
+438,440fold
+346,441fold
+223,442fold
+445,563fold
+8
 normal! zo
-let s:l = 1 - ((0 * winheight(0) + 20) / 41)
+8
+normal! zc
+37
+normal! zo
+37
+normal! zc
+62
+normal! zo
+62
+normal! zc
+87
+normal! zo
+88
+normal! zo
+90
+normal! zo
+88
+normal! zc
+87
+normal! zc
+129
+normal! zo
+130
+normal! zo
+130
+normal! zc
+129
+normal! zc
+182
+normal! zo
+182
+normal! zc
+223
+normal! zo
+224
+normal! zo
+227
+normal! zo
+227
+normal! zc
+270
+normal! zo
+270
+normal! zc
+224
+normal! zc
+346
+normal! zo
+349
+normal! zo
+357
+normal! zo
+364
+normal! zo
+364
+normal! zc
+390
+normal! zo
+357
+normal! zc
+349
+normal! zc
+346
+normal! zc
+223
+normal! zc
+let s:l = 3 - ((2 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 020|
+3
+normal! 0
+lcd ~/CMU_MSCB/Courses/Algorithims-02613/Homework/HW5
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

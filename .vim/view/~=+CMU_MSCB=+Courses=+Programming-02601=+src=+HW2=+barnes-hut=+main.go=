@@ -119,11 +119,11 @@ silent! normal! zE
 68,76fold
 77,85fold
 86,88fold
-let s:l = 77 - ((61 * winheight(0) + 13) / 27)
+let s:l = 59 - ((4 * winheight(0) + 5) / 10)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-77
+59
 normal! 0
 lcd ~/CMU_MSCB/Courses/Programming-02601/src/HW2/barnes-hut
 let &so = s:so_save | let &siso = s:siso_save
