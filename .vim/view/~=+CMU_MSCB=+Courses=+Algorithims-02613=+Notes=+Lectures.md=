@@ -345,43 +345,118 @@ silent! normal! zE
 654,656fold
 657,659fold
 660,662fold
-663,665fold
-666,668fold
-669,671fold
-672,674fold
-675,677fold
-678,680fold
-681,683fold
-684,686fold
-687,689fold
-690,692fold
-693,695fold
-696,698fold
-699,701fold
-702,704fold
-705,707fold
-709,713fold
-724,728fold
-729,734fold
-714,734fold
-737,742fold
-743,748fold
-749,754fold
-755,760fold
-761,766fold
-767,772fold
-773,778fold
-779,784fold
-785,790fold
-791,797fold
-735,797fold
-651
+663,669fold
+670,682fold
+683,688fold
+689,691fold
+692,694fold
+695,697fold
+698,700fold
+701,703fold
+704,717fold
+718,723fold
+724,739fold
+740,746fold
+747,750fold
+751,753fold
+754,756fold
+757,762fold
+763,766fold
+767,769fold
+770,772fold
+773,775fold
+776,778fold
+779,781fold
+783,787fold
+788,797fold
+798,802fold
+803,807fold
+809,871fold
+1
 normal! zo
-let s:l = 651 - ((412 * winheight(0) + 21) / 43)
+4
+normal! zo
+4
+normal! zc
+1
+normal! zc
+56
+normal! zo
+59
+normal! zo
+59
+normal! zc
+56
+normal! zc
+72
+normal! zo
+75
+normal! zo
+75
+normal! zc
+72
+normal! zc
+102
+normal! zo
+102
+normal! zc
+198
+normal! zo
+198
+normal! zc
+221
+normal! zo
+221
+normal! zc
+239
+normal! zo
+252
+normal! zo
+252
+normal! zc
+239
+normal! zc
+266
+normal! zo
+266
+normal! zc
+294
+normal! zo
+294
+normal! zo
+302
+normal! zo
+302
+normal! zc
+294
+normal! zc
+294
+normal! zc
+309
+normal! zo
+309
+normal! zc
+383
+normal! zo
+383
+normal! zc
+422
+normal! zo
+422
+normal! zc
+549
+normal! zo
+549
+normal! zc
+604
+normal! zo
+604
+normal! zc
+let s:l = 871 - ((632 * winheight(0) + 30) / 61)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-651
+871
 normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

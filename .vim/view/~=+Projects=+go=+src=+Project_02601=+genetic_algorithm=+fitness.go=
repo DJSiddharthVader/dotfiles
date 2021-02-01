@@ -113,20 +113,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-9,17fold
-18,43fold
-44,54fold
-44,55fold
-56,61fold
-62,66fold
-68,101fold
-44
-normal! zo
-44
-normal! zo
-44
-normal! zc
-let s:l = 1 - ((0 * winheight(0) + 20) / 40)
+16,27fold
+28,43fold
+44,53fold
+55,130fold
+let s:l = 1 - ((0 * winheight(0) + 30) / 60)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt

@@ -113,37 +113,32 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-10,19fold
-20,28fold
-29,38fold
-9,39fold
-41,48fold
-49,62fold
-63,71fold
-72,84fold
-85,103fold
-40,104fold
-106,115fold
-116,145fold
-105,146fold
-9
+11,20fold
+21,28fold
+29,39fold
+10,40fold
+42,49fold
+50,71fold
+72,80fold
+81,92fold
+93,112fold
+41,113fold
+115,133fold
+134,169fold
+114,170fold
+172,205fold
+10
 normal! zo
-9
-normal! zc
-40
+41
 normal! zo
-40
-normal! zc
-105
+114
 normal! zo
-105
-normal! zc
-let s:l = 105 - ((104 * winheight(0) + 15) / 30)
+let s:l = 11 - ((9 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-105
-normal! 0
+11
+normal! 01|
 lcd ~/Projects/go/src/Project_02601/genetic_algorithm
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost

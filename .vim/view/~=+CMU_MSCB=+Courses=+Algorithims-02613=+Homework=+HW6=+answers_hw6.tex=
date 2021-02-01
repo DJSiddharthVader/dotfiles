@@ -360,12 +360,68 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 29) / 59)
+17,41fold
+42,49fold
+50,63fold
+16,64fold
+66,73fold
+74,75fold
+76,85fold
+86,108fold
+65,111fold
+113,120fold
+121,122fold
+123,125fold
+126,138fold
+112,140fold
+142,149fold
+150,151fold
+152,156fold
+157,184fold
+141,187fold
+189,196fold
+197,198fold
+199,204fold
+205,220fold
+188,223fold
+225,232fold
+233,234fold
+235,243fold
+244,262fold
+224,265fold
+16
+normal! zo
+16
+normal! zc
+65
+normal! zo
+65
+normal! zc
+112
+normal! zo
+113
+normal! zo
+112
+normal! zc
+141
+normal! zo
+141
+normal! zc
+188
+normal! zo
+188
+normal! zc
+224
+normal! zo
+244
+normal! zo
+let s:l = 251 - ((16 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-1
-normal! 020|
+251
+normal! 04|
+lcd ~/CMU_MSCB/Courses/Algorithims-02613/Homework/HW6
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

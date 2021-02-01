@@ -113,16 +113,19 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-3,14fold
-15,28fold
-29,37fold
-38,57fold
-let s:l = 15 - ((14 * winheight(0) + 10) / 20)
+3,10fold
+11,23fold
+24,32fold
+33,48fold
+52,78fold
+11
+normal! zo
+let s:l = 17 - ((16 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-15
-normal! 01|
+17
+normal! 010|
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
