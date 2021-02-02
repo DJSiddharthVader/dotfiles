@@ -45,28 +45,18 @@ alias rspa='~/.scripts/reset-pulseaudio.sh'
 alias knit='~/.scripts/knit-pdf.sh'
 
 #Shorten
-alias school='cd /home/sidreed/Documents/CMU_MSCB/Courses/'
+alias school='cd /home/sidreed/CMU_MSCB/Courses/'
 alias pdf='zathura'
-alias bat='acpi -b'
-alias plx='pdflatex'
 alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
-alias ct='conda activate thesis'
-alias fuck='sudo $(history -p \!\!)'
-alias jpy='~/anaconda3/bin/jupyter-lab'
 alias mnt="~/.scripts/mount.sh on"
 alias umt="~/.scripts/mount.sh off"
 alias ip="hostname -I | cut -d' ' -f1"
-alias saa='~/.scripts/set_album_art.sh'
-alias cwp='~/.scripts/currentwallpaper.sh'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
+alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
-alias reset-wifi='sudo /etc/init.d/network-manager restart'
-alias mkst='cd ~/apps/st/; sudo make clean; make; sudo make install'
-alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
-alias psync="rsync -e 'ssh -p 2222' -rP --ignore-existing --human-readable --info=progress2"
 
 #Print
 alias cfh="grep -c '^>'"
