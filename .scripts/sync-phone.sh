@@ -95,6 +95,7 @@ function sync_all() {
 }
 function main() {
     #Args
+    port="2222"
     while getopts 'i:np:' flag; do
         case "${flag}" in
             i) ip="${OPTARG}" ;;
@@ -104,8 +105,6 @@ function main() {
         esac
     done
     check_phone_open "$ip" "$port"
-    #rsync_args=("${rsync_args[@]}" "-e \"ssh -p $port\"")
-    rsync -e "ssh -p $port" "${rsync_args[@]}" "$ip:$notes_phone"/ ./
     if [ "$notes_only" = true ]; then
         sync_notes "$ip" "$port"
     else
