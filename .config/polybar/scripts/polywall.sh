@@ -1,71 +1,54 @@
 #!/bin/bash
 
-modefile="$HOME/dotfiles/.varfiles/polywallmode"
 wallidfile="$HOME/dotfiles/.varfiles/wallidx"
 wallpfile="$HOME/dotfiles/.varfiles/fehbg"
-sep=""
+mode_file="$HOME/dotfiles/.varfiles/polywallmode"
+modes=(font back both)
 
-changeMode() {
-    mode="$1"
-    case "$mode" in
-        'font')
-            newmode='back'
-            ;;
-        'back')
-            newmode='both'
-            ;;
-        'both')
-            newmode='font'
-            ;;
-        *)
-            echo "Usage: $0 {font|back|both}"
-            exit 1
+help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
+cycle() {
+    # cycle through modes either forwards or backwards
+    # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
+    # next mode index is:  (x+1) % n
+    # prev mode index is:  (x+n-1) % n
+    # x is current mode index, n is number of modes
+    dir="$1"
+    mode="$(cat $mode_file)"
+    idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
+    idx=$(($idx -1)) #current mode idx
+    case "$dir" in
+         'next') idx=$(($idx + 1)) ;;
+         'prev') idx=$(($idx +${#modes[@]} -1)) ;;
+         *) echo "Error cycle takes {next|prev}" && exit 1 ;;
     esac
-    echo "$newmode" >| "$modefile"
+    next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
+    echo "${modes[$next_idx]}"
 }
-getModeIcon() {
+
+icon() {
     mode="$1"
     case "$mode" in
-        'font')
-            modeicon=""
-            ;;
-        'back')
-            modeicon=""
-            ;;
-        'both')
-            modeicon=""
-            ;;
-        *)
-            echo "Usage: $0 {font|back|both}"
-            exit 1
+        'font') modeicon="" ;;
+        'back') modeicon="" ;;
+        'both') modeicon="" ;;
+        *) help && exit 1 ;;
     esac
     echo "$modeicon"
 }
+display() {
+    wallpaper="$(head -"$(cat $wallidfile)" "$wallpfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/p')"
+    icon="$(icon "$mode")"
+    echo " $icon $wallpaperx "
+}
 main() {
-    mode="$(cat $modefile | head -1)"
-    modeIcon="$(getModeIcon "$mode")"
+    mode="$(cat $mode_file | head -1)"
     case "$1" in
-        prev)
-            /home/sidreed/.scripts/wallpaper.sh "$mode" prev
-            ;;
-        next)
-            /home/sidreed/.scripts/wallpaper.sh "$mode" next
-            ;;
-        mode)
-            mode="$(changeMode "$mode")"
-            ;;
-        print)
-            wallp="$(head -"$(cat $wallidfile)" "$wallpfile" | tail -1)"
-            wallp="$(echo $wallp | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/p')"
-            echo " $modeIcon$sep $wallp "
-            ;;
-        stay)
-            /home/sidreed/.scripts/wallpaper.sh "$mode" 'stay'
-            ;;
-        *)
-            echo "Usage: $0 {prev|next|mode|print}"
-            exit 1
-            ;;
+        'prev'   ) /home/sidreed/.scripts/wallpaper.sh "$mode" prev ;;
+        'next'   ) /home/sidreed/.scripts/wallpaper.sh "$mode" next ;;
+        'stay') /home/sidreed/.scripts/wallpaper.sh "$mode" 'stay' ;;
+        'mode'   ) cycle next ;;
+        'display') display ;;
+        *) help && exit 1 ;;
     esac
 }
 
