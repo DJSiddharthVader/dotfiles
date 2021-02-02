@@ -6,14 +6,6 @@ isDeviceConnected() {
     [[ "$status" =~ 'yes' ]] && msg="yes" || msg="no"
     echo "$msg"
 }
-setDefaultSink() { #DOES NOT WORK
-    case "$1" in
-        'bluetooth') sink="$(pactl list short sinks | grep bluez | head -1 | tr -s '\t' ' ' | cut -d' ' -f1)" ;;
-        'speaker') sink="1" ;;
-        *) echo "invalid sink" && exit 1 ;;
-    esac
-    pactl set-default-sink "$sink"
-}
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
     #setDefaultSink 'speaker'
@@ -75,6 +67,14 @@ main "$mode" "$device"
 
 
 #DEPRECIATED
+#setDefaultSink() { #DOES NOT WORK
+#    case "$1" in
+#        'bluetooth') sink="$(pactl list short sinks | grep bluez | head -1 | tr -s '\t' ' ' | cut -d' ' -f1)" ;;
+#        'speaker') sink="1" ;;
+#        *) echo "invalid sink" && exit 1 ;;
+#    esac
+#    pactl set-default-sink "$sink"
+#}
 #isConnected() {
 #    status=""
 #    while IFS= read -r uuid; do #read all paired devices and check if connected
