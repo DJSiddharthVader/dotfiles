@@ -1,33 +1,25 @@
 #!/bin/bash
 
 function get_secondary_resolution() {
-        # get the  largest resolution of the first conncted monitor
-        resolution="$(
-            xrandr | grep -v 'primary' |
-            grep -Pzo '^ .* connected(.*\n)*' |
-            grep -a '^ ' |
-            sort -rn |
-            grep -Ev '[0-9]i|\*|i' |
-            head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*'
-            echo
-            )"
-        echo $resolution
+    monitor="$1"
+    resolution="$(xrandr | sed -ne "/$monitor/,/connected/ p" |
+                  grep -v 'connected' |
+                  head -1 |
+                  grep -ao '[0-9]*x[0-9]*')"
+    echo $resolution
 }
 connectToMonitor() {
-    monitor="$(xrandr | grep ' connected' | tail -1 | cut -d' ' -f1)"
-    ishdmi="$(xrandr | grep ' connected' | tail -1)"
-    echo $(get_secondary_resolution)
-    exit 1
-    if [[ $ishdmi =~ 'HDMI' ]]; then
-        resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | grep -v i | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*')"
+    connected=$(xrandr | grep -c ' connected')
+    if [ "$connected" -gt 1 ]; then #connected to a monitor
+        monitor="$(xrandr | grep ' connected' | tail -1 | cut -d' ' -f1)"
+        resolution="$(get_secondary_resolution "$monitor")"
+        #echo "$resolution"
         #pactl set-card-profile 0 output:hdmi-stereo
-        sleep 1
-        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
-    else
-        resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | head -1 | grep -ao '[0-9]*x[0-9]*')"
-        xrandr --output eDP-1 --output "$monitor" --mode "$resolution" --right-of eDP-1
+        xrandr --output eDP-1       \
+               --output "$monitor"  \
+               --mode "$resolution" \
+               --right-of eDP-1
     fi
-    bash ~/.scripts/bar-manager.sh stay
 }
 disconnectMonitor() {
     monitor=`xrandr | grep ' connected' | tail -1 | cut -d' ' -f1`
@@ -41,21 +33,46 @@ disconnectMonitor() {
 function main() {
     case "$1" in
         on)
-            connected=$(xrandr | grep -c ' connected')
-
-            if [ "$connected" -gt 1 ]; then #connected to a monitor
-                connectToMonitor
-            fi
+            connectToMonitor
+            ~/dotfiles/.scripts/bar-manager.sh restart
             ;;
         off)
             disconnectMonitor
+            ~/dotfiles/.scripts/bar-manager.sh restart
             ;;
         *)
             echo "usage {on|off}"
             exit 1
             ;;
     esac
-    ~/dotfiles/.scripts/bar_manager.sh auto
 }
 
 main "$1"
+
+#DEPRECIATED
+#function get_secondary_resolution() {
+#    # get the  largest resolution of the first conncted monitor
+#    ishdmi="$(xrandr | grep ' connected' | tail -1)"
+#    if [[ $ishdmi =~ 'HDMI' ]]; then
+#        #resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i' | grep -v '\*' | grep -v i | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*')"
+#        resolution="$(xrandr | grep -v 'primary' |
+#                      grep -Pzo '^ .* connected(.*\n)*' |
+#                      grep -a '^ ' |
+#                      sort -rn |
+#                      grep -v '[0-9]i' |
+#                      grep -v '\*' |
+#                      head -2 | tail -1 |
+#                      grep -ao '[0-9]*x[0-9]*')"
+#    else
+#        #resolution="$(xrandr | grep -v 'primary' | grep -Pzo '.* connected(.*\n)*' | grep -a '^ ' | sort -rn | grep -v '[0-9]i'  | grep -v '\*' | head -1 | grep -ao '[0-9]*x[0-9]*')"
+#        resolution="$(xrandr | grep -v 'primary' |
+#                      grep -Pzo '.* connected(.*\n)*' |
+#                      grep -a '^ ' |
+#                      sort -rn |
+#                      grep -v '[0-9]i'  |
+#                      grep -v '\*' |
+#                      head -1 |
+#                      grep -ao '[0-9]*x[0-9]*')"
+#    fi
+#    echo $resolution
+#}
