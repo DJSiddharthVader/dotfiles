@@ -1,16 +1,19 @@
 #!/bin/bash
 #Script to scroll song name of current mpd song in polybar
 mode_file="$HOME/dotfiles/.varfiles/scrollmode"
-spacechar="_"
-thresh=20
+spacechar=" "
+thresh=45
 
-function scroll() {
-    ( zscroll -l "$thresh" -d 0.60 -b "" -a "" -p "///" "$(mpc current | sed -uEn 's/(^.*$)/ \1 /p' | tr '[:blank:]' "$spacechar" )" ) &
+static() { echo "$(mpc current)" ; }
+scroll() {
+    song="$(mpc current)"
+    if [[ ${#song} -gt $thresh ]]; then
+        ( zscroll -l "$thresh" -d 0.40 -b "" -a "" -p " /// " "$(mpc current)" ) &
+    else
+        static
+    fi
 }
-function static() {
-    echo "$(mpc current)"
-}
-function display() {
+display() {
     mode="$1"
     if ! mpc >/dev/null 2>&1; then
         echo Server offline
@@ -35,15 +38,12 @@ function display() {
     fi
     mpc idle >/dev/null
 }
-function main() {
+main() {
     mode="$1"
     case $mode in
-        'static')
-            echo 'static' >| $mode_file
-            ;;
-        'scroll')
-            echo 'scroll' >| $mode_file
-            ;;
+        '') ;;
+        'static') echo 'static' >| $mode_file ;;
+        'scroll') echo 'scroll' >| $mode_file ;;
         'toggle')
             mode="$(cat $mode_file)"
             if [[ $mode == "static" ]]; then
@@ -52,13 +52,7 @@ function main() {
                 echo 'static' >| $mode_file
             fi
             ;;
-        '')
-            sleep 0.0000000001
-            ;;
-        *)
-            echo "Usage $0 {toggle|scroll|static}"
-            exit 1
-            ;;
+        *) echo "Usage $0 {toggle|scroll|static}" && exit 1 ;;
     esac
     mode="$(cat $mode_file)"
     display $mode
