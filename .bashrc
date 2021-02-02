@@ -159,7 +159,7 @@ fi
 if [ -f ~/.bash_functions.sh ]; then
     . ~/.bash_functions.sh
 fi
-#Priviliged Acces
+## Priviliged Acces
 if ! $_isroot; then
       alias sudo='sudo '
       alias scat='sudo cat'
@@ -251,7 +251,7 @@ export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COL
 
 export PATH="/usr/local/bin:$HOME/bin:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$PATH"
 #export GOPATH="$(echo $HOME/Documents/CMU_MSCB/Courses/Programming-02601/{Class,Homework,Project} | sed -e 's/ /:/g')"
-export GOPATH="$HOME/Documents/CMU_MSCB/Courses/Programming-02601/:$HOME/Projects/musman/:$HOME/Documents/CMU_MSCB/Courses/Programming-02601/Project:"
+export GOPATH="$HOME/CMU_MSCB/Courses/Programming-02601/:$HOME/Projects/musman/:$HOME/Projects/go/src"
 export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
