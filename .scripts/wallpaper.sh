@@ -99,7 +99,7 @@ setImg() {
 changeColors() {
     image="$1"
     wal -e -n -i "$image"  #font only
-    ~/dotfiles/.scripts/bar-manager.sh stay >> /dev/null 2>&1
+   ~/dotfiles/.scripts/bar-manager.sh stay >> /dev/null 2>&1
     pywalfox update
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
     timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
