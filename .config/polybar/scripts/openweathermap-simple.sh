@@ -42,12 +42,11 @@ main() {
         weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
         weather_icon=$(echo "$weather" | jq -r ".weather[0].icon")
         icon="$(getIcon "$weather_icon")"
-        echo "$icon $weather_temp$SYMBOL"
+        echo " $icon $weather_temp$SYMBOL"
     fi
 }
 
 main
-
 
 #DEPRECIATED
 #getWeather() {
