@@ -1,19 +1,20 @@
 *.pid
-.config/Epic
-.config/zoomus.conf
-.config/calibre
-.config/discord
-.config/autostart/
-.config/MonoGame/
-.config/UNDERTALE/
 .config/BraveSoftware
+.config/Epic
+.config/Koi_Unleashed/
+.config/MonoGame/
 .config/Open Sorcery/
 .config/RStudio/
 .config/Slack
+.config/UNDERTALE/
+.config/Unknown Organization/
+.config/autostart/
+.config/calibre
 .config/cef_user_data/
 .config/chromium/
 .config/compiz-1/
 .config/dconf/user
+.config/discord
 .config/enchant/
 .config/evolution/
 .config/expressvpn/
@@ -40,11 +41,16 @@
 .config/skypeforlinux/
 .config/syncthing/
 .config/systemd/
+.config/totem/
+.config/transmission-daemon/resume/
+.config/transmission-daemon/stats.json
+.config/transmission-daemon/torrents/
 .config/transmission/
 .config/unity/
 .config/unity3d/
 .config/user-dirs.dirs
 .config/vlc
+.config/zoomus.conf
 .ipython/profile_default/db/dhist
 .ipython/profile_default/db/rootmodules_cache
 .ipython/profile_default/history.sqlite
@@ -52,9 +58,9 @@
 .mpd/mpd.db
 .mpd/mpd.log
 .mpd/mpdstate
-.mpd/sticker.sql
 .mpd/playlists/mostrecent.m3u
 .mpd/playlists/mostrecentadded.m3u
+.mpd/sticker.sql
 .ncmpcpp/error.log
 .scripts/schedules
 .tmux/resurrect
