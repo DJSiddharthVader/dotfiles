@@ -1,79 +1,74 @@
 #!/bin/bash
 
 mode_file="$HOME/dotfiles/.varfiles/tempmode"
+modes=(short long)
 #Icons
 ramp0=""
 ramp1=""
 ramp2=""
 
 
-function short() {
-    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
+help() {
+    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
 }
-function long() {
-    sensors | grep -v 'ERROR' | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
+cycle() {
+    # cycle through modes either forwards or backwards
+    # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
+    # next mode index is:  (x+1) % n
+    # prev mode index is:  (x+n-1) % n
+    # x is current mode index, n is number of modes
+    dir="$1"
+    mode="$(cat $mode_file)"
+    idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
+    idx=$(($idx -1)) #current mode idx
+    case "$dir" in
+         'next') idx=$(($idx + 1)) ;;
+         'prev') idx=$(($idx +${#modes[@]} -1)) ;;
+         *) echo "Error cycle takes {next|prev}" && exit 1 ;;
+    esac
+    next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
+    echo "${modes[$next_idx]}"
 }
-function getTemp () {
-    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..'
-}
-function showIcon() {
-    temp=$(getTemp)
+
+icon() {
+    temp="$(sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..')"
     case 1 in
-        $(($temp < 40)))
-            icon=$ramp0
-            ;;
-        $(($temp < 50)))
-            icon=$ramp1
-            ;;
-        $(($temp < 60)))
-            icon=$ramp2
+        $(($temp < 40))) icon=$ramp0 ;;
+        $(($temp < 50))) icon=$ramp1 ;;
+        $(($temp < 60))) icon=$ramp2
             ;;
     esac
     echo "$icon"
 }
-function display(){
-    mode="$1"
+short() {
+    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
+}
+long() {
+    sensors | grep -v 'ERROR' | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
+}
+display(){
+    mode="$(cat $mode_file)"
     case $mode in
-        'short')
-            temp="$(showIcon) $(short)"
-            ;;
-        'long')
-            temp="$(showIcon) $(long)"
-            ;;
-        *)
-            echo "Usage $0 {short|long}"
-            exit 1
-            ;;
+        'short') temp="$(icon) $(short)" ;;
+        'long') temp="$(icon) $(long)" ;;
+        *) help && exit 1 ;;
     esac
     echo $temp | grep -v 'ERROR'
 }
-function main() {
+main() {
     mode="$1"
-    case $mode in
-        'short')
-            echo 'short' >| $mode_file
-            ;;
-        'long')
-            echo 'long' >| $mode_file
-            ;;
-        'toggle')
-            mode="$(cat $mode_file)"
-            if [[ $mode == "short" ]]; then
-                echo 'long' >| $mode_file
-            else
-                echo 'short' >| $mode_file
-            fi
-            ;;
-        '')
-            sleep 0.001
-            ;;
-        *)
-            echo "Usage $0 {toggle|short|long}"
-            exit 1
-            ;;
-    esac
-    mode="$(cat $mode_file)"
-    display $mode | grep -v 'ERROR'
+    if [[ "$mode" == 'display' ]]; then
+        display
+    else
+        tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
+        case "$mode" in
+            'next') dmode="$(cycle 'next')" ;;
+            'prev') dmode="$(cycle 'prev')" ;;
+            $tmp  ) dmode="$mode" ;; #capture any valid mode
+            *) help && exit 1 ;;
+        esac
+        echo "$dmode"  >| "$mode_file"
+    fi
 }
 
 main "$1"

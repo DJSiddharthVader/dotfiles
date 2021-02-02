@@ -3,6 +3,27 @@
 mode_file="$HOME/dotfiles/.varfiles/upmode"
 modes=(short med long)
 
+help() {
+    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
+}
+cycle() {
+    # cycle through modes either forwards or backwards
+    # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
+    # next mode index is:  (x+1) % n
+    # prev mode index is:  (x+n-1) % n
+    # x is current mode index, n is number of modes
+    dir="$1"
+    mode="$(cat $mode_file)"
+    idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
+    idx=$(($idx -1)) #current mode idx
+    case "$dir" in
+         'next') idx=$(($idx + 1)) ;;
+         'prev') idx=$(($idx +${#modes[@]} -1)) ;;
+         *) echo "Error cycle takes {next|prev}" && exit 1 ;;
+    esac
+    next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
+    echo "${modes[$next_idx]}"
+}
 function getTime() {
     timeperiod="$1"
     pattern="[0-9]\{1,\}$timeperiod"
@@ -21,81 +42,34 @@ function getTime() {
     fi
 }
 function display() {
-    mode="$1"
+    mode="$(cat $mode_file)"
     weeks=$(getTime 'week')
     days=$(getTime 'day')
     hours=$(getTime 'hour')
     minutes=$(getTime 'minute')
     case $mode in
-        'short')
-            total=$(($weeks*7*24 + $days*24 + $hours))
-            uptime="H:$total"
-            ;;
-        'med')
-            days=$((7*$weeks + $days))
-            uptime="D:$days H:$hours"
-            ;;
-        'long')
-            uptime="W:$weeks D:$days H:$hours M:$minutes"
-            ;;
-        *)
-            echo "Usage $0 {short|med|long}"
-            exit 1
-            ;;
+        'short') uptime="H:$(($weeks*7*24 + $days*24 + $hours))" ;;
+        'med'  ) uptime="D:$((7*$weeks + $days)) H:$hours" ;;
+        'long' ) uptime="W:$weeks D:$days H:$hours M:$minutes" ;;
+        *) help && exit 1 ;;
     esac
-    echo "$uptime "
+    echo " $uptime "
 }
-function cycleMode() {
-    printf '%s ' "${modes[${i:=0}]}"
-    ((i=i>=${#modes[@]}-1?0:++i))
-}
-function main() {
+main() {
     mode="$1"
-    case $mode in
-        'short')
-            echo 'short' >| $mode_file
-            ;;
-        'med')
-            echo 'med' >| $mode_file
-            ;;
-        'long')
-            echo 'long' >| $mode_file
-            ;;
-        'toggle')
-            mode="$(cat $mode_file)"
-            case $mode in
-                'short')
-                    echo 'med' >| $mode_file
-                    ;;
-                'med')
-                    echo 'long' >| $mode_file
-                    ;;
-                'long')
-                    echo 'short' >| $mode_file
-                    ;;
-            esac
-            ;;
-        '')
-            sleep 0.001
-            ;;
-        *)
-            echo "Usage $0 {toggle|short|med|long}"
-            exit 1
-            ;;
-    esac
-    mode="$(cat $mode_file)"
-    display $mode
+    if [[ "$mode" == 'display' ]]; then
+        display
+    else
+        tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
+        case "$mode" in
+            'next') dmode="$(cycle 'next')" ;;
+            'prev') dmode="$(cycle 'prev')" ;;
+            $tmp  ) dmode="$mode" ;; #capture any valid mode
+            *) help && exit 1 ;;
+        esac
+        echo "$dmode"  >| "$mode_file"
+    fi
 }
 
 main "$1"
-
-#DEPRECIATED
-#    uptime --pretty | \
-#          sed 's/^up //' | \
-#          sed -E 's/[, ]//g' | \
-#          sed -E 's/([0-9]*)week[s]*/W:\1 /' | \
-#          sed -E 's/([0-9]*)day[s]*/D:\1 /' | \
-#          sed -E 's/([0-9]*)hour[s]*/H:\1 /' | \
-#          sed -E 's/([0-9]*)minute[s]*/M:\1/'
-          #sed -E 's/([0-9]*)minute[s]*//'
 

@@ -1,6 +1,8 @@
 #!/bin/bash
+shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/batmode"
+modes=(short long)
 #icons
 charging=""
 ramp0=""
@@ -10,97 +12,83 @@ ramp3=""
 ramp4=""
 
 
-function showPercent() {
-    percent=$(acpi -b | cut -d',' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}')
-    echo $percent
+help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
+cycle() {
+    # cycle through modes either forwards or backwards
+    # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
+    # next mode index is:  (x+1) % n
+    # prev mode index is:  (x+n-1) % n
+    # x is current mode index, n is number of modes
+    dir="$1"
+    mode="$(cat $mode_file)"
+    idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
+    idx=$(($idx -1)) #current mode idx
+    case "$dir" in
+         'next') idx=$(($idx + 1)) ;;
+         'prev') idx=$(($idx +${#modes[@]} -1)) ;;
+         *) echo "Error cycle takes {next|prev}" && exit 1 ;;
+    esac
+    next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
+    echo "${modes[$next_idx]}"
 }
-function showStatus() {
+
+percent() { acpi -b | cut -d',' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}' | tr -d '%' ; }
+time_() { acpi -b | cut -d',' -f3 | cut -d' ' -f-2 | cut -d':' -f-2 | awk '{gsub(/^ +| +$/,"")} {print $0}' ; }
+status() {
     status=$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}')
-    if [[ $status == 'Charging' ]]; then
-        echo $charging
-    elif [[ $status == 'Not charging' ]]; then
-        echo $charging #full and plugged in
-    else
-        echo ""
-    fi
+    case $status in
+        'Charging'|'Not charging') msg="$charging" ;;
+        *) msg="" ;;
+    esac
+    echo "$msg"
 }
-function showTime() {
-    time=$(acpi -b | cut -d',' -f3 | cut -d' ' -f-2 | cut -d':' -f-2 |  awk '{gsub(/^ +| +$/,"")} {print $0}')
-    echo $time
-}
-function showIcon() {
-    percent=$(showPercent | tr -d '%' )
+icon() {
+    percent=$(percent)
     case 1 in
-        $(($percent <= 20)))
-            icon=$ramp0
-            ;;
-        $(($percent <= 40)))
-            icon=$ramp1
-            ;;
-        $(($percent <= 60)))
-            icon=$ramp2
-            ;;
-        $(($percent <= 80)))
-            icon=$ramp3
-            ;;
-        $(($percent <= 100)))
-            icon=$ramp4
-            ;;
+        $(($percent <= 20))) icon=$ramp0 ;;
+        $(($percent <= 40))) icon=$ramp1 ;;
+        $(($percent <= 60))) icon=$ramp2 ;;
+        $(($percent <= 80))) icon=$ramp3 ;;
+        $(($percent <= 100))) icon=$ramp4 ;;
     esac
     echo "$icon"
 }
-function display(){
-    mode="$1"
-    status="$(showStatus)"
-    case $mode in
-        'short')
-            if [[ -z $status ]]; then
-                bat="$(showIcon) $(showPercent)"
-            else
-                bat="$status $(showIcon) $(showPercent)"
-            fi
-            ;;
-        'long')
-            if [[ -z $status ]]; then
-                bat="$(showIcon) $(showPercent) $(showTime)"
-            else
-                bat="$status $(showIcon) $(showPercent) $(showTime)"
-            fi
-            ;;
-        *)
-            echo "Usage $0 {short|long}"
-            exit 1
-            ;;
-    esac
-    echo "$bat "
-}
-function main() {
-    mode="$1"
-    case $mode in
-        'short')
-            echo 'short' >| $mode_file
-            ;;
-        'long')
-            echo 'long' >| $mode_file
-            ;;
-        'toggle')
-            mode="$(cat $mode_file)"
-            if [[ $mode == "short" ]]; then
-                echo 'long' >| $mode_file
-            else
-                echo 'short' >| $mode_file
-            fi
-            ;;
-        '')
-            sleep 0.001
-            ;;
-        *)
-            echo "Usage $0 {toggle|short|long}"
-            exit 1
-            ;;
-    esac
+display(){
     mode="$(cat $mode_file)"
-    display $mode
+    status="$(status)"
+    case $mode in
+        'short')
+            if [[ -z $status ]]; then
+                bat="$(icon) $(percent)"
+            else
+                bat="$status $(icon) $(percent)"
+            fi
+            ;;
+        'long')
+            if [[ -z $status ]]; then
+                bat="$(icon) $(percent) $(time_)"
+            else
+                bat="$status $(icon) $(percent) $(time_)"
+            fi
+            ;;
+        *) help && exit 1 ;;
+    esac
+    echo "$bat"
+}
+main() {
+    mode="$1"
+    if [[ "$mode" == 'display' ]]; then
+        display
+    else
+        tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
+        case "$mode" in
+            'next') dmode="$(cycle 'next')" ;;
+            'prev') dmode="$(cycle 'prev')" ;;
+            $tmp  ) dmode="$mode" ;; #capture any valid mode
+            *) help && exit 1 ;;
+        esac
+        echo "$dmode"  >| "$mode_file"
+    fi
 }
 
 main "$1"
