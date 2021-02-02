@@ -33,11 +33,14 @@ set $hibernate sudo systemctl suspend
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 #lock after 45 mins of inactivity
 exec_always --no-startup-id xautolock -time 45 -locker ~/.scripts/scriptslock.sh -detectsleep
+#lock daemon to lock by listening to events
+#exec --no-startup-id xss-lock -- /home/sidreed/dotfiles/.scripts/lock.sh &
 #Increase key rate
 exec --no-startup-id xset r rate 300 50
 #Composite manager:
 exec --no-startup-id compton --config ~/.config/compton.conf
 #Launch Polybar and set wallpaper
+exec_always --no-startup-id ~/dotfiles/.scripts/bar-manager.sh stay
 exec_always --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
@@ -50,14 +53,10 @@ exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id /home/sidreed/dotfiles/.scripts/low-battery.sh &
-#lock daemon to lock by listening to events
-exec --no-startup-id xss-lock -- /home/sidreed/dotfiles/.scripts/lock.sh &
 #Torrent daemon:
 exec --no-startup-id transmission-daemon
 #express vpn
 exec --no-startup-id expressvpn connect
-#start tmux window for scripting eith bluetoothctl
-exec --no-startup-id tmux new-session -d -s bluetooth 'sudo bluetoothctl -a |& tee /run/shm/BLUETOOTH_OUTPUT'
 #Mount other drives:
 #exec --no-startup-id sudo mount -a
 
@@ -157,7 +156,7 @@ bindsym $mod+w         exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w   exec --no-startup-id firefox --private-window
 
 bindsym $mod+e         exec ~/dotfiles/.scripts/bar-manager.sh stay
-bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/reset-pulseaudio.sh
+bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh float
 
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
