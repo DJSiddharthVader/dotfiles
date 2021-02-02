@@ -16,16 +16,30 @@ task_icon=""
 #task_seperator=""
 task_seperator="  "
 
-
-function short() {
-    total=$(wc -l "$task_file" | cut -d" " -f1)
-    out="$task_icon $total"
-    echo $out
+help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
+cycle() {
+    # cycle through modes either forwards or backwards
+    # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
+    # next mode index is:  (x+1) % n
+    # prev mode index is:  (x+n-1) % n
+    # x is current mode index, n is number of modes
+    dir="$1"
+    mode="$(cat $mode_file)"
+    idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
+    idx=$(($idx -1)) #current mode idx
+    case "$dir" in
+         'next') idx=$(($idx + 1)) ;;
+         'prev') idx=$(($idx +${#modes[@]} -1)) ;;
+         *) echo "Error cycle takes {next|prev}" && exit 1 ;;
+    esac
+    next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
+    echo "${modes[$next_idx]}"
 }
-function long() {
+
+total() { wc -l "$task_file" | cut -d" " -f1 ; }
+long() {
     task_categories=$(cut -d':' -f1 "$task_file" | sort | uniq -c | sort -rn )
-    total=$(wc -l "$task_file" | cut -d" " -f1)
-    out="$task_icon $total"
+    out="$task_icon $(total)"
     while read -r task_count; do
         catagory=$(echo "$task_count" | cut -d' ' -f2)
         count=$(echo "$task_count" | cut -d' ' -f1)
@@ -34,47 +48,27 @@ function long() {
     echo "$out"
 }
 function display(){
-    mode="$1"
+    mode="$(cat $mode_file)"
     case $mode in
-        'short')
-            short
-            ;;
-        'long')
-            long
-            ;;
-        *)
-            echo "Usage $0 {short|long}"
-            exit 1
-            ;;
+        'short') "$task_icon $(total)" ;;
+        'long') long ;;
+        *) help && exit 1 ;;
     esac
 }
-function main() {
+main() {
     mode="$1"
-    case $mode in
-        'short')
-            echo 'short' >| $mode_file
-            ;;
-        'long')
-            echo 'long' >| $mode_file
-            ;;
-        'toggle')
-            mode="$(cat $mode_file)"
-            if [[ $mode == "short" ]]; then
-                echo 'long' >| $mode_file
-            else
-                echo 'short' >| $mode_file
-            fi
-            ;;
-        '')
-            sleep 0.001
-            ;;
-        *)
-            echo "Usage $0 {toggle|short|long}"
-            exit 1
-            ;;
-    esac
-    mode="$(cat $mode_file)"
-    display $mode
+    if [[ "$mode" == 'display' ]]; then
+        display
+    else
+        tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
+        case "$mode" in
+            'next') dmode="$(cycle 'next')" ;;
+            'prev') dmode="$(cycle 'prev')" ;;
+            $tmp  ) dmode="$mode" ;; #capture any valid mode
+            *) help && exit 1 ;;
+        esac
+        echo "$dmode"  >| "$mode_file"
+    fi
 }
 
 main "$1"
