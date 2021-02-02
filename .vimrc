@@ -328,6 +328,9 @@ set laststatus=2
 
 " Format the status line
 set statusline=\ %l,%c\ \ %{HasPaste()}%F%m%r%h\ %w "CWD:\ %r%{getcwd()}%h\ \
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 " => vim-airline config (force color)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:airline_theme="base16_eighties"
@@ -346,8 +349,22 @@ nnoremap <silent> <leader>z :Goyo<cr>
 " => Syntastic (syntax checker)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pymode_python = 'python3'
-let g:syntastic_python_checkers=['pyflakes']
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_exec='/home/sidreed/anaconda3/envs/prog02601/bin/flake8'
+let g:syntastic_python_pylint_exec='/home/sidreed/anaconda3/envs/prog02601/bin/pylint'
+let g:syntastic_python_pylint_args='--disable=missing-docstring --errors-only'
+let g:syntastic_go_checkers= ['go', 'gofmt', 'govet']
+let g:syntastic_enable_r_lintr_checker = 1
+let g:syntastic_R_checkers= ['lintr']
+let g:syntastic_markdown_checkers= ['mdl', 'proselint']
+let g:syntastic_tex_checkers= ['chktex', 'proselint']
+
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
 " Custom CoffeeScript SyntasticCheck
 func! SyntasticCheckCoffeescript()
@@ -377,6 +394,9 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
+" map increment/decrement to Alt as C-a is my tmux leader key
+nnoremap <C-i> <C-a>
+
 
 " => Ag searching and cope displaying
 "    requires ag.vim - it's much better than vimgrep/grep
@@ -420,7 +440,7 @@ map <leader>s? z=
 " => Misc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remove the Windows ^M - when the encodings gets messed up
-noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+noremap <leader>wm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
 " Quickly open a buffer for scribble
 map <leader>q :e ~/buffer<cr>
@@ -507,7 +527,14 @@ endfunc
 func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
-
+"copy matches only to buffer with CopyMatches <buffer>
+function! CopyMatches(reg)
+    let hits = []
+    %s//\=len(add(hits, submatch(0))) ? submatch(0) : ''/gne
+    let reg = empty(a:reg) ? '+' : a:reg
+    execute 'let @'.reg.' = join(hits, "\n") . "\n"'
+endfunction
+command! -register CopyMatches call CopyMatches(<q-reg>)
 " => Plugin options
 " ===============================================
 
@@ -523,6 +550,19 @@ let g:vim_markdown_math = 1
 " Markdown
 let g:markdown_fenced_languages = ['css','json=javascript', 'ruby', 'xml', 'python', 'go','tex']
 let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby","literatehaskell=lhaskell", "bash=sh","go"]
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+call plug#end()
+
+
+let g:mkdp_filetypes = ['markdown']
+
+nmap <leader>mp <Plug>MarkdownPreview
+nmap <leader>ms <Plug>MarkdownPreviewStop
+nmap <leader>mt <Plug>MarkdownPreviewToggle
 
 augroup pandoc_syntax
     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
