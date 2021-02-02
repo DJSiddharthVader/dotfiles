@@ -25,8 +25,9 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
+
 info() {
-    transmission-remote -tall -i
+    transmission-remote -tall -i | grep -v 'None'
 }
 sumConvert() {
     # parses output of tranmission-remote -i to sum sizes of a specified fild for all torrents and convert final  output to desired unit (K,M,G,T etc.)
