@@ -72,7 +72,7 @@ pen=" "
 #Set prompt by terminal width
 function prompt_command() {
     termwidth=${COLUMNS}
-    if [ "$termwidth" -gt "80" ]; then
+    if [ "$termwidth" -gt "100" ]; then
         #wide terminal
         #Modules
         strt="$end$B0$Fb$top$end$B1"
