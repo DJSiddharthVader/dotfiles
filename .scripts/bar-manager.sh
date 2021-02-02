@@ -54,41 +54,44 @@ function setWallPaper() {
             ;;
     esac
 }
-function barWrapper() {
-    option="$1"
-    case "$option" in
-        next)
-            mode="$(head -2 $togglefile | tail -1)"
-            ;;
-        prev)
-            mode="$(head -3 $togglefile | tail -1)"
-            ;;
-        stay)
-            mode="$(head -1 $togglefile)"
-            ;;
-        float)
-            mode="float"
-            ;;
-        full)
-            mode="full"
-            ;;
-        mini)
-            mode="mini"
-            ;;
-        none)
-            mode="none"
-            ;;
-        *)
-            echo "Usage: $0 {next|prev|stay|float|full||mini|none}"
-            exit 1
-            ;;
-    esac
-    launchBar "$mode"
-    setWallPaper "$mode"
+function writeToggleFile() {
+    mode="$1"
     nextidx="$(( ${modes_idxs[$mode]} % ${#modes_idxs[@]} + 1 ))"
     fmode="${modes_fwd[$nextidx]}"
     rmode="${modes_rev[$nextidx]}"
     echo -e "$mode\n$fmode\n$rmode" >| "$togglefile"
+}
+function updateBar() {
+    mode="$1"
+    launchBar "$mode"
+    setWallPaper "$mode"
+    writeToggleFile "$mode"
+}
+function barWrapper() {
+    option="$1"
+    case "$option" in
+        next) mode="$(head -2 $togglefile | tail -1)" ;;
+        prev) mode="$(head -3 $togglefile | tail -1)" ;;
+        stay) mode="reload" ;;
+        restart) mode="$(head -1 $togglefile | tail -1)" ;;
+        float) mode="float" ;;
+        full) mode="full" ;;
+        mini) mode="mini" ;;
+        none) mode="none" ;;
+        *) echo "Usage: $0 {next|prev|stay|float|full||mini|none}"
+           exit 1
+          ;;
+    esac
+    if [ "$mode" = "reload" ]; then
+        if ! [ -z "$(pgrep 'polybar')" ]; then
+            # launch bar if not already launched
+            polybar-msg cmd restart
+            exit 0 #exit
+        else
+            mode="$(head -1 $togglefile)" # current mode, kill an restart bar
+        fi
+    fi
+    updateBar "$mode"
 }
 
 barWrapper "$1"
