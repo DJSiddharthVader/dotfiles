@@ -10,7 +10,7 @@ set adjust-open "best-fit"
 #map k navigate previous
 #unmap K
 #map K scroll up
-umap i
-umap u
+unmap i
+unmap u
 map u navigate next
 map i navigate previous
