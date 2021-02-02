@@ -1,12 +1,12 @@
 name: cmu
-root: ~/Documents/CMU_MSCB/Courses
+root: ~/CMU_MSCB/Courses
 tmux_options: -f /home/sidreed/dotfiles/.tmux.scratch.conf
 on_project_start: wal -R -e -n -q &
 
 windows:
-    - prof_issues: cd ~/Documents/Resume && git branch prof_issues
-    - math: cd Math-02680
-    - algorithms: cd Algorithims-02613
-    - programming: cd Programming-02601
+    - ML : cd /home/sidreed/CMU_MSCB/Courses/Machine_Learning-02620
+    - Practicum : cd /home/sidreed/CMU_MSCB/Courses/Practicum-03713
+    - Genomics : cd /home/sidreed/CMU_MSCB/Courses/Genomics-02710
+    - Evolution : cd /home/sidreed/CMU_MSCB/Courses/Evolution-02331
 
 

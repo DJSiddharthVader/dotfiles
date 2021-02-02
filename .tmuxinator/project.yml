@@ -1,0 +1,24 @@
+name: project
+root: ~/CMU_MSCB/Courses/Programming-02601/Project_02601
+tmux_options: -f /home/sidreed/dotfiles/.tmux.conf
+
+windows:
+    - git:
+        layout: 0215,163x44,0,0{81x44,0,0,12,81x44,82,0[81x22,82,0,14,81x21,82,23,15]}
+        panes:
+            -  watch -n1 git status
+            -
+    - readme: vi ./README.md
+    - genetic:
+        layout: 0b97,163x44,0,0[163x30,0,0,17,163x13,0,31,18]
+        panes:
+            - cd genetic_algorithm
+            - cd genetic_algorithm
+    - ml_model:
+        layout: 0b97,163x44,0,0[163x30,0,0,17,163x13,0,31,18]
+        panes:
+            - cd dnazyme_ML_model
+            - cd dnazyme_ML_model
+    - igem:
+        cd ~/Archive/Projects/mgem-drylab-2017/
+

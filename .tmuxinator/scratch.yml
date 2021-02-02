@@ -4,8 +4,8 @@ tmux_options: -f /home/sidreed/dotfiles/.tmux.scratch.conf
 on_project_start: wal -R -e -n -q &
 
 windows:
-    - school: cd ~/Documents/CMU_MSCB/Courses
+    - school: cd ~/CMU_MSCB/Current_Courses
     - scratch:
-    - read: cd ~/Documents/Reading
+    - media: cd ~/Media/
     - fetch: neofetch
 
