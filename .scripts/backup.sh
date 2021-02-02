@@ -3,8 +3,8 @@
 # Vars
 drive="/media/1tbdrive"
 backupdir="$drive/BackUps"
-snapshotfile="$drive/tar-snapshot.file"
-rsyncdirs=(Documents dotfiles Games Music Projects Pictures)
+snapshotfile="$drive/tar-snapshot.snar"
+rsyncdirs=(Archive Documents dotfiles Games Music Projects Pictures)
 
 
 function checkDrive(){
@@ -25,7 +25,7 @@ function rsyncBackup(){
     done
 }
 function tarBackup(){
-    backupfile="$backupdir/backup_$(date +"%F").tar.bz2"
+    backupfile="$backupdir/backup_$(date +"%F").tar.gz"
     sudo tar \
         --exclude=$HOME/.cache               \
         --exclude=$HOME/.steam               \
@@ -41,9 +41,7 @@ function tarBackup(){
         --exclude=/var/cache/apt             \
         --exclude=/usr/src/linux-headers*    \
         --exclude=/swapfile                  \
-        --listed-incremental="$snapshotfile" \
-        -I pbzip2                            \
-        -cvf "$backupfile"                  \
+        -czvf "$backupfile"                   \
         --one-file-system /
 }
 function main(){
