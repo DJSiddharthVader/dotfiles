@@ -2,7 +2,7 @@
 
 downloadpage='https://www.expressvpn.com/latest?utm_source=linux_app#linux'
 
-function update() {
+update() {
     if [ "$(expressvpn status | grep -c 'A new version is available')" -eq 1 ]; then
         deb_url="$(wget -O - "$downloadpage" | grep 'name=\"linux-download\"' | grep -oP '(?<=value=\")https.*(?=\">Ubuntu)')"
         cd ~/Downloads && wget "$deb_url"
@@ -14,7 +14,7 @@ function update() {
         exit 0
     fi
 }
-function displayStatus() {
+display() {
     status="$(expressvpn status | tail -1)"
     case $status in
         'Not Connected') output="N/A" ;;
@@ -22,7 +22,7 @@ function displayStatus() {
     esac
     echo "$output "
 }
-function toggleConnection() {
+toggle() {
     status="$(expressvpn status | tail -1)"
     if [[ "$status" == "Not connected" ]]
     then
@@ -31,28 +31,15 @@ function toggleConnection() {
         expressvpn disconnect
     fi
 }
-function main() {
+main() {
     mode="$1"
     case $mode in
-        'status')
-            displayStatus
-            ;;
-        'toggle')
-            toggleConnection
-            ;;
-        'connect')
-            expressvpn connect
-            ;;
-        'disconnect')
-            expressvpn disconnect
-            ;;
-        'update')
-            update
-            ;;
-        *)
-            echo "Usage $0 {status|toggle|connect|disconnect|update}"
-            exit 1
-            ;;
+        'status') display ;;
+        'toggle') toggle ;;
+        'connect') expressvpn connect ;;
+        'disconnect') expressvpn disconnect ;;
+        'update') update ;;
+        *) echo "Usage $0 {status|toggle|connect|disconnect|update}" && exit 1 ;;
     esac
 }
 
