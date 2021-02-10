@@ -1,5 +1,5 @@
-name: cmu
-root: ~/CMU_MSCB/Courses
+name: school
+root: ~/CMU_MSCB/Current_Courses
 tmux_options: -f /home/sidreed/dotfiles/.tmux.scratch.conf
 on_project_start: wal -R -e -n -q &
 
@@ -8,5 +8,4 @@ windows:
     - Practicum : cd /home/sidreed/CMU_MSCB/Courses/Practicum-03713
     - Genomics : cd /home/sidreed/CMU_MSCB/Courses/Genomics-02710
     - Evolution : cd /home/sidreed/CMU_MSCB/Courses/Evolution-02331
-
 
