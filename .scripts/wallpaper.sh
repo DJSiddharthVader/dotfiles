@@ -1,4 +1,5 @@
 #!/bin/bash
+shopt -s extglob
 
 # Vars
 bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
@@ -10,21 +11,11 @@ tmp='/tmp/histfile'
 resolution='1366x768!' #resolution, ignore aspect ratio
 
 
-usage() {
-    echo "Usage: $0 {path/to/image|rs|prev|stay|next} {font|back|both}"
-}
-appendHist() {
-    find "$picdir" -maxdepth 99 -type f >| "$histfile"
-}
-resetHist() {
-    find "$picdir" -maxdepth 99 -type f | shuf >| "$histfile"
-}
+usage() { echo "Usage: $0 {path/to/image|rs|prev|stay|next} {font|back|both}" ; }
+appendHist() { find "$picdir" -maxdepth 99 -type f >| "$histfile" ; }
+resetHist() { find "$picdir" -maxdepth 99 -type f | shuf >| "$histfile" ; }
 updateImageIdx() {
-    if [[ -f "$1" ]];then
-        mode="path"
-    else
-        mode="$1"
-    fi
+    [[ -f "$1" ]] && mode="path" || mode="$1"
     idx=$(cat "$idxfile")
     maxidx="$(wc -l "$histfile" | cut -d' ' -f1)"
     case "$mode" in
@@ -44,65 +35,43 @@ updateImageIdx() {
                 nidx=$(( $idx - 1 ))
             fi
             ;;
-        'stay')
-            nidx="$idx"
-            ;;
         'next')
-            if [ "$idx" -gt "$maxidx" ]; then
-                appendHist
-            fi
+            [ "$idx" -gt "$maxidx" ] && appendHist
             nidx=$(( $idx + 1 ))
             ;;
-        *)
-            usage
-            exit 1
-            ;;
+        'stay') nidx="$idx" ;;
+        *) usage && exit 1 ;;
     esac
     echo "$nidx" >| "$idxfile"
     echo "$nidx"
 }
-idxToImage(){
-    idx="$1"
-    image="$(head -"$idx" "$histfile" | tail -1)"
-    echo "$image"
-}
+idxToImage(){ echo "$(head -"$1" "$histfile" | tail -1)" ; }
 addBorderToImg() {
     image="$1"
     cp "$image" "$unbgfile"
-    bordercolor="$(convert "$image" -colorspace Gray -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
+    #bordercolor="$(convert "$image" -colorspace Gray -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
     bordercolor="$(convert "$image" -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
     convert "$unbgfile" -resize "$resolution" -bordercolor "$bordercolor" -border 0x34 "$bgfile" #add borderes to image
 }
 setImg() {
     image="$1"
     addBorderToImg "$image"
-    barmode="$(head -1 ~/dotfiles/.varfiles/bartoggle)" #get bar status
+    barmode="$(head -1 ~/dotfiles/.varfiles/barmode)" #get bar status
     case "$barmode" in
-        float)
-            feh --bg-scale "$unbgfile" #without borders
-            ;;
-        full)
-            feh --bg-scale "$bgfile" #with borders
-            ;;
-        mini)
-            feh --bg-scale "$unbgfile" #without borders
-            ;;
-        none)
-            feh --bg-scale "$unbgfile" #without borders
-            ;;
-        *)
-            usage
-            exit 1
-            ;;
+        float|mini|none) feh --bg-scale "$unbgfile" ;; #without borders
+        full) feh --bg-scale "$bgfile" ;; #with borders
+        *) usage && exit 1 ;;
     esac
 }
 changeColors() {
     image="$1"
     wal -e -n -i "$image"  #font only
-   ~/dotfiles/.scripts/bar-manager.sh stay >> /dev/null 2>&1
+   ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1
     pywalfox update
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
     timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
+    ~/dotfiles/.scripts/zathura.sh
+    pywalfox update
 }
 main() {
     method="$1"
@@ -120,20 +89,10 @@ main() {
     fi
     mode="$2"
     case "$mode" in
-        'font')
-            changeColors "$image"
-            ;;
-        'back')
-            setImg "$image"
-            ;;
-        'both')
-            setImg "$image"
-            changeColors "$image"
-            ;;
-        *)
-            usage
-            exit 1
-            ;;
+        'font') changeColors "$image" ;;
+        'back') setImg "$image" ;;
+        'both') setImg "$image" && changeColors "$image" ;;
+        *) usage && exit 1 ;;
     esac
 }
 
