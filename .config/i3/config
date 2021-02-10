@@ -40,7 +40,7 @@ exec --no-startup-id xset r rate 300 50
 #Composite manager:
 exec --no-startup-id compton --config ~/.config/compton.conf
 #Launch Polybar and set wallpaper
-exec_always --no-startup-id ~/dotfiles/.scripts/bar-manager.sh stay
+exec_always --no-startup-id ~/dotfiles/.scripts/bar-manager.sh restart
 exec_always --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
 #Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
@@ -54,7 +54,7 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id /home/sidreed/dotfiles/.scripts/low-battery.sh &
 #Torrent daemon:
-exec --no-startup-id transmission-daemon
+exec --no-startup-id ~/.scripts/transmission-start.sh
 #express vpn
 exec --no-startup-id expressvpn connect
 #Mount other drives:
@@ -155,7 +155,7 @@ bindsym $mod+q         kill
 bindsym $mod+w         exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w   exec --no-startup-id firefox --private-window
 
-bindsym $mod+e         exec ~/dotfiles/.scripts/bar-manager.sh stay
+bindsym $mod+e         exec ~/dotfiles/.scripts/bar-manager.sh reload
 bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh float
 
 bindsym $mod+r         exec rofi -show run
