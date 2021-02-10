@@ -45,7 +45,7 @@ alias rspa='~/.scripts/reset-pulseaudio.sh'
 alias knit='~/.scripts/knit-pdf.sh'
 
 #Shorten
-alias school='cd /home/sidreed/CMU_MSCB/Courses/'
+alias school='cd /home/sidreed/CMU_MSCB/Current_Courses/'
 alias pdf='zathura'
 alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
@@ -59,6 +59,7 @@ alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
 
 #Print
+alias tsm="transmission-remote"
 alias cfh="grep -c '^>'"
 alias shln="ls -la | grep '\-\>'"
 alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
