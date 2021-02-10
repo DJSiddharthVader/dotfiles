@@ -243,15 +243,23 @@ fi
 #export QT_QPA_PLATFORMTHEME=gtk2
 
 ## Prompt
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+#[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+## CTRL-T - Paste the selected file path into the command line
+#bind -m emacs-standard -x '"\C-t": ~/.fzf/bin/fzf'
+#bind -m vi-command -x '"\C-t": ~/.fzf/bin/fzf'
+#bind -m vi-insert -x '"\C-t": ~/.fzf/bin/fzf'
+## CTRL-R - Paste the selected command from history into the command line
+#bind -m emacs-standard -x '"\C-r": ~/.fzf/bin/fzf'
+#bind -m vi-command -x '"\C-r": ~/.fzf/bin/fzf'
+#bind -m vi-insert -x '"\C-r": ~/.fzf/bin/fzf'
 source $HOME/dotfiles/.scripts/bash-prompt.sh
 export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
 
 ## Set PATH variable
 
-export PATH="/usr/local/bin:$HOME/bin:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$PATH"
 #export GOPATH="$(echo $HOME/Documents/CMU_MSCB/Courses/Programming-02601/{Class,Homework,Project} | sed -e 's/ /:/g')"
 export GOPATH="$HOME/CMU_MSCB/Courses/Programming-02601/:$HOME/Projects/musman/:$HOME/Projects/go/src"
+export PATH="/usr/local/bin:$HOME/bin:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$PATH"
 export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
