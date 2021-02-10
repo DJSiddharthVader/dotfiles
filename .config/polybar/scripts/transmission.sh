@@ -2,6 +2,7 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/tormode"
+stats="$HOME/dotfiles/.config/transmission-daemon/stats.json"
 modes=(ratio data speed active) #no spaces in mode titles
 
 help() {
@@ -36,8 +37,10 @@ sumConvert() {
     info | grep "$pattern" | #isolate field for each torrent
            sed -e "s/^.*$pattern//" -e 's/(.*)//' | #extract values
            sed -e 's/\([0-9\.]*\) \([A-Za-z]\)B[^ ]*/\1\U\2 /g' |
-           tr -d '\n' | sed -e 's/ *$/\n/' | numfmt --from=auto --field=1- | #convert to bits
-           tr -s ' ' '+'  | bc | numfmt --to-unit="$outunit" --format="%.2f" #sum and convert to $unit
+           tr -d '\n' | sed -e 's/ *$/\n/' | #join lines add trailing newline for bc
+           numfmt --from=auto --field=1- | #convert to bits
+           tr -s ' ' '+'  | bc | #sum together
+           numfmt --to-unit="$outunit" --format="%.2f" #sum and convert to $unit
 }
 display() {
     mode="$(cat $mode_file)"
@@ -49,21 +52,26 @@ display() {
             down="$(sumConvert 'Downloaded' "$unit")"
             total="$(sumConvert 'Total size' "$unit")"
             msg=" $(echo "scale=2; $down/$total" | bc)  $(echo "scale=2; $up/$down" | bc)"
+
+            upt="$(jq '."uploaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
+            downt="$(jq '."downloaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
+            [[ -z "$up$down$total" ]] && msg="T $(echo "scale=2; $upt/$downt" | bc)"
             ;;
         'data')
             unit="Gi"
             up="$(sumConvert 'Uploaded' "$unit" "$info")"
             down="$(sumConvert 'Downloaded' "$unit" "$info")"
-            msg=" $down $unit  $up $unit "
+            upt="$(jq '."uploaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
+            downt="$(jq '."downloaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
+            [[ -z "$up$down" ]] && msg="T  $downt $unit T  $upt $unit " || msg=" $down $unit  $up $unit "
             ;;
         'speed')
             unit="Mi"
             up="$(sumConvert 'Upload Speed' "$unit" "$info")"
             down="$(sumConvert 'Download Speed' "$unit" "$info")"
-            msg=" $down $unit  $up $unit "
+            [[ -z "$up$down" ]] &&  msg=" - $unit/s  - $unit/s " || msg=" $down $unit/s  $up $unit/s "
             ;;
         'active')
-
             seed="$(info | grep -c 'State: Seeding')"
             down="$(info | grep -c 'State: Downloading')"
             both="$(info | grep -c 'State: Up & Down')"
@@ -72,7 +80,7 @@ display() {
             ;;
         *) help && exit 1 ;;
     esac
-    echo "  $msg"
+    echo "$msg"
 }
 main() {
     mode="$1"
