@@ -115,107 +115,64 @@ setlocal wrapmargin=0
 silent! normal! zE
 7,11fold
 12,15fold
-16,21fold
-22,58fold
-59,89fold
-91,98fold
-99,106fold
-107,112fold
-113,119fold
-120,135fold
-90,136fold
-138,182fold
-183,189fold
-190,196fold
-197,203fold
-204,212fold
-213,219fold
-220,226fold
-227,234fold
-235,242fold
-243,249fold
-250,256fold
-257,261fold
-137,262fold
-264,289fold
-290,295fold
-296,299fold
-300,314fold
-315,332fold
-333,360fold
-361,376fold
-377,421fold
-422,432fold
-433,460fold
-461,468fold
-469,498fold
-499,502fold
-263,503fold
-505,510fold
-511,516fold
-517,522fold
-523,528fold
-529,534fold
-535,540fold
-541,546fold
-547,552fold
-553,558fold
-559,564fold
-565,570fold
-571,576fold
-577,582fold
-583,588fold
-589,594fold
-595,600fold
-601,606fold
-607,612fold
-613,618fold
-619,624fold
-625,630fold
-631,636fold
-637,642fold
-643,648fold
-649,654fold
-655,660fold
-661,666fold
-667,672fold
-673,678fold
-679,684fold
-685,690fold
-691,696fold
-697,702fold
-703,708fold
-709,714fold
-715,720fold
-721,726fold
-727,732fold
-733,738fold
-739,744fold
-745,750fold
-751,756fold
-757,762fold
-763,768fold
-769,774fold
-775,780fold
-504,781fold
-90
+16,24fold
+26,50fold
+25,61fold
+62,92fold
+94,100fold
+101,107fold
+108,113fold
+114,120fold
+121,136fold
+93,137fold
+139,155fold
+156,205fold
+206,255fold
+256,260fold
+261,275fold
+276,304fold
+305,338fold
+339,353fold
+354,368fold
+369,380fold
+381,416fold
+418,429fold
+430,445fold
+446,446fold
+446,461fold
+462,477fold
+478,496fold
+497,512fold
+513,527fold
+528,543fold
+544,556fold
+558,568fold
+569,577fold
+578,584fold
+585,590fold
+138,591fold
+25
 normal! zo
-137
-normal! zo
-263
-normal! zo
-263
+25
 normal! zc
-504
+93
 normal! zo
-504
+93
 normal! zc
-let s:l = 188 - ((182 * winheight(0) + 20) / 41)
+138
+normal! zo
+446
+normal! zo
+446
+normal! zc
+138
+normal! zc
+let s:l = 1 - ((0 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-188
-normal! 01|
+1
+normal! 0
 let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
