@@ -1,5 +1,15 @@
 #!/bin/bash
 
+setDefaultSink() {
+    case "$1" in
+        'speakers' ) sink=1 ;;
+        'both'     ) sink=2 ;;
+        'bluetooth')  sink=3 ;;
+        *) echo "Error: invalid sink" && exit 1
+    esac
+    sink="$(pactl list sinks | grep Name | cut -f2- -d' ' | head -n "$sink" | tail -1)"
+    pactl set-default-sink "$sink"
+}
 isDeviceConnected() {
     device="$1" #uuid
     status="$(echo -e "info $device" | bluetoothctl | grep Connected | cut -d':' -f2)"
@@ -8,16 +18,15 @@ isDeviceConnected() {
 }
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
-    #setDefaultSink 'speaker'
+    setDefaultSink 'speakers'
 }
 connect() {
-    disconnect
     device="$1"  # a uuid
     while [[ "$(isDeviceConnected $device)" == 'no' ]]; do
         echo -e "connect $device\n" | bluetoothctl /dev/null 2>&1
-        sleep 5
+        sleep 10
     done
-    #setDefaultSink 'bluetooth'
+    setDefaultSink 'bluetooth'
 }
 toggle() {
     device="$1"
@@ -27,7 +36,7 @@ toggle() {
         "yes") disconnect ;;
         *) echo "Error: invalid status message $status" && exit 1
     esac
-    ~/.scripts/bar-manager.sh stay
+    ~/.scripts/bar-manager.sh reload
 }
 
 getDeviceName() {
@@ -40,7 +49,7 @@ getConnectedDevice() {
     while IFS= read -r uuid; do
         [[ "$(isDeviceConnected $uuid)" = 'yes' ]] && name="$(getDeviceName $uuid)" && break
     done <<< "$(echo -e "paired-devices" | bluetoothctl | cut -f2 -d' ')"
-    echo "$name"
+    echo " $name"
 }
 
 main() {

@@ -1,11 +1,10 @@
 #!/bin/bash
+shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/upmode"
-modes=(short med long)
+modes=(hour day week)
 
-help() {
-    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
-}
+help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -24,33 +23,27 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
-function getTime() {
-    timeperiod="$1"
-    pattern="[0-9]\{1,\}$timeperiod"
-    #time=$(uptime -p | sed -re 's/ //g' | grep -Po "$pattern" | sed -re "s/[^0-9]//" )
-    if [[ "$(uptime -p)" =~ "$timeperiod" ]]; then
-        time=$(uptime -p | sed -rE "s/(^.*)( [0-9]{1,} $timeperiod).*$/\2/" | sed -re 's/[^0-9]//g')
-        if [[ $time =~ [^0-9]+ ]]; then
-            echo 0
-        elif [[ $time =~ [0-9]{4} ]]; then
-            echo 0
-        else
-            echo $time
-        fi
+
+time_() {
+    time_period="$1"
+    if [[ "$(uptime -p)" =~ "$time_period" ]]; then
+        time_passed="$(uptime -p | sed -rE "s/(^.*) ([0-9]{1,} $time_period).*$/\2/" | sed -re 's/[^0-9]//g')"
     else
-        echo 0
+        time_passed="0"
     fi
+    echo "$time_passed"
 }
-function display() {
+display() {
+    weeks=$(time_ 'week')
+    days=$(time_ 'day')
+    hours=$(time_ 'hour')
+    minutes=$(time_ 'minute')
+    echo "$weeks $days $hours $minutes"
     mode="$(cat $mode_file)"
-    weeks=$(getTime 'week')
-    days=$(getTime 'day')
-    hours=$(getTime 'hour')
-    minutes=$(getTime 'minute')
     case $mode in
-        'short') uptime="H:$(($weeks*7*24 + $days*24 + $hours))" ;;
-        'med'  ) uptime="D:$((7*$weeks + $days)) H:$hours" ;;
-        'long' ) uptime="W:$weeks D:$days H:$hours M:$minutes" ;;
+        'hour') uptime="H:$(($weeks*7*24 + $days*24 + $hours))" ;;
+        'day' ) uptime="D:$((7*$weeks + $days)) H:$hours" ;;
+        'week') uptime="W:$weeks D:$days H:$hours M:$minutes" ;;
         *) help && exit 1 ;;
     esac
     echo " $uptime "

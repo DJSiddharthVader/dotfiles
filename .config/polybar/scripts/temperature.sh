@@ -1,16 +1,16 @@
 #!/bin/bash
+shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/tempmode"
 modes=(short long)
 #Icons
-ramp0=""
-ramp1=""
-ramp2=""
+ramp1=""
+ramp2=""
+ramp3=""
+ramp4=""
+ramp5=""
 
-
-help() {
-    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
-}
+help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -33,10 +33,11 @@ cycle() {
 icon() {
     temp="$(sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..')"
     case 1 in
-        $(($temp < 40))) icon=$ramp0 ;;
-        $(($temp < 50))) icon=$ramp1 ;;
-        $(($temp < 60))) icon=$ramp2
-            ;;
+        $(($temp < 30))) icon=$ramp1 ;;
+        $(($temp < 40))) icon=$ramp2 ;;
+        $(($temp < 50))) icon=$ramp3 ;;
+        $(($temp < 60))) icon=$ramp4 ;;
+        $(($temp < 70))) icon=$ramp5 ;;
     esac
     echo "$icon"
 }
@@ -53,7 +54,7 @@ display(){
         'long') temp="$(icon) $(long)" ;;
         *) help && exit 1 ;;
     esac
-    echo $temp | grep -v 'ERROR'
+    echo "$temp"
 }
 main() {
     mode="$1"

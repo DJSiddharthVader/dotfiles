@@ -23,6 +23,7 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
+
 display() {
     mode="$(cat $mode_file)"
     case $mode in
@@ -35,7 +36,7 @@ display() {
             ;;
         *) help && exit 1 ;;
     esac
-    echo "$cpu"
+    echo " $cpu"
 }
 main() {
     mode="$1"

@@ -20,16 +20,9 @@ display() {
         exit 1
     elif mpc status | grep -q playing; then
         case $mode in
-            'scroll')
-                scroll
-                ;;
-            'static')
-                static
-                ;;
-            *)
-                echo "invalid arg"
-                exit 1
-                ;;
+            'scroll') scroll ;;
+            'static') static ;;
+            *) echo "invalid arg" && exit 1 ;;
         esac
     elif mpc status | grep -q paused; then
         echo "Paused"

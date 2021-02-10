@@ -3,11 +3,12 @@
 #Vars
 API="https://api.openweathermap.org/data/2.5"
 KEY="f8411a3dd03e0674a17b8e736c2d0df5"
-CITY=""
+CITY="Kelowna"
 UNITS="metric"
 SYMBOL="°"
 
-getIcon() {
+
+icon() {
     case $1 in
         01d) icon="";;
         01n) icon="";;
@@ -25,25 +26,22 @@ getIcon() {
         13n) icon="";;
         50d) icon="";;
         50n) icon="";;
-        *) icon="";
+        *) icon="";
     esac
     echo $icon
 }
-getWeather() {
-    location=$(curl -sf https://location.services.mozilla.com/v1/geolocate?key=geoclue)
-    location_lat="$(echo "$location" | jq '.location.lat')"
-    location_lon="$(echo "$location" | jq '.location.lng')"
-    weather=$(curl -sf "$API/weather?appid=$KEY&lat=$location_lat&lon=$location_lon&units=$UNITS")
-    echo "$weather"
+weather() {
+    #location=$(curl -sf https://location.services.mozilla.com/v1/geolocate?key=geoclue)
+    #lattitude="$(echo "$location" | jq '.location.lat')"
+    #longitude="$(echo "$location" | jq '.location.lng')"
+    #curl -sf "$API/weather?appid=$KEY&lat=$lattitude&lon=$longitude&units=$UNITS"
+    curl -sf "$API/weather?appid=$KEY&units=$UNITS&q=$CITY"
 }
 main() {
-    weather="$(getWeather)"
-    if [ -n "$weather" ]; then
-        weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
-        weather_icon=$(echo "$weather" | jq -r ".weather[0].icon")
-        icon="$(getIcon "$weather_icon")"
-        echo " $icon $weather_temp$SYMBOL"
-    fi
+    weather="$(weather)"
+    weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
+    icon="$(icon "$(echo "$weather" | jq -r ".weather[0].icon")")"
+    echo "$icon $weather_temp$SYMBOL"
 }
 
 main
@@ -60,10 +58,10 @@ main
 #    else #no city set
 #        location=$(curl -sf https://location.services.mozilla.com/v1/geolocate?key=geoclue)
 #        if [ -n "$location" ]; then
-#            location_lat="$(echo "$location" | jq '.location.lat')"
-#            location_lon="$(echo "$location" | jq '.location.lng')"
+#            lattitude="$(echo "$location" | jq '.location.lat')"
+#            longitude="$(echo "$location" | jq '.location.lng')"
 #
-#            weather=$(curl -sf "$API/weather?appid=$KEY&lat=$location_lat&lon=$location_lon&units=$UNITS")
+#            weather=$(curl -sf "$API/weather?appid=$KEY&lat=$lattitude&lon=$longitude&units=$UNITS")
 #        fi
 #    fi
 #    echo "$weather"

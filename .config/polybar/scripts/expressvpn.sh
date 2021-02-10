@@ -20,7 +20,7 @@ display() {
         'Not Connected') output="N/A" ;;
         *) output="$(expressvpn status | grep 'onnect' | head -1 | cut -d'-' -f2 | tr -d '\[\;[0-9]m?' )" ;;
     esac
-    echo "$output "
+    echo " $output"
 }
 toggle() {
     status="$(expressvpn status | tail -1)"

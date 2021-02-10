@@ -24,10 +24,8 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
-
 icon() {
-    mode="$1"
-    case "$mode" in
+    case "$(cat $mode_file)" in
         'font') modeicon="" ;;
         'back') modeicon="" ;;
         'both') modeicon="" ;;
@@ -36,16 +34,15 @@ icon() {
     echo "$modeicon"
 }
 display() {
-    wallpaper="$(head -"$(cat $wallidfile)" "$wallpfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/p')"
-    icon="$(icon "$mode")"
-    echo " $icon $wallpaperx "
+    wallpaper="$(head -n $(cat $wallidfile) "$wallpfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"
+    echo " $(icon) $wallpaper "
 }
 main() {
-    mode="$(cat $mode_file | head -1)"
+    mode="$(cat $mode_file)"
     case "$1" in
-        'prev'   ) /home/sidreed/.scripts/wallpaper.sh "$mode" prev ;;
-        'next'   ) /home/sidreed/.scripts/wallpaper.sh "$mode" next ;;
-        'stay') /home/sidreed/.scripts/wallpaper.sh "$mode" 'stay' ;;
+        'prev'   ) /home/sidreed/.scripts/wallpaper.sh prev  "$mode" ;;
+        'next'   ) /home/sidreed/.scripts/wallpaper.sh next  "$mode" ;;
+        'reload' ) /home/sidreed/.scripts/wallpaper.sh reload "$mode" ;;
         'mode'   ) cycle next ;;
         'display') display ;;
         *) help && exit 1 ;;

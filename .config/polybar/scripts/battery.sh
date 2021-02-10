@@ -2,7 +2,7 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/batmode"
-modes=(short long)
+modes=('icon' 'percent' 'time' 'text' 'all')
 #icons
 charging=""
 ramp0=""
@@ -33,7 +33,7 @@ cycle() {
 }
 
 percent() { acpi -b | cut -d',' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}' | tr -d '%' ; }
-time_() { acpi -b | cut -d',' -f3 | cut -d' ' -f-2 | cut -d':' -f-2 | awk '{gsub(/^ +| +$/,"")} {print $0}' ; }
+time_left() { acpi -b | cut -d',' -f3 | cut -d' ' -f-2 | cut -d':' -f-2 | awk '{gsub(/^ +| +$/,"")} {print $0}' ; }
 status() {
     status=$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}')
     case $status in
@@ -55,25 +55,15 @@ icon() {
 }
 display(){
     mode="$(cat $mode_file)"
-    status="$(status)"
     case $mode in
-        'short')
-            if [[ -z $status ]]; then
-                bat="$(icon) $(percent)"
-            else
-                bat="$status $(icon) $(percent)"
-            fi
-            ;;
-        'long')
-            if [[ -z $status ]]; then
-                bat="$(icon) $(percent) $(time_)"
-            else
-                bat="$status $(icon) $(percent) $(time_)"
-            fi
-            ;;
+        'icon'   ) bat="$(icon)" ;;
+        'percent') bat="$(icon) $(percent)%" ;;
+        'time'   ) bat="$(icon) $(time_left)" ;;
+        'text'   ) bat="$(percent)% $(time_left)" ;;
+        'all'    ) bat="$(icon) $(percent)% $(time_left)" ;;
         *) help && exit 1 ;;
     esac
-    echo "$bat"
+    echo "$(status) $bat"
 }
 main() {
     mode="$1"
