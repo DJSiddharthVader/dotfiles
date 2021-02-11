@@ -54,6 +54,7 @@ alias mnt="~/.scripts/mount.sh on"
 alias umt="~/.scripts/mount.sh off"
 alias ip="hostname -I | cut -d' ' -f1"
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
+alias brg='ssh slreed@bridges2.psc.edu'
 alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
