@@ -20,6 +20,11 @@ update() {
                    | perl -pe 's/,\n/~/'               \
                    | tr -s ' ' ' '                    >| $readings
 }
+pick() {
+    cat $readings | shuf | tail -1 >| $reading   #pick new random article
+    killall -q "$(basename $0)" > /dev/null 2>&1 #restart zscroll with new article so scroll updates
+}
+open() { "$browser" --new-tab "$(cat $reading | cut -f2 -d'~')" ; } #open article in browser
 display() {
     #scroll article title if longer than $thresh characeters otherwise static display
     articlename="$(cat "$reading" | cut -f1 -d'~')"
@@ -30,11 +35,6 @@ display() {
         echo " $articlename"
     fi
 }
-pick() {
-    cat $readings | shuf | tail -1 >| $reading   #pick new random article
-    killall -q "$(basename $0)" > /dev/null 2>&1 #restart zscroll with new article so scroll updates
-}
-open() { "$browser" --new-tab "$(cat $reading | cut -f2 -d'~')" ; } #open article in browser
 main() {
     mode="$1"
     case "$mode" in
