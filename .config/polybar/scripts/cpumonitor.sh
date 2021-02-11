@@ -36,7 +36,7 @@ display() {
             ;;
         *) help && exit 1 ;;
     esac
-    echo " $cpu"
+    echo "$cpu"
 }
 main() {
     mode="$1"

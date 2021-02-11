@@ -35,7 +35,7 @@ display() {
         'full'   ) msg=" $(date +'%I:%M')  $(date +'%A, %B %d %Y')" ;;
         *) help && exit 1 ;;
     esac
-    echo " $msg "
+    echo "$msg"
 }
 main() {
     mode="$1"

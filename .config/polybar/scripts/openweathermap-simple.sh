@@ -7,7 +7,6 @@ CITY="Kelowna"
 UNITS="metric"
 SYMBOL="°"
 
-
 icon() {
     case $1 in
         01d) icon="";;
@@ -39,9 +38,9 @@ weather() {
 }
 main() {
     weather="$(weather)"
-    weather_temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
+    temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
     icon="$(icon "$(echo "$weather" | jq -r ".weather[0].icon")")"
-    echo "$icon $weather_temp$SYMBOL"
+    echo "$icon $temp$SYMBOL"
 }
 
 main

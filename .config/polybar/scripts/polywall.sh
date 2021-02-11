@@ -35,7 +35,7 @@ icon() {
 }
 display() {
     wallpaper="$(head -n $(cat $wallidfile) "$wallpfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"
-    echo " $(icon) $wallpaper "
+    echo "$(icon) $wallpaper"
 }
 main() {
     mode="$(cat $mode_file)"

@@ -30,9 +30,10 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
+open() { $terminal -e nmtui connect ; }
 ip() { hostname -I | cut -d' ' -f1 ; }
 name() { nmcli -t -f active,ssid dev wifi | cut -d':' -f2 ; }
-strength() { ; }
+strength() { echo 'unfinished' ; }
 icon() {
     strength="$(strength)"
     case 1 in
@@ -43,13 +44,12 @@ icon() {
     esac
     echo "$icon"
 }
-open() { $terminal -e nmtui connect ; }
 display(){
     mode="$(cat $mode_file)"
     case $mode in
         *) help && exit 1 ;;
     esac
-    echo "$temp"
+    echo "$msg"
 }
 main() {
     mode="$1"

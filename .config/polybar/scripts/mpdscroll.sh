@@ -16,8 +16,7 @@ scroll() {
 display() {
     mode="$1"
     if ! mpc >/dev/null 2>&1; then
-        echo Server offline
-        exit 1
+        echo Server offline && exit 1
     elif mpc status | grep -q playing; then
         case $mode in
             'scroll') scroll ;;

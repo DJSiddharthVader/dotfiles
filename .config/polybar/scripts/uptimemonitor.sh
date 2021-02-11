@@ -46,7 +46,7 @@ display() {
         'week') uptime="W:$weeks D:$days H:$hours M:$minutes" ;;
         *) help && exit 1 ;;
     esac
-    echo " $uptime "
+    echo " $uptime"
 }
 main() {
     mode="$1"
