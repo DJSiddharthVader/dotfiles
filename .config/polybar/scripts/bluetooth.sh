@@ -1,6 +1,6 @@
 #!/bin/bash
 
-setDefaultSink() {
+changeOutput() {
     case "$1" in
         'speakers' ) sink=1 ;;
         'both'     ) sink=2 ;;
@@ -9,6 +9,9 @@ setDefaultSink() {
     esac
     sink="$(pactl list sinks | grep Name | cut -f2- -d' ' | head -n "$sink" | tail -1)"
     pactl set-default-sink "$sink"
+    pactl list short sink-inputs | while read stream; do
+        pactl move-sink-input "$(echo $stream|cut '-d ' -f1)" "$sink"
+    done
 }
 isDeviceConnected() {
     device="$1" #uuid
@@ -18,7 +21,7 @@ isDeviceConnected() {
 }
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
-    setDefaultSink 'speakers'
+    changeOutput 'speakers'
 }
 connect() {
     device="$1"  # a uuid
@@ -26,7 +29,7 @@ connect() {
         echo -e "connect $device\n" | bluetoothctl /dev/null 2>&1
         sleep 10
     done
-    setDefaultSink 'bluetooth'
+    changeOutput 'bluetooth'
 }
 toggle() {
     device="$1"
