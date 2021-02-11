@@ -551,19 +551,6 @@ let g:vim_markdown_math = 1
 let g:markdown_fenced_languages = ['css','json=javascript', 'ruby', 'xml', 'python', 'go','tex']
 let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby","literatehaskell=lhaskell", "bash=sh","go"]
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-
-call plug#end()
-
-
-let g:mkdp_filetypes = ['markdown']
-
-nmap <leader>mp <Plug>MarkdownPreview
-nmap <leader>ms <Plug>MarkdownPreviewStop
-nmap <leader>mt <Plug>MarkdownPreviewToggle
-
 augroup pandoc_syntax
     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 augroup END
