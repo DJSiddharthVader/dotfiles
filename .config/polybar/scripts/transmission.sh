@@ -51,25 +51,31 @@ display() {
             up="$(sumConvert 'Uploaded' "$unit")"
             down="$(sumConvert 'Downloaded' "$unit")"
             total="$(sumConvert 'Total size' "$unit")"
-            msg=" $(echo "scale=2; $down/$total" | bc)  $(echo "scale=2; $up/$down" | bc)"
-
-            upt="$(jq '."uploaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
-            downt="$(jq '."downloaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
-            [[ -z "$up$down$total" ]] && msg="T $(echo "scale=2; $upt/$downt" | bc)"
+            if [[ -z "$up$down$total" ]]; then
+                upt="$(jq '."uploaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
+                downt="$(jq '."downloaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
+                msg="T $(echo "scale=2; $upt/$downt" | bc)"
+            else
+                msg=" $(echo "scale=2; $down/$total" | bc)  $(echo "scale=2; $up/$down" | bc)"
+            fi
             ;;
         'data')
             unit="Gi"
             up="$(sumConvert 'Uploaded' "$unit" "$info")"
             down="$(sumConvert 'Downloaded' "$unit" "$info")"
-            upt="$(jq '."uploaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
-            downt="$(jq '."downloaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
-            [[ -z "$up$down" ]] && msg="T  $downt $unit T  $upt $unit " || msg=" $down $unit  $up $unit "
+            if [[ -z "$up$down" ]];then
+                upt="$(jq '."uploaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
+                downt="$(jq '."downloaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
+                msg="T  $downt $unit T  $upt $unit"
+            else
+                msg=" $down $unit  $up $unit"
+            fi
             ;;
         'speed')
             unit="Mi"
             up="$(sumConvert 'Upload Speed' "$unit" "$info")"
             down="$(sumConvert 'Download Speed' "$unit" "$info")"
-            [[ -z "$up$down" ]] &&  msg=" - $unit/s  - $unit/s " || msg=" $down $unit/s  $up $unit/s "
+            [[ -z "$up$down" ]] &&  msg=" - $unit/s  - $unit/s" || msg=" $down $unit/s  $up $unit/s"
             ;;
         'active')
             seed="$(info | grep -c 'State: Seeding')"
