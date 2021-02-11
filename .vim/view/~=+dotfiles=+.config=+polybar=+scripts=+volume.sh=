@@ -117,7 +117,7 @@ silent! normal! zE
 30,40fold
 30
 normal! zo
-let s:l = 2 - ((1 * winheight(0) + 19) / 38)
+let s:l = 2 - ((1 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
