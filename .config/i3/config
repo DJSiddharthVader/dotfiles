@@ -53,10 +53,10 @@ exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id /home/sidreed/dotfiles/.scripts/low-battery.sh &
-#Torrent daemon:
-exec --no-startup-id ~/.scripts/transmission-start.sh
 #express vpn
 exec --no-startup-id expressvpn connect
+#Torrent daemon:
+exec --no-startup-id ~/.scripts/transmission-start.sh
 #Mount other drives:
 #exec --no-startup-id sudo mount -a
 
@@ -192,7 +192,7 @@ bindsym $mod+f         fullscreen toggle
 bindsym $mod+Shift+f   split toggle
 
 bindsym $mod+g         gaps inner current set 0; gaps outer current set 0
-bindsym $mod+Shift+g   gaps inner current set 15; gaps outer current set 15
+bindsym $mod+Shift+g   gaps inner current set 15; gaps outer current set 5
 
 bindsym $mod+h         focus left
 bindsym $mod+Shift+h   move left 10
