@@ -123,9 +123,6 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Add a bit extra margin to the left
-set foldcolumn=1
-
 " Turn on syntax highlighting
 syntax on
 
@@ -134,12 +131,23 @@ set number
 " makes all relative except for current line
 set relativenumber
 
+" Add a bit extra margin to the left
+set foldcolumn=1
+
 "set folding to save/load automatically
-augroup autosave_buffer
-    autocmd!
-    autocmd BufWinLeave *.* mkview
-    autocmd BufWinEnter *.* silent loadview
-augroup END
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* loadview
+
+function! MyFoldText()
+    let nl = v:foldend - v:foldstart + 1
+    let comment = substitute(getline(v:foldstart),"^ *","",1)
+    let linetext = substitute(getline(v:foldstart+1),"^ *","",1)
+    "let txt = '+ ' . linetext . ' : "' . comment . '" : length ' . nl
+    let txt = '+ ' . comment . ' : '. nl . ' : '  . linetext
+    return txt
+endfunction
+set foldtext=MyFoldText()
+
 " => Colors and Fonts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
@@ -147,7 +155,9 @@ syntax enable
 set background=dark
 "colorscheme hybrid
 "colorscheme new-railscasts
+"colorscheme wal
 colorscheme angr
+
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 " Use Unix as the standard file type
@@ -202,7 +212,6 @@ set noshiftround
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart mappings on the command line
 cno $h e ~/
-cno $d e ~/Desktop/
 cno $j e ./
 cno $c e <C-\>eCurrentFileDir("e")<cr>
 
@@ -554,6 +563,10 @@ let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby","literatehaskell=lhaskell"
 augroup pandoc_syntax
     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 augroup END
+
+call plug#begin('~/dotfiles/.config/nvim/plugged')
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+cal plug#end()
 
 
 " => Custom header
