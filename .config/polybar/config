@@ -16,13 +16,16 @@ margin-bottom = 1
 [colors]
 ; hack for getting colors to read from Xressources
 include-file = ~/.cache/wal/polybarColors.wal
-leftprefix = 
-leftsuffix = 
-rightprefix = 
-rightsuffix = 
+leftcap =
+rightcap =
+leftprefix = 
+leftsuffix = 
+rightprefix = 
+rightsuffix = 
 ;icons in order for module sepration
 ;may need to adjust font size
-; ;; ; ; ; ; ; ;
+;symetric    ; ; ; ; ; ;
+;directional ;  ;  ; ; ;【】
 
 [section/float]
 ;options
@@ -50,11 +53,11 @@ border-color = #00000000
 ;lines
 line-size = 3
 line-color = #f00
-;fonts
 ;allow bitmap file /etc/fonts/conf.avail/70-no-bitmaps.conf
 font-0 = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
 font-1 = Weather Icons:style=Regular;3
 font-2 = Terminus:style=Regular:pixelsize=14;1
+;font-2 = Iosevka:pixelsize=10;2
 font-3 = Siji:pixelsize=12;1
 font-4 = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=20;4
 font-5 = material\-wifi:style=Regular:size=15;2
@@ -65,7 +68,7 @@ font-7 = Terminess Powerline:style=Regular:size=15:antialias=false;1
 ;options
 monitor = ${env:MONITOR:}
 width = 100%
-height = 32
+height = 4%
 radius = 0
 enable-ipc = true
 background = ${colors.background}
@@ -84,13 +87,14 @@ border-right-size = 1
 ;lines
 line-size = 3
 line-color = #f00
-;fonts
+;allow bitmap file /etc/fonts/conf.avail/70-no-bitmaps.conf
 font-0 = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
 font-1 = Weather Icons:style=Regular;3
-font-2 = Terminus:style=Regular:pixelsize=16;1
+font-2 = Terminus:style=Regular:pixelsize=14;1
 font-3 = Siji:pixelsize=12;1
-font-4 = Terminus:style=Regular:pixelsize=40;4
+font-4 = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=26;5
 font-5 = material\-wifi:style=Regular:size=12;2
+font-6 = Terminus:style=Regular:pixelsize=13;1
 
 ;bars
 [bar/floating_top]
@@ -109,16 +113,16 @@ modules-right = reading
 
 [bar/bordered_top]
 inherit = section/full
-modules-left = i3
+modules-left = lc8 i3
 modules-center = songnames mpd
-modules-right = bluetooth expressvpn wlan volume backlight-acpi applauncher
+modules-right = bluetooth expressvpn wlan volume backlight-acpi applauncher rc1
 
 [bar/bordered_bot]
 inherit = section/full
 bottom = true
-modules-left = wall
+modules-left = lc1 date battery memory temperature xkeyboard uptime weather transmission
 modules-center =
-modules-right = transmission weather uptime xkeyboard temperature memory battery date
+modules-right = reading wall rc1
 
 [bar/minimal]
 inherit = section/float
@@ -129,11 +133,17 @@ border-left-size = 400
 background = ${colors.background}
 border-top-size = 0
 border-bottom-size = 0
-font-4 = Terminus:style=Regular:pixelsize=26;3
+font-0 = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
+font-1 = Weather Icons:style=Regular;3
+font-2 = Terminus:style=Regular:pixelsize=14;1
+font-3 = Siji:pixelsize=12;1
+font-4 = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=20;4
+font-5 = material\-wifi:style=Regular:size=15;2
+font-6 = Terminus:style=Regular:pixelsize=13;1
+font-7 = Terminess Powerline:style=Regular:size=15:antialias=false;1
 tray-transparent = true
-
-modules-left = i3 s33 volume sr32 backlight-acpi sr27 date sr79 battery sr910 memory sr10b
-modules-center =
+modules-left =
+modules-center = i3 date battery memory volume backlight-acpi
 modules-right =
 
 
@@ -142,7 +152,7 @@ modules-right =
 type = internal/bspwm
 
 label-focused = %index%
-label-focused-background = ${colors.color2}
+label-focused-background = ${colors.color1}
 label-focused-padding = 1
 
 label-occupied = %index%
@@ -152,7 +162,7 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 1
 
 label-empty = %index%
-label-empty-background = ${colors.color2}
+label-empty-background = ${colors.color1}
 label-empty-padding = 1
 
 [module/i3]
@@ -161,18 +171,18 @@ format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
 
-ws-icon-0 = 10;
-ws-icon-1 = 1;
-ws-icon-2 = 2;
-ws-icon-3 = 3;
+ws-icon-0 = 10;
+ws-icon-1 = 1;
+ws-icon-2 = 2;
+ws-icon-3 = 3;
 ws-icon-4 = 4;
-ws-icon-5 = 5;
-ws-icon-6 = 6;
-ws-icon-7 = 7;
-ws-icon-8 = 8;
-ws-icon-9 = 9;
+ws-icon-5 = 5;
+ws-icon-6 = 6;
+ws-icon-7 = 7;
+ws-icon-8 = 8;
+ws-icon-9 = 9;
 ws-icon-default = 
-;
+;       ❁ ❂ ❃ ❇
 
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
@@ -187,7 +197,7 @@ label-focused-padding = ${module/bspwm.label-focused-padding}
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index% %icon%
-label-unfocused-background = ${colors.color1}
+label-unfocused-background = ${colors.color8}
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 
 ;visible = Active workspace on unfocused monitor
@@ -200,11 +210,14 @@ label-urgent = %index% %icon%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
+format-prefix = ${colors.rightprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color8}
+format-prefix-background = ${colors.background}
 format-suffix = ${colors.rightsuffix}
 format-suffix-font = 5
-format-suffix-foreground = ${colors.color1}
+format-suffix-foreground = ${colors.color8}
 format-suffix-background = ${colors.background}
-
 [module/applauncher]
 type = custom/menu
 expand-right = true
@@ -243,9 +256,9 @@ menu-2-0-exec = menu-open-0
 menu-2-1 = ""
 menu-2-1-exec = ~/.scripts/lock.sh
 menu-2-2 = ""
-menu-2-2-exec = ~/dotfiles/.config/polybar/scripts/bluetooth.sh
+menu-2-2-exec = ~/dotfiles/.scripts/polybar/bluetooth.sh
 menu-2-3 = ""
-menu-2-3-exec = ~/dotfiles/.config/polybar/scripts/expressvpn.sh toggle
+menu-2-3-exec = ~/dotfiles/.scripts/polybar/expressvpn.sh toggle
 menu-2-4 = ""
 menu-2-4-exec = ~/dotfiles/.scripts/wallpaper.sh next
 
@@ -254,12 +267,14 @@ format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
 format-prefix-foreground = ${colors.color1}
 format-prefix-background = ${colors.background}
-
+format-suffix = ${colors.leftsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color1}
+format-suffix-background = ${colors.background}
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
-
 [module/xbacklight]
 type = internal/xbacklight
 enabele-scroll = true
@@ -274,7 +289,6 @@ format-suffix = ${colors.leftsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color2}
 format-suffix-background = ${colors.background}
-
 [module/volume]
 type = internal/alsa
 label-volume = %percentage%%
@@ -303,47 +317,30 @@ format-muted-suffix = ${colors.leftsuffix}
 format-muted-suffix-font = 5
 format-muted-suffix-foreground = ${colors.color3}
 format-muted-suffix-background = ${colors.background}
-
 [module/wlan]
-type = internal/network
-interface = wlp1s0
-interval = 3.0
-ramp-signal-foreground = ${colors.foreground}
-ramp-signal-font = 6
-ramp-signal-0 =  
-ramp-signal-1 =  
-ramp-signal-2 =  
-ramp-signal-3 = 
-label-connected = " %essid% "
-label-connected-foreground = ${colors.foreground}
-format-connected = %{A:st -e nmtui-connect&:}<ramp-signal><label-connected>%{A}
-format-connected-background = ${colors.color4}
-format-connected-prefix = ${colors.leftprefix}
-format-connected-prefix-font = 5
-format-connected-prefix-foreground = ${colors.color4}
-format-connected-prefix-background = ${colors.background}
-format-connected-suffix = ${colors.leftsuffix}
-format-connected-suffix-font = 5
-format-connected-suffix-foreground = ${colors.color4}
-format-connected-suffix-background = ${colors.background}
-format-disconnected = %{A:st -e nmtui-connect&:}disconnected%{A}
-label-disconnected-foreground = ${colors.foreground-alt}
-format-disconnected-background = ${colors.alert}
-format-disconnected-prefix = ${colors.leftprefix}
-format-disconnected-prefix-font = 5
-format-disconnected-prefix-foreground = ${colors.color4}
-format-disconnected-prefix-background = ${colors.background}
-format-disconnected-suffix = ${colors.leftsuffix}
-format-disconnected-suffix-font = 5
-format-disconnected-suffix-foreground = ${colors.color4}
-format-disconnected-suffix-background = ${colors.background}
+type = custom/script
+interval = 1
+exec = ~/dotfiles/.scripts/polybar/network.sh display
+click-middle = ~/dotfiles/.scripts/polybar/network.sh open
+click-left = ~/dotfiles/.scripts/polybar/network.sh next
+click-right = ~/dotfiles/.scripts/polybar/network.sh prev
+format-font = 3
+format-background = ${colors.color4}
+format-prefix = ${colors.leftprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color4}
+format-prefix-background = ${colors.background}
+format-suffix = ${colors.leftsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color4}
+format-suffix-background = ${colors.background}
 
 [module/expressvpn]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/expressvpn.sh status
-click-left = ~/dotfiles/.config/polybar/scripts/expressvpn.sh toggle
-click-right = ~/dotfiles/.config/polybar/scripts/expressvpn.sh pick
+exec = ~/dotfiles/.scripts/polybar/expressvpn.sh status
+click-left = ~/dotfiles/.scripts/polybar/expressvpn.sh toggle
+click-right = ~/dotfiles/.scripts/polybar/expressvpn.sh pick
 format-background = ${colors.color5}
 format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
@@ -357,8 +354,8 @@ format-suffix-background = ${colors.background}
 [module/bluetooth]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/bluetooth.sh status
-format = %{A1:~/dotfiles/.config/polybar/scripts/bluetooth.sh :} <label> %{A}
+exec = ~/dotfiles/.scripts/polybar/bluetooth.sh status
+format = %{A1:~/dotfiles/.scripts/polybar/bluetooth.sh :} <label> %{A}
 format-background = ${colors.color6}
 format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
@@ -368,31 +365,29 @@ format-suffix = ${colors.leftsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color6}
 format-suffix-background = ${colors.background}
-
 [module/songnames]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/mpdscroll.sh
-format = "%{A1:~/dotfiles/.config/polybar/scripts/mpdscroll.sh toggle:}  %{T7}<label>%{T-}  %{A}"
+exec = ~/dotfiles/.scripts/polybar/mpdscroll.sh
+format = "%{A1:~/dotfiles/.scripts/polybar/mpdscroll.sh toggle:}  %{T7}<label>%{T-}  %{A}"
 ; use different font for label to maintain monospace (not at size > 13 for Terminus?) so module width doesnt change during scrolling
 format-background = ${colors.color7}
 format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
 format-prefix-foreground = ${colors.color7}
 format-prefix-background = ${colors.background}
-
 [module/mpd]
 type = internal/mpd
 host=localhost
 port=6600
 format-online =  <icon-prev> <toggle> <icon-next> <icon-single> <icon-random> <bar-progress> <label-time>
-format-online-background = ${colors.color7}
 format-offline = MPD Offline
-format-offline-background = ${colors.color7}
+format-online-background = ${colors.color7}
 format-online-suffix = ${colors.leftsuffix}
 format-online-suffix-font = 5
 format-online-suffix-foreground = ${colors.color7}
 format-online-suffix-background = ${colors.background}
+format-offline-background = ${colors.color7}
 format-offline-suffix = ${colors.leftsuffix}
 format-offline-suffix-font = 5
 format-offline-suffix-foreground = ${colors.color7}
@@ -418,14 +413,19 @@ bar-progress-fill = ─
 bar-progress-empty = ─
 
 
+
 [module/date]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/date.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/date.sh next
-click-right = ~/dotfiles/.config/polybar/scripts/date.sh prev
+exec = ~/dotfiles/.scripts/polybar/date.sh display
+click-left = ~/dotfiles/.scripts/polybar/date.sh next
+click-right = ~/dotfiles/.scripts/polybar/date.sh prev
 label = " %output%"
 format-background = ${colors.color1}
+format-prefix = ${colors.rightprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color1}
+format-prefix-background = ${colors.background}
 format-suffix = ${colors.rightsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color1}
@@ -434,9 +434,9 @@ format-suffix-background = ${colors.background}
 [module/battery]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/battery.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/battery.sh next
-click-right = ~/dotfiles/.config/polybar/scripts/battery.sh prev
+exec = ~/dotfiles/.scripts/polybar/battery.sh display
+click-left = ~/dotfiles/.scripts/polybar/battery.sh next
+click-right = ~/dotfiles/.scripts/polybar/battery.sh prev
 format-background = ${colors.color2}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -450,9 +450,9 @@ format-suffix-background = ${colors.background}
 [module/memory]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/memory.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/memory.sh next
-click-right = ~/dotfiles/.config/polybar/scripts/memory.sh prev
+exec = ~/dotfiles/.scripts/polybar/memory.sh display
+click-left = ~/dotfiles/.scripts/polybar/memory.sh next
+click-right = ~/dotfiles/.scripts/polybar/memory.sh prev
 format-background = ${colors.color3}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -466,9 +466,9 @@ format-suffix-background = ${colors.background}
 [module/temperature]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/temperature.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/temperature.sh next
-click-right = ~/dotfiles/.config/polybar/scripts/temperature.sh prev
+exec = ~/dotfiles/.scripts/polybar/temperature.sh display
+click-left = ~/dotfiles/.scripts/polybar/temperature.sh next
+click-right = ~/dotfiles/.scripts/polybar/temperature.sh prev
 format-background = ${colors.color4}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -500,10 +500,10 @@ label-indicator-on-background = #ff1100
 
 [module/uptime]
 type = custom/script
-tail = true
-exec = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh display
-click-left =  = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh next
-click-right =  = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh prev
+interval = 60
+exec = ~/dotfiles/.scripts/polybar/uptimemonitor.sh display
+click-left =  = ~/dotfiles/.scripts/polybar/uptimemonitor.sh next
+click-right =  = ~/dotfiles/.scripts/polybar/uptimemonitor.sh prev
 format-background = ${colors.color5}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -518,7 +518,7 @@ format-suffix-background = ${colors.background}
 type = custom/script
 interval = 600
 label-font = 2
-exec = ~/dotfiles/.config/polybar/scripts/openweathermap-simple.sh
+exec = ~/dotfiles/.scripts/polybar/openweathermap-simple.sh
 format-background = ${colors.color6}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -532,9 +532,9 @@ format-suffix-background = ${colors.background}
 [module/transmission]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/transmission.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/transmission.sh next
-click-right = ~/dotfiles/.config/polybar/scripts/transmission.sh prev
+exec = ~/dotfiles/.scripts/polybar/transmission.sh display
+click-left = ~/dotfiles/.scripts/polybar/transmission.sh next
+click-right = ~/dotfiles/.scripts/polybar/transmission.sh prev
 format-background = ${colors.color7}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -548,48 +548,90 @@ format-suffix-background = ${colors.background}
 [module/reading]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/reading.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/reading.sh open
-click-right = ~/dotfiles/.config/polybar/scripts/reading.sh pick
-label = " %output% "
-format-background = ${colors.color9}
+exec = ~/dotfiles/.scripts/polybar/reading.sh display
+click-left = ~/dotfiles/.scripts/polybar/reading.sh open
+click-right = ~/dotfiles/.scripts/polybar/reading.sh pick
+label = "%output% "
+label-font = 7
+format = " <label>"
+format-background = ${colors.color8}
 format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
-format-prefix-foreground = ${colors.color9}
+format-prefix-foreground = ${colors.color8}
 format-prefix-background = ${colors.background}
+format-suffix = ${colors.leftsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color8}
+format-suffix-background = ${colors.background}
 
 
 [module/wall]
 type = custom/script
 interval = 3
-exec =  ~/dotfiles/.config/polybar/scripts/polywall.sh display
-format = %{A1:~/dotfiles/.config/polybar/scripts/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh mode:}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh display:} %{A}<label> %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh next:} %{A}
-format-background = ${colors.color6}
+exec =  ~/dotfiles/.scripts/polybar/polywall.sh display
+format = %{A1:~/dotfiles/.scripts/polybar/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh mode:}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh display:} %{A}<label> %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh next:} %{A}
+format-background = ${colors.color9}
+format-prefix = ${colors.leftprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color9}
+format-prefix-background = ${colors.background}
 format-suffix = ${colors.leftsuffix}
 format-suffix-font = 5
-format-suffix-foreground = ${colors.color6}
+format-suffix-foreground = ${colors.color9}
 format-suffix-background = ${colors.background}
 
 [module/cpu]
 type = custom/script
-exec = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh display
+exec = ~/dotfiles/.scripts/polybar/cpumonitor.sh display
 tail=true
 format = <label>
 format-background = ${colors.color4}
-click-left =  = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh next
-click-right = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh prev
+click-left =  = ~/dotfiles/.scripts/polybar/cpumonitor.sh next
+click-right = ~/dotfiles/.scripts/polybar/cpumonitor.sh prev
 
 [module/taskcounter]
 type = custom/script
-exec = ~/dotfiles/.config/polybar/scripts/task_counter.sh
+exec = ~/dotfiles/.scripts/polybar/task_counter.sh
 tail = true
 format-background = ${colors.color8}
-format = %{A1:~/dotfiles/.config/polybar/scripts/task_counter.sh toggle:} <label>%{A}
+format = %{A1:~/dotfiles/.scripts/polybar/task_counter.sh toggle:} <label>%{A}
 
 [module/schedule]
 type = custom/script
-exec = ~/dotfiles/.config/polybar/scripts/sched.py 0 3
+exec = ~/dotfiles/.scripts/polybar/sched.py 0 3
 format-background = ${colors.color9}
 tail = true
+
+
+
+;caps
+[module/lc1]
+type = custom/text
+content = ${colors.leftcap}
+content-font = 5
+content-foreground = ${colors.color1}
+content-background = ${colors.background}
+
+[module/lc8]
+type = custom/text
+content = ${colors.leftcap}
+content-font = 5
+content-foreground = ${colors.color8}
+content-background = ${colors.background}
+
+[module/rc1]
+type = custom/text
+content = ${colors.rightcap}
+content-font = 5
+content-foreground = ${colors.color1}
+content-background = ${colors.background}
+
+[module/rc8]
+type = custom/text
+content = ${colors.rightcap}
+content-font = 5
+content-foreground = ${colors.color8}
+content-background = ${colors.background}
+
 
 
