@@ -1,4 +1,5 @@
 *.pid
+.config/transmission-daemon/dht.dat
 .emacs.d/elpa
 .config/BraveSoftware
 .config/Epic
