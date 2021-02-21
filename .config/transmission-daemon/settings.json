@@ -90,7 +90,5 @@
     "umask": 2,
     "upload-slots-per-torrent": 14,
     "user-has-given-informed-consent": true,
-    "utp-enabled": true,
-    "watch-dir": "/home/sidreed/Downloads",
-    "watch-dir-enabled": false
+    "utp-enabled": true
 }
