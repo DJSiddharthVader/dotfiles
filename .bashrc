@@ -19,6 +19,13 @@ _isxrunning=false
 _isroot=false
 [[ $UID -eq 0 ]] && _isroot=true
 
+# set vim readline bindings but keep regular C-l binding
+set -o vi
+bind "\C-l":clear-screen
+bind "\C-e":end-of-line
+bind "\C-k":kill-line
+
+
 # }}}
 ## Linux TTY colors {{{
 
@@ -147,18 +154,12 @@ if $_isxrunning; then
 fi
 
 # }}}
-
 ## Aliases {{{
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# }}}
 ## Functions
-if [ -f ~/.bash_functions.sh ]; then
-    . ~/.bash_functions.sh
-fi
+[ -f ~/.bash_functions.sh ] && source ~/.bash_functions.sh
+
 ## Priviliged Acces
 if ! $_isroot; then
       alias sudo='sudo '
@@ -183,7 +184,7 @@ shopt -s cdspell 2> /dev/null
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
-#CDPATH=".:~:~/projects:/srv/archsrv/media"
+CDPATH=".:~/dotfiles:/media/1tbdrive/Media"
 
 # This allows you to bookmark your favorite places across the file system
 # Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
@@ -191,9 +192,6 @@ shopt -s cdspell 2> /dev/null
 #
 #export  dot="$HOME/dotfiles"
 #export   sh="$HOME/scripts"
-
-# }}}
-
 
 ## Systemd Support {{{
 if which systemctl &>/dev/null; then
@@ -239,10 +237,8 @@ fi
 # &   # Run the process in the background.
 # ( ) # Hide shell job control messages.
 (cat ~/.cache/wal/sequences &)
-#(cat $HOME/.config/wpg/sequences &)
-#export QT_QPA_PLATFORMTHEME=gtk2
 
-## Prompt
+## fzf
 #[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 ## CTRL-T - Paste the selected file path into the command line
 #bind -m emacs-standard -x '"\C-t": ~/.fzf/bin/fzf'
@@ -252,6 +248,8 @@ fi
 #bind -m emacs-standard -x '"\C-r": ~/.fzf/bin/fzf'
 #bind -m vi-command -x '"\C-r": ~/.fzf/bin/fzf'
 #bind -m vi-insert -x '"\C-r": ~/.fzf/bin/fzf'
+
+## Prompt
 source $HOME/dotfiles/.scripts/bash-prompt.sh
 export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
 
@@ -259,13 +257,17 @@ export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COL
 
 #export GOPATH="$(echo $HOME/Documents/CMU_MSCB/Courses/Programming-02601/{Class,Homework,Project} | sed -e 's/ /:/g')"
 export GOPATH="$HOME/CMU_MSCB/Courses/Programming-02601/:$HOME/Projects/musman/:$HOME/Projects/go/src"
-export PATH="/usr/local/bin:$HOME/bin:$HOME/bin:$HOME/.local/bin:/usr/local/go/bin:$PATH"
-export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
+
 PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
 
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.scripts:$PATH"
 PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}') #remove duplicate entries
 
 # >>> conda initialize >>>
