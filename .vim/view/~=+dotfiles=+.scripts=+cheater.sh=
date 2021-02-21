@@ -1,4 +1,4 @@
-let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -17,7 +17,7 @@ setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 setlocal commentstring=#%s
-setlocal complete=.,w,b,u,t,i
+setlocal complete=.,w,b,u,t
 setlocal concealcursor=
 setlocal conceallevel=1
 setlocal completefunc=youcompleteme#CompleteFunc
@@ -34,7 +34,6 @@ setlocal expandtab
 if &filetype != 'sh'
 setlocal filetype=sh
 endif
-setlocal fillchars=
 setlocal fixendofline
 setlocal foldcolumn=1
 setlocal foldenable
@@ -52,7 +51,7 @@ setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
-setlocal imsearch=-1
+setlocal imsearch=0
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=GetShIndent()
@@ -64,13 +63,11 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
-setlocal listchars=
-setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
-setlocal nomodeline
+setlocal modeline
 setlocal modifiable
-setlocal nrformats=bin,octal,hex
+setlocal nrformats=bin,hex
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
@@ -84,9 +81,7 @@ setlocal norightleft
 setlocal rightleftcmd=search
 setlocal scrollback=-1
 setlocal noscrollbind
-setlocal scrolloff=-1
 setlocal shiftwidth=4
-setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal nosmartindent
 setlocal softtabstop=4
@@ -94,7 +89,6 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal spelloptions=
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
@@ -102,7 +96,6 @@ setlocal synmaxcol=3000
 if &syntax != 'sh'
 setlocal syntax=sh
 endif
-setlocal tagfunc=
 setlocal tabstop=4
 setlocal tagcase=
 setlocal tags=
@@ -110,27 +103,18 @@ setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
-setlocal winblend=0
 setlocal winhighlight=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-8,10fold
-11,28fold
-30,32fold
-33,44fold
-45,50fold
-51,91fold
-92,106fold
-let &fdl = &fdl
-let s:l = 58 - ((57 * winheight(0) + 17) / 34)
+let s:l = 1 - ((0 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
+exe s:l
 normal! zt
-keepjumps 58
-normal! 01|
-let &g:so = s:so_save | let &g:siso = s:siso_save
+1
+normal! 0
+let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

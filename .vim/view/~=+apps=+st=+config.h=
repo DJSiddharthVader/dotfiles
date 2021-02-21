@@ -1,10 +1,9 @@
-let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 argglobal
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
 setlocal backupcopy=
-setlocal balloonexpr=
 setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
@@ -23,7 +22,6 @@ setlocal concealcursor=
 setlocal conceallevel=0
 setlocal completefunc=youcompleteme#CompleteFunc
 setlocal nocopyindent
-setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal cursorline
@@ -36,6 +34,7 @@ setlocal expandtab
 if &filetype != 'cpp'
 setlocal filetype=cpp
 endif
+setlocal fillchars=
 setlocal fixendofline
 setlocal foldcolumn=1
 setlocal foldenable
@@ -65,6 +64,7 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
+setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
@@ -82,9 +82,11 @@ setlocal noreadonly
 setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
+setlocal scrollback=-1
 setlocal noscrollbind
+setlocal scrolloff=-1
 setlocal shiftwidth=4
-setlocal noshortname
+setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
@@ -92,6 +94,7 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
+setlocal spelloptions=
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
@@ -99,26 +102,29 @@ setlocal synmaxcol=3000
 if &syntax != 'cpp'
 setlocal syntax=cpp
 endif
+setlocal tagfunc=
 setlocal tabstop=4
 setlocal tagcase=
 setlocal tags=
-setlocal termkey=
-setlocal termsize=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
+setlocal winblend=0
+setlocal winhighlight=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 231 - ((29 * winheight(0) + 22) / 45)
+let &fdl = &fdl
+let s:l = 9 - ((8 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
-exe s:l
+keepjumps exe s:l
 normal! zt
-231
-normal! 045|
-let &so = s:so_save | let &siso = s:siso_save
+keepjumps 9
+normal! 076|
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

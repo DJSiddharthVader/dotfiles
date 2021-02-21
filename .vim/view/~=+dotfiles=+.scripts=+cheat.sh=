@@ -17,7 +17,7 @@ setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 setlocal commentstring=#%s
-setlocal complete=.,w,b,u,t,i
+setlocal complete=.,w,b,u,t
 setlocal concealcursor=
 setlocal conceallevel=1
 setlocal completefunc=youcompleteme#CompleteFunc
@@ -52,7 +52,7 @@ setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
-setlocal imsearch=-1
+setlocal imsearch=0
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=GetShIndent()
@@ -68,9 +68,9 @@ setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
-setlocal nomodeline
+setlocal modeline
 setlocal modifiable
-setlocal nrformats=bin,octal,hex
+setlocal nrformats=bin,hex
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
@@ -117,20 +117,16 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-8,10fold
-11,28fold
-30,32fold
-33,44fold
-45,50fold
-51,91fold
-92,106fold
+7,12fold
+13,24fold
 let &fdl = &fdl
-let s:l = 58 - ((57 * winheight(0) + 17) / 34)
+let s:l = 15 - ((14 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 58
+keepjumps 15
 normal! 01|
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :
