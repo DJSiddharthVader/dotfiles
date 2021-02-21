@@ -66,9 +66,9 @@ git=$(echo -e '\u2325')
 snk=$(echo -e '\u2440')
 tsk=$(echo -e '\u2713')
 bot=$(echo -e '\u2514')
-#→↠↣⇝⇢⇥⮡⭬
+#→↠↣⇝⇢⇥⮡⭬
+pen="$(echo -e '\uE0C6') "
 #pen=$(echo -e '\u0F3B')
-pen=" "
 #Set prompt by terminal width
 function prompt_command() {
     termwidth=${COLUMNS}
@@ -84,7 +84,7 @@ function prompt_command() {
         cond="$B5$F0$snk\$(condaenv)$F5$B6$par"
         gits="$B6$F0\$(gitstats)$F6$B0$par"
         endd="\n$B0$Fb$bot$end$F1$pen$FB"
-        PROMPT_DIRTRIM=99
+        PROMPT_DIRTRIM=4
         export PS1="$strt$time$user$host$dirc$cond$gits$endd"
     else
         #small terminal
