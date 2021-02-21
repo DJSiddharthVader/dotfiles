@@ -12,7 +12,9 @@ alias ....='cd ../../../'
 
 #Typos
 alias r,='rm'
-alias bi='vi'
+alias bi='nvim'
+alias vi='nvim'
+alias vim='nvim'
 alias mc='mv'
 
 #Options
