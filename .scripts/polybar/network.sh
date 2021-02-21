@@ -2,7 +2,7 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/netmode"
-modes=(standard standardd ip text name strength allnoip all)
+modes=(standard standardd ip text name strength all)
 terminal="st"
 interface="wlp1s0"
 pipurl="ifconfig.co"
@@ -60,7 +60,6 @@ display(){
         'text'     ) msg="$(name) $(strength)% $(pip)" ;;
         'name'     ) msg="$(name)" ;;
         'strength' ) msg="$(strength)%" ;;
-        'allnoip'  ) msg="$(icon) $(strength)% $(name)" ;;
         'all'      ) msg="$(icon) $(strength)% $(name) $(pip)" ;;
         *) help && exit 1 ;;
     esac
@@ -84,5 +83,5 @@ main() {
     fi
 }
 
-main "$1"
+main "$@"
 
