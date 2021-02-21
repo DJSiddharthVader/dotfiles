@@ -33,7 +33,8 @@ display() {
     mem_free="$(info 'MemAvailable')"
     swp_total="$(info 'SwapTotal')"
     swp_free="$(info 'SwapFree')"
-    case "$(cat $mode_file)" in
+    mode="$1"
+    case "$mode" in
         "data"   ) msg="$(data "$mem_total-$mem_free") Gi $(data "$swp_total-$swp_free") Gi" ;;
         'percent') msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(perc "($swp_total-$swp_free)/$swp_total*100")%" ;;
         *) help && exit 1 ;;
@@ -43,7 +44,8 @@ display() {
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        display
+        [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+        display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in

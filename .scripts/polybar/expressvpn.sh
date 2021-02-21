@@ -2,6 +2,7 @@
 
 downloadpage='https://www.expressvpn.com/latest?utm_source=linux_app#linux'
 
+help() { echo "Usage $0 {status|pick|toggle|connect|disconnect|update}" ; }
 update() {
     if [ "$(expressvpn status | grep -c 'A new version is available')" -eq 1 ]; then
         deb_url="$(wget -O - "$downloadpage" | grep 'name=\"linux-download\"' | grep -oP '(?<=value=\")https.*(?=\">Ubuntu)')"
@@ -28,7 +29,6 @@ pick_location() {
     expressvpn connect "$code"
 }
 display() {
-
     case "$(status)" in
         'Not Connected') output="N/A" ;;
         *) output="$(expressvpn status | grep 'onnect' | head -1 | cut -d'-' -f2 | tr -d '\[\;[0-9]m?' )" ;;
@@ -44,7 +44,7 @@ main() {
         'connect'   ) connect       ;;
         'disconnect') disconnect    ;;
         'update'    ) update        ;;
-        *) echo "Usage $0 {status|pick|toggle|connect|disconnect|update}" && exit 1 ;;
+        *) help && exit 1 ;;
     esac
 }
 

@@ -38,8 +38,7 @@ display() {
     days=$(time_ 'day')
     hours=$(time_ 'hour')
     minutes=$(time_ 'minute')
-    echo "$weeks $days $hours $minutes"
-    mode="$(cat $mode_file)"
+    mode="$1"
     case $mode in
         'hour') uptime="H:$(($weeks*7*24 + $days*24 + $hours))" ;;
         'day' ) uptime="D:$((7*$weeks + $days)) H:$hours" ;;
@@ -51,7 +50,8 @@ display() {
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        display
+        [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+        display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in

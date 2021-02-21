@@ -1,12 +1,16 @@
 #!/bin/bash
 shopt -s extglob
 
-mode_file="$HOME/dotfiles/.varfiles/datemode"
-modes=(time date numeric full) #no spaces in mode titles
+mode_file="$HOME/dotfiles/.varfiles/tempmode"
+modes=(short long)
+#Icons
+ramp1=""
+ramp2=""
+ramp3=""
+ramp4=""
+ramp5=""
 
-help() {
-    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
-}
+help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -25,22 +29,38 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
-display() {
-    # 
-    mode="$(cat $mode_file)"
-    case "$mode" in
-        'time'   ) msg=" $(date +'%I:%M')" ;;
-        'date'   ) msg=" $(date +'%B %d %Y')" ;;
-        'numeric') msg=" $(date +'%I:%M')  $(date +'%d/%m/%Y')" ;;
-        'full'   ) msg=" $(date +'%I:%M')  $(date +'%A, %B %d %Y')" ;;
+
+icon() {
+    temp="$(sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..')"
+    case 1 in
+        $(($temp < 30))) icon=$ramp1 ;;
+        $(($temp < 40))) icon=$ramp2 ;;
+        $(($temp < 50))) icon=$ramp3 ;;
+        $(($temp < 60))) icon=$ramp4 ;;
+        $(($temp < 70))) icon=$ramp5 ;;
+    esac
+    echo "$icon"
+}
+short() {
+    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
+}
+long() {
+    sensors | grep -v 'ERROR' | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
+}
+display(){
+    mode="$1"
+    case $mode in
+        'short') temp="$(icon) $(short)" ;;
+        'long') temp="$(icon) $(long)" ;;
         *) help && exit 1 ;;
     esac
-    echo "$msg"
+    echo "$temp"
 }
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        display
+        [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+        display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in
@@ -54,4 +74,3 @@ main() {
 }
 
 main "$1"
-

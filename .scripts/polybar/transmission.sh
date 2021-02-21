@@ -3,7 +3,7 @@ shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/tormode"
 stats="$HOME/dotfiles/.config/transmission-daemon/stats.json"
-modes=(ratio data speed active) #no spaces in mode titles
+modes=(ratio data datatotal speed active) #no spaces in mode titles
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -42,34 +42,35 @@ sumConvert() {
            tr -s ' ' '+'  | bc | #sum together
            numfmt --to-unit="$outunit" --format="%.2f" #sum and convert to $unit
 }
+divide() {
+    num="$1"
+    denom="$2"
+    scale="$3"
+    echo "scale=$scale; $num/$denom" | bc | sed -e 's/^\./0./'
+}
 display() {
-    mode="$(cat $mode_file)"
+    mode="$1"
     #        
     case "$mode" in
         'ratio')
             unit="Gi"
-            up="$(sumConvert 'Uploaded' "$unit")"
-            down="$(sumConvert 'Downloaded' "$unit")"
+            down="$(sumConvert 'Have' "$unit")"
             total="$(sumConvert 'Total size' "$unit")"
-            if [[ -z "$up$down$total" ]]; then
-                upt="$(jq '."uploaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
-                downt="$(jq '."downloaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
-                msg="T $(echo "scale=2; $upt/$downt" | bc)"
-            else
-                msg=" $(echo "scale=2; $down/$total" | bc)  $(echo "scale=2; $up/$down" | bc)"
-            fi
+            upt="$(jq '."uploaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
+            downt="$(jq '."downloaded-bytes"' "$stats" | numfmt --to-unit "$unit" --format="%.2f")"
+            msg=" $(divide $down $total 2)  $(divide $upt $downt 2)"
             ;;
         'data')
             unit="Gi"
             up="$(sumConvert 'Uploaded' "$unit" "$info")"
-            down="$(sumConvert 'Downloaded' "$unit" "$info")"
-            if [[ -z "$up$down" ]];then
-                upt="$(jq '."uploaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
-                downt="$(jq '."downloaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
-                msg="T  $downt $unit T  $upt $unit"
-            else
-                msg=" $down $unit  $up $unit"
-            fi
+            down="$(sumConvert 'Have' "$unit" "$info")"
+            msg=" $down $unit  $up $unit"
+            ;;
+        'datatotal')
+            unit="Gi"
+            upt="$(jq '."uploaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
+            downt="$(jq '."downloaded-bytes"' $stats | numfmt --to-unit "$unit" --format="%.2f")"
+            msg="  $downt $unit   $upt $unit"
             ;;
         'speed')
             unit="Mi"
@@ -91,7 +92,8 @@ display() {
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        display
+        [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+        display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in

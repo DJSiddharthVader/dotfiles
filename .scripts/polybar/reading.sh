@@ -32,7 +32,7 @@ display() {
         ( zscroll -l "$thresh" -d 0.20 -b " " -a "" -p " /// " "$(cat "$reading" | cut -f1 -d'~')" ) &
        wait
     else
-        echo " $articlename"
+        echo "$articlename"
     fi
 }
 main() {

@@ -1,14 +1,19 @@
 #!/bin/bash
 shopt -s extglob
 
-mode_file="$HOME/dotfiles/.varfiles/tempmode"
-modes=(short long)
+mode_file="$HOME/dotfiles/.varfiles/netmode"
+modes=(standard standardd ip text name strength allnoip all)
+terminal="st"
+interface="wlp1s0"
+pipurl="ifconfig.co"
 #Icons
-ramp1=""
-ramp2=""
-ramp3=""
-ramp4=""
-ramp5=""
+# 𝍥𝌮𝌭𝌪𝌡𝌆
+#ramp1="䷗"
+#ramp2="䷒"
+ramp3=""
+ramp4=""
+ramp5=""
+ramp6=""
 
 help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
 cycle() {
@@ -29,40 +34,47 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
-
+open() { $terminal -e nmtui connect ; }
+lip() { hostname -I | cut -d' ' -f1 ; }
+pip() { curl -s  "$pipurl" ; }
+name() { iwgetid -r ; }
+strength() { grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70)}'| xargs | sed 's/100/99/' ; }
 icon() {
-    temp="$(sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..')"
+    percent=$(strength)
     case 1 in
-        $(($temp < 30))) icon=$ramp1 ;;
-        $(($temp < 40))) icon=$ramp2 ;;
-        $(($temp < 50))) icon=$ramp3 ;;
-        $(($temp < 60))) icon=$ramp4 ;;
-        $(($temp < 70))) icon=$ramp5 ;;
+        $(($percent <  25))) icon="$ramp1" ;;
+        $(($percent <  40))) icon="$ramp2" ;;
+        $(($percent <  55))) icon="$ramp3" ;;
+        $(($percent <  70))) icon="$ramp4" ;;
+        $(($percent <  85))) icon="$ramp5" ;;
+        $(($percent < 100))) icon="$ramp6" ;;
     esac
     echo "$icon"
 }
-short() {
-    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
-}
-long() {
-    sensors | grep -v 'ERROR' | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
-}
 display(){
-    mode="$(cat $mode_file)"
+    mode="$1"
     case $mode in
-        'short') temp="$(icon) $(short)" ;;
-        'long') temp="$(icon) $(long)" ;;
+        'standard' ) msg="$(icon) $(name)" ;;
+        'standardd') msg="$(icon) $(strength)% $(name)" ;;
+        'ip'       ) msg="L:$(lip) P:$(pip)"  ;;
+        'text'     ) msg="$(name) $(strength)% $(pip)" ;;
+        'name'     ) msg="$(name)" ;;
+        'strength' ) msg="$(strength)%" ;;
+        'allnoip'  ) msg="$(icon) $(strength)% $(name)" ;;
+        'all'      ) msg="$(icon) $(strength)% $(name) $(pip)" ;;
         *) help && exit 1 ;;
     esac
-    echo "$temp"
+    echo "$msg"
 }
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        display
+        [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+        display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in
+            'open') dmode="$(cat $mode_file)" && open ;;
             'next') dmode="$(cycle 'next')" ;;
             'prev') dmode="$(cycle 'prev')" ;;
             $tmp  ) dmode="$mode" ;; #capture any valid mode
@@ -73,3 +85,4 @@ main() {
 }
 
 main "$1"
+

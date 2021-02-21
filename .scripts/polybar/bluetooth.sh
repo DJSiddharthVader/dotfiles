@@ -25,11 +25,7 @@ disconnect() {
 }
 connect() {
     device="$1"  # a uuid
-    while [[ "$(isDeviceConnected $device)" == 'no' ]]; do
-        echo -e "connect $device\n" | bluetoothctl /dev/null 2>&1
-        sleep 10
-    done
-    changeOutput 'bluetooth'
+    [[ "$(isDeviceConnected $device)" == 'no' ]] && echo -e "connect $device\n" | bluetoothctl /dev/null 2>&1 && changeOutput 'bluetooth'
 }
 toggle() {
     device="$1"
