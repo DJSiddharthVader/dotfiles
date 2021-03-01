@@ -5,20 +5,15 @@ alias la='ls -A'
 alias l='ls -CF'
 alias lc='colorls -A --sd'
 
-#Navigation
-alias ..='cd ..'
-alias ...='cd ../../'
-alias ....='cd ../../../'
-
 #Typos
 alias r,='rm'
+alias e='nvim'
 alias bi='nvim'
 alias vi='nvim'
 alias vim='nvim'
 alias mc='mv'
 
 #Options
-alias top='htop'
 alias rm='rm -i'
 alias tmux='tmux -2'
 
@@ -46,28 +41,30 @@ alias pipes='~/apps/pipes.sh/pipes.sh'
 alias rspa='~/.scripts/reset-pulseaudio.sh'
 alias knit='~/.scripts/knit-pdf.sh'
 
-#Shorten
-alias school='cd /home/sidreed/CMU_MSCB/Current_Courses/'
+#Apps
+alias top='htop'
 alias pdf='zathura'
+alias tsm="transmission-remote"
+alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
+
+#Shorten
 alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
 alias mnt="~/.scripts/mount.sh on"
 alias umt="~/.scripts/mount.sh off"
 alias ip="hostname -I | cut -d' ' -f1"
-alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 alias brg='ssh slreed@bridges2.psc.edu'
-alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
+alias school='cd /home/sidreed/CMU_MSCB/Current_Courses/'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
+alias ifs='ssh -t sid@info.mcmaster.ca ssh sid@info114'
 
 #Print
-alias tsm="transmission-remote"
 alias cfh="grep -c '^>'"
 alias shln="ls -la | grep '\-\>'"
 alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
 alias bgal='feh -g 640x480 -d /home/sidreed/Pictures/wallpapers/*'
 alias t='python ~/apps/t/t.py --task-dir ~/Personal/notes/tasks --list tasks'
 alias tl='python ~/apps/t/t.py --task-dir ~/Personal/notes/tasks --list tasks | sort -k3'
-alias neofetch='neofetch --ascii /home/sidreed/dotfiles/.config/neofetch/my_apreature.txt --config /home/sidreed/dotfiles/.config/neofetch/config'
 
