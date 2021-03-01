@@ -32,10 +32,12 @@ cycle() {
     echo "${modes[$next_idx]}"
 }
 
-percent() { acpi -b | cut -d',' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}' | tr -d '%' ; }
-time_left() { acpi -b | cut -d',' -f3 | cut -d' ' -f-2 | cut -d':' -f-2 | awk '{gsub(/^ +| +$/,"")} {print $0}' ; }
+batinfo() { acpi -b | grep -v 'rate information unavailable' | head -1 ; }
+charging()  { batinfo | cut -d',' -f1 | cut -d':' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}' ; }
+percent()   { batinfo | cut -d',' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}' | tr -d '%' ; }
+time_left() { batinfo | cut -d',' -f3 | cut -d' ' -f-2 | cut -d':' -f-2 | awk '{gsub(/^ +| +$/,"")} {print $0}' ; }
 status() {
-    status=$(acpi -b | cut -d',' -f1 | cut -d':' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}')
+    status="$(charging)"
     case $status in
         'Charging'|'Not charging') msg="$charging" ;;
         *) msg="" ;;
@@ -65,6 +67,7 @@ display(){
     esac
     echo "$(status) $bat"
 }
+
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
@@ -82,5 +85,5 @@ main() {
     fi
 }
 
-main "$1"
+main "$@"
 
