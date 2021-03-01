@@ -1,4 +1,5 @@
 #!/bin/bash
+services=(compton pulse wifi)
 
 help() { echo "Error: usage $0 \$SERVICE {stop|start|restart}" ; }
 stop() {
@@ -22,18 +23,26 @@ start() {
     esac
 }
 restart() { service="$1"; stop "$1"; start "$1"; }
+rofi_menu() {
+    service="$(echo $sevices | tr ' ' '\n' | rofi -m -3 -width 20 -lines 5 -dmenu)"
+    [[ -n "$service" ]] && restart "$service"
+}
 main() {
     service="$1"
     mode="$2"
-    case "$mode" in
-        'stop') stop "$service" ;;
-        'start') start "$service" ;;
-        'restart') restart "$service" ;;
-        *) help && exit 1 ;;
-    esac
+    if [[ "$service" == 'menu' ]]; then
+        rofi_menu
+    else
+        case "$mode" in
+            'stop') stop "$service" ;;
+            'start') start "$service" ;;
+            'restart') restart "$service" ;;
+            *) help && exit 1 ;;
+        esac
+    fi
 }
 
-if (( $# < 2 )); then
+if (( $# == 1 )); then
     service="$1"
     mode="restart"
 else
