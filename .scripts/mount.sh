@@ -1,6 +1,7 @@
 #!/bin/bash
 
 mountdir="/media/1tbdrive"
+
 function checkMount() {
     mountnode="$1"
     [[ "$mountnode" == "/dev/" ]] && \
@@ -13,27 +14,20 @@ function main() {
     mode="$1"
     case $mode in
         'on')
-            if [[ $(lsblk | grep -c $mountdir | cut -d' ' -f1 ) -eq 0 ]]
-            then
+            if [[ $(lsblk | grep -c $mountdir | cut -d' ' -f1 ) -eq 0 ]]; then
                 sudo mount $mountnode $mountdir
             else
-                echo 'Already mounted'
-                exit 0
+                echo 'Already mounted' && exit 0
             fi
             ;;
         'off')
-            if [[ $(lsblk | grep -c $mountdir | cut -d' ' -f1 ) -eq 0 ]]
-            then
-                echo 'Not connected'
-                exit 0
+            if [[ $(lsblk | grep -c $mountdir | cut -d' ' -f1 ) -eq 0 ]]; then
+                echo 'Not connected' && exit 0
             else
                 sudo umount $mountnode
             fi
             ;;
-        *)
-            echo "Usage: $0 {on|off}"
-            exit 1
-            ;;
+        *) echo "Usage: $0 {on|off}" && exit 1 ;;
     esac
 }
 
