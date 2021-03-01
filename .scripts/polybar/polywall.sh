@@ -25,13 +25,14 @@ cycle() {
     echo "${modes[$next_idx]}"
 }
 icon() {
-    case "$(cat $mode_file)" in
-        'font') modeicon="" ;;
-        'back') modeicon="" ;;
-        'both') modeicon="" ;;
-        *) help && exit 1 ;;
-    esac
-    echo "$modeicon"
+#    case "$(cat $mode_file)" in
+#        'font') modeicon="" ;;
+#        'back') modeicon="" ;;
+#        'both') modeicon="" ;;
+#        *) help && exit 1 ;;
+#    esac
+#    echo "$modeicon"
+    echo ""
 }
 display() {
     wallpaper="$(head -n $(cat $wallidfile) "$wallpfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"
