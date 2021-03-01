@@ -14,18 +14,11 @@ margin-top = 1
 margin-bottom = 1
 
 [colors]
-; hack for getting colors to read from Xressources
+;hack for getting colors to read from Xressources
 include-file = ~/.cache/wal/polybarColors.wal
+include-file = ~/dotfiles/.varfiles/polysep
 leftcap =
 rightcap =
-leftprefix = 
-leftsuffix = 
-rightprefix = 
-rightsuffix = 
-;icons in order for module sepration
-;may need to adjust font size
-;symetric    ; ; ; ; ; ;
-;directional ;  ;  ; ; ;【】
 
 [section/float]
 ;options
@@ -47,8 +40,8 @@ cursor-scroll = ns-resize
 ;borders
 border-top-size = 10
 border-bottom-size = 10
-border-left-size = 20
-border-right-size = 20
+border-left-size = 10
+border-right-size = 10
 border-color = #00000000
 ;lines
 line-size = 3
@@ -92,7 +85,7 @@ font-0 = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
 font-1 = Weather Icons:style=Regular;3
 font-2 = Terminus:style=Regular:pixelsize=14;1
 font-3 = Siji:pixelsize=12;1
-font-4 = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=26;5
+font-4 = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=34;6
 font-5 = material\-wifi:style=Regular:size=12;2
 font-6 = Terminus:style=Regular:pixelsize=13;1
 
@@ -102,27 +95,27 @@ inherit = section/float
 fixed-center = true
 modules-left = i3
 modules-center =
-modules-right = songnames mpd bluetooth expressvpn wlan volume backlight-acpi applauncher
+modules-right = songnames mpd bluetooth expressvpn wlan volume applauncher
 
 [bar/floating_bot]
 inherit = section/float
 bottom = true
-modules-left = date battery memory temperature xkeyboard uptime weather transmission
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather deluge
 modules-center =
-modules-right = reading
+modules-right = reading wall
 
 [bar/bordered_top]
 inherit = section/full
-modules-left = lc8 i3
-modules-center = songnames mpd
-modules-right = bluetooth expressvpn wlan volume backlight-acpi applauncher rc1
+modules-left = i3
+modules-center =
+modules-right = wall songnames mpd bluetooth expressvpn wlan volume backlight-acpi applauncher
 
 [bar/bordered_bot]
 inherit = section/full
 bottom = true
-modules-left = lc1 date battery memory temperature xkeyboard uptime weather transmission
+modules-left = date battery memory temperature xkeyboard uptime weather transmission
 modules-center =
-modules-right = reading wall rc1
+modules-right = reading
 
 [bar/minimal]
 inherit = section/float
@@ -218,6 +211,20 @@ format-suffix = ${colors.rightsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color8}
 format-suffix-background = ${colors.background}
+[module/focused]
+type = custom/script
+tail = true
+exec = ~/dotfiles/.scripts/polybar/current-window.sh
+format-background = ${colors.color2}
+format-prefix = ${colors.rightprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color2}
+format-prefix-background = ${colors.background}
+format-suffix = ${colors.rightsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color2}
+format-suffix-background = ${colors.background}
+
 [module/applauncher]
 type = custom/menu
 expand-right = true
@@ -261,6 +268,8 @@ menu-2-3 = ""
 menu-2-3-exec = ~/dotfiles/.scripts/polybar/expressvpn.sh toggle
 menu-2-4 = ""
 menu-2-4-exec = ~/dotfiles/.scripts/wallpaper.sh next
+menu-2-5 = "⏼"
+menu-2-5-exec = systemctl suspend
 
 format-background = ${colors.color1}
 format-prefix = ${colors.leftprefix}
@@ -271,10 +280,12 @@ format-suffix = ${colors.leftsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color1}
 format-suffix-background = ${colors.background}
+
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
+
 [module/xbacklight]
 type = internal/xbacklight
 enabele-scroll = true
@@ -289,6 +300,24 @@ format-suffix = ${colors.leftsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color2}
 format-suffix-background = ${colors.background}
+
+[module/gamma]
+type = custom/script
+interval = 3
+exec = ~/dotfiles/.scripts/polybar/brightness.sh display
+scroll-up = ~/dotfiles/.scripts/polybar/brightness.sh inc
+scroll-down = ~/dotfiles/.scripts/polybar/brightness.sh dec
+format = " <label> "
+format-background = ${colors.color2}
+format-prefix = ${colors.leftprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color2}
+format-prefix-background = ${colors.background}
+format-suffix = ${colors.leftsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color2}
+format-suffix-background = ${colors.background}
+
 [module/volume]
 type = internal/alsa
 label-volume = %percentage%%
@@ -341,6 +370,7 @@ tail = true
 exec = ~/dotfiles/.scripts/polybar/expressvpn.sh status
 click-left = ~/dotfiles/.scripts/polybar/expressvpn.sh toggle
 click-right = ~/dotfiles/.scripts/polybar/expressvpn.sh pick
+format = " <label>"
 format-background = ${colors.color5}
 format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
@@ -355,7 +385,7 @@ format-suffix-background = ${colors.background}
 type = custom/script
 tail = true
 exec = ~/dotfiles/.scripts/polybar/bluetooth.sh status
-format = %{A1:~/dotfiles/.scripts/polybar/bluetooth.sh :} <label> %{A}
+click-left = ~/dotfiles/.scripts/polybar/bluetooth.sh
 format-background = ${colors.color6}
 format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
@@ -365,22 +395,26 @@ format-suffix = ${colors.leftsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color6}
 format-suffix-background = ${colors.background}
+
 [module/songnames]
 type = custom/script
 tail = true
 exec = ~/dotfiles/.scripts/polybar/mpdscroll.sh
-format = "%{A1:~/dotfiles/.scripts/polybar/mpdscroll.sh toggle:}  %{T7}<label>%{T-}  %{A}"
+format =  %{T7}<label>%{T-}
+click-left = ~/dotfiles/.scripts/polybar/mpdscroll.sh toggle
 ; use different font for label to maintain monospace (not at size > 13 for Terminus?) so module width doesnt change during scrolling
 format-background = ${colors.color7}
 format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
 format-prefix-foreground = ${colors.color7}
 format-prefix-background = ${colors.background}
+
 [module/mpd]
 type = internal/mpd
 host=localhost
 port=6600
-format-online =  <icon-prev> <toggle> <icon-next> <icon-single> <icon-random> <bar-progress> <label-time>
+;format-online =  <icon-prev> <toggle> <icon-next> <icon-single> <icon-random> <bar-progress> <label-time>
+format-online = <bar-progress> <label-time>
 format-offline = MPD Offline
 format-online-background = ${colors.color7}
 format-online-suffix = ${colors.leftsuffix}
@@ -388,7 +422,7 @@ format-online-suffix-font = 5
 format-online-suffix-foreground = ${colors.color7}
 format-online-suffix-background = ${colors.background}
 format-offline-background = ${colors.color7}
-format-offline-suffix = ${colors.leftsuffix}
+format-offline-suffix = ${colors.rightprefix}
 format-offline-suffix-font = 5
 format-offline-suffix-foreground = ${colors.color7}
 format-offline-suffix-background = ${colors.background}
@@ -411,7 +445,6 @@ bar-progress-width = 10
 bar-progress-indicator = |
 bar-progress-fill = ─
 bar-progress-empty = ─
-
 
 
 [module/date]
@@ -463,12 +496,13 @@ format-suffix-font = 5
 format-suffix-foreground = ${colors.color3}
 format-suffix-background = ${colors.background}
 
-[module/temperature]
+[module/cpu]
 type = custom/script
-tail = true
-exec = ~/dotfiles/.scripts/polybar/temperature.sh display
-click-left = ~/dotfiles/.scripts/polybar/temperature.sh next
-click-right = ~/dotfiles/.scripts/polybar/temperature.sh prev
+exec = ~/dotfiles/.scripts/polybar/cpumonitor.sh display
+tail=true
+format = <label>
+click-left =  = ~/dotfiles/.scripts/polybar/cpumonitor.sh next
+click-right = ~/dotfiles/.scripts/polybar/cpumonitor.sh prev
 format-background = ${colors.color4}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -477,6 +511,22 @@ format-prefix-background = ${colors.background}
 format-suffix = ${colors.rightsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color4}
+format-suffix-background = ${colors.background}
+
+[module/temperature]
+type = custom/script
+tail = true
+exec = ~/dotfiles/.scripts/polybar/temperature.sh display
+click-left = ~/dotfiles/.scripts/polybar/temperature.sh next
+click-right = ~/dotfiles/.scripts/polybar/temperature.sh prev
+format-background = ${colors.color5}
+format-prefix = ${colors.rightprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color5}
+format-prefix-background = ${colors.background}
+format-suffix = ${colors.rightsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color5}
 format-suffix-background = ${colors.background}
 
 [module/xkeyboard]
@@ -498,27 +548,13 @@ label-indicator-on-capslock =  " CapsLock "
 label-indicator-on-foreground = ${colors.foreground}
 label-indicator-on-background = #ff1100
 
-[module/uptime]
+[module/disk]
 type = custom/script
-interval = 60
-exec = ~/dotfiles/.scripts/polybar/uptimemonitor.sh display
-click-left =  = ~/dotfiles/.scripts/polybar/uptimemonitor.sh next
-click-right =  = ~/dotfiles/.scripts/polybar/uptimemonitor.sh prev
-format-background = ${colors.color5}
-format-prefix = ${colors.rightprefix}
-format-prefix-font = 5
-format-prefix-foreground = ${colors.color5}
-format-prefix-background = ${colors.background}
-format-suffix = ${colors.rightsuffix}
-format-suffix-font = 5
-format-suffix-foreground = ${colors.color5}
-format-suffix-background = ${colors.background}
-
-[module/weather]
-type = custom/script
-interval = 600
-label-font = 2
-exec = ~/dotfiles/.scripts/polybar/openweathermap-simple.sh
+tail = true
+exec = ~/dotfiles/.scripts/polybar/disk.sh display
+click-left = ~/dotfiles/.scripts/polybar/disk.sh next
+click-right = ~/dotfiles/.scripts/polybar/disk.sh prev
+format = " <label>"
 format-background = ${colors.color6}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -529,12 +565,12 @@ format-suffix-font = 5
 format-suffix-foreground = ${colors.color6}
 format-suffix-background = ${colors.background}
 
-[module/transmission]
+[module/uptime]
 type = custom/script
-tail = true
-exec = ~/dotfiles/.scripts/polybar/transmission.sh display
-click-left = ~/dotfiles/.scripts/polybar/transmission.sh next
-click-right = ~/dotfiles/.scripts/polybar/transmission.sh prev
+interval = 60
+exec = ~/dotfiles/.scripts/polybar/uptimemonitor.sh display
+click-left =  = ~/dotfiles/.scripts/polybar/uptimemonitor.sh next
+click-right =  = ~/dotfiles/.scripts/polybar/uptimemonitor.sh prev
 format-background = ${colors.color7}
 format-prefix = ${colors.rightprefix}
 format-prefix-font = 5
@@ -543,6 +579,56 @@ format-prefix-background = ${colors.background}
 format-suffix = ${colors.rightsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color7}
+format-suffix-background = ${colors.background}
+
+[module/weather]
+type = custom/script
+interval = 600
+label-font = 2
+exec = ~/dotfiles/.scripts/polybar/weather.sh
+format-background = ${colors.color8}
+format-prefix = ${colors.rightprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color8}
+format-prefix-background = ${colors.background}
+format-suffix = ${colors.rightsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color8}
+format-suffix-background = ${colors.background}
+
+[module/deluge]
+type = custom/script
+tail = true
+exec = ~/dotfiles/.scripts/polybar/deluge.sh display
+click-left = ~/dotfiles/.scripts/polybar/deluge.sh next
+click-right = ~/dotfiles/.scripts/polybar/deluge.sh prev
+;click-middle =  ~/dotfiles/.scripts/polybar/deluge.sh search
+format-background = ${colors.color9}
+format-prefix = ${colors.rightprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color9}
+format-prefix-background = ${colors.background}
+format-suffix = ${colors.rightsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color9}
+format-suffix-background = ${colors.background}
+
+[module/wall]
+type = custom/script
+interval = 3
+exec =  ~/dotfiles/.scripts/polybar/polywall.sh display
+;format = %{A1:~/dotfiles/.scripts/polybar/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh mode:}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh display:} %{A}<label> %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh next:} %{A}
+click-left = ~/dotfiles/.config/polybar/scripts/polywall.sh prev
+click-right = ~/dotfiles/.config/polybar/scripts/polywall.sh next
+click-middle = ~/dotfiles/.config/polybar/scripts/polywall.sh reload
+format-background = ${colors.color2}
+format-prefix = ${colors.leftprefix}
+format-prefix-font = 5
+format-prefix-foreground = ${colors.color2}
+format-prefix-background = ${colors.background}
+format-suffix = ${colors.leftsuffix}
+format-suffix-font = 5
+format-suffix-foreground = ${colors.color2}
 format-suffix-background = ${colors.background}
 
 [module/reading]
@@ -554,40 +640,16 @@ click-right = ~/dotfiles/.scripts/polybar/reading.sh pick
 label = "%output% "
 label-font = 7
 format = " <label>"
-format-background = ${colors.color8}
+format-background = ${colors.color1}
 format-prefix = ${colors.leftprefix}
 format-prefix-font = 5
-format-prefix-foreground = ${colors.color8}
+format-prefix-foreground = ${colors.color1}
 format-prefix-background = ${colors.background}
 format-suffix = ${colors.leftsuffix}
 format-suffix-font = 5
-format-suffix-foreground = ${colors.color8}
+format-suffix-foreground = ${colors.color1}
 format-suffix-background = ${colors.background}
 
-
-[module/wall]
-type = custom/script
-interval = 3
-exec =  ~/dotfiles/.scripts/polybar/polywall.sh display
-format = %{A1:~/dotfiles/.scripts/polybar/polywall.sh prev:}  %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh mode:}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh display:} %{A}<label> %{A}%{A1:~/dotfiles/.config/polybar/scripts/polywall.sh next:} %{A}
-format-background = ${colors.color9}
-format-prefix = ${colors.leftprefix}
-format-prefix-font = 5
-format-prefix-foreground = ${colors.color9}
-format-prefix-background = ${colors.background}
-format-suffix = ${colors.leftsuffix}
-format-suffix-font = 5
-format-suffix-foreground = ${colors.color9}
-format-suffix-background = ${colors.background}
-
-[module/cpu]
-type = custom/script
-exec = ~/dotfiles/.scripts/polybar/cpumonitor.sh display
-tail=true
-format = <label>
-format-background = ${colors.color4}
-click-left =  = ~/dotfiles/.scripts/polybar/cpumonitor.sh next
-click-right = ~/dotfiles/.scripts/polybar/cpumonitor.sh prev
 
 [module/taskcounter]
 type = custom/script
@@ -601,7 +663,6 @@ type = custom/script
 exec = ~/dotfiles/.scripts/polybar/sched.py 0 3
 format-background = ${colors.color9}
 tail = true
-
 
 
 ;caps
