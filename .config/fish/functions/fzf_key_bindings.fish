@@ -1,0 +1,1 @@
+/home/sidreed/.fzf/shell/key-bindings.fish
