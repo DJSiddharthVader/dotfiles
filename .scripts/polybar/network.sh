@@ -8,12 +8,10 @@ interface="wlp1s0"
 pipurl="ifconfig.co"
 #Icons
 # 𝍥𝌮𝌭𝌪𝌡𝌆
-#ramp1="䷗"
-#ramp2="䷒"
-ramp3=""
-ramp4=""
-ramp5=""
-ramp6=""
+ramp1=""
+ramp2=""
+ramp3=""
+ramp4=""
 
 help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
 cycle() {
@@ -38,16 +36,22 @@ open() { $terminal -e nmtui connect ; }
 lip() { hostname -I | cut -d' ' -f1 ; }
 pip() { curl -s  "$pipurl" ; }
 name() { iwgetid -r ; }
-strength() { grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70)}'| xargs | sed 's/100/99/' ; }
+strength() {
+    percent="$(grep "^\s*w" /proc/net/wireless \
+               | awk '{ print "", int($3 * 100 / 70)}'\
+               | xargs | sed 's/100/99/')"
+    [[ -z "$percent" ]] && percent=0
+    echo $percent
+}
 icon() {
     percent=$(strength)
     case 1 in
         $(($percent <  25))) icon="$ramp1" ;;
-        $(($percent <  40))) icon="$ramp2" ;;
-        $(($percent <  55))) icon="$ramp3" ;;
-        $(($percent <  70))) icon="$ramp4" ;;
-        $(($percent <  85))) icon="$ramp5" ;;
-        $(($percent < 100))) icon="$ramp6" ;;
+        $(($percent <  40))) icon="$ramp1" ;;
+        $(($percent <  55))) icon="$ramp1" ;;
+        $(($percent <  70))) icon="$ramp2" ;;
+        $(($percent <  85))) icon="$ramp3" ;;
+        $(($percent < 100))) icon="$ramp4" ;;
     esac
     echo "$icon"
 }
