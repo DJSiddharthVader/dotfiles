@@ -4,7 +4,8 @@
 ## Main Config
 
 ## Overall Conditionals {{{
-export TERM='screen-256color'
+#export TERM='screen-256color'
+export TERM='st'
 export HISTTIMEFORMAT="%m/%d - %H:%M:%S: "
 
 _islinux=false
@@ -160,7 +161,7 @@ fi
 ## Functions
 [ -f ~/.bash_functions.sh ] && source ~/.bash_functions.sh
 
-## Priviliged Acces
+## Priviliged Access
 if ! $_isroot; then
       alias sudo='sudo '
       alias scat='sudo cat'
@@ -239,15 +240,7 @@ fi
 (cat ~/.cache/wal/sequences &)
 
 ## fzf
-#[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-## CTRL-T - Paste the selected file path into the command line
-#bind -m emacs-standard -x '"\C-t": ~/.fzf/bin/fzf'
-#bind -m vi-command -x '"\C-t": ~/.fzf/bin/fzf'
-#bind -m vi-insert -x '"\C-t": ~/.fzf/bin/fzf'
-## CTRL-R - Paste the selected command from history into the command line
-#bind -m emacs-standard -x '"\C-r": ~/.fzf/bin/fzf'
-#bind -m vi-command -x '"\C-r": ~/.fzf/bin/fzf'
-#bind -m vi-insert -x '"\C-r": ~/.fzf/bin/fzf'
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ## Prompt
 source $HOME/dotfiles/.scripts/bash-prompt.sh
