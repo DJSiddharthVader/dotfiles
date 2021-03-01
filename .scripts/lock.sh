@@ -1,6 +1,6 @@
 #!/bin/bash
-
 set -e
+
 #colors,text,font
 ringcolor=ffffffff
 keyhlcolor=3cc908ff
@@ -19,11 +19,11 @@ loginbox=00000066
 datestring=
 font='Terminus:style=Bold'
 locktext="$(date +'%A, %B %d %Y' )"
-screensaverpath="/tmp/screen.png"
+screensaverpath="$HOME/.screen.png"
 
-function lockbox() { #drawing rectangles
+lockbox() { #drawing rectangles
     rectangles=" "
-    SR=$(xrandr --query | grep ' connected' | grep -o '[0-9][0-9]*x[0-9][0-9]*[^ ]*')
+    SR="$(xrandr -q | grep ' connected' | grep -o '[0-9]*x[0-9]*+[0-9]*+[0-9]*')"
     for RES in $SR; do
         SRA=(${RES//[x+]/ })
         CX=$((${SRA[2]} + 35))
@@ -32,14 +32,14 @@ function lockbox() { #drawing rectangles
     done
     echo "$rectangles"
 }
-function main(){
+main(){
     mpc pause > /dev/null 2>&1
     rectangles="$(lockbox)"
     scrot "$screensaverpath"
     convert "$screensaverpath" -scale 20% -scale 500% -draw "fill black fill-opacity 0.8 $rectangles" "$screensaverpath"
     #lock command
     /home/sidreed/apps/i3lock-color/build/i3lock \
-        -i "$screensaverpath"                \
+        -i "$screensaverpath" -t             \
         --indpos='x+290:h-80'                \
         --noinputtext=''                     \
         --clock                              \
@@ -69,6 +69,8 @@ function main(){
         --wrongcolor="$wrongcolor"           \
         --ringwrongcolor=$ringwrongcolor     \
         --insidewrongcolor=$insidewrongcolor
+    rm $screensaverpath
 }
+
 main
 

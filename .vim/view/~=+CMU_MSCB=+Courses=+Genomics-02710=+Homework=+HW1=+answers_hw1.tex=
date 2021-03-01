@@ -2,29 +2,12 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
-imap <buffer> <silent> <F5> <Plug>Tex_FastEnvironmentInsert
-imap <buffer> <silent> <S-F5> <Plug>Tex_FastEnvironmentChange
-inoremap <buffer> <silent> <S-F1> =Tex_PutEnvironment("eqnarray*")
-inoremap <buffer> <silent> <S-F2> =Tex_PutEnvironment("eqnarray")
-inoremap <buffer> <silent> <S-F3> =Tex_PutEnvironment("bmatrix")
-imap <buffer> <silent> <S-F7> <Plug>Tex_FastCommandChange
-imap <buffer> <C-CR> <Plug>Tex_InsertItemOnNextLine
-imap <buffer> <F9> <Plug>Tex_Completion
-imap <buffer> <silent> <F7> <Plug>Tex_FastCommandInsert
+imap <buffer> <silent> <F7> <Plug>(vimtex-cmd-create)
 inoremap <buffer> <silent> <Plug>(vimtex-delim-close) =vimtex#delim#close()
 inoremap <buffer> <silent> <Plug>(vimtex-cmd-create) =vimtex#cmd#create_insert()
 omap <buffer> <silent> % <Plug>(vimtex-%)
 xmap <buffer> <silent> % <Plug>(vimtex-%)
 nmap <buffer> <silent> % <Plug>(vimtex-%)
-nmap <buffer> ,ll <Plug>Tex_Compile
-vmap <buffer> ,ll <Plug>Tex_Compile
-nmap <buffer> ,lv <Plug>Tex_View
-nmap <buffer> ,ls <Plug>Tex_ForwardSearch
-nmap <buffer> <silent> ,rf <Plug>Tex_RefreshFolds
-imap <buffer> é <Plug>Tex_InsertItemOnThisLine
-imap <buffer> <silent> â <Plug>Tex_MathBF
-imap <buffer> <silent> ã <Plug>Tex_MathCal
-imap <buffer> <silent> ì <Plug>Tex_LeftRight
 nmap <buffer> <silent> K <Plug>(vimtex-doc-package)
 omap <buffer> <silent> [[ <Plug>(vimtex-[[)
 omap <buffer> <silent> [] <Plug>(vimtex-[])
@@ -102,16 +85,8 @@ xnoremap <buffer> <silent> <SNR>131_(vimtex-]]) :call vimtex#motion#next_secti
 xnoremap <buffer> <silent> <SNR>131_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
 xnoremap <buffer> <silent> <SNR>131_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
 xnoremap <buffer> <silent> <SNR>131_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-nmap <buffer> <silent> <F5> <Plug>Tex_FastEnvironmentInsert
-vmap <buffer> <silent> <F5> <Plug>Tex_FastEnvironmentInsert
-nmap <buffer> <silent> <S-F5> <Plug>Tex_FastEnvironmentChange
-nmap <buffer> <silent> <S-F7> <Plug>Tex_FastCommandChange
-nnoremap <buffer> <Plug>Tex_Compile :call Tex_RunLaTeX()
-vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
-nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
-nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
-vmap <buffer> <silent> <F7> <Plug>Tex_FastCommandInsert
-nmap <buffer> <silent> <F7> <Plug>Tex_FastCommandInsert
+xmap <buffer> <silent> <F7> <Plug>(vimtex-cmd-create)
+nmap <buffer> <silent> <F7> <Plug>(vimtex-cmd-create)
 nnoremap <buffer> <Plug>(vimtex-view) :call b:vimtex.viewer.view('')
 nnoremap <buffer> <Plug>(vimtex-toc-toggle) :call b:vimtex.toc.toggle()
 nnoremap <buffer> <Plug>(vimtex-toc-open) :call b:vimtex.toc.open()
@@ -138,18 +113,18 @@ xnoremap <buffer> <silent> <Plug>(vimtex-ic) :call vimtex#text_obj#commands(1,
 nnoremap <buffer> <Plug>(vimtex-reload-state) :VimtexReloadState
 nnoremap <buffer> <Plug>(vimtex-toggle-main) :VimtexToggleMain
 nnoremap <buffer> <Plug>(vimtex-errors) :call vimtex#qf#toggle()
-xnoremap <buffer> <silent> <SNR>123_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>123_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>123_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>123_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
 nnoremap <buffer> <silent> <Plug>(vimtex-[[) :call vimtex#motion#next_section(0,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-[]) :call vimtex#motion#next_section(1,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-][) :call vimtex#motion#next_section(1,0,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-]]) :call vimtex#motion#next_section(0,0,0)
-xnoremap <buffer> <silent> <SNR>123_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
 nnoremap <buffer> <silent> <Plug>(vimtex-%) :call vimtex#motion#find_matching_pair()
-nnoremap <buffer> <SNR>123_(V) V
-nnoremap <buffer> <SNR>123_(v) v
+nnoremap <buffer> <SNR>101_(V) V
+nnoremap <buffer> <SNR>101_(v) v
 nnoremap <buffer> <Plug>(vimtex-reload) :VimtexReload
 nnoremap <buffer> <Plug>(vimtex-log) :VimtexLog
 nnoremap <buffer> <Plug>(vimtex-labels-toggle) :call b:vimtex.labels.toggle()
@@ -185,9 +160,6 @@ xnoremap <buffer> <silent> <Plug>(vimtex-cmd-create) :call vimtex#cmd#create_a
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-create) :call vimtex#cmd#create_ask(0)
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-change) :call vimtex#cmd#change()
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-delete) :call vimtex#cmd#delete()
-vmap <buffer> <silent> â <Plug>Tex_MathBF
-vmap <buffer> <silent> ã <Plug>Tex_MathCal
-nmap <buffer> <silent> ì <Plug>Tex_LeftRight
 imap <buffer> <silent> ]] <Plug>(vimtex-delim-close)
 inoremap <buffer> <silent> <expr> `vr vimtex#imaps#wrap_math("`vr", '\varrho')
 inoremap <buffer> <silent> <expr> `vq vimtex#imaps#wrap_math("`vq", '\vartheta')
@@ -265,25 +237,25 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=sO:%\ -,mO:%\ \ ,eO:%%,:%
 setlocal commentstring=%%s
-setlocal complete=.,w,b,u,t,i
+setlocal complete=.,w,b,u,t
 setlocal concealcursor=
 setlocal conceallevel=1
-setlocal completefunc=youcompleteme#CompleteFunc
+setlocal completefunc=
 setlocal nocopyindent
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal cursorline
 setlocal define=\\\\\\([egx]\\|char\\|mathchar\\|count\\|dimen\\|muskip\\|skip\\|toks\\)\\=def\\|\\\\font\\|\\\\\\(future\\)\\=let\\|\\\\new\\(count\\|dimen\\|skip\\|muskip\\|box\\|toks\\|read\\|write\\|fam\\|insert\\)\\|\\\\\\(re\\)\\=new\\(boolean\\|command\\|counter\\|environment\\|font\\|if\\|length\\|savebox\\|theorem\\(style\\)\\=\\)\\s*\\*\\=\\s*{\\=\\|DeclareMathOperator\\s*{\\=\\s*
-setlocal dictionary=/var/lib/vim/addons/ftplugin/latex-suite/dictionaries/dictionary
+setlocal dictionary=
 setlocal nodiff
 setlocal equalprg=
-setlocal errorformat=%*[^\"]\"%f\"%*\\D%l:\ %m,\"%f\"%*\\D%l:\ %m,%-G%f:%l:\ (Each\ undeclared\ identifier\ is\ reported\ only\ once,%-G%f:%l:\ for\ each\ function\ it\ appears\ in.),%-GIn\ file\ included\ from\ %f:%l:%c:,%-GIn\ file\ included\ from\ %f:%l:%c\\,,%-GIn\ file\ included\ from\ %f:%l:%c,%-GIn\ file\ included\ from\ %f:%l,%-G%*[\ ]from\ %f:%l:%c,%-G%*[\ ]from\ %f:%l:,%-G%*[\ ]from\ %f:%l\\,,%-G%*[\ ]from\ %f:%l,%f(%l):%m,\"%f\"\\,\ line\ %l%*\\D%c%*[^\ ]\ %m,%D%*\\a[%*\\d]:\ Entering\ directory\ %*[`']%f',%X%*\\a[%*\\d]:\ Leaving\ directory\ %*[`']%f',%D%*\\a:\ Entering\ directory\ %*[`']%f',%X%*\\a:\ Leaving\ directory\ %*[`']%f',%DMaking\ %*\\a\ in\ %f,%f|%l|\ %m,%-G%.%#Underfull%.%#,%-G%.%#Overfull%.%#,%-G%.%#specifier\ changed\ to%.%#,%-G%.%#You\ have\ requested%.%#,%-G%.%#Missing\ number%\\,\ treated\ as\ zero.%.%#,%-G%.%#There\ were\ undefined\ references%.%#,%-G%.%#Citation\ %.%#\ undefined%.%#,%E!\ LaTeX\ %trror:\ %m,%E!\ %m,%E%f:%l:\ %m,%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#,%+W%.%#\ at\ lines\ %l--%*\\d,%+WLaTeX\ %.%#Warning:\ %m,%-Cl.%l\ %m,%-Cl.%l\ ,%-C\ \ %m,%-C%.%#-%.%#,%-C%.%#[]%.%#,%-C[]%.%#,%-C%.%#%[{}\\]%.%#,%-C<%.%#>%m,%-GSee\ the\ LaTeX%m,%-GType\ \ H\ <return>%m,%-G\ ...%.%#,%-G%.%#\ (C)\ %.%#,%-G(see\ the\ transcript%.%#),%-G\\s%#,%-O(%*[^()])%r,%-P(%f%r,%-P\ %\\=(%f%r,%-P%*[^()](%f%r,%-P(%f%*[^()],%-P[%\\d%[^()]%#(%f%r,%-P%*[^()],%-Q)%r,%-Q%*[^()])%r,%-Q[%\\d%*[^()])%r,%-Q%*[^()],%-G%.%#
+setlocal errorformat=%-P**%f,%-P**\"%f\",%E!\ LaTeX\ %trror:\ %m,%E%f:%l:\ %m,%E!\ %m,%Z<argument>\ %m,%Cl.%l\ %m,%+WLaTeX\ Font\ Warning:\ %.%#line\ %l%.%#,%-CLaTeX\ Font\ Warning:\ %m,%-C(Font)%m,%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#,%+WLaTeX\ %.%#Warning:\ %m,%+WOverfull\ %\\%\\hbox%.%#\ at\ lines\ %l--%*\\d,%+WUnderfull\ %\\%\\hbox%.%#\ at\ lines\ %l--%*\\d,%+WPackage\ natbib\ Warning:\ %m\ on\ input\ line\ %l%.,%+WPackage\ biblatex\ Warning:\ %m,%-C(biblatex)%.%#in\ t%.%#,%-C(biblatex)%.%#Please\ v%.%#,%-C(biblatex)%.%#LaTeX\ a%.%#,%-C(biblatex)%m,%-Z(babel)%.%#input\ line\ %l.,%-C(babel)%m,%+WPackage\ hyperref\ Warning:\ %m,%-C(hyperref)%.%#on\ input\ line\ %l.,%-C(hyperref)%m,%+WPackage\ scrreprt\ Warning:\ %m,%-C(scrreprt)%m,%+WPackage\ fixltx2e\ Warning:\ %m,%-C(fixltx2e)%m,%+WPackage\ titlesec\ Warning:\ %m,%-C(titlesec)%m,%-G%.%#
 setlocal expandtab
 if &filetype != 'tex'
 setlocal filetype=tex
@@ -310,7 +282,7 @@ setlocal imsearch=-1
 setlocal include=\\v%(\\v\\\\%(input|include|subfile)\\s*\\{|\\v\\\\%(sub)?%(import|%(input|include)from)\\*?\\{[^\\}]*\\}\\{)
 setlocal includeexpr=vimtex#include#expr()
 setlocal indentexpr=VimtexIndentExpr()
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e,[,(,{,),},],&,=item
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,[,(,{,),},],&,=item
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255,:
 setlocal keywordprg=
@@ -320,11 +292,11 @@ setlocal lispwords=
 setlocal nolist
 setlocal listchars=
 setlocal makeencoding=
-setlocal makeprg=latex\ -interaction=nonstopmode\ -file-line-error-style\ $*
+setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
-setlocal nomodeline
+setlocal modeline
 setlocal modifiable
-setlocal nrformats=bin,octal,hex
+setlocal nrformats=bin,hex
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=vimtex#complete#omnifunc
@@ -371,23 +343,52 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-5,7fold
-9,13fold
-14,16fold
-17,19fold
-24,26fold
-27,33fold
-34,40fold
+4,6fold
+8,12fold
+13,15fold
+16,18fold
+19,21fold
+22,24fold
+25,27fold
+28,34fold
+35,41fold
+7,42fold
+44,48fold
+49,53fold
+54,56fold
+58,74fold
+75,85fold
+86,98fold
+57,99fold
+43,100fold
+102,115fold
+116,119fold
+120,131fold
+101,132fold
 let &fdl = &fdl
-9
+7
 normal! zo
-let s:l = 42 - ((41 * winheight(0) + 20) / 40)
+7
+normal! zc
+43
+normal! zo
+57
+normal! zo
+57
+normal! zc
+43
+normal! zc
+101
+normal! zo
+101
+normal! zc
+let s:l = 1 - ((0 * winheight(0) + 32) / 65)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 42
-normal! 0
-lcd ~/CMU_MSCB/Courses/Genomics-02710/Homework/HW1
+keepjumps 1
+normal! 045|
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

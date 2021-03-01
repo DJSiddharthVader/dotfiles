@@ -1,4 +1,4 @@
-let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -34,6 +34,7 @@ setlocal expandtab
 if &filetype != 'sh'
 setlocal filetype=sh
 endif
+setlocal fillchars=
 setlocal fixendofline
 setlocal foldcolumn=1
 setlocal foldenable
@@ -63,6 +64,8 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
+setlocal listchars=
+setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal modeline
@@ -81,7 +84,9 @@ setlocal norightleft
 setlocal rightleftcmd=search
 setlocal scrollback=-1
 setlocal noscrollbind
+setlocal scrolloff=-1
 setlocal shiftwidth=4
+setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal nosmartindent
 setlocal softtabstop=4
@@ -89,6 +94,7 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
+setlocal spelloptions=
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
@@ -96,6 +102,7 @@ setlocal synmaxcol=3000
 if &syntax != 'sh'
 setlocal syntax=sh
 endif
+setlocal tagfunc=
 setlocal tabstop=4
 setlocal tagcase=
 setlocal tags=
@@ -103,21 +110,25 @@ setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
+setlocal winblend=0
 setlocal winhighlight=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-7,15fold
-16,26fold
-28,37fold
-let s:l = 2 - ((1 * winheight(0) + 31) / 63)
+5,13fold
+14,24fold
+26,29fold
+30,43fold
+let &fdl = &fdl
+let s:l = 30 - ((29 * winheight(0) + 32) / 65)
 if s:l < 1 | let s:l = 1 | endif
-exe s:l
+keepjumps exe s:l
 normal! zt
-2
+keepjumps 30
 normal! 0
-let &so = s:so_save | let &siso = s:siso_save
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

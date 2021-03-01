@@ -104,6 +104,7 @@ function main() {
             *) help ;;
         esac
     done
+    #[[ -z $ip ]] && ip="192.168.1.72"
     check_phone_open "$ip" "$port"
     if [ "$notes_only" = true ]; then
         sync_notes "$ip" "$port"

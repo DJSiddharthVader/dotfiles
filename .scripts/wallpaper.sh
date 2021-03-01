@@ -7,7 +7,6 @@ unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
 picdir="$HOME/Pictures/wallpapers"
 histfile="$HOME/dotfiles/.varfiles/fehbg"
 idxfile="$HOME/dotfiles/.varfiles/wallidx"
-tmp='/tmp/histfile'
 resolution='1366x768!' #resolution, ignore aspect ratio
 
 
@@ -18,6 +17,7 @@ updateImageIdx() {
     [[ -f "$1" ]] && mode="path" || mode="$1"
     idx=$(cat "$idxfile")
     maxidx="$(wc -l "$histfile" | cut -d' ' -f1)"
+    tmp="$(mktemp)"
     case "$mode" in
         'path')
             head -"$idx" "$histfile" >| "$tmp"
@@ -44,6 +44,7 @@ updateImageIdx() {
     esac
     echo "$nidx" >| "$idxfile"
     echo "$nidx"
+    rm $tmp
 }
 idxToImage(){ echo "$(head -"$1" "$histfile" | tail -1)" ; }
 addBorderToImg() {
@@ -67,11 +68,10 @@ changeColors() {
     image="$1"
     wal -e -n -i "$image"  #font only
    ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1
-    pywalfox update
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
     timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
     ~/dotfiles/.scripts/zathura.sh
-    pywalfox update
+    #pywalfox update # update firefox css
 }
 main() {
     method="$1"

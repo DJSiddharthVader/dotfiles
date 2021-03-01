@@ -119,66 +119,62 @@ setlocal wrapmargin=0
 silent! normal! zE
 7,11fold
 12,15fold
-16,29fold
-30,66fold
-67,98fold
+16,22fold
+23,59fold
+60,91fold
+93,99fold
 100,106fold
-107,113fold
-114,119fold
-120,126fold
-120,144fold
-120,148fold
-99,149fold
-151,167fold
-168,220fold
-221,273fold
-274,277fold
-278,291fold
-292,319fold
-320,337fold
-338,353fold
-354,367fold
-368,378fold
-379,415fold
-417,433fold
-434,449fold
-450,465fold
-466,481fold
-482,500fold
-501,516fold
-517,531fold
-532,547fold
-548,566fold
-568,582fold
-583,591fold
-592,598fold
-599,605fold
-150,606fold
-608,614fold
-615,621fold
-622,628fold
-629,635fold
-607,636fold
+107,112fold
+113,119fold
+120,141fold
+92,142fold
+144,160fold
+161,213fold
+214,227fold
+228,283fold
+284,288fold
+289,303fold
+304,320fold
+321,348fold
+349,366fold
+367,383fold
+384,398fold
+399,411fold
+412,448fold
+450,466fold
+467,482fold
+483,498fold
+499,515fold
+516,531fold
+532,550fold
+551,567fold
+568,583fold
+584,598fold
+599,615fold
+616,633fold
+634,652fold
+654,660fold
+661,666fold
+143,667fold
+669,675fold
+676,682fold
+683,689fold
+690,696fold
+668,697fold
 let &fdl = &fdl
-99
+92
 normal! zo
-120
-normal! zo
-120
-normal! zo
-120
+92
 normal! zc
-99
-normal! zc
-150
+143
 normal! zo
-150
+143
 normal! zc
-607
+668
 normal! zo
-607
+668
 normal! zc
-let s:l = 1 - ((0 * winheight(0) + 31) / 63)
+let s:l = 1 - ((0 * winheight(0) + 17) / 34)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt

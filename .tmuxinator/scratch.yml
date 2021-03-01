@@ -1,11 +1,11 @@
 name: scratch
 root: ~/
-tmux_options: -f /home/sidreed/dotfiles/.tmux.scratch.conf
+tmux_options: -f ~/dotfiles/.tmux.scratch.conf
 on_project_start: wal -R -e -n -q &
 
 windows:
     - school: cd ~/CMU_MSCB/Current_Courses
     - scratch:
-    - media: cd ~/Media/
-    - fetch: neofetch
+    - media:
+    - fetch: neofetch --ascii ~/dotfiles/.config/neofetch/aperature.ascii
 
