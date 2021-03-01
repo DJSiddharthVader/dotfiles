@@ -1,5 +1,7 @@
 #!/bin/bash
+icon=""
 
+help() { echo "Usage $0 {connect|disconnect|toggle|status} \$MAC_ADDR" ; }
 changeOutput() {
     case "$1" in
         'speakers' ) sink=1 ;;
@@ -16,16 +18,16 @@ changeOutput() {
 isDeviceConnected() {
     device="$1" #uuid
     status="$(echo -e "info $device" | bluetoothctl | grep Connected | cut -d':' -f2)"
-    [[ "$status" =~ 'yes' ]] && msg="yes" || msg="no"
-    echo "$msg"
+    [[ "$status" =~ 'yes' ]] && echo "yes" || echo "no"
 }
+
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
     changeOutput 'speakers'
 }
 connect() {
     device="$1"  # a uuid
-    [[ "$(isDeviceConnected $device)" == 'no' ]] && echo -e "connect $device\n" | bluetoothctl /dev/null 2>&1 && changeOutput 'bluetooth'
+    [[ "$(isDeviceConnected $device)" == 'no' ]] && echo -e "connect $device\n" | bluetoothctl && changeOutput 'bluetooth'
 }
 toggle() {
     device="$1"
@@ -39,16 +41,19 @@ toggle() {
 }
 
 getDeviceName() {
-    device="$1"
-    echo -e "info $device" | bluetoothctl | grep Name | cut -f2- -d' '
+    mac="$1"
+    echo -e "info $mac" | bluetoothctl | grep Name | cut -f2- -d' '
 }
 getConnectedDevice() {
     #check all paired devices and if connected and get name
-    name="None"
+    name=""
     while IFS= read -r uuid; do
-        [[ "$(isDeviceConnected $uuid)" = 'yes' ]] && name="$(getDeviceName $uuid)" && break
-    done <<< "$(echo -e "paired-devices" | bluetoothctl | cut -f2 -d' ')"
-    echo " $name"
+        if [[ "$(isDeviceConnected $uuid)" == 'yes' ]]; then
+            name="$name, $(getDeviceName $uuid)"
+        fi
+    done <<< "$(echo -e "paired-devices" | bluetoothctl | grep '^Device' | cut -f2 -d' ')"
+    name="$(echo $name | sed -e 's/^, //')"
+    [[ -n "$name" ]] && echo "$icon $name" || echo "$icon None"
 }
 
 main() {
@@ -59,7 +64,7 @@ main() {
         'disconnect') disconnect "$device" ;;
         'toggle') toggle "$device" ;;
         'status') getConnectedDevice ;;
-        *)
+        *) help && exit 1 ;;
     esac
 }
 
@@ -73,22 +78,3 @@ fi
 
 main "$mode" "$device"
 
-
-#DEPRECIATED
-#setDefaultSink() { #DOES NOT WORK
-#    case "$1" in
-#        'bluetooth') sink="$(pactl list short sinks | grep bluez | head -1 | tr -s '\t' ' ' | cut -d' ' -f1)" ;;
-#        'speaker') sink="1" ;;
-#        *) echo "invalid sink" && exit 1 ;;
-#    esac
-#    pactl set-default-sink "$sink"
-#}
-#isConnected() {
-#    status=""
-#    while IFS= read -r uuid; do #read all paired devices and check if connected
-#        status="$status\n$(isDeviceConnected $uuid)"
-#    done <<< "$(echo -e "paired-devices" | bluetoothctl | cut -f2 -d' ')"
-#    [[ "$(uniq $status)" =~ 'yes' ]] && msg="yes" || msg="no"
-#    echo "$msg"
-#
-#}
