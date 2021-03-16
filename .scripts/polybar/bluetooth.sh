@@ -1,7 +1,9 @@
 #!/bin/bash
 icon=""
 
-help() { echo "Usage $0 {connect|disconnect|toggle|status} \$MAC_ADDR" ; }
+help() {
+    echo "Usage $0 {connect|disconnect|toggle|status} \$MAC_ADDR"
+}
 changeOutput() {
     case "$1" in
         'speakers' ) sink=1 ;;
@@ -23,11 +25,15 @@ isDeviceConnected() {
 
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
+    mpc pause
     changeOutput 'speakers'
+    sleep 5 && ~/.scripts/polybar/bar-manager.sh reload
 }
 connect() {
     device="$1"  # a uuid
-    [[ "$(isDeviceConnected $device)" == 'no' ]] && echo -e "connect $device\n" | bluetoothctl && changeOutput 'bluetooth'
+    [[ "$(isDeviceConnected $device)" == 'no' ]] && echo -e "connect $device\n" | bluetoothctl
+    changeOutput 'bluetooth'
+    sleep 5 && ~/.scripts/polybar/bar-manager.sh reload
 }
 toggle() {
     device="$1"
@@ -37,6 +43,7 @@ toggle() {
         "yes") disconnect ;;
         *) echo "Error: invalid status message $status" && exit 1
     esac
+    polybar-msg hook bluetooth 1
     ~/.scripts/bar-manager.sh reload
 }
 
