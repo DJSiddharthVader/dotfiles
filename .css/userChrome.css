@@ -107,20 +107,20 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
   #reload-button { display: none; }
   #downloads-button { display: none; }
   #library-button { display: none; }
+  #sidebar-button { display: none; }
+  #PanelUI-button { display: none; }
 */
+  /* General Firefox menu button */
 
   #forward-button { display: none; }
   #stop-button { display: none; }
   #home-button { display: none; }
-  #sidebar-button { display: none; }
 
   /* Firefox account button */
   #fxa-toolbar-menu-button { display: none; }
 
   #nav-bar-overflow-button { display: none !important; }
 
-  /* General Firefox menu button */
-  #PanelUI-button { display: none; }
 
   /* Empty space before and after the url bar */
   #customizableui-special-spring1,
@@ -178,7 +178,7 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
     --urlbar-container-height: var(--tab-min-height) !important;
     background-color: var(--color4) !important;
     margin-left: 0 !important;
-    margin-right: 2.15em !important;
+    margin-right: 0.15em !important;
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     font-family: 'Jetbrains Mono', monospace;
@@ -230,7 +230,7 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
   #reader-mode-button { display: none; }
   #urlbar-zoom-button { display: none; }
   */
-  #canvasblocker-button { display: none; }
+  #canvas-blocker-button { display: none; }
   #tracking-protection-icon-container { display: none; }
   #identity-box { display: none; }
   #pageActionButton { display: none; }
@@ -245,8 +245,8 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
 /* end debloat urlbar */
 
 
-/* hide tab bar if only one tab open */
-tab:only-of-type { display: none; }
+/* hide tab bar if only one tab open
+tab:only-of-type { display: none; } */
 
 /* remove min-height from tabs toolbar (needed for fullscreen one tab) */
 #TabsToolbar, #tabbrowser-tabs, #tabbrowser-tabs > .tabbrowser-arrowscrollbox, #tabbrowser-arrowscrollbox {
@@ -269,12 +269,11 @@ tab:only-of-type { display: none; }
 
 #tabbrowser-tabs .tabbrowser-tab:hover:not([selected]) .tab-content {
   background-color: var(--color4) !important;
-  color: var(--color1) !important;
+  color: var(--foreground) !important;
 }
 
 #tabs-newtab-button{
   fill: var(--color4) !important;
-  background-color: var(--color4) !important;
   background-color: var(--color1) !important;
 }
 
