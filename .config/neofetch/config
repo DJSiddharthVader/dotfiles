@@ -32,8 +32,8 @@ print_info () {
     info "Uptime" uptime
     prin "Disk" "$(~/dotfiles/.scripts/polybar/disk.sh display amounts)"
     #prin "Wifi" "$(~/dotfiles/.scripts/polybar/network.sh display text)"
-    prin "Torrent" "$(~/dotfiles/.scripts/polybar/deluge.sh display data)"
-    prin "VPN" "$(~/dotfiles/.scripts/polybar/expressvpn.sh status)"
+    prin "Torrent" "$(~/dotfiles/.scripts/polybar/deluge.sh display datatotal)"
+    prin "VPN" "$(~/dotfiles/.scripts/polybar/protonvpn.sh display)"
     prin "Weather" "$(~/dotfiles/.scripts/polybar/weather.sh)"
     info cols
 #    info "Disk" disk
