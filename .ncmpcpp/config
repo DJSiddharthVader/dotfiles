@@ -22,11 +22,11 @@
 #
 ##### connection settings #####
 #
-#mpd_host = localhost
+mpd_host = localhost
 #
-#mpd_port = 6600
+mpd_port = 6600
 #
-#mpd_connection_timeout = 5
+mpd_connection_timeout = 5
 #
 ## Needed for tag editor and file operations to work.
 ##
@@ -49,7 +49,7 @@ mpd_music_dir = "~/Music/songs"
 ## }
 ##
 #
-#visualizer_fifo_path = /tmp/mpd.fifo
+visualizer_fifo_path = /tmp/mpd.fifo
 #
 ##
 ## Note: Below parameter is needed for ncmpcpp to determine which output
@@ -62,7 +62,7 @@ mpd_music_dir = "~/Music/songs"
 ##
 ## If you set format to 44100:16:2, make it 'yes'.
 ##
-#visualizer_in_stereo = yes
+visualizer_in_stereo = yes
 #
 ##
 ## Note: Below parameter defines how often ncmpcpp has to "synchronize"

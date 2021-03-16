@@ -4,8 +4,8 @@ tmux_options: -f ~/dotfiles/.tmux.scratch.conf
 on_project_start: wal -R -e -n -q &
 
 windows:
-    - school: cd ~/CMU_MSCB/Current_Courses
+    - torrent: deluge-console
     - scratch:
-    - media:
-    - fetch: neofetch --ascii ~/dotfiles/.config/neofetch/aperature.ascii
+    - media: ~/.scripts/mount.sh on
+    - fetch: neofetch
 
