@@ -3,6 +3,7 @@
 #Window options
 for_window [class="^.*"] border pixel 1
 for_window [instance="feh"] floating enable
+for_window [instance="protonvpn"] floating enable
 set $mod Mod4
 set $term --no-startup-id st
 set $BROWSER firefox
@@ -22,21 +23,14 @@ exec_always --no-startup-id xautolock -time 45 -locker ~/dotfiles/.scripts/lock.
 #exec --no-startup-id xss-lock -- /home/sidreed/dotfiles/.scripts/lock.sh &
 #Increase key rate
 exec --no-startup-id xset r rate 300 50
-#Composite manager:
-exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
 #Pulseaudio
 exec --no-startup-id rm -rf ~/dotfiles/.config/pulse
 exec --no-startup-id pulseaudio --kill
 exec --no-startup-id pulseaudio --start
-#connect to external monitors
-exec --no-startup-id ~/dotfiles/.scripts/monitor.sh on
-#Launch Polybar and set wallpaper
-exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
-exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh restart
-#Unclutter makes the mouse invisible after a brief period
-exec --no-startup-id unclutter
 #Network Manager applet
 exec --no-startup-id nm-applet
+#Unclutter makes the mouse invisible after a brief period
+exec --no-startup-id unclutter
 #disable touchpad when typing
 exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
 #kill refular notification daemon so dunst runs
@@ -45,11 +39,19 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 #express vpn
-exec --no-startup-id expressvpn connect
+exec --no-startup-id ~/.scripts/polybar/protonvpn.sh connect
 #Torrent daemon:
-#exec --no-startup-id
+exec --no-startup-id ~/.scripts/polybar/deluge.sh start
 #Mount other drives:
 exec --no-startup-id sudo mount -a
+#connect to external monitors
+exec --no-startup-id ~/dotfiles/.scripts/monitor.sh on
+#Composite manager:
+exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
+#Launch Polybar and set wallpaper
+exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh rh
+exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
+exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh reload
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
@@ -57,7 +59,8 @@ for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 1
-exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
+exec $term -n dropdown -e tmux
+#exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
 
 # tmux scratchpad floating terminal 2
 for_window [instance="drop2"] resize set 625 400
@@ -128,14 +131,13 @@ bindsym $mod+Shift+bracketright exec $bigfor
 #set $lilfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek
 #set $bigfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek(
 
-
 ##---Basic Bindings--------#
-bindsym $mod+space		focus mode_toggle
-bindsym $mod+Shift+space 	floating toggle
-bindsym $mod+Return 	exec $term
-bindsym $mod+Escape		workspace prev
+bindsym $mod+space		  focus mode_toggle
+bindsym $mod+Shift+space  floating toggle
+bindsym $mod+Return       exec $term
+bindsym $mod+Escape       workspace prev
 #STOP/HIDE EVERYTHING:
-bindsym $mod+BackSpace	exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+bindsym $mod+BackSpace    exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
 # Print screen takes a screenshot.
 bindsym Print 	            exec --no-startup-id scrot
 bindsym $mod+Print 			exec --no-startup-id scrot -u
@@ -148,14 +150,14 @@ bindsym $mod+q         kill
 bindsym $mod+w         exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w   exec --no-startup-id firefox --private-window
 
-bindsym $mod+e         exec ~/dotfiles/.scripts/bar-manager.sh reload
+bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
 bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
 
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
 
-bindsym $mod+t         move workspace to output left
-bindsym $mod+Shift+t   exec --no-startup-id ~/dotfiles/.scripts/polybar/deluge.sh search
+bindsym $mod+t         exec --no-startup-id ~/dotfiles/.scripts/polybar/deluge.sh search
+#bindsym $mod+Shift+t  layout toggle
 
 bindsym $mod+y         resize shrink width 5 px or 5 ppt
 bindsym $mod+Shift+y   resize grow width 5 px or 5 ppt
@@ -166,11 +168,11 @@ bindsym $mod+u         [instance="dropdown"] scratchpad show,move position cente
 bindsym $mod+i         resize shrink height 5 px or 5 ppt
 bindsym $mod+Shift+i   resize grow height 5 px or 5 ppt
 
-bindsym $mod+o        exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh sep next
-#bindsym $mod+Shift+o exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh sep prev
+bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh sep next
+bindsym $mod+Shift+o   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh sep prev
 
-bindsym $mod+p         exec --no-startup-id tabbed -c zathura -e
-#bindsym $mod+Shift+p  exec $pause
+bindsym $mod+p         exec $pause
+bindsym $mod+Shift+p   exec --no-startup-id tabbed -c zathura -e
 
 bindsym $mod+a         gaps inner current minus 2
 bindsym $mod+Shift+a   gaps inner current plus 2
@@ -178,8 +180,8 @@ bindsym $mod+Shift+a   gaps inner current plus 2
 bindsym $mod+s         gaps outer current minus 2
 bindsym $mod+Shift+s   gaps outer current plus 2
 
-bindsym $mod+d         exec ~/dotfiles/.scripts/monitor.sh on
-bindsym $mod+Shift+d   exec ~/dotfiles/.scripts/monitor.sh off
+bindsym $mod+d         move workspace to output left
+#bindsym $mod+Shift+d
 
 bindsym $mod+f         fullscreen toggle
 #bindsym $mod+Shift+f
@@ -203,16 +205,16 @@ bindsym $mod+z         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh s
 bindsym $mod+Shift+z   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh style prev
 
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
-#bindsym $mod+Shift+x  exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
+bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
 
-#bindsym $mod+v        exec --no-startup-id ~/.scripts/polybar/brightness.sh inc
-#bindsym $mod+Shift+v  exec --no-startup-id ~/.scripts/polybar/brightness.sh dec
+bindsym $mod+v         exec --no-startup-id ~/.scripts/polybar/brightness.sh inc
+bindsym $mod+Shift+v   exec --no-startup-id ~/.scripts/polybar/brightness.sh dec
 
-bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next both
-bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev both
+bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
+bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
 
 bindsym $mod+n         focus output left
 #bindsym $mod+Shift+n
@@ -225,7 +227,6 @@ bindsym $mod+Shift+m   $mute
 #bindsym $mod+Shift+BackSpace
 #bindsym $mod+grave
 #bindsym $mod+asciitilde
-
 ##---Workspace Bindings----#
 # Shortcuts
 bindsym $mod+Home		    workspace $ws1
