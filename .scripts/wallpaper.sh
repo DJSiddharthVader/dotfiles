@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 shopt -s extglob
 
 # Vars
@@ -6,105 +7,136 @@ bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
 unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
 picdir="$HOME/Pictures/wallpapers"
 histfile="$HOME/dotfiles/.varfiles/fehbg"
-idxfile="$HOME/dotfiles/.varfiles/wallidx"
+indexfile="$HOME/dotfiles/.varfiles/wallindex"
 resolution='1366x768!' #resolution, ignore aspect ratio
+icon=""
 
 
-usage() { echo "Usage: $0 {path/to/image|rs|prev|stay|next} {font|back|both}" ; }
-appendHist() { find "$picdir" -maxdepth 99 -type f >| "$histfile" ; }
-resetHist() { find "$picdir" -maxdepth 99 -type f | shuf >| "$histfile" ; }
-updateImageIdx() {
+usage() {
+    name="$(basename $0)"
+    blnk="$(echo $name | sed -e 's/./ /g')"
+    echo \
+"Usage: ./$name {path/to/image|rh|reload|display|prev|stay|next} {font|back|both}
+          $blnk rh
+          $blnk reload
+          $blnk display
+          $blnk path/to/image {font|back|both}
+          $blnk prev          {font|back|both}
+          $blnk stay          {font|back|both}
+          $blnk next          {font|back|both}"
+}
+
+appendHistory() {
+    find "$picdir" -maxdepth 99 -type f >| "$histfile"
+}
+resetHistory() {
+    find "$picdir" -maxdepth 99 -type f | shuf >| "$histfile"
+    echo 1 >| "$file"
+}
+
+currentIndex() {
+    head -1 "$indexfile" | sed -e 's/^\([0-9]*\)[^0-9]*$/\1/'
+}
+updateImageIndex() {
     [[ -f "$1" ]] && mode="path" || mode="$1"
-    idx=$(cat "$idxfile")
-    maxidx="$(wc -l "$histfile" | cut -d' ' -f1)"
-    tmp="$(mktemp)"
+    index="$(currentIndex)"
+    maxindex="$(wc -l "$histfile" | cut -d' ' -f1)"
     case "$mode" in
         'path')
-            head -"$idx" "$histfile" >| "$tmp"
+            tmp="$(mktemp)"
+            head -"$index" "$histfile" >| "$tmp"
             echo "$(readlink -e "$1")" >> "$tmp"
-            remain="$(( $maxidx - $idx ))"
-            tail -"$remain" "$histfile" >> "$tmp"
+            tail -"$(( $maxindex - $index ))" "$histfile" >> "$tmp"
             mv "$tmp" "$histfile"
-            nidx=$(( $idx + 1 ))
+            index=$(( $index + 1 ))
             ;;
         'prev')
-            if [ $idx -lt 1 ]; then
-                resetHist
-                nidx=1
-            else
-                nidx=$(( $idx - 1 ))
-            fi
+            [ $ -lt 1 ] && resetHistory && index=2
+            index=$(( $index - 1 ))
             ;;
         'next')
-            [ "$idx" -gt "$maxidx" ] && appendHist
-            nidx=$(( $idx + 1 ))
+            [ "$index" -gt "$maxindex" ] && appendHistory
+            index=$(( $index + 1 ))
             ;;
-        'stay') nidx="$idx" ;;
+        'stay') index="$index" ;;
         *) usage && exit 1 ;;
     esac
-    echo "$nidx" >| "$idxfile"
-    echo "$nidx"
-    rm $tmp
+    echo "$index"
 }
-idxToImage(){ echo "$(head -"$1" "$histfile" | tail -1)" ; }
-addBorderToImg() {
+indexToImage(){
+    head -"$1" "$histfile" | tail -1
+}
+
+addBorder() {
     image="$1"
-    cp "$image" "$unbgfile"
-    #bordercolor="$(convert "$image" -colorspace Gray -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
     bordercolor="$(convert "$image" -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
     convert "$unbgfile" -resize "$resolution" -bordercolor "$bordercolor" -border 0x34 "$bgfile" #add borderes to image
 }
-setImg() {
+setWallpaper() {
     image="$1"
-    addBorderToImg "$image"
-    barmode="$(head -1 ~/dotfiles/.varfiles/barmode)" #get bar status
-    case "$barmode" in
+    cp "$image" "$unbgfile"
+    addBorder "$image"
+    case "$(head -1 ~/dotfiles/.varfiles/barmode)" in
         float|mini|none) feh --bg-scale "$unbgfile" ;; #without borders
-        full) feh --bg-scale "$bgfile" ;; #with borders
-        *) usage && exit 1 ;;
+        full           ) feh --bg-scale "$bgfile" ;; #with borders
+        *              ) usage && exit 1 ;;
     esac
 }
 changeColors() {
     image="$1"
-    wal -e -n -i "$image"  #font only
+    wal -geni "$image"  #font only
    ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
     timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
     ~/dotfiles/.scripts/zathura.sh
     #pywalfox update # update firefox css
 }
-main() {
-    method="$1"
-    if [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ]; then
-        resetHist
-        echo 1 >| "$idxfile"
-    fi
-    if [ "$method" = 'rs' ]; then
-        resetHist
-        echo 1 >| "$idxfile"
-        exit 0
-    else
-        nidx=$(updateImageIdx "$method")
-        image="$(idxToImage "$nidx")"
-    fi
-    mode="$2"
-    case "$mode" in
+wall() {
+    mode="$1"
+    index=$(updateImageIndex "$mode")
+    echo "$index" >| "$indexfile"
+    image="$(indexToImage "$index")"
+    polybar-msg hook wall 1
+
+    [ -z "$2" ] && change='back' || change="$2"
+    case "$change" in
         'font') changeColors "$image" ;;
-        'back') setImg "$image" ;;
-        'both') setImg "$image" && changeColors "$image" ;;
+        'back') setWallpaper "$image" ;;
+        'both') setWallpaper "$image" && changeColors "$image" ;;
         *) usage && exit 1 ;;
     esac
 }
 
-#main mode position img
-if (( $# < 1 )); then
-    usage
-    exit 1
-elif (( $# == 1 )); then
-    image="$1"
-    mode="both"
-else
-    image="$1"
-    mode="$2"
-fi
-    main "$image" "$mode"
+display() {
+    wallpaper="$(head -n $(currentIndex) "$histfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"
+    echo "$icon $wallpaper"
+}
+
+main() {
+    [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ] && resetHistory
+    [ -f "$1" ] && mode='path' || mode="$1"
+    change="$2"
+    case "$mode" in
+        path|prev|next) wall "$mode" "$change" ;;
+        'reload'      ) wall 'stay' 'both'     ;;
+        'rh'          ) resetHistory && exit 0 ;;
+        'display'     ) display && exit 0      ;;
+        *) usage && exit 1 ;;
+    esac
+}
+
+case 1 in
+    $(( $# == 1 )))
+        mode="$1"
+        change="back"
+        ;;
+    $(( $# == 2 )))
+        mode="$1"
+        change="$2"
+        ;;
+    $(( $# < 1  ))) usage && exit 1 ;;
+    $(( $# > 2  ))) usage && exit 1 ;;
+esac
+
+main "$mode" "$change"
+
