@@ -3,21 +3,28 @@ shopt -s extglob
 
 bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
 unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
-
 mode_file="$HOME/dotfiles/.varfiles/barmode"
 modes=(float full mini none)
 
+#Icons
 icon_file="$HOME/dotfiles/.varfiles/polysep"
-icons=(arrow_sym trig_left trig_right circle arrow_tail trig_out trig_in arrow_curve)
-icon_sets=(       )
-#icons in order for module sepration
+dl="." #arbitrary but might as well be a variable, allows for spaces in the icon sets
+icons=(arrow_tail arrow_sym trig_in trig_out big_fade_in big_fade small_fade circle)
+icon_sets=("$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl $dl $dl ")
 #symetric    ; ; ; ; ; ;
 #directional ;  ;  ; ; ;【】
 
 help() {
-    name=$1[@]
-    arr=("${!name}")
-    echo "Error: usage ./$(basename $0) {style|sep|reload|restart} {stay|next|prev$(echo '|'${arr[*]} | tr ' ' '|')}"
+    icontable="Name,|,Icons\n ,|, "
+    for ((i=0; i<${#icons[@]}; i++)); do
+        line="$(echo "${icons[$i]},|,${icon_sets[$i]}" | tr -d "$dl" )"
+        icontable="$icontable\n$line"
+    done
+    icontable="$(echo -e $icontable | column -s ',' -t)"
+    echo "Usage $(basename $0) {style|sep|reload|restart}
+                      style {stay|next|prev$(echo '|'${modes[*]} | tr ' ' '|')}
+                      sep   {stay|next|prev$(echo '|'${icons[*]} | tr ' ' '|')}
+$icontable"
 }
 cycle() {
     # cycle through modes either forwards or backwards
@@ -43,7 +50,7 @@ wallpaper() {
     case $1 in
         float|mini|none) feh --bg-scale "$unbgfile" ;;
         full) feh --bg-scale "$bgfile" ;;
-        *) help 'style' && echo 'wall' && exit 1 ;;
+        *) help && exit 1 ;;
     esac
 }
 separators() {
@@ -54,19 +61,19 @@ separators() {
         'next') dmode="$(cycle 'next' icons $icon_file)" ;;
         'prev') dmode="$(cycle 'prev' icons $icon_file)" ;;
          $tmp ) dmode="$mode" ;; #capture any valid mode
-        *) echo "failed: $mode" && help sep && exit 1 ;;
+        *) help && exit 1 ;;
     esac
     idx="$(echo "${icons[*]}" | grep -o "^.*$dmode" | tr ' ' '\n' | wc -l | sed -s 's/$/-1/' | bc)"
     #idx=$(($idx -1)) #current mode idx
     icon_set="${icon_sets[$idx]}"
-    echo -e "$mode\n$dmode\n$idx\n$icon_set"
+    #echo -e "$mode\n$dmode\n$idx\n$icon_set"
     echo "$dmode
 ; icons to delimit polybar modules
-leftprefix =  ${icon_set:0:1}
-leftsuffix =  ${icon_set:1:1}
-rightprefix = ${icon_set:2:1}
-rightsuffix = ${icon_set:3:1}
-" >| "$icon_file"
+leftprefix =  \"$(echo $icon_set | cut -d"$dl" -f1)\"
+leftsuffix =  \"$(echo $icon_set | cut -d"$dl" -f2)\"
+rightprefix = \"$(echo $icon_set | cut -d"$dl" -f3)\"
+rightsuffix = \"$(echo $icon_set | cut -d"$dl" -f4)\"
+" | sed -e 's/""//' >| "$icon_file"
 }
 launch() {
     mode="$1"
@@ -76,7 +83,7 @@ launch() {
         'next') dmode="$(cycle 'next' modes $mode_file)" ;;
         'prev') dmode="$(cycle 'prev' modes $mode_file)" ;;
          $tmp ) dmode="$mode" ;; #capture any valid mode
-        *) echo "failed: $mode" && help style && exit 1 ;;
+        *) help style && exit 1 ;;
     esac
     echo "$dmode"  >| "$mode_file"
     wallpaper "$dmode"
@@ -93,20 +100,19 @@ launch() {
                 ;;
             'mini' ) MONITOR=$m polybar minimal & ;;
             'none' ) sleep 1 ;;
-            *) help && echo 'launch' && exit 1 ;;
+            *) help && exit 1 ;;
         esac
     done
 }
 main() {
     mode="$1"
     change="$2"
-    echo "$mode $change"
     case $mode in
         'sep'    ) separators "$change"; launch 'stay' ;;
         'style'  ) launch "$change" ;;
         'reload' ) ! [[ -z "$(pgrep 'polybar')" ]] && polybar-msg cmd restart ;;
         'restart') separators "$(head -1 $icon_file)"; launch "$(cat $mode_file)" ;;
-        *) echo "failed: $mode" && help $mode && exit 1 ;;
+        *) help && exit 1 ;;
     esac
 }
 
