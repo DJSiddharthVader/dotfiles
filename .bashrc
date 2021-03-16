@@ -7,6 +7,7 @@
 #export TERM='screen-256color'
 export TERM='st'
 export HISTTIMEFORMAT="%m/%d - %H:%M:%S: "
+export VISUAL='nvim'
 
 _islinux=false
 [[ "$(uname -s)" =~ Linux|GNU|GNU/* ]] && _islinux=true
