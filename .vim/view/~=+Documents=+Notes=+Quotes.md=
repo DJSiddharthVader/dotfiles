@@ -2,9 +2,9 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
-inoremap <buffer> <silent> <Plug>MarkdownPreview :call mkdp#util#open_preview_page()a
-inoremap <buffer> <silent> <Plug>MarkdownPreviewStop :call mkdp#util#stop_preview()a
 inoremap <buffer> <silent> <Plug>MarkdownPreviewToggle :call mkdp#util#toggle_preview()
+inoremap <buffer> <silent> <Plug>MarkdownPreviewStop :call mkdp#util#stop_preview()a
+inoremap <buffer> <silent> <Plug>MarkdownPreview :call mkdp#util#open_preview_page()a
 map <buffer>  :call Vim_Markdown_Preview()
 xnoremap <buffer> <silent> [[ :exe "normal! gv"|call search('\%(^#\{1,5\}\s\+\S\|^\S.*\n^[=-]\+$\)', "bsW")
 nmap <buffer> [] <Plug>(pandoc-keyboard-rw-sect-end)
@@ -90,15 +90,15 @@ vnoremap <buffer> j gj
 nnoremap <buffer> j gj
 vnoremap <buffer> k gk
 nnoremap <buffer> k gk
-noremap <buffer> <silent> <Plug>MarkdownPreview :call mkdp#util#open_preview_page()
-noremap <buffer> <silent> <Plug>MarkdownPreviewStop :call mkdp#util#stop_preview()
-nnoremap <buffer> <silent> <Plug>MarkdownPreviewToggle :call mkdp#util#toggle_preview()
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-subscript) :set opfunc=pandoc#keyboard#styles#ToggleSubscriptg@
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-superscript) :set opfunc=pandoc#keyboard#styles#ToggleSuperscriptg@
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-strikeout) :set opfunc=pandoc#keyboard#styles#ToggleStrikeoutg@
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-verbatim) :set opfunc=pandoc#keyboard#styles#ToggleVerbatimg@
-nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-strong) :set opfunc=pandoc#keyboard#styles#ToggleStrongg@
 nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-emphasis) :set opfunc=pandoc#keyboard#styles#ToggleEmphasisg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-strong) :set opfunc=pandoc#keyboard#styles#ToggleStrongg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-verbatim) :set opfunc=pandoc#keyboard#styles#ToggleVerbatimg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-strikeout) :set opfunc=pandoc#keyboard#styles#ToggleStrikeoutg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-superscript) :set opfunc=pandoc#keyboard#styles#ToggleSuperscriptg@
+nnoremap <buffer> <silent> <Plug>(pandoc-keyboard-toggle-subscript) :set opfunc=pandoc#keyboard#styles#ToggleSubscriptg@
+nnoremap <buffer> <silent> <Plug>MarkdownPreviewToggle :call mkdp#util#toggle_preview()
+noremap <buffer> <silent> <Plug>MarkdownPreviewStop :call mkdp#util#stop_preview()
+noremap <buffer> <silent> <Plug>MarkdownPreview :call mkdp#util#open_preview_page()
 nnoremap <buffer> <silent> <Plug>(pandoc-hypertext-goto-id) :call pandoc#hypertext#GotoID()
 nnoremap <buffer> <silent> <Plug>(pandoc-hypertext-open-system) :call pandoc#hypertext#OpenSystem()
 nnoremap <buffer> <silent> <Plug>(pandoc-hypertext-open-local) :call pandoc#hypertext#OpenLocal()
@@ -281,12 +281,12 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 134 - ((13 * winheight(0) + 11) / 22)
+let s:l = 145 - ((16 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 134
-normal! 017|
+keepjumps 145
+normal! 015|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

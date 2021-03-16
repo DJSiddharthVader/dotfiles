@@ -1,30 +1,30 @@
-let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
-imap <buffer> <F9> <Plug>Tex_Completion
-imap <buffer> <C-CR> <Plug>Tex_InsertItemOnNextLine
-imap <buffer> <silent> <S-F7> <Plug>Tex_FastCommandChange
-inoremap <buffer> <silent> <S-F3> =Tex_PutEnvironment("bmatrix")
-inoremap <buffer> <silent> <S-F2> =Tex_PutEnvironment("eqnarray")
-inoremap <buffer> <silent> <S-F1> =Tex_PutEnvironment("eqnarray*")
-imap <buffer> <silent> <S-F5> <Plug>Tex_FastEnvironmentChange
 imap <buffer> <silent> <F5> <Plug>Tex_FastEnvironmentInsert
+imap <buffer> <silent> <S-F5> <Plug>Tex_FastEnvironmentChange
+inoremap <buffer> <silent> <S-F1> =Tex_PutEnvironment("eqnarray*")
+inoremap <buffer> <silent> <S-F2> =Tex_PutEnvironment("eqnarray")
+inoremap <buffer> <silent> <S-F3> =Tex_PutEnvironment("bmatrix")
+imap <buffer> <silent> <S-F7> <Plug>Tex_FastCommandChange
+imap <buffer> <C-CR> <Plug>Tex_InsertItemOnNextLine
+imap <buffer> <F9> <Plug>Tex_Completion
 imap <buffer> <silent> <F7> <Plug>Tex_FastCommandInsert
 inoremap <buffer> <silent> <Plug>(vimtex-delim-close) =vimtex#delim#close()
 inoremap <buffer> <silent> <Plug>(vimtex-cmd-create) =vimtex#cmd#create_insert()
 omap <buffer> <silent> % <Plug>(vimtex-%)
 xmap <buffer> <silent> % <Plug>(vimtex-%)
 nmap <buffer> <silent> % <Plug>(vimtex-%)
-nmap <buffer> <silent> ,rf <Plug>Tex_RefreshFolds
-nmap <buffer> ,ls <Plug>Tex_ForwardSearch
-nmap <buffer> ,lv <Plug>Tex_View
-vmap <buffer> ,ll <Plug>Tex_Compile
 nmap <buffer> ,ll <Plug>Tex_Compile
-imap <buffer> <silent> ì <Plug>Tex_LeftRight
-imap <buffer> <silent> ã <Plug>Tex_MathCal
-imap <buffer> <silent> â <Plug>Tex_MathBF
+vmap <buffer> ,ll <Plug>Tex_Compile
+nmap <buffer> ,lv <Plug>Tex_View
+nmap <buffer> ,ls <Plug>Tex_ForwardSearch
+nmap <buffer> <silent> ,rf <Plug>Tex_RefreshFolds
 imap <buffer> é <Plug>Tex_InsertItemOnThisLine
+imap <buffer> <silent> â <Plug>Tex_MathBF
+imap <buffer> <silent> ã <Plug>Tex_MathCal
+imap <buffer> <silent> ì <Plug>Tex_LeftRight
 nmap <buffer> <silent> K <Plug>(vimtex-doc-package)
 omap <buffer> <silent> [[ <Plug>(vimtex-[[)
 omap <buffer> <silent> [] <Plug>(vimtex-[])
@@ -95,35 +95,42 @@ xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
 nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
-nnoremap <buffer> <SNR>104_(v) v
-nnoremap <buffer> <SNR>104_(V) V
-xnoremap <buffer> <silent> <SNR>104_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-xnoremap <buffer> <silent> <SNR>104_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>104_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>104_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>104_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-nnoremap <buffer> <SNR>107_(v) v
-nnoremap <buffer> <SNR>107_(V) V
-xnoremap <buffer> <silent> <SNR>107_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-xnoremap <buffer> <silent> <SNR>107_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>107_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>107_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>107_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>108_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>108_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>108_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>108_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>108_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-nnoremap <buffer> <SNR>108_(V) V
-nnoremap <buffer> <SNR>108_(v) v
-nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
-nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
-vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
-nnoremap <buffer> <Plug>Tex_Compile :call Tex_RunLaTeX()
-nmap <buffer> <silent> <S-F7> <Plug>Tex_FastCommandChange
-nmap <buffer> <silent> <S-F5> <Plug>Tex_FastEnvironmentChange
-vmap <buffer> <silent> <F5> <Plug>Tex_FastEnvironmentInsert
+nnoremap <buffer> <SNR>105_(v) v
+nnoremap <buffer> <SNR>105_(V) V
+xnoremap <buffer> <silent> <SNR>105_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>105_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>105_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>105_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>105_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 nmap <buffer> <silent> <F5> <Plug>Tex_FastEnvironmentInsert
+vmap <buffer> <silent> <F5> <Plug>Tex_FastEnvironmentInsert
+nmap <buffer> <silent> <S-F5> <Plug>Tex_FastEnvironmentChange
+nmap <buffer> <silent> <S-F7> <Plug>Tex_FastCommandChange
+nnoremap <buffer> <Plug>Tex_Compile :call Tex_RunLaTeX()
+vnoremap <buffer> <Plug>Tex_Compile :call Tex_PartCompile()
+nnoremap <buffer> <Plug>Tex_View :call Tex_ViewLaTeX()
+nnoremap <buffer> <Plug>Tex_ForwardSearch :call Tex_ForwardSearchLaTeX()
+nnoremap <buffer> <SNR>108_(v) v
+nnoremap <buffer> <SNR>108_(V) V
+xnoremap <buffer> <silent> <SNR>108_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>108_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>108_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>108_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>108_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>107_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>107_(V) V
+nnoremap <buffer> <SNR>107_(v) v
+xnoremap <buffer> <silent> <SNR>104_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>104_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>104_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>104_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>104_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>104_(V) V
+nnoremap <buffer> <SNR>104_(v) v
 vmap <buffer> <silent> <F7> <Plug>Tex_FastCommandInsert
 nmap <buffer> <silent> <F7> <Plug>Tex_FastCommandInsert
 nnoremap <buffer> <Plug>(vimtex-view) :call b:vimtex.viewer.view('')
@@ -152,18 +159,18 @@ xnoremap <buffer> <silent> <Plug>(vimtex-ic) :call vimtex#text_obj#commands(1,
 nnoremap <buffer> <Plug>(vimtex-reload-state) :VimtexReloadState
 nnoremap <buffer> <Plug>(vimtex-toggle-main) :VimtexToggleMain
 nnoremap <buffer> <Plug>(vimtex-errors) :call vimtex#qf#toggle()
-xnoremap <buffer> <silent> <SNR>105_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>105_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>105_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>105_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
 nnoremap <buffer> <silent> <Plug>(vimtex-[[) :call vimtex#motion#next_section(0,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-[]) :call vimtex#motion#next_section(1,1,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-][) :call vimtex#motion#next_section(1,0,0)
 nnoremap <buffer> <silent> <Plug>(vimtex-]]) :call vimtex#motion#next_section(0,0,0)
-xnoremap <buffer> <silent> <SNR>105_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>101_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
 nnoremap <buffer> <silent> <Plug>(vimtex-%) :call vimtex#motion#find_matching_pair()
-nnoremap <buffer> <SNR>105_(V) V
-nnoremap <buffer> <SNR>105_(v) v
+nnoremap <buffer> <SNR>101_(V) V
+nnoremap <buffer> <SNR>101_(v) v
 nnoremap <buffer> <Plug>(vimtex-reload) :VimtexReload
 nnoremap <buffer> <Plug>(vimtex-log) :VimtexLog
 nnoremap <buffer> <Plug>(vimtex-labels-toggle) :call b:vimtex.labels.toggle()
@@ -199,11 +206,10 @@ xnoremap <buffer> <silent> <Plug>(vimtex-cmd-create) :call vimtex#cmd#create_a
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-create) :call vimtex#cmd#create_ask(0)
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-change) :call vimtex#cmd#change()
 nnoremap <buffer> <silent> <Plug>(vimtex-cmd-delete) :call vimtex#cmd#delete()
-nmap <buffer> <silent> ì <Plug>Tex_LeftRight
-vmap <buffer> <silent> ã <Plug>Tex_MathCal
 vmap <buffer> <silent> â <Plug>Tex_MathBF
+vmap <buffer> <silent> ã <Plug>Tex_MathCal
+nmap <buffer> <silent> ì <Plug>Tex_LeftRight
 imap <buffer> <silent> ]] <Plug>(vimtex-delim-close)
-inoremap <buffer> <silent> `` `
 inoremap <buffer> <silent> <expr> `vr vimtex#imaps#wrap_math("`vr", '\varrho')
 inoremap <buffer> <silent> <expr> `vq vimtex#imaps#wrap_math("`vq", '\vartheta')
 inoremap <buffer> <silent> <expr> `vk vimtex#imaps#wrap_math("`vk", '\varkappa')
@@ -266,13 +272,13 @@ inoremap <buffer> <silent> <expr> `= vimtex#imaps#wrap_math("`=", '\equiv')
 inoremap <buffer> <silent> <expr> `8 vimtex#imaps#wrap_math("`8", '\infty')
 inoremap <buffer> <silent> <expr> `6 vimtex#imaps#wrap_math("`6", '\partial')
 inoremap <buffer> <silent> <expr> `0 vimtex#imaps#wrap_math("`0", '\emptyset')
+inoremap <buffer> <silent> `` `
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
 setlocal backupcopy=
-setlocal balloonexpr=
 setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
@@ -291,7 +297,6 @@ setlocal concealcursor=
 setlocal conceallevel=1
 setlocal completefunc=youcompleteme#CompleteFunc
 setlocal nocopyindent
-setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal cursorline
@@ -304,6 +309,7 @@ setlocal expandtab
 if &filetype != 'tex'
 setlocal filetype=tex
 endif
+setlocal fillchars=
 setlocal fixendofline
 setlocal foldcolumn=1
 setlocal foldenable
@@ -333,6 +339,7 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
+setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=latex\ -interaction=nonstopmode\ -file-line-error-style\ $*
 setlocal matchpairs=(:),{:},[:]
@@ -350,9 +357,11 @@ setlocal noreadonly
 setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
+setlocal scrollback=-1
 setlocal noscrollbind
+setlocal scrolloff=-1
 setlocal shiftwidth=4
-setlocal noshortname
+setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal smartindent
 setlocal softtabstop=4
@@ -360,6 +369,7 @@ setlocal spell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
+setlocal spelloptions=
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=.tex,.sty,.cls
 setlocal noswapfile
@@ -367,29 +377,32 @@ setlocal synmaxcol=3000
 if &syntax != 'tex'
 setlocal syntax=tex
 endif
+setlocal tagfunc=
 setlocal tabstop=4
 setlocal tagcase=
 setlocal tags=
-setlocal termkey=
-setlocal termsize=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
+setlocal winblend=0
+setlocal winhighlight=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-8,18fold
+8,19fold
+let &fdl = &fdl
 8
 normal! zo
-let s:l = 27 - ((24 * winheight(0) + 31) / 63)
+let s:l = 32 - ((19 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
-exe s:l
+keepjumps exe s:l
 normal! zt
-27
-normal! 0
-let &so = s:so_save | let &siso = s:siso_save
+keepjumps 32
+normal! 050|
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :
