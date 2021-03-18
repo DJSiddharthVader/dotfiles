@@ -6,7 +6,9 @@ reading_folder="reading list"
 browser="firefox"
 thresh=60
 
-help() { echo "Error Usage: $0 {update|pick|open|display}" && exit 1 ; }
+help() {
+    echo "Error Usage: $0 {update|pick|open|display}"
+}
 update() {
     #update list of readings to read for local file
     #isolates all readings in the reading_folder folder
@@ -24,12 +26,14 @@ pick() {
     cat $readings | shuf | tail -1 >| $reading   #pick new random article
     killall -q "$(basename $0)" > /dev/null 2>&1 #restart zscroll with new article so scroll updates
 }
-open() { "$browser" --new-tab "$(cat $reading | cut -f2 -d'~')" ; } #open article in browser
+open() {
+    "$browser" --new-tab "$(cat $reading | cut -f2 -d'~')" #open article in browser
+}
 display() {
     #scroll article title if longer than $thresh characeters otherwise static display
     articlename="$(cat "$reading" | cut -f1 -d'~')"
     if [[ ${#articlename} -gt $thresh ]]; then
-        ( zscroll -l "$thresh" -d 0.20 -b " " -a "" -p " /// " "$(cat "$reading" | cut -f1 -d'~')" ) &
+        ( zscroll -l "$thresh" -d 0.20 -b "" -a "" -p " /// " "$(cat "$reading" | cut -f1 -d'~')" ) &
        wait
     else
         echo "$articlename"
