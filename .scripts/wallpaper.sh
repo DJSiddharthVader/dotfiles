@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+# set -euo pipefail causes gtkautoreload to fail
 shopt -s extglob
 
 # Vars
@@ -51,7 +51,7 @@ updateImageIndex() {
             index=$(( $index + 1 ))
             ;;
         'prev')
-            [ $ -lt 1 ] && resetHistory && index=2
+            [ $index -lt 1 ] && resetHistory && index=2
             index=$(( $index - 1 ))
             ;;
         'next')
@@ -82,14 +82,19 @@ setWallpaper() {
         *              ) usage && exit 1 ;;
     esac
 }
+colorFirefox() {
+    window_id="$(xwininfo -tree -root | grep '\"Navigator\" \"Firefox\"' | head -1 | grep -o '0x[0-9a-Z]*' | head -1)" #get window id for a firefox windown (doesnt matter which one)
+    xdotool key --window "$window_id" --clearmodifiers "ctrl+h" # send ctrl+h keypress to firefox window
+    # this triggers a script to reload style sheets, specificalls colors.css
+}
 changeColors() {
     image="$1"
     wal -geni "$image"  #font only
-   ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1
+    colorFirefox
+    ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
-    timeout 0.5s xsettingsd -c dotfiles/.varfiles/gtkautoreload.ini > /dev/null 2>&1
     ~/dotfiles/.scripts/zathura.sh
-    #pywalfox update # update firefox css
+    timeout 0.5s xsettingsd -c ~/dotfiles/.varfiles/gtkautoreload.ini
 }
 wall() {
     mode="$1"
