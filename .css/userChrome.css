@@ -1,4 +1,3 @@
-@import url('file:///home/sidreed/.cache/wal/colors.css');
 @namespace "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
 
 
@@ -109,6 +108,7 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
   #library-button { display: none; }
   #sidebar-button { display: none; }
   #PanelUI-button { display: none; }
+  #nav-bar-overflow-button { display: none !important; }
 */
   /* General Firefox menu button */
 
@@ -119,7 +119,6 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
   /* Firefox account button */
   #fxa-toolbar-menu-button { display: none; }
 
-  #nav-bar-overflow-button { display: none !important; }
 
 
   /* Empty space before and after the url bar */
