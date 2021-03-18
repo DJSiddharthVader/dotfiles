@@ -34,9 +34,14 @@ cycle() {
     echo "${modes[$next_idx]}"
 }
 
-info() { deluge-console 'info -v' 2> /dev/null ; }
-status() { deluge-console status 2> /dev/null ; }
+info() {
+    deluge-console 'info -v' 2> /dev/null
+}
+status() {
+    deluge-console status 2> /dev/null
+}
 
+# Global Torrent Data Tracking
 scrape_stats() {
     pattern="$2"
     echo "$1" | grep "$pattern: " |
@@ -55,7 +60,7 @@ update_stats() {
     downloaded="$(scrape_stats "$info" 'Downloaded' "$unit" | tr ' ' '\n')"
     uploaded="$(scrape_stats "$info" 'Uploaded' "$unit" | tr ' ' '\n')"
     paste -d"$delim" <(echo "$ids") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$stats_file"
-    sort -t"$delim" -r -k1,1 -k4,4 -k5,5 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
+    sort -t"$delim" -r -k4,4 -k5,5 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
     #sed -i "1s/^/$header"/ "$stats_file"
 }
 total_stats() {
@@ -66,9 +71,10 @@ total_stats() {
         'down') fn=4 ;;
         'up'  ) fn=5 ;;
     esac
-    cut -d"$delim" -f$fn $stats_file | tr '\n' '+' | sed -e 's/+$/\n/' | bc | numfmt --to-unit="$outunit" --format="%.2f"
+    cut -d"$delim" -f$fn $stats_file | tr '\n' '+' | sed -e 's/^+/\n/' | sed -e 's/+$/\n/' | bc | numfmt --to-unit="$outunit" --format="%.2f"
 }
 
+# Display Toreent Data
 speed() {
     # parses output of tranmission-remote -i to sum sizes of a specified fild for all torrents and convert final  output to desired unit (K,M,G,T etc.)
     pattern="$1"
@@ -107,8 +113,6 @@ display() {
             update_stats
             upt="$(total_stats 'up' "$unit")"
             downt="$(total_stats 'down' "$unit")"
-            echo $down
-            echo $total
             msg=" $(divide $down $total 2)  $(divide $upt $downt 2)"
             ;;
         'datatotal')
@@ -143,6 +147,7 @@ display() {
     echo "$msg"
 }
 
+# Managing Torrents
 start() {
     deluged
 }
@@ -155,6 +160,7 @@ resume_all() {
     deluge-console "$action $(deluge-console 'info -v' 2> /dev/null | grep ID | cut -d':' -f2 | tr -d ' ' | tr '\n' '.' | sed -e "s/\./\;$action /g" | sed -e "s/\;$action $//")"
 }
 
+# Torrent Search
 extract_from_page() {
     grep "$1" "$2" | sed -e 's/^.*>\([^<>]\+\)<\(\/td\|\/a\|span\).*$/\1/'
 }
@@ -193,7 +199,6 @@ search() {
     magnet="$(curl -Ss "https://1337x.to/$txlink/" | grep 'magnet' | head -1 | sed -e 's/^.*href="\(magnet[^"<>]*\)".*$/\1/')"
     [[ -z "$magnet" ]] && exit 1 #no query
     name="$(echo "$chosen" | rev | cut -f1 | rev | tr -s ' ' '.')"
-    echo "$name"
     echo "$watch_dir/$name"
     deluge-console add --path="$watch_dir" "$magnet" && notify-send "torrent added $name"
     rm $results_page
