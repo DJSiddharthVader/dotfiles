@@ -43,7 +43,6 @@ toggle() {
         "yes") disconnect ;;
         *) echo "Error: invalid status message $status" && exit 1
     esac
-    polybar-msg hook bluetooth 1
     ~/.scripts/bar-manager.sh reload
 }
 
@@ -73,6 +72,7 @@ main() {
         'status') getConnectedDevice ;;
         *) help && exit 1 ;;
     esac
+    #polybar-msg hook bluetooth-ipc 1 &> /dev/null
 }
 
 if (( $# < 1 )); then
