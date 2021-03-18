@@ -9,8 +9,6 @@
 ;- deluge - want ipc to change modes but continuous output
 ;- songnames - cant work with zscroll
 ;- reading - cant work with zscroll
-;- volume
-
 
 [settings]
 screenchange-reload = true
@@ -244,6 +242,7 @@ format-suffix = ${colors.rightsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color8}
 format-suffix-background = ${colors.background}
+
 [module/focused]
 type = custom/script
 tail = true
@@ -387,6 +386,7 @@ format-muted-suffix = ${colors.leftsuffix}
 format-muted-suffix-font = 5
 format-muted-suffix-foreground = ${colors.color3}
 format-muted-suffix-background = ${colors.background}
+
 [module/wlan]
 type = custom/script
 interval = 1
@@ -431,12 +431,11 @@ type = custom/script
 exec = polybar-msg hook protonvpn 1 &>/dev/null
 
 [module/bluetooth]
-type = custom/ipc
-initial = 1
-hook-0 = ~/dotfiles/.scripts/polybar/bluetooth.sh status
-hook-1 = ~/dotfiles/.scripts/polybar/bluetooth.sh
+type = custom/script
+interval = 60
 
-click-left =   polybar-msg hook bluetooth 2 && sleep 1 && polybar-msg hook bluetooth 1
+exec = ~/dotfiles/.scripts/polybar/bluetooth.sh status
+click-left = ~/dotfiles/.scripts/polybar/bluetooth.sh
 
 format-background = ${colors.color6}
 format-prefix = ${colors.leftprefix}
@@ -447,10 +446,6 @@ format-suffix = ${colors.leftsuffix}
 format-suffix-font = 5
 format-suffix-foreground = ${colors.color6}
 format-suffix-background = ${colors.background}
-
-[module/bluetooth-ipc]
-type = custom/script
-exec = polybar-msg hook bluetooth 1 &>/dev/null
 
 [module/mpd]
 type = internal/mpd
@@ -756,127 +751,7 @@ content-foreground = ${colors.color7}
 content-background = ${colors.background}
 
 
-;depreciated
-;[module/focused]
-;type = custom/script
-;tail = true
-;exec = ${scripts.focused}
-;format-background = ${colors.color2}
-;format-prefix = ${colors.rightprefix}
-;format-prefix-font = 5
-;format-prefix-foreground = ${colors.color2}
-;format-prefix-background = ${colors.background}
-;format-suffix = ${colors.rightsuffix}
-;format-suffix-font = 5
-;format-suffix-foreground = ${colors.color2}
-;format-suffix-background = ${colors.background}
-;
-;[module/bluetooth]
-;type = custom/script
-;interval = 60
-;exec = ~/dotfiles/.scripts/polybar/bluetooth.sh status
-;click-left = ~/dotfiles/.scripts/polybar/bluetooth.sh
-;format-background = ${colors.color6}
-;format-prefix = ${colors.leftprefix}
-;format-prefix-font = 5
-;format-prefix-foreground = ${colors.color6}
-;format-prefix-background = ${colors.background}
-;format-suffix = ${colors.leftsuffix}
-;format-suffix-font = 5
-;format-suffix-foreground = ${colors.color6}
-;format-suffix-background = ${colors.background}
-
-;[module/gamma]
-;type = custom/script
-;interval = 3
-;exec = ~/dotfiles/.scripts/polybar/gamma.sh inc
-;scroll-up = ~/dotfiles/.scripts/polybar/gamma.sh inc
-;scroll-down = ~/dotfiles/.scripts/polybar/gamma.sh dec
-;format = " <label> "
-;format-background = ${colors.color2}
-;format-prefix = ${colors.leftprefix}
-;format-prefix-font = 5
-;format-prefix-foreground = ${colors.color2}
-;format-prefix-background = ${colors.background}
-;format-suffix = ${colors.leftsuffix}
-;format-suffix-font = 5
-;format-suffix-foreground = ${colors.color2}
-;format-suffix-background = ${colors.background}
-;
-;[module/volume]
-;type = internal/alsa
-;label-volume = %percentage%%
-;label-volume-foreground = ${root.foreground}
-;label-muted =  %percentage%%
-;format-volume = "<ramp-volume> <label-volume>"
-;format-muted-foreground = ${colors.foreground-alt}
-;ramp-volume-0 = 
-;ramp-volume-1 = 
-;ramp-volume-2 = 
-;format-volume-background = ${colors.color3}
-;format-volume-prefix = ${colors.leftprefix}
-;format-volume-prefix-font = 5
-;format-volume-prefix-foreground = ${colors.color3}
-;format-volume-prefix-background = ${colors.background}
-;format-volume-suffix = ${colors.leftsuffix}
-;format-volume-suffix-font = 5
-;format-volume-suffix-foreground = ${colors.color3}
-;format-volume-suffix-background = ${colors.background}
-;format-muted-background = ${colors.color3}
-;format-muted-prefix = ${colors.leftprefix}
-;format-muted-prefix-font = 5
-;format-muted-prefix-foreground = ${colors.color3}
-;format-muted-prefix-background = ${colors.background}
-;format-muted-suffix = ${colors.leftsuffix}
-;format-muted-suffix-font = 5
-;format-muted-suffix-foreground = ${colors.color3}
-;format-muted-suffix-background = ${colors.background}
-;
-;[module/protonvpn]
-;type = custom/script
-;interval = 60
-;exec = ~/dotfiles/.scripts/polybar/protonvpn.sh display
-;click-left = ~/dotfiles/.scripts/polybar/protonvpn.sh toggle
-;click-right = ~/dotfiles/.scripts/polybar/protonvpn.sh pick
-;format = " <label>"
-;format-background = ${colors.color5}
-;format-prefix = ${colors.leftprefix}
-;format-prefix-font = 5
-;format-prefix-foreground = ${colors.color5}
-;format-prefix-background = ${colors.background}
-;format-suffix = ${colors.leftsuffix}
-;format-suffix-font = 5
-;format-suffix-foreground = ${colors.color5}
-;format-suffix-background = ${colors.background}
-;
-;[module/songnames]
-;type = custom/script
-;tail = true
-;exec = ~/dotfiles/.scripts/polybar/mpdscroll.sh
-;format = " %{T7}<label>%{T-} "
-;click-left = ~/dotfiles/.scripts/polybar/mpdscroll.sh toggle
-;; use different font for label to maintain monospace (not at size > 13 for Terminus?) so module width doesnt change during scrolling
-;format-background = ${colors.color7}
-;format-prefix = ${colors.leftprefix}
-;format-prefix-font = 5
-;format-prefix-foreground = ${colors.color7}
-;format-prefix-background = ${colors.background}
-;[module/deluge]
-;type = custom/script
-;tail = true
-;exec = ~/dotfiles/.scripts/polybar/deluge.sh display
-;click-left = ~/dotfiles/.scripts/polybar/deluge.sh next
-;click-right = ~/dotfiles/.scripts/polybar/deluge.sh prev
-;format-background = ${colors.color8}
-;format-prefix = ${colors.rightprefix}
-;format-prefix-font = 5
-;format-prefix-foreground = ${colors.color8}
-;format-prefix-background = ${colors.background}
-;format-suffix = ${colors.rightsuffix}
-;format-suffix-font = 5
-;format-suffix-foreground = ${colors.color8}
-;format-suffix-background = ${colors.background}
-;
+;not working
 ;[module/reading-ipc]
 ;type = custom/ipc
 ;initial = 1
@@ -904,5 +779,27 @@ content-background = ${colors.background}
 ;format-suffix-font = 5
 ;format-suffix-foreground = ${colors.color3}
 ;format-suffix-background = ${colors.background}
+
+;[bluetooth]
+;type = custom/ipc
+;initial = 1
+;hook-0 = ~/dotfiles/.scripts/polybar/bluetooth.sh status
+;hook-1 = ~/dotfiles/.scripts/polybar/bluetooth.sh
 ;
+;click-left = polybar-msg hook bluetooth-ipc 2 && sleep 1 && polybar-msg hook bluetooth-ipc 1
+;
+;format-background = ${colors.color6}
+;format-prefix = ${colors.leftprefix}
+;format-prefix-font = 5
+;format-prefix-foreground = ${colors.color6}
+;format-prefix-background = ${colors.background}
+;format-suffix = ${colors.leftsuffix}
+;format-suffix-font = 5
+;format-suffix-foreground = ${colors.color6}
+;format-suffix-background = ${colors.background}
+;
+;[module/bluetooth-ipc]
+;type = custom/script
+;exec = polybar-msg hook bluetooth 1 &>/dev/null
+
 
