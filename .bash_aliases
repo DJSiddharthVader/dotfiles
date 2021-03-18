@@ -48,6 +48,7 @@ alias tsm="transmission-remote"
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 
 #Shorten
+alias ..='cd ..'
 alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
