@@ -122,22 +122,22 @@ silent! normal! zE
 29,48fold
 49,55fold
 56,77fold
-78,106fold
-107,107fold
-107,117fold
+78,107fold
+108,108fold
+108,118fold
 let &fdl = &fdl
 9
 normal! zo
-107
+78
 normal! zo
-107
-normal! zc
-let s:l = 78 - ((76 * winheight(0) + 17) / 34)
+108
+normal! zo
+let s:l = 114 - ((22 * winheight(0) + 14) / 29)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 78
-normal! 01|
+keepjumps 114
+normal! 038|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
