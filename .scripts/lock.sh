@@ -1,26 +1,26 @@
 #!/bin/bash
 set -e
-
+source "$HOME/.cache/wal/colors.sh"
 #colors,text,font
-ringcolor=ffffffff
-keyhlcolor=3cc908ff
-bshlcolor=d23c3dff
-separatorcolor=00000000
+alpha="ff"
+ringcolor="$(echo "$color1$alpha" | tr -d '#')"
+keyhlcolor="$(echo "$color2$alpha" | tr -d '#')"
+bshlcolor="$(echo "$color3$alpha" | tr -d '#')"
 insidecolor=00000000
-insidevercolor=00000000
-ringvercolor=ffffffff
+separatorcolor=00000000
+wrongcolor="$(echo "$color4$alpha" | tr -d '#')"
+ringwrongcolor="$(echo "$color4$alpha" | tr -d '#')"
 insidewrongcolor=00000000
-ringwrongcolor=ff0000ff
-wrongcolor=ffffffff
-verifcolor=ffffffff
-timecolor=ffffffff
-datecolor=ffffffff
-loginbox=00000066
+verifcolor="$(echo "$color5$alpha" | tr -d '#')"
+ringvercolor="$(echo "$color5$alpha" | tr -d '#')"
+insidevercolor=00000000
+timecolor="$(echo "$foreground$alpha" | tr -d '#')"
+datecolor="$(echo "$foreground$alpha" | tr -d '#')"
+loginbox="$(echo "$color6 66" | tr -d ' #')"
+#loginbox=00000066
 datestring=
 font='Terminus:style=Bold'
 locktext="$(date +'%A, %B %d %Y' )"
-screensaverpath="$HOME/.screen.png"
-
 lockbox() { #drawing rectangles
     rectangles=" "
     SR="$(xrandr -q | grep ' connected' | grep -o '[0-9]*x[0-9]*+[0-9]*+[0-9]*')"
@@ -35,11 +35,12 @@ lockbox() { #drawing rectangles
 main(){
     mpc pause > /dev/null 2>&1
     rectangles="$(lockbox)"
-    scrot "$screensaverpath"
-    convert "$screensaverpath" -scale 20% -scale 500% -draw "fill black fill-opacity 0.8 $rectangles" "$screensaverpath"
+    screen="$(mktemp).png"
+    scrot "$screen"
+    convert "$screen" -scale 20% -scale 500% -draw "fill $background fill-opacity 0.8 $rectangles" "$screen.png"
     #lock command
     /home/sidreed/apps/i3lock-color/build/i3lock \
-        -i "$screensaverpath" -t             \
+        -i "$screen.png" -t             \
         --indpos='x+290:h-80'                \
         --noinputtext=''                     \
         --clock                              \
@@ -69,7 +70,6 @@ main(){
         --wrongcolor="$wrongcolor"           \
         --ringwrongcolor=$ringwrongcolor     \
         --insidewrongcolor=$insidewrongcolor
-    rm $screensaverpath
 }
 
 main
