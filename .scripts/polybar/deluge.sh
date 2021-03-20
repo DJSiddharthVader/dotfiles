@@ -10,7 +10,7 @@ max_pages=5
 
 stats_file="$HOME/dotfiles/.config/deluge/stats.tsv"
 delim="~"
-header="id"$delim"name"$delim"size"$delim"downloaded"$delim"uploaded"
+#header="id"$delim"name"$delim"size"$delim"downloaded"$delim"uploaded"
 
 help() {
     echo "Error: usage ./$(basename $0) {search|display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -34,6 +34,7 @@ cycle() {
     echo "${modes[$next_idx]}"
 }
 
+# Global Torrent Data Tracking
 info() {
     deluge-console 'info -v' 2> /dev/null
 }
@@ -41,7 +42,6 @@ status() {
     deluge-console status 2> /dev/null
 }
 
-# Global Torrent Data Tracking
 scrape_stats() {
     pattern="$2"
     echo "$1" | grep "$pattern: " |

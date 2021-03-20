@@ -6,6 +6,7 @@ KEY="f8411a3dd03e0674a17b8e736c2d0df5"
 CITY="Kelowna"
 UNITS="metric"
 SYMBOL="°"
+#SYMBOL=" C"
 
 icon() {
     case $1 in

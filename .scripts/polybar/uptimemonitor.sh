@@ -4,7 +4,9 @@ shopt -s extglob
 mode_file="$HOME/dotfiles/.varfiles/upmode"
 modes=(hour day week)
 
-help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
+help() {
+    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
+}
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -40,9 +42,9 @@ display() {
     minutes=$(time_ 'minute')
     mode="$1"
     case $mode in
-        'hour') uptime="H:$(($weeks*7*24 + $days*24 + $hours))" ;;
-        'day' ) uptime="D:$((7*$weeks + $days)) H:$hours" ;;
-        'week') uptime="W:$weeks D:$days H:$hours M:$minutes" ;;
+        'hour') uptime="H: $(($weeks*7*24 + $days*24 + $hours))" ;;
+        'day' ) uptime="D: $((7*$weeks + $days)) H:$hours" ;;
+        'week') uptime="W: $weeks D:$days H:$hours M:$minutes" ;;
         *) help && exit 1 ;;
     esac
     echo " $uptime"

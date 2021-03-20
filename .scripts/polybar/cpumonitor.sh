@@ -4,7 +4,9 @@ shopt -s extglob
 mode_file="$HOME/dotfiles/.varfiles/cpumode"
 modes=(short long)
 
-help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
+help() {
+    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
+}
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it

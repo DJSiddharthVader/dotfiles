@@ -10,7 +10,9 @@ ramp3=""
 ramp4=""
 ramp5=""
 
-help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
+help() {
+    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
+}
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -42,10 +44,10 @@ icon() {
     echo "$icon"
 }
 short() {
-    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
+    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*.\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
 }
 long() {
-    sensors | grep -v 'ERROR' | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
+    sensors | grep -v 'ERROR' | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*.\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
 }
 display(){
     mode="$1"

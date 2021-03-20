@@ -8,12 +8,17 @@ interface="wlp1s0"
 pipurl="ifconfig.co"
 #Icons
 # 𝍥𝌮𝌭𝌪𝌡𝌆
-ramp1=""
-ramp2=""
-ramp3=""
-ramp4=""
+#
+#▁▂▃▄▅▆▇█▉
+ramp1="⎽"
+ramp2="⎼"
+ramp3="⎯"
+ramp4="⎻"
 
-help() { echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}" ; }
+
+help() {
+    echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
+}
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -32,10 +37,20 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
-open() { $terminal -e nmtui connect ; }
-lip() { hostname -I | cut -d' ' -f1 ; }
-pip() { curl -s  "$pipurl" ; }
-name() { iwgetid -r ; }
+
+open() {
+    $terminal -e nmtui connect
+}
+
+lip() {
+    hostname -I | cut -d' ' -f1
+}
+pip() {
+    curl -s  "$pipurl"
+}
+name() {
+    iwgetid -r
+}
 strength() {
     percent="$(grep "^\s*w" /proc/net/wireless \
                | awk '{ print "", int($3 * 100 / 70)}'\
@@ -55,6 +70,7 @@ icon() {
     esac
     echo "$icon"
 }
+
 display(){
     mode="$1"
     case $mode in
