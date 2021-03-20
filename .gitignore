@@ -1,3 +1,4 @@
+.varfiles/gitPAT
 .config/mpd/mpd.db
 .config/mpd/mpd.log
 .config/mpd/mpdstate
