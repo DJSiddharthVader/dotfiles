@@ -2,31 +2,29 @@
 
 # Vars
 user='DJSiddharthVader'
-spacer=" "
+password="$(cat $HOME/dotfiles/.varfiles/gitPAT)"
 first_commit_msg="first commit"
 
-
-function help(){
+help(){
     echo 'Usage ./init-new-gitrepo.sh $repo_name $repo_description'
     exit 1
 }
-function createRemote(){
+createRemote(){
     repo_name="$1"
     repo_description="$2"
     dflag="$(jq -nc \
-                --arg name "$repo_name" \
-                --arg description "$repo_description" \
-                --arg private "true" \
-                '{ $name, $description, $private }'
+                --arg 'name' "$repo_name" \
+                --arg 'description' "$repo_description" \
+                --arg 'private' "true" \
+                '{"name":$name, "description":$description, "private":$private }'
             )"
     curl -X POST \
-         -u "$user" \
+         -u "$user:$password" \
          -H "Accept: application/vnd.github.v3+json" \
              https://api.github.com/user/repos \
-         -d "$dflag" \
-         -s #>> /dev/null 2>&1
+         -d "$dflag"
 }
-function createLocal(){
+createLocal(){
     repo_name="$1"
     repo_description="$2"
     echo "$repo_description" >| README.md
@@ -37,7 +35,7 @@ function createLocal(){
     git config remote.origin.push HEAD
     git push -u origin master
 }
-function main(){
+main(){
     repo_name="$1"
     repo_description="$2"
     mkdir -p "$repo_name"
