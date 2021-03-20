@@ -59,7 +59,7 @@ getConnectedDevice() {
         fi
     done <<< "$(echo -e "paired-devices" | bluetoothctl | grep '^Device' | cut -f2 -d' ')"
     name="$(echo $name | sed -e 's/^, //')"
-    [[ -n "$name" ]] && echo "$icon $name" || echo "$icon None"
+    [[ -n "$name" ]] && echo "$name" || echo "None"
 }
 
 main() {
