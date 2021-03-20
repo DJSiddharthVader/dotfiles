@@ -1,5 +1,5 @@
 #!/bin/bash
-# set -euo pipefail causes gtkautoreload to fail
+set -eo pipefail # -e causes gtkautoreload to fail since it relies on timeout
 shopt -s extglob
 
 # Vars
@@ -8,9 +8,7 @@ unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
 picdir="$HOME/Pictures/wallpapers"
 histfile="$HOME/dotfiles/.varfiles/fehbg"
 indexfile="$HOME/dotfiles/.varfiles/wallindex"
-resolution='1366x768!' #resolution, ignore aspect ratio
 icon=""
-
 
 usage() {
     name="$(basename $0)"
@@ -31,11 +29,14 @@ appendHistory() {
 }
 resetHistory() {
     find "$picdir" -maxdepth 99 -type f | shuf >| "$histfile"
-    echo 1 >| "$file"
+    echo 1 >| "$indexfile"
 }
 
 currentIndex() {
     head -1 "$indexfile" | sed -e 's/^\([0-9]*\)[^0-9]*$/\1/'
+}
+indexToImage(){
+    head -"$1" "$histfile" | tail -1
 }
 updateImageIndex() {
     [[ -f "$1" ]] && mode="path" || mode="$1"
@@ -46,7 +47,8 @@ updateImageIndex() {
             tmp="$(mktemp)"
             head -"$index" "$histfile" >| "$tmp"
             echo "$(readlink -e "$1")" >> "$tmp"
-            tail -"$(( $maxindex - $index ))" "$histfile" >> "$tmp"
+            remain=$(( $maxindex - $index ))
+            tail -"$remain" "$histfile" >> "$tmp"
             mv "$tmp" "$histfile"
             index=$(( $index + 1 ))
             ;;
@@ -63,12 +65,10 @@ updateImageIndex() {
     esac
     echo "$index"
 }
-indexToImage(){
-    head -"$1" "$histfile" | tail -1
-}
 
 addBorder() {
     image="$1"
+    resolution="$(xrandr | grep ' primary' | grep -o '[0-9]\{3,\}x[0-9]\{3,\}')"
     bordercolor="$(convert "$image" -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
     convert "$unbgfile" -resize "$resolution" -bordercolor "$bordercolor" -border 0x34 "$bgfile" #add borderes to image
 }
@@ -92,9 +92,9 @@ changeColors() {
     wal -geni "$image"  #font only
     colorFirefox
     ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1
+    timeout 0.5s xsettingsd -c ~/dotfiles/.varfiles/gtkautoreload.ini
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
     ~/dotfiles/.scripts/zathura.sh
-    timeout 0.5s xsettingsd -c ~/dotfiles/.varfiles/gtkautoreload.ini
 }
 wall() {
     mode="$1"
@@ -114,7 +114,8 @@ wall() {
 
 display() {
     wallpaper="$(head -n $(currentIndex) "$histfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"
-    echo "$icon $wallpaper"
+    echo "$wallpaper"
+    #echo "$icon $wallpaper"
 }
 
 main() {
@@ -122,7 +123,8 @@ main() {
     [ -f "$1" ] && mode='path' || mode="$1"
     change="$2"
     case "$mode" in
-        path|prev|next) wall "$mode" "$change" ;;
+        'path'        ) wall "$1" "$change" ;;
+        stay|prev|next) wall "$mode" "$change" ;;
         'reload'      ) wall 'stay' 'both'     ;;
         'rh'          ) resetHistory && exit 0 ;;
         'display'     ) display && exit 0      ;;
