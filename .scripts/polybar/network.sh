@@ -8,13 +8,15 @@ interface="wlp1s0"
 pipurl="ifconfig.co"
 #Icons
 # 𝍥𝌮𝌭𝌪𝌡𝌆
-#
 #▁▂▃▄▅▆▇█▉
+#ramp1="𝍥"
+#ramp2="𝌭"
+#ramp3="𝌪"
+#ramp4="𝌆"
 ramp1="⎽"
 ramp2="⎼"
 ramp3="⎯"
 ramp4="⎻"
-
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
