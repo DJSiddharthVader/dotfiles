@@ -48,7 +48,7 @@ scrape_stats() {
                 sed -e "s/\(^.*$pattern: \)[0-9\.]* [A-Z]\//\1/" |
                 sed -e "s/^.*$pattern: \([0-9\.]*\) \([BKMG]\).*/\1\2i /" |
                 sed -e 's/0Bi /0 /' | tr -d '\n' | sed -e 's/ *$/\n/' |
-                numfmt --from=auto --field=1-
+                numfmt --from=auto --field=1- | tr -s ' ' '\n'
 }
 update_stats() {
     # store all torrent stats in a tsv, update tsv and remove dups, keeping entries with the largest numbers
@@ -56,11 +56,12 @@ update_stats() {
     info="$(info)"
     ids="$(echo "$info" | grep 'ID: ' | cut -f2 -d':' | tr -d ' ')"
     names="$(echo "$info" | grep 'Name: ' | cut -f2 -d':' | sed -e 's/^ //')"
-    sizes="$(scrape_stats "$info" 'Size' "$unit" | tr ' ' '\n')"
-    downloaded="$(scrape_stats "$info" 'Downloaded' "$unit" | tr ' ' '\n')"
-    uploaded="$(scrape_stats "$info" 'Uploaded' "$unit" | tr ' ' '\n')"
+    sizes="$(scrape_stats "$info" 'Size' "$unit")"
+    downloaded="$(scrape_stats "$info" 'Downloaded' "$unit")"
+    uploaded="$(scrape_stats "$info" 'Uploaded' "$unit" )"
     paste -d"$delim" <(echo "$ids") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$stats_file"
-    sort -t"$delim" -r -k4,4 -k5,5 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
+    cp "$stats_file" "$stats_file.bak"
+    sort -t"$delim" -k4,4 -k5,5 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
     #sed -i "1s/^/$header"/ "$stats_file"
 }
 total_stats() {
@@ -108,26 +109,32 @@ display() {
         'ratio')
             unit="Gi"
             info="$(info)"
+            down="$(parse_data "$info" 'Uploaded' "$unit")"
             down="$(parse_data "$info" 'Downloaded' "$unit")"
-            total="$(parse_data "$info" 'Size' "$unit")"
-            update_stats
-            upt="$(total_stats 'up' "$unit")"
-            downt="$(total_stats 'down' "$unit")"
-            msg=" $(divide $down $total 2)  $(divide $upt $downt 2)"
+            size="$(parse_data "$info" 'Size' "$unit")"
+            msg=" $(divide $down $size 2)  $(divide $up $down 2)"
             ;;
-        'datatotal')
+        'ratiototal')
             unit="Gi"
             update_stats
-            upt="$(total_stats 'up' "$unit")"
-            downt="$(total_stats 'down' "$unit")"
-            msg=" $downt $unit  $upt $unit"
+            up="$(total_stats 'up' "$unit")"
+            down="$(total_stats 'down' "$unit")"
+            size="$(total_stats 'size' "$unit")"
+            msg=" $(divide $down $size 2)  $(divide $up $down 2)"
             ;;
         'data')
             unit="Gi"
             info="$(info)"
             up="$(parse_data "$info" 'Uploaded' "$unit")"
             down="$(parse_data "$info" 'Downloaded' "$unit")"
-            msg=" $down $unit  $up $unit"
+            msg="  $down $unit   $up $unit"
+            ;;
+        'datatotal')
+            unit="Gi"
+            update_stats
+            upt="$(total_stats 'up' "$unit")"
+            downt="$(total_stats 'down' "$unit")"
+            msg="  $downt $unit   $upt $unit"
             ;;
         'speed')
             unit="Mi"
@@ -142,7 +149,7 @@ display() {
             #both="$(info | grep -c '')"
             msg=" $down  $seed  $idle" # $both
             ;;
-        *) help && exit 1 ;;
+       *) help && exit 1 ;;
     esac
     echo "$msg"
 }
