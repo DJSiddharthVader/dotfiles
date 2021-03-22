@@ -26,9 +26,11 @@ alias gph='git push'
 alias gpl='git pull'
 alias gco='git commit'
 alias gbr='git branch'
+alias gst='git status'
 alias gch='git checkout'
-alias gst="git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf | grep -v .gitignore"
-alias gsw="watch -n1 'git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf'"
+
+alias gsl='~/.scripts/commit-status.sh status'
+alias gsw='watch -n2 "~/.scripts/commit-status.sh status"'
 
 #My Scripts
 alias mon='~/.scripts/monitor.sh on'
