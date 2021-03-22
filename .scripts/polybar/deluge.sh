@@ -61,7 +61,7 @@ update_stats() {
     uploaded="$(scrape_stats "$info" 'Uploaded' "$unit" )"
     paste -d"$delim" <(echo "$ids") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$stats_file"
     cp "$stats_file" "$stats_file.bak"
-    sort -t"$delim" -k4,4 -k5,5 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
+    sort -r -t"$delim" -k4,4 -k5,5 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
     #sed -i "1s/^/$header"/ "$stats_file"
 }
 total_stats() {
