@@ -19,17 +19,16 @@ alias tmux='tmux -2'
 
 #Git
 alias grm='git rm'
-alias add='git add'
-alias log='git log'
-alias diff='git diff'
-alias push='git push'
-alias pull='git pull'
-alias com='git commit'
-alias brch='git branch'
-alias chk='git checkout'
-alias statf="git status | less"
-alias stat="git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf | grep -v .gitignore"
-alias stwt="watch -n1 'git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf'"
+alias gad='git add'
+alias glo='git log'
+alias gdi='git diff'
+alias gph='git push'
+alias gpl='git pull'
+alias gco='git commit'
+alias gbr='git branch'
+alias gch='git checkout'
+alias gst="git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf | grep -v .gitignore"
+alias gsw="watch -n1 'git status | grep -v .vim/view | grep -v .varfiles | grep -v .config/qt5ct/colors/pywal.conf'"
 
 #My Scripts
 alias mon='~/.scripts/monitor.sh on'
