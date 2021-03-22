@@ -1,14 +1,53 @@
 #! /bin/bash
 
 dotdir="$HOME/dotfiles"
+to_ignore=(
+    "" #status seems to skip this idk why
+    ".vim/.netrwhist"
+    ".vim/view"
+    ".vim/spell"
+    ".varfiles"
+    ".config/qt5ct/colors/pywal.conf"
+    ".config/zathura/zathurarc"
+    ".config/deluge/stats.tsv"
+    ".gitignore"
+    ".config/zathura/zathurarc"
+    )
+#messages=(
+#    "update vim folds"
+#    "update vim/netrwhist"
+#    "update vim folds "
+#    "update background tracking files"
+#    "update QT5 colors as set by pywal"
+#    "update zathura colors as set by pywal"
+#    "torrent stats"
+#    "update ignore files"
+#    "zathura colors"
+#    )
 
-cd $dotdir
-git add .vim/view/* .vim/.netrwhist .vim/spell/*
-git add .varfiles/*
-git commit -m "update vim folds, spellfiles"
-git commit -m "update background tracking files"
-git commit .config/qt5ct/colors/pywal.conf -m "update QT5 colors as set by pywal"
-git commit .config/zathura/zathurarc -m "update zathura colors as set by pywal"
-git commit .config/deluge/stats.tsv -m "torrent stats"
-git commit .gitignore -m "update ignore files"
-cd -
+status() {
+    pattern=""
+    for i in ${!to_ignore[@]}; do
+        files="${to_ignore[$i]}"
+        pattern="$pattern\|$files"
+    done
+    pattern="'$(echo "$pattern" | sed -e 's/^\\|//')'"
+    git status | grep -v "$pattern"
+}
+commit() {
+    cd $dotdir
+    for i in ${to_ignore[@]}; do
+        files=${to_ignore[$i]}
+        git add $files
+    done
+    cd -
+}
+main() {
+    case "$1" in
+        'status') status ;;
+        'commit') commit ;;
+        *) echo 'invalid arg' && exit 1 ;;
+    esac
+}
+
+main "$@"
