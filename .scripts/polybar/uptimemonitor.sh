@@ -3,6 +3,7 @@ shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/upmode"
 modes=(hour day week)
+icon=""
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -42,12 +43,12 @@ display() {
     minutes=$(time_ 'minute')
     mode="$1"
     case $mode in
-        'hour') uptime="H: $(($weeks*7*24 + $days*24 + $hours))" ;;
-        'day' ) uptime="D: $((7*$weeks + $days)) H:$hours" ;;
-        'week') uptime="W: $weeks D:$days H:$hours M:$minutes" ;;
+        'hour') uptime="H:$(($weeks*7*24 + $days*24 + $hours))" ;;
+        'day' ) uptime="D:$((7*$weeks + $days)) H:$hours" ;;
+        'week') uptime="W:$weeks D:$days H:$hours M:$minutes" ;;
         *) help && exit 1 ;;
     esac
-    echo " $uptime"
+    echo "$uptime"
 }
 main() {
     mode="$1"
