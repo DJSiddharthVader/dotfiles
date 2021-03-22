@@ -40,10 +40,10 @@ display() {
     mode="$1"
     case "$mode" in
         'percent') msg="$(disk 4)" ;;
-        'used'   ) msg="Used: $(disk 2) $(disk 4)" ;;
-        'free'   ) msg="Free: $(percent_free) $(disk 3)" ;;
-        'amounts') msg="Used: $(disk 2) Free:$(disk 3)" ;;
-        'all'    ) msg="Used: $(disk 2) $(disk 4) Free:$(disk 3) $(percent_free)" ;;
+        'used'   ) msg="U: $(disk 2) $(disk 4)" ;;
+        'free'   ) msg="F: $(percent_free) $(disk 3)" ;;
+        'amounts') msg="U: $(disk 2) Free:$(disk 3)" ;;
+        'all'    ) msg="U: $(disk 2) $(disk 4) Free:$(disk 3) $(percent_free)" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
