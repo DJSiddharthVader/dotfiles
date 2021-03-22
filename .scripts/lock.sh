@@ -3,24 +3,27 @@ set -e
 source "$HOME/.cache/wal/colors.sh"
 #colors,text,font
 alpha="ff"
-ringcolor="$(echo "$color1$alpha" | tr -d '#')"
-keyhlcolor="$(echo "$color2$alpha" | tr -d '#')"
-bshlcolor="$(echo "$color3$alpha" | tr -d '#')"
+background="$(echo "$color1" | tr -d '#')"
+background="$color1"
+ringcolor="$(echo "$color2$alpha" | tr -d '#')"
+keyhlcolor="$(echo "$color3$alpha" | tr -d '#')"
+bshlcolor="$(echo "$color4$alpha" | tr -d '#')"
 insidecolor=00000000
 separatorcolor=00000000
-wrongcolor="$(echo "$color4$alpha" | tr -d '#')"
-ringwrongcolor="$(echo "$color4$alpha" | tr -d '#')"
+wrongcolor="$(echo "$color5$alpha" | tr -d '#')"
+ringwrongcolor="$(echo "$color5$alpha" | tr -d '#')"
 insidewrongcolor=00000000
-verifcolor="$(echo "$color5$alpha" | tr -d '#')"
-ringvercolor="$(echo "$color5$alpha" | tr -d '#')"
+verifcolor="$(echo "$color6$alpha" | tr -d '#')"
+ringvercolor="$(echo "$color6$alpha" | tr -d '#')"
 insidevercolor=00000000
 timecolor="$(echo "$foreground$alpha" | tr -d '#')"
 datecolor="$(echo "$foreground$alpha" | tr -d '#')"
-loginbox="$(echo "$color6 66" | tr -d ' #')"
+loginbox="$(echo "$color1 66" | tr -d ' #')"
 #loginbox=00000066
 datestring=
 font='Terminus:style=Bold'
 locktext="$(date +'%A, %B %d %Y' )"
+
 lockbox() { #drawing rectangles
     rectangles=" "
     SR="$(xrandr -q | grep ' connected' | grep -o '[0-9]*x[0-9]*+[0-9]*+[0-9]*')"
