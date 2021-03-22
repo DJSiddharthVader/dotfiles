@@ -3,6 +3,7 @@ shopt -s extglob
 
 mode_file="$HOME/dotfiles/.varfiles/memmode"
 modes=(percent data) #no spaces in mode titles
+icon=""
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -25,9 +26,16 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
-info() { cat /proc/meminfo | grep "$1" | sed -e 's/^[^0-9]*\([0-9]\+\) kB.*$/\1/' | numfmt --from-unit="Ki" --to-unit="Gi" --format="%.2f" ; }
-data() { echo "scale=2; $1" | bc | sed -e 's/^\./0./' | sed -e 's/^\([0-9]\{1\}\)$/0\1/' ; }
-perc() { echo "scale=2; $1" | bc | sed  -e 's/\.[0-9]\{2\}//' | sed -e 's/^\./0./' | sed -e 's/^\([0-9]\{1\}\)$/0\1/' ; }
+
+info() {
+    cat /proc/meminfo | grep "$1" | sed -e 's/^[^0-9]*\([0-9]\+\) kB.*$/\1/' | numfmt --from-unit="Ki" --to-unit="Gi" --format="%.2f"
+}
+data() {
+    echo "scale=2; $1" | bc | sed -e 's/^\./0./' | sed -e 's/^\([0-9]\{1\}\)$/0\1/'
+}
+perc() {
+    echo "scale=2; $1" | bc | sed  -e 's/\.[0-9]\{2\}//' | sed -e 's/^\./0./' | sed -e 's/^\([0-9]\{1\}\)$/0\1/'
+}
 display() {
     mem_total="$(info 'MemTotal')"
     mem_free="$(info 'MemAvailable')"
@@ -39,8 +47,9 @@ display() {
         'percent') msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(perc "($swp_total-$swp_free)/$swp_total*100")%" ;;
         *) help && exit 1 ;;
     esac
-    echo " $msg"
+    echo "$msg"
 }
+
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
@@ -59,32 +68,4 @@ main() {
 }
 
 main "$1"
-
-
-#DEPRECIATED
-#info() {
-#    type="$1"
-#    if [[ "$type" == 'mem' ]]; then
-#        info="$(free -m | head -2 | tail -1)"
-#    elif [[ "$type" == 'swp' ]]; then
-#        info="$(free -m | head -3 | tail -1)"
-#    fi
-#    echo "$info" | tr -s ' ' ' ' | cut -f2-4 -d' ' |
-#         numfmt --field=1- --from-unit="Mi" --to-unit="Gi" --format="%.2f"
-#}
-#display() {
-#    mode="$(cat $mode_file)"
-#    mem_info="$(info 'mem')"
-#    mem_used="$(echo $mem_info | cut -f2-3 -d' ' | tr ' ' '+' | bc)"
-#    mem_total="$(echo $mem_info | cut -f1 -d' ')"
-#    swp_info="$(info 'swp')"
-#    swp_used="$(echo $swp_info | cut -f2-3 -d' ' | tr ' ' '+' | bc)"
-#    swp_total="$(echo $swp_info | cut -f1 -d' ')"
-#    case "$mode" in
-#        'data'   ) msg="" ;;
-#        'precent') msg="" ;;
-#        *) help && exit 1 ;;
-#    esac
-#    echo " $msg"
-#}
 
