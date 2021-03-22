@@ -29,13 +29,11 @@ cycle() {
 display() {
     mode="$1"
     case $mode in
-        'short') cpu="$(mpstat -P ALL 1 1 | grep "Average: *all" | sed -e 's/ \{1,\}/\t/g' | cut -f3 | sed -uEn 's/(^[0-9]*)\..*$/0\1/p' | grep -o '..$' | sed -uEn 's/(^.*$)/ \1\%/p')" ;;
-        'long' ) cpu="$(mpstat -P ALL 1 1 | awk '/Average:/ && $2 ~ /[0-9]/ {print $3}' | sed -uEn 's/(^[0-9]*)\..*$/0\1\%/p' | grep -o '...$' | tr '\n' ' ' | sed -E 's/(^.*$)/ \1/') " #mpstat -P ALL 1 1 | #get cpu loads
+        'short') cpu="$(mpstat -P ALL 1 1 | grep "Average: *all" | sed -e 's/ \{1,\}/\t/g' | cut -f3 | cut -d'.' -f1 | sed -e 's/^\(\[0-9\]\)$/0\1/' | sed -e 's/$/\%/' )" ;;
+        'long' ) cpu="$(mpstat -P ALL 1 1 | awk '/Average:/ && $2 ~ /[0-9]/ {print $3}' | cut -d'.' -f1 | sed -e 's/^\(\[0-9\]\)$/0\1/g' | tr '\n' '%' | sed -e 's/%/% /g')" ;;
             #awk '/Average:/ && [ ~ /[0-9]/ {print {}' | #magic to get only load values
             #sed -uEn 's/(^[0-9]*)\..*$/0\1\%/p' | #trim decimals, pad 0 if < 10, add % after
             #tr '\n' ' ' # join lines together
-            # sed -E 's/(^.*$)/ \1/' add icon infront, shold be a variable, but run into issues with sed idk why
-            ;;
         *) help && exit 1 ;;
     esac
     echo "$cpu"
