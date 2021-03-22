@@ -3,8 +3,7 @@ set -eo pipefail # -e causes gtkautoreload to fail since it relies on timeout
 shopt -s extglob
 
 # Vars
-bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
-unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
+wallpaper_file="$HOME/dotfiles/.varfiles/wallpaper.png"
 picdir="$HOME/Pictures/wallpapers"
 histfile="$HOME/dotfiles/.varfiles/fehbg"
 indexfile="$HOME/dotfiles/.varfiles/wallindex"
@@ -70,17 +69,18 @@ addBorder() {
     image="$1"
     resolution="$(xrandr | grep ' primary' | grep -o '[0-9]\{3,\}x[0-9]\{3,\}')"
     bordercolor="$(convert "$image" -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
-    convert "$unbgfile" -resize "$resolution" -bordercolor "$bordercolor" -border 0x34 "$bgfile" #add borderes to image
+    convert "$wallpaper_file" -resize "$resolution" -bordercolor "$bordercolor" -border 0x34 "$bgfile" #add borderes to image
 }
 setWallpaper() {
     image="$1"
-    cp "$image" "$unbgfile"
-    addBorder "$image"
-    case "$(head -1 ~/dotfiles/.varfiles/barmode)" in
-        float|mini|none) feh --bg-scale "$unbgfile" ;; #without borders
-        full           ) feh --bg-scale "$bgfile" ;; #with borders
-        *              ) usage && exit 1 ;;
-    esac
+    cp "$image" "$wallpaper_file"
+    feh --bg-scale "$wallpaper_file"
+#    addBorder "$image"
+#    case "$(head -1 ~/dotfiles/.varfiles/barmode)" in
+#        float|mini|none) feh --bg-scale "$wallpaper_file" ;; #without borders
+#        full           ) feh --bg-scale "$bgfile" ;; #with borders
+#        *              ) usage && exit 1 ;;
+#   esac
 }
 colorFirefox() {
     window_id="$(xwininfo -tree -root | grep '\"Navigator\" \"Firefox\"' | head -1 | grep -o '0x[0-9a-Z]*' | head -1)" #get window id for a firefox windown (doesnt matter which one)
@@ -90,19 +90,18 @@ colorFirefox() {
 changeColors() {
     image="$1"
     wal -geni "$image"  #font only
+    polybar-msg hook wall 1
+    ~/dotfiles/.scripts/zathura.sh
     colorFirefox
     ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1
     timeout 0.5s xsettingsd -c ~/dotfiles/.varfiles/gtkautoreload.ini
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1
-    ~/dotfiles/.scripts/zathura.sh
 }
 wall() {
     mode="$1"
     index=$(updateImageIndex "$mode")
     echo "$index" >| "$indexfile"
     image="$(indexToImage "$index")"
-    polybar-msg hook wall 1
-
     [ -z "$2" ] && change='back' || change="$2"
     case "$change" in
         'font') changeColors "$image" ;;

@@ -1,16 +1,17 @@
 #!/bin/bash
 shopt -s extglob
 
-bgfile="$HOME/dotfiles/.varfiles/bordered_background.png"
-unbgfile="$HOME/dotfiles/.varfiles/unbordered_background.png"
+wallpaper_file="$HOME/dotfiles/.varfiles/wallpaper.png"
 mode_file="$HOME/dotfiles/.varfiles/barmode"
 modes=(float full mini none)
 
 #Icons
 icon_file="$HOME/dotfiles/.varfiles/polysep"
 dl="." #arbitrary but might as well be a variable, allows for spaces in the icon sets
-icons=(arrow_tail arrow_sym trig_in trig_out big_fade_in big_fade small_fade circle)
-icon_sets=("$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl $dl $dl ")
+icons=(arrow_tail arrow_sym trig_in trig_out big_fade_in circle)
+icon_sets=("$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl $dl $dl")
+# small_fade "$dl$dl$dl"
+# big_fade "$dl$dl$dl"
 #symetric    ; ; ; ; ; ;
 #directional ;  ;  ; ; ;【】
 
@@ -47,11 +48,12 @@ cycle() {
     echo "${arr[$next_idx]}"
 }
 wallpaper() {
-    case $1 in
-        float|mini|none) feh --bg-scale "$unbgfile" ;;
-        full) feh --bg-scale "$bgfile" ;;
-        *) help && exit 1 ;;
-    esac
+    feh --bg-scale "$wallpaper_file"
+#    case $1 in
+#        float|mini|none) feh --bg-scale "$wallpaper_file" ;;
+#        full) feh --bg-scale "$bgfile" ;;
+#        *) help && exit 1 ;;
+#    esac
 }
 separators() {
     mode="$1"
