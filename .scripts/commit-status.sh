@@ -1,29 +1,18 @@
 #! /bin/bash
 
 dotdir="$HOME/dotfiles"
+message="updated miscelanoues/variable/colorscheme/stats files"
 to_ignore=(
     "" #status seems to skip this idk why
+    ".vim/view/*"
     ".vim/.netrwhist"
-    ".vim/view"
-    ".vim/spell"
-    ".varfiles"
-    ".config/qt5ct/colors/pywal.conf"
+    ".vim/spell/*"
+    ".varfiles/*"
     ".config/zathura/zathurarc"
     ".config/deluge/stats.tsv"
     ".gitignore"
     ".config/zathura/zathurarc"
     )
-#messages=(
-#    "update vim folds"
-#    "update vim/netrwhist"
-#    "update vim folds "
-#    "update background tracking files"
-#    "update QT5 colors as set by pywal"
-#    "update zathura colors as set by pywal"
-#    "torrent stats"
-#    "update ignore files"
-#    "zathura colors"
-#    )
 
 status() {
     pattern=""
@@ -36,10 +25,10 @@ status() {
 }
 commit() {
     cd $dotdir
-    for i in ${to_ignore[@]}; do
-        files=${to_ignore[$i]}
-        git add $files
+    for i in ${!to_ignore[@]}; do
+        git add "${to_ignore[$i]}"
     done
+    git commit -m "$message"
     cd -
 }
 main() {
