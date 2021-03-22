@@ -4,7 +4,7 @@ readings="$HOME/dotfiles/.varfiles/readings"
 reading="$HOME/dotfiles/.varfiles/reading"
 reading_folder="reading list"
 browser="firefox"
-thresh=60
+thresh=50
 
 help() {
     echo "Error Usage: $0 {update|pick|open|display}"
