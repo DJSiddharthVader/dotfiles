@@ -5,7 +5,6 @@ message="updated miscelanoues/variable/colorscheme/stats files"
 to_ignore=(
     "" #status seems to skip this idk why
     ".vim/view/*"
-    ".vim/.netrwhist"
     ".vim/spell/*"
     ".varfiles/*"
     ".config/zathura/zathurarc"
@@ -14,6 +13,9 @@ to_ignore=(
     ".config/zathura/zathurarc"
     )
 
+help() {
+    echo "Error: usage $0 {status|commit}"
+}
 status() {
     pattern=""
     for i in ${!to_ignore[@]}; do
@@ -35,7 +37,7 @@ main() {
     case "$1" in
         'status') status ;;
         'commit') commit ;;
-        *) echo 'invalid arg' && exit 1 ;;
+        *) echo help && exit 1 ;;
     esac
 }
 
