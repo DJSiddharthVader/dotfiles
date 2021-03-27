@@ -1,0 +1,52 @@
+inherit = section/full
+modules-right = reading deluge weather uptime disk xkeyboard temperature cpu memory date i3
+
+i3-prefix = ${colors.leftprefix}
+i3-suffix = ${colors.leftsuffix}
+;i3-color = ${colors.colorN}
+
+date-prefix = ${colors.leftprefix}
+date-suffix = ${colors.leftsuffix}
+;date-color = ${colors.colorN}
+
+memory-prefix = ${colors.leftprefix}
+memory-suffix = ${colors.leftsuffix}
+;memory-color = ${colors.colorN}
+
+cpu-prefix = ${colors.leftprefix}
+cpu-suffix = ${colors.leftsuffix}
+;cpu-color = ${colors.colorN}
+
+temperature-prefix = ${colors.leftprefix}
+temperature-suffix = ${colors.leftsuffix}
+;temperature-color = ${colors.colorN}
+
+xkeyboard-prefix = ${colors.leftprefix}
+xkeyboard-suffix = ${colors.leftsuffix}
+;xkeyboard-color = ${colors.colorN}
+
+disk-prefix = ${colors.leftprefix}
+disk-suffix = ${colors.leftsuffix}
+;disk-color = ${colors.colorN}
+
+uptime-prefix = ${colors.leftprefix}
+uptime-suffix = ${colors.leftsuffix}
+;uptime-color = ${colors.colorN}
+
+weather-prefix = ${colors.leftprefix}
+weather-suffix = ${colors.leftsuffix}
+;weather-color = ${colors.colorN}
+
+deluge-prefix = ${colors.leftprefix}
+deluge-suffix = ${colors.leftsuffix}
+;deluge-color = ${colors.colorN}
+
+wall-prefix = ${colors.leftprefix}
+wall-suffix = ${colors.leftsuffix}
+;wall-color = ${colors.colorN}
+
+reading-prefix = ${colors.leftprefix}
+reading-suffix = ${colors.leftsuffix}
+;reading-color = ${colors.colorN}
+
+

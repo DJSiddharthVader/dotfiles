@@ -31,6 +31,7 @@ font-icon = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
 font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
 ; for weather icons
 font-weather = Weather Icons:style=Regular;3
+font-weather-large = Weather Icons:style=Regular:size=15;3
 ; text font
 font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
 font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
@@ -54,6 +55,7 @@ font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
 ;font-main = Iosevka:pixelsize=10;2
 ; for text char not in font-2, avoids oversized icons from defualting to font-4
 font-overflow =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
+font-overflow-large =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=19:antialias=true;1
 ;font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
 ;font-overflow = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 ; for powerline separators
@@ -61,6 +63,8 @@ font-powerline = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=22:antialias
 font-powerline-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=28:antialias=true;6
 ; for long scrolling text, (smaller and mono-spaced
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
+font-focused = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
+font-focused-large = Terminus:style=Regular:pixelsize=15:antialias=true;2
 
 [section/float]
 monitor = ${env:MONITOR:}
@@ -94,6 +98,7 @@ font-2 = ${fonts.font-main}
 font-3 = ${fonts.font-overflow}
 font-4 = ${fonts.font-powerline}
 font-5 = ${fonts.font-scrolling}
+font-6 = ${fonts.font-focused}
 
 [section/full]
 tray-transparent = true
@@ -124,271 +129,32 @@ line-size = 3
 line-color = #f00
 ;fonts
 font-0 = ${fonts.font-icon-large}
-font-1 = ${fonts.font-weather}
+font-1 = ${fonts.font-weather-large}
 font-2 = ${fonts.font-main-large}
-font-3 = ${fonts.font-overflow}
+font-3 = ${fonts.font-overflow-large}
 font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-scrolling}
+font-6 = ${fonts.font-focused-large}
 
 
 ;bars
 [bar/floating-top]
-inherit = section/float
-fixed-center = true
-modules-left = i3
-modules-center =
-modules-right = songnames mpd bluetooth protonvpn wlan volume gamma applauncher
+include-file = ~/dotfiles/.config/polybar/bars/floating-top.bar
+[bar/floating-bottom]
+include-file = ~/dotfiles/.config/polybar/bars/floating-bottom.bar
 
-i3-prefix = ${colors.rightprefix}
-i3-suffix = ${colors.rightsuffix}
-
-applauncher-prefix = ${colors.leftprefix}
-applauncher-suffix = ${colors.leftsuffix}
-
-gamma-prefix = ${colors.leftprefix}
-gamma-suffix = ${colors.leftsuffix}
-
-volume-prefix = ${colors.leftprefix}
-volume-suffix = ${colors.leftsuffix}
-
-wlan-prefix = ${colors.leftprefix}
-wlan-suffix = ${colors.leftsuffix}
-
-protonvpn-prefix = ${colors.leftprefix}
-protonvpn-suffix = ${colors.leftsuffix}
-
-bluetooth-prefix = ${colors.leftprefix}
-bluetooth-suffix = ${colors.leftsuffix}
-
-mpd-prefix =
-mpd-suffix = ${colors.leftsuffix}
-
-songnames-prefix = ${colors.leftprefix}
-songnames-suffix =
-
-[bar/floating-bot]
-inherit = section/float
-bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather deluge
-modules-center =
-modules-right = reading wall
-
-date-prefix = ${colors.rightprefix}
-date-suffix = ${colors.rightsuffix}
-
-memory-prefix = ${colors.rightprefix}
-memory-suffix = ${colors.rightsuffix}
-
-cpu-prefix = ${colors.rightprefix}
-cpu-suffix = ${colors.rightsuffix}
-
-temperature-prefix = ${colors.rightprefix}
-temperature-suffix = ${colors.rightsuffix}
-
-xkeyboard-prefix = ${colors.rightprefix}
-xkeyboard-suffix = ${colors.rightsuffix}
-
-disk-prefix = ${colors.rightprefix}
-disk-suffix = ${colors.rightsuffix}
-
-uptime-prefix = ${colors.rightprefix}
-uptime-suffix = ${colors.rightsuffix}
-
-weather-prefix = ${colors.rightprefix}
-weather-suffix = ${colors.rightsuffix}
-
-deluge-prefix = ${colors.rightprefix}
-deluge-suffix = ${colors.rightsuffix}
-
-wall-prefix = ${colors.leftprefix}
-wall-suffix = ${colors.leftsuffix}
-
-reading-prefix = ${colors.leftprefix}
-reading-suffix = ${colors.leftsuffix}
-
-[bar/bordered-top]
-inherit = section/full
-modules-left = i3
-modules-center =
-modules-right = songnames mpd bluetooth protonvpn wlan volume gamma applauncher
-
-i3-prefix = ${colors.rightprefix}
-i3-suffix = ${colors.rightsuffix}
-
-applauncher-prefix = ${colors.leftprefix}
-applauncher-suffix = ${colors.leftsuffix}
-
-date-prefix = ${colors.leftprefix}
-date-suffix = ${colors.leftsuffix}
-
-gamma-prefix = ${colors.leftprefix}
-gamma-suffix = ${colors.leftsuffix}
-
-volume-prefix = ${colors.leftprefix}
-volume-suffix = ${colors.leftsuffix}
-
-wlan-prefix = ${colors.leftprefix}
-wlan-suffix = ${colors.leftsuffix}
-
-protonvpn-prefix = ${colors.leftprefix}
-protonvpn-suffix = ${colors.leftsuffix}
-
-bluetooth-prefix = ${colors.leftprefix}
-bluetooth-suffix = ${colors.leftsuffix}
-
-mpd-prefix =
-mpd-suffix = ${colors.leftsuffix}
-
-songnames-prefix = ${colors.leftprefix}
-songnames-suffix =
-
-[bar/bordered-bot]
-inherit = section/full
-bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather deluge
-modules-center =
-modules-right = reading wall
-
-date-prefix = ${colors.rightprefix}
-date-suffix = ${colors.rightsuffix}
-
-memory-prefix = ${colors.rightprefix}
-memory-suffix = ${colors.rightsuffix}
-
-cpu-prefix = ${colors.rightprefix}
-cpu-suffix = ${colors.rightsuffix}
-
-temperature-prefix = ${colors.rightprefix}
-temperature-suffix = ${colors.rightsuffix}
-
-xkeyboard-prefix = ${colors.rightprefix}
-xkeyboard-suffix = ${colors.rightsuffix}
-
-disk-prefix = ${colors.rightprefix}
-disk-suffix = ${colors.rightsuffix}
-
-uptime-prefix = ${colors.rightprefix}
-uptime-suffix = ${colors.rightsuffix}
-
-weather-prefix = ${colors.rightprefix}
-weather-suffix = ${colors.rightsuffix}
-
-deluge-prefix = ${colors.rightprefix}
-deluge-suffix = ${colors.rightsuffix}
-
-wall-prefix = ${colors.leftprefix}
-wall-suffix = ${colors.leftsuffix}
-
-reading-prefix = ${colors.leftprefix}
-reading-suffix = ${colors.leftsuffix}
+[bar/full-top]
+include-file = ~/dotfiles/.config/polybar/bars/full-top.bar
+[bar/full-bottom]
+include-file = ~/dotfiles/.config/polybar/bars/full-bottom.bar
 
 [bar/cross-left]
-inherit = section/full
-modules-left = i3 applauncher gamma volume wlan protonvpn focused bluetooth mpd songnames
-
-applauncher-prefix = ${colors.rightprefix}
-applauncher-suffix = ${colors.rightsuffix}
-
-i3-prefix = ${colors.rightprefix}
-i3-suffix = ${colors.rightsuffix}
-
-focused-prefix = ${colors.rightprefix}
-focused-suffix = ${colors.rightsuffix}
-
-gamma-prefix = ${colors.rightprefix}
-gamma-suffix = ${colors.rightsuffix}
-
-volume-prefix = ${colors.rightprefix}
-volume-suffix = ${colors.rightsuffix}
-
-wlan-prefix = ${colors.rightprefix}
-wlan-suffix = ${colors.rightsuffix}
-
-protonvpn-prefix = ${colors.rightprefix}
-protonvpn-suffix = ${colors.rightsuffix}
-
-bluetooth-prefix = ${colors.rightprefix}
-bluetooth-suffix = ${colors.rightsuffix}
-
-mpd-prefix = ${colors.rightprefix}
-mpd-suffix =
-
-songnames-prefix =
-songnames-suffix = ${colors.rightsuffix}
-
+include-file = ~/dotfiles/.config/polybar/bars/cross-left.bar
 [bar/cross-right]
-inherit = section/full
-modules-right = reading deluge weather uptime disk xkeyboard temperature cpu memory date i3
-
-i3-prefix = ${colors.leftprefix}
-i3-suffix = ${colors.leftsuffix}
-
-date-prefix = ${colors.leftprefix}
-date-suffix = ${colors.leftsuffix}
-
-memory-prefix = ${colors.leftprefix}
-memory-suffix = ${colors.leftsuffix}
-
-cpu-prefix = ${colors.leftprefix}
-cpu-suffix = ${colors.leftsuffix}
-
-temperature-prefix = ${colors.leftprefix}
-temperature-suffix = ${colors.leftsuffix}
-
-xkeyboard-prefix = ${colors.leftprefix}
-xkeyboard-suffix = ${colors.leftsuffix}
-
-disk-prefix = ${colors.leftprefix}
-disk-suffix = ${colors.leftsuffix}
-
-uptime-prefix = ${colors.leftprefix}
-uptime-suffix = ${colors.leftsuffix}
-
-weather-prefix = ${colors.leftprefix}
-weather-suffix = ${colors.leftsuffix}
-
-deluge-prefix = ${colors.leftprefix}
-deluge-suffix = ${colors.leftsuffix}
-
-wall-prefix = ${colors.leftprefix}
-wall-suffix = ${colors.leftsuffix}
-
-reading-prefix = ${colors.leftprefix}
-reading-suffix = ${colors.leftsuffix}
+include-file = ~/dotfiles/.config/polybar/bars/cross-right.bar
 
 [bar/minimal]
-inherit = section/float
-height = 22
-y-offset = 0
-radius = 5.0
-tray-transparent = true
-border-top-size = 0
-border-bottom-size = 0
-modules-left =
-modules-center = i3 xkeyboard bluetooth protonvpn wlan volume date
-modules-right =
-
-i3-prefix = ${colors.rightprefix}
-i3-suffix =
-
-focused-prefix = " "
-focused-suffix =
-
-date-prefix = " "
-date-suffix =
-
-volume-prefix = " "
-volume-suffix =
-
-wlan-prefix = " "
-wlan-suffix =
-
-protonvpn-prefix = " "
-protonvpn-suffix =
-
-bluetooth-prefix = ${colors.leftprefix}
-bluetooth-suffix =
-
+include-file = ~/dotfiles/.config/polybar/bars/minimal.bar
 
 ;modules
 [module/bspwm]
@@ -455,6 +221,7 @@ format-suffix-background = ${colors.transparent}
 type = custom/script
 tail = true
 exec = ~/dotfiles/.scripts/polybar/current-window.sh
+format = "%{T7}<label>%{T-}"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color2}
@@ -487,7 +254,7 @@ menu-1-3 = ""
 menu-1-3-exec = inkscape &
 menu-1-4 = ""
 menu-1-4-exec = st &
-menu-1-5 = ""
+menu-1-5 = ""
 menu-1-5-exec = firefox --browser &
 menu-1-6 = ""
 menu-1-6-exec = firefox --private-window &

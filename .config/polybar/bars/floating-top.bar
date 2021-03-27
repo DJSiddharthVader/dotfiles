@@ -1,0 +1,47 @@
+inherit = section/float
+fixed-center = true
+modules-left = i3 focused
+modules-center =
+modules-right = songnames mpd bluetooth protonvpn wlan volume gamma applauncher
+
+i3-prefix = ${colors.rightprefix}
+i3-suffix = ${colors.rightsuffix}
+;i3-color = ${colors.colorN}
+
+focused-prefix = ${colors.rightprefix}
+focused-suffix = ${colors.rightsuffix}
+;focused-color = ${colors.colorN}
+
+applauncher-prefix = ${colors.leftprefix}
+applauncher-suffix = ${colors.leftsuffix}
+;applauncher-color = ${colors.colorN}
+
+gamma-prefix = ${colors.leftprefix}
+gamma-suffix = ${colors.leftsuffix}
+;gamma-color = ${colors.colorN}
+
+volume-prefix = ${colors.leftprefix}
+volume-suffix = ${colors.leftsuffix}
+;volume-color = ${colors.colorN}
+
+wlan-prefix = ${colors.leftprefix}
+wlan-suffix = ${colors.leftsuffix}
+;wlan-color = ${colors.colorN}
+
+protonvpn-prefix = ${colors.leftprefix}
+protonvpn-suffix = ${colors.leftsuffix}
+;protonvpn-color = ${colors.colorN}
+
+bluetooth-prefix = ${colors.leftprefix}
+bluetooth-suffix = ${colors.leftsuffix}
+;bluetooth-color = ${colors.colorN}
+
+mpd-prefix =
+mpd-suffix = ${colors.leftsuffix}
+;mpd-color = ${colors.colorN}
+
+songnames-prefix = ${colors.leftprefix}
+songnames-suffix =
+;songnames-color = ${colors.colorN}
+
+

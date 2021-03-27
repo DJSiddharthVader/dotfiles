@@ -1,0 +1,51 @@
+inherit = section/full
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather deluge
+modules-center =
+modules-right = reading wall
+
+date-prefix = ${colors.rightprefix}
+date-suffix = ${colors.rightsuffix}
+;date-color = ${colors.colorN}
+
+memory-prefix = ${colors.rightprefix}
+memory-suffix = ${colors.rightsuffix}
+;memory-color = ${colors.colorN}
+
+cpu-prefix = ${colors.rightprefix}
+cpu-suffix = ${colors.rightsuffix}
+;cpu-color = ${colors.colorN}
+
+temperature-prefix = ${colors.rightprefix}
+temperature-suffix = ${colors.rightsuffix}
+;temperature-color = ${colors.colorN}
+
+xkeyboard-prefix = ${colors.rightprefix}
+xkeyboard-suffix = ${colors.rightsuffix}
+;xkeyboard-color = ${colors.colorN}
+
+disk-prefix = ${colors.rightprefix}
+disk-suffix = ${colors.rightsuffix}
+;disk-color = ${colors.colorN}
+
+uptime-prefix = ${colors.rightprefix}
+uptime-suffix = ${colors.rightsuffix}
+;uptime-color = ${colors.colorN}
+
+weather-prefix = ${colors.rightprefix}
+weather-suffix = ${colors.rightsuffix}
+;weather-color = ${colors.colorN}
+
+deluge-prefix = ${colors.rightprefix}
+deluge-suffix = ${colors.rightsuffix}
+;deluge-color = ${colors.colorN}
+
+wall-prefix = ${colors.leftprefix}
+wall-suffix = ${colors.leftsuffix}
+;wall-color = ${colors.colorN}
+
+reading-prefix = ${colors.leftprefix}
+reading-suffix = ${colors.leftsuffix}
+;reading-color = ${colors.colorN}
+
+

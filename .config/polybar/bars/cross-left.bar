@@ -1,0 +1,43 @@
+inherit = section/full
+modules-left = i3 focused applauncher gamma volume wlan protonvpn bluetooth mpd songnames
+
+applauncher-prefix = ${colors.rightprefix}
+applauncher-suffix = ${colors.rightsuffix}
+;applauncher-color = ${colors.colorN}
+
+i3-prefix = ${colors.rightprefix}
+i3-suffix = ${colors.rightsuffix}
+;i3-color = ${colors.colorN}
+
+focused-prefix = ${colors.rightprefix}
+focused-suffix = ${colors.rightsuffix}
+;focused-color = ${colors.colorN}
+
+gamma-prefix = ${colors.rightprefix}
+gamma-suffix = ${colors.rightsuffix}
+;gamma-color = ${colors.colorN}
+
+volume-prefix = ${colors.rightprefix}
+volume-suffix = ${colors.rightsuffix}
+;volume-color = ${colors.colorN}
+
+wlan-prefix = ${colors.rightprefix}
+wlan-suffix = ${colors.rightsuffix}
+;wlan-color = ${colors.colorN}
+
+protonvpn-prefix = ${colors.rightprefix}
+protonvpn-suffix = ${colors.rightsuffix}
+;protonvpn-color = ${colors.colorN}
+
+bluetooth-prefix = ${colors.rightprefix}
+bluetooth-suffix = ${colors.rightsuffix}
+;bluetooth-color = ${colors.colorN}
+
+mpd-prefix = ${colors.rightprefix}
+mpd-suffix =
+;mpd-color = ${colors.colorN}
+
+songnames-prefix =
+songnames-suffix = ${colors.rightsuffix}
+;songnames-color = ${colors.colorN}
+
