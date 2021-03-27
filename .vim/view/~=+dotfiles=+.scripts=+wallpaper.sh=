@@ -134,12 +134,12 @@ silent! normal! zE
 let &fdl = &fdl
 5
 normal! zo
-let s:l = 26 - ((25 * winheight(0) + 22) / 45)
+let s:l = 128 - ((126 * winheight(0) + 22) / 44)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 26
-normal! 01|
+keepjumps 128
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

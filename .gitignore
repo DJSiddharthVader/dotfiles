@@ -1,4 +1,7 @@
 theme_change.mp4
+.config/kritarc
+.config/fontforge
+.config/nvim/.netrwhist
 .varfiles/gitPAT
 .config/mpd/mpd.db
 .config/mpd/mpd.log
