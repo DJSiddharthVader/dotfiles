@@ -1,9 +1,4 @@
 # Separators, Symbols and Colors
-#git symbols
-bsym='\u2325'
-csym='\u21E1' #dotted up arrow
-msym='+'
-usym='\u26EC' #three trig dots
 #Foreground Colors
 F0='\[\e[07;40m\]'
 F1b='\[\e[01;31m\]'
@@ -23,7 +18,12 @@ B4='\[\e[44m\]'
 B5='\[\e[45m\]'
 B6='\[\e[46m\]'
 B7='\[\e[47m\]'
-# prompt symbols
+#git symbols
+bsym='\u2325'
+csym='\u21E1' #dotted up arrow
+msym='+'
+usym='\u26EC' #three trig dots
+#prompt symbols
 #par=" "
 #top="$(echo -e '\u250C') "
 #bot="\n$(echo -e '\u2514')  "
