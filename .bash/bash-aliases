@@ -19,17 +19,16 @@ alias tmux='tmux -2'
 
 #Git
 alias grm='git rm'
-alias gad='git add'
-alias glo='git log'
-alias gdi='git diff'
-alias gph='git push'
-alias gpl='git pull'
-alias gdi='git diff'
-alias gco='git commit'
-alias gbr='git branch'
-alias gst='git status'
-alias gch='git checkout'
+alias add='git add'
+alias log='git log'
+alias dif='git diff'
+alias push='git push'
+alias pull='git pull'
+alias com='git commit'
+alias bra='git branch'
+alias chk='git checkout'
 
+alias gst='git status'
 alias gsl='~/.scripts/commit-status.sh status'
 alias gsw='watch -n2 "~/.scripts/commit-status.sh status"'
 
@@ -56,7 +55,6 @@ alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
 alias mnt="~/.scripts/mount.sh on"
 alias umt="~/.scripts/mount.sh off"
-alias ip="hostname -I | cut -d' ' -f1"
 alias brg='ssh slreed@bridges2.psc.edu'
 alias school='cd /home/sidreed/CMU_MSCB/Current_Courses/'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'

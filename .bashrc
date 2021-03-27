@@ -157,10 +157,10 @@ fi
 
 # }}}
 ## Aliases {{{
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
+[ -f $HOME/.bash/bash-aliases ] && source $HOME/.bash/bash-aliases
 
 ## Functions
-[ -f ~/.bash_functions.sh ] && source ~/.bash_functions.sh
+[ -f $HOME/.bash/bash-functions.sh ] && source $HOME/.bash/bash-functions.sh
 
 ## Priviliged Access
 if ! $_isroot; then
@@ -244,29 +244,29 @@ fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ## Prompt
-source $HOME/dotfiles/.scripts/bash-prompt.sh
-export  LS_COLORS="$(dircolors -b $HOME/.dircolors | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
+[ -f $HOME/.bash/bash-prompt.sh ] && source $HOME/.bash/bash-prompt.sh
+export  LS_COLORS="$(dircolors -b $HOME/.bash/dircolors_256 | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
 
 ## Set PATH variable
 
 #export GOPATH="$(echo $HOME/Documents/CMU_MSCB/Courses/Programming-02601/{Class,Homework,Project} | sed -e 's/ /:/g')"
 export GOPATH="$HOME/CMU_MSCB/Courses/Programming-02601/:$HOME/Projects/musman/:$HOME/Projects/go/src"
 
-PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
-export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+#PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+#PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+#PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
+#PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
+#export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
+#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
 export PATH="$HOME/.scripts:$PATH"
-PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}') #remove duplicate entries
+PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}') #remove duplicate entries in path
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/sidreed/anaconda3/condabin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+# Conda
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
