@@ -11,7 +11,7 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
@@ -20,7 +20,7 @@ setlocal commentstring=#%s
 setlocal complete=.,w,b,u,t
 setlocal concealcursor=
 setlocal conceallevel=1
-setlocal completefunc=youcompleteme#CompleteFunc
+setlocal completefunc=
 setlocal nocopyindent
 setlocal nocursorbind
 setlocal nocursorcolumn
@@ -45,18 +45,18 @@ setlocal foldmarker={{{,}}}
 setlocal foldmethod=manual
 setlocal foldminlines=1
 setlocal foldnestmax=20
-setlocal foldtext=foldtext()
+setlocal foldtext=MyFoldText()
 setlocal formatexpr=
 setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
-setlocal imsearch=0
+setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=GetShIndent()
-setlocal indentkeys=0{,0},!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -117,30 +117,18 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-2,7fold
-9,18fold
-19,27fold
-28,41fold
-42,62fold
-1,63fold
-64,71fold
-72,87fold
-89,97fold
-98,127fold
-88,129fold
+7,9fold
+10,27fold
+28,30fold
+31,33fold
+35,46fold
 let &fdl = &fdl
-1
-normal! zo
-88
-normal! zo
-88
-normal! zc
-let s:l = 42 - ((41 * winheight(0) + 23) / 46)
+let s:l = 34 - ((33 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 42
-normal! 01|
+keepjumps 34
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
