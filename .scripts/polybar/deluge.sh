@@ -1,7 +1,7 @@
 #!/bin/bash
 shopt -s extglob
 
-mode_file="$HOME/dotfiles/.varfiles/tormode"
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 config_dir="$HOME/dotfiles/.config/deluge"
 watch_dir="$HOME/Torrents"
 modes=(ratio data datatotal speed active) #no spaces in mode titles
@@ -33,6 +33,12 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
+getMode() {
+    grep '^torrent:' "$mode_file" | cut -d':' -f2
+}
+setMode() {
+    sed -i "/^torrent:/s/:.*/:$1/" "$mode_file"
+}
 
 # Global Torrent Data Tracking
 info() {
@@ -61,7 +67,7 @@ update_stats() {
     uploaded="$(scrape_stats "$info" 'Uploaded' "$unit" )"
     paste -d"$delim" <(echo "$ids") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$stats_file"
     cp "$stats_file" "$stats_file.bak"
-    sort -r -t"$delim" -k4,4 -k5,5 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
+    sort -t"$delim" -k5,5 -k4,4 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
     #sed -i "1s/^/$header"/ "$stats_file"
 }
 total_stats() {
@@ -211,6 +217,7 @@ search() {
     rm $results_page
 }
 
+
 main() {
     mode="$1"
     case $mode in
@@ -218,7 +225,7 @@ main() {
         'start'  ) start ;;
         'stats'  ) update_stats ;;
         'display')
-            [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+            [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
             display "$dmode"
             ;;
         *)
@@ -229,7 +236,7 @@ main() {
                 $tmp    ) dmode="$mode" ;; #capture any valid mode
                 *       ) help && exit 1 ;;
             esac
-            echo "$dmode"  >| "$mode_file"
+            setMode "$dmode"
             ;;
     esac
 }
