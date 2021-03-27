@@ -14,11 +14,11 @@ getIcon() {
         case "$class $name" in
             *st-256color*) icon="" ;;
             *Firefox*    ) icon="" ;;
-            *zathura*     ) icon="" ;;
+            *.pdf*       ) icon="" ;;
             *) icon="" ;;
         esac
     fi
-    echo $icon
+    echo "$icon"
 }
 getWorkspace() {
     id="$1"
@@ -29,8 +29,12 @@ getWorkspace() {
 }
 getName() {
     id="$1"
-    name="$(xprop -id $id WM_NAME | cut -d'=' -f2 | tr -d '"' | tr -s " " | sed -e 's/[Nn]one//')"
-    echo $name
+    name="$(xprop -id $id WM_NAME | cut -d'=' -f2 | tr -d '"' | tr -s " " | sed -e 's/[Nn]one//' | sed -e 's/^ //')"
+    if [[ "$name" =~ ".pdf" ]]; then
+        echo "$name" | rev | cut -d'/' -f-2 | rev | sed -e 's/^/...\//'
+    else
+        echo "$name"
+    fi
 }
 main() {
     id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
