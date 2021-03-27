@@ -1,7 +1,6 @@
 #!/bin/bash
 shopt -s extglob
 
-wallpaper_file="$HOME/dotfiles/.config/polybar/wallpaper.png"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=(float full cross mini none)
 
@@ -36,7 +35,7 @@ cycle() {
     dir="$1"
     name=$2[@]
     arr=("${!name}")
-    mode="$(cat $3)"
+    mode="$(getMode $3)"
     idx="$(echo "${arr[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
     idx=$(($idx -1)) #current mode idx
     case "$dir" in
@@ -48,34 +47,33 @@ cycle() {
     echo "${arr[$next_idx]}"
 }
 getMode() {
-    grep '^bar:' "$mode_file" | cut -d':' -f2
+    if [ "$1" = 'style' ]; then
+        grep '^bar:' "$mode_file" | cut -d':' -f2
+    else
+        grep '^separator:' "$mode_file" | cut -d':' -f2
+    fi
 }
 setMode() {
-    sed -i "/^bar:/s/:.*/:$1/" "$mode_file"
+    if [ "$1" = 'style' ]; then
+        sed -i "/^bar:/s/:.*/:$2/" "$mode_file"
+    else
+        sed -i "/^separator:/s/:.*/:$2/" "$mode_file"
+    fi
 }
 
-wallpaper() {
-    feh --bg-scale "$wallpaper_file"
-#    case $1 in
-#        float|mini|none) feh --bg-scale "$wallpaper_file" ;;
-#        full) feh --bg-scale "$bgfile" ;;
-#        *) help && exit 1 ;;
-#    esac
-}
 separators() {
     mode="$1"
     tmp="@($(echo ${icons[*]} | sed -e 's/ /|/g'))"
     case "$mode" in
-        'stay') dmode="$(head -1 $icon_file)" ;;
-        'next') dmode="$(cycle 'next' icons $icon_file)" ;;
-        'prev') dmode="$(cycle 'prev' icons $icon_file)" ;;
+        'stay') dmode="$(setMode 'separator')" ;;
+        'next') dmode="$(cycle 'next' icons 'separator')" ;;
+        'prev') dmode="$(cycle 'prev' icons 'separator')" ;;
          $tmp ) dmode="$mode" ;; #capture any valid mode
         *) help && exit 1 ;;
     esac
     idx="$(echo "${icons[*]}" | grep -o "^.*$dmode" | tr ' ' '\n' | wc -l | sed -s 's/$/-1/' | bc)"
-    #idx=$(($idx -1)) #current mode idx
     icon_set="${icon_sets[$idx]}"
-    #echo -e "$mode\n$dmode\n$idx\n$icon_set"
+    setMode 'separator' "$dmode"
     echo "$dmode
 ; icons to delimit polybar modules
 leftprefix = \"$(echo $icon_set | cut -d"$dl" -f1)\"
@@ -98,18 +96,17 @@ launch() {
     mode="$1"
     tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
     case "$mode" in
-        'stay') dmode="$(cat $mode_file)" ;;
-        'next') dmode="$(cycle 'next' modes $mode_file)" ;;
-        'prev') dmode="$(cycle 'prev' modes $mode_file)" ;;
+        'stay') dmode="$(getMode 'style')" ;;
+        'next') dmode="$(cycle 'next' modes 'style')" ;;
+        'prev') dmode="$(cycle 'prev' modes 'style')" ;;
          $tmp ) dmode="$mode" ;; #capture any valid mode
         *) help style && exit 1 ;;
     esac
-    echo "$dmode"  >| "$mode_file"
-    wallpaper "$dmode"
+    setMode 'style' "$dmode"
     killall -q polybar && sleep 0.00001 # Terminate already running bar instances
     case "$dmode" in
-        'float') launchOnAllMonitors floating-top floating-bot ;;
-        'full' ) launchOnAllMonitors bordered-top bordered-bot ;;
+        'float') launchOnAllMonitors floating-top floating-bottom ;;
+        'full' ) launchOnAllMonitors full-top full-bottom ;;
         'cross')
             monitors=$(getMonitors)
             MONITOR="$(echo $monitors | cut -d' ' -f1)" polybar cross-left &
@@ -120,6 +117,7 @@ launch() {
         *) help && exit 1 ;;
     esac
 }
+
 main() {
     mode="$1"
     change="$2"
@@ -127,7 +125,7 @@ main() {
         'sep'    ) separators "$change"; launch 'stay' ;;
         'style'  ) launch "$change" ;;
         'reload' ) ! [[ -z "$(pgrep 'polybar')" ]] && polybar-msg cmd restart ;;
-        'restart') separators "$(head -1 $icon_file)"; launch "$(cat $mode_file)" ;;
+        'restart') separators "$(getMode 'separator')"; launch "$(getMode 'style')" ;;
         *) help && exit 1 ;;
     esac
 }
