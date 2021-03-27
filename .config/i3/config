@@ -37,7 +37,7 @@ exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
 exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
-exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
+#exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 #express vpn
 exec --no-startup-id ~/.scripts/polybar/protonvpn.sh connect
 #Torrent daemon:
