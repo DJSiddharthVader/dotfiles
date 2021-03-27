@@ -97,7 +97,7 @@ changeColors() {
 wall() {
     mode="$1"
     index=$(updateImageIndex "$mode")
-    echo "$index" >| "$indexfile"
+    setIndex "$index"
     image="$(indexToImage "$index")"
     [ -z "$2" ] && change='back' || change="$2"
     case "$change" in
