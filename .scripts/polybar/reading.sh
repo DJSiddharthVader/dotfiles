@@ -1,7 +1,7 @@
 #!/bin/bash
 
 readings="$HOME/dotfiles/.varfiles/readings"
-reading="$HOME/dotfiles/.varfiles/reading"
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 reading_folder="reading list"
 browser="firefox"
 thresh=50
@@ -9,6 +9,13 @@ thresh=50
 help() {
     echo "Error Usage: $0 {update|pick|open|display}"
 }
+getReading() {
+    grep '^reading:' "$mode_file" | cut -d':' -f2-
+}
+setReading() {
+    sed -i "/^reading:/s/:.*/:$1/" "$mode_file"
+}
+
 update() {
     #update list of readings to read for local file
     #isolates all readings in the reading_folder folder
@@ -23,7 +30,8 @@ update() {
                    | tr -s ' ' ' '                    >| $readings
 }
 pick() {
-    cat $readings | shuf | tail -1 >| $reading   #pick new random article
+    rnd_article="$(cat $readings | shuf | tail -1)"
+    setReading "$rnd_article"
     killall -q "$(basename $0)" > /dev/null 2>&1 #restart zscroll with new article so scroll updates
 }
 open() {
@@ -31,14 +39,15 @@ open() {
 }
 display() {
     #scroll article title if longer than $thresh characeters otherwise static display
-    articlename="$(cat "$reading" | cut -f1 -d'~')"
+    articlename="$(getReading | cut -f1 -d'~')"
     if [[ ${#articlename} -gt $thresh ]]; then
-        ( zscroll -l "$thresh" -d 0.20 -b "" -a "" -p " /// " "$(cat "$reading" | cut -f1 -d'~')" ) &
+        ( zscroll -l "$thresh" -d 0.20 -b "" -a "" -p " /// " "$articlename" ) &
        wait
     else
         echo "$articlename"
     fi
 }
+
 main() {
     mode="$1"
     case "$mode" in

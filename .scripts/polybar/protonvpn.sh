@@ -29,7 +29,7 @@ pick_location() {
 display() {
     case "$(status)" in
         'not connected') output="Not Connected" ;;
-        'connected'    ) output="$(protonvpn-cli s | grep 'Country:\|Server:' | cut -d':' -f2 | tr '\n' ' ' | tr -s ' \t' ' ')" ;;
+        'connected'    ) output="$(protonvpn-cli s | grep 'Country:\|Server:' | cut -d':' -f2 | tr '\n' ' ' | tr -s ' \t' ' ')" ;; # | cut -d' ' -f3)" ;;
     esac
     echo "$output"
 }

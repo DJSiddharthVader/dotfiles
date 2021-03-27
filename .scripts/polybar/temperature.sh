@@ -1,7 +1,7 @@
 #!/bin/bash
 shopt -s extglob
 
-mode_file="$HOME/dotfiles/.varfiles/tempmode"
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=(short long)
 #Icons
 ramp1=""
@@ -31,6 +31,12 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
+getMode() {
+    grep '^temperature:' "$mode_file" | cut -d':' -f2
+}
+setMode() {
+    sed -i "/^temperature:/s/:.*/:$1/" "$mode_file"
+}
 
 icon() {
     temp="$(sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..')"
@@ -58,10 +64,11 @@ display(){
     esac
     echo "$temp"
 }
+
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+        [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
         display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
@@ -71,7 +78,7 @@ main() {
             $tmp  ) dmode="$mode" ;; #capture any valid mode
             *) help && exit 1 ;;
         esac
-        echo "$dmode"  >| "$mode_file"
+        setMode "$dmode"
     fi
 }
 

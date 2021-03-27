@@ -1,22 +1,33 @@
 #!/bin/bash
 shopt -s extglob
 
-mode_file="$HOME/dotfiles/.varfiles/netmode"
-modes=(standard standardd ip text name strength all)
-terminal="st"
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
+modes=(standard standardd text name strength ip all)
 interface="wlp1s0"
 pipurl="ifconfig.co"
-#Icons
-# 𝍥𝌮𝌭𝌪𝌡𝌆
-#▁▂▃▄▅▆▇█▉
+# Ramp Icons
+## Segmented Block
 #ramp1="𝍥"
-#ramp2="𝌭"
-#ramp3="𝌪"
-#ramp4="𝌆"
-ramp1="⎽"
-ramp2="⎼"
-ramp3="⎯"
-ramp4="⎻"
+#ramp2="䷒"
+#ramp3="䷊"
+#ramp4="䷡"
+#ramp5="䷀"
+#ramp6="䷪"
+## Lines
+#ramp1=" "
+#ramp2="⎽"
+#ramp3="⎽"
+#ramp4="⎼"
+#ramp5="⎯"
+#ramp6="⎻"
+## Block
+ramp1="│▃"
+ramp2="│▄"
+ramp3="│▅"
+ramp4="│▆"
+ramp5="│▇"
+ramp6="│█"
+
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -39,9 +50,15 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
+getMode() {
+    grep '^wifi:' "$mode_file" | cut -d':' -f2
+}
+setMode() {
+    sed -i "/^wifi:/s/:.*/:$1/" "$mode_file"
+}
 
 open() {
-    $terminal -e nmtui connect
+    $TERM -e nmtui connect
 }
 
 lip() {
@@ -63,34 +80,34 @@ strength() {
 icon() {
     percent=$(strength)
     case 1 in
-        $(($percent <  25))) icon="$ramp1" ;;
-        $(($percent <  40))) icon="$ramp1" ;;
-        $(($percent <  55))) icon="$ramp1" ;;
-        $(($percent <  70))) icon="$ramp2" ;;
-        $(($percent <  85))) icon="$ramp3" ;;
-        $(($percent < 100))) icon="$ramp4" ;;
+        $(($percent <  20))) icon="$ramp1" ;;
+        $(($percent <  40))) icon="$ramp2" ;;
+        $(($percent <  60))) icon="$ramp3" ;;
+        $(($percent <  80))) icon="$ramp4" ;;
+        $(($percent <  90))) icon="$ramp5" ;;
+        $(($percent < 101))) icon="$ramp6" ;;
     esac
     echo "$icon"
 }
-
 display(){
     mode="$1"
     case $mode in
         'standard' ) msg="$(icon) $(name)" ;;
         'standardd') msg="$(icon) $(strength)% $(name)" ;;
-        'ip'       ) msg="L:$(lip) P:$(pip)"  ;;
-        'text'     ) msg="$(name) $(strength)% $(pip)" ;;
+        'text'     ) msg="$(strength)% $(name) $(pip)" ;;
         'name'     ) msg="$(name)" ;;
         'strength' ) msg="$(strength)%" ;;
+        'ip'       ) msg="L:$(lip) P:$(pip)"  ;;
         'all'      ) msg="$(icon) $(strength)% $(name) $(pip)" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
 }
+
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+        [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
         display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
@@ -101,7 +118,7 @@ main() {
             $tmp  ) dmode="$mode" ;; #capture any valid mode
             *) help && exit 1 ;;
         esac
-        echo "$dmode"  >| "$mode_file"
+        setMode "$dmode"
     fi
 }
 

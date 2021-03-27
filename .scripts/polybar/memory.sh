@@ -1,8 +1,9 @@
 #!/bin/bash
 shopt -s extglob
 
-mode_file="$HOME/dotfiles/.varfiles/memmode"
-modes=(percent data) #no spaces in mode titles
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
+modes=(free_all free_mem used_all used_mem percent data short)
+mem_unit="Gi"
 icon=""
 
 help() {
@@ -26,9 +27,16 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
+getMode() {
+    grep '^memory:' "$mode_file" | cut -d':' -f2
+}
+setMode() {
+    sed -i "/^memory:/s/:.*/:$1/" "$mode_file"
+}
 
 info() {
-    cat /proc/meminfo | grep "$1" | sed -e 's/^[^0-9]*\([0-9]\+\) kB.*$/\1/' | numfmt --from-unit="Ki" --to-unit="Gi" --format="%.2f"
+    unit="$2"
+    cat /proc/meminfo | grep "$1" | sed -e 's/^[^0-9]*\([0-9]\+\) kB.*$/\1/' | numfmt --from-unit="Ki" --to-unit="$unit" --format="%.2f"
 }
 data() {
     echo "scale=2; $1" | bc | sed -e 's/^\./0./' | sed -e 's/^\([0-9]\{1\}\)$/0\1/'
@@ -37,14 +45,20 @@ perc() {
     echo "scale=2; $1" | bc | sed  -e 's/\.[0-9]\{2\}//' | sed -e 's/^\./0./' | sed -e 's/^\([0-9]\{1\}\)$/0\1/'
 }
 display() {
-    mem_total="$(info 'MemTotal')"
-    mem_free="$(info 'MemAvailable')"
-    swp_total="$(info 'SwapTotal')"
-    swp_free="$(info 'SwapFree')"
     mode="$1"
+    unit="$2"
+    mem_total="$(info 'MemTotal' "$unit")"
+    mem_free="$(info  'MemAvailable' "$unit")"
+    swp_total="$(info 'SwapTotal' "$unit")"
+    swp_free="$(info  'SwapFree' "$unit")"
     case "$mode" in
-        "data"   ) msg="$(data "$mem_total-$mem_free") Gi $(data "$swp_total-$swp_free") Gi" ;;
-        'percent') msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(perc "($swp_total-$swp_free)/$swp_total*100")%" ;;
+        'free_all') msg="$(perc "($mem_free)/$mem_total*100")% $(data $swp_free) $unit $(perc "($swp_free)/$swp_total*100")%" ;;
+        'free_mem') msg="$(perc "($mem_free)/$mem_total*100")% $(data $swp_free) $unit" ;;
+        'used_all') msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(data "$swp_total-$swp_free") $unit $(perc "($swp_total-$swp_free)/$swp_total*100")%" ;;
+        'used_mem') msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(data "$swp_total-$swp_free") $unit" ;;
+        'percent' ) msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(perc "($swp_total-$swp_free)/$swp_total*100")%" ;;
+        'data'    ) msg="$(data "$mem_total-$mem_free") $unit $(data "$swp_total-$swp_free") $unit" ;;
+        'short'   ) msg="$(perc "($mem_total-$mem_free)/$mem_total*100")%" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
@@ -53,8 +67,8 @@ display() {
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
-        display "$dmode"
+        [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
+        display "$dmode" "$mem_unit"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in
@@ -63,9 +77,9 @@ main() {
             $tmp  ) dmode="$mode" ;; #capture any valid mode
             *) help && exit 1 ;;
         esac
-        echo "$dmode"  >| "$mode_file"
+        setMode "$dmode"
     fi
 }
 
-main "$1"
+main "$@"
 

@@ -1,10 +1,22 @@
 #!/bin/bash
 #Script to scroll song name of current mpd song in polybar
-mode_file="$HOME/dotfiles/.varfiles/scrollmode"
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 spacechar=" "
 thresh=45
 
-static() { echo "$(mpc current)" ; }
+help() {
+    echo "Usage $0 {toggle|scroll|static}"
+}
+getMode() {
+    grep '^songnames:' "$mode_file" | cut -d':' -f2
+}
+setMode() {
+    sed -i "/^songnames:/s/:.*/:$1/" "$mode_file"
+}
+
+static() {
+    echo "$(mpc current)"
+}
 scroll() {
     song="$(mpc current)"
     if [[ ${#song} -gt $thresh ]]; then
@@ -36,17 +48,10 @@ main() {
         '') ;;
         'static') echo 'static' >| $mode_file ;;
         'scroll') echo 'scroll' >| $mode_file ;;
-        'toggle')
-            mode="$(cat $mode_file)"
-            if [[ $mode == "static" ]]; then
-                echo 'scroll' >| $mode_file
-            else
-                echo 'static' >| $mode_file
-            fi
-            ;;
-        *) echo "Usage $0 {toggle|scroll|static}" && exit 1 ;;
+        'toggle') [[ "$(getMode)" == "static" ]] && setMode 'scroll' || setMode 'static' ;;
+        *) help && exit 1 ;;
     esac
-    mode="$(cat $mode_file)"
+    mode="$(getMode)"
     display $mode
 }
 

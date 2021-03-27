@@ -1,15 +1,15 @@
 #!/bin/bash
 shopt -s extglob
 
-wallpaper_file="$HOME/dotfiles/.varfiles/wallpaper.png"
-mode_file="$HOME/dotfiles/.varfiles/barmode"
-modes=(float full mini none)
+wallpaper_file="$HOME/dotfiles/.config/polybar/wallpaper.png"
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
+modes=(float full cross mini none)
 
 #Icons
-icon_file="$HOME/dotfiles/.varfiles/polysep"
+icon_file="$HOME/dotfiles/.config/polybar/separators.mode"
 dl="." #arbitrary but might as well be a variable, allows for spaces in the icon sets
 icons=(arrow_tail arrow_sym trig_in trig_out big_fade_in circle)
-icon_sets=("$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl $dl $dl")
+icon_sets=("$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" " $dl$dl$dl ")
 # small_fade "$dl$dl$dl"
 # big_fade "$dl$dl$dl"
 #symetric    ; ; ; ; ; ;
@@ -47,6 +47,13 @@ cycle() {
     next_idx=$(($idx % ${#arr[@]})) #modulo to wrap back
     echo "${arr[$next_idx]}"
 }
+getMode() {
+    grep '^bar:' "$mode_file" | cut -d':' -f2
+}
+setMode() {
+    sed -i "/^bar:/s/:.*/:$1/" "$mode_file"
+}
+
 wallpaper() {
     feh --bg-scale "$wallpaper_file"
 #    case $1 in
@@ -71,11 +78,21 @@ separators() {
     #echo -e "$mode\n$dmode\n$idx\n$icon_set"
     echo "$dmode
 ; icons to delimit polybar modules
-leftprefix =  \"$(echo $icon_set | cut -d"$dl" -f1)\"
-leftsuffix =  \"$(echo $icon_set | cut -d"$dl" -f2)\"
+leftprefix = \"$(echo $icon_set | cut -d"$dl" -f1)\"
+leftsuffix = \"$(echo $icon_set | cut -d"$dl" -f2)\"
 rightprefix = \"$(echo $icon_set | cut -d"$dl" -f3)\"
 rightsuffix = \"$(echo $icon_set | cut -d"$dl" -f4)\"
 " | sed -e 's/""//' >| "$icon_file"
+}
+getMonitors() {
+    xrandr | sed -n '/ primary/,$p' | grep ' connected' | cut -d' ' -f1
+}
+launchOnAllMonitors() {
+    for barname in "$@"; do
+        for m in $(getMonitors); do
+            MONITOR=$m polybar "$barname" &
+        done
+    done
 }
 launch() {
     mode="$1"
@@ -90,21 +107,18 @@ launch() {
     echo "$dmode"  >| "$mode_file"
     wallpaper "$dmode"
     killall -q polybar && sleep 0.00001 # Terminate already running bar instances
-    for m in $(xrandr | grep ' connected' | cut -d' ' -f1); do
-        case "$dmode" in
-            'float')
-                MONITOR=$m polybar floating_top &
-                MONITOR=$m polybar floating_bot &
-                ;;
-            'full' )
-                MONITOR=$m polybar bordered_top &
-                MONITOR=$m polybar bordered_bot &
-                ;;
-            'mini' ) MONITOR=$m polybar minimal & ;;
-            'none' ) sleep 1 ;;
-            *) help && exit 1 ;;
-        esac
-    done
+    case "$dmode" in
+        'float') launchOnAllMonitors floating-top floating-bot ;;
+        'full' ) launchOnAllMonitors bordered-top bordered-bot ;;
+        'cross')
+            monitors=$(getMonitors)
+            MONITOR="$(echo $monitors | cut -d' ' -f1)" polybar cross-left &
+            MONITOR="$(echo $monitors | cut -d' ' -f2)" polybar cross-right &
+            ;;
+        'mini' ) launchOnAllMonitors minimal ;;
+        'none' ) sleep 1 ;;
+        *) help && exit 1 ;;
+    esac
 }
 main() {
     mode="$1"
