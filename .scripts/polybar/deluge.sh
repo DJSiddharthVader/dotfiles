@@ -4,7 +4,7 @@ shopt -s extglob
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 config_dir="$HOME/dotfiles/.config/deluge"
 watch_dir="$HOME/Torrents"
-modes=(ratio data datatotal speed active) #no spaces in mode titles
+modes=(ratio ratiototal data datatotal speed active) #no spaces in mode titles
 
 max_pages=5
 
@@ -67,7 +67,7 @@ update_stats() {
     uploaded="$(scrape_stats "$info" 'Uploaded' "$unit" )"
     paste -d"$delim" <(echo "$ids") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$stats_file"
     cp "$stats_file" "$stats_file.bak"
-    sort -t"$delim" -k5,5 -k4,4 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
+    sort -t"$delim" -g -r -k5,5 -k4,4 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
     #sed -i "1s/^/$header"/ "$stats_file"
 }
 total_stats() {
@@ -115,7 +115,7 @@ display() {
         'ratio')
             unit="Gi"
             info="$(info)"
-            down="$(parse_data "$info" 'Uploaded' "$unit")"
+            up="$(parse_data "$info" 'Uploaded' "$unit")"
             down="$(parse_data "$info" 'Downloaded' "$unit")"
             size="$(parse_data "$info" 'Size' "$unit")"
             msg=" $(divide $down $size 2)  $(divide $up $down 2)"
@@ -126,7 +126,7 @@ display() {
             up="$(total_stats 'up' "$unit")"
             down="$(total_stats 'down' "$unit")"
             size="$(total_stats 'size' "$unit")"
-            msg=" $(divide $down $size 2)  $(divide $up $down 2)"
+            msg="T  $(divide $down $size 2)  $(divide $up $down 2)"
             ;;
         'data')
             unit="Gi"
