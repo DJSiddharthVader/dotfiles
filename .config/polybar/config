@@ -23,41 +23,44 @@ margin-bottom = 1
 [colors]
 ;hack for getting colors to read from Xressources
 include-file = ~/.cache/wal/polybarColors.wal
-include-file = ~/dotfiles/.varfiles/polysep
+include-file = ~/dotfiles/.config/polybar/separators.mode
 
 [fonts]
 ; for font awesome icons
-font-0 = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
+font-icon = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
+font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
 ; for weather icons
-font-1 = Weather Icons:style=Regular;3
+font-weather = Weather Icons:style=Regular;3
 ; text font
-font-2 = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;3
-;font-2 = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
-;font-2 = GothicPixels:style=Medium:pixelsize=11:antialias=true;3
-;font-2 = PixelPlay:style=Regular:pixelsize=13:antialias=true;3
-;font-2 = Retron2000:style=Regular:pixelsize=11:antialias=false;3
-;font-2 = Pixeled English Font:style=Regular:pixelsize=11:antialias=true;3
-;font-2 = Silom:style=Regular:pixelsize=12:antialias=false;3
-;font-2 = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
-;font-2 = Press Start 2P:style=Regular:pixelsize=7;2
-;font-2 = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
-;font-2 = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
-;font-2 = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
-;font-2 = Terminus:style=Regular:pixelsize=14;1
-;font-2 = Nintendo DS BIOS:style=Regular:pixelsize=18;1
-;font-2 = scientifica:style=Regular:size=28;1
-;font-2 = Iosevka:pixelsize=10;2
+font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
+font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
+;font-main-large = Pixeliza20:Regular=Medium:pixelsize=25:antialias=false;2
+;font-main-large = 3D Thirteen Pixel Fonts:Regular=Bold:pixelsize=22:antialias=false;5
+;font-main-large = Pixelmania:Regular=Bold:pixelsize=6:antialias=false;4
+;font-main = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
+;font-main = GothicPixels:style=Medium:pixelsize=11:antialias=true;3
+;font-main = PixelPlay:style=Regular:pixelsize=13:antialias=true;3
+;font-main = Retron2000:style=Regular:pixelsize=11:antialias=false;3
+;font-main = Pixeled English Font:style=Regular:pixelsize=11:antialias=true;3
+;font-main = Silom:style=Regular:pixelsize=12:antialias=false;3
+;font-main = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
+;font-main = Press Start 2P:style=Regular:pixelsize=7;2
+;font-main = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
+;font-main = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+;font-main = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
+;font-main = Terminus:style=Regular:pixelsize=14;1
+;font-main = Nintendo DS BIOS:style=Regular:pixelsize=18;1
+;font-main = scientifica:style=Regular:size=28;1
+;font-main = Iosevka:pixelsize=10;2
 ; for text char not in font-2, avoids oversized icons from defualting to font-4
-font-3 =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
-;font-3 = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
-;font-3 = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+font-overflow =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
+;font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
+;font-overflow = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 ; for powerline separators
-font-4 = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=22:antialias=true;4
-; for scrolling text, want monospaced to module size doesnt change
-font-5 = Terminus:style=Regular:pixelsize=13;1
-font-6 =  Pixel Bit Advanced:style=Regular:pixelsize=8:antialias=true;3
-; for alternative to font-4 for larger sized bar
-font-7 = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=28:antialias=true;6
+font-powerline = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=22:antialias=true;4
+font-powerline-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=28:antialias=true;6
+; for long scrolling text, (smaller and mono-spaced
+font-scrolling = Terminus:style=Regular:pixelsize=13;2
 
 [section/float]
 monitor = ${env:MONITOR:}
@@ -66,10 +69,10 @@ cursor-click = pointer
 enable-ipc = true
 fixed-center = false
 dim-value = 0
-
 width = 100%
 height = 24
 radius = 5.0
+;background
 background = ${colors.transparent}
 foreground = ${colors.foreground}
 tray-transparent = false
@@ -84,14 +87,13 @@ border-color = ${colors.transparent}
 ;lines
 line-size = 3
 line-color = #f00
-
-font-0 = ${fonts.font-0}
-font-1 = ${fonts.font-1}
-font-2 = ${fonts.font-2}
-font-3 = ${fonts.font-3}
-font-4 = ${fonts.font-4}
-font-5 = ${fonts.font-5}
-font-6 = ${fonts.font-6}
+;fonts
+font-0 = ${fonts.font-icon}
+font-1 = ${fonts.font-weather}
+font-2 = ${fonts.font-main}
+font-3 = ${fonts.font-overflow}
+font-4 = ${fonts.font-powerline}
+font-5 = ${fonts.font-scrolling}
 
 [section/full]
 tray-transparent = true
@@ -100,20 +102,19 @@ cursor-click = pointer
 dim-value = 0
 enable-ipc = true
 monitor = ${env:MONITOR:}
-
 width = 100%
-height = 3.5%
+height = 3.25%
 radius = 0
 padding = 0
 module-margin = 0
-background-0 = ${colors.transparent1}
-background-1 = ${colors.transparent2}
-background-2 = ${colors.transparent3}
-background-3 = ${colors.transparent4}
-background-4 = ${colors.transparent5}
-background-5 = ${colors.transparent6}
-background-6 = ${colors.transparent7}
-background-7 = ${colors.transparent8}
+background-0 = ${colors.transparent2}
+background-1 = ${colors.transparent3}
+;background-2 = ${colors.transparent5}
+;background-3 = ${colors.transparent4}
+;background-4 = ${colors.transparent5}
+;background-5 = ${colors.transparent6}
+;background-6 = ${colors.transparent7}
+;background-7 = ${colors.transparent8}
 foreground = ${colors.foreground}
 border-top-size = 0
 border-bottom-size = 0
@@ -121,71 +122,285 @@ border-left-size = 0
 border-right-size = 0
 line-size = 3
 line-color = #f00
-
-font-0 = ${fonts.font-0}
-font-1 = ${fonts.font-1}
-font-2 = ${fonts.font-2}
-font-3 = ${fonts.font-3}
-font-4 = ${fonts.font-7}
-font-5 = ${fonts.font-5}
-font-6 = ${fonts.font-6}
+;fonts
+font-0 = ${fonts.font-icon-large}
+font-1 = ${fonts.font-weather}
+font-2 = ${fonts.font-main-large}
+font-3 = ${fonts.font-overflow}
+font-4 = ${fonts.font-powerline-large}
+font-5 = ${fonts.font-scrolling}
 
 
 ;bars
-[bar/floating_top]
+[bar/floating-top]
 inherit = section/float
 fixed-center = true
 modules-left = i3
 modules-center =
 modules-right = songnames mpd bluetooth protonvpn wlan volume gamma applauncher
 
-[bar/floating_bot]
+i3-prefix = ${colors.rightprefix}
+i3-suffix = ${colors.rightsuffix}
+
+applauncher-prefix = ${colors.leftprefix}
+applauncher-suffix = ${colors.leftsuffix}
+
+gamma-prefix = ${colors.leftprefix}
+gamma-suffix = ${colors.leftsuffix}
+
+volume-prefix = ${colors.leftprefix}
+volume-suffix = ${colors.leftsuffix}
+
+wlan-prefix = ${colors.leftprefix}
+wlan-suffix = ${colors.leftsuffix}
+
+protonvpn-prefix = ${colors.leftprefix}
+protonvpn-suffix = ${colors.leftsuffix}
+
+bluetooth-prefix = ${colors.leftprefix}
+bluetooth-suffix = ${colors.leftsuffix}
+
+mpd-prefix =
+mpd-suffix = ${colors.leftsuffix}
+
+songnames-prefix = ${colors.leftprefix}
+songnames-suffix =
+
+[bar/floating-bot]
 inherit = section/float
 bottom = true
 modules-left = date memory cpu temperature xkeyboard disk uptime weather deluge
 modules-center =
 modules-right = reading wall
 
-[bar/bordered_top]
+date-prefix = ${colors.rightprefix}
+date-suffix = ${colors.rightsuffix}
+
+memory-prefix = ${colors.rightprefix}
+memory-suffix = ${colors.rightsuffix}
+
+cpu-prefix = ${colors.rightprefix}
+cpu-suffix = ${colors.rightsuffix}
+
+temperature-prefix = ${colors.rightprefix}
+temperature-suffix = ${colors.rightsuffix}
+
+xkeyboard-prefix = ${colors.rightprefix}
+xkeyboard-suffix = ${colors.rightsuffix}
+
+disk-prefix = ${colors.rightprefix}
+disk-suffix = ${colors.rightsuffix}
+
+uptime-prefix = ${colors.rightprefix}
+uptime-suffix = ${colors.rightsuffix}
+
+weather-prefix = ${colors.rightprefix}
+weather-suffix = ${colors.rightsuffix}
+
+deluge-prefix = ${colors.rightprefix}
+deluge-suffix = ${colors.rightsuffix}
+
+wall-prefix = ${colors.leftprefix}
+wall-suffix = ${colors.leftsuffix}
+
+reading-prefix = ${colors.leftprefix}
+reading-suffix = ${colors.leftsuffix}
+
+[bar/bordered-top]
 inherit = section/full
 modules-left = i3
 modules-center =
-modules-right = songnames mpd bluetooth protonvpn wlan volume applauncher
+modules-right = songnames mpd bluetooth protonvpn wlan volume gamma applauncher
 
-[bar/bordered_bot]
+i3-prefix = ${colors.rightprefix}
+i3-suffix = ${colors.rightsuffix}
+
+applauncher-prefix = ${colors.leftprefix}
+applauncher-suffix = ${colors.leftsuffix}
+
+date-prefix = ${colors.leftprefix}
+date-suffix = ${colors.leftsuffix}
+
+gamma-prefix = ${colors.leftprefix}
+gamma-suffix = ${colors.leftsuffix}
+
+volume-prefix = ${colors.leftprefix}
+volume-suffix = ${colors.leftsuffix}
+
+wlan-prefix = ${colors.leftprefix}
+wlan-suffix = ${colors.leftsuffix}
+
+protonvpn-prefix = ${colors.leftprefix}
+protonvpn-suffix = ${colors.leftsuffix}
+
+bluetooth-prefix = ${colors.leftprefix}
+bluetooth-suffix = ${colors.leftsuffix}
+
+mpd-prefix =
+mpd-suffix = ${colors.leftsuffix}
+
+songnames-prefix = ${colors.leftprefix}
+songnames-suffix =
+
+[bar/bordered-bot]
 inherit = section/full
 bottom = true
 modules-left = date memory cpu temperature xkeyboard disk uptime weather deluge
 modules-center =
 modules-right = reading wall
+
+date-prefix = ${colors.rightprefix}
+date-suffix = ${colors.rightsuffix}
+
+memory-prefix = ${colors.rightprefix}
+memory-suffix = ${colors.rightsuffix}
+
+cpu-prefix = ${colors.rightprefix}
+cpu-suffix = ${colors.rightsuffix}
+
+temperature-prefix = ${colors.rightprefix}
+temperature-suffix = ${colors.rightsuffix}
+
+xkeyboard-prefix = ${colors.rightprefix}
+xkeyboard-suffix = ${colors.rightsuffix}
+
+disk-prefix = ${colors.rightprefix}
+disk-suffix = ${colors.rightsuffix}
+
+uptime-prefix = ${colors.rightprefix}
+uptime-suffix = ${colors.rightsuffix}
+
+weather-prefix = ${colors.rightprefix}
+weather-suffix = ${colors.rightsuffix}
+
+deluge-prefix = ${colors.rightprefix}
+deluge-suffix = ${colors.rightsuffix}
+
+wall-prefix = ${colors.leftprefix}
+wall-suffix = ${colors.leftsuffix}
+
+reading-prefix = ${colors.leftprefix}
+reading-suffix = ${colors.leftsuffix}
+
+[bar/cross-left]
+inherit = section/full
+modules-left = i3 applauncher gamma volume wlan protonvpn focused bluetooth mpd songnames
+
+applauncher-prefix = ${colors.rightprefix}
+applauncher-suffix = ${colors.rightsuffix}
+
+i3-prefix = ${colors.rightprefix}
+i3-suffix = ${colors.rightsuffix}
+
+focused-prefix = ${colors.rightprefix}
+focused-suffix = ${colors.rightsuffix}
+
+gamma-prefix = ${colors.rightprefix}
+gamma-suffix = ${colors.rightsuffix}
+
+volume-prefix = ${colors.rightprefix}
+volume-suffix = ${colors.rightsuffix}
+
+wlan-prefix = ${colors.rightprefix}
+wlan-suffix = ${colors.rightsuffix}
+
+protonvpn-prefix = ${colors.rightprefix}
+protonvpn-suffix = ${colors.rightsuffix}
+
+bluetooth-prefix = ${colors.rightprefix}
+bluetooth-suffix = ${colors.rightsuffix}
+
+mpd-prefix = ${colors.rightprefix}
+mpd-suffix =
+
+songnames-prefix =
+songnames-suffix = ${colors.rightsuffix}
+
+[bar/cross-right]
+inherit = section/full
+modules-right = reading deluge weather uptime disk xkeyboard temperature cpu memory date i3
+
+i3-prefix = ${colors.leftprefix}
+i3-suffix = ${colors.leftsuffix}
+
+date-prefix = ${colors.leftprefix}
+date-suffix = ${colors.leftsuffix}
+
+memory-prefix = ${colors.leftprefix}
+memory-suffix = ${colors.leftsuffix}
+
+cpu-prefix = ${colors.leftprefix}
+cpu-suffix = ${colors.leftsuffix}
+
+temperature-prefix = ${colors.leftprefix}
+temperature-suffix = ${colors.leftsuffix}
+
+xkeyboard-prefix = ${colors.leftprefix}
+xkeyboard-suffix = ${colors.leftsuffix}
+
+disk-prefix = ${colors.leftprefix}
+disk-suffix = ${colors.leftsuffix}
+
+uptime-prefix = ${colors.leftprefix}
+uptime-suffix = ${colors.leftsuffix}
+
+weather-prefix = ${colors.leftprefix}
+weather-suffix = ${colors.leftsuffix}
+
+deluge-prefix = ${colors.leftprefix}
+deluge-suffix = ${colors.leftsuffix}
+
+wall-prefix = ${colors.leftprefix}
+wall-suffix = ${colors.leftsuffix}
+
+reading-prefix = ${colors.leftprefix}
+reading-suffix = ${colors.leftsuffix}
 
 [bar/minimal]
 inherit = section/float
 height = 22
 y-offset = 0
-wm-restack = i3
+radius = 5.0
+tray-transparent = true
 border-top-size = 0
 border-bottom-size = 0
-tray-transparent = true
-modules-left = i3 date cpu temperature xkeyboard
-modules-center =
-modules-right = songnames leftsuffix7 protonvpn wlan volume
+modules-left =
+modules-center = i3 xkeyboard bluetooth protonvpn wlan volume date
+modules-right =
+
+i3-prefix = ${colors.rightprefix}
+i3-suffix =
+
+focused-prefix = " "
+focused-suffix =
+
+date-prefix = " "
+date-suffix =
+
+volume-prefix = " "
+volume-suffix =
+
+wlan-prefix = " "
+wlan-suffix =
+
+protonvpn-prefix = " "
+protonvpn-suffix =
+
+bluetooth-prefix = ${colors.leftprefix}
+bluetooth-suffix =
 
 
 ;modules
 [module/bspwm]
 type = internal/bspwm
-
 label-focused = %index%
 label-focused-background = ${colors.color1}
 label-focused-padding = 1
-
 label-occupied = %index%
 label-occupied-padding = 1
 label-urgent = %index%!
 label-urgent-background = ${colors.alert}
 label-urgent-padding = 1
-
 label-empty = %index%
 label-empty-background = ${colors.color1}
 label-empty-padding = 1
@@ -195,64 +410,58 @@ type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
-
-ws-icon-0 = 10;
 ws-icon-1 = 1;
 ws-icon-2 = 2;
-ws-icon-3 = 3;
-ws-icon-4 = 4;
-ws-icon-5 = 5;
-ws-icon-6 = 6;
-ws-icon-7 = 7;
-ws-icon-8 = 8;
+ws-icon-3 = 3;
+ws-icon-4 = 4;
+ws-icon-5 = 5;
+ws-icon-6 = 6;
+ws-icon-7 = 7;
+ws-icon-8 = 8;❁ ❂ ❃ ❇
 ws-icon-9 = 9;
+ws-icon-0 = 10;
 ws-icon-default =
-;       ❁ ❂ ❃ ❇
-
+;      
 ; Only show workspaces on the same output as the bar
 pin-workspaces = true
-
 label-mode-padding = 0
 label-mode-foreground = #000
-
 ; focused = Active workspace on focused monitor
 label-focused = %index% %icon%
 label-focused-background = ${module/bspwm.label-focused-background}
 label-focused-padding = ${module/bspwm.label-focused-padding}
-
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index% %icon%
 label-unfocused-background = ${colors.color8}
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
-
 ;visible = Active workspace on unfocused monitor
 label-visible = %index% %icon%
 label-visible-background = ${module/bspwm.label-empty-background}
 label-visible-padding = 1
-
 ; urgent = Workspace with urgency hint set
 label-urgent = %index% %icon%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
-
 format-prefix-font = 5
 format-suffix-font = 5
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.i3-prefix}
 format-prefix-foreground = ${colors.color8}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.i3-suffix}
 format-suffix-foreground = ${colors.color8}
 format-suffix-background = ${colors.transparent}
 
 [module/focused]
 type = custom/script
 tail = true
-exec = ${scripts.focused}
+exec = ~/dotfiles/.scripts/polybar/current-window.sh
+format-prefix-font = 5
+format-suffix-font = 5
 format-background = ${colors.color2}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.focused-prefix}
 format-prefix-foreground = ${colors.color2}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.focused-suffix}
 format-suffix-foreground = ${colors.color2}
 format-suffix-background = ${colors.transparent}
 
@@ -260,16 +469,14 @@ format-suffix-background = ${colors.transparent}
 type = custom/menu
 expand-right = true
 format-spacing = 1
-label-open = " "
+label-open = ""
 label-close = ""
 label-separator = |
 label-separator-foreground = ${colors.foreground}
-
 menu-0-0 = "Apps"
 menu-0-0-exec = menu-open-1
 menu-0-1 = "Actions "
 menu-0-1-exec = menu-open-2
-
 menu-1-0 = ""
 menu-1-0-exec = menu-open-0
 menu-1-1 = ""
@@ -288,7 +495,6 @@ menu-1-7 = ""
 menu-1-7-exec = steam &
 menu-1-8 = ""
 menu-1-8-exec = transmission-gtk &
-
 menu-2-0 = ""
 menu-2-0-exec = menu-open-0
 menu-2-1 = ""
@@ -301,14 +507,13 @@ menu-2-4 = ""
 menu-2-4-exec = ~/dotfiles/.scripts/wallpaper.sh next
 menu-2-5 = "⏼"
 menu-2-5-exec = systemctl suspend
-
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color1}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.applauncher-prefix}
 format-prefix-foreground = ${colors.color1}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
+format-suffix = ${root.applauncher-suffix}
 format-suffix-foreground = ${colors.color1}
 format-suffix-background = ${colors.transparent}
 
@@ -324,45 +529,42 @@ format = " <output> "
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color2}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.gamma-prefix}
 format-prefix-foreground = ${colors.color2}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
+format-suffix = ${root.gamma-suffix}
 format-suffix-foreground = ${colors.color2}
 format-suffix-background = ${colors.transparent}
-
 [module/gamma-ipc]
 type = custom/script
 exec = polybar-msg hook gamma 1 &>/dev/null
 
 [module/volume]
 type = internal/alsa
-label-volume = %percentage%%
-label-volume-foreground = ${root.foreground}
-format-volume = "<ramp-volume> <label-volume>"
-format-volume-prefix-font = 5
-format-volume-suffix-font = 5
-label-muted =  %percentage%%
-format-muted-prefix-font = 5
-format-muted-suffix-font = 5
-format-muted-foreground = ${colors.foreground-alt}
 ramp-volume-0 = 
 ramp-volume-1 = 
 ramp-volume-2 = 
-format-prefix-font = 5
-format-suffix-font = 5
+label-volume = %percentage%%
+label-volume-foreground = ${root.foreground}
+format-volume = "<ramp-volume> <label-volume>"
 format-volume-background = ${colors.color3}
-format-volume-prefix = ${colors.leftprefix}
+format-volume-prefix-font = 5
+format-volume-prefix = ${root.volume-prefix}
 format-volume-prefix-foreground = ${colors.color3}
 format-volume-prefix-background = ${colors.transparent}
-format-volume-suffix = ${colors.leftsuffix}
+format-volume-suffix = ${root.volume-suffix}
+format-volume-suffix-font = 5
 format-volume-suffix-foreground = ${colors.color3}
 format-volume-suffix-background = ${colors.transparent}
+label-muted =  %percentage%%
+format-muted-foreground = ${colors.foreground-alt}
 format-muted-background = ${colors.color3}
-format-muted-prefix = ${colors.leftprefix}
+format-muted-prefix = ${root.volume-prefix}
+format-muted-prefix-font = 5
 format-muted-prefix-foreground = ${colors.color3}
 format-muted-prefix-background = ${colors.transparent}
-format-muted-suffix = ${colors.leftsuffix}
+format-muted-suffix = ${root.volume-suffix}
+format-muted-suffix-font = 5
 format-muted-suffix-foreground = ${colors.color3}
 format-muted-suffix-background = ${colors.transparent}
 
@@ -373,14 +575,13 @@ exec = ~/dotfiles/.scripts/polybar/network.sh display
 click-middle = ~/dotfiles/.scripts/polybar/network.sh open
 click-left = ~/dotfiles/.scripts/polybar/network.sh next
 click-right = ~/dotfiles/.scripts/polybar/network.sh prev
-format = "%{T3}<label>%{T-}"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color4}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.wlan-prefix}
 format-prefix-foreground = ${colors.color4}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
+format-suffix = ${root.wlan-suffix}
 format-suffix-foreground = ${colors.color4}
 format-suffix-background = ${colors.transparent}
 
@@ -396,10 +597,10 @@ format = " <output>"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color5}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.protonvpn-prefix}
 format-prefix-foreground = ${colors.color5}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
+format-suffix = ${root.protonvpn-suffix}
 format-suffix-foreground = ${colors.color5}
 format-suffix-background = ${colors.transparent}
 [module/protonvpn-ipc]
@@ -408,17 +609,17 @@ exec = polybar-msg hook protonvpn 1 &>/dev/null
 
 [module/bluetooth]
 type = custom/script
-interval = 60
+interval = 1
 exec = ~/dotfiles/.scripts/polybar/bluetooth.sh status
 click-left = ~/dotfiles/.scripts/polybar/bluetooth.sh
 format =" <label>"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color6}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.bluetooth-prefix}
 format-prefix-foreground = ${colors.color6}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
+format-suffix = ${root.bluetooth-suffix}
 format-suffix-foreground = ${colors.color6}
 format-suffix-background = ${colors.transparent}
 
@@ -426,17 +627,30 @@ format-suffix-background = ${colors.transparent}
 type = internal/mpd
 host=localhost
 port=6600
-;format-online =  <icon-prev> <toggle> <icon-next> <icon-single> <icon-random> <bar-progress> <label-time>
-format-online = "%{T3}[<bar-progress>]%{T-}"
-format-offline = MPD Offline
+bar-progress-width =20
+bar-progress-indicator = ":"
+bar-progress-fill = ":"
+bar-progress-empty = "."
+format-online = "  [<bar-progress>] "
+format-online-font = 8
+format-online-prefix-font = 5
 format-online-suffix-font = 5
-format-offline-suffix-font = 5
 format-online-background = ${colors.color7}
-format-online-suffix = ${colors.leftsuffix}
+format-online-prefix = ${root.mpd-prefix}
+format-online-prefix-foreground = ${colors.color7}
+format-online-prefix-background = ${colors.transparent}
+format-online-suffix = ${root.mpd-suffix}
 format-online-suffix-foreground = ${colors.color7}
 format-online-suffix-background = ${colors.transparent}
+format-offline = MPD Offline
+format-offline-font = 8
+format-offline-refix-font = 5
+format-offline-suffix-font = 5
 format-offline-background = ${colors.color7}
-format-offline-suffix = ${colors.rightprefix}
+format-offline-prefix = ${root.mpd-prefix}
+format-offline-prefix-foreground = ${colors.color7}
+format-offline-prefix-background = ${colors.transparent}
+format-offline-suffix = ${root.mpd-suffix}
 format-offline-suffix-foreground = ${colors.color7}
 format-offline-suffix-background = ${colors.transparent}
 label-song =  %artist% - %title% 
@@ -451,10 +665,6 @@ icon-repeat = 
 icon-single = 
 toggle-on-foreground = ${colors.foreground}
 toggle-off-foreground = ${colors.foreground-alt}
-bar-progress-width = 20
-bar-progress-indicator = ":"
-bar-progress-fill = ":"
-bar-progress-empty = "."
 
 [module/songnames]
 type = custom/script
@@ -466,9 +676,12 @@ format-suffix-font = 5
 click-left = ~/dotfiles/.scripts/polybar/mpdscroll.sh toggle
 ; use different font for label to maintain monospace (not at size > 13 for Terminus?) so module width doesnt change during scrolling
 format-background = ${colors.color7}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.songnames-prefix}
 format-prefix-foreground = ${colors.color7}
 format-prefix-background = ${colors.transparent}
+format-suffix = ${root.songnames-suffix}
+format-suffix-foreground = ${colors.color7}
+format-suffix-background = ${colors.transparent}
 
 
 [module/date]
@@ -477,48 +690,48 @@ interval = 30
 exec = ~/dotfiles/.scripts/polybar/date.sh display
 click-left = ~/dotfiles/.scripts/polybar/date.sh next
 click-right = ~/dotfiles/.scripts/polybar/date.sh prev
-label = " %output%"
+label = "%output%"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color1}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.date-prefix}
 format-prefix-foreground = ${colors.color1}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.date-suffix}
 format-suffix-foreground = ${colors.color1}
 format-suffix-background = ${colors.transparent}
 
 [module/memory]
 type = custom/script
-tail = true
+interval = 1
 exec = ~/dotfiles/.scripts/polybar/memory.sh display
 click-left = ~/dotfiles/.scripts/polybar/memory.sh next
 click-right = ~/dotfiles/.scripts/polybar/memory.sh prev
-label = "  %output%"
+label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color2}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.memory-prefix}
 format-prefix-foreground = ${colors.color2}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.memory-suffix}
 format-suffix-foreground = ${colors.color2}
 format-suffix-background = ${colors.transparent}
 
 [module/cpu]
 type = custom/script
 exec = ~/dotfiles/.scripts/polybar/cpumonitor.sh display
-tail=true
-label = "  %output%"
+interval = 1
+label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
 click-left =  = ~/dotfiles/.scripts/polybar/cpumonitor.sh next
 click-right = ~/dotfiles/.scripts/polybar/cpumonitor.sh prev
 format-background = ${colors.color3}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.cpu-prefix}
 format-prefix-foreground = ${colors.color3}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.cpu-suffix}
 format-suffix-foreground = ${colors.color3}
 format-suffix-background = ${colors.transparent}
 
@@ -528,14 +741,14 @@ tail = true
 exec = ~/dotfiles/.scripts/polybar/temperature.sh display
 click-left = ~/dotfiles/.scripts/polybar/temperature.sh next
 click-right = ~/dotfiles/.scripts/polybar/temperature.sh prev
-label = " %output%"
+label = "%output%"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color4}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.temperature-prefix}
 format-prefix-foreground = ${colors.color4}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.temperature-suffix}
 format-suffix-foreground = ${colors.color4}
 format-suffix-background = ${colors.transparent}
 
@@ -561,14 +774,14 @@ tail = true
 exec = ~/dotfiles/.scripts/polybar/disk.sh display
 click-left = ~/dotfiles/.scripts/polybar/disk.sh next
 click-right = ~/dotfiles/.scripts/polybar/disk.sh prev
-label = "  %output%"
+label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color5}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.disk-prefix}
 format-prefix-foreground = ${colors.color5}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.disk-suffix}
 format-suffix-foreground = ${colors.color5}
 format-suffix-background = ${colors.transparent}
 
@@ -582,10 +795,10 @@ label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color6}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.uptime-prefix}
 format-prefix-foreground = ${colors.color6}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.uptime-suffix}
 format-suffix-foreground = ${colors.color6}
 format-suffix-background = ${colors.transparent}
 
@@ -594,14 +807,14 @@ type = custom/script
 interval = 600
 exec = ~/dotfiles/.scripts/polybar/weather.sh
 label-font = 2
-label = " %output%"
+label = "%output%"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color7}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.weather-prefix}
 format-prefix-foreground = ${colors.color7}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.weather-suffix}
 format-suffix-foreground = ${colors.color7}
 format-suffix-background = ${colors.transparent}
 
@@ -611,14 +824,13 @@ tail = true
 exec = ~/dotfiles/.scripts/polybar/deluge.sh display
 click-left = ~/dotfiles/.scripts/polybar/deluge.sh next
 click-right = ~/dotfiles/.scripts/polybar/deluge.sh prev
-label = " %output%"
 format-background = ${colors.color8}
 format-prefix-font = 5
 format-suffix-font = 5
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.deluge-prefix}
 format-prefix-foreground = ${colors.color8}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.deluge-suffix}
 format-suffix-foreground = ${colors.color8}
 format-suffix-background = ${colors.transparent}
 
@@ -632,14 +844,14 @@ hook-3 = ~/dotfiles/.scripts/wallpaper.sh reload
 click-left =   polybar-msg hook wall 2 && sleep 1 && polybar-msg hook wall 1
 click-right =  polybar-msg hook wall 3 && sleep 1 && polybar-msg hook wall 1
 click-middle = polybar-msg hook wall 4 && sleep 1 && polybar-msg hook wall 1
-format = " %{T7}<output> %{T-}"
+format = " %{T6}<output> %{T-}"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color1}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.wall-prefix}
 format-prefix-foreground = ${colors.color1}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
+format-suffix = ${root.wall-suffix}
 format-suffix-foreground = ${colors.color1}
 format-suffix-background = ${colors.transparent}
 [module/wall-ipc]
@@ -656,10 +868,10 @@ format = " %{T6}<label> %{T-}"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color3}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.reading-prefix}
 format-prefix-foreground = ${colors.color3}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
+format-suffix = ${root.reading-suffix}
 format-suffix-foreground = ${colors.color3}
 format-suffix-background = ${colors.transparent}
 
@@ -673,29 +885,12 @@ click-right = ~/dotfiles/.scripts/polybar/battery.sh prev
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color2}
-format-prefix = ${colors.rightprefix}
+format-prefix = ${root.battery-prefix}
 format-prefix-foreground = ${colors.color2}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.rightsuffix}
+format-suffix = ${root.battery-suffix}
 format-suffix-foreground = ${colors.color2}
 format-suffix-background = ${colors.transparent}
-
-[module/taskcounter]
-type = custom/script
-exec = ~/dotfiles/.scripts/polybar/task_counter.sh
-tail = true
-format-background = ${colors.color8}
-format-prefix-font = 5
-format-suffix-font = 5
-format = %{A1:~/dotfiles/.scripts/polybar/task_counter.sh toggle:} <label>%{A}
-
-[module/schedule]
-type = custom/script
-exec = ~/dotfiles/.scripts/polybar/sched.py 0 3
-format-background = ${colors.color9}
-tail = true
-format-prefix-font = 5
-format-suffix-font = 5
 
 [module/expressvpn]
 type = custom/script
@@ -707,10 +902,10 @@ format = " <label>"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.color5}
-format-prefix = ${colors.leftprefix}
+format-prefix = ${root.expressvpn-prefix}
 format-prefix-foreground = ${colors.color5}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
+format-suffix = ${root.expressvpn-suffix}
 format-suffix-foreground = ${colors.color5}
 format-suffix-background = ${colors.transparent}
 content-foreground = ${colors.color1}
@@ -743,7 +938,7 @@ content-background = ${colors.transparent}
 ;click-left = polybar-msg hook reading-ipc 2
 ;click-right = polybar-msg hook reading-ipc 3
 ;
-;label-font = 7
+;label-font = 6
 ;format = " <label>"
 ;format-background = ${colors.color3}
 ;format-prefix = ${colors.leftprefix}
