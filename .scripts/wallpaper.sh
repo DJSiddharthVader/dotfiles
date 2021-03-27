@@ -5,8 +5,8 @@ shopt -s extglob
 # Vars
 wallpaper_file="$HOME/dotfiles/.varfiles/wallpaper.png"
 picdir="$HOME/Pictures/wallpapers"
-histfile="$HOME/dotfiles/.varfiles/fehbg"
-indexfile="$HOME/dotfiles/.varfiles/wallindex"
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
+histfile="$HOME/dotfiles/.config/polybar/wallpapers.txt"
 icon=""
 
 usage() {
@@ -22,24 +22,27 @@ usage() {
           $blnk stay          {font|back|both}
           $blnk next          {font|back|both}"
 }
+getIndex() {
+    grep '^wallpaper_index:' "$mode_file" | cut -d':' -f2
+}
+setIndex() {
+    sed -i "/^wallpaper_index:/s/:.*/:$1/" "$mode_file"
+}
 
 appendHistory() {
     find "$picdir" -maxdepth 99 -type f >| "$histfile"
 }
 resetHistory() {
     find "$picdir" -maxdepth 99 -type f | shuf >| "$histfile"
-    echo 1 >| "$indexfile"
+    setIndex 1
 }
 
-currentIndex() {
-    head -1 "$indexfile" | sed -e 's/^\([0-9]*\)[^0-9]*$/\1/'
-}
 indexToImage(){
     head -"$1" "$histfile" | tail -1
 }
 updateImageIndex() {
     [[ -f "$1" ]] && mode="path" || mode="$1"
-    index="$(currentIndex)"
+    index="$(getIndex)"
     maxindex="$(wc -l "$histfile" | cut -d' ' -f1)"
     case "$mode" in
         'path')
@@ -65,16 +68,11 @@ updateImageIndex() {
     echo "$index"
 }
 
-addBorder() {
-    image="$1"
-    resolution="$(xrandr | grep ' primary' | grep -o '[0-9]\{3,\}x[0-9]\{3,\}')"
-    bordercolor="$(convert "$image" -scale 1x1\! txt:- | grep -oP '#[A-Za-z0-9]{6}')" #average color of grayscale version of the image
-    convert "$wallpaper_file" -resize "$resolution" -bordercolor "$bordercolor" -border 0x34 "$bgfile" #add borderes to image
-}
 setWallpaper() {
     image="$1"
     cp "$image" "$wallpaper_file"
     feh --bg-scale "$wallpaper_file"
+    polybar-msg hook wall 1
 #    addBorder "$image"
 #    case "$(head -1 ~/dotfiles/.varfiles/barmode)" in
 #        float|mini|none) feh --bg-scale "$wallpaper_file" ;; #without borders
@@ -90,7 +88,6 @@ colorFirefox() {
 changeColors() {
     image="$1"
     wal -geni "$image"  #font only
-    polybar-msg hook wall 1
     ~/dotfiles/.scripts/zathura.sh
     colorFirefox
     ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1
@@ -112,9 +109,8 @@ wall() {
 }
 
 display() {
-    wallpaper="$(head -n $(currentIndex) "$histfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"
+    wallpaper="$(head -n $(getIndex) "$histfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"
     echo "$wallpaper"
-    #echo "$icon $wallpaper"
 }
 
 main() {
