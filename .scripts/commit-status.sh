@@ -6,6 +6,7 @@ to_ignore=(
     "" #status seems to skip this idk why
     ".vim/view/*"
     ".vim/spell/*"
+    ".config/polybar/modules.mode"
     ".varfiles/*"
     ".config/zathura/zathurarc"
     ".config/deluge/stats.tsv"
