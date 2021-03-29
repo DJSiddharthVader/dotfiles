@@ -29,12 +29,15 @@ include-file = ~/.cache/wal/polybarColors.wal
 ; for font awesome icons
 font-icon = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
 font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
+font-icon-huge = FontAwesome:format=truetype:style=Regular:size=17:antialias=true;4
 ; for weather icons
 font-weather = Weather Icons:style=Regular;3
 font-weather-large = Weather Icons:style=Regular:size=15;3
+font-weather-huge= Weather Icons:style=Regular:size=17;3
 ; text font
 font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
 font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
+font-main-huge = Pixel Bit Advanced:style=Regular:pixelsize=13:antialias=true;5
 ;font-main-large = Pixeliza20:Regular=Medium:pixelsize=25:antialias=false;2
 ;font-main-large = 3D Thirteen Pixel Fonts:Regular=Bold:pixelsize=22:antialias=false;5
 ;font-main-large = Pixelmania:Regular=Bold:pixelsize=6:antialias=false;4
@@ -144,12 +147,11 @@ module-margin = 1
 background-0 = ${colors.transparent2}
 background-1 = ${colors.transparent3}
 foreground = ${colors.foreground}
-line-size = 5
-line-color = #f00
+line-size = 7
 ;fonts
-font-0 = ${fonts.font-icon-large}
+font-0 = ${fonts.font-icon-huge}
 font-1 = ${fonts.font-weather-large}
-font-2 = ${fonts.font-main-large}
+font-2 = ${fonts.font-main-huge}
 font-3 = ${fonts.font-overflow-large}
 font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-scrolling}
@@ -190,7 +192,7 @@ label-focused-underline = ${root.i3-underline-2}
 label-focused-padding = 1
 label-occupied = %index%
 label-occupied-background = ${root.i3-color}
-label-occupied-underline = ${root.i3-underline-2}
+label-occupied-underline = ${root.i3-underline}
 label-occupied-padding = 1
 label-urgent = %index%!
 label-urgent-background = ${colors.alert}
@@ -254,9 +256,9 @@ format-suffix-background = ${colors.transparent}
 [module/focused]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/polybar/current-window.sh
-;format = "  %{T7}<label>%{T-}"
-format = "  <label>"
+exec = ~/dotfiles/.config/polybar/scripts/current-window.sh
+format = "  %{T7}<label>%{T-}"
+;format = "  <label>"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.focused-color}
@@ -304,9 +306,9 @@ menu-2-0-exec = menu-open-0
 menu-2-1 = ""
 menu-2-1-exec = ~/.scripts/lock.sh
 menu-2-2 = ""
-menu-2-2-exec = ~/dotfiles/.scripts/polybar/bluetooth.sh
+menu-2-2-exec = ~/dotfiles/.config/polybar/scripts/bluetooth.sh
 menu-2-3 = ""
-menu-2-3-exec = ~/dotfiles/.scripts/polybar/protonvpn.sh toggle
+menu-2-3-exec = ~/dotfiles/.config/polybar/scripts/protonvpn.sh toggle
 menu-2-4 = ""
 menu-2-4-exec = ~/dotfiles/.scripts/wallpaper.sh next
 menu-2-5 = "⏼"
@@ -324,9 +326,9 @@ format-suffix-background = ${colors.transparent}
 [module/gamma]
 type = custom/ipc
 initial = 1
-hook-0 = ~/dotfiles/.scripts/polybar/gamma.sh display
-hook-1 = ~/dotfiles/.scripts/polybar/gamma.sh inc
-hook-2 = ~/dotfiles/.scripts/polybar/gamma.sh dec
+hook-0 = ~/dotfiles/.config/polybar/scripts/gamma.sh display
+hook-1 = ~/dotfiles/.config/polybar/scripts/gamma.sh inc
+hook-2 = ~/dotfiles/.config/polybar/scripts/gamma.sh dec
 scroll-up   = polybar-msg hook gamma 2 && sleep 1 && polybar-msg hook gamma 1
 scroll-down = polybar-msg hook gamma 3 && sleep 1 && polybar-msg hook gamma 1
 format = " <output> "
@@ -378,10 +380,10 @@ format-muted-suffix-background = ${colors.transparent}
 [module/wlan]
 type = custom/script
 interval = 1
-exec = ~/dotfiles/.scripts/polybar/network.sh display
-click-middle = ~/dotfiles/.scripts/polybar/network.sh open
-click-left = ~/dotfiles/.scripts/polybar/network.sh next
-click-right = ~/dotfiles/.scripts/polybar/network.sh prev
+exec = ~/dotfiles/.config/polybar/scripts/network.sh display
+click-middle = ~/dotfiles/.config/polybar/scripts/network.sh open
+click-left = ~/dotfiles/.config/polybar/scripts/network.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/network.sh prev
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.wlan-color}
@@ -396,9 +398,9 @@ format-suffix-background = ${colors.transparent}
 [module/protonvpn]
 type = custom/ipc
 initial = 1
-hook-0 = ~/dotfiles/.scripts/polybar/protonvpn.sh display
-hook-1 = ~/dotfiles/.scripts/polybar/protonvpn.sh toggle
-hook-2 = ~/dotfiles/.scripts/polybar/protonvpn.sh pick
+hook-0 = ~/dotfiles/.config/polybar/scripts/protonvpn.sh display
+hook-1 = ~/dotfiles/.config/polybar/scripts/protonvpn.sh toggle
+hook-2 = ~/dotfiles/.config/polybar/scripts/protonvpn.sh pick
 click-left  = polybar-msg hook protonvpn 2 && sleep 1 && polybar-msg hook protonvpn 1
 click-right = polybar-msg hook protonvpn 3 && sleep 1 && polybar-msg hook protonvpn 1
 format = " <output>"
@@ -419,8 +421,8 @@ exec = polybar-msg hook protonvpn 1 &>/dev/null
 [module/bluetooth]
 type = custom/script
 interval = 1
-exec = ~/dotfiles/.scripts/polybar/bluetooth.sh status
-click-left = ~/dotfiles/.scripts/polybar/bluetooth.sh
+exec = ~/dotfiles/.config/polybar/scripts/bluetooth.sh status
+click-left = ~/dotfiles/.config/polybar/scripts/bluetooth.sh
 format =" <label>"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -480,8 +482,8 @@ toggle-off-foreground = ${colors.foreground-alt}
 [module/songnames]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/polybar/mpdscroll.sh
-click-left = ~/dotfiles/.scripts/polybar/mpdscroll.sh toggle
+exec = ~/dotfiles/.config/polybar/scripts/mpdscroll.sh
+click-left = ~/dotfiles/.config/polybar/scripts/mpdscroll.sh toggle
 format = " %{T6}<label>%{T-} "
 format-prefix-font = 5
 format-suffix-font = 5
@@ -498,9 +500,9 @@ format-suffix-background = ${colors.transparent}
 [module/date]
 type = custom/script
 interval = 30
-exec = ~/dotfiles/.scripts/polybar/date.sh display
-click-left = ~/dotfiles/.scripts/polybar/date.sh next
-click-right = ~/dotfiles/.scripts/polybar/date.sh prev
+exec = ~/dotfiles/.config/polybar/scripts/date.sh display
+click-left = ~/dotfiles/.config/polybar/scripts/date.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/date.sh prev
 label = "%output%"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -516,9 +518,9 @@ format-suffix-background = ${colors.transparent}
 [module/memory]
 type = custom/script
 interval = 1
-exec = ~/dotfiles/.scripts/polybar/memory.sh display
-click-left = ~/dotfiles/.scripts/polybar/memory.sh next
-click-right = ~/dotfiles/.scripts/polybar/memory.sh prev
+exec = ~/dotfiles/.config/polybar/scripts/memory.sh display
+click-left = ~/dotfiles/.config/polybar/scripts/memory.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/memory.sh prev
 label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -533,13 +535,13 @@ format-suffix-background = ${colors.transparent}
 
 [module/cpu]
 type = custom/script
-exec = ~/dotfiles/.scripts/polybar/cpumonitor.sh display
+exec = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh display
 interval = 1
 label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
-click-left =  = ~/dotfiles/.scripts/polybar/cpumonitor.sh next
-click-right = ~/dotfiles/.scripts/polybar/cpumonitor.sh prev
+click-left =  = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh prev
 format-background = ${root.cpu-color}
 format-underline = ${root.cpu-underline}
 format-prefix = ${root.cpu-prefix}
@@ -552,9 +554,9 @@ format-suffix-background = ${colors.transparent}
 [module/temperature]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/polybar/temperature.sh display
-click-left = ~/dotfiles/.scripts/polybar/temperature.sh next
-click-right = ~/dotfiles/.scripts/polybar/temperature.sh prev
+exec = ~/dotfiles/.config/polybar/scripts/temperature.sh display
+click-left = ~/dotfiles/.config/polybar/scripts/temperature.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/temperature.sh prev
 label = "%output%"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -586,9 +588,9 @@ label-indicator-on-background = #ff1100
 [module/disk]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/polybar/disk.sh display
-click-left = ~/dotfiles/.scripts/polybar/disk.sh next
-click-right = ~/dotfiles/.scripts/polybar/disk.sh prev
+exec = ~/dotfiles/.config/polybar/scripts/disk.sh display
+click-left = ~/dotfiles/.config/polybar/scripts/disk.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/disk.sh prev
 label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -604,9 +606,9 @@ format-suffix-background = ${colors.transparent}
 [module/uptime]
 type = custom/script
 interval = 600
-exec = ~/dotfiles/.scripts/polybar/uptimemonitor.sh display
-click-left =  = ~/dotfiles/.scripts/polybar/uptimemonitor.sh next
-click-right =  = ~/dotfiles/.scripts/polybar/uptimemonitor.sh prev
+exec = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh display
+click-left =  = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh next
+click-right =  = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh prev
 label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -622,7 +624,7 @@ format-suffix-background = ${colors.transparent}
 [module/weather]
 type = custom/script
 interval = 600
-exec = ~/dotfiles/.scripts/polybar/weather.sh
+exec = ~/dotfiles/.config/polybar/scripts/weather.sh
 label-font = 2
 label = "%output%"
 format-prefix-font = 5
@@ -639,9 +641,9 @@ format-suffix-background = ${colors.transparent}
 [module/deluge]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/polybar/deluge.sh display
-click-left = ~/dotfiles/.scripts/polybar/deluge.sh next
-click-right = ~/dotfiles/.scripts/polybar/deluge.sh prev
+exec = ~/dotfiles/.config/polybar/scripts/deluge.sh display
+click-left = ~/dotfiles/.config/polybar/scripts/deluge.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/deluge.sh prev
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.deluge-color}
@@ -681,9 +683,9 @@ exec = polybar-msg hook wall 1 &>/dev/null
 [module/reading]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/polybar/reading.sh display
-click-left = ~/dotfiles/.scripts/polybar/reading.sh pick
-click-right = ~/dotfiles/.scripts/polybar/reading.sh open
+exec = ~/dotfiles/.config/polybar/scripts/reading.sh display
+click-left = ~/dotfiles/.config/polybar/scripts/reading.sh pick
+click-right = ~/dotfiles/.config/polybar/scripts/reading.sh open
 format = " %{T6}<label> %{T-}"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -700,9 +702,9 @@ format-suffix-background = ${colors.transparent}
 [module/battery]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/polybar/battery.sh display
-click-left = ~/dotfiles/.scripts/polybar/battery.sh next
-click-right = ~/dotfiles/.scripts/polybar/battery.sh prev
+exec = ~/dotfiles/.config/polybar/scripts/battery.sh display
+click-left = ~/dotfiles/.config/polybar/scripts/battery.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/battery.sh prev
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${colors.col2}
@@ -716,9 +718,9 @@ format-suffix-background = ${colors.transparent}
 [module/expressvpn]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/polybar/expressvpn.sh status
-click-left = ~/dotfiles/.scripts/polybar/expressvpn.sh toggle
-click-right = ~/dotfiles/.scripts/polybar/expressvpn.sh pick
+exec = ~/dotfiles/.config/polybar/scripts/expressvpn.sh status
+click-left = ~/dotfiles/.config/polybar/scripts/expressvpn.sh toggle
+click-right = ~/dotfiles/.config/polybar/scripts/expressvpn.sh pick
 format = " <label>"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -737,15 +739,15 @@ content-background = ${colors.transparent}
 ;[module/reading-ipc]
 ;type = custom/ipc
 ;initial = 1
-;hook-0 = ~/dotfiles/.scripts/polybar/reading.sh display
-;hook-1 = ~/dotfiles/.scripts/polybar/reading.sh pick
-;hook-2 = ~/dotfiles/.scripts/polybar/reading.sh open
+;hook-0 = ~/dotfiles/.config/polybar/scripts/reading.sh display
+;hook-1 = ~/dotfiles/.config/polybar/scripts/reading.sh pick
+;hook-2 = ~/dotfiles/.config/polybar/scripts/reading.sh open
 ;
 ;[module/reading]
 ;type = custom/script
 ;tail = true
 ;;exec = polybar-msg hook reading 1 &>/dev/null
-;exec = ~/dotfiles/.scripts/polybar/reading.sh display
+;exec = ~/dotfiles/.config/polybar/scripts/reading.sh display
 ;
 ;click-left = polybar-msg hook reading-ipc 2
 ;click-right = polybar-msg hook reading-ipc 3
@@ -763,8 +765,8 @@ content-background = ${colors.transparent}
 ;[bluetooth]
 ;type = custom/ipc
 ;initial = 1
-;hook-0 = ~/dotfiles/.scripts/polybar/bluetooth.sh status
-;hook-1 = ~/dotfiles/.scripts/polybar/bluetooth.sh
+;hook-0 = ~/dotfiles/.config/polybar/scripts/bluetooth.sh status
+;hook-1 = ~/dotfiles/.config/polybar/scripts/bluetooth.sh
 ;
 ;click-left = polybar-msg hook bluetooth-ipc 2 && sleep 1 && polybar-msg hook bluetooth-ipc 1
 ;

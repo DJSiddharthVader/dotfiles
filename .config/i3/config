@@ -41,7 +41,7 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #express vpn
 exec --no-startup-id ~/.scripts/polybar/protonvpn.sh connect
 #Torrent daemon:
-exec --no-startup-id ~/.scripts/polybar/deluge.sh start
+exec --no-startup-id ~/.scripts/deluge.sh start
 #Mount other drives:
 exec --no-startup-id sudo mount -a
 #connect to external monitors
@@ -156,7 +156,7 @@ bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
 
-bindsym $mod+t         exec --no-startup-id ~/dotfiles/.scripts/polybar/deluge.sh search
+bindsym $mod+t         exec --no-startup-id ~/dotfiles/.scripts/deluge.sh search
 #bindsym $mod+Shift+t  layout toggle
 
 bindsym $mod+y         resize shrink width 5 px or 5 ppt

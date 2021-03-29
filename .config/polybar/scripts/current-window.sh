@@ -2,7 +2,7 @@
 shopt -s extglob
 
 #wsicon="" #$(echo -e '\uF260')"
-thresh=30
+thresh=40
 
 getIcon() {
     id="$1"
