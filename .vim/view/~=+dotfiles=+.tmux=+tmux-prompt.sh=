@@ -117,17 +117,13 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-7,26fold
-27,35fold
-36,44fold
-45,58fold
 let &fdl = &fdl
-let s:l = 47 - ((45 * winheight(0) + 10) / 21)
+let s:l = 17 - ((7 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 47
-normal! 01|
+keepjumps 17
+normal! 047|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost
