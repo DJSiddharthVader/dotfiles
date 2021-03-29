@@ -11,16 +11,16 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 setlocal commentstring=#%s
-setlocal complete=.,w,b,u,t,i
+setlocal complete=.,w,b,u,t
 setlocal concealcursor=
 setlocal conceallevel=1
-setlocal completefunc=youcompleteme#CompleteFunc
+setlocal completefunc=
 setlocal nocopyindent
 setlocal nocursorbind
 setlocal nocursorcolumn
@@ -45,7 +45,7 @@ setlocal foldmarker={{{,}}}
 setlocal foldmethod=manual
 setlocal foldminlines=1
 setlocal foldnestmax=20
-setlocal foldtext=foldtext()
+setlocal foldtext=MyFoldText()
 setlocal formatexpr=
 setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
@@ -56,7 +56,7 @@ setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=GetShIndent()
-setlocal indentkeys=0{,0},!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -68,9 +68,9 @@ setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
-setlocal nomodeline
+setlocal modeline
 setlocal modifiable
-setlocal nrformats=bin,octal,hex
+setlocal nrformats=bin,hex
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
@@ -117,19 +117,64 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-7,9fold
-10,27fold
-28,39fold
-40,54fold
+15,17fold
+18,35fold
+36,38fold
+39,41fold
+44,46fold
+47,49fold
+51,58fold
+59,72fold
+73,82fold
+43,83fold
+85,93fold
+94,104fold
+105,110fold
+115,122fold
+123,130fold
+131,137fold
+138,144fold
+145,150fold
+151,157fold
+111,161fold
+84,162fold
+164,166fold
+167,170fold
+171,174fold
+163,175fold
+177,179fold
+180,188fold
+189,202fold
+203,218fold
+176,219fold
+221,242fold
 let &fdl = &fdl
-28
+43
 normal! zo
-let s:l = 38 - ((28 * winheight(0) + 19) / 38)
+43
+normal! zc
+84
+normal! zo
+111
+normal! zo
+111
+normal! zc
+84
+normal! zc
+163
+normal! zo
+163
+normal! zc
+176
+normal! zo
+176
+normal! zc
+let s:l = 4 - ((3 * winheight(0) + 36) / 72)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 38
-normal! 011|
+keepjumps 4
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

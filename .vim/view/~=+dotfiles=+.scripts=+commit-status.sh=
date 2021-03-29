@@ -123,12 +123,14 @@ silent! normal! zE
 31,38fold
 39,45fold
 let &fdl = &fdl
-let s:l = 11 - ((10 * winheight(0) + 15) / 31)
+5
+normal! zo
+let s:l = 10 - ((9 * winheight(0) + 15) / 30)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 11
-normal! 01|
+keepjumps 10
+normal! 07|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost
