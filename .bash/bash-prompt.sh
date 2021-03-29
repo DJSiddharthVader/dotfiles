@@ -37,9 +37,14 @@ dir="$(echo -e '\u26E9')"
 git="$(echo -e '\u2325')"
 snk="$(echo -e '\u2440')"
 tsk="$(echo -e '\u2713')"
-#powerline
+#colors powerline separators
 mSs="$B1$B0$F1b"
 mSe="$B0$F1$B1$par"
+start="$mSs$top$mSe"
+mEs="$B0$F1b"
+mEe="$B0$F1b"
+end="$mEs$bot$mEe "
+
 m1s="$B1$F0"
 m1e="$F2$B1$par"
 m2s="$B2$F0"
@@ -54,11 +59,6 @@ m6s="$B6$F0"
 m6e="$F7$B6$par"
 m7s="$B7$F0"
 m7e="$F1$B7$par"
-mEs="$B0$F1b"
-mEe="$B0$F1"
-start="$mSs$top$mSe"
-end="$mEs$bot$mEe "
-
 
 condaenv() {
     if [[ "$CONDA_DEFAULT_ENV" = "" ]]; then
@@ -69,20 +69,26 @@ condaenv() {
     echo -e "$cond"
 }
 gitstats() {
-    if `git branch > /dev/null 2>& 1 && exit 0`; then
+    if [ -n "$(git branch 2> /dev/null)" ]; then
         brnch=$(git branch 2> /dev/null | grep '\*' | cut -d' ' -f2)
-        if [[ `git status 2> /dev/null | grep -o 'by [0-9]* commit'` = "" ]]; then
-            cmmts='0'
-        else
-            cmmts=$(git status 2> /dev/null | grep -o 'by [0-9]* commit' | cut -d' ' -f2)
-        fi
-        moded=$(git status -s 2> /dev/null | grep '^ M' | wc -l)
-        untrk=$(git status -s 2> /dev/null | grep '^\?\?' | wc -l)
+        status="$(git status 2> /dev/null)"
+        cmmts="$(echo "$status" | grep -o 'by [0-9]* commit' | cut -d' ' -f2)"
+        [[ -z "$cmmts" ]] && cmmts='0'
+        moded=$(echo "$status" | grep '^ M' | wc -l)
+        untrk=$(echo "$status" | grep '^\?\?' | wc -l)
         echo -e "$bsym ($brnch)$csym $cmmts$msym$moded$usym $untrk"
         #echo -e "$bsym $csym$cmmts$msym$moded$usym $untrk"
     else
         echo -e "$bsym "
     fi
+}
+exitstatus() {
+    case "$?" in
+        0) icon="✔" ;;
+        1) icon="✖" ;;
+        *) icon="?" ;;
+    esac
+    echo "$icon"
 }
 prompt_command() {
     #initialize all modules as empty
@@ -99,25 +105,28 @@ prompt_command() {
     case 1 in
         $(($termwidth < 20)))
             PROMPT_DIRTRIM=1
-            mod1="$m1s$clk\@$m1e"
-            mod2="$m2s$dir \w$m2e"
-            mod3="$m3s$snk\$(condaenv)$B0$F3$par"
+            mod1="$m1s\$(exitstatus)$m1e"
+            mod2="$m2s$clk\@$m2e"
+            mod3="$m3s$dir \w$m3e"
+            mod4="$m4s$snk\$(condaenv)$B0$F4$par"
             ;;
         $(($termwidth < 80)))
             PROMPT_DIRTRIM=3
-            mod1="$m1s$clk\@$m1e"
-            mod2="$m2s$dir \w$m2e"
-            mod3="$m3s$snk\$(condaenv)$m3e"
-            mod4="$m4s\$(gitstats) $B0$F4$par"
+            mod1="$m1s\$(exitstatus)$m1e"
+            mod2="$m2s$clk\@$m2e"
+            mod3="$m3s$dir \w$m3e"
+            mod4="$m4s$snk\$(condaenv)$m4e"
+            mod5="$m5s\$(gitstats) $B0$F5$par"
             ;;
         *)
             PROMPT_DIRTRIM=4
-            mod1="$m1s$clk\@$m1e"
-            mod2="$m2s$usr \u$m2e"
-            mod3="$m3s$hst \h$m3e"
-            mod4="$m4s$dir $F0\w$m4e"
-            mod5="$m5s$snk\$(condaenv)$m5e"
-            mod6="$m6s\$(gitstats) $B0$F6$par"
+            mod1="$m1s\$(exitstatus)$m1e"
+            mod2="$m2s$clk\@$m2e"
+            mod3="$m3s$usr \u$m3e"
+            mod4="$m4s$hst \h$m4e"
+            mod5="$m5s$dir $F0\w$m5e"
+            mod6="$m6s$snk\$(condaenv)$m6e"
+            mod7="$m7s\$(gitstats) $B0$F7$par"
             ;;
     esac
     export PS1="$start$mod1$mod2$mod3$mod4$mod5$mod6$mod7$end"
