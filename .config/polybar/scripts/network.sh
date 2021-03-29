@@ -39,7 +39,7 @@ cycle() {
     # prev mode index is:  (x+n-1) % n
     # x is current mode index, n is number of modes
     dir="$1"
-    mode="$(cat $mode_file)"
+    mode="$(getMode)"
     idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
     idx=$(($idx -1)) #current mode idx
     case "$dir" in
@@ -112,7 +112,7 @@ main() {
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in
-            'open') dmode="$(cat $mode_file)" && open ;;
+            'open') dmode="$(getMode)" && open ;;
             'next') dmode="$(cycle 'next')" ;;
             'prev') dmode="$(cycle 'prev')" ;;
             $tmp  ) dmode="$mode" ;; #capture any valid mode

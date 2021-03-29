@@ -641,9 +641,9 @@ format-suffix-background = ${colors.transparent}
 [module/deluge]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/deluge.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/deluge.sh next
-click-right = ~/dotfiles/.config/polybar/scripts/deluge.sh prev
+exec = ~/dotfiles/.scripts/deluge.sh display
+click-left = ~/dotfiles/.scripts/deluge.sh next
+click-right = ~/dotfiles/.scripts/deluge.sh prev
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.deluge-color}

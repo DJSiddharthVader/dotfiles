@@ -16,7 +16,7 @@ cycle() {
     # prev mode index is:  (x+n-1) % n
     # x is current mode index, n is number of modes
     dir="$1"
-    mode="$(cat $mode_file)"
+    mode="$(getMode)"
     idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
     idx=$(($idx -1)) #current mode idx
     case "$dir" in

@@ -1,7 +1,7 @@
 #!/bin/bash
 shopt -s extglob
 
-mode_file="$HOME/dotfiles/.varfiles/tormode"
+mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 stats="$HOME/dotfiles/.config/transmission-daemon/stats.json"
 config_dir="$HOME/dotfiles/.config/transmission-daemon"
 watch_dir="$HOME/Torrents"
@@ -18,7 +18,7 @@ cycle() {
     # prev mode index is:  (x+n-1) % n
     # x is current mode index, n is number of modes
     dir="$1"
-    mode="$(cat $mode_file)"
+    mode="$(getMode)"
     idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
     idx=$(($idx -1)) #current mode idx
     case "$dir" in
@@ -28,6 +28,12 @@ cycle() {
     esac
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
+}
+getMode() {
+    grep '^torrent:' "$mode_file" | cut -d':' -f2
+}
+setMode() {
+    sed -i "/^torrent:/s/:.*/:$1/" "$mode_file"
 }
 
 info() {
@@ -149,7 +155,7 @@ main() {
         'search' ) search ;;
         'start'  ) start ;;
         'display')
-            [[ -z "$2" ]] && dmode="$(cat $mode_file)" || dmode="$2"
+            [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
             display "$dmode"
             ;;
         *)
@@ -160,7 +166,7 @@ main() {
                 $tmp    ) dmode="$mode" ;; #capture any valid mode
                 *       ) help && exit 1 ;;
             esac
-            echo "$dmode"  >| "$mode_file"
+            setMode "$dmode"
             ;;
     esac
 }
