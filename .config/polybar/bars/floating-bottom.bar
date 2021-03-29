@@ -6,46 +6,57 @@ modules-right = reading wall
 
 date-prefix = ${colors.rightprefix}
 date-suffix = ${colors.rightsuffix}
-;date-color = ${colors.colorN}
+date-color = ${colors.col1}
+date-underline =
 
 memory-prefix = ${colors.rightprefix}
 memory-suffix = ${colors.rightsuffix}
-;memory-color = ${colors.colorN}
+memory-color = ${colors.col2}
+memory-underline =
 
 cpu-prefix = ${colors.rightprefix}
 cpu-suffix = ${colors.rightsuffix}
-;cpu-color = ${colors.colorN}
+cpu-color = ${colors.col3}
+cpu-underline =
 
 temperature-prefix = ${colors.rightprefix}
 temperature-suffix = ${colors.rightsuffix}
-;temperature-color = ${colors.colorN}
+temperature-color = ${colors.col4}
+temperature-underline =
 
 xkeyboard-prefix = ${colors.rightprefix}
 xkeyboard-suffix = ${colors.rightsuffix}
-;xkeyboard-color = ${colors.colorN}
+xkeyboard-color = ${colors.alert}
+xkeyboard-underline =
 
 disk-prefix = ${colors.rightprefix}
 disk-suffix = ${colors.rightsuffix}
-;disk-color = ${colors.colorN}
+disk-color = ${colors.col5}
+disk-underline =
 
 uptime-prefix = ${colors.rightprefix}
 uptime-suffix = ${colors.rightsuffix}
-;uptime-color = ${colors.colorN}
+uptime-color = ${colors.col6}
+uptime-underline =
 
 weather-prefix = ${colors.rightprefix}
 weather-suffix = ${colors.rightsuffix}
-;weather-color = ${colors.colorN}
+weather-color = ${colors.col7}
+weather-underline =
 
 deluge-prefix = ${colors.rightprefix}
 deluge-suffix = ${colors.rightsuffix}
-;deluge-color = ${colors.colorN}
+deluge-color = ${colors.col8}
+deluge-underline =
 
 wall-prefix = ${colors.leftprefix}
 wall-suffix = ${colors.leftsuffix}
-;wall-color = ${colors.colorN}
+wall-color = ${colors.col1}
+wall-underline =
 
 reading-prefix = ${colors.leftprefix}
 reading-suffix = ${colors.leftsuffix}
-;reading-color = ${colors.colorN}
+reading-color = ${colors.col2}
+reading-underline =
 
 

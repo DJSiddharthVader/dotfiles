@@ -5,46 +5,54 @@ modules-right = songnames mpd bluetooth protonvpn wlan volume gamma applauncher
 
 i3-prefix = ${colors.rightprefix}
 i3-suffix = ${colors.rightsuffix}
-;i3-color = ${colors.colorN}
+i3-color = ${colors.col1}
+i3-color-2 = ${colors.col2}
+i3-underline =
+i3-underline-2 =
 
 focused-prefix = ${colors.rightprefix}
 focused-suffix = ${colors.rightsuffix}
-;focused-color = ${colors.colorN}
+focused-color = ${colors.col2}
+focused-underline =
 
 applauncher-prefix = ${colors.leftprefix}
 applauncher-suffix = ${colors.leftsuffix}
-;applauncher-color = ${colors.colorN}
-
-date-prefix = ${colors.leftprefix}
-date-suffix = ${colors.leftsuffix}
-;date-color = ${colors.colorN}
+applauncher-color = ${colors.col1}
+applauncher-underline =
 
 gamma-prefix = ${colors.leftprefix}
 gamma-suffix = ${colors.leftsuffix}
-;gamma-color = ${colors.colorN}
+gamma-color = ${colors.col1}
+gamma-underline =
 
 volume-prefix = ${colors.leftprefix}
 volume-suffix = ${colors.leftsuffix}
-;volume-color = ${colors.colorN}
+volume-color = ${colors.col2}
+volume-underline =
 
 wlan-prefix = ${colors.leftprefix}
 wlan-suffix = ${colors.leftsuffix}
-;wlan-color = ${colors.colorN}
+wlan-color = ${colors.col3}
+wlan-underline =
 
 protonvpn-prefix = ${colors.leftprefix}
 protonvpn-suffix = ${colors.leftsuffix}
-;protonvpn-color = ${colors.colorN}
+protonvpn-color = ${colors.col4}
+protonvpn-underline =
 
 bluetooth-prefix = ${colors.leftprefix}
 bluetooth-suffix = ${colors.leftsuffix}
-;bluetooth-color = ${colors.colorN}
+bluetooth-color = ${colors.col5}
+bluetooth-underline =
 
 mpd-prefix =
 mpd-suffix = ${colors.leftsuffix}
-;mpd-color = ${colors.colorN}
+mpd-color = ${colors.col6}
+mpd-underline =
 
 songnames-prefix = ${colors.leftprefix}
 songnames-suffix =
-;songnames-color = ${colors.colorN}
+songnames-color = ${colors.col6}
+songnames-underline =
 
 
