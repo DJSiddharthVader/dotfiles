@@ -50,6 +50,8 @@ alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 
 #Shorten
 alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
 alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
