@@ -338,7 +338,7 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 " => vim-airline config (force color)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme="base16_eighties"
+let g:airline_theme="wal"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
