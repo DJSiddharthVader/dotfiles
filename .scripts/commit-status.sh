@@ -7,6 +7,8 @@ to_ignore=(
     ".vim/view/*"
     ".vim/spell/*"
     ".config/polybar/modules.mode"
+    ".config/polybar/wallpapers.txt"
+    ".config/qt5ct/colors/pywal.conf"
     ".varfiles/*"
     ".config/zathura/zathurarc"
     ".config/deluge/stats.tsv"
