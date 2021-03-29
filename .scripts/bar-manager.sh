@@ -2,7 +2,7 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(float full cross mini none)
+modes=(mini textual float cross full none)
 
 #Icons
 icon_file="$HOME/dotfiles/.config/polybar/separators.mode"
@@ -105,15 +105,16 @@ launch() {
     setMode 'style' "$dmode"
     killall -q polybar && sleep 0.00001 # Terminate already running bar instances
     case "$dmode" in
-        'float') launchOnAllMonitors floating-top floating-bottom ;;
-        'full' ) launchOnAllMonitors full-top full-bottom ;;
-        'cross')
+        'float'  ) launchOnAllMonitors floating-top floating-bottom ;;
+        'full'   ) launchOnAllMonitors full-top full-bottom ;;
+        'textual') launchOnAllMonitors textual-top textual-bottom ;;
+        'cross'  )
             monitors=$(getMonitors)
             MONITOR="$(echo $monitors | cut -d' ' -f1)" polybar cross-left &
             MONITOR="$(echo $monitors | cut -d' ' -f2)" polybar cross-right &
             ;;
-        'mini' ) launchOnAllMonitors minimal ;;
-        'none' ) sleep 1 ;;
+        'mini'   ) launchOnAllMonitors minimal ;;
+        'none'   ) sleep 1 ;;
         *) help && exit 1 ;;
     esac
 }
