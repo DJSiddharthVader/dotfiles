@@ -40,6 +40,11 @@ if [ "$TERM" = "linux" ]; then
 fi
 
 # }}}
+## Import colorscheme from 'wal' asynchronously
+# &   # Run the process in the background.
+# ( ) # Hide shell job control messages.
+(cat ~/.cache/wal/sequences &)
+
 ## Exports {{{
 
 # Default browser
@@ -95,30 +100,16 @@ fi
 # }}}
 ## BASH Options {{{
 
-  shopt -s cdspell                 # Correct cd typos
-  shopt -s checkwinsize            # Update windows size on command
-  shopt -s histappend              # Append History instead of overwriting
-  shopt -s cmdhist                 # Save multi-line commands as one
-  shopt -s extglob                 # Extended pattern
-  shopt -s no_empty_cmd_completion # No empty completion
+shopt -s cdspell                 # Correct cd typos
+shopt -s checkwinsize            # Update windows size on command
+shopt -s histappend              # Append History instead of overwriting
+shopt -s cmdhist                 # Save multi-line commands as one
+shopt -s extglob                 # Extended pattern
+shopt -s no_empty_cmd_completion # No empty completion
 
-  set -o noclobber
-  # Prevent file overwrite on stdout redirection
-  # Use `>|` to force redirection to an existing file
-
-  # }}}
-## Completion {{{
-
-complete -cf sudo
-if [[ -f /etc/bash_completion ]]; then
-    . /etc/bash_completion
-fi
-
-# Perform file completion in a case insensitive fashion
-bind "set completion-ignore-case on"
-
-# Display matches for ambiguous patterns at first tab press
-bind "set show-all-if-ambiguous on"
+set -o noclobber
+# Prevent file overwrite on stdout redirection
+# Use `>|` to force redirection to an existing file
 
 # }}}
 
@@ -139,7 +130,6 @@ bind '"\e[C": forward-char'
 bind '"\e[D": backward-char'
 
 # }}}
-
 ## Colored MAN Pages {{{
 
 # @see http://www.tuxarena.com/?p=508
@@ -156,23 +146,20 @@ if $_isxrunning; then
 fi
 
 # }}}
-## Aliases {{{
-[ -f $HOME/.bash/bash-aliases ] && source $HOME/.bash/bash-aliases
+## Completion {{{
 
-## Functions
-[ -f $HOME/.bash/bash-functions.sh ] && source $HOME/.bash/bash-functions.sh
+complete -cf sudo
+if [[ -f /etc/bash_completion ]]; then
+    . /etc/bash_completion
+fi
 
-## Priviliged Access
-if ! $_isroot; then
-      alias sudo='sudo '
-      alias scat='sudo cat'
-      alias svim='sudo vim'
-      alias svi='sudo vi'
-      alias root='sudo su'
-      alias reboot='sudo reboot'
-      alias halt='sudo halt'
-  fi
+# Perform file completion in a case insensitive fashion
+bind "set completion-ignore-case on"
 
+# Display matches for ambiguous patterns at first tab press
+bind "set show-all-if-ambiguous on"
+
+# }}}
 ## Better directory navigation {{{
 ## Enter and list directory
 function cd() { builtin cd -- "$@" && { [ "$PS1" = "" ] || ls -hrt --color; }; }
@@ -186,14 +173,27 @@ shopt -s cdspell 2> /dev/null
 # This defines where cd looks for targets
 # Add the directories you want to have fast access to, separated by colon
 # Ex: CDPATH=".:~:~/projects" will look for targets in the current working directory, in home and in the ~/projects folder
-CDPATH=".:~/dotfiles:/media/1tbdrive/Media"
+#CDPATH=".:~/dotfiles:/media/1tbdrive/Media"
 
 # This allows you to bookmark your favorite places across the file system
 # Define a variable containing a path and you will be able to cd into it regardless of the directory you're in
 #shopt -s cdable_vars
 #
-#export  dot="$HOME/dotfiles"
-#export   sh="$HOME/scripts"
+export  dot="$HOME/dotfiles"
+export   sh="$HOME/.scripts"
+
+## Aliases {{{
+[ -f $HOME/.bash/bash-aliases ] && source $HOME/.bash/bash-aliases
+
+## Functions
+[ -f $HOME/.bash/bash-functions.sh ] && source $HOME/.bash/bash-functions.sh
+
+## fzf
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+## Prompt
+[ -f $HOME/.bash/bash-prompt.sh ] && source $HOME/.bash/bash-prompt.sh
+export  LS_COLORS="$(dircolors -b $HOME/.bash/dircolors_256 | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
 
 ## Systemd Support {{{
 if which systemctl &>/dev/null; then
@@ -235,18 +235,6 @@ if which systemctl &>/dev/null; then
     }
 fi
 
-## Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences &)
-
-## fzf
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-## Prompt
-[ -f $HOME/.bash/bash-prompt.sh ] && source $HOME/.bash/bash-prompt.sh
-export  LS_COLORS="$(dircolors -b $HOME/.bash/dircolors_256 | head -1 | sed -n "s/^LS_COLORS='//p" | sed -n "s/:';$//p")"
-
 ## Set PATH variable
 
 #export GOPATH="$(echo $HOME/Documents/CMU_MSCB/Courses/Programming-02601/{Class,Homework,Project} | sed -e 's/ /:/g')"
@@ -266,7 +254,7 @@ PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}') #remove du
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/sidreed/anaconda3/condabin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-# Conda
+## Conda
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else

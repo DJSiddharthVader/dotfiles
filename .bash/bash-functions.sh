@@ -1,24 +1,27 @@
 #!/bin/bash
 
-## Functions
-function ffile() {
-    find . -iname $1 -exec grep -l $2 {} +
+# Functions
+ff() { # Find a file with a pattern in name
+    find . -type f -iname '*'$*'*' -ls
 }
-function fl() {
+fe() { # Find a file with pattern $1 in name and execute $2 on it
+    find . -type f -iname '*'$1'*' -exec "${2:-file}" {} \;
+}
+fl() {
     # echo line $1 from file $2
     head -$1 $2 | tail -1;
 }
-function jless() {
+jless() {
     jq . -C $1 | less -R;
 }
-function prog() {
+prog() { # progress bar, print at a given percent
     local w=60 p=$1;  shift
     # create a string of spaces, then change them to dots
     printf -v dots "%*s" "$(( $p*$w/100 ))" ""; dots=${dots// /#};
     # print those dots on a fixed-width space plus the percentage etc.
     printf "\r\e[K|%-*s| %3d %% %s" "$w" "$dots" "$p" "$*";
 }
-function mvpr() {
+mvpr() {
     #move with a progress bar
     dest="${@: -1}"
     counter=0
@@ -34,10 +37,7 @@ function mvpr() {
     echo ''
 }
 
-## Top 10 Commands
-top10() { history | awk '{a[$2]++ } END{for(i in a){print a[i] " " i}}' | sort -rn | head; }
-# Goes up many dirs as the number passed as argument, if none goes up by 1 by default
-up() {
+up() { # Goes up many dirs as the number passed as argument, if none goes up by 1 by default
     local d=""
     limit=$1
     for ((i=1 ; i <= limit ; i++)); do
@@ -49,9 +49,7 @@ up() {
     fi
     cd $d
 }
-
-extract() {
-## Archive Extractor {{{
+extract() { # Archive Extractor {{{
       clrstart="\033[1;34m"  # color codes
       clrend="\033[0m"
 
@@ -93,7 +91,7 @@ extract() {
       fi
 
       filename=`basename "$1"`
-      case "${filename##*.}" in
+      case "${filename#*.}" in
         tar)
           echo -e "${clrstart}Extracting $1 to $DESTDIR: (uncompressed tar)${clrend}"
           tar x${3}f "$1" -C "$DESTDIR"
@@ -133,7 +131,7 @@ extract() {
       esac
     }
 compress() {
-## Archive Compress {{{
+# Archive Compress {{{
       if [[ -n "$1" ]]; then
         FILE=$1
         case $FILE in
@@ -152,7 +150,7 @@ remindme() { sleep $1 && notify-send "$2" & }
 # usage: remindme <time> <text>
 # e.g.: remind 10m "omg, the pizza"
 
-## Simple Calculator {{{
+# Simple Calculator {{{
 calc() {
   if which bc &>/dev/null; then
       echo "scale=3; $*" | bc -l
@@ -160,17 +158,24 @@ calc() {
       awk "BEGIN { print $* }"
   fi
 }
-
-## Find a file with a pattern in name {{{
-ff() { find . -type f -iname '*'$*'*' -ls ; }
-
-## Find a file with pattern $1 in name and execute $2 on it {{{
-fe() { find . -type f -iname '*'$1'*' -exec "${2:-file}" {} \;  ; }
-
-## Move filenames to lowercase {{{
-lowercase() {
+compress() { # Archive Compress
+      if [[ -n "$1" ]]; then
+        FILE=$1
+        case $FILE in
+        *.tar ) shift && tar cf $FILE $* ;;
+    *.tar.bz2 ) shift && tar cjf $FILE $* ;;
+     *.tar.gz ) shift && tar czf $FILE $* ;;
+        *.tgz ) shift && tar czf $FILE $* ;;
+        *.zip ) shift && zip $FILE $* ;;
+        *.rar ) shift && rar $FILE $* ;;
+        esac
+      else
+        echo "usage: compress <foo.tar.gz> ./foo ./bar"
+      fi
+}
+lowercase() { # move filenames to lowercase
     for file ; do
-      filename=${file##*/}
+      filename=${file#*/}
       case "$filename" in
       */* ) dirname==${file%/*} ;;
         * ) dirname=.;;
@@ -184,20 +189,18 @@ lowercase() {
         echo "lowercase: $file not changed."
       fi
     done
-  }
-
-
-## Finds directory sizes Fand lists them for the current directory {{{
-dirsize () {
+}
+dirsize () { # List sub-directory sizes in pwd
     du -shx * .[a-zA-Z0-9_]* 2> /dev/null | egrep '^ *[0-9.]*[MG]' | sort -n > /tmp/list
     egrep '^ *[0-9.]*M' /tmp/list
     egrep '^ *[0-9.]*G' /tmp/list
     rm -rf /tmp/list
-  }
-## Find and remove empty directories {{{
-fared() {
+}
+fared() { # Find and remove empty directories
     read -p "Delete all empty folders recursively [y/N]: " OPT
     [[ $OPT == y ]] && find . -type d -empty -exec rm -fr {} \; &> /dev/null
-  }
-
-
+}
+remindme() { # usage: remindme <time> <text>
+    # e.g.: remind 10m "omg, the pizza"
+    sleep $1 && notify-send "$2" &
+}
