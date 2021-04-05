@@ -2,19 +2,44 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-config_dir="$HOME/dotfiles/.config/deluge"
+mode_prefix="torrent"
 watch_dir="$HOME/Torrents"
 modes=(ratio ratiototal data datatotal speed active) #no spaces in mode titles
-
-max_pages=5
-
+max_pages=5 # max number of results pages to parse when searching
 stats_file="$HOME/dotfiles/.config/deluge/stats.tsv"
 delim="~"
-#header="id"$delim"name"$delim"size"$delim"downloaded"$delim"uploaded"
 
 help() {
-    echo "Error: usage ./$(basename $0) {search|display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
+    mode='$mode'
+    echo "Error: usage ./$(basename $0) [FNC] [OPT]*
+
+    FNC           | Description
+   ---------------|-----------------------------------
+    search        | search 1337x for a torrent query
+    start         | start deluge daemon
+    pause         | pause all torrents
+    resume        | resume all torrents
+    clean         | remove all errored torrents
+    stats         | update up/download stats csv file
+    display $mode | display data in the specified mode
+                  | if mode blank then it will display in default mode
+    next          | cycle defualt display mode forward
+    prev          | cycle defualt display mode backward
+    $mode         | set defualt display mode to $mode
+   ---------------------------------------------------
+
+   - modes are {$(echo ${modes[*]} | tr ' ' '|')}
+   - you can see the defualt mode with \`grep 'torrent' ~/dotfiles/.config/polybar/modules.mode\`
+"
 }
+init() {
+    # init files
+    mkdir -p "$watch_dir"
+    touch "$stats_file"
+    touch "$mode_file"
+    echo "$mode_prefix:speed" >> "$mode_file"
+}
+
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -24,23 +49,22 @@ cycle() {
     dir="$1"
     mode="$(cat $mode_file)"
     idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
-    idx=$(($idx -1)) #current mode idx
+    idx=$(($idx -1)) # current mode idx
     case "$dir" in
          'next') idx=$(($idx + 1)) ;;
          'prev') idx=$(($idx +${#modes[@]} -1)) ;;
          *) echo "Error cycle takes {next|prev}" && exit 1 ;;
     esac
-    next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
-    echo "${modes[$next_idx]}"
+    next_idx=$(($idx % ${#modes[@]})) # modulo to wrap back around modes array
+    echo "${modes[$next_idx]}" # return new mode
 }
 getMode() {
-    grep '^torrent:' "$mode_file" | cut -d':' -f2
+    grep "^$mode_prefix:" "$mode_file" | cut -d':' -f2
 }
 setMode() {
-    sed -i "/^torrent:/s/:.*/:$1/" "$mode_file"
+    sed -i "/^$mode_prefix:/s/:.*/:$1/" "$mode_file"
 }
 
-# Global Torrent Data Tracking
 info() {
     deluge-console 'info -v' 2> /dev/null
 }
@@ -48,6 +72,7 @@ status() {
     deluge-console status 2> /dev/null
 }
 
+# Global Torrent Data Tracking
 scrape_stats() {
     pattern="$2"
     echo "$1" | grep "$pattern: " |
@@ -58,6 +83,7 @@ scrape_stats() {
 }
 update_stats() {
     # store all torrent stats in a tsv, update tsv and remove dups, keeping entries with the largest numbers
+    #header="id"$delim"name"$delim"size"$delim"downloaded"$delim"uploaded"
     unit="Gi"
     info="$(info)"
     ids="$(echo "$info" | grep 'ID: ' | cut -f2 -d':' | tr -d ' ')"
@@ -68,7 +94,6 @@ update_stats() {
     paste -d"$delim" <(echo "$ids") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$stats_file"
     cp "$stats_file" "$stats_file.bak"
     sort -t"$delim" -g -r -k5,5 -k4,4 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
-    #sed -i "1s/^/$header"/ "$stats_file"
 }
 total_stats() {
     field="$1"
@@ -161,16 +186,14 @@ display() {
 }
 
 # Managing Torrents
-start() {
+start_daemon() {
     deluged
 }
-pause_all() {
-    action='pause'
-    deluge-console "$action $(deluge-console 'info -v' 2> /dev/null | grep ID | cut -d':' -f2 | tr -d ' ' | tr '\n' '.' | sed -e "s/\./\;$action /g" | sed -e "s/\;$action $//")"
-}
-resume_all() {
-    action='resume'
-    deluge-console "$action $(deluge-console 'info -v' 2> /dev/null | grep ID | cut -d':' -f2 | tr -d ' ' | tr '\n' '.' | sed -e "s/\./\;$action /g" | sed -e "s/\;$action $//")"
+action_all() {
+    # preform an action an all torrents in a given state (states are Error|Downloading|Seeding|etc., pass "" to match is all state) (action can be pause|resume|rm|etc. from deluge)
+    action="$1"
+    state="$2"
+    deluge-console "$action $(info | grep -B1 "State: $state" | grep ID | cut -d':' -f2 | tr -d ' ' | tr '\n' '.' | sed -e "s/\./\;$action /g" | sed -e "s/\;$action $//")" 2> /dev/null
 }
 
 # Torrent Search
@@ -201,11 +224,11 @@ get_search_results() {
     #cp $results_page ~/results.html
 }
 search() {
-    query="$(rofi -lines 0 -dmenu -p "Enter query")"
+    query="$(rofi -lines 0 -dmenu -p "Enter Torrent Query")"
     [[ -z "$query" ]] && exit 1 #no query
     results_page=$(mktemp)
     get_search_results "$query" "$results_page"
-    chosen="$(parse_results $results_page | rofi -lines 25 -width 80 -dmenu -p "Pick torrent")"
+    chosen="$(parse_results $results_page | rofi -lines 25 -width 80 -dmenu -p "Pick Torrent")"
     [[ -z "$chosen" ]] && exit 1 #no query
     txlink="$(grep -F "$(echo "$chosen" | rev | cut -f1 | rev)" $results_page | sed -e 's/^.*href="\/\(torrent.*\)\/">.*$/\1/')"
     [[ -z "$txlink" ]] && exit 1 #no query
@@ -213,7 +236,7 @@ search() {
     [[ -z "$magnet" ]] && exit 1 #no query
     name="$(echo "$chosen" | rev | cut -f1 | rev | tr -s ' ' '.')"
     echo "$watch_dir/$name"
-    deluge-console add --path="$watch_dir" "$magnet" && notify-send "torrent added $name"
+    deluge-console add --path="$watch_dir" "$magnet" && notify-send "Torrent Added: $name"
     rm $results_page
 }
 
@@ -221,14 +244,17 @@ search() {
 main() {
     mode="$1"
     case $mode in
-        'search' ) search ;;
-        'start'  ) start ;;
-        'stats'  ) update_stats ;;
-        'display')
+        'search' ) search                     ;;
+        'start'  ) start_daemon               ;;
+        'pause'  ) action_all pause ""        ;;
+        'resume' ) action_all resume ""       ;;
+        'clean'  ) action_all 'rm -c' 'Error' ;;
+        'stats'  ) update_stats               ;;
+        'display') # display torrent data
             [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
             display "$dmode"
             ;;
-        *)
+        *) # change/set display mode
             tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
             case "$mode" in
                 'next'  ) dmode="$(cycle 'next')" ;;
