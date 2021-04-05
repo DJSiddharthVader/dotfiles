@@ -39,7 +39,7 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 #exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 #express vpn
-exec --no-startup-id ~/.scripts/polybar/protonvpn.sh connect
+exec --no-startup-id ~/.scripts/protonvpn.sh connect
 #Torrent daemon:
 exec --no-startup-id ~/.scripts/deluge.sh start
 #Mount other drives:
@@ -156,7 +156,7 @@ bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
 
-bindsym $mod+t         exec --no-startup-id ~/dotfiles/.scripts/deluge.sh search
+bindsym $mod+t         exec ~/dotfiles/.scripts/deluge.sh search
 #bindsym $mod+Shift+t  layout toggle
 
 bindsym $mod+y         resize shrink width 5 px or 5 ppt
@@ -172,7 +172,7 @@ bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh s
 bindsym $mod+Shift+o   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh sep prev
 
 bindsym $mod+p         exec $pause
-bindsym $mod+Shift+p   exec --no-startup-id tabbed -c zathura -e
+bindsym $mod+Shift+p   exec tabbed -c zathura -e
 
 bindsym $mod+a         gaps inner current minus 2
 bindsym $mod+Shift+a   gaps inner current plus 2
