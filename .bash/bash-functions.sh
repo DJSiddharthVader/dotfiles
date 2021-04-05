@@ -36,6 +36,21 @@ mvpr() {
     done
     echo ''
 }
+notes() { # pandoc compiles md notes and open in firefox
+    pattern="$1"
+    ext="$2"
+
+    name="$pattern-Notes.$ext"
+    css="$HOME/dotfiles/.css/pandoc-notes.css"
+    pandoc -s --toc -c "$css" ./Notes/* -o "$name"
+    window_id="$(xwininfo -tree -root | grep "$pattern" | head -1 | grep -o '0x[0-9a-Z]*' | head -1)"
+    if [ -n "$window_id" ]; then # is notes tab already open
+        # refresh open tab
+        xdotool key --window "$window_id" --clearmodifiers "ctrl+r" # refresh already open tab
+    else
+        firefox --new-tab "file://$(readlink -e $name)" # open pandoc output in tab
+    fi
+}
 
 up() { # Goes up many dirs as the number passed as argument, if none goes up by 1 by default
     local d=""
