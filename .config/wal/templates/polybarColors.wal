@@ -1,5 +1,5 @@
 transparent = #00000000
-transparent0 = #99{color0.strip}
+transparent0 = #cc{color0.strip}
 transparent1 = #99{color1.strip}
 transparent2 = #99{color2.strip}
 transparent3 = #99{color3.strip}
@@ -7,7 +7,15 @@ transparent4 = #99{color4.strip}
 transparent5 = #99{color5.strip}
 transparent6 = #99{color6.strip}
 transparent7 = #99{color7.strip}
-transparent8 = #99{color8.strip}
+transparent8 = #cc{color8.strip}
+textual1 = #cc{color1.strip}
+textual2 = #cc{color2.strip}
+textual3 = #cc{color3.strip}
+textual4 = #cc{color4.strip}
+textual5 = #cc{color5.strip}
+textual6 = #cc{color6.strip}
+textual7 = #cc{color7.strip}
+textual8 = #cc{color8.strip}
 
 primary = {color1}
 secondary = {color2}
