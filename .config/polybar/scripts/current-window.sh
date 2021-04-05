@@ -2,7 +2,7 @@
 shopt -s extglob
 
 #wsicon="" #$(echo -e '\uF260')"
-thresh=40
+thresh=50
 
 getIcon() {
     id="$1"
@@ -31,7 +31,6 @@ getWorkspace() {
 #    echo "$wslist" | head -"$index" | tail -1
     # get currently focused i3 workspace
     i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2
-
 }
 getName() {
     id="$1"
@@ -44,17 +43,16 @@ getName() {
 }
 main() {
     id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
+    ws="$(getWorkspace)" # focused window workspace
     xprop -id $id > /dev/null 2>&1
     if [ $? -eq 0 ]; then
         icon="$(getIcon $id)"
         name="$(getName $id)"
+        # trucate output to desired length
+        echo "$ws $icon $name" | cut -c -$thresh
     else
-        icon=""
-        name=""
+        echo "$ws"
     fi
-    ws="$(getWorkspace)" # focused window workspace
-    # trucate output to desired length
-    echo "$ws $icon $name" | cut -c -$thresh
 }
 
 main
