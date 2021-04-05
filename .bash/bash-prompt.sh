@@ -71,7 +71,7 @@ condaenv() {
 gitstats() {
     if [ -n "$(git branch 2> /dev/null)" ]; then
         brnch=$(git branch 2> /dev/null | grep '\*' | cut -d' ' -f2)
-        status="$(git status 2> /dev/null)"
+        status="$(git status --short 2> /dev/null)"
         cmmts="$(echo "$status" | grep -o 'by [0-9]* commit' | cut -d' ' -f2)"
         [[ -z "$cmmts" ]] && cmmts='0'
         moded=$(echo "$status" | grep '^ M' | wc -l)
