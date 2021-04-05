@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source "$HOME/dotfiles/.scripts/music_utils/variables.sh"
-credentials="$HOME/dotfiles/.varfiles/discogs.credentials"
+credentials="$HOME/.varfiles/discogs.credentials"
 api_url="https://api.discogs.com/database/search"
 feature_patterns_title='(featuring|feat\.|ft\.| ft | feat | w\/ )'
 feature_patterns='(featuring|feat\.|ft\.| ft | feat | w\/ | x | & )'

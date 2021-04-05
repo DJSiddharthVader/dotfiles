@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail # -e causes gtkautoreload to fail since it relies on timeout
+set -o pipefail # -e causes gtkautoreload to fail since it relies on timeout
 shopt -s extglob # for pattern matching in case statements
 
 # Manage wallpaper and colorschemes
@@ -29,8 +29,8 @@ shopt -s extglob # for pattern matching in case statements
 # Vars
 picdir="$HOME/Pictures/wallpapers"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-histfile="$HOME/dotfiles/.config/polybar/wallpapers.txt"
-wallpaper_file="$HOME/dotfiles/.varfiles/wallpaper.png"
+histfile="$HOME/.varfiles/wallpapers.txt"
+wallpaper_file="$HOME/.varfiles/wallpaper.png"
 icon=""
 
 
@@ -125,7 +125,7 @@ changeColors() {
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1 # theme for GTK apps and whatnot
     # this must be run last since the timeout block anything after it from executing due to the set -e (script exists on error, including timeout
     # if no timeout it would run infinitely and script would never finish
-    timeout 0.1s xsettingsd -c ~/dotfiles/.varfiles/gtkautoreload.ini # live reload all GTK app colors
+    timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
 }
 wall() {
     mode="$1"

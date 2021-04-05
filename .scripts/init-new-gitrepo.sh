@@ -2,7 +2,7 @@
 
 # Vars
 user='DJSiddharthVader'
-password="$(cat $HOME/dotfiles/.varfiles/gitPAT)"
+password="$(cat $HOME/.varfiles/gitPAT)"
 first_commit_msg="first commit"
 
 help(){
