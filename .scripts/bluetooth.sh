@@ -1,4 +1,5 @@
 #!/bin/bash
+shopt -s extglob
 icon=""
 
 help() {
@@ -27,13 +28,12 @@ disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
     mpc pause
     changeOutput 'speakers'
-    sleep 5 && ~/.scripts/polybar/bar-manager.sh reload
 }
 connect() {
     device="$1"  # a uuid
     [[ "$(isDeviceConnected $device)" == 'no' ]] && echo -e "connect $device\n" | bluetoothctl
+    sleep 5
     changeOutput 'bluetooth'
-    sleep 5 && ~/.scripts/polybar/bar-manager.sh reload
 }
 toggle() {
     device="$1"
@@ -43,7 +43,6 @@ toggle() {
         "yes") disconnect ;;
         *) echo "Error: invalid status message $status" && exit 1
     esac
-    ~/.scripts/bar-manager.sh reload
 }
 
 getDeviceName() {
@@ -71,6 +70,10 @@ main() {
         'toggle') toggle "$device" ;;
         'status') getConnectedDevice ;;
         *) help && exit 1 ;;
+    esac
+    case "$mode" in
+        connect|disconnect|toggle) ~/.scripts/bar-manager.sh reload ;;
+        *) ;;
     esac
     #polybar-msg hook bluetooth-ipc 1 &> /dev/null
 }
