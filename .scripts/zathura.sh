@@ -33,7 +33,6 @@ set index-active-fg "$color0"
 set render-loading-bg "$color13"
 set render-loading-fg "$color0"
 
-set smooth-scroll true
 set window-title-home-tilde true
 set statusbar-basename true
 set selection-clipboard clipboard
