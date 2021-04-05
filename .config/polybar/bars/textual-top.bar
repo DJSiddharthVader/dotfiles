@@ -8,7 +8,7 @@ i3-suffix =
 i3-color = ${colors.transparent}
 i3-color-2 = ${colors.transparent}
 i3-underline = ${colors.col1}
-i3-underline-2 = ${colors.col1}
+i3-underline-2 = ${colors.col3}
 
 focused-prefix =
 focused-suffix =

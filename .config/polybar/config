@@ -12,7 +12,7 @@
 
 ;bar formatting
 [settings]
-screenchange-reload = true
+screenchange-reload = false
 compositing-background = over
 compositing-foreground = over
 
@@ -66,7 +66,7 @@ font-powerline = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=22:antialias
 font-powerline-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=28:antialias=true;6
 ; for long scrolling text, (smaller and mono-spaced
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
-font-focused = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
+font-focused = Terminus:style=Regular:pixelsize=15:antialias=true;3
 ;font-focused-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=13:antialias=false;4
 font-focused-large = Terminus:style=Regular:pixelsize=15:antialias=true;3
 
@@ -91,6 +91,7 @@ border-bottom-size = 5
 border-left-size = 10
 border-right-size = 10
 border-color = ${colors.transparent}
+focused-format = "  <label>"
 ;fonts
 font-0 = ${fonts.font-icon}
 font-1 = ${fonts.font-weather}
@@ -99,6 +100,7 @@ font-3 = ${fonts.font-overflow}
 font-4 = ${fonts.font-powerline}
 font-5 = ${fonts.font-scrolling}
 font-6 = ${fonts.font-focused}
+font-7 = ${fonts.font-icon}
 
 [section/full]
 monitor = ${env:MONITOR:}
@@ -123,6 +125,7 @@ border-top-size = 0
 border-bottom-size = 0
 border-left-size = 0
 border-right-size = 0
+focused-format = "  %{T7}<label>%{T-}"
 ;fonts
 font-0 = ${fonts.font-icon-large}
 font-1 = ${fonts.font-weather-large}
@@ -137,21 +140,30 @@ monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
 cursor-click = pointer
 enable-ipc = true
+fixed-center = false
 dim-value = 0
+radius = 5
+height = 3.25%
+border-top-size = 5
+border-bottom-size = 5
 width = 100%
-height = 4.25%
-radius = 0
-padding = 4
+border-right-size = 10
+border-left-size = 10
+padding = 1
 module-margin = 1
-;background = ${colors.transparent}
-background-0 = ${colors.transparent2}
-background-1 = ${colors.transparent3}
+background = ${colors.textual2}
+;background = ${colors.transparent8}
+;background-0 = ${colors.textual2}
+;background-1 = ${colors.textual3}
+;background-2 = ${colors.textual4}
+;background-3 = ${colors.textual5}
 foreground = ${colors.foreground}
-line-size = 7
+line-size = 5
+focused-format = "  <label>"
 ;fonts
-font-0 = ${fonts.font-icon-huge}
+font-0 = ${fonts.font-icon-large}
 font-1 = ${fonts.font-weather-large}
-font-2 = ${fonts.font-main-huge}
+font-2 = ${fonts.font-main-large}
 font-3 = ${fonts.font-overflow-large}
 font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-scrolling}
@@ -179,6 +191,11 @@ include-file = ~/dotfiles/.config/polybar/bars/textual-top.bar
 [bar/textual-bottom]
 include-file = ~/dotfiles/.config/polybar/bars/textual-bottom.bar
 
+[bar/laptop-top]
+include-file = ~/dotfiles/.config/polybar/bars/laptop-top.bar
+[bar/laptop-bottom]
+include-file = ~/dotfiles/.config/polybar/bars/laptop-bottom.bar
+
 [bar/minimal]
 include-file = ~/dotfiles/.config/polybar/bars/minimal.bar
 
@@ -205,9 +222,10 @@ label-empty-padding = 1
 
 [module/i3]
 type = internal/i3
-format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
+pin-workspaces = true
+format = <label-state> <label-mode>
 ws-icon-1 = 1;
 ws-icon-2 = 2;
 ws-icon-3 = 3;
@@ -215,13 +233,12 @@ ws-icon-4 = 4;
 ws-icon-5 = 5;
 ws-icon-6 = 6;
 ws-icon-7 = 7;
-ws-icon-8 = 8;❁ ❂ ❃ ❇
+ws-icon-8 = 8;
 ws-icon-9 = 9;
 ws-icon-0 = 10;
 ws-icon-default =
 ;      
 ; Only show workspaces on the same output as the bar
-pin-workspaces = true
 label-mode-padding = 0
 label-mode-foreground = #000
 ; focused = Active workspace on focused monitor
@@ -257,8 +274,7 @@ format-suffix-background = ${colors.transparent}
 type = custom/script
 tail = true
 exec = ~/dotfiles/.config/polybar/scripts/current-window.sh
-format = "  %{T7}<label>%{T-}"
-;format = "  <label>"
+format = ${root.focused-format}
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.focused-color}
@@ -306,9 +322,9 @@ menu-2-0-exec = menu-open-0
 menu-2-1 = ""
 menu-2-1-exec = ~/.scripts/lock.sh
 menu-2-2 = ""
-menu-2-2-exec = ~/dotfiles/.config/polybar/scripts/bluetooth.sh
+menu-2-2-exec = ~/dotfiles/.scripts/bluetooth.sh
 menu-2-3 = ""
-menu-2-3-exec = ~/dotfiles/.config/polybar/scripts/protonvpn.sh toggle
+menu-2-3-exec = ~/dotfiles/.scripts/protonvpn.sh toggle
 menu-2-4 = ""
 menu-2-4-exec = ~/dotfiles/.scripts/wallpaper.sh next
 menu-2-5 = "⏼"
@@ -398,9 +414,9 @@ format-suffix-background = ${colors.transparent}
 [module/protonvpn]
 type = custom/ipc
 initial = 1
-hook-0 = ~/dotfiles/.config/polybar/scripts/protonvpn.sh display
-hook-1 = ~/dotfiles/.config/polybar/scripts/protonvpn.sh toggle
-hook-2 = ~/dotfiles/.config/polybar/scripts/protonvpn.sh pick
+hook-0 = ~/dotfiles/.scripts/protonvpn.sh display
+hook-1 = ~/dotfiles/.scripts/protonvpn.sh toggle
+hook-2 = ~/dotfiles/.scripts/protonvpn.sh location
 click-left  = polybar-msg hook protonvpn 2 && sleep 1 && polybar-msg hook protonvpn 1
 click-right = polybar-msg hook protonvpn 3 && sleep 1 && polybar-msg hook protonvpn 1
 format = " <output>"
@@ -414,15 +430,12 @@ format-prefix-background = ${colors.transparent}
 format-suffix = ${root.protonvpn-suffix}
 format-suffix-foreground = ${root.protonvpn-color}
 format-suffix-background = ${colors.transparent}
-[module/protonvpn-ipc]
-type = custom/script
-exec = polybar-msg hook protonvpn 1 &>/dev/null
 
 [module/bluetooth]
 type = custom/script
 interval = 1
-exec = ~/dotfiles/.config/polybar/scripts/bluetooth.sh status
-click-left = ~/dotfiles/.config/polybar/scripts/bluetooth.sh
+exec = ~/dotfiles/.scripts/bluetooth.sh status
+click-left = ~/dotfiles/.scripts/bluetooth.sh
 format =" <label>"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -607,8 +620,8 @@ format-suffix-background = ${colors.transparent}
 type = custom/script
 interval = 600
 exec = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh display
-click-left =  = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh next
-click-right =  = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh prev
+click-left = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/uptimemonitor.sh prev
 label = " %output%"
 format-prefix-font = 5
 format-suffix-font = 5
@@ -676,9 +689,6 @@ format-prefix-background = ${colors.transparent}
 format-suffix = ${root.wall-suffix}
 format-suffix-foreground = ${root.wall-color}
 format-suffix-background = ${colors.transparent}
-[module/wall-ipc]
-type = custom/script
-exec = polybar-msg hook wall 1 &>/dev/null
 
 [module/reading]
 type = custom/script
@@ -715,6 +725,23 @@ format-suffix = ${root.battery-suffix}
 format-suffix-foreground = ${colors.col2}
 format-suffix-background = ${colors.transparent}
 
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+[module/xbacklight]
+type = internal/xbacklight
+enabele-scroll = true
+label = " %percentage%%"
+format = <label>
+format-background = ${colors.col2}
+format-prefix = ${colors.leftprefix}
+format-prefix-foreground = ${colors.col2}
+format-prefix-background = ${colors.transparent}
+format-suffix = ${colors.leftsuffix}
+format-suffix-foreground = ${colors.col2}
+format-suffix-background = ${colors.transparent}
+
 [module/expressvpn]
 type = custom/script
 tail = true
@@ -736,32 +763,6 @@ content-background = ${colors.transparent}
 
 
 ;not used or not working
-;[module/reading-ipc]
-;type = custom/ipc
-;initial = 1
-;hook-0 = ~/dotfiles/.config/polybar/scripts/reading.sh display
-;hook-1 = ~/dotfiles/.config/polybar/scripts/reading.sh pick
-;hook-2 = ~/dotfiles/.config/polybar/scripts/reading.sh open
-;
-;[module/reading]
-;type = custom/script
-;tail = true
-;;exec = polybar-msg hook reading 1 &>/dev/null
-;exec = ~/dotfiles/.config/polybar/scripts/reading.sh display
-;
-;click-left = polybar-msg hook reading-ipc 2
-;click-right = polybar-msg hook reading-ipc 3
-;
-;label-font = 6
-;format = " <label>"
-;format-background = ${colors.col3}
-;format-prefix = ${colors.leftprefix}
-;format-prefix-foreground = ${colors.col3}
-;format-prefix-background = ${colors.transparent}
-;format-suffix = ${colors.leftsuffix}
-;format-suffix-foreground = ${colors.col3}
-;format-suffix-background = ${colors.transparent}
-
 ;[bluetooth]
 ;type = custom/ipc
 ;initial = 1
@@ -782,23 +783,25 @@ content-background = ${colors.transparent}
 ;type = custom/script
 ;exec = polybar-msg hook bluetooth 1 &>/dev/null
 
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
-[module/xbacklight]
-type = internal/xbacklight
-enabele-scroll = true
-label = " %percentage%%"
-format = <label>
-format-background = ${colors.col2}
-format-prefix = ${colors.leftprefix}
-format-prefix-foreground = ${colors.col2}
-format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
-format-suffix-foreground = ${colors.col2}
-format-suffix-background = ${colors.transparent}
+;[module/reading]
+;type = custom/ipc
+;initial = 1
+;hook-0 = ~/dotfiles/.config/polybar/scripts/reading.sh display
+;hook-1 = ~/dotfiles/.config/polybar/scripts/reading.sh pick
+;hook-2 = ~/dotfiles/.config/polybar/scripts/reading.sh open
+;click-left =  polybar-msg hook reading 2 && sleep 1 && polybar-msg hook reading 1
+;click-right = polybar-msg hook reading 3 && sleep 1 && polybar-msg hook reading 1
+;format = " %{T6}<output> %{T-}"
+;format-prefix-font = 5
+;format-suffix-font = 5
+;format-background = ${root.reading-color}
+;format-underline = ${root.reading-underline}
+;format-prefix = ${root.reading-prefix}
+;format-prefix-foreground = ${root.reading-color}
+;format-prefix-background = ${colors.transparent}
+;format-suffix = ${root.reading-suffix}
+;format-suffix-foreground = ${root.reading-color}
+;format-suffix-background = ${colors.transparent}
 
 
 

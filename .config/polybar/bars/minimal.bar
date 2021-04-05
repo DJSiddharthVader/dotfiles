@@ -11,25 +11,34 @@ modules-right =
 
 i3-prefix = ${colors.rightprefix}
 i3-suffix =
+i3-color = ${colors.color1}
+i3-color-2 = ${colors.color2}
+i3-underline = ${colors.color1}
+i3-underline -2 = ${colors.color2}
 
 date-prefix =
 date-suffix = ${colors.leftsuffix}
-;date-color = ${colors.colorN}
+date-color = ${colors.color3}
+date-underline = ${colors.color3}
 
 volume-prefix =
 volume-suffix =
-;volume-color = ${colors.colorN}
+volume-color = ${colors.color4}
+volume-underline = ${colors.color4}
 
 wlan-prefix =
 wlan-suffix =
-;wlan-color = ${colors.colorN}
+wlan-color = ${colors.color5}
+wlan-underline = ${colors.color5}
 
 protonvpn-prefix =
 protonvpn-suffix =
-;protonvpn-color = ${colors.colorN}
+protonvpn-color = ${colors.color6}
+protonvpn-underline = ${colors.color6}
 
 bluetooth-prefix =
 bluetooth-suffix =
-;bluetooth-color = ${colors.colorN}
+bluetooth-color = ${colors.color7}
+bluetooth-underline = ${colors.color7}
 
 
