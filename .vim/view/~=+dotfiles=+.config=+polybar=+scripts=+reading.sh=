@@ -120,17 +120,18 @@ silent! normal! zE
 9,11fold
 12,14fold
 15,17fold
-19,31fold
-32,36fold
-37,39fold
-40,49fold
-51,60fold
+18,21fold
+23,35fold
+36,40fold
+41,43fold
+44,55fold
+57,66fold
 let &fdl = &fdl
-let s:l = 50 - ((49 * winheight(0) + 19) / 38)
+let s:l = 11 - ((10 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 50
+keepjumps 11
 normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost

@@ -1,6 +1,6 @@
 bar:float
 separator:arrow_tail
-wallpaper_index:17
+wallpaper_index:130
 wifi:standardd
 songnames:scroll
 date:time
@@ -10,6 +10,6 @@ temperature:short
 disk:amount
 uptime:day
 torrent:speed
-reading:The Broken Algorithm That Poisoned American Transportation~https://www.vice.com/en_us/article/v7gxy9/the-broken-algorithm-that-poisoned-american-transportation-v27n3
+reading:An Interactive Tutorial on Numerical Optimization~http://www.benfrederickson.com/numerical-optimization/
 battery:all
 

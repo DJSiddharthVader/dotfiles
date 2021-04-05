@@ -4,13 +4,6 @@ let s:cpo_save=&cpo
 set cpo&vim
 inoremap <buffer> <silent> <Plug>(vimtex-delim-close) =vimtex#delim#close()
 inoremap <buffer> <silent> <Plug>(vimtex-cmd-create) =vimtex#cmd#create_insert()
-nnoremap <buffer> <SNR>124_(v) v
-nnoremap <buffer> <SNR>124_(V) V
-xnoremap <buffer> <silent> <SNR>124_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-xnoremap <buffer> <silent> <SNR>124_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>124_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>124_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>124_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 nnoremap <buffer> <Plug>(vimtex-view) :call b:vimtex.viewer.view('')
 nnoremap <buffer> <Plug>(vimtex-toc-toggle) :call b:vimtex.toc.toggle()
 nnoremap <buffer> <Plug>(vimtex-toc-open) :call b:vimtex.toc.open()
@@ -266,13 +259,16 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
+5,21fold
+35,52fold
+57,74fold
 let &fdl = &fdl
-let s:l = 18 - ((17 * winheight(0) + 32) / 65)
+let s:l = 57 - ((31 * winheight(0) + 18) / 37)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 18
-normal! 02|
+keepjumps 57
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
