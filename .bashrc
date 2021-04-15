@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # vim: fdm=marker:noai:ts=4:sw=4
 
-## Main Config
-
 ## Overall Conditionals {{{
 #export TERM='screen-256color'
 export TERM='st'
@@ -45,7 +43,7 @@ fi
 # ( ) # Hide shell job control messages.
 (cat ~/.cache/wal/sequences &)
 
-## Exports {{{
+## Exports
 
 # Default browser
 if [ -n "$TERM" ]; then
@@ -97,8 +95,7 @@ if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
     . $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
 fi
 
-# }}}
-## BASH Options {{{
+## BASH Options
 
 shopt -s cdspell                 # Correct cd typos
 shopt -s checkwinsize            # Update windows size on command
@@ -110,8 +107,6 @@ shopt -s no_empty_cmd_completion # No empty completion
 set -o noclobber
 # Prevent file overwrite on stdout redirection
 # Use `>|` to force redirection to an existing file
-
-# }}}
 
 ## BASH History {{{
 
@@ -129,7 +124,6 @@ bind '"\e[B": history-search-forward'
 bind '"\e[C": forward-char'
 bind '"\e[D": backward-char'
 
-# }}}
 ## Colored MAN Pages {{{
 
 # @see http://www.tuxarena.com/?p=508
@@ -145,7 +139,6 @@ if $_isxrunning; then
     export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 fi
 
-# }}}
 ## Completion {{{
 
 complete -cf sudo
@@ -159,9 +152,8 @@ bind "set completion-ignore-case on"
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
 
-# }}}
-## Better directory navigation {{{
-## Enter and list directory
+## Better directory navigation
+# Enter and list directory
 function cd() { builtin cd -- "$@" && { [ "$PS1" = "" ] || ls -hrt --color; }; }
 # Prepend cd to directory names automatically
 #shopt -s autocd 2> /dev/null
@@ -182,7 +174,7 @@ shopt -s cdspell 2> /dev/null
 export  dot="$HOME/dotfiles"
 export   sh="$HOME/.scripts"
 
-## Aliases {{{
+## Aliases
 [ -f $HOME/.bash/bash-aliases ] && source $HOME/.bash/bash-aliases
 
 ## Functions
@@ -236,17 +228,14 @@ if which systemctl &>/dev/null; then
 fi
 
 ## Set PATH variable
-
 #export GOPATH="$(echo $HOME/Documents/CMU_MSCB/Courses/Programming-02601/{Class,Homework,Project} | sed -e 's/ /:/g')"
 export GOPATH="$HOME/CMU_MSCB/Courses/Programming-02601/:$HOME/Projects/musman/:$HOME/Projects/go/src"
-
 #PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 #PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 #PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
 #PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 #export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
 export PATH="$HOME/.scripts:$PATH"
 PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}') #remove duplicate entries in path
@@ -267,3 +256,6 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# print a random quote on new terminal launch
+~/.scripts/quote.sh | lolcat
