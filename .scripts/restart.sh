@@ -1,7 +1,9 @@
 #!/bin/bash
 services=(compton pulse wifi)
 
-help() { echo "Error: usage $0 \$SERVICE {stop|start|restart}" ; }
+help() {
+    echo "Error: usage $0 \$SERVICE {stop|start|restart}"
+}
 stop() {
     service="$1"
     case "$service" in
@@ -22,7 +24,9 @@ start() {
         *) help && exit 1 ;;
     esac
 }
-restart() { service="$1"; stop "$1"; start "$1"; }
+restart() {
+    stop "$1" && start "$1"
+}
 rofi_menu() {
     service="$(echo $sevices | tr ' ' '\n' | rofi -m -3 -width 20 -lines 5 -dmenu)"
     [[ -n "$service" ]] && restart "$service"
