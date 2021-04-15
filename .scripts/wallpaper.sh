@@ -1,6 +1,7 @@
 #!/bin/bash
 set -o pipefail # -e causes gtkautoreload to fail since it relies on timeout
 shopt -s extglob # for pattern matching in case statements
+thresh=50
 
 # Manage wallpaper and colorschemes
 
@@ -24,7 +25,6 @@ shopt -s extglob # for pattern matching in case statements
 #I do this since I often scroll through many images before settling on a wallpaper so avoids needlessly running the changeColors() function so many times.
 #You can easily scroll through wallpapers using `./wallpaper.sh` next and `./wallpaper.sh` prev and once you get one you like run `./wallpaper.sh stay both` to set the colorschemes.
 #For convieniece I have all of these bound to key in i3 because I am fickle and impatient.
-
 
 # Vars
 picdir="$HOME/Pictures/wallpapers"
@@ -120,12 +120,12 @@ changeColors() {
     image="$1"
     wal -geni "$image"  # use wal to generate colorschemes from image
     ~/dotfiles/.scripts/zathura.sh # re-write zathura config with new colors
-    colorFirefox # trigger reloadin of colors.css in firefox
-    ~/dotfiles/.scripts/bar-manager.sh reload >> /dev/null 2>&1 # reload polybar with new colors
+    colorFirefox # trigger reloading of colors.css in firefox
+    ~/dotfiles/.scripts/bar-manager.sh reload > /dev/null 2>&1 # reload polybar with new colors
     ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1 # theme for GTK apps and whatnot
-    # this must be run last since the timeout block anything after it from executing due to the set -e (script exists on error, including timeout
-    # if no timeout it would run infinitely and script would never finish
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
+    # this must be run last since the timeout blocks anything after it from executing due to the set -e (script exists on error, including timeout)
+    # if no timeout it would run infinitely and script would never finish
 }
 wall() {
     mode="$1"
@@ -142,9 +142,16 @@ wall() {
 }
 
 display() {
-    wallpaper="$(head -n $(getIndex) "$histfile" | tail -1 | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"
-    # trim picdir from wallpaper path, replace with  ...
+    wallpaper="$(indexToImage "$(getIndex)" | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')" # replace picdir with ... in wallpaper path
     echo "$wallpaper"
+#    if [[ ${#wallpaper} -gt $thresh ]]; then
+#        ( zscroll -l "$thresh" -d 0.20 -b "" -a "" -p " /// " "$wallpaper" ) &
+#        wait
+#    else
+#        # right pad with spaces until total length $thresh
+#        # keeps module width constant no matter article length
+#        printf "%-${thresh}s" "$wallpaper"
+#    fi
 }
 
 main() {
