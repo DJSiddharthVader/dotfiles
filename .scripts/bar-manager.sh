@@ -2,7 +2,7 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(laptop textual float cross full mini none)
+modes=(laptop float textual cross full mini none)
 
 #Icons
 icon_file="$HOME/dotfiles/.config/polybar/separators.mode"
@@ -99,20 +99,22 @@ launch() {
         'stay') dmode="$(getMode 'style')" ;;
         'next') dmode="$(cycle 'next' modes 'style')" ;;
         'prev') dmode="$(cycle 'prev' modes 'style')" ;;
-         $tmp ) dmode="$mode" ;; #capture any valid mode
+         $tmp ) dmode="$mode" ;; #capture any valid mode passed
         *) help style && exit 1 ;;
     esac
-    setMode 'style' "$dmode"
-    killall -q polybar && sleep 0.00001 # Terminate already running bar instances
+    setMode 'style' "$dmode" # set defualt polybar style
+    killall -q polybar && sleep 0.001 # Terminate already running bar instances
     case "$dmode" in
         'laptop' ) launchOnAllMonitors laptop-top laptop-bottom ;;
+        'textual') launchOnAllMonitors textual-top textual-bottom ;;
         'float'  ) launchOnAllMonitors floating-top floating-bottom ;;
         'full'   ) launchOnAllMonitors full-top full-bottom ;;
-        'textual') launchOnAllMonitors textual-top textual-bottom ;;
         'cross'  )
-            monitors=$(getMonitors)
-            MONITOR="$(echo $monitors | cut -d' ' -f1)" polybar cross-left &
-            MONITOR="$(echo $monitors | cut -d' ' -f2)" polybar cross-right &
+            monitor=$(getMonitors)
+            m1="$(echo $monitor | cut -d' ' -f1)"
+            m2="$(echo $monitor | cut -d' ' -f2)"
+            MONITOR="$m1" polybar cross-left &
+            MONITOR="$m2" polybar cross-right &
             ;;
         'mini'   ) launchOnAllMonitors minimal ;;
         'none'   ) sleep 1 ;;
