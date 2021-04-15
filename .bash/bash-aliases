@@ -55,6 +55,7 @@ alias ....='cd ../../..'
 alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
+alias copy='xclip -sel clip'
 alias mnt="~/.scripts/mount.sh on"
 alias umt="~/.scripts/mount.sh off"
 alias brg='ssh slreed@bridges2.psc.edu'
