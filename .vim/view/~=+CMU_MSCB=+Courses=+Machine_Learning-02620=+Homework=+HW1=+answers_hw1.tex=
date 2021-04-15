@@ -5,95 +5,95 @@ set cpo&vim
 imap <buffer> <silent> <F7> <Plug>(vimtex-cmd-create)
 inoremap <buffer> <silent> <Plug>(vimtex-delim-close) =vimtex#delim#close()
 inoremap <buffer> <silent> <Plug>(vimtex-cmd-create) =vimtex#cmd#create_insert()
-nmap <buffer> <silent> % <Plug>(vimtex-%)
-xmap <buffer> <silent> % <Plug>(vimtex-%)
 omap <buffer> <silent> % <Plug>(vimtex-%)
+xmap <buffer> <silent> % <Plug>(vimtex-%)
+nmap <buffer> <silent> % <Plug>(vimtex-%)
 nmap <buffer> <silent> K <Plug>(vimtex-doc-package)
-nmap <buffer> <silent> [] <Plug>(vimtex-[])
-nmap <buffer> <silent> [[ <Plug>(vimtex-[[)
-xmap <buffer> <silent> [] <Plug>(vimtex-[])
-xmap <buffer> <silent> [[ <Plug>(vimtex-[[)
-omap <buffer> <silent> [] <Plug>(vimtex-[])
 omap <buffer> <silent> [[ <Plug>(vimtex-[[)
-nmap <buffer> <silent> \li <Plug>(vimtex-info)
-nmap <buffer> <silent> \lI <Plug>(vimtex-info-full)
-nmap <buffer> <silent> \lx <Plug>(vimtex-reload)
-nmap <buffer> <silent> \lX <Plug>(vimtex-reload-state)
-nmap <buffer> <silent> \ls <Plug>(vimtex-toggle-main)
-nmap <buffer> <silent> \lq <Plug>(vimtex-log)
-nmap <buffer> <silent> \ll <Plug>(vimtex-compile)
-nmap <buffer> <silent> \lo <Plug>(vimtex-compile-output)
-nmap <buffer> <silent> \lL <Plug>(vimtex-compile-selected)
-xmap <buffer> <silent> \lL <Plug>(vimtex-compile-selected)
-nmap <buffer> <silent> \lk <Plug>(vimtex-stop)
-nmap <buffer> <silent> \lK <Plug>(vimtex-stop-all)
-nmap <buffer> <silent> \le <Plug>(vimtex-errors)
-nmap <buffer> <silent> \lc <Plug>(vimtex-clean)
-nmap <buffer> <silent> \lC <Plug>(vimtex-clean-full)
-nmap <buffer> <silent> \lg <Plug>(vimtex-status)
-nmap <buffer> <silent> \lG <Plug>(vimtex-status-all)
-nmap <buffer> <silent> \lt <Plug>(vimtex-toc-open)
-nmap <buffer> <silent> \lT <Plug>(vimtex-toc-toggle)
-nmap <buffer> <silent> \ly <Plug>(vimtex-labels-open)
-nmap <buffer> <silent> \lY <Plug>(vimtex-labels-toggle)
-nmap <buffer> <silent> \lv <Plug>(vimtex-view)
+omap <buffer> <silent> [] <Plug>(vimtex-[])
+xmap <buffer> <silent> [[ <Plug>(vimtex-[[)
+xmap <buffer> <silent> [] <Plug>(vimtex-[])
+nmap <buffer> <silent> [[ <Plug>(vimtex-[[)
+nmap <buffer> <silent> [] <Plug>(vimtex-[])
 nmap <buffer> <silent> \lm <Plug>(vimtex-imaps-list)
-nmap <buffer> <silent> ]] <Plug>(vimtex-]])
-nmap <buffer> <silent> ][ <Plug>(vimtex-][)
-xmap <buffer> <silent> ]] <Plug>(vimtex-]])
-xmap <buffer> <silent> ][ <Plug>(vimtex-][)
-omap <buffer> <silent> ]] <Plug>(vimtex-]])
+nmap <buffer> <silent> \lv <Plug>(vimtex-view)
+nmap <buffer> <silent> \lY <Plug>(vimtex-labels-toggle)
+nmap <buffer> <silent> \ly <Plug>(vimtex-labels-open)
+nmap <buffer> <silent> \lT <Plug>(vimtex-toc-toggle)
+nmap <buffer> <silent> \lt <Plug>(vimtex-toc-open)
+nmap <buffer> <silent> \lG <Plug>(vimtex-status-all)
+nmap <buffer> <silent> \lg <Plug>(vimtex-status)
+nmap <buffer> <silent> \lC <Plug>(vimtex-clean-full)
+nmap <buffer> <silent> \lc <Plug>(vimtex-clean)
+nmap <buffer> <silent> \le <Plug>(vimtex-errors)
+nmap <buffer> <silent> \lK <Plug>(vimtex-stop-all)
+nmap <buffer> <silent> \lk <Plug>(vimtex-stop)
+xmap <buffer> <silent> \lL <Plug>(vimtex-compile-selected)
+nmap <buffer> <silent> \lL <Plug>(vimtex-compile-selected)
+nmap <buffer> <silent> \lo <Plug>(vimtex-compile-output)
+nmap <buffer> <silent> \ll <Plug>(vimtex-compile)
+nmap <buffer> <silent> \lq <Plug>(vimtex-log)
+nmap <buffer> <silent> \ls <Plug>(vimtex-toggle-main)
+nmap <buffer> <silent> \lX <Plug>(vimtex-reload-state)
+nmap <buffer> <silent> \lx <Plug>(vimtex-reload)
+nmap <buffer> <silent> \lI <Plug>(vimtex-info-full)
+nmap <buffer> <silent> \li <Plug>(vimtex-info)
 omap <buffer> <silent> ][ <Plug>(vimtex-][)
-xmap <buffer> <silent> ac <Plug>(vimtex-ac)
-omap <buffer> <silent> ac <Plug>(vimtex-ac)
-xmap <buffer> <silent> ad <Plug>(vimtex-ad)
-omap <buffer> <silent> ad <Plug>(vimtex-ad)
-xmap <buffer> <silent> ae <Plug>(vimtex-ae)
-omap <buffer> <silent> ae <Plug>(vimtex-ae)
-xmap <buffer> <silent> a$ <Plug>(vimtex-a$)
-omap <buffer> <silent> a$ <Plug>(vimtex-a$)
-xmap <buffer> <silent> aP <Plug>(vimtex-aP)
+omap <buffer> <silent> ]] <Plug>(vimtex-]])
+xmap <buffer> <silent> ][ <Plug>(vimtex-][)
+xmap <buffer> <silent> ]] <Plug>(vimtex-]])
+nmap <buffer> <silent> ][ <Plug>(vimtex-][)
+nmap <buffer> <silent> ]] <Plug>(vimtex-]])
 omap <buffer> <silent> aP <Plug>(vimtex-aP)
-nmap <buffer> <silent> cs$ <Plug>(vimtex-env-change-math)
-nmap <buffer> <silent> cse <Plug>(vimtex-env-change)
-nmap <buffer> <silent> csc <Plug>(vimtex-cmd-change)
+xmap <buffer> <silent> aP <Plug>(vimtex-aP)
+omap <buffer> <silent> a$ <Plug>(vimtex-a$)
+xmap <buffer> <silent> a$ <Plug>(vimtex-a$)
+omap <buffer> <silent> ae <Plug>(vimtex-ae)
+xmap <buffer> <silent> ae <Plug>(vimtex-ae)
+omap <buffer> <silent> ad <Plug>(vimtex-ad)
+xmap <buffer> <silent> ad <Plug>(vimtex-ad)
+omap <buffer> <silent> ac <Plug>(vimtex-ac)
+xmap <buffer> <silent> ac <Plug>(vimtex-ac)
 nmap <buffer> <silent> csd <Plug>(vimtex-delim-change-math)
-nmap <buffer> <silent> ds$ <Plug>(vimtex-env-delete-math)
-nmap <buffer> <silent> dse <Plug>(vimtex-env-delete)
-nmap <buffer> <silent> dsc <Plug>(vimtex-cmd-delete)
+nmap <buffer> <silent> csc <Plug>(vimtex-cmd-change)
+nmap <buffer> <silent> cse <Plug>(vimtex-env-change)
+nmap <buffer> <silent> cs$ <Plug>(vimtex-env-change-math)
 nmap <buffer> <silent> dsd <Plug>(vimtex-delim-delete)
-xmap <buffer> <silent> ic <Plug>(vimtex-ic)
-omap <buffer> <silent> ic <Plug>(vimtex-ic)
-xmap <buffer> <silent> id <Plug>(vimtex-id)
-omap <buffer> <silent> id <Plug>(vimtex-id)
-xmap <buffer> <silent> ie <Plug>(vimtex-ie)
-omap <buffer> <silent> ie <Plug>(vimtex-ie)
-xmap <buffer> <silent> i$ <Plug>(vimtex-i$)
-omap <buffer> <silent> i$ <Plug>(vimtex-i$)
-xmap <buffer> <silent> iP <Plug>(vimtex-iP)
+nmap <buffer> <silent> dsc <Plug>(vimtex-cmd-delete)
+nmap <buffer> <silent> dse <Plug>(vimtex-env-delete)
+nmap <buffer> <silent> ds$ <Plug>(vimtex-env-delete-math)
 omap <buffer> <silent> iP <Plug>(vimtex-iP)
-nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
-nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
-nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
-xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
-nmap <buffer> <silent> tsD <Plug>(vimtex-delim-toggle-modifier-reverse)
+xmap <buffer> <silent> iP <Plug>(vimtex-iP)
+omap <buffer> <silent> i$ <Plug>(vimtex-i$)
+xmap <buffer> <silent> i$ <Plug>(vimtex-i$)
+omap <buffer> <silent> ie <Plug>(vimtex-ie)
+xmap <buffer> <silent> ie <Plug>(vimtex-ie)
+omap <buffer> <silent> id <Plug>(vimtex-id)
+xmap <buffer> <silent> id <Plug>(vimtex-id)
+omap <buffer> <silent> ic <Plug>(vimtex-ic)
+xmap <buffer> <silent> ic <Plug>(vimtex-ic)
 xmap <buffer> <silent> tsD <Plug>(vimtex-delim-toggle-modifier-reverse)
-nnoremap <buffer> <SNR>123_(v) v
-nnoremap <buffer> <SNR>123_(V) V
-xnoremap <buffer> <silent> <SNR>123_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-xnoremap <buffer> <silent> <SNR>123_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>123_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>123_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>123_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-nmap <buffer> <silent> <F7> <Plug>(vimtex-cmd-create)
-xmap <buffer> <silent> <F7> <Plug>(vimtex-cmd-create)
-xnoremap <buffer> <silent> <SNR>122_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
-xnoremap <buffer> <silent> <SNR>122_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
-xnoremap <buffer> <silent> <SNR>122_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
-xnoremap <buffer> <silent> <SNR>122_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
-xnoremap <buffer> <silent> <SNR>122_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
-nnoremap <buffer> <SNR>122_(V) V
+nmap <buffer> <silent> tsD <Plug>(vimtex-delim-toggle-modifier-reverse)
+xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
+nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
+nmap <buffer> <silent> tsc <Plug>(vimtex-cmd-toggle-star)
+nmap <buffer> <silent> tse <Plug>(vimtex-env-toggle-star)
 nnoremap <buffer> <SNR>122_(v) v
+nnoremap <buffer> <SNR>122_(V) V
+xnoremap <buffer> <silent> <SNR>122_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>122_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>122_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>122_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>122_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xmap <buffer> <silent> <F7> <Plug>(vimtex-cmd-create)
+nmap <buffer> <silent> <F7> <Plug>(vimtex-cmd-create)
+xnoremap <buffer> <silent> <SNR>123_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
+xnoremap <buffer> <silent> <SNR>123_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>123_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>123_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>123_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+nnoremap <buffer> <SNR>123_(V) V
+nnoremap <buffer> <SNR>123_(v) v
 nnoremap <buffer> <Plug>(vimtex-view) :call b:vimtex.viewer.view('')
 nnoremap <buffer> <Plug>(vimtex-toc-toggle) :call b:vimtex.toc.toggle()
 nnoremap <buffer> <Plug>(vimtex-toc-open) :call b:vimtex.toc.open()
@@ -387,14 +387,14 @@ normal! zo
 normal! zo
 56
 normal! zo
-56
-normal! zc
-let s:l = 24 - ((23 * winheight(0) + 32) / 65)
+57
+normal! zo
+let s:l = 63 - ((31 * winheight(0) + 33) / 66)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 24
-normal! 014|
+keepjumps 63
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :

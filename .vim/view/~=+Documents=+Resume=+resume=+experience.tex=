@@ -95,6 +95,13 @@ nmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 xmap <buffer> <silent> tsd <Plug>(vimtex-delim-toggle-modifier)
 nmap <buffer> <silent> tsD <Plug>(vimtex-delim-toggle-modifier-reverse)
 xmap <buffer> <silent> tsD <Plug>(vimtex-delim-toggle-modifier-reverse)
+nnoremap <buffer> <SNR>124_(v) v
+nnoremap <buffer> <SNR>124_(V) V
+xnoremap <buffer> <silent> <SNR>124_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
+xnoremap <buffer> <silent> <SNR>124_(vimtex-]]) :call vimtex#motion#next_section(0,0,1)
+xnoremap <buffer> <silent> <SNR>124_(vimtex-][) :call vimtex#motion#next_section(1,0,1)
+xnoremap <buffer> <silent> <SNR>124_(vimtex-[]) :call vimtex#motion#next_section(1,1,1)
+xnoremap <buffer> <silent> <SNR>124_(vimtex-[[) :call vimtex#motion#next_section(0,1,1)
 nnoremap <buffer> <SNR>101_(v) v
 nnoremap <buffer> <SNR>101_(V) V
 xnoremap <buffer> <silent> <SNR>101_(vimtex-%) :call vimtex#motion#find_matching_pair(1)
@@ -408,24 +415,17 @@ setlocal wrapmargin=0
 silent! normal! zE
 3,17fold
 18,31fold
-32,32fold
 32,45fold
 46,59fold
 60,71fold
 73,88fold
 let &fdl = &fdl
-32
-normal! zo
-32
-normal! zo
-32
-normal! zc
-let s:l = 31 - ((30 * winheight(0) + 15) / 30)
+let s:l = 32 - ((31 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 31
-normal! 01|
+keepjumps 32
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

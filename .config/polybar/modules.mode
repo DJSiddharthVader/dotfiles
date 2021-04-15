@@ -1,6 +1,6 @@
 bar:float
 separator:arrow_tail
-wallpaper_index:130
+wallpaper_index:204
 wifi:standardd
 songnames:scroll
 date:time
@@ -10,6 +10,6 @@ temperature:short
 disk:amount
 uptime:day
 torrent:speed
-reading:An Interactive Tutorial on Numerical Optimization~http://www.benfrederickson.com/numerical-optimization/
+reading:Randomized Clinical Trials Do Not Mimic Clinical Practice, Thank Goodness | Statistical Thinking~http://www.fharrell.com/post/rct-mimic/
 battery:all
 

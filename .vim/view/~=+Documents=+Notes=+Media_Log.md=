@@ -278,18 +278,16 @@ setlocal wrap
 setlocal wrapmargin=0
 1
 normal! zo
-263
-normal! zo
-270
-normal! zo
-270
+1
 normal! zc
-let s:l = 268 - ((267 * winheight(0) + 10) / 21)
+273
+normal! zo
+let s:l = 273 - ((272 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 268
-normal! 014|
+keepjumps 273
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost
