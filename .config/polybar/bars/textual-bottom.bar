@@ -1,7 +1,6 @@
 inherit = section/textual
 bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather
-; deluge
+modules-left = date memory cpu temperature xkeyboard disk uptime weather deluge
 modules-center =
 modules-right = reading wall
 

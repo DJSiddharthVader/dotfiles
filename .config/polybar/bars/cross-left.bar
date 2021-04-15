@@ -1,5 +1,5 @@
 inherit = section/full
-modules-left = applauncher i3 focused gamma volume wlan protonvpn bluetooth mpd songnames
+modules-left = applauncher i3 focused focused-text gamma volume wlan protonvpn bluetooth mpd songnames
 
 applauncher-prefix = ${colors.rightprefix}
 applauncher-suffix = ${colors.rightsuffix}
@@ -17,6 +17,11 @@ focused-prefix = ${colors.rightprefix}
 focused-suffix = ${colors.rightsuffix}
 focused-color = ${colors.col3}
 focused-underline =
+
+focused-text-prefix = ${colors.rightprefix}
+focused-text-suffix = ${colors.rightsuffix}
+focused-text-color = ${colors.col3}
+focused-text-underline =
 
 gamma-prefix = ${colors.rightprefix}
 gamma-suffix = ${colors.rightsuffix}

@@ -91,7 +91,7 @@ border-bottom-size = 5
 border-left-size = 10
 border-right-size = 10
 border-color = ${colors.transparent}
-focused-format = "  <label>"
+focused-text-format = "%{T7}<label>%{T-}"
 ;fonts
 font-0 = ${fonts.font-icon}
 font-1 = ${fonts.font-weather}
@@ -125,7 +125,7 @@ border-top-size = 0
 border-bottom-size = 0
 border-left-size = 0
 border-right-size = 0
-focused-format = "  %{T7}<label>%{T-}"
+focused-text-format = "%{T7}<label>%{T-}"
 ;fonts
 font-0 = ${fonts.font-icon-large}
 font-1 = ${fonts.font-weather-large}
@@ -159,7 +159,7 @@ background = ${colors.textual2}
 ;background-3 = ${colors.textual5}
 foreground = ${colors.foreground}
 line-size = 5
-focused-format = "  <label>"
+focused-text-format = "%{T7}<label>%{T-}"
 ;fonts
 font-0 = ${fonts.font-icon-large}
 font-1 = ${fonts.font-weather-large}
@@ -233,10 +233,10 @@ ws-icon-4 = 4;
 ws-icon-5 = 5;
 ws-icon-6 = 6;
 ws-icon-7 = 7;
-ws-icon-8 = 8;
+ws-icon-8 = 8;
 ws-icon-9 = 9;
 ws-icon-0 = 10;
-ws-icon-default =
+ws-icon-default = 
 ;      
 ; Only show workspaces on the same output as the bar
 label-mode-padding = 0
@@ -273,15 +273,23 @@ format-suffix-background = ${colors.transparent}
 [module/focused]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.config/polybar/scripts/current-window.sh
-format = ${root.focused-format}
-format-prefix-font = 5
-format-suffix-font = 5
+exec = ~/dotfiles/.config/polybar/scripts/current-window.sh icon
+format = "  <label> "
 format-background = ${root.focused-color}
 format-underline = ${root.focused-underline}
+format-prefix-font = 5
 format-prefix = ${root.focused-prefix}
 format-prefix-foreground = ${root.focused-color}
 format-prefix-background = ${colors.transparent}
+
+[module/focused-text]
+type = custom/script
+tail = true
+exec = ~/dotfiles/.config/polybar/scripts/current-window.sh text
+format = ${root.focused-text-format}
+format-background = ${root.focused-color}
+;format-underline = ${root.focused-underline}
+format-suffix-font = 5
 format-suffix = ${root.focused-suffix}
 format-suffix-foreground = ${root.focused-color}
 format-suffix-background = ${colors.transparent}
@@ -501,7 +509,7 @@ format = " %{T6}<label>%{T-} "
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.songnames-color}
-format-underline = ${root.songnames-underline}
+;format-underline = ${root.songnames-underline}
 format-prefix = ${root.songnames-prefix}
 format-prefix-foreground = ${root.songnames-color}
 format-prefix-background = ${colors.transparent}
