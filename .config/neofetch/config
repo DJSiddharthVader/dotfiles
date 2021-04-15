@@ -33,7 +33,7 @@ print_info () {
     prin "Disk" "$(~/dotfiles/.config/polybar/scripts/disk.sh display free)"
     #prin "Wifi" "$(~/dotfiles/.config/polybar/scripts/network.sh display text)"
     prin "Torrent" "$(~/dotfiles/.scripts/deluge.sh display datatotal)"
-    prin "VPN" "$(~/dotfiles/.config/polybar/scripts/protonvpn.sh display)"
+    prin "VPN" "$(~/dotfiles/.scripts/protonvpn.sh display)"
     prin "Weather" "$(~/dotfiles/.config/polybar/scripts/weather.sh)"
     info cols
 #    info "Disk" disk
@@ -286,7 +286,7 @@ disk_display="infobar"
 # }}}
 # Image Options {{{
 
-image_source="$HOME/dotfiles/.config/neofetch/aperature.ascii"
+image_source="$HOME/dotfiles/.ascii/aperature.ascii"
 
 # Image Source
 # --image wall, ascii, /path/to/img, /path/to/dir/, off
