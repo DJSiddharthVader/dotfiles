@@ -20,13 +20,13 @@ pipurl="ifconfig.co"
 #ramp4="⎼"
 #ramp5="⎯"
 #ramp6="⎻"
-## Block
-ramp1="│▃"
-ramp2="│▄"
-ramp3="│▅"
-ramp4="│▆"
-ramp5="│▇"
-ramp6="│█"
+## Block │
+ramp1="▃"
+ramp2="▄"
+ramp3="▅"
+ramp4="▆"
+ramp5="▇"
+ramp6="█"
 
 
 help() {
@@ -87,7 +87,7 @@ icon() {
         $(($percent <  90))) icon="$ramp5" ;;
         $(($percent < 101))) icon="$ramp6" ;;
     esac
-    echo "$icon"
+    echo "$icon▎"
 }
 display(){
     mode="$1"

@@ -34,8 +34,9 @@ update() {
                    | tr -s ' ' ' '                    >| $readings
 }
 pick() {
-    setReading "$(cat $readings | shuf | tail -1)"
-    killall -q "$(basename $0)" > /dev/null 2>&1 #restart zscroll with new article so scroll updates
+    setReading "$(cat $readings | shuf -n1)"
+    #restart zscroll with new article so scroll updates
+    killall -q "$(basename $0)" > /dev/null 2>&1
     #polybar-msg hook reading 1 # for ipc messaging to polybar
 }
 open() {
@@ -46,11 +47,11 @@ display() {
     articlename="$(getArticle)"
     if [[ ${#articlename} -gt $thresh ]]; then
         ( zscroll -l "$thresh" -d 0.20 -b "" -a "" -p " /// " "$(getArticle)" ) &
-        #[( zscroll -l "$thresh" -d 0.20 -b "" -a "" -p " /// " "$(grep '^reading:' "$mode_file" | cut -d':' -f2- | cut -d'~' -f1)" ) &
         wait
     else
-        # echo "$articlename"
-        getArticle
+        # right pad with spaces until total length $thresh
+        # keeps module width constant no matter article length
+        printf "%-${thresh}s" "$(getArticle)"
     fi
 }
 

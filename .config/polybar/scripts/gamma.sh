@@ -34,6 +34,7 @@ main() {
                 *) help && exit 1 ;;
             esac
         done <<< "$(xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev)"
+        polybar-msg hook gamma 1
     fi
 }
 
