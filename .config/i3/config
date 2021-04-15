@@ -1,7 +1,7 @@
 # vim: filetype=i3
 ##---i3 options------------#
 #Window options
-for_window [class="^.*"] border pixel 1
+for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 for_window [instance="protonvpn"] floating enable
 set $mod Mod4
