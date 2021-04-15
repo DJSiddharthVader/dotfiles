@@ -37,13 +37,16 @@ mvpr() {
     echo ''
 }
 notes() { # pandoc compiles md notes and open in firefox
+    css="$HOME/dotfiles/.css/pandoc-notes.css"
+    filter="$HOME/dotfiles/.scripts/notes-pandoc-filter.py" # makes all headings collapsible
+
     pattern="$1"
     ext="$2"
-
     name="$pattern-Notes.$ext"
-    css="$HOME/dotfiles/.css/pandoc-notes.css"
-    pandoc -s --toc -c "$css" ./Notes/* -o "$name"
-    window_id="$(xwininfo -tree -root | grep "$pattern" | head -1 | grep -o '0x[0-9a-Z]*' | head -1)"
+
+    #pandoc --mathjax --standalone --toc --toc-depth 2 -c "$css" -f markdown+pipe_tables ./Notes/*.md -o "$name"
+    pandoc -s ./Notes/*.md -f markdown+pipe_tables --filter "$filter" --mathjax --toc --toc-depth 2 -c "$css" -o "$name"
+    window_id="$(xwininfo -tree -root | grep -i "$(echo $pattern | tr '_' ' ')" | head -1 | grep -o '0x[0-9a-Z]*' | head -1)"
     if [ -n "$window_id" ]; then # is notes tab already open
         # refresh open tab
         xdotool key --window "$window_id" --clearmodifiers "ctrl+r" # refresh already open tab
