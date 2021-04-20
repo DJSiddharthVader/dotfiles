@@ -16,7 +16,7 @@ setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
+setlocal commentstring=#%s
 setlocal complete=.,w,b,u,t
 setlocal concealcursor=
 setlocal conceallevel=1
@@ -31,8 +31,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != ''
-setlocal filetype=
+if &filetype != 'sh'
+setlocal filetype=sh
 endif
 setlocal fillchars=
 setlocal fixendofline
@@ -55,8 +55,8 @@ setlocal iminsert=0
 setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
+setlocal indentexpr=GetShIndent()
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -88,7 +88,7 @@ setlocal scrolloff=-1
 setlocal shiftwidth=4
 setlocal sidescrolloff=-1
 setlocal signcolumn=auto
-setlocal smartindent
+setlocal nosmartindent
 setlocal softtabstop=4
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
@@ -99,8 +99,8 @@ setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != ''
-setlocal syntax=
+if &syntax != 'sh'
+setlocal syntax=sh
 endif
 setlocal tagfunc=
 setlocal tabstop=4
@@ -117,74 +117,24 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-14,18fold
-19,22fold
-23,27fold
-28,72fold
-73,104fold
-105,137fold
-138,171fold
-13,172fold
-174,178fold
-179,183fold
-184,188fold
-189,193fold
-194,198fold
-199,203fold
-204,206fold
-173,207fold
-209,227fold
-228,277fold
-278,289fold
-290,301fold
-302,354fold
-355,377fold
-378,408fold
-409,426fold
-427,446fold
-447,463fold
-464,507fold
-508,524fold
-526,543fold
-544,561fold
-562,579fold
-580,597fold
-598,613fold
-614,631fold
-632,649fold
-650,666fold
-667,683fold
-684,705fold
-706,723fold
-725,740fold
-741,757fold
-758,776fold
-208,777fold
-779,798fold
-799,818fold
-778,819fold
+4,6fold
+7,14fold
+15,18fold
+19,21fold
+22,24fold
+25,28fold
+29,35fold
+36,38fold
+39,54fold
 let &fdl = &fdl
-13
+39
 normal! zo
-13
-normal! zc
-173
-normal! zo
-173
-normal! zc
-208
-normal! zo
-778
-normal! zo
-778
-normal! zc
-let s:l = 296 - ((294 * winheight(0) + 32) / 65)
+let s:l = 22 - ((21 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 296
-normal! 0
+keepjumps 22
+normal! 01|
 let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :
