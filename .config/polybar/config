@@ -191,6 +191,11 @@ include-file = ~/dotfiles/.config/polybar/bars/textual-top.bar
 [bar/textual-bottom]
 include-file = ~/dotfiles/.config/polybar/bars/textual-bottom.bar
 
+[bar/clear-top]
+include-file = ~/dotfiles/.config/polybar/bars/clear-top.bar
+[bar/clear-bottom]
+include-file = ~/dotfiles/.config/polybar/bars/clear-bottom.bar
+
 [bar/laptop-top]
 include-file = ~/dotfiles/.config/polybar/bars/laptop-top.bar
 [bar/laptop-bottom]
@@ -288,7 +293,7 @@ tail = true
 exec = ~/dotfiles/.config/polybar/scripts/current-window.sh text
 format = ${root.focused-text-format}
 format-background = ${root.focused-color}
-;format-underline = ${root.focused-underline}
+format-underline = ${root.focused-underline}
 format-suffix-font = 5
 format-suffix = ${root.focused-suffix}
 format-suffix-foreground = ${root.focused-color}
@@ -509,7 +514,7 @@ format = " %{T6}<label>%{T-} "
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.songnames-color}
-;format-underline = ${root.songnames-underline}
+format-underline = ${root.songnames-underline}
 format-prefix = ${root.songnames-prefix}
 format-prefix-foreground = ${root.songnames-color}
 format-prefix-background = ${colors.transparent}
@@ -558,7 +563,7 @@ format-suffix-background = ${colors.transparent}
 type = custom/script
 exec = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh display
 interval = 1
-label = " %output%"
+label = "%output%"
 format-prefix-font = 5
 format-suffix-font = 5
 click-left =  = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh next
