@@ -6,6 +6,7 @@
 export TERM='st'
 export HISTTIMEFORMAT="%m/%d - %H:%M:%S: "
 export VISUAL='nvim'
+export STEAM_RUNTIME=1
 
 _islinux=false
 [[ "$(uname -s)" =~ Linux|GNU|GNU/* ]] && _islinux=true
@@ -258,4 +259,4 @@ unset __conda_setup
 
 
 # print a random quote on new terminal launch
-~/.scripts/quote.sh | lolcat
+~/.scripts/quote.sh
