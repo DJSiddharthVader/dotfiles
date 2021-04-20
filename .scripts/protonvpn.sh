@@ -4,7 +4,6 @@ icon=""
 help() {
     echo "Usage $(basename $0) {status|location|toggle|connect|disconnect}"
 }
-
 connect() {
     #protonvpn-cli ks --on
     if [[ -z "$1" ]]; then
@@ -23,7 +22,6 @@ toggle() {
 reload() {
     disconnect && connect
 }
-
 status() {
     [[ "$(protonvpn-cli s)" =~ 'No active' ]] && msg="not connected" || msg="connected"
     echo "$msg"
@@ -35,11 +33,9 @@ display() {
     esac
     echo "$output" | rev | cut -d' ' -f-2 | rev
 }
-
 pick_location() {
     st -n protonvpn -e protonvpn-cli c
 }
-
 main() {
     mode="$1"
     case $mode in
@@ -51,6 +47,9 @@ main() {
         'disconnect') disconnect    ;;
         'location'  ) pick_location ;;
         *) help && exit 1 ;;
+    esac
+    case $mode in
+        reload|toggle|connect|disconnect) polybar-msg hook protonvpn 1 ;;
     esac
 }
 
