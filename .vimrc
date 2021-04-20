@@ -564,11 +564,6 @@ augroup pandoc_syntax
     au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
 augroup END
 
-call plug#begin('~/dotfiles/.config/nvim/plugged')
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-cal plug#end()
-
-
 " => Custom header
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Startify plugin
