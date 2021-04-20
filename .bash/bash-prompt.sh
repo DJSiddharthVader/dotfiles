@@ -1,73 +1,27 @@
-# Separators, Symbols and Colors
-## Foreground Colors
-F0='\[\e[07;40m\]'
-F1b='\[\e[01;31m\]'
-F1='\[\e[31m\]'
-F2='\[\e[32m\]'
-F3='\[\e[33m\]'
-F4='\[\e[34m\]'
-F5='\[\e[35m\]'
-F6='\[\e[36m\]'
-F7='\[\e[37m\]'
-## Background Colors
-B0='\[\e[0m\]'
-B1='\[\e[41m\]'
-B2='\[\e[42m\]'
-B3='\[\e[43m\]'
-B4='\[\e[44m\]'
-B5='\[\e[45m\]'
-B6='\[\e[46m\]'
-B7='\[\e[47m\]'
-## Prompt Symbols
-par="$(echo -e '\uE0B0')" # "
+# Prompt Symbols
+text_font='07;40'
+pow_sep="$(echo -e '\uE0B0')" # "
 top="$(echo -e '╭\uE0B2')" # ┏
 bot="$(echo -e '╰\uE0B2\uE0C6')" # ┗
 clk="$(echo -e '\u231B')"
 usr="$(echo -e '\u23FF')"
 hst="$(echo -e '\u237E')"
 dir="$(echo -e '\u26E9')"
-git="$(echo -e '\u2325')"
-tsk="$(echo -e '\u2713')"
-## Formatting Modules
-mSs="$B1$B0$F1b"
-mSe="$B0$F1$B1$par"
-start="$mSs$top$mSe"
-mEs="$B0$F1b"
-mEe="$B0$F1b"
-end="$mEs\n$bot$mEe "
-
-m1s="$B1$F0"
-m1e="$F2$B1$par"
-m2s="$B2$F0"
-m2e="$F3$B2$par"
-m3s="$B3$F0"
-m3e="$F4$B3$par"
-m4s="$B4$F0"
-m4e="$F5$B4$par"
-m5s="$B5$F0"
-m5e="$F6$B5$par"
-m6s="$B6$F0"
-m6e="$F7$B6$par"
-m7s="$B7$F0"
-m7e="$F1$B7$par"
-
+# Module functions
 exitstatus() {
     case "$?" in
         0) icon="✔" ;;
-        1) icon="✖" ;;
+        1) icon="✖ " ;;
         *) icon="?" ;;
     esac
     echo "$icon"
 }
-condaenv() {
-    if [[ -z "$CONDA_DEFAULT_ENV" ]]; then
-        cond=""
-    else
-        cond="\u2440 $CONDA_DEFAULT_ENV"
-    fi
-    echo -e "$cond"
+cenv() {
+    snake_sym='\u2440'
+    [[ -z "$CONDA_DEFAULT_ENV" ]]  && env="" || env="$snake_sym $CONDA_DEFAULT_ENV"
+    echo -e "$env"
 }
-gitstats() {
+gits() {
     #git symbols
     bsym='\u2325 ' # branch symbol
     committed_symbol='⇡' # dotted up arrow
@@ -78,7 +32,7 @@ gitstats() {
     prompt="$bsym"
     if [ -n "$(git branch 2> /dev/null)" ]; then
         branch="$(git branch 2> /dev/null | grep '\*' | cut -d' ' -f2)"
-        prompt="$prompt($branch)" # current git branch
+        prompt="$prompt ($branch)" # current git branch
 
         commits="$(git status 2> /dev/null | grep -o 'by [0-9]* commit' | cut -d' ' -f2)"
         if [[ -n "$commits" ]]; then # non-zero commits
@@ -101,46 +55,67 @@ gitstats() {
     fi
     echo -e "$prompt"
 }
-prompt_command() {
-    #initialize all modules as empty
-    mod1=""
-    mod2=""
-    mod3=""
-    mod4=""
-    mod5=""
-    mod6=""
-    mod7=""
-    mod8=""
-    # define modules based on term width
+
+# Format prompt
+setColor() {
+    # pass a space deilimited string of promt formatting colors
+    # produce PS1 formatting string
+    # i.e. "07;40 0 31" -> \[\e[07:40m\]\[\e[0m\]\[\e[31m\]
+    col_str=""
+    for color in $@; do
+        col_str="$col_str\[\\e[${color}m\]"
+    done
+    echo "$col_str"
+}
+build_prompt() {
+    # pass a \t delimited string of of modules that are formatted into powerline prompy
+    # each module is a string that corresponds to text,variables,commands
+    # note, starting,connection,newline ending are handeled externally
+    # this only builds the powerline string of modules
+    prompt=""
+    i=1
+    for module in "$@"; do
+        if [[ $i = 1 ]]; then
+            f_prev="$(setColor "3$i 4$i")$pow_sep"
+        else
+            f_prev="$(setColor "3$i 4$((i-1))")$pow_sep"
+        fi
+        f_curr="$(setColor "4$i $text_font")"
+        prompt="$prompt$f_prev$f_curr$module"
+        i=$((1+i%8)) # modulo 7 since pywal colors go from 31-37, 41-47
+    done
+    echo "$prompt$(setColor "0 3$((i-1))")$pow_sep"
+}
+setOptions() {
+    # Set how many dirs are shown in prompt path based on term width
     termwidth=${COLUMNS}
     case 1 in
-        $(($termwidth < 20)))
-            PROMPT_DIRTRIM=1
-            mod1="$m1s\$(exitstatus)$m1e"
-            mod2="$m2s$clk\@$m2e"
-            mod3="$m3s$dir \w$m3e"
-            mod4="$m4s\$(condaenv)$B0$F4$par"
+        $(($termwidth < 20))) PROMPT_DIRTRIM=1 ;;
+        $(($termwidth < 60))) PROMPT_DIRTRIM=2 ;;
+        $(($termwidth < 100))) PROMPT_DIRTRIM=3 ;;
+        *) PROMPT_DIRTRIM=4 ;;
+    esac
+}
+prompt_command() {
+    setOptions
+    # define modules to be shown based on term width and format them with powerline
+    termwidth=${COLUMNS}
+    case 1 in
+        $(($termwidth < 40)))
+            modules="$(build_prompt "\$(exitstatus)" "$clk\@" "$dir \w" "\$(cenv)")"
             ;;
-        $(($termwidth < 80)))
-            PROMPT_DIRTRIM=3
-            mod1="$m1s\$(exitstatus)$m1e"
-            mod2="$m2s$clk\@$m2e"
-            mod3="$m3s$dir \w$m3e"
-            mod4="$m4s\$(condaenv)$m4e"
-            mod5="$m5s\$(gitstats)$B0$F5$par"
+        $(($termwidth < 120)))
+            modules="$(build_prompt "\$(exitstatus)" "$clk\@" "$dir \w" "\$(cenv)" "\$(gits)")"
             ;;
         *)
-            PROMPT_DIRTRIM=4
-            mod1="$m1s\$(exitstatus)$m1e"
-            mod2="$m2s$clk\@$m2e"
-            mod3="$m3s$usr \u$m3e"
-            mod4="$m4s$hst \h$m4e"
-            mod5="$m5s$dir $F0\w$m5e"
-            mod6="$m6s\$(condaenv)$m6e"
-            mod7="$m7s\$(gitstats)$B0$F7$par"
+            modules="$(build_prompt "\$(exitstatus)" "$clk\@" "$usr \u" "$hst \h" "$dir \w" "\$(cenv)" "\$(gits)")"
             ;;
     esac
-    export PS1="$start$mod1$mod2$mod3$mod4$mod5$mod6$mod7$end"
+    # format start and end of prompt to put info and entered text on different lines
+    start="$(setColor "41 0 01;31")$top$(setColor "0")"
+    end="$(setColor "0 01;31")\n$bot "
+    term_text_formatting="$(setColor "0 01;31")"
+    export PS1="$start$modules$end$term_text_formatting"
 }
 
 PROMPT_COMMAND=prompt_command
