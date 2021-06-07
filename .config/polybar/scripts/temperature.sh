@@ -41,11 +41,11 @@ setMode() {
 icon() {
     temp="$(sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..')"
     case 1 in
-        $(($temp < 30))) icon=$ramp1 ;;
-        $(($temp < 40))) icon=$ramp2 ;;
-        $(($temp < 50))) icon=$ramp3 ;;
-        $(($temp < 60))) icon=$ramp4 ;;
-        $(($temp < 70))) icon=$ramp5 ;;
+        $(($temp < 40))) icon=$ramp1 ;;
+        $(($temp < 50))) icon=$ramp2 ;;
+        $(($temp < 60))) icon=$ramp3 ;;
+        $(($temp < 70))) icon=$ramp4 ;;
+        $(($temp < 80))) icon=$ramp5 ;;
     esac
     echo "$icon"
 }
