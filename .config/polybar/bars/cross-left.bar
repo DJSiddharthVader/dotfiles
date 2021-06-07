@@ -1,60 +1,68 @@
-inherit = section/full
-modules-left = applauncher i3 focused focused-text gamma volume wlan protonvpn bluetooth mpd songnames
+modules-left = applauncher i3 focused focused-name gamma volume wlan protonvpn bluetooth mpd songnames
 
 applauncher-prefix = ${colors.rightprefix}
 applauncher-suffix = ${colors.rightsuffix}
 applauncher-color = ${colors.col1}
 applauncher-underline =
+applauncher-text-color = ${colors.foreground}
 
 i3-prefix = ${colors.rightprefix}
 i3-suffix = ${colors.rightsuffix}
 i3-color = ${colors.col2}
 i3-color-2 = ${colors.col1}
 i3-underline =
+i3-text-color = ${colors.foreground}
 i3-underline-2 =
+i3-text-color-2 =
 
 focused-prefix = ${colors.rightprefix}
 focused-suffix = ${colors.rightsuffix}
 focused-color = ${colors.col3}
 focused-underline =
+focused-text-color = ${colors.foreground}
 
-focused-text-prefix = ${colors.rightprefix}
-focused-text-suffix = ${colors.rightsuffix}
-focused-text-color = ${colors.col3}
-focused-text-underline =
+focused-name-prefix = ${colors.rightprefix}
+focused-name-suffix = ${colors.rightsuffix}
 
 gamma-prefix = ${colors.rightprefix}
 gamma-suffix = ${colors.rightsuffix}
 gamma-color = ${colors.col4}
 gamma-underline =
+gamma-text-color = ${colors.foreground}
 
 volume-prefix = ${colors.rightprefix}
 volume-suffix = ${colors.rightsuffix}
 volume-color = ${colors.col5}
 volume-underline =
+volume-text-color = ${colors.foreground}
 
 wlan-prefix = ${colors.rightprefix}
 wlan-suffix = ${colors.rightsuffix}
 wlan-color = ${colors.col6}
 wlan-underline =
+wlan-text-color = ${colors.foreground}
 
 protonvpn-prefix = ${colors.rightprefix}
 protonvpn-suffix = ${colors.rightsuffix}
 protonvpn-color = ${colors.col7}
 protonvpn-underline =
+protonvpn-text-color = ${colors.foreground}
 
 bluetooth-prefix = ${colors.rightprefix}
 bluetooth-suffix = ${colors.rightsuffix}
 bluetooth-color = ${colors.col8}
 bluetooth-underline =
+bluetooth-text-color = ${colors.foreground}
 
 mpd-prefix = ${colors.rightprefix}
 mpd-suffix =
 mpd-color = ${colors.col9}
 mpd-underline =
+mpd-text-color = ${colors.foreground}
 
 songnames-prefix =
 songnames-suffix = ${colors.rightsuffix}
 songnames-color = ${colors.col9}
 songnames-underline =
+songnames-text-color = ${colors.foreground}
 

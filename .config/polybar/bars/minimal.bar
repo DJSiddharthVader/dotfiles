@@ -1,4 +1,3 @@
-inherit = section/float
 height = 22
 y-offset = 0
 radius = 5.0
@@ -14,31 +13,38 @@ i3-suffix =
 i3-color = ${colors.color1}
 i3-color-2 = ${colors.color2}
 i3-underline = ${colors.color1}
-i3-underline -2 = ${colors.color2}
+i3-text-color = ${colors.foreground}
+i3-underline-2 = ${colors.color2}
+i3-text-color-2 =  ${colors.foreground}
 
 date-prefix =
 date-suffix = ${colors.leftsuffix}
 date-color = ${colors.color3}
 date-underline = ${colors.color3}
+date-text-color =  ${colors.foreground}
 
 volume-prefix =
 volume-suffix =
 volume-color = ${colors.color4}
 volume-underline = ${colors.color4}
+volume-text-color = ${colors.foreground}
 
 wlan-prefix =
 wlan-suffix =
 wlan-color = ${colors.color5}
 wlan-underline = ${colors.color5}
+wlan-text-color = ${colors.foreground}
 
 protonvpn-prefix =
 protonvpn-suffix =
 protonvpn-color = ${colors.color6}
 protonvpn-underline = ${colors.color6}
+protonvpn-text-color = ${colors.foreground}
 
 bluetooth-prefix =
 bluetooth-suffix =
 bluetooth-color = ${colors.color7}
 bluetooth-underline = ${colors.color7}
+bluetooth-text-color = ${colors.foreground}
 
 

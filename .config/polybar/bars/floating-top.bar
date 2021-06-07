@@ -1,6 +1,5 @@
-inherit = section/float
 fixed-center = true
-modules-left = i3 focused focused-text
+modules-left = i3 focused focused-name
 modules-center =
 modules-right = songnames mpd bluetooth protonvpn wlan volume applauncher
 
@@ -9,55 +8,64 @@ i3-suffix = ${colors.rightsuffix}
 i3-color = ${colors.col1}
 i3-color-2 = ${colors.col2}
 i3-underline =
+i3-text-color = ${colors.foreground}
 i3-underline-2 =
+i3-text-color-2 = ${colors.foreground}
 
 focused-prefix = ${colors.rightprefix}
 focused-suffix = ${colors.rightsuffix}
 focused-color = ${colors.col3}
 focused-underline =
+focused-text-color = ${colors.foreground}
 
-focused-text-prefix = ${colors.rightprefix}
-focused-text-suffix = ${colors.rightsuffix}
-focused-text-color = ${colors.col3}
-focused-text-underline =
+focused-name-prefix = ${colors.rightprefix}
+focused-name-suffix = ${colors.rightsuffix}
 
 applauncher-prefix = ${colors.leftprefix}
 applauncher-suffix = ${colors.leftsuffix}
 applauncher-color = ${colors.col1}
 applauncher-underline =
+applauncher-text-color = ${colors.foreground}
 
 gamma-prefix = ${colors.leftprefix}
 gamma-suffix = ${colors.leftsuffix}
 gamma-color = ${colors.col2}
 gamma-underline =
+gamma-text-color = ${colors.foreground}
 
 volume-prefix = ${colors.leftprefix}
 volume-suffix = ${colors.leftsuffix}
 volume-color = ${colors.col3}
 volume-underline =
+volume-text-color = ${colors.foreground}
 
 wlan-prefix = ${colors.leftprefix}
 wlan-suffix = ${colors.leftsuffix}
 wlan-color = ${colors.col4}
 wlan-underline =
+wlan-text-color = ${colors.foreground}
 
 protonvpn-prefix = ${colors.leftprefix}
 protonvpn-suffix = ${colors.leftsuffix}
 protonvpn-color = ${colors.col5}
 protonvpn-underline =
+protonvpn-text-color = ${colors.foreground}
 
 bluetooth-prefix = ${colors.leftprefix}
 bluetooth-suffix = ${colors.leftsuffix}
 bluetooth-color = ${colors.col6}
 bluetooth-underline =
+bluetooth-text-color = ${colors.foreground}
 
 mpd-prefix =
 mpd-suffix = ${colors.leftsuffix}
 mpd-color = ${colors.col7}
 mpd-underline =
+mpd-text-color = ${colors.foreground}
 
 songnames-prefix = ${colors.leftprefix}
 songnames-suffix =
 songnames-color = ${colors.col7}
 songnames-underline =
+songnames-text-color = ${colors.foreground}
 

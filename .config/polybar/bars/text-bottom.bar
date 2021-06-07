@@ -1,4 +1,3 @@
-inherit = section/textual
 bottom = true
 modules-left = date memory cpu temperature xkeyboard disk uptime weather deluge
 modules-center =
@@ -7,22 +6,26 @@ modules-right = reading wall
 date-prefix =
 date-suffix =
 date-color = ${colors.transparent}
-date-underline = ${colors.col1}
+date-underline = ${colors.col2}
+date-text-color = ${colors.foreground}
 
 memory-prefix =
 memory-suffix =
 memory-color = ${colors.transparent}
-memory-underline = ${colors.col2}
+memory-underline = ${colors.col3}
+memory-text-color = ${colors.foreground}
 
 cpu-prefix =
 cpu-suffix =
 cpu-color = ${colors.transparent}
-cpu-underline = ${colors.col3}
+cpu-underline = ${colors.col4}
+cpu-text-color = ${colors.foreground}
 
 temperature-prefix =
 temperature-suffix =
 temperature-color = ${colors.transparent}
-temperature-underline = ${colors.col4}
+temperature-underline = ${colors.col5}
+temperature-text-color = ${colors.foreground}
 
 xkeyboard-prefix =
 xkeyboard-suffix =
@@ -31,31 +34,35 @@ xkeyboard-color = ${colors.alert}
 disk-prefix =
 disk-suffix =
 disk-color = ${colors.transparent}
-disk-underline = ${colors.col5}
+disk-underline = ${colors.col6}
+disk-text-color = ${colors.foreground}
 
 uptime-prefix =
 uptime-suffix =
 uptime-color = ${colors.transparent}
-uptime-underline = ${colors.col6}
+uptime-underline = ${colors.col7}
+uptime-text-color = ${colors.foreground}
 
 weather-prefix =
 weather-suffix =
 weather-color = ${colors.transparent}
-weather-underline = ${colors.col7}
+weather-underline = ${colors.col8}
+weather-text-color = ${colors.foreground}
 
 deluge-prefix =
 deluge-suffix =
 deluge-color = ${colors.transparent}
-deluge-underline = ${colors.col8}
+deluge-underline = ${colors.col10}
+deluge-text-color = ${colors.foreground}
 
 wall-prefix =
 wall-suffix =
 wall-color = ${colors.transparent}
-wall-underline = ${colors.col1}
+wall-underline = ${colors.col2}
+wall-text-color = ${colors.foreground}
 
 reading-prefix =
 reading-suffix =
 reading-color = ${colors.transparent}
-reading-underline = ${colors.col2}
-
-
+reading-underline = ${colors.col3}
+reading-text-color = ${colors.foreground}
