@@ -7,8 +7,25 @@ thresh=40
 help() {
     echo "Usage: $0 {text|icon|both}"
 }
+intToRoman() {
+    case "$1" in
+        1) numeral="I" ;;
+        2) numeral="II" ;;
+        3) numeral="III" ;;
+        4) numeral="IV" ;;
+        5) numeral="V" ;;
+        6) numeral="VI" ;;
+        7) numeral="VII" ;;
+        8) numeral="VIII" ;;
+        9) numeral="IX" ;;
+        10) numeral="X" ;;
+    esac
+    echo $numeral
+}
 getWorkspace() {
-    i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2
+    ws="$(i3-msg -t get_workspaces | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2)"
+    echo "$ws"
+    #intToRoman "$ws"
 }
 getIcon() {
     id="$1"
