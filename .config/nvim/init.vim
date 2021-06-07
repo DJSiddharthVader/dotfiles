@@ -1,10 +1,7 @@
 " => VIM config
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set updatetime=1000
 " Automatically deletes all tralling whitespace on save.
 autocmd BufWritePre * %s/\s\+$//e
@@ -20,14 +17,6 @@ filetype indent on
 
 " Set to auto read when a file is changed from the outside
 set autoread
-
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
-
-" Fast saving
-nmap <leader>w :w!<cr>
 
 "speed up marcors by not redrawing entire screen at once
 set lazyredraw
@@ -55,12 +44,6 @@ source $VIMRUNTIME/menu.vim
 " Turn on the WiLd menu
 set wildmenu
 
-" Disable scrollbars (real hackers don't use scrollbars for navigation!)
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
-
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
 if has("win16") || has("win32")
@@ -86,8 +69,8 @@ set hid
 " Configure backspace so it acts as it should act
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
-
 set mouse=
+
 "turns on spell check
 autocmd FileType latex,tex,md setlocal spell
 
@@ -121,11 +104,9 @@ set novisualbell
 set t_vb=
 set tm=500
 
-" Turn on syntax highlighting
-syntax on
-
 " Add line numbers
 set number
+
 " makes all relative except for current line
 set relativenumber
 
@@ -146,26 +127,44 @@ function! MyFoldText()
 endfunction
 set foldtext=MyFoldText()
 
-" => Colors and Fonts
+" => Syntax
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Enable syntax highlighting
+syntax on
 syntax enable
-set background=dark
-"colorscheme hybrid
-"colorscheme new-railscasts
-"colorscheme wal
-colorscheme angr
+
+" Markdown
+let g:markdown_fenced_languages = ['css','json=javascript', 'ruby', 'xml', 'python', 'go','tex']
+let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby","literatehaskell=lhaskell", "bash=sh","go"]
+
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
+
+" Syntastic (syntax checker) Options
+let g:pymode_python = 'python3'
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_exec='/home/sidreed/anaconda3/envs/prog02601/bin/flake8'
+let g:syntastic_python_pylint_exec='/home/sidreed/anaconda3/envs/prog02601/bin/pylint'
+let g:syntastic_python_pylint_args='--disable=missing-docstring --errors-only'
+let g:syntastic_go_checkers= ['go', 'gofmt', 'govet']
+let g:syntastic_enable_r_lintr_checker = 1
+let g:syntastic_R_checkers= ['lintr']
+let g:syntastic_markdown_checkers= ['mdl', 'proselint']
+let g:syntastic_tex_checkers= ['chktex', 'proselint']
+let g:syntastic_bash_checkers= ['shellcheck']
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
-" Set font according to system
-if has("linux")
-    set gfn=Hack\ Source\ Code\ Pro:h12,Bitstream\ Vera\ Sans\ Mono:h11
-elseif has("unix")
-    set gfn=Monospace\ 11
-endif
+
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git etc anyway...
@@ -179,6 +178,7 @@ set noswapfile
 "set backupskip=/tmp/*,/private/tmp/*
 "set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 "set writebackup
+
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
@@ -205,60 +205,6 @@ set textwidth=0
 " Whitespace
 set formatoptions=cqt
 set noshiftround
-
-" => Command mode related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Smart mappings on the command line
-cno $h e ~/
-cno $j e ./
-cno $c e <C-\>eCurrentFileDir("e")<cr>
-
-" $q is super useful when browsing on the command line
-" it deletes everything until the last slash
-cno $q <C-\>eDeleteTillSlash()<cr>
-
-" Bash like keys for the command line
-cnoremap <C-A>		<Home>
-cnoremap <C-E>		<End>
-cnoremap <C-K>		<C-U>
-
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
-
-" Map ½ to something useful
-map ½ $
-cmap ½ $
-imap ½ $
-
-"Commands
-command! -range Cc :<line1>,<line2>s/^/#/
-command! -range Uu :<line1>,<line2>s/^#//
-
-" => Visual mode related
-""""""""""""""""""""""""""""""
-" Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
-"vnoremap <silent> * :call VisualSelection('f', '')<CR>
-"vnoremap <silent> # :call VisualSelection('b', '')<CR>
-vnoremap # y/\V<C-r>=escape(@",'/\')<CR><CR>
-
-" => Parenthesis/bracket
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-vnoremap $1 <esc>`>a)<esc>`<i(<esc>
-vnoremap $2 <esc>`>a]<esc>`<i[<esc>
-vnoremap $3 <esc>`>a}<esc>`<i{<esc>
-vnoremap $$ <esc>`>a"<esc>`<i"<esc>
-vnoremap $q <esc>`>a'<esc>`<i'<esc>
-vnoremap $e <esc>`>a"<esc>`<i"<esc>
-
-" Map auto complete of (, ", ', [
-inoremap $1 ()<esc>i
-inoremap $2 []<esc>i
-inoremap $3 {}<esc>i
-inoremap $4 {<esc>o}<esc>O
-inoremap $q ''<esc>i
-inoremap $e ""<esc>i
-inoremap $t <><esc>i
 
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -297,7 +243,6 @@ let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
-
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
@@ -320,81 +265,29 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-" => General abbreviations
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-iab xdate <c-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-" => Omni complete functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-" => Status line
-""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-
-" Format the status line
-set statusline=\ %l,%c\ \ %{HasPaste()}%F%m%r%h\ %w "CWD:\ %r%{getcwd()}%h\ \
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-" => vim-airline config (force color)
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme="wal"
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts=1
-
-" => Vimroom
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=100
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
-nnoremap <silent> <leader>z :Goyo<cr>
-
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-" map increment/decrement to Alt as C-a is my tmux leader key
-nnoremap <C-i> <C-a>
+" Fast saving
+nmap <leader>w :w!<cr>
 
+" Visual mode pressing * or # searches for the current selection
+vnoremap # y/\V<C-r>=escape(@",'/\')<CR><CR>
 
-" => Ag searching and cope displaying
-"    requires ag.vim - it's much better than vimgrep/grep
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" When you press gv you Ag after the selected text
-vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
+" Map ½ to something useful
+map ½ $
+cmap ½ $
+imap ½ $
 
-" Open Ag and put the cursor in the right position
-map <leader>g :Ag
-
-" When you press <leader>r you can search and replace the selected text
-vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
-
-" Do :help cope if you are unsure what cope is. It's super useful!
-"
-" When you search with Ag, display your results in cope by doing:
-"   <leader>cc
-"
-" To go to the next search result do:
-"   <leader>n
-"
-" To go to the previous search results do:
-"   <leader>p
-"
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
+"Commands
+command! -range Cc :<line1>,<line2>s/^/#/
+command! -range Uu :<line1>,<line2>s/^#//
 
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -407,19 +300,17 @@ map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
 
-" => Misc
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Remove the Windows ^M - when the encodings gets messed up
-noremap <leader>wm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
+autocmd BufWrite *.coffee :call DeleteTrailingWS()
+" map increment/decrement to Alt as C-a is my tmux leader key
+nnoremap <C-i> <C-a>
 
-" Quickly open a buffer for scribble
-map <leader>q :e ~/buffer<cr>
-
-" Quickly open a markdown buffer for scribble
-map <leader>x :e ~/buffer.md<cr>
-
-" Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
 
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -475,25 +366,6 @@ function! <SID>BufcloseCloseIt()
      execute("bdelete! ".l:currentBufNum)
    endif
 endfunction
-func! DeleteTillSlash()
-    let g:cmd = getcmdline()
-
-    if has("win16") || has("win32")
-        let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\]\\).*", "\\1", "")
-    else
-        let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*", "\\1", "")
-    endif
-
-    if g:cmd == g:cmd_edited
-        if has("win16") || has("win32")
-            let g:cmd_edited = substitute(g:cmd, "\\(.*\[\\\\\]\\).*\[\\\\\]", "\\1", "")
-        else
-            let g:cmd_edited = substitute(g:cmd, "\\(.*\[/\]\\).*/", "\\1", "")
-        endif
-    endif
-
-    return g:cmd_edited
-endfunc
 func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
@@ -505,10 +377,32 @@ function! CopyMatches(reg)
     execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
-" => Plugin options
-" ===============================================
-execute pathogen#infect()
 
+" => Misc
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remove the Windows ^M - when the encodings gets messed up
+noremap <leader>wm mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
+
+" Quickly open a buffer for scribble
+map <leader>q :tabnew ~/buffer<cr>
+
+" Quickly open a markdown buffer for scribble
+map <leader>x :tabnew ~/buffer.md<cr>
+
+" Toggle paste mode on and off
+map <leader>pp :setlocal paste!<cr>
+
+" => Plugin options
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+execute pathogen#infect()
+call plug#begin('~/dotfiles/.config/nvim/plugged')
+    Plug 'junegunn/goyo.vim'
+cal plug#end()
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips","snips"]
+
+" => vimtex
+""""""""""""""""""""""""""""""
 let g:vimtex_mappings_enabled = 0
 let g:vimtex_view_general_viewer = 'open'
 let g:vimtex_view_general_options = '-a zathura'
@@ -517,58 +411,40 @@ let g:vimtex_view_method='zathura'
 let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
-
-let g:UltiSnipsSnippetDirectories=["UltiSnips","snips"]
 let g:vim_markdown_math = 1
-" Markdown
-let g:markdown_fenced_languages = ['css','json=javascript', 'ruby', 'xml', 'python', 'go','tex']
-let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby","literatehaskell=lhaskell", "bash=sh","go"]
 
-augroup pandoc_syntax
-    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-augroup END
-
-call plug#begin('~/dotfiles/.config/nvim/plugged')
-    Plug 'neoclide/coc.nvim', {'branch': 'release'}
-    Plug 'junegunn/goyo.vim'
-cal plug#end()
-" => Syntastic (syntax checker)
+" => Goyo Options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pymode_python = 'python3'
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_exec='/home/sidreed/anaconda3/envs/prog02601/bin/flake8'
-let g:syntastic_python_pylint_exec='/home/sidreed/anaconda3/envs/prog02601/bin/pylint'
-let g:syntastic_python_pylint_args='--disable=missing-docstring --errors-only'
-let g:syntastic_go_checkers= ['go', 'gofmt', 'govet']
-let g:syntastic_enable_r_lintr_checker = 1
-let g:syntastic_R_checkers= ['lintr']
-let g:syntastic_markdown_checkers= ['mdl', 'proselint']
-let g:syntastic_tex_checkers= ['chktex', 'proselint']
+let g:goyo_width=100
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+nnoremap <silent> <leader>z :Goyo<cr>
 
+" => Status line
+""""""""""""""""""""""""""""""
+" Always show the status line
+set laststatus=2
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" Format the status line
+set statusline=\ %l,%c\ \ %{HasPaste()}%F%m%r%h\ %w "CWD:\ %r%{getcwd()}%h\ \
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-
-
-" => Custom header
+" => vim-airline config (force color)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Startify plugin
-let g:startify_custom_header = [
-      \ '                                             ',
-      \ '       ___________________________           ',
-      \ '      /                           \          ',
-      \ '      |     VIM - Vi IMproved     |          ',
-      \ '      |    -------------------    |          ',
-      \ '      |  by Bram Moolenaar et al. |          ',
-      \ '      \_________   _______________/          ',
-      \ '                \ / ^__^                     ',
-      \ '                 \\ (oo)\_______             ',
-      \ '                    (__)\       )\/\         ',
-      \ '                        ||----w |            ',
-      \ '                        ||     ||            ',
-      \ '                                             ',
-      \ ]
-"
+let g:airline_theme="wal"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_powerline_fonts=1
+
+
+" => Colors and Fonts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme
+"colorscheme hybrid
+"colorscheme new-railscasts
+"colorscheme wal
+colorscheme angr
+
