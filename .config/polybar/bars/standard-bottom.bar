@@ -1,0 +1,71 @@
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather deluge
+modules-center =
+modules-right = reading wall
+
+date-prefix =
+date-suffix =
+date-color = ${colors.transparent}
+date-underline = ${colors.col2}
+date-text-color = ${colors.col2}
+
+memory-prefix =
+memory-suffix =
+memory-color = ${colors.transparent}
+memory-underline = ${colors.col3}
+memory-text-color = ${colors.col3}
+
+cpu-prefix =
+cpu-suffix =
+cpu-color = ${colors.transparent}
+cpu-underline = ${colors.col4}
+cpu-text-color = ${colors.col4}
+
+temperature-prefix =
+temperature-suffix =
+temperature-color = ${colors.transparent}
+temperature-underline = ${colors.col5}
+temperature-text-color = ${colors.col5}
+
+xkeyboard-prefix =
+xkeyboard-suffix =
+xkeyboard-color = ${colors.alert}
+
+disk-prefix =
+disk-suffix =
+disk-color = ${colors.transparent}
+disk-underline = ${colors.col6}
+disk-text-color = ${colors.col6}
+
+uptime-prefix =
+uptime-suffix =
+uptime-color = ${colors.transparent}
+uptime-underline = ${colors.col7}
+uptime-text-color = ${colors.col7}
+
+weather-prefix =
+weather-suffix =
+weather-color = ${colors.transparent}
+weather-underline = ${colors.col8}
+weather-text-color = ${colors.col8}
+
+deluge-prefix =
+deluge-suffix =
+deluge-color = ${colors.transparent}
+deluge-underline = ${colors.col10}
+deluge-text-color = ${colors.col10}
+
+wall-prefix =
+wall-suffix =
+wall-color = ${colors.transparent}
+wall-underline = ${colors.col2}
+wall-text-color = ${colors.col2}
+
+reading-prefix =
+reading-suffix =
+reading-color = ${colors.transparent}
+reading-underline = ${colors.col3}
+reading-text-color = ${colors.col3}
+
+
+
