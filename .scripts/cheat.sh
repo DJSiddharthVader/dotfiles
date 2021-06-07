@@ -23,6 +23,8 @@ open() {
     #i3-msg floating enable > /dev/null
     #i3-msg move position center > /dev/null
 }
-main() { open "$(pick)" ; }
+main() {
+    open "$(pick)"
+}
 
 main

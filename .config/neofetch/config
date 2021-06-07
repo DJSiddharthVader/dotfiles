@@ -26,7 +26,7 @@ print_info () {
     info "OS" distro
     info "Package" packages
     info "WM" wm
-    prin "Terminal" "$TERM"
+    prin "Terminal" "$TERMINAL"
     info "Shell" shell
 #   info "Battery" battery
     info "Uptime" uptime

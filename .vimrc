@@ -155,7 +155,7 @@ syntax enable
 set background=dark
 "colorscheme hybrid
 "colorscheme new-railscasts
-"colorscheme wal
+colorscheme anderson
 colorscheme angr
 
 " Set utf8 as standard encoding and en_US as the standard language

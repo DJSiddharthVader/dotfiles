@@ -39,7 +39,7 @@ main() {
     case "$1" in
         'status') status ;;
         'commit') commit ;;
-        *) echo help && exit 1 ;;
+        *) help && exit 1 ;;
     esac
 }
 

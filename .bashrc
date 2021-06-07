@@ -2,8 +2,8 @@
 # vim: fdm=marker:noai:ts=4:sw=4
 
 ## Overall Conditionals {{{
-#export TERM='screen-256color'
-export TERM='st'
+export TERM='screen-256color'
+export TERMINAL='st'
 export HISTTIMEFORMAT="%m/%d - %H:%M:%S: "
 export VISUAL='nvim'
 export STEAM_RUNTIME=1
@@ -243,8 +243,7 @@ PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}') #remove du
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/sidreed/anaconda3/condabin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-## Conda
+__conda_setup="$('/home/sidreed/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -256,7 +255,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
 
 # print a random quote on new terminal launch
 ~/.scripts/quote.sh

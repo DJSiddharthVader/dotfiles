@@ -2,7 +2,7 @@
 icon=""
 
 help() {
-    echo "Usage $(basename $0) {status|location|toggle|connect|disconnect}"
+    echo "Usage $(basename $0) {status|display|reload|toggle|connect|disconnect|location}"
 }
 connect() {
     #protonvpn-cli ks --on
@@ -28,7 +28,7 @@ status() {
 }
 display() {
     case "$(status)" in
-        'not connected') output="Not Connected" ;;
+        'not connected') output="None" ;;
         'connected'    ) output="$(protonvpn-cli s | grep 'Country:\|Server:' | cut -d':' -f2 | tr '\n' ' ' | tr -s ' \t' ' ')" ;; # | cut -d' ' -f3)" ;;
     esac
     echo "$output" | rev | cut -d' ' -f-2 | rev

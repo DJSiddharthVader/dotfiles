@@ -1,7 +1,7 @@
-arrow_tail
+trig_out
 ; icons to delimit polybar modules
-leftprefix = ""
-leftsuffix = ""
-rightprefix = ""
-rightsuffix = ""
+leftprefix = ""
+leftsuffix = ""
+rightprefix = ""
+rightsuffix = ""
 
