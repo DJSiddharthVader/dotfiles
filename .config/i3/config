@@ -59,8 +59,7 @@ for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 1
-exec $term -n dropdown -e tmux
-#exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
+exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
 
 # tmux scratchpad floating terminal 2
 for_window [instance="drop2"] resize set 625 400
@@ -137,7 +136,7 @@ bindsym $mod+Shift+space  floating toggle
 bindsym $mod+Return       exec $term
 bindsym $mod+Escape       workspace prev
 #STOP/HIDE EVERYTHING:
-bindsym $mod+BackSpace    exec $truemute ; exec $truepause ; workspace lmao ; exec $term -e htop ; exec $term -e ranger
+#bindsym $mod+BackSpace
 # Print screen takes a screenshot.
 bindsym Print 	            exec --no-startup-id scrot
 bindsym $mod+Print 			exec --no-startup-id scrot -u
@@ -168,8 +167,8 @@ bindsym $mod+u         [instance="dropdown"] scratchpad show,move position cente
 bindsym $mod+i         resize shrink height 5 px or 5 ppt
 bindsym $mod+Shift+i   resize grow height 5 px or 5 ppt
 
-bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh sep next
-bindsym $mod+Shift+o   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh sep prev
+bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu style
+bindsym $mod+Shift+o   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu sep
 
 bindsym $mod+p         exec $pause
 bindsym $mod+Shift+p   exec tabbed -c zathura -e
@@ -180,8 +179,8 @@ bindsym $mod+Shift+a   gaps inner current plus 2
 bindsym $mod+s         gaps outer current minus 2
 bindsym $mod+Shift+s   gaps outer current plus 2
 
-bindsym $mod+d         move workspace to output left
-#bindsym $mod+Shift+d
+bindsym $mod+d         move workspace to output right
+bindsym $mod+Shift+d   move workspace to output left
 
 bindsym $mod+f         fullscreen toggle
 #bindsym $mod+Shift+f
@@ -201,26 +200,26 @@ bindsym $mod+Shift+k   move up 10
 bindsym $mod+l         focus right
 bindsym $mod+Shift+l   move right 10
 
-bindsym $mod+z         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh style next
-bindsym $mod+Shift+z   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh style prev
+#bindsym $mod+z
+#bindsym $mod+Shift+z
 
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
-bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
+#bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
 
-bindsym $mod+v         exec --no-startup-id ~/.scripts/polybar/brightness.sh inc
-bindsym $mod+Shift+v   exec --no-startup-id ~/.scripts/polybar/brightness.sh dec
+#bindsym $mod+v
+#bindsym $mod+Shift+v
 
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
 
-bindsym $mod+n         focus output left
-#bindsym $mod+Shift+n
+bindsym $mod+n         focus output right
+bindsym $mod+Shift+n   focus output left
 
-bindsym $mod+m         [instance="music"] scratchpad show; [instance="music"] move position center
-bindsym $mod+Shift+m   $mute
+bindsym $mod+m        [instance="music"] scratchpad show; [instance="music"] move position center
+#bindsym $mod+Shift+m exec $mute
 
 #bindsym $mod+Shift+Return
 #bindsym $mod+Shift+Escape
