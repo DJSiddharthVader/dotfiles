@@ -1,6 +1,6 @@
 bar:float
-separator:arrow_tail
-wallpaper_index:1
+separator:trig_out
+wallpaper_index:1327
 wifi:standardd
 songnames:scroll
 date:time
@@ -10,6 +10,6 @@ temperature:short
 disk:amount
 uptime:day
 torrent:speed
-reading:Computational Complexity as an Ultimate Constraint on Evolution | Genetics~http://www.genetics.org/content/early/2019/03/04/genetics.119.302000
+reading:A Gentle Introduction to Markov Chain Monte Carlo (MCMC) | The Clever Machine~https://theclevermachine.wordpress.com/2012/11/19/a-gentle-introduction-to-markov-chain-monte-carlo-mcmc/
 battery:all
 
