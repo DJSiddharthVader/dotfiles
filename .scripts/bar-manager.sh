@@ -1,37 +1,59 @@
 #!/bin/bash
 shopt -s extglob
 
+# Styles
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(laptop float textual clear cross full mini none)
+styles=(laptop float standard text cross full mini none)
+# Separators
+dl="."
+separator_file="$HOME/dotfiles/.config/polybar/separators.mode"
+separator_names=(arrow_tail
+                 tail_sym
+                 arrow_sym
+                 trig_in
+                 trig_out
+                 circle
+                 circle_tail
+                 small_fade
+                 small_fade_in
+                 big_fade
+                 big_fade_in )
+separator_icons=("$dl$dl$dl"
+                 "$dl$dl$dl"
+                 "$dl$dl$dl"
+                 "$dl$dl$dl"
+                 "$dl$dl$dl"
+                 " $dl$dl$dl "
+                 " $dl$dl$dl "
+                 "$dl$dl$dl"
+                 "$dl$dl$dl"
+                 "$dl$dl$dl"
+                 "$dl$dl$dl")
 
-#Icons
-icon_file="$HOME/dotfiles/.config/polybar/separators.mode"
-dl="." #arbitrary but might as well be a variable, allows for spaces in the icon sets
-icons=(arrow_tail arrow_sym trig_in trig_out big_fade_in circle)
-icon_sets=("$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" "$dl$dl$dl" " $dl$dl$dl ")
-# small_fade "$dl$dl$dl"
-# big_fade "$dl$dl$dl"
-#symetric    ; ; ; ; ; ;
-#directional ;  ;  ; ; ;【】
-
-help() {
-    icontable="Name,|,Icons\n ,|, "
-    for ((i=0; i<${#icons[@]}; i++)); do
-        line="$(echo "${icons[$i]},|,${icon_sets[$i]}" | tr -d "$dl" )"
-        icontable="$icontable\n$line"
+makeSeparatorTable() {
+    separator_table="Name,|,Separators"
+    for ((i=0; i<${#separator_names[@]}; i++)); do
+        line="$(echo "${separator_names[$i]},|,${separator_icons[$i]} " | tr "$dl" ' ')"
+        separator_table="$separator_table\n$line"
     done
-    icontable="$(echo -e $icontable | column -s ',' -t)"
-    echo "Usage $(basename $0) {style|sep|reload|restart}
-                      style {stay|next|prev$(echo '|'${modes[*]} | tr ' ' '|')}
-                      sep   {stay|next|prev$(echo '|'${icons[*]} | tr ' ' '|')}
-$icontable"
+    echo -e $separator_table | column -s ',' -t
 }
+help() {
+    separator_table="$(makeSeparatorTable)"
+    echo "Usage $(basename $0) {style|sep|reload|restart|pick}
+                      menu {style|sep}
+                      style {stay|next|prev} or {$(echo ${styles[*]} | tr ' ' '|')}
+                      sep   {stay|next|prev} or {$(echo ${separator_names[*]} | tr ' ' '|')}
+                      "
+    echo "$separator_table" | pr -T -o 22
+}
+
 cycle() {
-    # cycle through modes either forwards or backwards
-    # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
-    # next mode index is:  (x+1) % n
-    # prev mode index is:  (x+n-1) % n
-    # x is current mode index, n is number of modes
+    # cycle through array elements either forwards or backwards
+    # get index of current element in the array, find index for next/previous element and get the array value of that index and echo it
+    # next element index is:  (x+1) % n
+    # prev element index is:  (x+n-1) % n
+    # x is current mode index, n is number of elements
     dir="$1"
     name=$2[@]
     arr=("${!name}")
@@ -63,76 +85,95 @@ setMode() {
 
 separators() {
     mode="$1"
-    tmp="@($(echo ${icons[*]} | sed -e 's/ /|/g'))"
+    tmp="@($(echo ${separator_names[*]} | sed -e 's/ /|/g'))"
     case "$mode" in
         'stay') dmode="$(setMode 'separator')" ;;
-        'next') dmode="$(cycle 'next' icons 'separator')" ;;
-        'prev') dmode="$(cycle 'prev' icons 'separator')" ;;
+        'next') dmode="$(cycle 'next' separator_names 'separator')" ;;
+        'prev') dmode="$(cycle 'prev' separator_names 'separator')" ;;
          $tmp ) dmode="$mode" ;; #capture any valid mode
-        *) help && exit 1 ;;
+        *) echo "Error: Invalid separator" && help && exit 1 ;;
     esac
-    idx="$(echo "${icons[*]}" | grep -o "^.*$dmode" | tr ' ' '\n' | wc -l | sed -s 's/$/-1/' | bc)"
-    icon_set="${icon_sets[$idx]}"
+    idx="$(echo ${separator_names[@]/$dmode//} | cut -d/ -f1 | wc -w | tr -d ' ')"
+    icons="${separator_icons[$idx]}"
     setMode 'separator' "$dmode"
     echo "$dmode
 ; icons to delimit polybar modules
-leftprefix = \"$(echo $icon_set | cut -d"$dl" -f1)\"
-leftsuffix = \"$(echo $icon_set | cut -d"$dl" -f2)\"
-rightprefix = \"$(echo $icon_set | cut -d"$dl" -f3)\"
-rightsuffix = \"$(echo $icon_set | cut -d"$dl" -f4)\"
-" | sed -e 's/""//' >| "$icon_file"
+leftprefix = \"$(echo $icons | cut -d"$dl" -f1)\"
+leftsuffix = \"$(echo $icons | cut -d"$dl" -f2)\"
+rightprefix = \"$(echo $icons | cut -d"$dl" -f3)\"
+rightsuffix = \"$(echo $icons | cut -d"$dl" -f4)\"
+" | sed -e 's/""//' >| "$separator_file"
 }
 getMonitors() {
     xrandr | sed -n '/ primary/,$p' | grep ' connected' | cut -d' ' -f1
 }
 launchOnAllMonitors() {
-    for barname in "$@"; do
-        for m in $(getMonitors); do
-            MONITOR=$m polybar "$barname" &
-        done
+    for m in $(getMonitors); do
+        if [[ $m = 'eDP-1' ]]; then
+            MONITOR=$m polybar laptop-top &
+            MONITOR=$m polybar laptop-bottom &
+        else
+            for barname in "$@"; do
+                MONITOR=$m polybar "$barname" &
+            done
+        fi
     done
 }
 launch() {
     mode="$1"
-    tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
+    tmp="@($(echo ${styles[*]} | sed -e 's/ /|/g'))"
     case "$mode" in
         'stay') dmode="$(getMode 'style')" ;;
-        'next') dmode="$(cycle 'next' modes 'style')" ;;
-        'prev') dmode="$(cycle 'prev' modes 'style')" ;;
+        'next') dmode="$(cycle 'next' styles 'style')" ;;
+        'prev') dmode="$(cycle 'prev' styles 'style')" ;;
          $tmp ) dmode="$mode" ;; #capture any valid mode passed
-        *) help style && exit 1 ;;
+        *) echo "Error: Invalid style" && help && exit 1 ;;
     esac
     setMode 'style' "$dmode" # set defualt polybar style
     killall -q polybar && sleep 0.001 # Terminate already running bar instances
     case "$dmode" in
-        'laptop' ) launchOnAllMonitors laptop-top laptop-bottom ;;
-        'float'  ) launchOnAllMonitors floating-top floating-bottom ;;
-        'textual') launchOnAllMonitors textual-top textual-bottom ;;
-        'clear'  ) launchOnAllMonitors clear-top clear-bottom ;;
-        'cross'  )
-            monitor=$(getMonitors)
+        laptop  ) launchOnAllMonitors laptop-top laptop-bottom ;;
+        float   ) launchOnAllMonitors floating-top floating-bottom ;;
+        standard) launchOnAllMonitors standard-top standard-bottom ;;
+        text    ) launchOnAllMonitors text-top text-bottom ;;
+        full    ) launchOnAllMonitors full-top full-bottom ;;
+        mini    ) launchOnAllMonitors minimal ;;
+        none    ) sleep 1 ;;
+        cross   )
+            monitor=$(getMonitors | tail -2)
             m1="$(echo $monitor | cut -d' ' -f1)"
             m2="$(echo $monitor | cut -d' ' -f2)"
             MONITOR="$m1" polybar cross-left &
             MONITOR="$m2" polybar cross-right &
             ;;
-        'full'   ) launchOnAllMonitors full-top full-bottom ;;
-        'mini'   ) launchOnAllMonitors minimal ;;
-        'none'   ) sleep 1 ;;
-        *) help && exit 1 ;;
+        *) echo "Error: Invalid style" && help && exit 1 ;;
     esac
 }
-
+rofiMenu() {
+    mode="$1"
+    if [[ $mode = 'style' ]]; then
+        style="$(printf '%s\n' ${styles[@]} | rofi -m -1 -width 12 -lines ${#styles[@]} -dmenu -p 'Pick Polybar Style')"
+        [[ -n $style ]] && launch $style
+    elif [[ $mode = 'sep' ]]; then
+        #separator="$(printf '%s\n' ${separator_names[@]} | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
+        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
+        [[ -n $separator ]] && separators $separator && launch 'stay'
+    fi
+}
 main() {
     mode="$1"
-    change="$2"
-    case $mode in
-        'sep'    ) separators "$change"; launch 'stay' ;;
-        'style'  ) launch "$change" ;;
-        'reload' ) ! [[ -z "$(pgrep 'polybar')" ]] && polybar-msg cmd restart ;;
-        'restart') separators "$(getMode 'separator')"; launch "$(getMode 'style')" ;;
-        *) help && exit 1 ;;
-    esac
+    option="$2"
+    if [[ $mode = 'menu' ]]; then
+        rofiMenu $option
+    else
+        case $mode in
+            'sep'    ) separators "$option"; launch 'stay' ;;
+            'style'  ) launch "$option" ;;
+            'reload' ) ! [[ -z "$(pgrep 'polybar')" ]] && polybar-msg cmd restart ;;
+            'restart') separators "$(getMode 'separator')"; launch "$(getMode 'style')" ;;
+            *) help && exit 1 ;;
+        esac
+    fi
 }
 
 main "$@"
