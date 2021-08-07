@@ -41,6 +41,7 @@ usage() {
 "Usage: ./$name {path/to/image|rh|reload|display|prev|stay|next} {font|back|both}
           $blnk rh                              reset wallpaper history
           $blnk reload                          reload colors for current wallpaper
+          $blnk print                           print current wallpaper path
           $blnk display                         print current wallpaper
           $blnk path/to/image {font|back|both}  set the wallpaper using explicit path to image
           $blnk prev          {font|back|both}  set the wallpaper to previous image
@@ -151,16 +152,18 @@ display() {
 #        printf "%-${thresh}s" "$wallpaper"
 #    fi
 }
+
 main() {
     [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ] && resetHistory
     [ -f "$1" ] && mode='path' || mode="$1"
     change="$2"
     case "$mode" in
-        rh            ) resetHistory && exit 0 ;;
-        reload        ) wall 'stay' 'both'     ;;
-        display       ) display && exit 0      ;;
-        path          ) wall "$1" "$change"    ;;
-        stay|prev|next) wall "$mode" "$change" ;;
+        rh            ) resetHistory && exit 0               ;;
+        display       ) display && exit 0                    ;;
+        print         ) indexToImage "$(getIndex)" && exit 0 ;;
+        reload        ) wall 'stay' 'both'                   ;;
+        path          ) wall "$1" "$change"                  ;;
+        stay|prev|next) wall "$mode" "$change"               ;;
         *) usage && exit 1 ;;
     esac
 }
