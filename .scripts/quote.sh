@@ -24,6 +24,7 @@ help() {
     thinker_list="$(find $thinker_dir -type f -name "*.ascii" -exec basename {} \; | cut -d'.' -f1 | tr '\n' '|' | sed -e 's/|$//' )"
     echo "Print a quote and something thinking it (basically fortune | cowsay)
 Usage: $0 [OPTIONS]
+        -p      print only the random quote (plain)
         -q      quote (string, defualt is random from ${quote_files[@]})
         -c      column wrap width for quote text (int, default $colwrap)
         -b      border string specifiying bubble boundaries (left top right bottom, no spaces, default is '$border_string')
@@ -33,6 +34,7 @@ Usage: $0 [OPTIONS]
                 possible thinkers are {$thinker_list} or any filepath
         -h      print this message"
 }
+
 random_quote() {
     # pick random quote from local files
     quote="$(cat ${quote_files[@]} | grep '^"' | shuf -n1 | tr -d '"')"
@@ -108,17 +110,19 @@ display() {
     # print whatever is thinking the bubble
     thinker $thinker_file $thinker_offset $thinker_line $thinker_padding
 }
+
 main() {
     # pick random quote and thinker, will be updated if specified by a CLI flag
     quote_string="$(random_quote)"
     thinker_file="$(find $thinker_dir -type f -name "*.ascii" | shuf -n1)"
-    while getopts "hq:c:b:l:o:t:" arg; do
+    while getopts "hpq:c:b:l:o:t:" arg; do
         case $arg in
-            q) quote_string="$OPTARG"   ;;
-            c) colwrap="$OPTARG"        ;;
-            b) border_string="$OPTARG"  ;;
-            l) thinker_line="$OPTARG"   ;;
-            o) thinker_offset="$OPTARG" ;;
+            q) quote_string="$OPTARG"          ;;
+            c) colwrap="$OPTARG"               ;;
+            b) border_string="$OPTARG"         ;;
+            l) thinker_line="$OPTARG"          ;;
+            o) thinker_offset="$OPTARG"        ;;
+            p) echo -e $quote_string && exit 0 ;;
             t) if [ -f "$OPTARG" ]; then
                     thinker_file="$OPTARG"
                 else
