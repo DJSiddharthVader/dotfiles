@@ -5,9 +5,9 @@ mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 mode_prefix="torrent"
 watch_dir="$HOME/Torrents"
 modes=(ratio ratiototal data datatotal speed active) #no spaces in mode titles
-max_pages=5 # max number of results pages to parse when searching
 stats_file="$HOME/dotfiles/.config/deluge/stats.tsv"
 delim="~"
+search_script="$HOME/dotfiles/.scripts/torrent/search.sh"
 
 help() {
     mode='$mode'
@@ -84,15 +84,20 @@ scrape_stats() {
 update_stats() {
     # store all torrent stats in a tsv, update tsv and remove dups, keeping entries with the largest numbers
     #header="id"$delim"name"$delim"size"$delim"downloaded"$delim"uploaded"
+    cp "$stats_file" "$stats_file.bak"
     unit="Gi"
     info="$(info)"
     ids="$(echo "$info" | grep 'ID: ' | cut -f2 -d':' | tr -d ' ')"
+    echo 'scraped IDs'
     names="$(echo "$info" | grep 'Name: ' | cut -f2 -d':' | sed -e 's/^ //')"
+    echo 'scraped names'
     sizes="$(scrape_stats "$info" 'Size' "$unit")"
+    echo 'scraped sizes'
     downloaded="$(scrape_stats "$info" 'Downloaded' "$unit")"
+    echo 'scraped downloads'
     uploaded="$(scrape_stats "$info" 'Uploaded' "$unit" )"
+    echo 'scraped uploads'
     paste -d"$delim" <(echo "$ids") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$stats_file"
-    cp "$stats_file" "$stats_file.bak"
     sort -t"$delim" -g -r -k5,5 -k4,4 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
 }
 total_stats() {
@@ -196,50 +201,16 @@ action_all() {
     deluge-console "$action $(info | grep -B1 "State: $state" | grep ID | cut -d':' -f2 | tr -d ' ' | tr '\n' '.' | sed -e "s/\./\;$action /g" | sed -e "s/\;$action $//")" 2> /dev/null
 }
 
-# Torrent Search
-extract_from_page() {
-    grep "$1" "$2" | sed -e 's/^.*>\([^<>]\+\)<\(\/td\|\/a\|span\).*$/\1/'
-}
-parse_results() {
-    page="$1"
-    names="$(extract_from_page 'coll-1 name' $page)"
-    seeders="$(extract_from_page 'coll-2 seeds' $page)"
-    leechers="$(extract_from_page 'coll-3 leeches' $page)"
-    date="$(extract_from_page 'coll-date' $page)"
-    size="$(extract_from_page 'coll-4 size' $page)"
-    paste <(echo "$date") <(echo "$seeders") <(echo "$leechers") <(echo "$size") <(echo "$names") | tail -n+2 | tr -s ' ' | tr -s '\t' #| column -t -s'\t'
-}
-get_search_results() {
-    query="$1"
-    results_page="$2"
-    search_url="https://1337x.to/search/${query// /+}/1/"
-    #curl -Ss "$search_url" >| ~/pages.html
-    total_pages="$(curl -Ss "$search_url" | grep 'Last' |  sed -s 's/^.*class=.last.><a href=.\/search\/.*\/\([0-9]*\)\/.>.*$/\1/')"
-    [[ $max_pages -lt $total_pages ]] && total_pages=$max_pages
-    for page_num in $(seq 1 $total_pages); do
-        search_url="https://1337x.to/sort-search/${query// /+}/seeders/desc/$page_num/"
-        #echo $search_url
-        curl -Ss "$search_url" >> $results_page
-    done
-    #cp $results_page ~/results.html
-}
 search() {
-    query="$(rofi -lines 0 -dmenu -p "Enter Torrent Query")"
-    [[ -z "$query" ]] && exit 1 #no query
-    results_page=$(mktemp)
-    get_search_results "$query" "$results_page"
-    chosen="$(parse_results $results_page | rofi -lines 25 -width 80 -dmenu -p "Pick Torrent")"
-    [[ -z "$chosen" ]] && exit 1 #no query
-    txlink="$(grep -F "$(echo "$chosen" | rev | cut -f1 | rev)" $results_page | sed -e 's/^.*href="\/\(torrent.*\)\/">.*$/\1/')"
-    [[ -z "$txlink" ]] && exit 1 #no query
-    magnet="$(curl -Ss "https://1337x.to/$txlink/" | grep 'magnet' | head -1 | sed -e 's/^.*href="\(magnet[^"<>]*\)".*$/\1/')"
-    [[ -z "$magnet" ]] && exit 1 #no query
-    name="$(echo "$chosen" | rev | cut -f1 | rev | tr -s ' ' '.')"
-    echo "$watch_dir/$name"
-    deluge-console add --path="$watch_dir" "$magnet" && notify-send "Torrent Added: $name"
-    rm $results_page
+    magnets="$($search_script)"
+    for magnet in ${magnets}; do
+        # add magnet link and count
+        if [[ -n "${magnet}" ]]; then
+            deluge-console add --path="$watch_dir" "${magnet}" > /dev/null 2>&1 &
+            #echo "link $links_added  worked"
+        fi
+    done
 }
-
 
 main() {
     mode="$1"
