@@ -10,7 +10,7 @@ to_ignore=(
     ".config/mpd/playlists/*"
     ".config/qt5ct/colors/pywal.conf"
     ".config/zathura/zathurarc"
-    ".config/deluge/stats.tsv"
+    ".config/transmission-daemon/stats.tsv"
     ".gitignore"
     ".config/zathura/zathurarc"
     )
