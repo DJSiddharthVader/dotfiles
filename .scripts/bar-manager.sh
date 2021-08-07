@@ -2,6 +2,7 @@
 shopt -s extglob
 
 # Styles
+script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 styles=(laptop float standard text cross full mini none)
 # Separators
@@ -147,6 +148,10 @@ launch() {
             MONITOR="$m2" polybar cross-right &
             ;;
         *) echo "Error: Invalid style" && help && exit 1 ;;
+    esac
+    case "$dmode" in
+        standard|text) $script_dir/current-window.sh thresh 80 ;;
+        *) $script_dir/current-window.sh thresh 40 ;;
     esac
 }
 rofiMenu() {
