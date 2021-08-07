@@ -1,6 +1,6 @@
-bar:float
+bar:standard
 separator:trig_out
-wallpaper_index:1327
+wallpaper_index:469
 wifi:standardd
 songnames:scroll
 date:time
@@ -12,4 +12,4 @@ uptime:day
 torrent:speed
 reading:A Gentle Introduction to Markov Chain Monte Carlo (MCMC) | The Clever Machine~https://theclevermachine.wordpress.com/2012/11/19/a-gentle-introduction-to-markov-chain-monte-carlo-mcmc/
 battery:all
-
+focus_thresh:80

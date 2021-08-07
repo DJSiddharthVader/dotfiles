@@ -127,12 +127,15 @@ silent! normal! zE
 47,65fold
 67,82fold
 let &fdl = &fdl
-let s:l = 67 - ((62 * winheight(0) + 19) / 38)
+47
+normal! zo
+let s:l = 5 - ((4 * winheight(0) + 9) / 19)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 67
-normal! 0
+keepjumps 5
+normal! 062|
 let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

@@ -278,13 +278,13 @@ setlocal wrap
 setlocal wrapmargin=0
 1
 normal! zo
-300
+293
 normal! zo
-let s:l = 282 - ((281 * winheight(0) + 10) / 21)
+let s:l = 198 - ((197 * winheight(0) + 4) / 9)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 282
+keepjumps 198
 normal! 01|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
