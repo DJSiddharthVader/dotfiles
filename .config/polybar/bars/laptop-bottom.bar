@@ -1,5 +1,6 @@
 bottom = true
 modules-left = date memory cpu temperature xkeyboard disk uptime weather
+;torrent
 modules-center =
 modules-right = reading
 
@@ -51,11 +52,11 @@ weather-color = ${colors.col7}
 weather-underline =
 weather-text-color = ${colors.foreground}
 
-deluge-prefix = ${colors.rightprefix}
-deluge-suffix = ${colors.rightsuffix}
-deluge-color = ${colors.col8}
-deluge-underline =
-deluge-text-color = ${colors.foreground}
+torrent-prefix = ${colors.rightprefix}
+torrent-suffix = ${colors.rightsuffix}
+torrent-color = ${colors.col8}
+torrent-underline =
+torrent-text-color = ${colors.foreground}
 
 wall-prefix = ${colors.leftprefix}
 wall-suffix = ${colors.leftsuffix}
@@ -68,6 +69,3 @@ reading-suffix = ${colors.leftsuffix}
 reading-color = ${colors.col2}
 reading-underline =
 reading-text-color = ${colors.foreground}
-
-
-

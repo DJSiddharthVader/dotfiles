@@ -1,4 +1,4 @@
-modules-right = reading deluge weather uptime disk xkeyboard temperature cpu memory date i3
+modules-right = reading torrent weather uptime disk xkeyboard temperature cpu memory date i3
 
 i3-prefix = ${colors.leftprefix}
 i3-suffix = ${colors.leftsuffix}
@@ -57,11 +57,11 @@ weather-color = ${colors.col8}
 weather-underline =
 weather-text-color = ${colors.foreground}
 
-deluge-prefix = ${colors.leftprefix}
-deluge-suffix = ${colors.leftsuffix}
-deluge-color = ${colors.col9}
-deluge-underline =
-deluge-text-color = ${colors.foreground}
+torrent-prefix = ${colors.leftprefix}
+torrent-suffix = ${colors.leftsuffix}
+torrent-color = ${colors.col9}
+torrent-underline =
+torrent-text-color = ${colors.foreground}
 
 wall-prefix = ${colors.leftprefix}
 wall-suffix = ${colors.leftsuffix}

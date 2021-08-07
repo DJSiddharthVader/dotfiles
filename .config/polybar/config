@@ -30,9 +30,12 @@ font-weather = Weather Icons:style=Regular;3
 font-weather-large = Weather Icons:style=Regular:size=15;3
 font-weather-huge= Weather Icons:style=Regular:size=17;3
 ; text font
-font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
-font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
-font-main-huge = Pixel Bit Advanced:style=Regular:pixelsize=13:antialias=true;5
+font-main = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
+font-main-large = PixelSleigh:style=Regular:pixelsize=10:antialias=true;1
+font-main-huge = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
+;font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
+;font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
+;font-main-huge = Pixel Bit Advanced:style=Regular:pixelsize=13:antialias=true;5
 ;font-main-large = Pixeliza20:Regular=Medium:pixelsize=25:antialias=false;2
 ;font-main-large = 3D Thirteen Pixel Fonts:Regular=Bold:pixelsize=22:antialias=false;5
 ;font-main-large = Pixelmania:Regular=Bold:pixelsize=6:antialias=false;4
@@ -49,7 +52,6 @@ font-main-huge = Pixel Bit Advanced:style=Regular:pixelsize=13:antialias=true;5
 ;font-main = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
 ;font-main = Terminus:style=Regular:pixelsize=14;1
 ;font-main = Nintendo DS BIOS:style=Regular:pixelsize=18;1
-;font-main = scientifica:style=Regular:size=28;1
 ;font-main = Iosevka:pixelsize=10;2
 ; for text char not in font-2, avoids oversized icons from defualting to font-4
 font-overflow =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
@@ -59,11 +61,13 @@ font-overflow-large =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=19:antia
 ; for powerline separators
 font-powerline = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=22:antialias=true;4
 font-powerline-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=28:antialias=true;6
-; for long scrolling text, (smaller and mono-spaced
+; for long scrolling text, (smaller and mono-spaced)
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
-font-focused = Terminus:style=Regular:pixelsize=15:antialias=true;3
+font-focused = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
+font-focused-large = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
+;font-focused = Terminus:style=Regular:pixelsize=15:antialias=true;3
+;font-focused-large = Terminus:style=Regular:pixelsize=15:antialias=true;3
 ;font-focused-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=13:antialias=false;4
-font-focused-large = Terminus:style=Regular:pixelsize=15:antialias=true;3
 
 
 ;bar formatting
@@ -109,8 +113,7 @@ width = 100%
 height = 3.25%
 radius = 0
 module-margin = 0
-background-0 = ${colors.transparent2}
-background-1 = ${colors.transparent3}
+background = ${colors.transparent1}
 foreground = ${colors.foreground}
 border-top-size = 0
 border-bottom-size = 0
@@ -142,8 +145,8 @@ border-right-size = 10
 border-left-size = 10
 padding = 1
 module-margin = 1
-line-size = 3
-background = ${colors.transparent1}
+line-size = 0
+background = ${colors.transparent0}
 foreground = ${colors.foreground}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
@@ -153,7 +156,7 @@ font-2 = ${fonts.font-main-large}
 font-3 = ${fonts.font-overflow-large}
 font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-scrolling}
-font-6 = ${fonts.font-focused-large}
+font-6 = ${fonts.font-focused}
 
 [section/text]
 monitor = ${env:MONITOR:}
@@ -728,22 +731,22 @@ format-suffix = ${root.weather-suffix}
 format-suffix-foreground = ${root.weather-color}
 format-suffix-background = ${colors.transparent}
 
-[module/deluge]
+[module/torrent]
 type = custom/script
 tail = true
-exec = ~/dotfiles/.scripts/deluge.sh display
-click-left = ~/dotfiles/.scripts/deluge.sh next
-click-right = ~/dotfiles/.scripts/deluge.sh prev
+exec = ~/.torrent.sh display
+click-left = ~/.torrent.sh next
+click-right = ~/.torrent.sh prev
 format-prefix-font = 5
 format-suffix-font = 5
-format-background = ${root.deluge-color}
-format-foreground = ${root.deluge-text-color}
-format-underline = ${root.deluge-underline}
-format-prefix = ${root.deluge-prefix}
-format-prefix-foreground = ${root.deluge-color}
+format-background = ${root.torrent-color}
+format-foreground = ${root.torrent-text-color}
+format-underline = ${root.torrent-underline}
+format-prefix = ${root.torrent-prefix}
+format-prefix-foreground = ${root.torrent-color}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${root.deluge-suffix}
-format-suffix-foreground = ${root.deluge-color}
+format-suffix = ${root.torrent-suffix}
+format-suffix-foreground = ${root.torrent-color}
 format-suffix-background = ${colors.transparent}
 
 [module/wall]
@@ -756,7 +759,7 @@ hook-3 = ~/dotfiles/.scripts/wallpaper.sh reload
 click-left =   polybar-msg hook wall 2 && sleep 1 && polybar-msg hook wall 1
 click-right =  polybar-msg hook wall 3 && sleep 1 && polybar-msg hook wall 1
 click-middle = polybar-msg hook wall 4 && sleep 1 && polybar-msg hook wall 1
-format = " %{T6}<output> %{T-}"
+format = " %{T7}<output> %{T-}"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.wall-color}
