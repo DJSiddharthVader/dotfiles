@@ -41,7 +41,7 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #express vpn
 exec --no-startup-id ~/.scripts/protonvpn.sh connect
 #Torrent daemon:
-exec --no-startup-id ~/.scripts/deluge.sh start
+exec --no-startup-id ~/.torrent.sh start
 #Mount other drives:
 exec --no-startup-id sudo mount -a
 #connect to external monitors
@@ -147,7 +147,8 @@ bindsym $mod+q         kill
 #bindsym $mod+Shift+q
 
 bindsym $mod+w         exec --no-startup-id firefox --browser
-bindsym $mod+Shift+w   exec --no-startup-id firefox --private-window
+bindsym $mod+Shift+w   exec --no-startup-id firefox --private-window /home/sidreed/apps/Urge\ Surfing.mp3
+
 
 bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
 bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
@@ -155,7 +156,7 @@ bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
 
-bindsym $mod+t         exec ~/dotfiles/.scripts/deluge.sh search
+bindsym $mod+t         exec ~/.torrent.sh search
 #bindsym $mod+Shift+t  layout toggle
 
 bindsym $mod+y         resize shrink width 5 px or 5 ppt
