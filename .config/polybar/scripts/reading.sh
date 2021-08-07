@@ -42,6 +42,13 @@ pick() {
 open() {
     "$browser" --new-tab "$(getLink)" #open article in browser
 }
+print() {
+    #scroll article title if longer than $thresh characeters otherwise static display
+    articlename="$(getArticle)"
+    # right pad with spaces until total length $thresh
+    # keeps module width constant no matter article length
+    printf "%-${thresh}s" "$(getArticle)"
+}
 display() {
     #scroll article title if longer than $thresh characeters otherwise static display
     articlename="$(getArticle)"
@@ -59,9 +66,10 @@ main() {
     mode="$1"
     case "$mode" in
         'display') display ;;
+        'update' ) update ;;
+        'print'  ) print ;;
         'open'   ) open ;;
         'pick'   ) pick ;;
-        'update' ) update ;;
         *        ) help && exit 1 ;;
     esac
 }
