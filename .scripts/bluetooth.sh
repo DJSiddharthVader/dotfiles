@@ -71,10 +71,10 @@ main() {
         'status') getConnectedDevice ;;
         *) help && exit 1 ;;
     esac
-    case "$mode" in
-        connect|disconnect|toggle) ~/.scripts/bar-manager.sh reload ;;
-        *) ;;
-    esac
+    #case "$mode" in
+    #    connect|disconnect|toggle) ~/.scripts/bar-manager.sh reload ;;
+    #    *) ;;
+    #esac
     #polybar-msg hook bluetooth-ipc 1 &> /dev/null
 }
 
