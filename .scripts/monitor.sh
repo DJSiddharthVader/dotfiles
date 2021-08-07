@@ -6,7 +6,8 @@ help() {
 }
 resolution() {
     monitor="$1"
-    xrandr | sed -ne "/$monitor/,/connected/p" | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*'
+    #xrandr | sed -ne "/$monitor/,/connected/p" | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*'
+    xrandr | sed -ne "/$monitor/,/connected/p" | sort -n | tail -1 | grep -ao '[0-9]*x[0-9_\.]*'
 }
 listMonitors() {
     xrandr | grep ' connected' | cut -d' ' -f1 | tr -d ' '
@@ -25,6 +26,7 @@ connectToAll() {
     prev=""
     while IFS= read -r monitor; do
         resolution="$(resolution "$monitor")"
+        echo "$monitor $resolution"
         if [[ -z "$prev" ]]; then
             if [[ -z "$primary" ]]; then
                 xrandr --output $monitor --mode "$resolution" --primary
