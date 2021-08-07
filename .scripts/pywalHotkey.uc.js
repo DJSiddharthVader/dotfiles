@@ -4,35 +4,33 @@ const pywalUtils = {
         if (this.sss.sheetRegistered(this.ssUri, this.sss.USER_SHEET))
             this.sss.unregisterSheet(this.ssUri, this.sss.USER_SHEET);
         this.sss.loadAndRegisterSheet(this.ssUri, this.sss.USER_SHEET);
+        console.log(
+            this.sss.sheetRegistered(this.ssUri, this.sss.USER_SHEET)
+                ? "stylesheet registered"
+                : "stylesheet not registered"
+        );
     },
 
     init() {
         console.log("script loaded, initializing");
-        this.sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(Ci.nsIStyleSheetService);
-        console.log("this.sss defined");
-        this.ssUri = makeURI("chrome://userChrome/content/colors.css");
-        console.log("this.ssURI defined");
-
-        _ucUtils.registerHotkey(
-            { id: "key_pywalCSS", modifiers: "accel", key: "H" },
-            pywalUtils.updateSheet
+        this.sss = Cc["@mozilla.org/content/style-sheet-service;1"].getService(
+            Ci.nsIStyleSheetService
         );
-        console.log("hotkey defined");
+        this.ssUri = makeURI("chrome://userChrome/content/colors.css");
+        this.key = document.getElementById("key_gotoHistory");
+
+        this.key.setAttribute("oncommand", "pywalUtils.updateSheet(window)");
         this.updateSheet(window);
     },
 };
 
 if (gBrowserInit.delayedStartupFinished) {
-    console.log("init");
     pywalUtils.init();
-    console.log("init end");
 } else {
     let delayedListener = (subject, topic) => {
         if (topic == "browser-delayed-startup-finished" && subject == window) {
             Services.obs.removeObserver(delayedListener, topic);
-            console.log("init");
             pywalUtils.init();
-            console.log("init end");
         }
     };
     Services.obs.addObserver(delayedListener, "browser-delayed-startup-finished");
