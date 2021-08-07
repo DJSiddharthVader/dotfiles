@@ -4,8 +4,8 @@ tmux_options: -f ~/dotfiles/.tmux.conf
 on_project_start: wal -R -e -n -q &
 
 windows:
-    - torrent: deluge-console
-    - scratch:
-    - media: ~/.scripts/mount.sh on
     - fetch: neofetch
+    - media: ~/.scripts/mount.sh on
+    - work:
+    - scratch:
 
