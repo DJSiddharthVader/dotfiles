@@ -85,9 +85,6 @@ export QT_QPA_PLATFORMTHEME=gtk2
 # Python,VIM and UTF-8
 export PYTHONIOENCODING=utf-8
 
-# Steam native runtime
-export STEAM_RUNTIME=0
-
 # Ranger
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
