@@ -20,7 +20,7 @@ set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 #lock after 45 mins of inactivity
 exec_always --no-startup-id xautolock -time 45 -locker ~/dotfiles/.scripts/lock.sh -detectsleep
 #lock daemon to lock by listening to events
-#exec --no-startup-id xss-lock -- /home/sidreed/dotfiles/.scripts/lock.sh &
+#exec --no-startup-id xss-lock -l -- /home/sidreed/dotfiles/.scripts/lock.sh &
 #Increase key rate
 exec --no-startup-id xset r rate 300 50
 #Pulseaudio
@@ -49,7 +49,6 @@ exec --no-startup-id ~/dotfiles/.scripts/monitor.sh on
 #Composite manager:
 exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
 #Launch Polybar and set wallpaper
-exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh rh
 exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
 exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh reload
 
@@ -147,7 +146,8 @@ bindsym $mod+q         kill
 #bindsym $mod+Shift+q
 
 bindsym $mod+w         exec --no-startup-id firefox --browser
-bindsym $mod+Shift+w   exec --no-startup-id firefox --private-window /home/sidreed/apps/Urge\ Surfing.mp3
+bindsym $mod+Shift+w   exec --no-startup-id ~/Apps/tor-browser_en-US/Browser/start-tor-browser
+
 
 
 bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
