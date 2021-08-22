@@ -33,14 +33,9 @@ alias gsl='~/.scripts/commit-status.sh status'
 alias gsw='watch -n2 "~/.scripts/commit-status.sh status"'
 
 #My Scripts
-alias mon='~/.scripts/monitor.sh on'
-alias mof='~/.scripts/monitor.sh off'
-alias wll='~/.scripts/wallpaper.sh back'
-alias upm='~/.scripts/update-music.sh'
-alias rspb='~/.scripts/polybar-launch.sh'
-alias pipes='~/apps/pipes.sh/pipes.sh'
-alias rspa='~/.scripts/reset-pulseaudio.sh'
-alias knit='~/.scripts/knit-pdf.sh'
+alias mhyb='~/.scripts/monitor.sh hybrid'
+alias mext='~/.scripts/monitor.sh hybrid'
+alias mlap='~/.scripts/monitor.sh laptop'
 
 #Apps
 alias top='htop'
@@ -49,16 +44,12 @@ alias tsm="transmission-remote"
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 
 #Shorten
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
 alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias cof='conda deactivate'
 alias copy='xclip -sel clip'
 alias mnt="~/.scripts/mount.sh on"
 alias umt="~/.scripts/mount.sh off"
-alias brg='ssh slreed@bridges2.psc.edu'
 alias school='cd /home/sidreed/CMU_MSCB/Current_Courses/'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
