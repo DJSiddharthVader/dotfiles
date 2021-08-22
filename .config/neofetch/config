@@ -19,10 +19,10 @@ print_info () {
     info title
     info underline
     info "Model" model
+    #info "Kernel" kernel
     info "CPU" cpu
     info "GPU" gpu
     info "Display" resolution
-#   info "Kernel" kernel
     info "OS" distro
     info "Package" packages
     info "WM" wm
@@ -32,7 +32,7 @@ print_info () {
     info "Uptime" uptime
     prin "Disk" "$(~/dotfiles/.config/polybar/scripts/disk.sh display free)"
     prin "Wifi" "$(~/dotfiles/.config/polybar/scripts/network.sh display)"
-    prin "VPN" "$(~/dotfiles/.scripts/protonvpn.sh display)"
+    prin "VPN" "$(~/dotfiles/.scripts/mullvad.sh display)"
     prin "Torrent" "$(~/.torrent.sh display datatotal)"
     prin "Weather" "$(~/dotfiles/.config/polybar/scripts/weather.sh)"
     info cols
