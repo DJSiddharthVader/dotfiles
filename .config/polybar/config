@@ -24,15 +24,15 @@ include-file = ~/.cache/wal/polybarColors.wal
 ; for font awesome icons
 font-icon = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
 font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
-font-icon-huge = FontAwesome:format=truetype:style=Regular:size=17:antialias=true;4
+font-icon-huge = FontAwesome:format=truetype:style=Regular:size=27:antialias=true;4
 ; for weather icons
 font-weather = Weather Icons:style=Regular;3
 font-weather-large = Weather Icons:style=Regular:size=15;3
-font-weather-huge= Weather Icons:style=Regular:size=17;3
+font-weather-huge= Weather Icons:style=Regular:size=27;3
 ; text font
 font-main = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
 font-main-large = PixelSleigh:style=Regular:pixelsize=10:antialias=true;1
-font-main-huge = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
+font-main-huge = PixelSleigh:style=Regular:pixelsize=16:antialias=true;1
 ;font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
 ;font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
 ;font-main-huge = Pixel Bit Advanced:style=Regular:pixelsize=13:antialias=true;5
@@ -55,16 +55,20 @@ font-main-huge = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
 ;font-main = Iosevka:pixelsize=10;2
 ; for text char not in font-2, avoids oversized icons from defualting to font-4
 font-overflow =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
-font-overflow-large =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=19:antialias=true;1
+font-overflow-large = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=19:antialias=true;1
+font-overflow-huge = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=29:antialias=true;1
 ;font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
 ;font-overflow = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 ; for powerline separators
 font-powerline = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=22:antialias=true;4
 font-powerline-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=28:antialias=true;6
+font-powerline-huge = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=58:antialias=true;9
 ; for long scrolling text, (smaller and mono-spaced)
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
+font-scrolling-huge = Terminus:style=Regular:pixelsize=23;2
 font-focused = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
 font-focused-large = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
+font-focused-huge = PixelSleigh:style=Regular:pixelsize=16:antialias=true;1
 ;font-focused = Terminus:style=Regular:pixelsize=15:antialias=true;3
 ;font-focused-large = Terminus:style=Regular:pixelsize=15:antialias=true;3
 ;font-focused-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=13:antialias=false;4
@@ -121,13 +125,13 @@ border-left-size = 0
 border-right-size = 0
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
-font-0 = ${fonts.font-icon-large}
-font-1 = ${fonts.font-weather-large}
-font-2 = ${fonts.font-main-large}
-font-3 = ${fonts.font-overflow-large}
-font-4 = ${fonts.font-powerline-large}
-font-5 = ${fonts.font-scrolling}
-font-6 = ${fonts.font-focused-large}
+font-0 = ${fonts.font-icon-huge}
+font-1 = ${fonts.font-weather-huge}
+font-2 = ${fonts.font-main-huge}
+font-3 = ${fonts.font-overflow-huge}
+font-4 = ${fonts.font-powerline-huge}
+font-5 = ${fonts.font-scrolling-huge}
+font-6 = ${fonts.font-focused-huge}
 
 [section/standard]
 monitor = ${env:MONITOR:}
@@ -267,28 +271,28 @@ wrapping-scroll = false
 pin-workspaces = true
 strip-wsnumbers = true
 format = <label-state> <label-mode>
-;ws-icon-1 = 1;I 
-;ws-icon-2 = 2;II 
-;ws-icon-3 = 3;III 
-;ws-icon-4 = 4;IV 
-;ws-icon-5 = 5;V 
-;ws-icon-6 = 6;VI 
-;ws-icon-7 = 7;VII 
-;ws-icon-8 = 8;VIII 
-;ws-icon-9 = 9;IX 
-;ws-icon-0 = 10;X 
-;ws-icon-default = 
+ws-icon-1 = 1;I 
+ws-icon-2 = 2;II 
+ws-icon-3 = 3;III 
+ws-icon-4 = 4;IV 
+ws-icon-5 = 5;V 
+ws-icon-6 = 6;VI 
+ws-icon-7 = 7;VII 
+ws-icon-8 = 8;VIII 
+ws-icon-9 = 9;IX 
+ws-icon-0 = 10;X 
+ws-icon-default = 
 ;      
-ws-icon-1 = 1;1 
-ws-icon-2 = 2;2 
-ws-icon-3 = 3;3 
-ws-icon-4 = 4;4 
-ws-icon-5 = 5;5 
-ws-icon-6 = 6;6 
-ws-icon-7 = 7;7 
-ws-icon-8 = 8;8 
-ws-icon-9 = 9;9 
-ws-icon-0 = 10;10 
+;ws-icon-1 = 1;1 
+;ws-icon-2 = 2;2 
+;ws-icon-3 = 3;3 
+;ws-icon-4 = 4;4 
+;ws-icon-5 = 5;5 
+;ws-icon-6 = 6;6 
+;ws-icon-7 = 7;7 
+;ws-icon-8 = 8;8 
+;ws-icon-9 = 9;9 
+;ws-icon-0 = 10;10 
 ; Only show workspaces on the same output as the bar
 label-mode-padding = 0
 label-mode-foreground = #000
@@ -405,6 +409,27 @@ format-suffix = ${root.applauncher-suffix}
 format-suffix-foreground = ${root.applauncher-color}
 format-suffix-background = ${colors.transparent}
 
+[module/xbacklight]
+type = internal/xbacklight
+enabele-scroll = true
+label = " %percentage%%"
+format = <label>
+format-prefix-font = 5
+format-suffix-font = 5
+format-background = ${root.xbacklight-color}
+format-foreground = ${root.xbacklight-text-color}
+format-underline = ${root.xbacklight-underline}
+format-prefix = ${root.xbacklight-prefix}
+format-prefix-foreground = ${root.xbacklight-color}
+format-prefix-background = ${colors.transparent}
+format-suffix = ${root.xbacklight-suffix}
+format-suffix-foreground = ${root.xbacklight-color}
+format-suffix-background = ${colors.transparent}
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
 [module/gamma]
 type = custom/ipc
 initial = 1
@@ -429,36 +454,26 @@ format-suffix-background = ${colors.transparent}
 type = custom/script
 exec = polybar-msg hook gamma 1 &>/dev/null
 
-[module/volume]
-type = internal/alsa
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-label-volume = %percentage%%
-format-volume = "<ramp-volume> <label-volume>"
-format-volume-underline = ${root.volume-underline}
-format-volume-background = ${root.volume-color}
-format-volume-foreground = ${root.volume-text-color}
-format-volume-prefix-font = 5
-format-volume-prefix = ${root.volume-prefix}
-format-volume-prefix-foreground = ${root.volume-color}
-format-volume-prefix-background = ${colors.transparent}
-format-volume-suffix = ${root.volume-suffix}
-format-volume-suffix-font = 5
-format-volume-suffix-foreground = ${root.volume-color}
-format-volume-suffix-background = ${colors.transparent}
-label-muted =  %percentage%%
-format-muted-foreground = ${colors.foreground-alt}
-format-muted-background = ${root.volume-color}
-format-muted-underline = ${root.volume-underline}
-format-muted-prefix = ${root.volume-prefix}
-format-muted-prefix-font = 5
-format-muted-prefix-foreground = ${root.volume-color}
-format-muted-prefix-background = ${colors.transparent}
-format-muted-suffix = ${root.volume-suffix}
-format-muted-suffix-font = 5
-format-muted-suffix-foreground = ${root.volume-color}
-format-muted-suffix-background = ${colors.transparent}
+[module/pulseaudio-control]
+type = custom/script
+tail = true
+exec = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh listen
+click-left = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh togmute
+click-right = pavucontrol &
+click-middle = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh next-sink
+scroll-up = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh up
+scroll-down = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh down
+format-underline = ${root.pulseaudio-control-underline}
+format-background = ${root.pulseaudio-control-color}
+format-foreground = ${root.pulseaudio-control-text-color}
+format-prefix-font = 5
+format-prefix = ${root.pulseaudio-control-prefix}
+format-prefix-foreground = ${root.pulseaudio-control-color}
+format-prefix-background = ${colors.transparent}
+format-suffix = ${root.pulseaudio-control-suffix}
+format-suffix-font = 5
+format-suffix-foreground = ${root.pulseaudio-control-color}
+format-suffix-background = ${colors.transparent}
 
 [module/wlan]
 type = custom/script
@@ -479,25 +494,24 @@ format-suffix = ${root.wlan-suffix}
 format-suffix-foreground = ${root.wlan-color}
 format-suffix-background = ${colors.transparent}
 
-[module/protonvpn]
+[module/mullvad]
 type = custom/ipc
 initial = 1
-hook-0 = ~/dotfiles/.scripts/protonvpn.sh display
-hook-1 = ~/dotfiles/.scripts/protonvpn.sh toggle
-hook-2 = ~/dotfiles/.scripts/protonvpn.sh location
-click-left  = polybar-msg hook protonvpn 2 && sleep 1 && polybar-msg hook protonvpn 1
-click-right = polybar-msg hook protonvpn 3 && sleep 1 && polybar-msg hook protonvpn 1
+hook-0 = ~/dotfiles/.scripts/mullvad.sh display
+hook-1 = ~/dotfiles/.scripts/mullvad.sh toggle
+click-left  = polybar-msg hook mullvad 2 && sleep 1 && polybar-msg hook mullvad 1
+click-right = polybar-msg hook mullvad 3 && sleep 1 && polybar-msg hook mullvad 1
 format = " <output>"
 format-prefix-font = 5
 format-suffix-font = 5
-format-background = ${root.protonvpn-color}
-format-foreground = ${root.protonvpn-text-color}
-format-underline = ${root.protonvpn-underline}
-format-prefix = ${root.protonvpn-prefix}
-format-prefix-foreground = ${root.protonvpn-color}
+format-background = ${root.mullvad-color}
+format-foreground = ${root.mullvad-text-color}
+format-underline = ${root.mullvad-underline}
+format-prefix = ${root.mullvad-prefix}
+format-prefix-foreground = ${root.mullvad-color}
 format-prefix-background = ${colors.transparent}
-format-suffix = ${root.protonvpn-suffix}
-format-suffix-foreground = ${root.protonvpn-color}
+format-suffix = ${root.mullvad-suffix}
+format-suffix-foreground = ${root.mullvad-color}
 format-suffix-background = ${colors.transparent}
 
 [module/bluetooth]
@@ -600,6 +614,24 @@ format-prefix-foreground = ${root.date-color}
 format-prefix-background = ${colors.transparent}
 format-suffix = ${root.date-suffix}
 format-suffix-foreground = ${root.date-color}
+format-suffix-background = ${colors.transparent}
+
+[module/battery]
+type = custom/script
+tail = true
+exec = ~/dotfiles/.config/polybar/scripts/battery.sh display
+click-left = ~/dotfiles/.config/polybar/scripts/battery.sh next
+click-right = ~/dotfiles/.config/polybar/scripts/battery.sh prev
+format-prefix-font = 5
+format-suffix-font = 5
+format-background = ${root.battery-color}
+format-foreground = ${root.battery-text-color}
+format-underline = ${root.battery-underline}
+format-prefix = ${root.battery-prefix}
+format-prefix-foreground = ${root.battery-color}
+format-prefix-background = ${colors.transparent}
+format-suffix = ${root.battery-suffix}
+format-suffix-foreground = ${root.battery-color}
 format-suffix-background = ${colors.transparent}
 
 [module/memory]
@@ -792,41 +824,6 @@ format-suffix-foreground = ${root.reading-color}
 format-suffix-background = ${colors.transparent}
 
 
-[module/battery]
-type = custom/script
-tail = true
-exec = ~/dotfiles/.config/polybar/scripts/battery.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/battery.sh next
-click-right = ~/dotfiles/.config/polybar/scripts/battery.sh prev
-format-prefix-font = 5
-format-suffix-font = 5
-format-background = ${colors.col2}
-format-foreground = ${colors.col2}
-format-prefix = ${root.battery-prefix}
-format-prefix-foreground = ${colors.col2}
-format-prefix-background = ${colors.transparent}
-format-suffix = ${root.battery-suffix}
-format-suffix-foreground = ${colors.col2}
-format-suffix-background = ${colors.transparent}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-[module/xbacklight]
-type = internal/xbacklight
-enabele-scroll = true
-label = " %percentage%%"
-format = <label>
-format-background = ${colors.col2}
-format-foreground = ${colors.col2}
-format-prefix = ${colors.leftprefix}
-format-prefix-foreground = ${colors.col2}
-format-prefix-background = ${colors.transparent}
-format-suffix = ${colors.leftsuffix}
-format-suffix-foreground = ${colors.col2}
-format-suffix-background = ${colors.transparent}
-
 [module/expressvpn]
 type = custom/script
 tail = true
@@ -846,6 +843,66 @@ format-suffix-foreground = ${colors.col5}
 format-suffix-background = ${colors.transparent}
 content-foreground = ${colors.col1}
 content-background = ${colors.transparent}
+
+[module/protonvpn]
+type = custom/ipc
+initial = 1
+hook-0 = ~/dotfiles/.scripts/protonvpn.sh display
+hook-1 = ~/dotfiles/.scripts/protonvpn.sh toggle
+hook-2 = ~/dotfiles/.scripts/protonvpn.sh location
+click-left  = polybar-msg hook protonvpn 2 && sleep 1 && polybar-msg hook protonvpn 1
+click-right = polybar-msg hook protonvpn 3 && sleep 1 && polybar-msg hook protonvpn 1
+format = " <output>"
+format-prefix-font = 5
+format-suffix-font = 5
+format-background = ${root.protonvpn-color}
+format-foreground = ${root.protonvpn-text-color}
+format-underline = ${root.protonvpn-underline}
+format-prefix = ${root.protonvpn-prefix}
+format-prefix-foreground = ${root.protonvpn-color}
+format-prefix-background = ${colors.transparent}
+format-suffix = ${root.protonvpn-suffix}
+format-suffix-foreground = ${root.protonvpn-color}
+format-suffix-background = ${colors.transparent}
+
+[module/leftcap]
+type = custom/text
+content = ${colors.rightsuffix}
+content-font = 5
+content-background = ${root.leftcap-color}
+content-foreground = ${root.leftcap-text-color}
+content-underline = ${root.leftcap-underline}
+
+[module/volume]
+type = internal/alsa
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+label-volume = %percentage%%
+format-volume = "<ramp-volume> <label-volume>"
+format-volume-underline = ${root.volume-underline}
+format-volume-background = ${root.volume-color}
+format-volume-foreground = ${root.volume-text-color}
+format-volume-prefix-font = 5
+format-volume-prefix = ${root.volume-prefix}
+format-volume-prefix-foreground = ${root.volume-color}
+format-volume-prefix-background = ${colors.transparent}
+format-volume-suffix = ${root.volume-suffix}
+format-volume-suffix-font = 5
+format-volume-suffix-foreground = ${root.volume-color}
+format-volume-suffix-background = ${colors.transparent}
+label-muted =  %percentage%%
+format-muted-foreground = ${colors.foreground-alt}
+format-muted-background = ${root.volume-color}
+format-muted-underline = ${root.volume-underline}
+format-muted-prefix = ${root.volume-prefix}
+format-muted-prefix-font = 5
+format-muted-prefix-foreground = ${root.volume-color}
+format-muted-prefix-background = ${colors.transparent}
+format-muted-suffix = ${root.volume-suffix}
+format-muted-suffix-font = 5
+format-muted-suffix-foreground = ${root.volume-color}
+format-muted-suffix-background = ${colors.transparent}
 
 
 ;not used or not working
