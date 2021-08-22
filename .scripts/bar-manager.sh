@@ -25,7 +25,7 @@ separator_icons=("$dl$dl$dl"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
                  " $dl$dl$dl "
-                 " $dl$dl$dl "
+                 "$dl$dl$dl"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
@@ -99,10 +99,10 @@ separators() {
     setMode 'separator' "$dmode"
     echo "$dmode
 ; icons to delimit polybar modules
-leftprefix = \"$(echo $icons | cut -d"$dl" -f1)\"
-leftsuffix = \"$(echo $icons | cut -d"$dl" -f2)\"
-rightprefix = \"$(echo $icons | cut -d"$dl" -f3)\"
-rightsuffix = \"$(echo $icons | cut -d"$dl" -f4)\"
+leftprefix = \"$(echo "$icons" | cut -d"$dl" -f1)\"
+leftsuffix = \"$(echo "$icons" | cut -d"$dl" -f2)\"
+rightprefix = \"$(echo "$icons" | cut -d"$dl" -f3)\"
+rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"
 " | sed -e 's/""//' >| "$separator_file"
 }
 getMonitors() {
@@ -157,11 +157,11 @@ launch() {
 rofiMenu() {
     mode="$1"
     if [[ $mode = 'style' ]]; then
-        style="$(printf '%s\n' ${styles[@]} | rofi -m -1 -width 12 -lines ${#styles[@]} -dmenu -p 'Pick Polybar Style')"
+        style="$(printf '%s\n' ${styles[@]} | rofi -m -1 -width 15 -lines ${#styles[@]} -dmenu -p 'Pick Polybar Style')"
         [[ -n $style ]] && launch $style
     elif [[ $mode = 'sep' ]]; then
         #separator="$(printf '%s\n' ${separator_names[@]} | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
-        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
+        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 20 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
         [[ -n $separator ]] && separators $separator && launch 'stay'
     fi
 }
