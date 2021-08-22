@@ -62,12 +62,15 @@ open() {
 }
 
 lip() {
+    # local IP
     hostname -I | cut -d' ' -f1
 }
 pip() {
+    # public IP
     curl -s  "$pipurl"
 }
 name() {
+    # network SSID
     iwgetid -r
 }
 strength() {
@@ -80,14 +83,14 @@ strength() {
 icon() {
     percent=$(strength)
     case 1 in
-        $(($percent <  20))) icon="$ramp1" ;;
-        $(($percent <  40))) icon="$ramp2" ;;
-        $(($percent <  60))) icon="$ramp3" ;;
+        $(($percent <  50))) icon="$ramp1" ;;
+        $(($percent <  60))) icon="$ramp2" ;;
+        $(($percent <  70))) icon="$ramp3" ;;
         $(($percent <  80))) icon="$ramp4" ;;
         $(($percent <  90))) icon="$ramp5" ;;
         $(($percent < 101))) icon="$ramp6" ;;
     esac
-    echo "$icon▎"
+    echo "$icon" #▎
 }
 display(){
     mode="$1"
@@ -123,4 +126,3 @@ main() {
 }
 
 main "$@"
-
