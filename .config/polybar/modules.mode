@@ -1,8 +1,8 @@
-bar:standard
-separator:trig_out
-wallpaper_index:469
+bar:laptop
+separator:arrow_sym
+wallpaper_index:29
 wifi:standardd
-songnames:scroll
+songnames:static
 date:time
 memory:short
 cpu:short
@@ -10,6 +10,7 @@ temperature:short
 disk:amount
 uptime:day
 torrent:speed
-reading:A Gentle Introduction to Markov Chain Monte Carlo (MCMC) | The Clever Machine~https://theclevermachine.wordpress.com/2012/11/19/a-gentle-introduction-to-markov-chain-monte-carlo-mcmc/
+reading:[D] Why re-sampling imbalanced data isnt always the best idea : statistics~https://old.reddit.com/r/statistics/comments/dqkp9m/d_why_resampling_imbalanced_data_isnt_always_the/
 battery:all
-focus_thresh:80
+focus_thresh:40
+mullvad:location
