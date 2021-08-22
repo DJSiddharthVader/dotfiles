@@ -4,12 +4,12 @@ while true; do
     discharging=$(acpi -b | grep -o Discharging)
     if [[ "$discharging" = "Discharging" ]]; then
         power=$(acpi -b | cut -d' ' -f4 | cut -d'%' -f1)
-        if (( $power < 5 )) ; then
-            notify-send "BATTERY AT 5% PLUG IN NOW" -u critical
-        elif (( $power < 10 )) ; then
-            notify-send "Battery < 10%!" -u critical
-        elif (( $power < 15 )) ; then
-            notify-send "Battery < 15%!" -u critical
+        if (( $power < 15 )) ; then
+            notify-send "BATTERY AT 15% PLUG IN NOW" -u critical
+        elif (( $power < 25 )) ; then
+            notify-send "Battery < 25%!" -u critical
+        elif (( $power < 30 )) ; then
+            notify-send "Battery < 30%!" -u critical
         fi
     fi
     sleep 30
