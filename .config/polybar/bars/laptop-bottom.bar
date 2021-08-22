@@ -1,6 +1,5 @@
 bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather
-;torrent
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather
 modules-center =
 modules-right = reading
 
@@ -10,21 +9,27 @@ date-color = ${colors.col1}
 date-underline =
 date-text-color = ${colors.foreground}
 
+battery-prefix = ${colors.rightprefix}
+battery-suffix = ${colors.rightsuffix}
+battery-color = ${colors.col2}
+battery-underline =
+battery-text-color = ${colors.foreground}
+
 memory-prefix = ${colors.rightprefix}
 memory-suffix = ${colors.rightsuffix}
-memory-color = ${colors.col2}
+memory-color = ${colors.col3}
 memory-underline =
 memory-text-color = ${colors.foreground}
 
 cpu-prefix = ${colors.rightprefix}
 cpu-suffix = ${colors.rightsuffix}
-cpu-color = ${colors.col3}
+cpu-color = ${colors.col4}
 cpu-underline =
 cpu-text-color = ${colors.foreground}
 
 temperature-prefix = ${colors.rightprefix}
 temperature-suffix = ${colors.rightsuffix}
-temperature-color = ${colors.col4}
+temperature-color = ${colors.col5}
 temperature-underline =
 temperature-text-color = ${colors.foreground}
 
@@ -36,25 +41,25 @@ xkeyboard-text-color = ${colors.foreground}
 
 disk-prefix = ${colors.rightprefix}
 disk-suffix = ${colors.rightsuffix}
-disk-color = ${colors.col5}
+disk-color = ${colors.col6}
 disk-underline =
 disk-text-color = ${colors.foreground}
 
 uptime-prefix = ${colors.rightprefix}
 uptime-suffix = ${colors.rightsuffix}
-uptime-color = ${colors.col6}
+uptime-color = ${colors.col7}
 uptime-underline =
 uptime-text-color = ${colors.foreground}
 
 weather-prefix = ${colors.rightprefix}
 weather-suffix = ${colors.rightsuffix}
-weather-color = ${colors.col7}
+weather-color = ${colors.col8}
 weather-underline =
 weather-text-color = ${colors.foreground}
 
 torrent-prefix = ${colors.rightprefix}
 torrent-suffix = ${colors.rightsuffix}
-torrent-color = ${colors.col8}
+torrent-color = ${colors.col9}
 torrent-underline =
 torrent-text-color = ${colors.foreground}
 
