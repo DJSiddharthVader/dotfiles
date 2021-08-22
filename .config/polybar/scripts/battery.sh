@@ -38,7 +38,6 @@ getMode() {
 setMode() {
     sed -i "/^battery:/s/:.*/:$1/" "$mode_file"
 }
-
 batinfo() {
     acpi -b | grep -v 'rate information unavailable' | head -1
 }
@@ -79,7 +78,6 @@ display(){
     esac
     echo "$(status) $bat"
 }
-
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
@@ -98,4 +96,3 @@ main() {
 }
 
 main "$@"
-

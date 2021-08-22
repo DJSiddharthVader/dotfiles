@@ -31,7 +31,7 @@ function check_phone_open(){
     nc -z "$ip" "$port"
     if [ "$?" = 1 ] ;then
         echo "Phone connection refused, exiting..."
-        exit 1
+        #exit 1
     fi
 }
 function sync_notes() {
