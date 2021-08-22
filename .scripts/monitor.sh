@@ -1,8 +1,9 @@
 #!/bin/bash
 laptop_screen="eDP-1"
+bar_manager_script="$HOME/dotfiles/.scripts/bar-manager.sh"
 
 help() {
-    echo "Usage: $0 {multi|hybrid|laptop}"
+    echo "Usage: $0 {ext|hybrid|laptop}"
 }
 resolution() {
     monitor="$1"
@@ -58,14 +59,15 @@ connect() {
         *) help && exit 1 ;;
     esac
 }
-function main() {
+main() {
     connect "$1"
     case "$1" in
-        multi) ~/dotfiles/.scripts/bar-manager.sh style float ;;
-        hybrid) ~/dotfiles/.scripts/bar-manager.sh style float ;;
-        laptop) ~/dotfiles/.scripts/bar-manager.sh style laptop ;;
+        ext)    $bar_manager_script restart ;;
+        hybrid) $bar_manager_script restart ;;
+        laptop) $bar_manager_script style laptop ;;
         *) help && exit 1 ;;
     esac
+    $HOME/dotfiles/.scripts/wallpaper.sh stay back
 }
 
 main "$1"
