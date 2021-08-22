@@ -58,7 +58,8 @@ display() {
     else
         # right pad with spaces until total length $thresh
         # keeps module width constant no matter article length
-        printf "%-${thresh}s" "$(getArticle)"
+        #printf "%-${thresh}s" "$(getArticle)"
+        getArticle
     fi
 }
 
@@ -75,4 +76,3 @@ main() {
 }
 
 main "$1"
-
