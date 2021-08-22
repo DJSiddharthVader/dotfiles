@@ -65,6 +65,7 @@ getName() {
 }
 display() {
     ws="$(getWorkspace)" # focused window workspace
+    ws="$(intToRoman $ws)"
     id=$(xprop -root | awk '/_NET_ACTIVE_WINDOW\(WINDOW\)/{print $NF}')
     if [[ $id = 0x0 ]];then
         icon=""
