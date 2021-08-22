@@ -5,7 +5,7 @@ mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 mode_prefix="torrent"
 stats_file="$HOME/dotfiles/.config/transmission-daemon/stats.tsv"
 download_dir="$HOME/Torrents"
-modes=(ratio ratiototal data datatotal speed active) #no spaces in mode titles
+modes=(ratio data ratiototal datatotal speed active) #no spaces in mode titles
 delim="~"
 search_script="$HOME/dotfiles/.scripts/torrent/search.sh"
 
@@ -86,15 +86,20 @@ scrape_stats() {
 }
 update_stats() {
     #header="id"$delim"name"$delim"size"$delim"downloaded"$delim"uploaded"
-    cp "$stats_file" "$stats_file.bak"
     info="$(info)"
     hashes="$(extract "$info" 'Hash')"
     names="$(extract "$info" 'Name')"
     sizes="$(scrape_stats "$info" 'Total size')"
     downloaded="$(scrape_stats "$info" 'Downloaded')"
     uploaded="$(scrape_stats "$info" 'Uploaded')"
-    paste -d"$delim" <(echo "$hashes") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$stats_file"
-    sort -t"$delim" -g -r -k5,5 -k4,4 $stats_file | sort -t"$delim" -u -k1,1 -o $stats_file #dedup
+    # update records
+    tmp="$(mktemp)"
+    cp "$stats_file" "$tmp"
+    paste -d"$delim" <(echo "$hashes") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$tmp"
+    sort -t"$delim" -g -r -k5,5 -k4,4 $tmp | sort -t"$delim" -u -k1,1 -o $tmp #dedup
+    if [[ "$(wc -l $stats_file | cut -d' ' -f1)" -ge "$(wc -l $tmp | cut -d' ' -f1)" ]]; then
+        mv $tmp $stats_file
+    fi
 }
 total_stats() {
     field="$1"
@@ -133,30 +138,30 @@ display() {
             up="$(sum_convert "$up" "$unit")"
             down="$(scrape_stats "$info" 'Downloaded')"
             down="$(sum_convert "$down" "$unit")"
-            msg="  $down $unit   $up $unit"
+            [[ -z "$up$down" ]] &&  msg=" - $unit  - $unit" || msg=" $down $unit  $up $unit"
             ;;
         'ratio')
-            unit="Gi"
+            unit="K"
             size="$(scrape_stats "$info" 'Total size')"
             size="$(sum_convert "$size" "$unit")"
             up="$(scrape_stats "$info" 'Uploaded')"
             up="$(sum_convert "$up" "$unit")"
             down="$(scrape_stats "$info" 'Downloaded')"
             down="$(sum_convert "$down" "$unit")"
-            msg=" $(divide $down $size 2)  $(divide $up $down 2)"
+            [[ -z "$up$down" ]] &&  msg=" -  - " || msg=" $(divide $down $size 2)  $(divide $up $down 2)"
             ;;
         'datatotal')
-            unit="Gi"
-            update_stats
+            unit="Ti"
+            [[ -z "$info" ]] || update_stats
             up="$(cut -d"$delim" -f5 $stats_file)"
             up="$(sum_convert "$up" "$unit")"
             down="$(cut -d"$delim" -f4 $stats_file)"
             down="$(sum_convert "$down" "$unit")"
-            msg="  $down $unit   $up $unit"
+            msg=" $down $unit  $up $unit"
             ;;
         'ratiototal')
-            unit="Gi"
-            update_stats
+            unit="K"
+            [[ -z "$info" ]] || update_stats
             up="$(cut -d"$delim" -f5 $stats_file)"
             up="$(sum_convert "$up" "$unit")"
             down="$(cut -d"$delim" -f4 $stats_file)"
@@ -212,12 +217,12 @@ search() {
 main() {
     mode="$1"
     case $mode in
-        'start'  ) start_daemon        ;;
-        'pause'  ) action_all 'pause'  ;;
-        'resume' ) action_all 'resume' ;;
-        'clean'  ) clean_up            ;;
-        'search' ) search              ;;
-        'stats'  ) update_stats        ;;
+        'start'  ) start_daemon                           ;;
+        'pause'  ) action_all 'pause'                     ;;
+        'resume' ) action_all 'resume'                    ;;
+        'clean'  ) clean_up                               ;;
+        'search' ) search                                 ;;
+        'stats'  ) [[ -z "$(get_info)" ]] || update_stats ;;
         'display') # display torrent data
             [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
             display "$dmode"
