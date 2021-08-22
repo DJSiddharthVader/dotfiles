@@ -121,7 +121,7 @@ changeColors() {
     wal -geni "$image"  # use wal to generate colorschemes from image
     ~/dotfiles/.scripts/bar-manager.sh reload > /dev/null 2>&1 # reload polybar with new colors
     colorFirefox # trigger reloading of colors.css in firefox
-    ~/apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1 # theme for GTK apps and whatnot
+    ~/Apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox # theme for GTK apps and whatnot
     ~/dotfiles/.scripts/zathura.sh # re-write zathura config with new colors
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
     # this must be run last since the timeout blocks anything after it from executing due to the set -e (script exists on error, including timeout)
