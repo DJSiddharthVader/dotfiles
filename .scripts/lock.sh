@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
-source "$HOME/.cache/wal/colors.sh"
+tmp="$(mktemp)"
+tail -n+4 $HOME/.cache/wal/colors.sh >| $tmp
+source $tmp
+
 #colors,text,font
 alpha="ff"
 background="$(echo "$color1" | tr -d '#')"
@@ -20,11 +23,11 @@ timecolor="$(echo "$foreground$alpha" | tr -d '#')"
 datecolor="$(echo "$foreground$alpha" | tr -d '#')"
 loginbox="$(echo "$color1 66" | tr -d ' #')"
 #loginbox=00000066
-datestring=
 font='Terminus:style=Bold'
 locktext="$(date +'%A, %B %d %Y' )"
 
-lockbox() { #drawing rectangles
+lockbox() {
+    #drawing rectangles
     rectangles=" "
     SR="$(xrandr -q | grep ' connected' | grep -o '[0-9]*x[0-9]*+[0-9]*+[0-9]*')"
     for RES in $SR; do
@@ -42,8 +45,8 @@ main(){
     scrot "$screen"
     convert "$screen" -scale 20% -scale 500% -draw "fill $background fill-opacity 0.8 $rectangles" "$screen.png"
     #lock command
-    /home/sidreed/apps/i3lock-color/build/i3lock \
-        -i "$screen.png" -t             \
+    $HOME/Apps/i3lock-color/build/i3lock     \
+        -i "$screen.png" -t                  \
         --indpos='x+290:h-80'                \
         --noinputtext=''                     \
         --clock                              \
@@ -76,4 +79,3 @@ main(){
 }
 
 main
-
