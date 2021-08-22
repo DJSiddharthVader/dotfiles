@@ -1,6 +1,6 @@
 modules-left = i3 focused focused-name
 modules-center =
-modules-right = songnames mpd bluetooth protonvpn wlan volume applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
 
 i3-prefix =
 i3-suffix =
@@ -38,6 +38,12 @@ volume-color = ${colors.transparent}
 volume-underline = ${colors.col4}
 volume-text-color = ${colors.foreground}
 
+pulseaudio-control-prefix =
+pulseaudio-control-suffix =
+pulseaudio-control-color = ${colors.transparent}
+pulseaudio-control-underline = ${colors.col4}
+pulseaudio-control-text-color = ${colors.foreground}
+
 wlan-prefix =
 wlan-suffix =
 wlan-color = ${colors.transparent}
@@ -49,6 +55,12 @@ protonvpn-suffix =
 protonvpn-color = ${colors.transparent}
 protonvpn-underline = ${colors.col6}
 protonvpn-text-color = ${colors.foreground}
+
+mullvad-prefix =
+mullvad-suffix =
+mullvad-color = ${colors.transparent}
+mullvad-underline = ${colors.col6}
+mullvad-text-color = ${colors.foreground}
 
 bluetooth-prefix =
 bluetooth-suffix =

@@ -1,7 +1,7 @@
 fixed-center = true
-modules-left = i3
+modules-left = i3 focused leftcap
 modules-center =
-modules-right = songnames mpd bluetooth protonvpn wlan volume applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 
 i3-prefix = ${colors.rightprefix}
 i3-suffix = ${colors.rightsuffix}
@@ -12,23 +12,40 @@ i3-text-color = ${colors.foreground}
 i3-underline-2 =
 i3-text-color-2 = ${colors.foreground}
 
+focused-prefix = ${colors.rightprefix}
+focused-suffix = ${colors.rightsuffix}
+focused-color = ${colors.col3}
+focused-underline =
+focused-text-color = ${colors.foreground}
+
+leftcap-prefix = ${colors.rightprefix}
+leftcap-color = ${colors.transparent}
+leftcap-underline =
+leftcap-text-color = ${colors.col3}
+
 applauncher-prefix = ${colors.leftprefix}
 applauncher-suffix = ${colors.leftsuffix}
 applauncher-color = ${colors.col1}
 applauncher-underline =
 applauncher-text-color = ${colors.foreground}
 
-gamma-prefix = ${colors.leftprefix}
-gamma-suffix = ${colors.leftsuffix}
-gamma-color = ${colors.col1}
-gamma-underline =
-gamma-text-color = ${colors.foreground}
+xbacklight-prefix = ${colors.leftprefix}
+xbacklight-suffix = ${colors.leftsuffix}
+xbacklight-color = ${colors.col2}
+xbacklight-underline =
+xbacklight-text-color = ${colors.foreground}
 
 volume-prefix = ${colors.leftprefix}
 volume-suffix = ${colors.leftsuffix}
 volume-color = ${colors.col2}
 volume-underline =
 volume-text-color = ${colors.foreground}
+
+pulseaudio-control-prefix = ${colors.leftprefix}
+pulseaudio-control-suffix = ${colors.leftsuffix}
+pulseaudio-control-color = ${colors.col2}
+pulseaudio-control-underline =
+pulseaudio-control-text-color = ${colors.foreground}
 
 wlan-prefix = ${colors.leftprefix}
 wlan-suffix = ${colors.leftsuffix}
@@ -41,6 +58,12 @@ protonvpn-suffix = ${colors.leftsuffix}
 protonvpn-color = ${colors.col4}
 protonvpn-underline =
 protonvpn-text-color = ${colors.foreground}
+
+mullvad-prefix = ${colors.leftprefix}
+mullvad-suffix = ${colors.leftsuffix}
+mullvad-color = ${colors.col4}
+mullvad-underline =
+mullvad-text-color = ${colors.foreground}
 
 bluetooth-prefix = ${colors.leftprefix}
 bluetooth-suffix = ${colors.leftsuffix}
