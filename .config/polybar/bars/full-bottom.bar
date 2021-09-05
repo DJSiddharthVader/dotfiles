@@ -1,8 +1,3 @@
-bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading wall
-
 date-prefix = ${colors.rightprefix}
 date-suffix = ${colors.rightsuffix}
 date-color = ${colors.col1}

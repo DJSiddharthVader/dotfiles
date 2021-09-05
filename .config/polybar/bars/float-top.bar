@@ -1,8 +1,3 @@
-fixed-center = true
-modules-left = i3 focused focused-name
-modules-center =
-modules-right = songnames mpd bluetooth mullvad pulseaudio-control wlan applauncher
-
 i3-prefix = ${colors.rightprefix}
 i3-suffix = ${colors.rightsuffix}
 i3-color = ${colors.col1}
@@ -18,8 +13,17 @@ focused-color = ${colors.col3}
 focused-underline =
 focused-text-color = ${colors.foreground}
 
-focused-name-prefix = ${colors.rightprefix}
+leftcap-prefix =
+leftcap-suffix =
+leftcap-color = ${colors.transparent}
+leftcap-text-color = ${colors.col3}
+leftcap-underline =
+
+focused-name-prefix =
 focused-name-suffix = ${colors.rightsuffix}
+focused-name-color = ${colors.col3}
+focused-name-underline =
+focused-name-text-color = ${colors.foreground}
 
 applauncher-prefix = ${colors.leftprefix}
 applauncher-suffix = ${colors.leftsuffix}
@@ -32,6 +36,12 @@ gamma-suffix = ${colors.leftsuffix}
 gamma-color = ${colors.col2}
 gamma-underline =
 gamma-text-color = ${colors.foreground}
+
+xbacklight-prefix = ${colors.leftprefix}
+xbacklight-suffix = ${colors.leftsuffix}
+xbacklight-color = ${colors.col2}
+xbacklight-underline =
+xbacklight-text-color = ${colors.foreground}
 
 volume-prefix = ${colors.leftprefix}
 volume-suffix = ${colors.leftsuffix}
@@ -80,4 +90,3 @@ songnames-suffix =
 songnames-color = ${colors.col7}
 songnames-underline =
 songnames-text-color = ${colors.foreground}
-

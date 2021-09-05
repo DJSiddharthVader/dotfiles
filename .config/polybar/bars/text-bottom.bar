@@ -1,30 +1,25 @@
-bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading wall
-
 date-prefix =
 date-suffix =
 date-color = ${colors.transparent}
-date-underline = ${colors.col2}
+date-underline = ${colors.col1}
 date-text-color = ${colors.foreground}
 
 memory-prefix =
 memory-suffix =
 memory-color = ${colors.transparent}
-memory-underline = ${colors.col3}
+memory-underline = ${colors.col2}
 memory-text-color = ${colors.foreground}
 
 cpu-prefix =
 cpu-suffix =
 cpu-color = ${colors.transparent}
-cpu-underline = ${colors.col4}
+cpu-underline = ${colors.col3}
 cpu-text-color = ${colors.foreground}
 
 temperature-prefix =
 temperature-suffix =
 temperature-color = ${colors.transparent}
-temperature-underline = ${colors.col5}
+temperature-underline = ${colors.col4}
 temperature-text-color = ${colors.foreground}
 
 xkeyboard-prefix =
@@ -34,35 +29,35 @@ xkeyboard-color = ${colors.alert}
 disk-prefix =
 disk-suffix =
 disk-color = ${colors.transparent}
-disk-underline = ${colors.col6}
+disk-underline = ${colors.col5}
 disk-text-color = ${colors.foreground}
 
 uptime-prefix =
 uptime-suffix =
 uptime-color = ${colors.transparent}
-uptime-underline = ${colors.col7}
+uptime-underline = ${colors.col6}
 uptime-text-color = ${colors.foreground}
 
 weather-prefix =
 weather-suffix =
 weather-color = ${colors.transparent}
-weather-underline = ${colors.col8}
+weather-underline = ${colors.col7}
 weather-text-color = ${colors.foreground}
 
 torrent-prefix =
 torrent-suffix =
 torrent-color = ${colors.transparent}
-torrent-underline = ${colors.col10}
+torrent-underline = ${colors.col8}
 torrent-text-color = ${colors.foreground}
 
 wall-prefix =
 wall-suffix =
 wall-color = ${colors.transparent}
-wall-underline = ${colors.col2}
+wall-underline = ${colors.col1}
 wall-text-color = ${colors.foreground}
 
 reading-prefix =
 reading-suffix =
 reading-color = ${colors.transparent}
-reading-underline = ${colors.col3}
+reading-underline = ${colors.col2}
 reading-text-color = ${colors.foreground}

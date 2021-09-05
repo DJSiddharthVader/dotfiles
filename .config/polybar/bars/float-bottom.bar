@@ -1,13 +1,14 @@
-bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading wall
-
 date-prefix = ${colors.rightprefix}
 date-suffix = ${colors.rightsuffix}
 date-color = ${colors.col1}
 date-underline =
 date-text-color = ${colors.foreground}
+
+battery-prefix = ${colors.rightprefix}
+battery-suffix = ${colors.rightsuffix}
+battery-color = ${colors.col8}
+battery-underline =
+battery-text-color = ${colors.foreground}
 
 memory-prefix = ${colors.rightprefix}
 memory-suffix = ${colors.rightsuffix}
@@ -68,5 +69,3 @@ reading-suffix = ${colors.leftsuffix}
 reading-color = ${colors.col2}
 reading-underline =
 reading-text-color = ${colors.foreground}
-
-

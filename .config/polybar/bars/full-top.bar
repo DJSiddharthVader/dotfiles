@@ -1,7 +1,3 @@
-modules-left = i3 focused focused-name
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control gamma applauncher
-
 i3-prefix = ${colors.rightprefix}
 i3-suffix = ${colors.rightsuffix}
 i3-color = ${colors.col1}

@@ -1,5 +1,3 @@
-modules-left = applauncher i3 focused focused-name gamma volume wlan protonvpn bluetooth mpd songnames
-
 applauncher-prefix = ${colors.rightprefix}
 applauncher-suffix = ${colors.rightsuffix}
 applauncher-color = ${colors.col1}
@@ -36,6 +34,12 @@ volume-color = ${colors.col5}
 volume-underline =
 volume-text-color = ${colors.foreground}
 
+pulseaudio-control-prefix = ${colors.rightprefix}
+pulseaudio-control-suffix = ${colors.rightsuffix}
+pulseaudio-control-color = ${colors.col5}
+pulseaudio-control-underline =
+pulseaudio-control-text-color = ${colors.foreground}
+
 wlan-prefix = ${colors.rightprefix}
 wlan-suffix = ${colors.rightsuffix}
 wlan-color = ${colors.col6}
@@ -47,6 +51,12 @@ protonvpn-suffix = ${colors.rightsuffix}
 protonvpn-color = ${colors.col7}
 protonvpn-underline =
 protonvpn-text-color = ${colors.foreground}
+
+mullvad-prefix = ${colors.rightprefix}
+mullvad-suffix = ${colors.rightsuffix}
+mullvad-color = ${colors.col7}
+mullvad-underline =
+mullvad-text-color = ${colors.foreground}
 
 bluetooth-prefix = ${colors.rightprefix}
 bluetooth-suffix = ${colors.rightsuffix}

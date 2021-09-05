@@ -4,9 +4,6 @@ radius = 5.0
 tray-transparent = true
 border-top-size = 0
 border-bottom-size = 0
-modules-left =
-modules-center = i3 xkeyboard bluetooth protonvpn wlan volume date
-modules-right =
 
 i3-prefix = ${colors.rightprefix}
 i3-suffix =

@@ -1,21 +1,17 @@
-modules-left = i3 focused focused-name
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
-
 i3-prefix =
 i3-suffix =
 i3-color = ${colors.transparent}
 i3-color-2 = ${colors.transparent}
-i3-underline = ${colors.col4}
-i3-text-color = ${colors.col4}
-i3-underline-2 = ${colors.col5}
-i3-text-color-2 = ${colors.col5}
+i3-underline = ${colors.col1}
+i3-text-color = ${colors.col1}
+i3-underline-2 = ${colors.col2}
+i3-text-color-2 = ${colors.col2}
 
 focused-prefix =
 focused-suffix =
 focused-color = ${colors.transparent}
 focused-underline =
-focused-text-color = ${colors.col2}
+focused-text-color = ${colors.col3}
 
 focused-name-prefix = ${colors.rightprefix}
 focused-name-suffix = ${colors.rightsuffix}
@@ -23,20 +19,20 @@ focused-name-suffix = ${colors.rightsuffix}
 applauncher-prefix =
 applauncher-suffix =
 applauncher-color = ${colors.transparent}
-applauncher-underline = ${colors.col2}
-applauncher-text-color = ${colors.col2}
+applauncher-underline = ${colors.col1}
+applauncher-text-color = ${colors.col1}
 
 gamma-prefix =
 gamma-suffix =
 gamma-color = ${colors.transparent}
-gamma-underline = ${colors.col3}
-gamma-text-color = ${colors.col3}
+gamma-underline = ${colors.col2}
+gamma-text-color = ${colors.col2}
 
 volume-prefix =
 volume-suffix =
 volume-color = ${colors.transparent}
-volume-underline = ${colors.col4}
-volume-text-color = ${colors.col4}
+volume-underline = ${colors.col3}
+volume-text-color = ${colors.col3}
 
 pulseaudio-control-prefix =
 pulseaudio-control-suffix =

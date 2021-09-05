@@ -1,5 +1,3 @@
-modules-right = reading torrent weather uptime disk xkeyboard temperature cpu memory date i3
-
 i3-prefix = ${colors.leftprefix}
 i3-suffix = ${colors.leftsuffix}
 i3-color = ${colors.col1}
