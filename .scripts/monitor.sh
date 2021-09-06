@@ -7,11 +7,10 @@ help() {
 }
 resolution() {
     monitor="$1"
-    #xrandr | sed -ne "/$monitor/,/connected/p" | head -2 | tail -1 | grep -ao '[0-9]*x[0-9]*'
     xrandr | sed -ne "/$monitor/,/connected/p" | sort -n | tail -1 | grep -ao '[0-9]*x[0-9_\.]*'
 }
 listMonitors() {
-    xrandr | grep ' connected' | cut -d' ' -f1 | tr -d ' '
+    xrandr | grep ' connected' | sort -r | cut -d' ' -f1 | tr -d ' '
 }
 disconnect(){
     # disconnect all external monitors except laptop screen
@@ -43,18 +42,24 @@ connectToAll() {
 connect() {
     setup="$1"
     case "$setup" in
-        'hybrid')
+        hybrid)
             connectToAll "$laptop_screen"
             ;;
-        'multi')
+        ext)
             connectToAll ""
             xrandr --output "$laptop_screen" --off
-            pacmd set-card-profile 0 output:hdmi-stereo
+            #pacmd set-card-profile 0 output:hdmi-stereo
             ;;
-        'laptop')
+        laptop)
             xrandr --output "$laptop_screen" --mode "$(resolution $laptop_screen)" --primary
             disconnect
             pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo
+            ;;
+        mirror)
+            while IFS= read -r monitor; do
+                resolution="$(resolution "$monitor")"
+                xrandr --output $monitor --mode "$resolution" --same-as $laptop_screen
+            done <<< "$(listMonitors)"
             ;;
         *) help && exit 1 ;;
     esac
@@ -65,6 +70,7 @@ main() {
         ext)    $bar_manager_script restart ;;
         hybrid) $bar_manager_script restart ;;
         laptop) $bar_manager_script style laptop ;;
+        mirror) $bar_manager_script restart ;;
         *) help && exit 1 ;;
     esac
     $HOME/dotfiles/.scripts/wallpaper.sh stay back
