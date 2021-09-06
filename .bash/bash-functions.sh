@@ -36,23 +36,17 @@ mvpr() {
     done
     echo ''
 }
-notes() { # pandoc compiles md notes and open in firefox
-    css="$HOME/dotfiles/.css/pandoc-notes.css"
-    filter="$HOME/dotfiles/.scripts/notes-pandoc-filter.py" # makes all headings collapsible
-
-    pattern="$1"
-    ext="$2"
-    name="$pattern-Notes.$ext"
-
-    #pandoc --mathjax --standalone --toc --toc-depth 2 -c "$css" -f markdown+pipe_tables ./Notes/*.md -o "$name"
-    pandoc -s ./Notes/*.md -f markdown+pipe_tables --filter "$filter" --mathjax --toc --toc-depth 2 -c "$css" -o "$name"
-    window_id="$(xwininfo -tree -root | grep -i "$(echo $pattern | tr '_' ' ')" | head -1 | grep -o '0x[0-9a-Z]*' | head -1)"
-    if [ -n "$window_id" ]; then # is notes tab already open
-        # refresh open tab
-        xdotool key --window "$window_id" --clearmodifiers "ctrl+r" # refresh already open tab
-    else
-        firefox --new-tab "file://$(readlink -e $name)" # open pandoc output in tab
-    fi
+mnn() {
+    name="$1"
+    num="$(find ./Notes -name '*.md' | sort -n | tail -1 | sed -e 's/^.*N\([0-9]*\)-.*$/\1/')"
+    num=$(($num+1))
+    num="$(printf %02d $num)" # pad 0
+    file="./Notes/N$num-$name.md"
+    touch $file
+    echo "# $name" | tr '_' ' ' >| $file
+    lec_notes="$(find ./Lectures -name "*$num*")"
+    echo "[Lectures Notes]($(readlink -e $lec_notes))" >> $file
+    echo "$file $lec_notes $num $name"
 }
 
 up() { # Goes up many dirs as the number passed as argument, if none goes up by 1 by default
