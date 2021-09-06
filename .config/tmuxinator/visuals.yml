@@ -1,0 +1,15 @@
+# /home/sidreed/.config/tmuxinator/visuals.yml
+
+name: visuals
+root: ~/
+
+windows:
+  - editor:
+      layout: 0380,210x57,0,0{80x57,0,0[80x27,0,0,57,80x29,0,28,59],129x57,81,0[129x27,81,0,58,129x13,81,28{76x13,81,28,60,52x13,158,28,62},129x15,81,42,61]}]
+      panes:
+        - neofetch
+        - ~/Apps/pipes.sh/pipes.sh
+        -
+        - cmatrix
+        - ~/.scripts/quote.sh -t cigarette -a 'Jean-Luc Godard' -q 'He who jumps into the void owes no explanation to those who stand and watch'
+        - cava

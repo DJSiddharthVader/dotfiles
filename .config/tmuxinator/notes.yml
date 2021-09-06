@@ -1,0 +1,25 @@
+# /home/sidreed/.config/tmuxinator/notes.yml
+
+name: notes
+root: ~/CMU_MSCB/Current
+pre_window: conda deactivate; clear
+
+windows:
+  - Brain:
+      root: ~/CMU_MSCB/Current/Brain_Genomics-02179
+      layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
+      panes:
+        - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
+        -
+  - RL:
+      root: ~/CMU_MSCB/Current/Deep_Learning-10703
+      layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
+      panes:
+        - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
+        -
+  - BioSim:
+      root: ~/CMU_MSCB/Current/Bio_Simulation-02712
+      layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
+      panes:
+        - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
+        -

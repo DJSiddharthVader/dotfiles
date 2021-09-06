@@ -1,0 +1,13 @@
+# /home/sidreed/.config/tmuxinator/scratch.yml
+
+name: scratch
+root: ~/
+tmux_options: -f ~/dotfiles/.tmux.conf
+on_project_start: wal -R -e -n -q &
+
+windows:
+    - fetch: neofetch
+    - media:
+    - work:
+    - scratch:
+
