@@ -1,9 +1,10 @@
 #!/bin/bash
 set -e
+
+# source theme colors
 tmp="$(mktemp)"
 tail -n+4 $HOME/.cache/wal/colors.sh >| $tmp
 source $tmp
-
 #colors,text,font
 alpha="ff"
 background="$(echo "$color1" | tr -d '#')"
@@ -39,7 +40,12 @@ lockbox() {
     echo "$rectangles"
 }
 main(){
+    # actions for locking
     mpc pause > /dev/null 2>&1
+    bw lock # lock bitwarden
+    #~/.config/polybar/scripts/pulseaudio-control.sh mute
+    #~/.scripts/mullvad.sh disconnect
+    #prep lockscreen
     rectangles="$(lockbox)"
     screen="$(mktemp).png"
     scrot "$screen"
