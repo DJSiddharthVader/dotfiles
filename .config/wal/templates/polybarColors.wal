@@ -1,4 +1,5 @@
 transparent = #00000000
+clear0 = #aa{color0.strip}
 transparent0 = #dd{color0.strip}
 transparent1 = #dd{color1.strip}
 transparent2 = #dd{color2.strip}
