@@ -4,7 +4,10 @@ shopt -s extglob
 # Styles
 script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-styles=(laptop float standard text cross full mini none)
+styles=(float standard text cross full mini laptop)
+compact_bars=(laptop minimal)
+res_limit=1600
+primary_screen="eDP-1"
 # Separators
 dl="."
 separator_file="$HOME/dotfiles/.config/polybar/separators.mode"
@@ -41,8 +44,8 @@ makeSeparatorTable() {
 }
 help() {
     separator_table="$(makeSeparatorTable)"
-    echo "Usage $(basename $0) {style|sep|reload|restart|pick}
-                      menu {style|sep}
+    echo "Usage $(basename $0) CMD OPT
+                      menu  {style|sep}
                       style {stay|next|prev} or {$(echo ${styles[*]} | tr ' ' '|')}
                       sep   {stay|next|prev} or {$(echo ${separator_names[*]} | tr ' ' '|')}
                       "
@@ -106,23 +109,40 @@ rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"
 " | sed -e 's/""//' >| "$separator_file"
 }
 getMonitors() {
-    xrandr | sed -n '/ primary/,$p' | grep ' connected' | cut -d' ' -f1
+    xrandr | sed -n '/ primary/,$p' | grep ' connected' | sort -r | cut -d' ' -f1
 }
-launchOnAllMonitors() {
-    for m in $(getMonitors); do
-        if [[ $m = 'eDP-1' ]]; then
-            MONITOR=$m polybar laptop-top &
-            MONITOR=$m polybar laptop-bottom &
-        else
-            for barname in "$@"; do
-                MONITOR=$m polybar "$barname" &
-            done
-        fi
-    done
+getResolution() {
+    monitor="$1"
+    xrandr | sed -ne "/$monitor/,/connected/p" | sort -n | tail -1 | grep -ao '[0-9]*x[0-9_\.]*'
 }
-launch() {
+launchBar() {
+    bartype="$1"
+    m="$2" # monitor
+    res="$(getResolution $m | cut -d'x' -f1)"
+    if [[ $m = $primary_screen ]]; then
+        MONITOR=$m polybar laptop-top &
+        MONITOR=$m polybar laptop-bottom &
+    elif [[ $res -lt $res_limit ]]; then
+        # if resolution is too low use trimmed bar
+        tmp="@($(echo ${compact_bars[*]} | sed -e 's/ /|/g'))"
+        case $bartype in
+            $tmp) #already compact bartype
+                MONITOR=$m polybar "$bartype"-top &
+                MONITOR=$m polybar "$bartype"-bottom &
+                ;;
+               *)
+                MONITOR=$m polybar compact-"$bartype"-top &
+                MONITOR=$m polybar compact-"$bartype"-bottom &
+                ;;
+        esac
+    else
+        MONITOR=$m polybar "$bartype"-top &
+        MONITOR=$m polybar "$bartype"-bottom &
+    fi
+}
+launchAllBars() {
     mode="$1"
-    tmp="@($(echo ${styles[*]} | sed -e 's/ /|/g'))"
+    tmp="@($(echo "none|${styles[*]}" | sed -e 's/ /|/g'))"
     case "$mode" in
         'stay') dmode="$(getMode 'style')" ;;
         'next') dmode="$(cycle 'next' styles 'style')" ;;
@@ -132,23 +152,27 @@ launch() {
     esac
     setMode 'style' "$dmode" # set defualt polybar style
     killall -q polybar && sleep 0.001 # Terminate already running bar instances
+    # launch bars
     case "$dmode" in
-        laptop  ) launchOnAllMonitors laptop-top laptop-bottom ;;
-        float   ) launchOnAllMonitors floating-top floating-bottom ;;
-        standard) launchOnAllMonitors standard-top standard-bottom ;;
-        text    ) launchOnAllMonitors text-top text-bottom ;;
-        full    ) launchOnAllMonitors full-top full-bottom ;;
-        mini    ) launchOnAllMonitors minimal ;;
-        none    ) sleep 1 ;;
-        cross   )
-            monitor=$(getMonitors | tail -2)
+        cross)
+            monitor=$(getMonitors)
             m1="$(echo $monitor | cut -d' ' -f1)"
             m2="$(echo $monitor | cut -d' ' -f2)"
             MONITOR="$m1" polybar cross-left &
             MONITOR="$m2" polybar cross-right &
+            for m in $(echo $monitor | cut -d' ' -f3-); do
+                launchBar float $m
+            done
             ;;
+        $tmp)
+            for m in $(getMonitors); do
+                launchBar $dmode $m
+            done
+            ;;
+        none) sleep 1 ;;
         *) echo "Error: Invalid style" && help && exit 1 ;;
     esac
+    # change size of some module depending on the bartype
     case "$dmode" in
         standard|text) $script_dir/current-window.sh thresh 80 ;;
         *) $script_dir/current-window.sh thresh 40 ;;
@@ -157,12 +181,13 @@ launch() {
 rofiMenu() {
     mode="$1"
     if [[ $mode = 'style' ]]; then
-        style="$(printf '%s\n' ${styles[@]} | rofi -m -1 -width 15 -lines ${#styles[@]} -dmenu -p 'Pick Polybar Style')"
-        [[ -n $style ]] && launch $style
+        styles+=("none")
+        style="$(printf '%s\n' ${styles[@]} | rofi -m -1 -width 20 -lines ${#styles[@]} -dmenu -p 'Pick Polybar Style')"
+        [[ -n $style ]] && launchAllBars $style
     elif [[ $mode = 'sep' ]]; then
         #separator="$(printf '%s\n' ${separator_names[@]} | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
-        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 20 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
-        [[ -n $separator ]] && separators $separator && launch 'stay'
+        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 25 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
+        [[ -n $separator ]] && separators $separator && launchAllBars 'stay'
     fi
 }
 main() {
@@ -172,10 +197,10 @@ main() {
         rofiMenu $option
     else
         case $mode in
-            'sep'    ) separators "$option"; launch 'stay' ;;
-            'style'  ) launch "$option" ;;
+            'sep'    ) separators "$option"; launchAllBars 'stay' ;;
+            'style'  ) launchAllBars "$option" ;;
             'reload' ) ! [[ -z "$(pgrep 'polybar')" ]] && polybar-msg cmd restart ;;
-            'restart') separators "$(getMode 'separator')"; launch "$(getMode 'style')" ;;
+            'restart') separators "$(getMode 'separator')"; launchAllBars "$(getMode 'style')" ;;
             *) help && exit 1 ;;
         esac
     fi
