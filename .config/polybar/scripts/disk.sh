@@ -2,7 +2,7 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(percent amount amounts used free all)
+modes=(percent amount used free) #amounts all
 #icon=""
 
 help() {
@@ -39,23 +39,28 @@ disk() {
     #-f2 is used disk space
     #-f3 is free disk space
     #-f4 is percent used
-    df -h | grep '/$' | tr -s ' ' '\t' | cut -f2-5 | cut -f"$1"
+    df -h | grep "$1$" | tr -s ' ' '\t' | cut -f2-5 | cut -f"$2"
 }
 percent_free() {
-    disk 4 | sed -e 's/\([0-9]*\)%/100-\1/' | bc | sed -e 's/^\([0-9]\)$/0\1/' | sed -e 's/$/%/'
+    disk "$1" 4 | sed -e 's/\([0-9]*\)%/100-\1/' | bc | sed -e 's/^\([0-9]\)$/0\1/' | sed -e 's/$/%/'
 }
 display() {
     mode="$1"
-    case "$mode" in
-        'percent') msg="$(percent_free)" ;;
-        'amount' ) msg="$(disk 3)" ;;
-        'amounts') msg="Used: $(disk 2) Free: $(disk 3)" ;;
-        'used'   ) msg="Used: $(disk 2) $(disk 4)" ;;
-        'free'   ) msg="Free: $(percent_free) $(disk 3)" ;;
-        'all'    ) msg="Used: $(disk 2) $(disk 4) Free: $(disk 3) $(percent_free)" ;;
-        *) help && exit 1 ;;
-    esac
-    echo "$msg"
+    msg=""
+    dirs="$(df -h | grep '/dev/sd.. ' | grep -v 'efi' | rev | cut -d' ' -f1 | rev)"
+    for dir in ${dirs[@]}; do
+        case "$mode" in
+            'percent') drive="$(percent_free "$dir")" ;;
+            'amount' ) drive="$(disk "$dir" 3)" ;;
+            'used'   ) drive="Used: $(disk "$dir" 2) $(disk "$dir" 4)" ;;
+            'free'   ) drive="Free: $(percent_free "$dir") $(disk "$dir" 3)" ;;
+            'amounts') drive="Used: $(disk "$dir" 2) Free: $(disk "$dir" 3)" ;;
+            'all'    ) drive="Used: $(disk "$dir" 2) $(disk "$dir" 4) Free: $(disk "$dir" 3) $(percent_free "$dir")" ;;
+            *) help && exit 1 ;;
+        esac
+        msg="$msg/${dir##*/} $drive "
+    done
+    echo "$msg" | sed -s 's/ *$//'
 }
 
 main() {
@@ -76,4 +81,3 @@ main() {
 }
 
 main "$@"
-
