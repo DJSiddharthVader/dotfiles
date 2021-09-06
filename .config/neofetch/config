@@ -30,10 +30,10 @@ print_info () {
     info "Shell" shell
 #   info "Battery" battery
     info "Uptime" uptime
-    prin "Disk" "$(~/dotfiles/.config/polybar/scripts/disk.sh display free)"
+    prin "Disk" "$(~/dotfiles/.config/polybar/scripts/disk.sh display)"
     prin "Wifi" "$(~/dotfiles/.config/polybar/scripts/network.sh display)"
     prin "VPN" "$(~/dotfiles/.scripts/mullvad.sh display)"
-    prin "Torrent" "$(~/.torrent.sh display datatotal)"
+    prin "Torrent" "$(~/.torrent.sh -u Gi -m datatotal -d)"
     prin "Weather" "$(~/dotfiles/.config/polybar/scripts/weather.sh)"
     info cols
 #    info "Disk" disk
