@@ -5,11 +5,24 @@ shopt -s extglob
 
 max_pages=5 # max number of results pages to parse when searching
 
-get_search_results() {
+get_1337x_results() {
     # download the search results for a torrent query from 1337x.to
     query="$1"
     results_page="$2"
     search_url="https://1337x.to/search/${query// /+}/1/"
+    total_pages="$(curl -Ss "$search_url" | grep 'Last' |  sed -s 's/^.*class=.last.><a href=.\/search\/.*\/\([0-9]*\)\/.>.*$/\1/')"
+    [[ $max_pages -lt $total_pages ]] && total_pages=$max_pages
+    for page_num in $(seq 1 $total_pages); do
+        search_url="https://1337x.to/sort-search/${query// /+}/seeders/desc/$page_num/"
+        #echo $search_url
+        curl -Ss "$search_url" >> "$results_page"
+    done
+}
+get_kickass_results() {
+    # download the search results for a torrent query from 1337x.to
+    query="$1"
+    results_page="$2"
+    search_url="https://katcr.to/usearch/${query// /+}/1/"
     total_pages="$(curl -Ss "$search_url" | grep 'Last' |  sed -s 's/^.*class=.last.><a href=.\/search\/.*\/\([0-9]*\)\/.>.*$/\1/')"
     [[ $max_pages -lt $total_pages ]] && total_pages=$max_pages
     for page_num in $(seq 1 $total_pages); do
@@ -44,7 +57,7 @@ search() {
     query="$(rofi -lines 0 -dmenu -p "Enter Torrent Query")"
     [[ -z "$query" ]] && exit 1 #no query
     results_page=$(mktemp)
-    get_search_results "$query" "$results_page"
+    get_1337x_results "$query" "$results_page"
     # pick result(s)
     chosen="$(parse_results $results_page |\
               tail -n+2 | tr -s ' ' |\
@@ -78,4 +91,3 @@ search() {
 }
 
 search
-
