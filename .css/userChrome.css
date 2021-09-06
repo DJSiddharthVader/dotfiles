@@ -6,7 +6,8 @@
 #tabbrowser-tabs .tabbrowser-tab .tab-close-button { display:none !important; } */
 
 #TabsToolbar, .tabbrowser-tab {
-  min-height: 2.5em !important;
+  /* min-height: 2.5em !important; */
+  max-height: 25px;
   font-size: 13px;
 }
 
@@ -79,8 +80,8 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
 
 #urlbar[breakout],
 #urlbar[breakout][breakout-extend] {
-  --urlbar-height: 28px !important;
-  --urlbar-toolbar-height: 30px !important;
+  --urlbar-height: 22px !important;
+  --urlbar-toolbar-height: 28px !important;
 
   width: 100% !important;
   top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
@@ -109,8 +110,9 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
 }
 
   #urlbar-container {
-    --urlbar-container-height: var(--tab-min-height) !important;
-    background-color: var(--color4) !important;
+    /* --urlbar-container-height: var(--tab-min-height) !important; */
+    --urlbar-container-height: 10px !important;
+    background-color: var(--color1) !important;
     margin-left: 0 !important;
     margin-right: 0.15em !important;
     padding-top: 0 !important;
@@ -157,11 +159,14 @@ tab { font-family: 'Jetbrains Mono', monospace; border: none; }
     height: 1em !important;
     width: 1em !important;
     margin-bottom: 0.2em !important;
+    margin-right: 0.2em !important;
+  }
+  #reader-mode-button {
+    margin-right: 1.5em !important;
   }
 
 /* debloat urlbar */
   /*
-  #reader-mode-button { display: none; }
   #urlbar-zoom-button { display: none; }
   */
   #canvas-blocker-button { display: none; }
