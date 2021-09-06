@@ -120,15 +120,13 @@ silent! normal! zE
 5,10fold
 11,32fold
 let &fdl = &fdl
-5
-normal! zo
 11
 normal! zo
-let s:l = 10 - ((9 * winheight(0) + 36) / 72)
+let s:l = 12 - ((11 * winheight(0) + 14) / 28)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 10
+keepjumps 12
 normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch

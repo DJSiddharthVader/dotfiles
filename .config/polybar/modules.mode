@@ -1,6 +1,6 @@
-bar:laptop
+bar:cross
 separator:arrow_sym
-wallpaper_index:29
+wallpaper_index:26
 wifi:standardd
 songnames:static
 date:time
@@ -10,7 +10,7 @@ temperature:short
 disk:amount
 uptime:day
 torrent:speed
-reading:[D] Why re-sampling imbalanced data isnt always the best idea : statistics~https://old.reddit.com/r/statistics/comments/dqkp9m/d_why_resampling_imbalanced_data_isnt_always_the/
+reading:Its time for science to abandon the term statistically significant | Aeon Essays~https://aeon.co/essays/it-s-time-for-science-to-abandon-the-term-statistically-significant
 battery:all
 focus_thresh:40
 mullvad:location

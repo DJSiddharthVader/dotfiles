@@ -1,3 +1,5 @@
+.config/Bitwarden/
+.config/Bitwarden\ CLI/
 .config/configstore/
 .config/qutebrowser/
 .config/transmission-daemon/stats.tsv.bak

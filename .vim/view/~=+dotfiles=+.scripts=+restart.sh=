@@ -124,7 +124,7 @@ silent! normal! zE
 30,33fold
 34,47fold
 let &fdl = &fdl
-let s:l = 4 - ((3 * winheight(0) + 12) / 24)
+let s:l = 4 - ((3 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
