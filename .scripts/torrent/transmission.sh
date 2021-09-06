@@ -5,32 +5,33 @@ mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 mode_prefix="torrent"
 stats_file="$HOME/dotfiles/.config/transmission-daemon/stats.tsv"
 download_dir="$HOME/Torrents"
-modes=(ratio data ratiototal datatotal speed active) #no spaces in mode titles
+modes=(ratiototal datatotal ratio data speed active) #no spaces in mode titles
 delim="~"
 search_script="$HOME/dotfiles/.scripts/torrent/search.sh"
 
 help() {
     mode='$mode'
-    echo "Error: usage ./$(basename $0) [FNC] [OPT]*
+    echo "Usage: ./$(basename $0) -m $mode
 
-    FNC           | Description
-   ---------------|-----------------------------------
-    search        | search 1337x for a torrent query
-    start         | start deluge daemon
-    pause         | pause all torrents
-    resume        | resume all torrents
-    clean         | remove all errored torrents
-    stats         | update up/download stats csv file
-    display $mode | display data in the specified mode
-                  | if mode blank then it will display in default mode
-    next          | cycle defualt display mode forward
-    prev          | cycle defualt display mode backward
-    $mode         | set defualt display mode to $mode
-   ---------------------------------------------------
+    -u) {Ki|Mi|Gi|Ti}
+        - specify unit for display
 
-   - modes are {$(echo ${modes[*]} | tr ' ' '|')}
-   - you can see the defualt mode with \`grep 'torrent' ~/dotfiles/.config/polybar/modules.mode\`
-"
+    -m) \$mode
+        - display modes are {$(echo ${modes[*]} | tr ' ' '|')}
+        - you can see the current mode with \`grep 'torrent' ~/dotfiles/.config/polybar/modules.mode\`
+        Modes   | Description
+        --------|------------------------------------------
+        display | display torrent data from set mode
+        next    | cycle defualt display mode forward
+        prev    | cycle defualt display mode backward
+        $mode   | set defualt display mode to $mode
+        --------|------------------------------------------
+        search  | search 1337x for a torrent query
+        start   | start deluge daemon
+        pause   | pause all torrents
+        resume  | resume all torrents
+        clean   | remove all errored torrents
+        stats   | update up/download stats csv file"
 }
 init() {
     # init files
@@ -39,7 +40,6 @@ init() {
     touch "$mode_file"
     echo "$mode_prefix:speed" >> "$mode_file"
 }
-
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -65,7 +65,7 @@ setMode() {
     sed -i "/^$mode_prefix:/s/:.*/:$1/" "$mode_file"
 }
 
-# Global Torrent Data Tracking
+# Torrent Data Tracking
 get_info() {
     transmission-remote -tall -i
 }
@@ -79,47 +79,45 @@ extract() {
 scrape_stats() {
     info="$1"
     pattern="$2"
-    extract "$info" "$pattern" |
+    extract "$info" "$pattern" | sed -e 's/None/ /g' |
             sed -e "s/\([0-9\.]*\) \([BKMGbkmg]\).*/\1\U\2\Li /" |
             sed -e 's/0Bi /0 /' | tr -d '\n' | sed -e 's/ *$/\n/' |
             numfmt --from=auto --field=1- | tr -s ' ' '\n'
 }
 update_stats() {
     #header="id"$delim"name"$delim"size"$delim"downloaded"$delim"uploaded"
-    info="$(info)"
+    info="$(get_info)"
     hashes="$(extract "$info" 'Hash')"
     names="$(extract "$info" 'Name')"
     sizes="$(scrape_stats "$info" 'Total size')"
     downloaded="$(scrape_stats "$info" 'Downloaded')"
     uploaded="$(scrape_stats "$info" 'Uploaded')"
     # update records
-    tmp="$(mktemp)"
-    cp "$stats_file" "$tmp"
-    paste -d"$delim" <(echo "$hashes") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> "$tmp"
-    sort -t"$delim" -g -r -k5,5 -k4,4 $tmp | sort -t"$delim" -u -k1,1 -o $tmp #dedup
-    if [[ "$(wc -l $stats_file | cut -d' ' -f1)" -ge "$(wc -l $tmp | cut -d' ' -f1)" ]]; then
-        mv $tmp $stats_file
-    fi
-}
-total_stats() {
-    field="$1"
-    outunit="$2"
-    case "$field" in
-        'size') fn=3 ;;
-        'down') fn=4 ;;
-        'up'  ) fn=5 ;;
-    esac
-    cut -d"$delim" -f$fn $stats_file | tr '\n' '+' |
-        sed -e 's/^+/\n/' | sed -e 's/+$/\n/' | bc |
-        numfmt --to-unit="$outunit" --format="%.2f"
+    tmp=$(mktemp)
+    cp "$stats_file" $tmp
+    paste -d"$delim" <(echo "$hashes") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> $tmp
+    sort -t"$delim" -r -g -k5,5 -k4,4 $tmp | sort -u -t"$delim" -k1,1 -o $tmp #dedup
+    mv $tmp $stats_file
 }
 
 # Display Torrent Data
 sum_convert() {
     terms="$1"
     unit="$2"
-    echo "$terms" | tr '\n' '+' | sed -e 's/[ \+]*$/\n/' | sed -e 's/^[ \+]*/\n/' | bc |
-          numfmt --to-unit="$unit" --format="%.2f"
+    echo "$terms" | grep -v '^$' |
+         tr '\n' '+' | sed -e 's/[ \+]*$/\n/' | sed -e 's/^[ \+]*/\n/' |
+         bc | numfmt --to-unit="$unit" --format="%.2f"
+}
+total_stats() {
+    field="$1"
+    unit="$2"
+    case "$field" in
+        'size') fn=3 ;;
+        'down') fn=4 ;;
+        'up'  ) fn=5 ;;
+    esac
+    terms="$(cut -d"$delim" -f$fn $stats_file)"
+    sum_convert "$terms" "$unit"
 }
 divide() {
     num="$1"
@@ -130,10 +128,11 @@ divide() {
 display() {
     #        
     mode="$1"
+    unit="$2"
     info="$(get_info)"
     case "$mode" in
         'data')
-            unit="Gi"
+            [[ -n "$unit" ]] || unit="Gi"
             up="$(scrape_stats "$info" 'Uploaded')"
             up="$(sum_convert "$up" "$unit")"
             down="$(scrape_stats "$info" 'Downloaded')"
@@ -141,7 +140,7 @@ display() {
             [[ -z "$up$down" ]] &&  msg=" - $unit  - $unit" || msg=" $down $unit  $up $unit"
             ;;
         'ratio')
-            unit="K"
+            [[ -n "$unit" ]] || unit="Ki"
             size="$(scrape_stats "$info" 'Total size')"
             size="$(sum_convert "$size" "$unit")"
             up="$(scrape_stats "$info" 'Uploaded')"
@@ -151,16 +150,14 @@ display() {
             [[ -z "$up$down" ]] &&  msg=" -  - " || msg=" $(divide $down $size 2)  $(divide $up $down 2)"
             ;;
         'datatotal')
-            unit="Ti"
+            [[ -n "$unit" ]] || unit="Ti"
             [[ -z "$info" ]] || update_stats
-            up="$(cut -d"$delim" -f5 $stats_file)"
-            up="$(sum_convert "$up" "$unit")"
-            down="$(cut -d"$delim" -f4 $stats_file)"
-            down="$(sum_convert "$down" "$unit")"
+            up="$(total_stats 'up' "$unit")"
+            down="$(total_stats 'down' "$unit")"
             msg=" $down $unit  $up $unit"
             ;;
         'ratiototal')
-            unit="K"
+            [[ -n "$unit" ]] || unit="Ki"
             [[ -z "$info" ]] || update_stats
             up="$(cut -d"$delim" -f5 $stats_file)"
             up="$(sum_convert "$up" "$unit")"
@@ -171,7 +168,7 @@ display() {
             msg="T  $(divide $down $size 2)  $(divide $up $down 2)"
             ;;
         'speed')
-            unit="Mi"
+            [[ -n "$unit" ]] || unit="Mi"
             up="$(scrape_stats "$info" 'Upload Speed')"
             up="$(sum_convert "$up" "$unit")"
             down="$(scrape_stats "$info" 'Download Speed')"
@@ -185,7 +182,7 @@ display() {
             idle="$(echo "$states" | grep -c 'Idle')"
             msg=" $down  $seed  $idle" # $both
             ;;
-       *) help && exit 1 ;;
+       *) echo 'display fail' && help && exit 1 ;;
     esac
     echo "$msg"
 }
@@ -205,6 +202,7 @@ clean_up(){
     echo TODO
 }
 
+
 search() {
     magnets="$($search_script)"
     for magnet in ${magnets}; do
@@ -215,7 +213,24 @@ search() {
 }
 
 main() {
-    mode="$1"
+    while getopts "hdu:m:" arg; do
+        case $arg in
+            u) unit="$OPTARG"
+               if [[ $unit =~ ^[KMGT]i$ ]]; then
+                   continue
+                else
+                   echo "Invalid unit $unit, pick from {Ki|Mi|Gi|Ti}"
+                   exit 1
+               fi
+               ;;
+            m) mode="$OPTARG" ;;
+            d) display=true ;;
+            h) help && exit 0 ;;
+            *) echo "Invalid flag $arg" && help && exit 1 ;;
+        esac
+    done
+    shift "$((OPTIND-1))"
+    [[ -z $mode ]] && mode="$1"
     case $mode in
         'start'  ) start_daemon                           ;;
         'pause'  ) action_all 'pause'                     ;;
@@ -223,22 +238,23 @@ main() {
         'clean'  ) clean_up                               ;;
         'search' ) search                                 ;;
         'stats'  ) [[ -z "$(get_info)" ]] || update_stats ;;
-        'display') # display torrent data
-            [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
-            display "$dmode"
-            ;;
+        'display') display "$(getMode)" "$unit" ;;
         *) # change/set display mode
             tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
             case "$mode" in
-                'next'  ) dmode="$(cycle 'next')" ;;
-                'prev'  ) dmode="$(cycle 'prev')" ;;
-                $tmp    ) dmode="$mode" ;; #capture any valid mode
-                *       ) help && exit 1 ;;
+                next) mode="$(cycle 'next')" ;;
+                prev) mode="$(cycle 'prev')" ;;
+                $tmp) mode="$mode" ;; #capture any valid mode
+                *   ) echo "invalid mode $mode" && help && exit 1 ;;
             esac
-            setMode "$dmode"
+            if [ "$display" = true ]; then
+                display $mode $unit
+            else
+                setMode "$mode"
+            fi
             ;;
     esac
 }
 
+[ $# -eq 0 ] && help
 main "$@"
-
