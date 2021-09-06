@@ -114,23 +114,24 @@ display() {
 main() {
     # pick random quote and thinker, will be updated if specified by a CLI flag
     quote_string="$(random_quote)"
+    author=""
     thinker_file="$(find $thinker_dir -type f -name "*.ascii" | shuf -n1)"
-    while getopts "hpq:c:b:l:o:t:" arg; do
+    while getopts "hpa:q:c:b:l:o:t:" arg; do
         case $arg in
+            a) author="$OPTARG"                ;;
             q) quote_string="$OPTARG"          ;;
             c) colwrap="$OPTARG"               ;;
             b) border_string="$OPTARG"         ;;
             l) thinker_line="$OPTARG"          ;;
             o) thinker_offset="$OPTARG"        ;;
-            p) echo -e $quote_string && exit 0 ;;
+            p) echo -e "$quote_string" && exit 0 ;;
             t) if [ -f "$OPTARG" ]; then
                     thinker_file="$OPTARG"
                 else
                     thinker_file="$thinker_dir/$OPTARG.ascii"
                     if [ ! -f $thinker_file ]; then
                         echo "Invalid option -$arg $OPTARG"
-                        help
-                        exit 1
+                        help && exit 1
                     fi
                 fi
                 ;;
@@ -141,7 +142,8 @@ main() {
         esac
     done
     shift "$((OPTIND-1))"
+    [[ -n "$author" ]] && quote_string="$quote_string\n --$author"
     display "$quote_string" $colwrap $border_string $thinker_file $thinker_offset $thinker_line
 }
 
-main $@
+main "$@"
