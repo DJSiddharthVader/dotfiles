@@ -19,8 +19,10 @@ status() {
 }
 connect() {
     mullvad connect
+    ~/.torrent.sh resume > /dev/null 2>&1
 }
 disconnect() {
+    ~/.torrent.sh pause > /dev/null 2>&1
     mullvad disconnect
 }
 
@@ -33,15 +35,14 @@ restart() {
 display() {
     mode="$1"
     case "$(status)" in
-        'Connected')
+        Connected|Connecting)
             info="$(curl -s ipinfo.io)"
             case "$1" in
                 'ip') output="$(echo "$info" | jq .ip)" ;;
                 'location') output="$(echo "$info" | jq .country)" ;;
             esac
             ;;
-        'Disconnected') output="None" ;;
-        *) sleep 1 && display ;;
+        Disconnected|Disconnecting) output="None" ;;
     esac
     echo "$output" | tr -d '"'
 }
@@ -68,8 +69,11 @@ main() {
             setMode "$dmode"
             ;;
     esac
+    sleep 2
     case $mode in
-        toggle|connect|disconnect) polybar-msg hook mullvad 1 >| /dev/null ;;
+        toggle    ) polybar-msg hook mullvad 1 >| /dev/null ;;
+        connect   ) polybar-msg hook mullvad 1 >| /dev/null ;;
+        disconnect) polybar-msg hook mullvad 1 >| /dev/null ;;
     esac
 }
 
