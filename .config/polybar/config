@@ -65,6 +65,7 @@ font-powerline-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=28:ant
 font-powerline-huge = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=58:antialias=true;9
 ; for long scrolling text, (smaller and mono-spaced)
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
+font-scrolling-large = Terminus:style=Regular:pixelsize=18;2
 font-scrolling-huge = Terminus:style=Regular:pixelsize=23;2
 font-focused = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
 font-focused-large = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
@@ -150,7 +151,7 @@ border-left-size = 10
 padding = 1
 module-margin = 1
 line-size = 0
-background = ${colors.transparent0}
+background = ${colors.clear0}
 foreground = ${colors.foreground}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
@@ -191,53 +192,191 @@ font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-scrolling}
 font-6 = ${fonts.font-focused-large}
 
+[section/cross]
+monitor = ${env:MONITOR:}
+cursor-scroll = ns-resize
+cursor-click = pointer
+enable-ipc = true
+dim-value = 0
+width = 100%
+height = 3.35%
+radius = 0
+module-margin = 0
+background = ${colors.transparent}
+foreground = ${colors.foreground}
+border-top-size = 0
+border-bottom-size = 0
+border-left-size = 0
+border-right-size = 0
+focused-name-format = "%{T7}<label>%{T-}"
+;fonts
+font-0 = ${fonts.font-icon-large}
+font-1 = ${fonts.font-weather-large}
+font-2 = ${fonts.font-main-large}
+font-3 = ${fonts.font-overflow-large}
+font-4 = ${fonts.font-powerline-large}
+font-5 = ${fonts.font-scrolling-large}
+font-6 = ${fonts.font-focused-large}
+
 
 ;bars
-[bar/floating-top]
+;;float
+[bar/float-top]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/floating-top.bar
-[bar/floating-bottom]
+include-file = ~/dotfiles/.config/polybar/bars/float-top.bar
+fixed-center = true
+modules-left = i3 focused focused-name
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
+[bar/float-bottom]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/floating-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-center =
+modules-right = reading wall
 
+;;full
 [bar/full-top]
 inherit = section/full
 include-file = ~/dotfiles/.config/polybar/bars/full-top.bar
+modules-left = i3 focused focused-name
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control gamma applauncher
 [bar/full-bottom]
 inherit = section/full
 include-file = ~/dotfiles/.config/polybar/bars/full-bottom.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-center =
+modules-right = reading wall
 
+;;cross
 [bar/cross-left]
-inherit = section/full
+inherit = section/cross
 include-file = ~/dotfiles/.config/polybar/bars/cross-left.bar
+modules-left = i3 focused focused-name applauncher pulseaudio-control wlan mullvad bluetooth mpd songnames
 [bar/cross-right]
-inherit = section/full
+inherit = section/cross
 include-file = ~/dotfiles/.config/polybar/bars/cross-right.bar
+modules-right = reading torrent weather uptime disk xkeyboard temperature cpu memory date i3
 
+;;standard
 [bar/standard-top]
 inherit = section/standard
 include-file = ~/dotfiles/.config/polybar/bars/standard-top.bar
+modules-left = i3 focused focused-name
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
 [bar/standard-bottom]
 inherit = section/standard
 include-file = ~/dotfiles/.config/polybar/bars/standard-bottom.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-center =
+modules-right = reading wall
 
+;;text
 [bar/text-top]
 inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text-top.bar
+modules-left = i3 focused focused-name
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
 [bar/text-bottom]
 inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text-bottom.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-center =
+modules-right = reading wall
 
+;;laptop
 [bar/laptop-top]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/laptop-top.bar
+include-file = ~/dotfiles/.config/polybar/bars/float-top.bar
+modules-left = i3 focused leftcap
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/laptop-bottom]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/laptop-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
+bottom = true
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather
+modules-center =
+modules-right = reading
 
+;;minimal
 [bar/minimal]
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/minimal.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-center =
+modules-right = reading wall
+
+
+;compact bars
+;;float
+[bar/compact-float-top]
+inherit = section/float
+include-file = ~/dotfiles/.config/polybar/bars/float-top.bar
+fixed-center = true
+modules-left = i3 focused leftcap
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
+[bar/compact-float-bottom]
+inherit = section/float
+include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather
+modules-center =
+modules-right = reading
+
+;;full
+[bar/compact-full-top]
+inherit = section/full
+include-file = ~/dotfiles/.config/polybar/bars/full-top.bar
+modules-left = i3 focused leftcap
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control gamma applauncher
+[bar/compact-full-bottom]
+inherit = section/full
+include-file = ~/dotfiles/.config/polybar/bars/full-bottom.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather
+modules-center =
+modules-right = reading
+
+;;standard
+[bar/compact-standard-top]
+inherit = section/standard
+include-file = ~/dotfiles/.config/polybar/bars/standard-top.bar
+modules-left = i3 focused
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
+[bar/compact-standard-bottom]
+inherit = section/standard
+include-file = ~/dotfiles/.config/polybar/bars/standard-bottom.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather
+modules-center =
+modules-right = reading
+
+;;text
+[bar/compact-text-top]
+inherit = section/text
+include-file = ~/dotfiles/.config/polybar/bars/text-top.bar
+modules-left = i3 focused
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
+[bar/compact-text-bottom]
+inherit = section/text
+include-file = ~/dotfiles/.config/polybar/bars/text-bottom.bar
+bottom = true
+modules-left = date memory cpu temperature xkeyboard disk uptime weather
+modules-center =
+modules-right = reading
 
 
 ;modules
@@ -368,34 +507,26 @@ menu-0-1 = "Actions "
 menu-0-1-exec = menu-open-2
 menu-1-0 = ""
 menu-1-0-exec = menu-open-0
-menu-1-1 = ""
-menu-1-1-exec = tabbed -c zathura -e &
-menu-1-2 = ""
-menu-1-2-exec = vlc &
-menu-1-3 = ""
-menu-1-3-exec = inkscape &
-menu-1-4 = ""
-menu-1-4-exec = st &
-menu-1-5 = ""
-menu-1-5-exec = firefox --browser &
-menu-1-6 = ""
-menu-1-6-exec = firefox --private-window &
-menu-1-7 = ""
-menu-1-7-exec = steam &
-menu-1-8 = ""
-menu-1-8-exec = transmission-gtk &
+menu-1-1 = ""
+menu-1-1-exec = vlc &
+menu-1-2 = ""
+menu-1-2-exec = inkscape &
+menu-1-3 = ""
+menu-1-3-exec = firefox --browser &
+menu-1-4 = ""
+menu-1-4-exec = /home/sidreed/Apps/tor-browser_en-US/Browser/start-tor-browser &
+menu-1-5 = ""
+menu-1-5-exec = steam &
+menu-1-6 = ""
+menu-1-6-exec = bitwarden
 menu-2-0 = ""
 menu-2-0-exec = menu-open-0
 menu-2-1 = ""
 menu-2-1-exec = ~/.scripts/lock.sh
-menu-2-2 = ""
-menu-2-2-exec = ~/dotfiles/.scripts/bluetooth.sh
-menu-2-3 = ""
-menu-2-3-exec = ~/dotfiles/.scripts/protonvpn.sh toggle
-menu-2-4 = ""
-menu-2-4-exec = ~/dotfiles/.scripts/wallpaper.sh next
-menu-2-5 = "⏼"
-menu-2-5-exec = systemctl suspend
+menu-2-2 = """
+menu-2-2-exec = ~/dotfiles/.scripts/wallpaper.sh next
+menu-2-3 = "⏼"
+menu-2-3-exec = systemctl suspend
 format-underline = ${root.applauncher-underline}
 label-separator-foreground = ${colors.foreground}
 format-prefix-font = 5
@@ -429,30 +560,6 @@ format-suffix-background = ${colors.transparent}
 inherit = module/xbacklight
 type = internal/backlight
 card = intel_backlight
-
-[module/gamma]
-type = custom/ipc
-initial = 1
-hook-0 = ~/dotfiles/.config/polybar/scripts/gamma.sh display
-hook-1 = ~/dotfiles/.config/polybar/scripts/gamma.sh inc
-hook-2 = ~/dotfiles/.config/polybar/scripts/gamma.sh dec
-scroll-up   = polybar-msg hook gamma 2 && sleep 1 && polybar-msg hook gamma 1
-scroll-down = polybar-msg hook gamma 3 && sleep 1 && polybar-msg hook gamma 1
-format = " <output> "
-format-prefix-font = 5
-format-suffix-font = 5
-format-background = ${root.gamma-color}
-format-foreground = ${root.gamma-text-color}
-format-underline = ${root.gamma-underline}
-format-prefix = ${root.gamma-prefix}
-format-prefix-foreground = ${root.gamma-color}
-format-prefix-background = ${colors.transparent}
-format-suffix = ${root.gamma-suffix}
-format-suffix-foreground = ${root.gamma-color}
-format-suffix-background = ${colors.transparent}
-[module/gamma-ipc]
-type = custom/script
-exec = polybar-msg hook gamma 1 &>/dev/null
 
 [module/pulseaudio-control]
 type = custom/script
@@ -496,12 +603,11 @@ format-suffix-background = ${colors.transparent}
 
 [module/mullvad]
 type = custom/ipc
-initial = 1
 hook-0 = ~/dotfiles/.scripts/mullvad.sh display
 hook-1 = ~/dotfiles/.scripts/mullvad.sh toggle
-click-left  = polybar-msg hook mullvad 2 && sleep 1 && polybar-msg hook mullvad 1
-click-right = polybar-msg hook mullvad 3 && sleep 1 && polybar-msg hook mullvad 1
-format = " <output>"
+initial = 1
+click-left = polybar-msg hook mullvad 2
+format = " <output> "
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.mullvad-color}
@@ -766,9 +872,9 @@ format-suffix-background = ${colors.transparent}
 [module/torrent]
 type = custom/script
 tail = true
-exec = ~/.torrent.sh display
-click-left = ~/.torrent.sh next
-click-right = ~/.torrent.sh prev
+exec = ~/.torrent.sh -m display
+click-left = ~/.torrent.sh -m next
+click-right = ~/.torrent.sh -m prev
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.torrent-color}
@@ -823,7 +929,16 @@ format-suffix = ${root.reading-suffix}
 format-suffix-foreground = ${root.reading-color}
 format-suffix-background = ${colors.transparent}
 
+[module/leftcap]
+type = custom/text
+content = ${colors.rightsuffix}
+content-font = 5
+content-background = ${root.leftcap-color}
+content-foreground = ${root.leftcap-text-color}
+content-underline = ${root.leftcap-underline}
 
+
+;depreciated
 [module/expressvpn]
 type = custom/script
 tail = true
@@ -865,14 +980,6 @@ format-suffix = ${root.protonvpn-suffix}
 format-suffix-foreground = ${root.protonvpn-color}
 format-suffix-background = ${colors.transparent}
 
-[module/leftcap]
-type = custom/text
-content = ${colors.rightsuffix}
-content-font = 5
-content-background = ${root.leftcap-color}
-content-foreground = ${root.leftcap-text-color}
-content-underline = ${root.leftcap-underline}
-
 [module/volume]
 type = internal/alsa
 ramp-volume-0 = 
@@ -904,48 +1011,28 @@ format-muted-suffix-font = 5
 format-muted-suffix-foreground = ${root.volume-color}
 format-muted-suffix-background = ${colors.transparent}
 
-
-;not used or not working
-;[bluetooth]
-;type = custom/ipc
-;initial = 1
-;hook-0 = ~/dotfiles/.config/polybar/scripts/bluetooth.sh status
-;hook-1 = ~/dotfiles/.config/polybar/scripts/bluetooth.sh
-;
-;click-left = polybar-msg hook bluetooth-ipc 2 && sleep 1 && polybar-msg hook bluetooth-ipc 1
-;
-;format-background = ${colors.col6}
-;fforet-background = ${colors.col6}
-;format-prefix = ${colors.leftprefix}
-;format-prefix-foreground = ${colors.col6}
-;format-prefix-background = ${colors.transparent}
-;format-suffix = ${colors.leftsuffix}
-;format-suffix-foreground = ${colors.col6}
-;format-suffix-background = ${colors.transparent}
-;
-;[module/bluetooth-ipc]
-;type = custom/script
-;exec = polybar-msg hook bluetooth 1 &>/dev/null
-
-;[module/reading]
-;type = custom/ipc
-;initial = 1
-;hook-0 = ~/dotfiles/.config/polybar/scripts/reading.sh display
-;hook-1 = ~/dotfiles/.config/polybar/scripts/reading.sh pick
-;hook-2 = ~/dotfiles/.config/polybar/scripts/reading.sh open
-;click-left =  polybar-msg hook reading 2 && sleep 1 && polybar-msg hook reading 1
-;click-right = polybar-msg hook reading 3 && sleep 1 && polybar-msg hook reading 1
-;format = " %{T6}<output> %{T-}"
-;format-prefix-font = 5
-;format-suffix-font = 5
-;format-background = ${root.reading-color}
-;fforet-background = ${root.reading-color}
-;format-underline = ${root.reading-underline}
-;format-prefix = ${root.reading-prefix}
-;format-prefix-foreground = ${root.reading-color}
-;format-prefix-background = ${colors.transparent}
-;format-suffix = ${root.reading-suffix}
-;format-suffix-foreground = ${root.reading-color}
-;format-suffix-background = ${colors.transparent}
+[module/gamma]
+type = custom/ipc
+initial = 1
+hook-0 = ~/dotfiles/.config/polybar/scripts/gamma.sh display
+hook-1 = ~/dotfiles/.config/polybar/scripts/gamma.sh inc
+hook-2 = ~/dotfiles/.config/polybar/scripts/gamma.sh dec
+scroll-up   = polybar-msg hook gamma 2 && sleep 1 && polybar-msg hook gamma 1
+scroll-down = polybar-msg hook gamma 3 && sleep 1 && polybar-msg hook gamma 1
+format = " <output> "
+format-prefix-font = 5
+format-suffix-font = 5
+format-background = ${root.gamma-color}
+format-foreground = ${root.gamma-text-color}
+format-underline = ${root.gamma-underline}
+format-prefix = ${root.gamma-prefix}
+format-prefix-foreground = ${root.gamma-color}
+format-prefix-background = ${colors.transparent}
+format-suffix = ${root.gamma-suffix}
+format-suffix-foreground = ${root.gamma-color}
+format-suffix-background = ${colors.transparent}
+[module/gamma-ipc]
+type = custom/script
+exec = polybar-msg hook gamma 1 &>/dev/null
 
 
