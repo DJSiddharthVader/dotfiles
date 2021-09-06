@@ -6,6 +6,7 @@ for_window [instance="feh"] floating enable
 for_window [instance="protonvpn"] floating enable
 set $mod Mod4
 set $term --no-startup-id st
+set $big_term --no-startup-id st -f "FiraCode Nerd Font:style=Regular:size=20:antialias=true:autohint=true"
 set $BROWSER firefox
 set $defgaps 5
 gaps inner $defgaps
@@ -38,19 +39,19 @@ exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 #exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
-#express vpn
-exec --no-startup-id ~/.scripts/protonvpn.sh connect
 #Torrent daemon:
-exec --no-startup-id ~/.torrent.sh start
+exec --no-startup-id ~/.torrent.sh -m start
+#express vpn
+exec --no-startup-id ~/.scripts/mullvad.sh connect
 #Mount other drives:
 exec --no-startup-id sudo mount -a
-#connect to external monitors
-exec --no-startup-id ~/dotfiles/.scripts/monitor.sh on
 #Composite manager:
 exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
+#connect to external monitors
+exec --no-startup-id ~/dotfiles/.scripts/monitor.sh laptop
 #Launch Polybar and set wallpaper
-exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
-exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh reload
+exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay back
+exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh laptop
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
@@ -58,7 +59,7 @@ for_window [instance="dropdown"] resize set 625 400
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 1
-exec $term -n dropdown -e tmuxinator start scratch -n scratch -p ~/dotfiles/.tmuxinator/scratch.yml
+exec $term -n dropdown -e tmuxinator start scratch
 
 # tmux scratchpad floating terminal 2
 for_window [instance="drop2"] resize set 625 400
@@ -95,13 +96,13 @@ set $bigbak --no-startup-id mpc seek -120
 set $beg --no-startup-id mpc seek 0%
 
 #For Alsa/Amixer
-set $inc --no-startup-id amixer sset Master 2%+
-set $biginc --no-startup-id amixer sset Master 5%+
-set $dec --no-startup-id amixer sset Master 2%-
-set $bigdec --no-startup-id amixer sset Master 5%-
-set $mute --no-startup-id amixer -q -D pulse sset Master toggle
+set $inc --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 2
+set $biginc --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 5
+set $dec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 2
+set $bigdec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 5
+set $mute --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh togmute
 set $micmute --no-startup-id amixer set Capture toggle
-set $truemute --no-startup-id amixer -q -D pulse sset Master mute
+set $truemute --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh mute
 
 #Volume keys
 bindsym $mod+equal          exec $inc
@@ -129,10 +130,12 @@ bindsym $mod+Shift+bracketright exec $bigfor
 #set $lilfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek
 #set $bigfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek(
 
+
 ##---Basic Bindings--------#
 bindsym $mod+space		  focus mode_toggle
 bindsym $mod+Shift+space  floating toggle
 bindsym $mod+Return       exec $term
+bindsym $mod+Shift+Return exec $big_term
 bindsym $mod+Escape       workspace prev
 #STOP/HIDE EVERYTHING:
 #bindsym $mod+BackSpace
@@ -148,15 +151,13 @@ bindsym $mod+q         kill
 bindsym $mod+w         exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w   exec --no-startup-id ~/Apps/tor-browser_en-US/Browser/start-tor-browser
 
-
-
 bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
 bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
 
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
 
-bindsym $mod+t         exec ~/.torrent.sh search
+bindsym $mod+t         exec ~/.torrent.sh -m search
 #bindsym $mod+Shift+t  layout toggle
 
 bindsym $mod+y         resize shrink width 5 px or 5 ppt
@@ -201,8 +202,8 @@ bindsym $mod+Shift+k   move up 10
 bindsym $mod+l         focus right
 bindsym $mod+Shift+l   move right 10
 
-#bindsym $mod+z
-#bindsym $mod+Shift+z
+bindsym $mod+z         exec --no-startup-id ~/.scripts/monitor.sh hybrid
+bindsym $mod+Shift+z   exec --no-startup-id ~/.scripts/monitor.sh laptop
 
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 #bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
@@ -210,7 +211,7 @@ bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
 
-#bindsym $mod+v
+bindsym $mod+v         exec --no-startup-id ~/.scripts/bitwarden.sh
 #bindsym $mod+Shift+v
 
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
@@ -227,6 +228,7 @@ bindsym $mod+m        [instance="music"] scratchpad show; [instance="music"] mov
 #bindsym $mod+Shift+BackSpace
 #bindsym $mod+grave
 #bindsym $mod+asciitilde
+
 ##---Workspace Bindings----#
 # Shortcuts
 bindsym $mod+Home		    workspace $ws1
@@ -348,5 +350,4 @@ bindsym XF86AudioMedia		    exec $music
 bindsym XF86Display		        exec --no-startup-id arandr
 bindsym XF86Documents		    exec $term -e ranger ~/Documents
 #bindsym XF86WLAN		        exec $netrefresh
-
 
