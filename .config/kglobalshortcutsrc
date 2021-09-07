@@ -1,7 +1,0 @@
-[ActivityManager]
-_k_friendly_name=Activity Manager
-switch-to-activity-3e78fe23-279f-42f4-b5b0-ac10303014e6=none,none,Switch to activity "Default"
-
-[org.kde.dolphin.desktop]
-_k_friendly_name=Dolphin
-_launch=Meta+E,Meta+E,Dolphin
