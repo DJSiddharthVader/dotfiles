@@ -4,7 +4,7 @@ shopt -s extglob
 # Styles
 script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-styles=(float standard text cross full mini laptop)
+styles=(float standard text cross press full mini laptop)
 compact_bars=(laptop minimal)
 res_limit=1600
 primary_screen="eDP-1"
@@ -142,6 +142,7 @@ launchBar() {
 }
 launchAllBars() {
     mode="$1"
+    # cycle modes
     tmp="@($(echo "none|${styles[*]}" | sed -e 's/ /|/g'))"
     case "$mode" in
         'stay') dmode="$(getMode 'style')" ;;
@@ -162,6 +163,11 @@ launchAllBars() {
             MONITOR="$m2" polybar cross-right &
             for m in $(echo $monitor | cut -d' ' -f3-); do
                 launchBar float $m
+            done
+            ;;
+        press)
+            for m in $(getMonitors); do
+                [[ $m = $primary_screen ]] || launchBar $dmode $m
             done
             ;;
         $tmp)
