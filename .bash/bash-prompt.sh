@@ -23,16 +23,17 @@ cenv() {
 }
 gits() {
     #git symbols
-    bsym='\u2325 ' # branch symbol
+    bsym='\u2325' # branch symbol
     committed_symbol='⇡' # dotted up arrow
     staged_symbol='' # node
     changed_symbol='∆' # delta
     added_symbol='+'
 
-    prompt="$bsym"
+    prompt="$bsym "
     if [ -n "$(git branch 2> /dev/null)" ]; then
         branch="$(git branch 2> /dev/null | grep '\*' | cut -d' ' -f2)"
-        prompt="$prompt ($branch)" # current git branch
+        [[ $branch = 'master' ]] && branch='m'
+        prompt="$prompt($branch)" # current git branch
 
         commits="$(git status 2> /dev/null | grep -o 'by [0-9]* commit' | cut -d' ' -f2)"
         if [[ -n "$commits" ]]; then # non-zero commits
@@ -42,15 +43,15 @@ gits() {
         status="$(git status --short 2> /dev/null)"
         staged=$(echo "$status" | grep -c '^ [ADC]' | tr -d ' ')
         if [[ "$staged" != 0 ]]; then # non-zero staged files
-           prompt="$prompt $staged_symbol$staged"
+           prompt="$prompt$staged_symbol$staged"
         fi
         changed=$(echo "$status" | grep -c '^ M' | tr -d ' ')
         if [[ "$changed" != 0 ]]; then # non-zero changed files
-           prompt="$prompt $changed_symbol$changed"
+           prompt="$prompt$changed_symbol$changed"
         fi
         added=$(echo "$status" | grep -c '^\?\?' | tr -d ' ')
         if [[ "$added" != 0 ]]; then # non-zero untracked files
-           prompt="$prompt $added_symbol$added"
+           prompt="$prompt$added_symbol$added"
         fi
     fi
     echo -e "$prompt"
@@ -91,7 +92,7 @@ setOptions() {
     termwidth=${COLUMNS}
     case 1 in
         $(($termwidth < 20))) PROMPT_DIRTRIM=1 ;;
-        $(($termwidth < 60))) PROMPT_DIRTRIM=2 ;;
+        $(($termwidth < 80))) PROMPT_DIRTRIM=2 ;;
         $(($termwidth < 100))) PROMPT_DIRTRIM=3 ;;
         *) PROMPT_DIRTRIM=4 ;;
     esac
