@@ -43,7 +43,7 @@ main(){
     # actions for locking
     mpc pause > /dev/null 2>&1
     bw lock # lock bitwarden
-    #~/.config/polybar/scripts/pulseaudio-control.sh mute
+    ~/.config/polybar/scripts/pulseaudio-control.sh mute
     #~/.scripts/mullvad.sh disconnect
     #prep lockscreen
     rectangles="$(lockbox)"
