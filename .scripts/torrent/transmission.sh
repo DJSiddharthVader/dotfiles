@@ -30,7 +30,6 @@ help() {
         start   | start deluge daemon
         pause   | pause all torrents
         resume  | resume all torrents
-        clean   | remove all errored torrents
         stats   | update up/download stats csv file"
 }
 init() {
@@ -198,8 +197,24 @@ action_all() {
     esac
     transmission-remote -tall "$action"
 }
-clean_up(){
-    echo TODO
+format_table() {
+    # format torrent list so I can cut it and easily filter ids
+    transmission-remote -tall -l | head -n-1 | sed -e 's/^ *//' | sed -e 's/ \{2,\}/\t/g'
+}
+delete_by_ratio() {
+    # delete all torrents with a ratio > 1.0
+    ids="$(format_table | cut -f1,7 | grep -P '\t[1-9]\.[0-9]\t')"
+    transmission-remote -t"$(echo "$ids" | cut -f1 | tr '\n' ',')" -rad
+}
+delete_finished() {
+    # delete torrents finished downloading
+    ids="$(format_table | cut -f1,8 | grep 'Done')"
+    transmission-remote -t"$(echo "$ids" | cut -f1 | tr '\n' ',')" -rad
+}
+delete_errored() {
+    # delete torrents that have errored, usually bc I have moved the files out of my torrent dir
+    ids="$(format_table | grep '\*' | tr -d '*')"
+    transmission-remote -t"$(echo "$ids" | cut -f1 | tr '\n' ',')" -rad
 }
 
 
@@ -235,10 +250,17 @@ main() {
         'start'  ) start_daemon                           ;;
         'pause'  ) action_all 'pause'                     ;;
         'resume' ) action_all 'resume'                    ;;
-        'clean'  ) clean_up                               ;;
         'search' ) search                                 ;;
         'stats'  ) [[ -z "$(get_info)" ]] || update_stats ;;
-        'display') display "$(getMode)" "$unit" ;;
+        'display') display "$(getMode)" "$unit"           ;;
+        'del'    )
+            case "$2" in
+                'err' ) delete_errored ;;
+                'fin' ) delete_finished ;;
+                'ufin') delete_unfinished ;;
+                     *) echo "Invalid sub command $2" && exit 1 ;;
+            esac
+            ;;
         *) # change/set display mode
             tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
             case "$mode" in
