@@ -30,7 +30,7 @@ toggle() {
     [[ "$(status)" =~ "Disconnected" ]] && connect || disconnect
 }
 restart() {
-   disconnect && connect
+   toggle && toggle
 }
 display() {
     mode="$1"
