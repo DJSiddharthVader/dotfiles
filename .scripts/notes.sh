@@ -29,7 +29,7 @@ notes() { # pandoc compiles md notes and open in firefox
     #pandoc --mathjax --standalone --toc --toc-depth 2 -c "$css" -f markdown+pipe_tables ./Notes/*.md -o "$name"
     pandoc -s ./Notes/*.md -f markdown+pipe_tables --filter "$filter" --mathjax --toc --toc-depth 2 -c "$css" -o "$name"
     # open notes page in browser
-    window_id="$(xwininfo -tree -root | grep -i "$(echo $pattern | tr '_' ' ')" | grep -o '0x[0-9a-Z]*' | tail -1)"
+    window_id="$(xwininfo -tree -root | grep -i "$(echo $pattern | tr '_' ' ')" | grep -o '0x[0-9a-zA-Z]*' | head -1)"
     if [ -n "$window_id" ]; then # is notes tab already open
         # refresh open tab
         xdotool key --window "$window_id" --clearmodifiers "ctrl+r" # refresh already open tab
