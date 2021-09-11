@@ -10,7 +10,7 @@ get_1337x_results() {
     query="$1"
     results_page="$2"
     search_url="https://1337x.to/search/${query// /+}/1/"
-    total_pages="$(curl -Ss "$search_url" | grep 'Last' |  sed -s 's/^.*class=.last.><a href=.\/search\/.*\/\([0-9]*\)\/.>.*$/\1/')"
+    total_pages="$(curl -Ss "$search_url" | grep 'Last' | sed -s 's/^.*class=.last.><a href=.\/search\/.*\/\([0-9]*\)\/.>.*$/\1/')"
     [[ $max_pages -lt $total_pages ]] && total_pages=$max_pages
     for page_num in $(seq 1 $total_pages); do
         search_url="https://1337x.to/sort-search/${query// /+}/seeders/desc/$page_num/"
