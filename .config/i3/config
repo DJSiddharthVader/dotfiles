@@ -202,7 +202,7 @@ bindsym $mod+Shift+k   move up 10
 bindsym $mod+l         focus right
 bindsym $mod+Shift+l   move right 10
 
-bindsym $mod+z         exec --no-startup-id ~/.scripts/monitor.sh hybrid
+bindsym $mod+z         exec --no-startup-id ~/.scripts/monitor.sh auto
 bindsym $mod+Shift+z   exec --no-startup-id ~/.scripts/monitor.sh laptop
 
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
