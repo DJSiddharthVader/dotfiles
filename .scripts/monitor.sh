@@ -64,16 +64,46 @@ connect() {
         *) help && exit 1 ;;
     esac
 }
+isConnected() {
+    monitors="$(xrandr --listmonitors | head -1 | cut -d' ' -f2)"
+    laptop_connected="$(xrandr --listmonitors | grep -c $laptop_screen)"
+    if [[ $monitors -eq 1 ]] && [[ $laptop_connected -eq 1 ]]; then
+        echo 'false'
+    else
+        echo 'true'
+    fi
+}
 main() {
-    connect "$1"
-    case "$1" in
-        ext)    $bar_manager_script restart ;;
-        hybrid) $bar_manager_script restart ;;
-        laptop) $bar_manager_script style laptop ;;
-        mirror) $bar_manager_script restart ;;
-        *) help && exit 1 ;;
-    esac
-    $HOME/dotfiles/.scripts/wallpaper.sh stay back
+    mode="$1"
+    if [[ "$mode" = 'auto' ]]; then
+        if [[ $(isConnected) = 'true' ]]; then # if already connected then disconnect
+            connect laptop
+            $bar_manager_script style laptop
+        else
+            monitors="$(listMonitors | wc -l)" #external and laptop
+            case $monitors in
+                4) connect ext # at home
+                   $bar_manager_script style cross
+                   ;;
+                3) connect ext # some 2 monitor setup
+                   $bar_manager_script style float
+                   ;;
+                2) connect hybrid # presenting
+                   $bar_manager_script style press
+                   ;;
+                1) echo 'No monitors connected' && exit 0 ;;
+                *) echo 'Error detecting monitors' && exit 1 ;;
+            esac
+        fi
+    else
+        connect "$1"
+        case "$mode" in
+            ext|hybrid) $bar_manager_script restart ;;
+            laptop) $bar_manager_script style laptop ;;
+            *) help && exit 1 ;;
+        esac
+    fi
+    $HOME/dotfiles/.scripts/wallpaper.sh stay back # set wallpaper on all screens
 }
 
 main "$1"
