@@ -4,7 +4,7 @@ readings="$HOME/.readings.txt"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 reading_folder="reading list"
 browser="firefox"
-thresh=60
+thresh=50
 
 help() {
     echo "Error Usage: $0 {update|pick|open|display}"
