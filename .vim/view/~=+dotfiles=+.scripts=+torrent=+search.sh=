@@ -118,6 +118,7 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 8,20fold
+21,33fold
 34,42fold
 43,54fold
 56,60fold
@@ -126,22 +127,16 @@ silent! normal! zE
 82,90fold
 55,91fold
 let &fdl = &fdl
-34
-normal! zo
-43
-normal! zo
 55
 normal! zo
-56
-normal! zo
-61
-normal! zo
-let s:l = 60 - ((6 * winheight(0) + 9) / 18)
+55
+normal! zc
+let s:l = 14 - ((13 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 60
-normal! 05|
+keepjumps 14
+normal! 01|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

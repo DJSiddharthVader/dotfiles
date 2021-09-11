@@ -11,16 +11,16 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
 setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
 setlocal commentstring=#%s
-setlocal complete=.,w,b,u,t,i
+setlocal complete=.,w,b,u,t
 setlocal concealcursor=
-setlocal conceallevel=0
-setlocal completefunc=youcompleteme#CompleteFunc
+setlocal conceallevel=1
+setlocal completefunc=
 setlocal nocopyindent
 setlocal nocursorbind
 setlocal nocursorcolumn
@@ -45,7 +45,7 @@ setlocal foldmarker={{{,}}}
 setlocal foldmethod=manual
 setlocal foldminlines=1
 setlocal foldnestmax=20
-setlocal foldtext=foldtext()
+setlocal foldtext=MyFoldText()
 setlocal formatexpr=
 setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
@@ -56,7 +56,7 @@ setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=GetShIndent()
-setlocal indentkeys=0{,0},!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
+setlocal indentkeys=0{,0},0),0],!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -68,9 +68,9 @@ setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
-setlocal nomodeline
+setlocal modeline
 setlocal modifiable
-setlocal nrformats=bin,octal,hex
+setlocal nrformats=bin,hex
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
@@ -117,21 +117,13 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-5,7fold
-8,11fold
-12,14fold
-15,23fold
-24,41fold
-42,66fold
-67,75fold
-76,107fold
 let &fdl = &fdl
-let s:l = 79 - ((74 * winheight(0) + 11) / 22)
+let s:l = 1 - ((0 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 79
-normal! 01|
+keepjumps 1
+normal! 022|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 nohlsearch
 doautoall SessionLoadPost

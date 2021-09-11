@@ -1,8 +1,8 @@
 bar:cross
-separator:arrow_sym
-wallpaper_index:26
+separator:trig_out
+wallpaper_index:221
 wifi:standardd
-songnames:static
+songnames:scroll
 date:time
 memory:short
 cpu:short
@@ -10,7 +10,7 @@ temperature:short
 disk:amount
 uptime:day
 torrent:speed
-reading:Its time for science to abandon the term statistically significant | Aeon Essays~https://aeon.co/essays/it-s-time-for-science-to-abandon-the-term-statistically-significant
+reading:Solarpunk imagines sustainable urban jungles for the future - Kinder World~https://kinder.world/articles/solutions/solarpunk-imagines-sustainable-urban-jungles-for-the-future-18397
 battery:all
 focus_thresh:40
 mullvad:location
