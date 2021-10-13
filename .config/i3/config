@@ -25,9 +25,7 @@ exec_always --no-startup-id xautolock -time 45 -locker ~/dotfiles/.scripts/lock.
 #Increase key rate
 exec --no-startup-id xset r rate 300 50
 #Pulseaudio
-exec --no-startup-id rm -rf ~/dotfiles/.config/pulse
 exec --no-startup-id pulseaudio --kill
-exec --no-startup-id pulseaudio --start
 #Network Manager applet
 exec --no-startup-id nm-applet
 #Unclutter makes the mouse invisible after a brief period
@@ -38,7 +36,7 @@ exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
 exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
-#exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
+exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 #Torrent daemon:
 exec --no-startup-id ~/.torrent.sh -m start
 #express vpn
@@ -52,24 +50,19 @@ exec --no-startup-id ~/dotfiles/.scripts/monitor.sh laptop
 #Launch Polybar and set wallpaper
 exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay back
 exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh laptop
+#Launch browser
+exec --no-startup-id firefox --browser
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 625 400
+for_window [instance="dropdown"] resize set 625 600
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 1
 exec $term -n dropdown -e tmuxinator start scratch
 
-# tmux scratchpad floating terminal 2
-for_window [instance="drop2"] resize set 625 400
-for_window [instance="drop2"] floating enable
-for_window [instance="drop2"] move scratchpad
-#for_window [instance="drop2"] border pixel 8
-exec $term -n drop2
 #cheatsheets
 for_window [instance="cheatsheet"] floating enable
-
 
 ##---Music-----------------#
 #Music player daemon and sound:
