@@ -76,3 +76,9 @@ songnames-color = ${colors.col9}
 songnames-underline =
 songnames-text-color = ${colors.foreground}
 
+
+reading-prefix = ${colors.rightprefix}
+reading-suffix = ${colors.rightsuffix}
+reading-color = ${colors.col11}
+reading-underline =
+reading-text-color = ${colors.foreground}

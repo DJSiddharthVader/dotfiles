@@ -13,6 +13,12 @@ date-color = ${colors.col2}
 date-underline =
 date-text-color = ${colors.foreground}
 
+battery-prefix = ${colors.leftprefix}
+battery-suffix = ${colors.leftsuffix}
+battery-color = ${colors.col8}
+battery-underline =
+battery-text-color = ${colors.foreground}
+
 memory-prefix = ${colors.leftprefix}
 memory-suffix = ${colors.leftsuffix}
 memory-color = ${colors.col3}
@@ -72,5 +78,3 @@ reading-suffix = ${colors.leftsuffix}
 reading-color = ${colors.col11}
 reading-underline =
 reading-text-color = ${colors.foreground}
-
-
