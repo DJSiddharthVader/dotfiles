@@ -232,9 +232,9 @@ modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applaunc
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
 bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
-modules-right = reading wall
+modules-right = reading
 
 ;;full
 [bar/full-top]
@@ -247,7 +247,7 @@ modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control gamma ap
 inherit = section/full
 include-file = ~/dotfiles/.config/polybar/bars/full-bottom.bar
 bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
 modules-right = reading wall
 
@@ -255,11 +255,11 @@ modules-right = reading wall
 [bar/cross-left]
 inherit = section/cross
 include-file = ~/dotfiles/.config/polybar/bars/cross-left.bar
-modules-left = i3 focused focused-name applauncher pulseaudio-control wlan mullvad bluetooth mpd songnames
+modules-left = i3 focused focused-name applauncher pulseaudio-control wlan mullvad bluetooth reading
 [bar/cross-right]
 inherit = section/cross
 include-file = ~/dotfiles/.config/polybar/bars/cross-right.bar
-modules-right = reading torrent weather uptime disk xkeyboard temperature cpu memory date i3
+modules-right = torrent weather uptime disk xkeyboard temperature cpu memory battery date i3
 
 ;;standard
 [bar/standard-top]
@@ -272,7 +272,7 @@ modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applaunc
 inherit = section/standard
 include-file = ~/dotfiles/.config/polybar/bars/standard-bottom.bar
 bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
 modules-right = reading wall
 
@@ -287,7 +287,7 @@ modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applaunc
 inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text-bottom.bar
 bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
 modules-right = reading wall
 
@@ -625,6 +625,7 @@ type = custom/script
 interval = 1
 exec = ~/dotfiles/.scripts/bluetooth.sh status
 click-left = ~/dotfiles/.scripts/bluetooth.sh
+click-right = ~/dotfiles/.scripts/bluetooth.sh disconnect
 format =" <label>"
 format-prefix-font = 5
 format-suffix-font = 5
