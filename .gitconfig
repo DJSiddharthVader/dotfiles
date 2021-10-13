@@ -1,6 +1,6 @@
 [user]
-	email = sidreed34@gmail.com
-	name = Sid Reed
+	email = slreed@andrew.cmu.edu
+	name = Siddharth Reed
 [push]
     default = simple
 	url = https://DJSiddharthVader@github.com/DJSiddharthVader/dotfiles.git
@@ -10,3 +10,8 @@
 	merge = refs/heads/master
 [diff "jupyternotebook"]
 	command = git-nbdiffdriver diff
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
