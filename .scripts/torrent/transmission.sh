@@ -1,10 +1,12 @@
 #!/bin/bash
+set -euo pipefail
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 mode_prefix="torrent"
 stats_file="$HOME/dotfiles/.config/transmission-daemon/stats.tsv"
 download_dir="$HOME/Torrents"
+vid_dir="$HOME/Videos/ToOrganize"
 modes=(ratiototal datatotal ratio data speed active) #no spaces in mode titles
 delim="~"
 search_script="$HOME/dotfiles/.scripts/torrent/search.sh"
@@ -17,7 +19,7 @@ help() {
         - specify unit for display
 
     -m) \$mode
-        - display modes are {$(echo ${modes[*]} | tr ' ' '|')}
+        - display modes are {$(echo ${modes[*]} | tr ' ' '|')|ee}
         - you can see the current mode with \`grep 'torrent' ~/dotfiles/.config/polybar/modules.mode\`
         Modes   | Description
         --------|------------------------------------------
@@ -181,7 +183,7 @@ display() {
             idle="$(echo "$states" | grep -c 'Idle')"
             msg=" $down  $seed  $idle" # $both
             ;;
-       *) echo 'display fail' && help && exit 1 ;;
+        *) echo 'display fail' && help && exit 1 ;;
     esac
     echo "$msg"
 }
@@ -199,25 +201,30 @@ action_all() {
 }
 format_table() {
     # format torrent list so I can cut it and easily filter ids
-    transmission-remote -tall -l | head -n-1 | sed -e 's/^ *//' | sed -e 's/ \{2,\}/\t/g'
+    transmission-remote -tall -l | tail -n+2 | head -n-1 | sed -e 's/^ *//' | sed -e 's/ \{2,\}/\t/g'
 }
-delete_by_ratio() {
-    # delete all torrents with a ratio > 1.0
-    ids="$(format_table | cut -f1,7 | grep -P '\t[1-9]\.[0-9]\t')"
-    transmission-remote -t"$(echo "$ids" | cut -f1 | tr '\n' ',')" -rad
+filter_table() {
+    mode="$1"
+    case $mode in
+        ratio) table="$(format_table | cut -f1,7,9 | grep -Pv '\t0\.[0-9]')" ;;
+        done ) table="$(format_table | cut -f1,4,9 | grep 'Done')" ;;
+        error) table="$(format_table | grep '\*' | cut -f 1,9 | tr -d '*')" ;;
+        *) echo "Invalid del mode $mode, must be {error|done|ratio}" && exit 1 ;;
+    esac
+    echo "$table" | grep -vP 'None'
 }
-delete_finished() {
-    # delete torrents finished downloading
-    ids="$(format_table | cut -f1,8 | grep 'Done')"
-    transmission-remote -t"$(echo "$ids" | cut -f1 | tr '\n' ',')" -rad
+delete_torrents() {
+    mode="$1"
+    ids="$(filter_table "$mode" | cut -f1)"
+    # remove and keep local data
+    transmission-remote -t"$(echo "$ids" | cut -f1 | tr '\n' ',')" --remove
+    # move all torrent files to Videos/ToOrganize
+    files="$(format_table | cut -f1,7,9 | grep "^(${ids/\n/\\\|/})" | rev | cut -f1 | rev)"
+    while IFS= read -r file; do
+        echo "$file"
+        mv "$download_dir/$file" $vid_dir
+    done <<< "$files"
 }
-delete_errored() {
-    # delete torrents that have errored, usually bc I have moved the files out of my torrent dir
-    ids="$(format_table | grep '\*' | tr -d '*')"
-    transmission-remote -t"$(echo "$ids" | cut -f1 | tr '\n' ',')" -rad
-}
-
-
 search() {
     magnets="$($search_script)"
     for magnet in ${magnets}; do
@@ -227,7 +234,12 @@ search() {
     done
 }
 
+
 main() {
+    # to avoid strict errors from -euo
+    unit=""
+    mode=""
+    display="false"
     while getopts "hdu:m:" arg; do
         case $arg in
             u) unit="$OPTARG"
@@ -247,20 +259,14 @@ main() {
     shift "$((OPTIND-1))"
     [[ -z $mode ]] && mode="$1"
     case $mode in
-        'start'  ) start_daemon                           ;;
-        'pause'  ) action_all 'pause'                     ;;
-        'resume' ) action_all 'resume'                    ;;
-        'search' ) search                                 ;;
-        'stats'  ) [[ -z "$(get_info)" ]] || update_stats ;;
-        'display') display "$(getMode)" "$unit"           ;;
-        'del'    )
-            case "$2" in
-                'err' ) delete_errored ;;
-                'fin' ) delete_finished ;;
-                'ufin') delete_unfinished ;;
-                     *) echo "Invalid sub command $2" && exit 1 ;;
-            esac
-            ;;
+        'start'  ) start_daemon                 ;;
+        'pause'  ) action_all 'pause'           ;;
+        'resume' ) action_all 'resume'          ;;
+        'search' ) search                       ;;
+        'stats'  ) update_stats                 ;;
+        'display') display "$(getMode)" "$unit" ;;
+        'table'  ) filter_table "$2"            ;;
+        'del'    ) delete_torrents "$2"         ;;
         *) # change/set display mode
             tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
             case "$mode" in
