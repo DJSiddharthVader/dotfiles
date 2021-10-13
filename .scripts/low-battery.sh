@@ -1,23 +1,21 @@
 #!/bin/bash
 
+send_notif() {
+    msg="$1"
+    notify-send "$msg" -u critical
+}
+
+threshes=(10 15 20 25)
 while true; do
-    discharging=$(acpi -b | grep -o Discharging)
-    if [[ "$discharging" = "Discharging" ]]; then
-        power=$(acpi -b | cut -d' ' -f4 | cut -d'%' -f1)
-        if (( $power < 15 )) ; then
-            notify-send "BATTERY AT 15% PLUG IN NOW" -u critical
-        elif (( $power < 25 )) ; then
-            notify-send "Battery < 25%!" -u critical
-        elif (( $power < 30 )) ; then
-            notify-send "Battery < 30%!" -u critical
-        fi
+    status="$(acpi -b | grep -o " [^ ]*Charging" | head -1)"
+    if [[ "$status" = " Discharging" ]]; then
+        power=$(acpi -b | cut -d' ' -f4 | cut -d'%' -f1 | head -1)
+        for thresh in ${threshes[@]}; do
+            if (( $power < $thresh )) ; then
+                send_notif "Battery < $thresh%, Charge laptop"
+                break
+            fi
+        done
     fi
     sleep 30
 done
-
-#if [[ `echo $BATTINFO | grep Discharging` && `echo $BATTINFO | cut -d' ' -f 4 | cut -d'%' -f1` < 5 ]] ; then
-#    notify-send "BATTERY AT 5% PLUG IN NOW" -u critical
-#elif [[ `echo $BATTINFO | grep Discharging` && `echo $BATTINFO | cut -d' ' -f 4 | cut -d'%' -f1` < 10 ]] ; then
-#    notify-send "Battery at 10%!" "Charging: ${battery_level}%" -u critical
-#elif [[ `echo $BATTINFO | grep Discharging` && `echo $BATTINFO | cut -d' ' -f 4 | cut -d'%' -f1` < 15 ]] ; then
-#fi
