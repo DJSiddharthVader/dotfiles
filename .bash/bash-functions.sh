@@ -36,6 +36,12 @@ mvpr() {
     done
     echo ''
 }
+undock() {
+    # disconnect laptop from home setup
+    #sudo umount -a
+    ~/.scripts/monitor.sh laptop
+    ~/.scripts/lock.sh
+}
 mnn() {
     name="$1"
     num="$(find ./Notes -name '*.md' | sort -n | tail -1 | sed -e 's/^.*N\([0-9]*\)-.*$/\1/')"
@@ -47,6 +53,15 @@ mnn() {
     lec_notes="$(find ./Lectures -name "*$num*")"
     echo "[Lectures Notes]($(readlink -e $lec_notes))" >> $file
     echo "$file $lec_notes $num $name"
+}
+hw() {
+    #compile HW assignments with pandoc tempate
+    mdfile="$(find . -type f -name '*HW*.md')" #hw answers in current dir
+    pdffile="${mdfile%.*}.pdf"
+    pandoc "$mdfile" -s -o "$pdffile"
+}
+pdfs() {
+    tabbed -c zathura "$@" -e
 }
 
 up() { # Goes up many dirs as the number passed as argument, if none goes up by 1 by default
