@@ -6,7 +6,7 @@ script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 styles=(float standard text cross press full mini laptop)
 compact_bars=(laptop minimal)
-res_limit=1600
+res_limit=1400
 primary_screen="eDP-1"
 # Separators
 dl="."
@@ -108,8 +108,12 @@ rightprefix = \"$(echo "$icons" | cut -d"$dl" -f3)\"
 rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"
 " | sed -e 's/""//' >| "$separator_file"
 }
-getMonitors() {
-    xrandr | sed -n '/ primary/,$p' | grep ' connected' | sort -r | cut -d' ' -f1
+getConnectedMonitors() {
+    xrandr |  grep ' connected' | sort -r | cut -d' ' -f1
+}
+getActiveMonitors() {
+   # same as get all monitors but excludes eDP-1
+    xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev | sort -r
 }
 getResolution() {
     monitor="$1"
@@ -152,11 +156,11 @@ launchAllBars() {
         *) echo "Error: Invalid style" && help && exit 1 ;;
     esac
     setMode 'style' "$dmode" # set defualt polybar style
-    killall -q polybar && sleep 0.001 # Terminate already running bar instances
     # launch bars
+    killall -q polybar && sleep 0.001 # Terminate already running bar instances
     case "$dmode" in
         cross)
-            monitor=$(getMonitors)
+            monitor=$(getActiveMonitors)
             m1="$(echo $monitor | cut -d' ' -f1)"
             m2="$(echo $monitor | cut -d' ' -f2)"
             MONITOR="$m1" polybar cross-left &
@@ -165,16 +169,12 @@ launchAllBars() {
                 launchBar float $m
             done
             ;;
-        press)
-            for m in $(getMonitors); do
-                [[ $m = $primary_screen ]] || launchBar $dmode $m
-            done
-            ;;
         $tmp)
-            for m in $(getMonitors); do
+            for m in $(getActiveMonitors); do
                 launchBar $dmode $m
             done
             ;;
+        press) launchBar float $primary_screen ;; #only put bar on laptop
         none) sleep 1 ;;
         *) echo "Error: Invalid style" && help && exit 1 ;;
     esac
