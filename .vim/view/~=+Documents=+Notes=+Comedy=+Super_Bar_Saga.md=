@@ -1,4 +1,4 @@
-let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 argglobal
 let s:cpo_save=&cpo
 set cpo&vim
@@ -158,7 +158,6 @@ setlocal keymap=
 setlocal noarabic
 setlocal autoindent
 setlocal backupcopy=
-setlocal balloonexpr=
 setlocal nobinary
 setlocal breakindent
 setlocal breakindentopt=
@@ -166,18 +165,17 @@ setlocal bufhidden=
 setlocal buflisted
 setlocal buftype=
 setlocal nocindent
-setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
 setlocal cinoptions=
 setlocal cinwords=if,else,while,do,for,switch
 setlocal colorcolumn=
-setlocal comments=fb:*,fb:-,fb:+,n:>
-setlocal commentstring=>\ %s
-setlocal complete=.,w,b,u,t,i
+setlocal comments=s:<!--,m:\ \ \ \ ,e:-->,:|,n:>
+setlocal commentstring=<!--%s-->
+setlocal complete=.,w,b,u,t
 setlocal concealcursor=
 setlocal conceallevel=2
-setlocal completefunc=youcompleteme#CompleteFunc
+setlocal completefunc=
 setlocal nocopyindent
-setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal cursorline
@@ -187,9 +185,10 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal expandtab
-if &filetype != 'markdown.pandoc'
-setlocal filetype=markdown.pandoc
+if &filetype != 'pandoc'
+setlocal filetype=pandoc
 endif
+setlocal fillchars=
 setlocal fixendofline
 setlocal foldcolumn=1
 setlocal foldenable
@@ -202,8 +201,8 @@ setlocal foldminlines=1
 setlocal foldnestmax=20
 setlocal foldtext=pandoc#folding#FoldText()
 setlocal formatexpr=
-setlocal formatoptions=tcqln
-setlocal formatlistpat=^\\s*\\d\\+\\.\\s\\+\\|^[-*+]\\s\\+\\|^\\[^\\ze[^\\]]\\+\\]:
+setlocal formatoptions=cqt
+setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
 setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
@@ -211,7 +210,7 @@ setlocal imsearch=-1
 setlocal include=
 setlocal includeexpr=
 setlocal indentexpr=pandoc#indent#GetIndent()
-setlocal indentkeys=0{,0},:,0#,!^F,o,O,e,[,(,{,),},],&,=item
+setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e,[,(,{,),},],&,=item
 setlocal noinfercase
 setlocal iskeyword=@,48-57,_,192-255
 setlocal keywordprg=
@@ -219,15 +218,16 @@ setlocal linebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
+setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
-setlocal matchpairs=(:),{:},[:],<:>
-setlocal nomodeline
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
 setlocal modifiable
-setlocal nrformats=bin,octal,hex
+setlocal nrformats=bin,hex
 setlocal number
 setlocal numberwidth=4
-setlocal omnifunc=htmlcomplete#CompleteTags
+setlocal omnifunc=pandoc#completion#Complete
 setlocal path=
 setlocal nopreserveindent
 setlocal nopreviewwindow
@@ -236,9 +236,11 @@ setlocal noreadonly
 setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
+setlocal scrollback=-1
 setlocal noscrollbind
+setlocal scrolloff=-1
 setlocal shiftwidth=4
-setlocal noshortname
+setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal nosmartindent
 setlocal softtabstop=4
@@ -246,42 +248,65 @@ setlocal spell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
+setlocal spelloptions=
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
 setlocal synmaxcol=3000
-if &syntax != 'markdown.pandoc'
-setlocal syntax=markdown.pandoc
+if &syntax != 'pandoc'
+setlocal syntax=pandoc
 endif
+setlocal tagfunc=
 setlocal tabstop=4
 setlocal tagcase=
 setlocal tags=
-setlocal termkey=
-setlocal termsize=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
+setlocal winblend=0
+setlocal winhighlight=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-1
+7
 normal! zo
-6
-normal! zo
-16
+19
 normal! zo
 21
 normal! zo
-25
+23
 normal! zo
-let s:l = 6 - ((5 * winheight(0) + 10) / 20)
+29
+normal! zo
+19
+normal! zc
+31
+normal! zo
+33
+normal! zo
+42
+normal! zo
+49
+normal! zo
+31
+normal! zc
+67
+normal! zo
+69
+normal! zo
+71
+normal! zo
+76
+normal! zo
+let s:l = 74 - ((73 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
-exe s:l
+keepjumps exe s:l
 normal! zt
-6
-normal! 011|
-let &so = s:so_save | let &siso = s:siso_save
+keepjumps 74
+normal! 025|
+let &g:so = s:so_save | let &g:siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

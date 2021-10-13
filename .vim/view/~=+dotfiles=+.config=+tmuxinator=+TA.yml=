@@ -1,9 +1,10 @@
-let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 argglobal
 setlocal keymap=
 setlocal noarabic
 setlocal autoindent
 setlocal backupcopy=
+setlocal balloonexpr=
 setlocal nobinary
 setlocal nobreakindent
 setlocal breakindentopt=
@@ -22,9 +23,11 @@ setlocal concealcursor=
 setlocal conceallevel=1
 setlocal completefunc=
 setlocal nocopyindent
+setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal cursorline
+setlocal cursorlineopt=both
 setlocal define=
 setlocal dictionary=
 setlocal nodiff
@@ -34,7 +37,6 @@ setlocal expandtab
 if &filetype != 'yaml'
 setlocal filetype=yaml
 endif
-setlocal fillchars=
 setlocal fixendofline
 setlocal foldcolumn=1
 setlocal foldenable
@@ -64,7 +66,6 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
-setlocal listchars=
 setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
@@ -82,10 +83,10 @@ setlocal noreadonly
 setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
-setlocal scrollback=-1
 setlocal noscrollbind
 setlocal scrolloff=-1
 setlocal shiftwidth=4
+setlocal noshortname
 setlocal sidescrolloff=-1
 setlocal signcolumn=auto
 setlocal nosmartindent
@@ -94,7 +95,6 @@ setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal spelloptions=
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
@@ -102,28 +102,32 @@ setlocal synmaxcol=3000
 if &syntax != 'yaml'
 setlocal syntax=yaml
 endif
-setlocal tagfunc=
 setlocal tabstop=4
 setlocal tagcase=
+setlocal tagfunc=
 setlocal tags=
+setlocal termwinkey=
+setlocal termwinscroll=10000
+setlocal termwinsize=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
-setlocal winblend=0
-setlocal winhighlight=
+setlocal varsofttabstop=
+setlocal vartabstop=
+setlocal wincolor=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let &fdl = &fdl
-let s:l = 12 - ((11 * winheight(0) + 11) / 22)
+let s:l = 10 - ((7 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
+exe s:l
 normal! zt
-keepjumps 12
-normal! 011|
-let &g:so = s:so_save | let &g:siso = s:siso_save
+10
+normal! 033|
+let &so = s:so_save | let &siso = s:siso_save
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :
