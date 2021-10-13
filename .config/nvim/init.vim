@@ -114,8 +114,16 @@ set relativenumber
 set foldcolumn=1
 
 "set folding to save/load automatically
+function! LoadView() abort
+    try
+        loadview
+    catch /E484/
+        return
+    endtry
+endfunction
+
+autocmd BufWinEnter * call LoadView()
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* loadview
 
 function! MyFoldText()
     let nl = v:foldend - v:foldstart + 1
@@ -144,8 +152,8 @@ augroup END
 " Syntastic (syntax checker) Options
 let g:pymode_python = 'python3'
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_exec='/home/sidreed/anaconda3/envs/prog02601/bin/flake8'
-let g:syntastic_python_pylint_exec='/home/sidreed/anaconda3/envs/prog02601/bin/pylint'
+let g:syntastic_python_flake8_exec='/home/sidreed/anaconda3/bin/flake8'
+let g:syntastic_python_pylint_exec='/home/sidreed/anaconda3/bin/pylint'
 let g:syntastic_python_pylint_args='--disable=missing-docstring --errors-only'
 let g:syntastic_go_checkers= ['go', 'gofmt', 'govet']
 let g:syntastic_enable_r_lintr_checker = 1
@@ -310,7 +318,6 @@ autocmd BufWrite *.py :call DeleteTrailingWS()
 autocmd BufWrite *.coffee :call DeleteTrailingWS()
 " map increment/decrement to Alt as C-a is my tmux leader key
 nnoremap <C-i> <C-a>
-
 
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
