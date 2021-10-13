@@ -135,8 +135,16 @@ set relativenumber
 set foldcolumn=1
 
 "set folding to save/load automatically
+function! LoadView() abort
+    try
+        loadview
+    catch /E484/
+        return
+    endtry
+endfunction
+
+autocmd BufWinEnter * call LoadView()
 autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* loadview
 
 function! MyFoldText()
     let nl = v:foldend - v:foldstart + 1
