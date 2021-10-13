@@ -83,3 +83,12 @@ theme_change.mp4
 .tmux/resurrect
 .vim/.netrwhist
 Anaconda*
+.config/QtProject.conf
+.config/Trolltech.conf
+.config/dolphinrc
+.config/glib-2.0/
+.config/inkscape/
+.config/kglobalshortcutsrc
+.config/kritadisplayrc
+.config/monitors.xml
+.config/user-dirs.locale
