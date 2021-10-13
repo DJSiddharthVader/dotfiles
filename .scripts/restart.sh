@@ -18,9 +18,9 @@ start() {
     case "$service" in
         'compton') compton --config "$HOME"/.config/compton.conf > /dev/null 2>&1 & ;;
         'pulse'  ) pulseaudio --start; ~/dotfiles/.scripts/bar-manager.sh reload ;;
-        'wifi'   ) sudo ln -sf /etc/resolv.conf /run/resolvconf/resolv.conf
-                   sudo /etc/init.d/network-manager start
-                   ;;
+        #'wifi'   ) sudo ln -sf /etc/resolv.conf /run/resolvconf/resolv.conf
+        #           sudo /etc/init.d/network-manager start
+        #           ;;
         *) help && exit 1 ;;
     esac
 }
