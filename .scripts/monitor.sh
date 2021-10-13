@@ -12,6 +12,14 @@ resolution() {
 listMonitors() {
     xrandr | grep ' connected' | sort -r | cut -d' ' -f1 | tr -d ' '
 }
+connectAudio() {
+    mode="$1"
+    case "$mode" in
+        laptop) pacmd set-card-profile 1 output:analog-stereo+input:analog-stereo ;;
+        hdmi) pacmd set-card-profile 1 output:hdmi-stereo+input:analog-stereo ;;
+        *) echo "Invalid mode use {laptop|hdmi}" && exit 1 ;;
+    esac
+}
 disconnect(){
     # disconnect all external monitors except laptop screen
     while IFS= read -r monitor; do
@@ -48,12 +56,10 @@ connect() {
         ext)
             connectToAll ""
             xrandr --output "$laptop_screen" --off
-            #pacmd set-card-profile 0 output:hdmi-stereo
             ;;
         laptop)
             xrandr --output "$laptop_screen" --mode "$(resolution $laptop_screen)" --primary
             disconnect
-            pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo
             ;;
         mirror)
             while IFS= read -r monitor; do
@@ -90,13 +96,14 @@ main() {
                    ;;
                 2) connect hybrid # presenting
                    $bar_manager_script style press
+                   connectAudio hdmi
                    ;;
                 1) echo 'No monitors connected' && exit 0 ;;
                 *) echo 'Error detecting monitors' && exit 1 ;;
             esac
         fi
     else
-        connect "$1"
+        connect "$mode"
         case "$mode" in
             ext|hybrid) $bar_manager_script restart ;;
             laptop) $bar_manager_script style laptop ;;
