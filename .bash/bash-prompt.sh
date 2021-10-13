@@ -87,18 +87,7 @@ build_prompt() {
     done
     echo "$prompt$(setColor "0 3$((i-1))")$pow_sep"
 }
-setOptions() {
-    # Set how many dirs are shown in prompt path based on term width
-    termwidth=${COLUMNS}
-    case 1 in
-        $(($termwidth < 20))) PROMPT_DIRTRIM=1 ;;
-        $(($termwidth < 80))) PROMPT_DIRTRIM=2 ;;
-        $(($termwidth < 100))) PROMPT_DIRTRIM=3 ;;
-        *) PROMPT_DIRTRIM=4 ;;
-    esac
-}
 prompt_command() {
-    setOptions
     # define modules to be shown based on term width and format them with powerline
     termwidth=${COLUMNS}
     case 1 in
@@ -108,7 +97,7 @@ prompt_command() {
         $(($termwidth < 120)))
             modules="$(build_prompt "\$(exitstatus)" "$clk\@" "$dir \w" "\$(cenv)" "\$(gits)")"
             ;;
-        *)
+        *) # > 120
             modules="$(build_prompt "\$(exitstatus)" "$clk\@" "$usr \u" "$hst \h" "$dir \w" "\$(cenv)" "\$(gits)")"
             ;;
     esac
