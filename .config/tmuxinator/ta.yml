@@ -9,12 +9,8 @@ windows:
       panes:
         - cd "$(find ./materials -maxdepth 1 | sort -n | tail -1)"
         -
-  - finished:
-      root: ~/CMU_MSCB/TA-02601/go_src/finished_code
-      pre: cd ~/CMU_MSCB/TA-02601/go_src/finished_code
-      panes:
-        -
-        -
   - starter:
       root: cd ~/CMU_MSCB/TA-02601/go_src/starter_code
       pre: cd ~/CMU_MSCB/TA-02601/go_src/starter_code
+        -
+        -
