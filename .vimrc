@@ -95,20 +95,12 @@ set number
 
 " makes all relative except for current line
 set relativenumber
-
+"
 " Add a bit extra margin to the left
 set foldcolumn=1
 
-"set folding to save/load automatically
-function! LoadView() abort
-    try
-        loadview
-    catch /E484/
-        return
-    endtry
-endfunction
-
-autocmd BufWinEnter * call LoadView()
+" automaticlly load/save views on opening/closing buffers
+autocmd BufWinEnter *.* silent loadview
 autocmd BufWinLeave *.* mkview
 
 " what is displayed in folded lines
@@ -296,6 +288,15 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 
 "press // to search for text highlighted in visual mode
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+"
+"" Vmap for maintain Visual Mode after shifting > and <
+vmap < <gv
+vmap > >gv
+
+"" Move visual block
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 
 " => Parenthesis/bracket
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -441,7 +442,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-" => Status line and Airline
+" => Airline
 """"""""""""""""""""""""""""""
 " Always show the status line
 set laststatus=2
@@ -465,20 +466,18 @@ let g:goyo_margin_top = 2
 let g:goyo_margin_bottom = 2
 nnoremap <silent> <leader>z :Goyo<cr>
 
-
-" => Custom header
+" => Startify
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Startify plugin
+"Custom Header
 let g:startify_custom_header = [
       \ '                                             ',
-      \ '       ___________________________           ',
-      \ '      /                           \          ',
-      \ '      |     VIM - Vi IMproved     |          ',
-      \ '      |    -------------------    |          ',
-      \ '      |  by Bram Moolenaar et al. |          ',
-      \ '      \_________   _______________/          ',
-      \ '                \  /                         ',
-      \ '                 \ \ ___                    ',
+      \ '      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~          ',
+      \ '     {  "The more you use VIM the  }         ',
+      \ '     {  the less you use VIM."     }         ',
+      \ '     {       -- DJSiddharthVader   }         ',
+      \ '      ~~~~~~~~~    ~~~~~~~~~~~~~~~~          ',
+      \ '               \  /                          ',
+      \ '                \ \  ___                     ',
       \ '                    (-_-)                    ',
       \ '                    _) (_                    ',
       \ '                   /     \                   ',
@@ -486,4 +485,5 @@ let g:startify_custom_header = [
       \ '                (_____\_____)                ',
       \ '                                             ',
       \ ]
+"
 "
