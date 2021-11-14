@@ -47,8 +47,8 @@ cycle() {
     # next mode index is:  (x+1) % n
     # prev mode index is:  (x+n-1) % n
     # x is current mode index, n is number of modes
-    dir="$1"
-    mode="$(cat $mode_file)"
+    dir="$1" # direction to set the mode
+    mode="$(getMode)"
     idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
     idx=$(($idx -1)) # current mode idx
     case "$dir" in
@@ -71,8 +71,8 @@ get_info() {
     transmission-remote -tall -i
 }
 extract() {
-    info="$1"
-    pattern="$2"
+    info="$1" # will always be get_info() output but make it an argument to reduce redundant calls
+    pattern="$2" # field of data to extract
     echo "$info" | grep "$pattern: " | cut -d':' -f2- |
                    sed -E 's/\(.*\)//' | sed -E 's/\[.*\]//' | #delete everything in parens
                    sed -E 's/ {2,}/ /' | sed -E 's/^ //' | sed -E 's/ $//' # delete trailing spaces
@@ -86,6 +86,7 @@ scrape_stats() {
             numfmt --from=auto --field=1- | tr -s ' ' '\n'
 }
 update_stats() {
+    # get data  for each field from torrents and format as tsv
     #header="id"$delim"name"$delim"size"$delim"downloaded"$delim"uploaded"
     info="$(get_info)"
     hashes="$(extract "$info" 'Hash')"
@@ -93,16 +94,18 @@ update_stats() {
     sizes="$(scrape_stats "$info" 'Total size')"
     downloaded="$(scrape_stats "$info" 'Downloaded')"
     uploaded="$(scrape_stats "$info" 'Uploaded')"
-    # update records
+    # append new data to current records
     tmp=$(mktemp)
     cp "$stats_file" $tmp
     paste -d"$delim" <(echo "$hashes") <(echo "$names") <(echo "$sizes") <(echo "$downloaded") <(echo "$uploaded") >> $tmp
+    # remove old redundant records
     sort -t"$delim" -r -g -k5,5 -k4,4 $tmp | sort -u -t"$delim" -k1,1 -o $tmp #dedup
     mv $tmp $stats_file
 }
 
 # Display Torrent Data
 sum_convert() {
+    # sum list of data sizes and format to desired unit (Kb, Mb, Gb, Tb)
     terms="$1"
     unit="$2"
     echo "$terms" | grep -v '^$' |
@@ -113,9 +116,9 @@ total_stats() {
     field="$1"
     unit="$2"
     case "$field" in
-        'size') fn=3 ;;
-        'down') fn=4 ;;
-        'up'  ) fn=5 ;;
+        'size') fn=3 ;; # total size of all torrents
+        'down') fn=4 ;; # total download
+        'up'  ) fn=5 ;; # total upload
     esac
     terms="$(cut -d"$delim" -f$fn $stats_file)"
     sum_convert "$terms" "$unit"
@@ -133,6 +136,7 @@ display() {
     info="$(get_info)"
     case "$mode" in
         'data')
+            # amount of data uploaded/downloaded for current torrents
             [[ -n "$unit" ]] || unit="Gi"
             up="$(scrape_stats "$info" 'Uploaded')"
             up="$(sum_convert "$up" "$unit")"
@@ -141,6 +145,7 @@ display() {
             [[ -z "$up$down" ]] &&  msg=" - $unit  - $unit" || msg=" $down $unit  $up $unit"
             ;;
         'ratio')
+            # get ratio of downloaded:size and uploaded:downloaded for current torrents
             [[ -n "$unit" ]] || unit="Ki"
             size="$(scrape_stats "$info" 'Total size')"
             size="$(sum_convert "$size" "$unit")"
@@ -151,6 +156,7 @@ display() {
             [[ -z "$up$down" ]] &&  msg=" -  - " || msg=" $(divide $down $size 2)  $(divide $up $down 2)"
             ;;
         'datatotal')
+            # get total amount of data uploaded and downloaded for all current and previous torrents
             [[ -n "$unit" ]] || unit="Ti"
             [[ -z "$info" ]] || update_stats
             up="$(total_stats 'up' "$unit")"
@@ -158,6 +164,7 @@ display() {
             msg=" $down $unit  $up $unit"
             ;;
         'ratiototal')
+            # get ratio of total downloaded to total size and total up to total down for all current and previous torrents
             [[ -n "$unit" ]] || unit="Ki"
             [[ -z "$info" ]] || update_stats
             up="$(cut -d"$delim" -f5 $stats_file)"
@@ -169,6 +176,7 @@ display() {
             msg="T  $(divide $down $size 2)  $(divide $up $down 2)"
             ;;
         'speed')
+            # total upload/download speed
             [[ -n "$unit" ]] || unit="Mi"
             up="$(scrape_stats "$info" 'Upload Speed')"
             up="$(sum_convert "$up" "$unit")"
@@ -177,11 +185,13 @@ display() {
             [[ -z "$up$down" ]] &&  msg=" - $unit/s  - $unit/s" || msg=" $down $unit/s  $up $unit/s"
             ;;
         'active')
+            # number of downloading, seeding and idle torrents
             states="$(extract "$info" "State")"
             down="$(echo "$states" | grep -c 'Downloading')"
             seed="$(echo "$states" | grep -c 'Seeding')"
             idle="$(echo "$states" | grep -c 'Idle')"
-            msg=" $down  $seed  $idle" # $both
+            both="$(echo "$states" | grep -c 'Both')"
+            msg="$down $seed  $idle" $both
             ;;
         *) echo 'display fail' && help && exit 1 ;;
     esac
@@ -204,6 +214,7 @@ format_table() {
     transmission-remote -tall -l | tail -n+2 | head -n-1 | sed -e 's/^ *//' | sed -e 's/ \{2,\}/\t/g'
 }
 filter_table() {
+    # get torrent table and filter torrentsif finished, ratio > 1, is errored
     mode="$1"
     case $mode in
         ratio) table="$(format_table | cut -f1,7,9 | grep -Pv '\t0\.[0-9]')" ;;
@@ -222,10 +233,11 @@ delete_torrents() {
     files="$(format_table | cut -f1,7,9 | grep "^(${ids/\n/\\\|/})" | rev | cut -f1 | rev)"
     while IFS= read -r file; do
         echo "$file"
-        mv "$download_dir/$file" $vid_dir
+        mv "$download_dir/$file" "$vid_dir"
     done <<< "$files"
 }
 search() {
+    # search online for torrents, get magnets and start downloading
     magnets="$($search_script)"
     for magnet in ${magnets}; do
         if [[ -n "${magnet}" ]]; then
@@ -240,6 +252,7 @@ main() {
     unit=""
     mode=""
     display="false"
+    # handle flag arguments
     while getopts "hdu:m:" arg; do
         case $arg in
             u) unit="$OPTARG"
@@ -258,6 +271,7 @@ main() {
     done
     shift "$((OPTIND-1))"
     [[ -z $mode ]] && mode="$1"
+    # handle main argument behaviour
     case $mode in
         'start'  ) start_daemon                 ;;
         'pause'  ) action_all 'pause'           ;;
