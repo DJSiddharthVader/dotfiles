@@ -117,15 +117,27 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
+8,11fold
+13,33fold
+35,48fold
+50,62fold
+64,80fold
+82,103fold
+105,112fold
+114,121fold
+123,131fold
 let &fdl = &fdl
-let s:l = 3 - ((2 * winheight(0) + 14) / 29)
+8
+normal! zo
+82
+normal! zo
+let s:l = 5 - ((4 * winheight(0) + 6) / 13)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 3
-normal! 0
+keepjumps 5
+normal! 04|
 lcd ~/Projects/go/src/TA-02601/starter_code/BST
 let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

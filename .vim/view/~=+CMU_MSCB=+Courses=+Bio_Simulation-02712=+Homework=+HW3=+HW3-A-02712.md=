@@ -276,74 +276,36 @@ normal! zo
 normal! zo
 21
 normal! zc
-61
+71
 normal! zo
-63
+120
 normal! zo
-65
+148
 normal! zo
-67
+150
 normal! zo
-69
+152
 normal! zo
-75
-normal! zo
-77
-normal! zo
-79
-normal! zo
-81
-normal! zo
-83
-normal! zo
-61
+120
 normal! zc
-73
+154
 normal! zo
-75
-normal! zo
-77
-normal! zo
-79
-normal! zo
-81
-normal! zo
-83
-normal! zo
-85
-normal! zo
-89
-normal! zo
-91
-normal! zo
-93
-normal! zo
-95
-normal! zo
-97
-normal! zo
-99
-normal! zo
-73
+154
 normal! zc
-87
+266
 normal! zo
-194
+268
 normal! zo
-196
+270
 normal! zo
-198
+272
 normal! zo
-200
-normal! zo
-194
-normal! zc
-let s:l = 95 - ((76 * winheight(0) + 16) / 32)
+let s:l = 269 - ((254 * winheight(0) + 21) / 43)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 95
-normal! 01|
+keepjumps 269
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
