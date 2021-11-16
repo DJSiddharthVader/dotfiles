@@ -7,10 +7,14 @@ pre_window: conda deactivate; clear
 windows:
   - scratch:
       root: /home/sidreed/CMU_MSCB/Current/Bio_Simulation-02712/Homework
-      pre: cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+      panes:
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
   - Simulations:
       root: /home/sidreed/CMU_MSCB/Current/Bio_Simulation-02712/Homework
-      pre: cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+      panes:
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
   - Genomics:
       root: /home/sidreed/CMU_MSCB/Current/Comp_Genomics-03711/Homework
       pre: cd "$(find . -maxdepth 1 | sort -n | tail -1)"

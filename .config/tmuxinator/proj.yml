@@ -1,0 +1,17 @@
+# /home/sidreed/.config/tmuxinator/proj.yml
+
+name: proj
+root: ~/Projects/Modelling-02712-Project/
+windows:
+  - git:
+      panes:
+        - watch -n2 "~/.scripts/commit-status.sh status"
+        - 
+  - code: 
+      root: ~/Projects/Modelling-02712-Project/src
+      layout: 5083,74x38,0,0[74x31,0,0,11,74x6,0,32,14]] 
+
+      panes:
+        - vi matrix_generation.py
+        -
+  - scratch: 
