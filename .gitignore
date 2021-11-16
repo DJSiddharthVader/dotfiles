@@ -92,3 +92,4 @@ Anaconda*
 .config/kritadisplayrc
 .config/monitors.xml
 .config/user-dirs.locale
+.config/nvim/plugged/
