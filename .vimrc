@@ -122,6 +122,11 @@ set foldtext=MyFoldText()
 colorscheme anderson
 colorscheme angr
 
+" always transparent background
+highlight Normal guibg=none
+highlight NonText guibg=none
+au ColorScheme * hi Normal ctermbg=none guibg=none
+
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
@@ -235,7 +240,7 @@ autocmd BufReadPost *
 set viminfo^=%
 
 " => Editing mappings
-" ===============================================================
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " With a map leader it's possible to do extra key combinations
 " like <leader>w saves the current file
 let mapleader = ","
@@ -316,7 +321,6 @@ inoremap $q ''<esc>i
 inoremap $e ""<esc>i
 inoremap $t <><esc>i
 
-
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing ,ss will toggle and untoggle spell checking
@@ -391,99 +395,8 @@ function! CopyMatches(reg)
     execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
-
 " => Plugin options
 " ===============================================
-" launch pathogen
-execute pathogen#infect()
-
-" Enable filetype plugins
-filetype plugin on
-filetype indent on
-
-" => Vimtex
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vimtex_mappings_enabled = 0
-let g:vimtex_view_general_viewer = 'open'
-let g:vimtex_view_general_options = '-a zathura'
-let g:tex_flavor='latex'
-let g:vimtex_view_method='zathura'
-let g:vimtex_quickfix_mode=0
-set conceallevel=1
-let g:tex_conceal='abdmg'
-let g:vim_markdown_math = 1
-
-" => Pandoc markdown
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vim_markdown_math = 1
-let g:markdown_fenced_languages = ['css','json=javascript', 'ruby', 'xml', 'python', 'go','tex']
-let g:pandoc#syntax#codeblocks#embeds#langs = ["ruby","literatehaskell=lhaskell", "bash=sh","go"]
-
-augroup pandoc_syntax
-    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-augroup END
-
-" => Syntastic
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pymode_python = 'python3'
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_exec='/home/sidreed/anaconda3/bin/flake8'
-let g:syntastic_python_pylint_exec='/home/sidreed/anaconda3/bin/pylint'
-let g:syntastic_python_pylint_args='--disable=missing-docstring --errors-only'
-let g:syntastic_go_checkers= ['go', 'gofmt', 'govet']
-let g:syntastic_enable_r_lintr_checker = 1
-let g:syntastic_R_checkers= ['lintr']
-let g:syntastic_markdown_checkers= ['mdl', 'proselint']
-let g:syntastic_tex_checkers= ['chktex', 'proselint']
-let g:syntastic_bash_checkers= ['shellcheck']
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-" => Airline
-""""""""""""""""""""""""""""""
-" Always show the status line
-set laststatus=2
-
-" Format the status line
-set statusline=\ %l,%c\ \ %{HasPaste()}%F%m%r%h\ %w "CWD:\ %r%{getcwd()}%h\ \
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:airline_theme="wal"
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts=1
-
-" => Goyo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:goyo_width=100
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
-nnoremap <silent> <leader>z :Goyo<cr>
-
-" => Startify
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Custom Header
-let g:startify_custom_header = [
-      \ '                                             ',
-      \ '      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~          ',
-      \ '     {  "The more you use VIM the  }         ',
-      \ '     {  the less you use VIM."     }         ',
-      \ '     {       -- DJSiddharthVader   }         ',
-      \ '      ~~~~~~~~~    ~~~~~~~~~~~~~~~~          ',
-      \ '               \  /                          ',
-      \ '                \ \  ___                     ',
-      \ '                    (-_-)                    ',
-      \ '                    _) (_                    ',
-      \ '                   /     \                   ',
-      \ '                 _( \_ _/ )_                 ',
-      \ '                (_____\_____)                ',
-      \ '                                             ',
-      \ ]
-"
+" launch pathogen, breaks nvim LSP
+"execute pathogen#infect()
 
