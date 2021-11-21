@@ -151,7 +151,7 @@ border-left-size = 10
 padding = 1
 module-margin = 1
 line-size = 0
-background = ${colors.clear0}
+background = ${colors.transparent}
 foreground = ${colors.foreground}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
@@ -302,7 +302,7 @@ modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backligh
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
 bottom = true
-modules-left = date battery memory cpu temperature xkeyboard disk uptime weather
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
 modules-right = reading
 
@@ -329,7 +329,7 @@ modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applaunc
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
 bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather
+modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
 modules-right = reading
 
