@@ -5,16 +5,18 @@ root: ~/CMU_MSCB/Current
 pre_window: conda deactivate; clear
 
 windows:
-  - scratch:
+  - code:
       root: /home/sidreed/CMU_MSCB/Current/Bio_Simulation-02712/Homework
+      layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
       panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"; vi -p *.py
         - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
   - Simulations:
       root: /home/sidreed/CMU_MSCB/Current/Bio_Simulation-02712/Homework
+      layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
       panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"; vi *.md
         - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
   - Genomics:
       root: /home/sidreed/CMU_MSCB/Current/Comp_Genomics-03711/Homework
-      pre: cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+      pre: cd "$(find . -maxdepth 1 | sort -n | tail -1)"; vi *.md
