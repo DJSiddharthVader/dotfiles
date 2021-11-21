@@ -9,8 +9,47 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
+4,25fold
+34,41fold
+42,50fold
+26,51fold
+62,69fold
+70,82fold
+52,83fold
+89,96fold
+97,105fold
+84,106fold
+122,128fold
+129,135fold
+136,142fold
+145,152fold
+153,160fold
+161,168fold
+169,176fold
+177,185fold
+187,195fold
+196,199fold
+200,203fold
+204,207fold
+107,207fold
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 11) / 22)
+26
+normal! zo
+26
+normal! zc
+52
+normal! zo
+52
+normal! zc
+84
+normal! zo
+84
+normal! zc
+107
+normal! zo
+107
+normal! zc
+let s:l = 1 - ((0 * winheight(0) + 29) / 59)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt

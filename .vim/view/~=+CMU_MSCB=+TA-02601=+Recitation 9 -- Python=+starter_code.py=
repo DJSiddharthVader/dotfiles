@@ -9,34 +9,55 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-3,9fold
-10,116fold
-117,145fold
-146,152fold
-153,179fold
-180,241fold
-242,274fold
-275,289fold
-290,308fold
-309,326fold
-327,337fold
-350,370fold
-371,377fold
-378,397fold
-338,400fold
-401,405fold
+3,24fold
+33,45fold
+46,54fold
+25,55fold
+66,83fold
+84,96fold
+56,97fold
+103,110fold
+111,119fold
+98,120fold
+136,142fold
+143,149fold
+150,156fold
+159,166fold
+167,174fold
+175,182fold
+183,190fold
+191,198fold
+201,209fold
+210,213fold
+214,217fold
+218,221fold
+157,221fold
+121,221fold
 let &fdl = &fdl
-338
+25
 normal! zo
-338
+25
 normal! zc
-let s:l = 1 - ((0 * winheight(0) + 11) / 22)
+56
+normal! zo
+56
+normal! zc
+98
+normal! zo
+98
+normal! zc
+121
+normal! zo
+157
+normal! zo
+121
+normal! zc
+let s:l = 234 - ((231 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 0
-lcd ~/Projects/Evolution-02731-Project
+keepjumps 234
+normal! 012|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

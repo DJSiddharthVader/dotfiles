@@ -11,19 +11,22 @@ setlocal fen
 silent! normal! zE
 3,9fold
 10,32fold
-33,38fold
-39,49fold
-50,58fold
-59,76fold
-77,97fold
-98,116fold
-117,127fold
+33,39fold
+40,51fold
+52,61fold
+62,80fold
+81,102fold
+103,122fold
+123,128fold
+129,202fold
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 17) / 35)
+129
+normal! zo
+let s:l = 194 - ((45 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
+keepjumps 194
 normal! 0
 lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
