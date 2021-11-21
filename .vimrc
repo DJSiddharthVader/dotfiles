@@ -252,6 +252,9 @@ nnoremap <C-i> <C-a>
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" better pattern searchin
+nnoremap n nzzzv
+
 " Remap VIM 0 to first non-blank character
 "map 0 ^
 
