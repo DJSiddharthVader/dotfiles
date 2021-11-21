@@ -8,6 +8,7 @@ usr="$(echo -e '\u23FF')"
 hst="$(echo -e '\u237E')"
 dir="$(echo -e '\u26E9')"
 # Module functions
+status_cmd="$HOME/dotfiles/.scripts/commit-status.sh"
 exitstatus() {
     case "$?" in
         0) icon="✔" ;;
@@ -35,12 +36,12 @@ gits() {
         [[ $branch = 'master' ]] && branch='m' # trim master to m
         prompt="$prompt($branch)" # current git branch
 
-        commits="$(git status 2> /dev/null | grep -o 'by [0-9]* commit' | cut -d' ' -f2)"
+        commits="$("$status_cmd" status | grep -o 'by [0-9]* commit' | cut -d' ' -f2)"
         if [[ -n "$commits" ]]; then # non-zero commits
            prompt="$prompt$committed_symbol$commits"
         fi
 
-        status="$(git status --short 2> /dev/null)"
+        status="$("$status_cmd" short )"
         staged=$(echo "$status" | grep -c '^ [ADC]' | tr -d ' ')
         if [[ "$staged" != 0 ]]; then # non-zero staged files
            prompt="$prompt$staged_symbol$staged"

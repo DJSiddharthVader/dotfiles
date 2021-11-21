@@ -6,27 +6,34 @@ to_ignore=(
     "" #status seems to skip this idk why
     ".vim/view/*"
     ".vim/spell/*"
+    ".config/mpd/playlists/*"
     ".config/polybar/modules.mode"
     ".config/polybar/separators.mode"
-    ".config/mpd/playlists/*"
     ".config/qt5ct/colors/pywal.conf"
     ".config/zathura/zathurarc"
     ".config/transmission-daemon/stats.tsv"
     ".gitignore"
-    ".config/zathura/zathurarc"
     )
 
 help() {
-    echo "Error: usage $0 {status|commit}"
+    echo "Error: usage $0 {status|commit|short}"
 }
-status() {
+filter() {
     pattern=""
     for i in ${!to_ignore[@]}; do
         files="${to_ignore[$i]}"
         pattern="$pattern\|$files"
     done
     pattern="'$(echo "$pattern" | sed -e 's/^\\|//')'"
-    git status | grep -v "$pattern"
+    echo "$pattern"
+}
+short() {
+    pattern="$(filter)"
+    git status --short 2> /dev/null | grep -v "$pattern"
+}
+status() {
+    pattern="$(filter)"
+    git status 2> /dev/null | grep -v "$pattern"
 }
 commit() {
     cd $dotdir
@@ -38,6 +45,7 @@ commit() {
 }
 main() {
     case "$1" in
+        'short')  short  ;;
         'status') status ;;
         'commit') commit ;;
         *) help && exit 1 ;;
