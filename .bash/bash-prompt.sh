@@ -32,7 +32,7 @@ gits() {
     prompt="$bsym "
     if [ -n "$(git branch 2> /dev/null)" ]; then
         branch="$(git branch 2> /dev/null | grep '\*' | cut -d' ' -f2)"
-        [[ $branch = 'master' ]] && branch='m'
+        [[ $branch = 'master' ]] && branch='m' # trim master to m
         prompt="$prompt($branch)" # current git branch
 
         commits="$(git status 2> /dev/null | grep -o 'by [0-9]* commit' | cut -d' ' -f2)"
@@ -49,7 +49,7 @@ gits() {
         if [[ "$changed" != 0 ]]; then # non-zero changed files
            prompt="$prompt$changed_symbol$changed"
         fi
-        added=$(echo "$status" | grep -c '^\?\?' | tr -d ' ')
+        added=$(echo "$status" | grep -c '^??' | tr -d ' ')
         if [[ "$added" != 0 ]]; then # non-zero untracked files
            prompt="$prompt$added_symbol$added"
         fi
