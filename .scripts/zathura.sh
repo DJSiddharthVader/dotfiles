@@ -2,8 +2,7 @@
 
 . $HOME/.cache/wal/colors.sh
 
-cat > ~/.config/zathura/zathurarc << EOM
-set recolor "true"
+cat > ~/.cache/zathura.colors << EOM
 set recolor-darkcolor "$color0"
 set recolor-lightcolor "$color1"
 set default-bg "$color1"
@@ -32,10 +31,4 @@ set index-active-bg "$color12"
 set index-active-fg "$color0"
 set render-loading-bg "$color13"
 set render-loading-fg "$color0"
-
-set window-title-basename true
-set statusbar-basename false
-set statusbar-home-tilde true
-set selection-clipboard clipboard
 EOM
-
