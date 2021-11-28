@@ -297,7 +297,7 @@ inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float-top.bar
 modules-left = i3 focused leftcap
 modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
+modules-right = bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/laptop-bottom]
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
