@@ -1,15 +1,18 @@
 # /home/sidreed/.config/tmuxinator/visuals.yml
-
 name: visuals
 root: ~/
 
 windows:
-  - editor:
-      layout: 0380,210x57,0,0{80x57,0,0[80x27,0,0,57,80x29,0,28,59],129x57,81,0[129x27,81,0,58,129x13,81,28{76x13,81,28,60,52x13,158,28,62},129x15,81,42,61]}]
+  - hacker:
+      layout: 80da,149x38,0,0{80x38,0,0[80x13,0,0,92,80x24,0,14,93],68x38,81,0[68x11,81,0,94,68x10,81,12,95,68x15,81,23,96]}
       panes:
+        - ~/.scripts/quote.sh -t cigarette -c81 -l 1 -a 'joshdick' -q 'A drunk man usually finds his way home, but a drunk bird almost never does.  More formally, a random walk in 2 dimensions usually returns to the origin, whereas a random walk in 3 dimensions almost never does.'
+
         - neofetch
         - ~/Apps/pipes.sh/pipes.sh
-        -
-        - cmatrix
-        - ~/.scripts/quote.sh -t cigarette -a 'Jean-Luc Godard' -q 'He who jumps into the void owes no explanation to those who stand and watch'
-        - cava
+        - htop
+        - ncmpcpp -s visualizer
+  - config:
+      panes:
+        - vim -p ~/.config/tmuxinator/visuals.yml ~/Documents/Notes/Quotes.md
+        - 
