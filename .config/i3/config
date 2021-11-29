@@ -1,6 +1,7 @@
 # vim: filetype=i3
 ##---i3 options------------#
 #Window options
+border_radius 2
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 for_window [instance="protonvpn"] floating enable
@@ -12,8 +13,8 @@ set $defgaps 5
 gaps inner $defgaps
 gaps outer $defgaps
 mouse_warping none
-#focus_follows_mouse no
-#font TerminessTTF Nerd Font Mono:style=Medium
+focus_follows_mouse yes
+font "TerminessTTF Nerd Font:style=Regular:pixelsize=17:antialias=true;4"
 set $hibernate sudo systemctl suspend
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 
@@ -55,10 +56,10 @@ exec --no-startup-id firefox --browser
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 625 600
+for_window [instance="dropdown"] resize set 725 450
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
-for_window [instance="dropdown"] border pixel 1
+for_window [instance="dropdown"] border pixel 0
 exec $term -n dropdown -e tmuxinator start scratch
 
 #cheatsheets
