@@ -1,7 +1,7 @@
 # vim: filetype=i3
 ##---i3 options------------#
 #Window options
-border_radius 2
+border_radius 3
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 for_window [instance="protonvpn"] floating enable
@@ -61,14 +61,12 @@ for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
 exec $term -n dropdown -e tmuxinator start scratch
-
 #cheatsheets
 for_window [instance="cheatsheet"] floating enable
 
 ##---Music-----------------#
 #Music player daemon and sound:
 exec --no-startup-id [ ! -s ~/.config/mpd/pid ] && mpd
-
 #ncmpcpp scratch terminal
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
 for_window [instance="music"] resize set 600 600
@@ -76,7 +74,6 @@ for_window [instance="music"] floating enable
 for_window [instance="music"] move scratchpad
 for_window [instance="music"] border pixel 0
 exec $term -n music -e $music
-
 #Music Commands
 set $pause --no-startup-id mpc toggle
 set $trupause --no-startup-id mpc pause
@@ -88,7 +85,6 @@ set $bigfor --no-startup-id mpc seek +120
 set $lilbak --no-startup-id mpc seek -10
 set $bigbak --no-startup-id mpc seek -120
 set $beg --no-startup-id mpc seek 0%
-
 #For Alsa/Amixer
 set $inc --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 2
 set $biginc --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 5
@@ -97,7 +93,6 @@ set $bigdec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down
 set $mute --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh togmute
 set $micmute --no-startup-id amixer set Capture toggle
 set $truemute --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh mute
-
 #Volume keys
 bindsym $mod+equal          exec $inc
 bindsym $mod+Shift+equal    exec $biginc
@@ -107,23 +102,11 @@ bindsym $mod+less 	    	exec $prev
 bindsym $mod+Shift+less		exec $beg
 bindsym $mod+greater		exec $next
 bindsym $mod+Shift+greater	exec $repeatone
-
 #For advancing forward/backward in an mpd song
 bindsym $mod+bracketleft 	    exec $lilbak
 bindsym $mod+Shift+bracketleft 	exec $bigbak
 bindsym $mod+bracketright 	    exec $lilfor
 bindsym $mod+Shift+bracketright exec $bigfor
-
-#For spotify
-#set $music spotify
-#set $pause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause
-#set $trupause dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Pause
-#set $play dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Play
-#set $next dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next
-#set $prev dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous
-#set $lilfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek
-#set $bigfor dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Seek(
-
 
 ##---Basic Bindings--------#
 bindsym $mod+space		  focus mode_toggle
@@ -141,82 +124,56 @@ bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
 ##---Letter Key Bindings---#
 bindsym $mod+q         kill
 #bindsym $mod+Shift+q
-
 bindsym $mod+w         exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w   exec --no-startup-id ~/Apps/tor-browser_en-US/Browser/start-tor-browser
-
 bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
 bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
-
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
-
 bindsym $mod+t         exec ~/.torrent.sh -m search
 #bindsym $mod+Shift+t  layout toggle
-
 bindsym $mod+y         resize shrink width 5 px or 5 ppt
 bindsym $mod+Shift+y   resize grow width 5 px or 5 ppt
-
 bindsym $mod+u         [instance="dropdown"] scratchpad show,move position center
 #bindsym $mod+Shift+u
-
 bindsym $mod+i         resize shrink height 5 px or 5 ppt
 bindsym $mod+Shift+i   resize grow height 5 px or 5 ppt
-
 bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu style
 bindsym $mod+Shift+o   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu sep
-
 bindsym $mod+p         exec $pause
 bindsym $mod+Shift+p   exec tabbed -c zathura -e
-
 bindsym $mod+a         gaps inner current minus 2
 bindsym $mod+Shift+a   gaps inner current plus 2
-
 bindsym $mod+s         gaps outer current minus 2
 bindsym $mod+Shift+s   gaps outer current plus 2
-
 bindsym $mod+d         move workspace to output right
 bindsym $mod+Shift+d   move workspace to output left
-
 bindsym $mod+f         fullscreen toggle
 #bindsym $mod+Shift+f
-
 bindsym $mod+g         gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+g   gaps inner current set $defgaps; gaps outer current set $defgaps
-
 bindsym $mod+h         focus left
 bindsym $mod+Shift+h   move left 10
-
 bindsym $mod+j         focus down
 bindsym $mod+Shift+j   move down 10
-
 bindsym $mod+k         focus up
 bindsym $mod+Shift+k   move up 10
-
 bindsym $mod+l         focus right
 bindsym $mod+Shift+l   move right 10
-
 bindsym $mod+z         exec --no-startup-id ~/.scripts/monitor.sh auto
 bindsym $mod+Shift+z   exec --no-startup-id ~/.scripts/monitor.sh laptop
-
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 #bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
-
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
-
 bindsym $mod+v         exec --no-startup-id ~/.scripts/bitwarden.sh
 #bindsym $mod+Shift+v
-
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
-
 bindsym $mod+n         focus output right
 bindsym $mod+Shift+n   focus output left
-
 bindsym $mod+m        [instance="music"] scratchpad show; [instance="music"] move position center
 #bindsym $mod+Shift+m exec $mute
-
 #bindsym $mod+Shift+Return
 #bindsym $mod+Shift+Escape
 #bindsym $mod+Shift+BackSpace
@@ -243,7 +200,6 @@ bindsym $mod+apostrophe		split horizontal ;; exec $term
 bindsym $mod+slash		    split vertical ;; exec $term
 bindsym $mod+Shift+slash	kill
 bindsym $mod+backslash		workspace back_and_forth
-
 #Set workspaces
 set $ws1 "1"
 set $ws2 "2"
@@ -255,7 +211,6 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
-
 # switch to workspace
 bindsym $mod+1		workspace $ws1
 bindsym $mod+2		workspace $ws2
@@ -267,7 +222,6 @@ bindsym $mod+7		workspace $ws7
 bindsym $mod+8		workspace $ws8
 bindsym $mod+9		workspace $ws9
 bindsym $mod+0		workspace $ws10
-
 # move focused container to workspace
 bindsym $mod+Shift+1	move container to workspace $ws1
 bindsym $mod+Shift+2	move container to workspace $ws2
@@ -279,7 +233,6 @@ bindsym $mod+Shift+7	move container to workspace $ws7
 bindsym $mod+Shift+8	move container to workspace $ws8
 bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
-
 
 ##---Arrow Keys------------#
 bindsym $mod+Left		    focus left
