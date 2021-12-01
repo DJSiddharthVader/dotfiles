@@ -67,7 +67,7 @@ main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
         [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
-        display "$dmode"
+        display "$dmode" 2> /dev/null
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in
