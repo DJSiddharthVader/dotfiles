@@ -79,6 +79,28 @@ isConnected() {
         echo 'true'
     fi
 }
+organizeWorkspaces() {
+    mode="$1"
+    case "$mode" in
+        home) 
+            move_left=(1)
+            move_right=(2 3 4 6 8)
+            ;;
+        present)
+            move_left=(1)
+            move_right=(3 6)
+            ;;
+        *) help && exit 1 ;;
+    esac
+    for ws in "${move_left[@]}"; do
+        i3-msg workspace "$ws"
+        i3-msg move workspace to output left
+    done
+    for ws in "${move_right[@]}"; do
+        i3-msg workspace "$ws"
+        i3-msg move workspace to output right
+    done
+}
 main() {
     mode="$1"
     if [[ "$mode" = 'auto' ]]; then
@@ -90,6 +112,7 @@ main() {
             case $monitors in
                 4) connect ext # at home
                    $bar_manager_script style cross
+                   organizeWorkspaces 'home'
                    ;;
                 3) connect ext # some 2 monitor setup
                    $bar_manager_script style float
@@ -97,6 +120,7 @@ main() {
                 2) connect hybrid # presenting
                    $bar_manager_script style press
                    connectAudio hdmi
+                   organizeWorkspaces 'present'
                    ;;
                 1) echo 'No monitors connected' && exit 0 ;;
                 *) echo 'Error detecting monitors' && exit 1 ;;
