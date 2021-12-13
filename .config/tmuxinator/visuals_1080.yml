@@ -1,0 +1,20 @@
+# /home/sidreed/.config/tmuxinator/visuals_1080.yml
+name: visuals_1080
+root: ~/
+
+windows:
+  - hacker:
+      pre-window: sleep 3
+      layout: b971,210x59,0,0{80x59,0,0[80x12,0,0,153,80x20,0,13,155,80x25,0,34,156],129x59,81,0[129x30,81,0{62x30,81,0,157,66x30,144,0,158},129x28,81,31{54x28,81,31[54x11,81,31,159,54x16,81,43,160],74x28,136,31,161}]}
+      panes:
+        - ~/.scripts/quote.sh -t frog -c "${COLUMNS}" -l 1 -a 'Jack Dierderich' -q 'I hate code and I want as little as possible in our product' | less
+        - ranger ~/CMU_MSCB
+        - neofetch
+        - ~/Apps/pipes.sh/pipes.sh
+        - htop
+        - clear; ls
+        - cmatrix
+        - ncmpcpp -s visualizer
+  - config:
+      panes:
+        - vim -p ~/.config/tmuxinator/visuals_1080.yml 

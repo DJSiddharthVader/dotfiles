@@ -1,18 +1,20 @@
 # /home/sidreed/.config/tmuxinator/visuals.yml
+# window layout command 
+# tmux list-windows | head -1 | cut -d'[' -f3- | cut -d' ' -f2- | rev | cut -d']' -f2- | rev | tr -d '\n' | copy
+
 name: visuals
 root: ~/
 
 windows:
   - hacker:
-      layout: 80da,149x38,0,0{80x38,0,0[80x13,0,0,92,80x24,0,14,93],68x38,81,0[68x11,81,0,94,68x10,81,12,95,68x15,81,23,96]}
+      layout: 5580,149x38,0,0{80x38,0,0[80x13,0,0,189,80x24,0,14,191],68x38,81,0[68x13,81,0,192,68x10,81,14,193,68x13,81,25,194]}
       panes:
-        - ~/.scripts/quote.sh -t cigarette -c81 -l 1 -a 'joshdick' -q 'A drunk man usually finds his way home, but a drunk bird almost never does.  More formally, a random walk in 2 dimensions usually returns to the origin, whereas a random walk in 3 dimensions almost never does.'
-
+        - cava
         - neofetch
-        - ~/Apps/pipes.sh/pipes.sh
+        - ~/.scripts/quote.sh -t frog -c "${COLUMNS}" -l 1 -a 'Jack Dierderich' -q 'I hate code and I want as little as possible in our product'
         - htop
-        - ncmpcpp -s visualizer
+        - ~/Apps/pipes.sh/pipes.sh
   - config:
       panes:
-        - vim -p ~/.config/tmuxinator/visuals.yml ~/Documents/Notes/Quotes.md
+        - vim ~/.config/tmuxinator/visuals.yml
         - 
