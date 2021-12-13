@@ -44,13 +44,12 @@ parse_results() {
     page="${1:-}"
     sed -i '/<\/th>/d' "$page" # filter crap
     links="$(get_links "$page")"
-    echo "$links" 1>&2 
     names="$(extract_from_page $page 'coll-1 name' '\/a')"
+    sizes="$(extract_from_page $page 'coll-4 size' 'span')"
+    dates="$(extract_from_page $page 'coll-date' '\/td')"
     seeders="$(extract_from_page $page 'coll-2 seeds' '\/td')"
     leechers="$(extract_from_page $page 'coll-3 leeches' '\/td')"
-    dates="$(extract_from_page $page 'coll-date' '\/td')"
-    sizes="$(extract_from_page $page 'coll-4 size' 'span')"
-    paste <(echo "$links") <(echo "$dates") <(echo "$seeders") <(echo "$leechers") <(echo "$sizes") <(echo "$names")
+    paste <(echo "$links") <(echo "$names") <(echo "$sizes") <(echo "$dates") <(echo "$seeders") <(echo "$leechers")
     # paste <(echo "$dates") <(echo "$seeders") <(echo "$leechers") <(echo "$sizes") <(echo "$names") 
 }
 main() {

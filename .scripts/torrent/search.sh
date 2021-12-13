@@ -3,7 +3,7 @@ shopt -s extglob
 
 # search 1337x.to for torrents given a query and echo the magnet links as one space delimited string
 
-MAX_PAGES=5 # max number of results pages to parse when searching
+MAX_PAGES=3 # max number of results pages to parse when searching
 
 search() {
     # download search results for query
@@ -14,7 +14,7 @@ search() {
     ~/.scripts/torrent/get_kickass_results.sh "$query" "$MAX_PAGES" >> "$results"
     formatted_results=$(mktemp)
     paste <(seq 1 "$(wc -l "$results" | cut -d' ' -f1)") $results |\
-            tr -s ' ' >| "$formatted_results"
+            tr -s ' ' | sort --field-separator='\t' --key=5n >| "$formatted_results"
     # pick result(s)
     chosen="$(cut -f1,3- "$formatted_results" | sed 's/\t/=|=/g' | column -s'=' -t |\
               rofi -lines 25 -width 80 -dmenu -multi-select -p "Pick Torrent")"
