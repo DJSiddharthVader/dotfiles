@@ -60,9 +60,9 @@ font-overflow-huge = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=29:antiali
 ;font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
 ;font-overflow = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 ; for powerline separators
-font-powerline = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=22:antialias=true;4
-font-powerline-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=28:antialias=true;6
-font-powerline-huge = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=58:antialias=true;9
+font-powerline = FiraCode Nerd Font Mono:style=Regular:size=14:antialias=true;3
+font-powerline-large = FiraCode Nerd Font Mono:style=Regular:size=23:antialias=true;3
+font-powerline-huge = FiraCode Nerd Font Mono:style=Regular:size=25:antialias=true;9 
 ; for long scrolling text, (smaller and mono-spaced)
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
 font-scrolling-large = Terminus:style=Regular:pixelsize=18;2
@@ -297,7 +297,7 @@ inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float-top.bar
 modules-left = i3 focused leftcap
 modules-center =
-modules-right = bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/laptop-bottom]
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
