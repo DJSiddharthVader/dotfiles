@@ -3,7 +3,7 @@ laptop_screen="eDP-1"
 bar_manager_script="$HOME/dotfiles/.scripts/bar-manager.sh"
 
 help() {
-    echo "Usage: $0 {ext|hybrid|laptop}"
+    echo "Usage: $0 {auto|ext|hybrid|laptop}"
 }
 resolution() {
     monitor="$1"
