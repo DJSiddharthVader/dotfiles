@@ -42,10 +42,12 @@ usage() {
           $blnk rh                              reset wallpaper history
           $blnk reload                          reload colors for current wallpaper
           $blnk print                           print current wallpaper path
-          $blnk display                         print current wallpaper
+          $blnk display                         fprint current wallpaper
           $blnk path/to/image {font|back|both}  set the wallpaper using explicit path to image
+                                                can also specify just a directroy and a random
+                                                image from that dir will be chosen
           $blnk prev          {font|back|both}  set the wallpaper to previous image
-          $blnk stay          {font|back|both}  set the wallpaper to previous image
+          $blnk stay          {font|back|both}  keep current wallpaper
           $blnk next          {font|back|both}  set the wallpaper to current wallpaper
                               font updates the colorschemes but doesnt update the wallpaper with new image
                               back updates the wallpaper but doesnt update the colorscheme with new image
@@ -129,6 +131,9 @@ changeColors() {
 }
 wall() {
     mode="$1"
+    if [[ -d "$mode" ]]; then
+         mode="$(find "$mode" -maxdepth 99 -type f | shuf | head -1)"
+    fi
     index=$(updateImageIndex "$mode") # get index of new wallpaper
     setIndex "$index" # write index to file
     image="$(indexToImage "$index")" # get image path of index
@@ -155,7 +160,11 @@ display() {
 
 main() {
     [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ] && resetHistory
-    [ -f "$1" ] && mode='path' || mode="$1"
+    if [[ -f "$1" || -d "$1" ]]; then
+        mode='path' 
+    else 
+        mode="$1"
+    fi
     change="$2"
     case "$mode" in
         rh            ) resetHistory && exit 0               ;;
