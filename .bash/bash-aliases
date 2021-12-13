@@ -32,6 +32,8 @@ alias gsl='~/.scripts/commit-status.sh status'
 alias gsw='watch -n2 "~/.scripts/commit-status.sh status"'
 
 #Apps
+alias pipes='~/Apps/pipes.sh/pipes.sh'
+alias man='tldr'
 alias top='htop'
 alias pdf='zathura'
 alias tsm="transmission-remote"
