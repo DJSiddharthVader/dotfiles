@@ -1,6 +1,6 @@
-bar:laptop
-separator:trig_out
-wallpaper_index:60
+bar:cross
+separator:arrow_tail
+wallpaper_index:155
 wifi:standardd
 songnames:static
 date:time
@@ -10,7 +10,7 @@ temperature:short
 disk:amount
 uptime:day
 torrent:speed
-reading:Solarpunk imagines sustainable urban jungles for the future - Kinder World~https://kinder.world/articles/solutions/solarpunk-imagines-sustainable-urban-jungles-for-the-future-18397
+reading:Material design charts and Data visualization encyclopedia~https://medium.com/@kamushken/material-design-charts-and-data-visualization-patterns-a9bfe8336ec7
 battery:all
 focus_thresh:40
 mullvad:location

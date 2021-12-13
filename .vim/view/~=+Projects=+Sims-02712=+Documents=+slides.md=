@@ -8,29 +8,36 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-17
+22
 normal! zo
-25
+65
 normal! zo
-34
+67
 normal! zo
-38
-normal! zo
-42
-normal! zo
-49
-normal! zo
-119
-normal! zo
-49
+67
 normal! zc
-let s:l = 43 - ((42 * winheight(0) + 28) / 56)
+81
+normal! zo
+101
+normal! zo
+81
+normal! zc
+113
+normal! zo
+135
+normal! zo
+137
+normal! zo
+145
+normal! zo
+let s:l = 145 - ((136 * winheight(0) + 28) / 56)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 43
-normal! 092|
+keepjumps 145
+normal! 03|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

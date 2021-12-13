@@ -16,14 +16,28 @@ normal! zo
 normal! zc
 60
 normal! zo
-62
+60
+normal! zc
+90
 normal! zo
-let s:l = 62 - ((55 * winheight(0) + 17) / 35)
+90
+normal! zc
+169
+normal! zo
+171
+normal! zo
+184
+normal! zo
+195
+normal! zo
+195
+normal! zc
+let s:l = 176 - ((157 * winheight(0) + 16) / 32)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 62
-normal! 02|
+keepjumps 176
+normal! 024|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost
