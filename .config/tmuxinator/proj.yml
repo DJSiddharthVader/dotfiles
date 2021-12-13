@@ -1,8 +1,8 @@
 # /home/sidreed/.config/tmuxinator/proj.yml
 
 name: proj
-root: ~/Projects/Sims-02712/
-pre_window: conda deactivate; conda activate proj_02712; clear
+root: ~/Projects/Automation
+pre_window: conda deactivate; conda activate proj_automation; clear
 
 windows:
   - git:
@@ -12,7 +12,7 @@ windows:
         - 
   - code: 
       layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
-      root: ~/Projects/Sims-02712/src
+      root: ~/Projects/Automation/src
 
       panes:
         - vim
@@ -21,4 +21,6 @@ windows:
       panes:
         - vi README.md
         - vi Documents/report.md
-  - scratch: 
+  - lab: 
+      panes:
+        - jupyter-lab 
