@@ -1,6 +1,6 @@
 #!/bin/bash
 
-readings="$HOME/.readings.txt"
+readings="$HOME/.varfiles/readings.txt"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 reading_folder="reading list"
 browser="firefox"
