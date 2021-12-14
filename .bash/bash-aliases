@@ -40,9 +40,7 @@ alias tsm="transmission-remote"
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 alias mx='tmuxinator'
 alias ta='tmux a -t'
-alias vt='~/.scripts/mullvad.sh toggle'
-alias haud='pactl set-card-profile 0 output:hdmi-stereo'
-alias aud='pactl set-card-profile 0 output:analog-stereo'
+alias go="/usr/local/go/bin/go"
 
 #Shorten
 alias ..='cd ..'
@@ -58,6 +56,9 @@ alias school='cd /home/sidreed/CMU_MSCB/Current/'
 alias pt='ping 8.8.8.8'
 alias md='sudo mount /dev/sdb1 /media/4tbdrive/'
 alias ud='sudo umount /media/4tbdrive/'
+alias vt='~/.scripts/mullvad.sh toggle'
+alias haud='pactl set-card-profile 0 output:hdmi-stereo'
+alias aud='pactl set-card-profile 0 output:analog-stereo'
 
 #Print
 alias cfh="grep -c '^>'"
