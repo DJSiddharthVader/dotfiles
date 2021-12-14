@@ -49,17 +49,14 @@ parse_results() {
     dates="$(extract_from_page $page 'coll-date' '\/td')"
     seeders="$(extract_from_page $page 'coll-2 seeds' '\/td')"
     leechers="$(extract_from_page $page 'coll-3 leeches' '\/td')"
-    paste <(echo "$links") <(echo "$names") <(echo "$sizes") <(echo "$dates") <(echo "$seeders") <(echo "$leechers")
+    paste <(echo "$links") <(echo "$names" | cut -c -60) <(echo "$sizes") <(echo "$dates") <(echo "$seeders") <(echo "$leechers")
     # paste <(echo "$dates") <(echo "$seeders") <(echo "$leechers") <(echo "$sizes") <(echo "$names") 
 }
 main() {
     query="${1:-}"
     max_pages="${2:-}"
-    # results="$(mktemp)"
-    results="results.html"
+    results="$(mktemp)"
     get_results "$query" "$max_pages" >| "$results"
-
-
     parse_results "$results" | grep -vi 'xxx' # filter porn
 }
 
