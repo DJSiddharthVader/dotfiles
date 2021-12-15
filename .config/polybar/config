@@ -75,20 +75,20 @@ font-weather-huge= Weather Icons:style=Regular:size=27;3
 ;font-main-huge = Retron2000:style=Regular:pixelsize=11:antialias=false;3
 
 ;; Thin
+;; MineCraftia
+font-main = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+font-main-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;12
+font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
+
 ;; Nitendo DS BIOS
 ;font-main = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
+;font-main-large = Nintendo DS BIOS:style=Regular:pixelsize=22;antialias=false;3
 ;font-main-huge = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
-;font-main-large = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
 
 ;; PixelPlay
 ;font-main = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
 ;font-main-large = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
 ;font-main-huge = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
-
-;; MineCraftia
-font-main = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
-font-main-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;7
-font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
 
 ;; Terminus
 ;font-main = Terminus:style=Regular:pixelsize=14;1
@@ -112,26 +112,23 @@ font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
 ;font-main-huge = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
 
 
-; for text char not in font-2, avoids oversized icons from defualting to font-4
+; Backup Font,  avoids oversized icons from defualting to font-4
 font-overflow =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
 font-overflow-large = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=19:antialias=true;1
 font-overflow-huge = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=29:antialias=true;1
 ;font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
 ;font-overflow = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
-; for powerline separators
+; Powerline Separators
 font-powerline = FiraCode Nerd Font Mono:style=Regular:size=15:antialias=true;3
 font-powerline-large = FiraCode Nerd Font Mono:style=Regular:size=23:antialias=true;3
 font-powerline-huge = FiraCode Nerd Font Mono:style=Regular:size=25:antialias=true;9 
-; for long scrolling text, (smaller and mono-spaced)
+; Long scrolling text, (smaller and mono-spaced)
+font-focused = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+font-focused-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;7
+font-focused-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
 font-scrolling-large = Terminus:style=Regular:pixelsize=18;2
 font-scrolling-huge = Terminus:style=Regular:pixelsize=23;2
-font-focused = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
-font-focused-large = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
-font-focused-huge = PixelSleigh:style=Regular:pixelsize=16:antialias=true;1
-;font-focused = Terminus:style=Regular:pixelsize=15:antialias=true;3
-;font-focused-large = Terminus:style=Regular:pixelsize=15:antialias=true;3
-;font-focused-large = TerminessTTF Nerd Font Mono:style=Medium:pixelsize=13:antialias=false;4
 
 
 ;bar formatting
@@ -318,7 +315,7 @@ modules-left = i3 focused focused-name applauncher pulseaudio-control wlan mullv
 [bar/cross-right]
 inherit = section/cross
 include-file = ~/dotfiles/.config/polybar/bars/cross-right.bar
-modules-right = torrent weather uptime disk xkeyboard temperature cpu memory battery date i3
+modules-right = songnames mpd torrent weather uptime disk xkeyboard temperature cpu memory battery date i3
 
 ;;standard
 [bar/standard-top]
