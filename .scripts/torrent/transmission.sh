@@ -239,11 +239,11 @@ delete_torrents() {
 search() {
     # search online for torrents, get magnets and start downloading
     magnets="$($search_script)"
+    echo -e "Found torrents\nAdding..."
     for magnet in ${magnets}; do
-        if [[ -n "${magnet}" ]]; then
-            transmission-remote -er -w $download_dir --add ${magnet}
-        fi
+        transmission-remote -er -w $download_dir --add ${magnet}
     done
+    echo "Added all torrents"
 }
 
 

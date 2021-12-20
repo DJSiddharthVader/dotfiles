@@ -2,6 +2,10 @@
 set -euo pipefail
 shopt -s extglob
 
+BASE_URL="https://1337x.to"
+BASE_SEARCH_URL="$BASE_URL/search"
+BASE_RESULT_URL="$BASE_URL"
+
 help() {
     echo "Usage: ./$(basename $0) query max_pages"
 }
@@ -9,12 +13,12 @@ get_results() {
     # download the search results for a torrent query from 1337x.to
     query="${1:-}"
     max_pages="${2:-}"
-    search_url="https://1337x.to/search/${query// /+}/1/"
+    search_url="$BASE_SEARCH_URL/${query// /+}/1/"
     total_pages="$(curl -Ss "$search_url" | grep 'Last' | sed -s 's/^.*class=.last.><a href=.\/search\/.*\/\([0-9]*\)\/.>.*$/\1/')"
     [[ $max_pages -lt $total_pages ]] && total_pages=$max_pages
     for page_num in $(seq 1 $total_pages); do
-        search_url="https://1337x.to/sort-search/${query// /+}/seeders/desc/$page_num/"
-        #echo $search_url
+        search_url="$BASE_SEARCH_URL/${query// /+}/$page_num/"
+        echo $search_url 1>&2
         curl -Ss "$search_url" 
     done
 }
@@ -32,7 +36,7 @@ get_links(){
     links="$(grep '/torrent/' "${results}" | sed -e 's/^.*href="\/\(torrent.*\)\/">.*$/\1/')"
     magnets=""
     while read link; do
-        magnet="$(curl -Ss "https://1337x.to/$link/" |\
+        magnet="$(curl -Ss "$BASE_RESULT_URL/$link/" |\
                   grep 'magnet' | head -1 |\
                   sed -e 's/^.*href="\(magnet[^"<>]*\)".*$/\1/')"
         [[ -n "$magnet" ]] && magnets="$magnets$magnet\n"
@@ -49,8 +53,7 @@ parse_results() {
     dates="$(extract_from_page $page 'coll-date' '\/td')"
     seeders="$(extract_from_page $page 'coll-2 seeds' '\/td')"
     leechers="$(extract_from_page $page 'coll-3 leeches' '\/td')"
-    paste <(echo "$links") <(echo "$names" | cut -c -60) <(echo "$sizes") <(echo "$dates") <(echo "$seeders") <(echo "$leechers")
-    # paste <(echo "$dates") <(echo "$seeders") <(echo "$leechers") <(echo "$sizes") <(echo "$names") 
+    paste <(echo "$links") <(echo "$sizes") <(echo "$dates") <(echo "$seeders") <(echo "$leechers") <(echo "$names")
 }
 main() {
     query="${1:-}"
