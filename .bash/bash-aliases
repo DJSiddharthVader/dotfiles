@@ -59,6 +59,7 @@ alias ud='sudo umount /media/4tbdrive/'
 alias vt='~/.scripts/mullvad.sh toggle'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
+alias tro='~/.scripts/torrent/transmission.sh'
 
 #Print
 alias cfh="grep -c '^>'"
