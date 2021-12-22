@@ -4,6 +4,7 @@ shopt -s extglob
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=(short long)
 #Icons
+degree="°"
 ramp1=""
 ramp2=""
 ramp3=""
@@ -38,8 +39,14 @@ setMode() {
     sed -i "/^temperature:/s/:.*/:$1/" "$mode_file"
 }
 
+get_temp() {
+    sensors \
+        |& grep -v 'ERROR' \
+        | grep Package \
+        | sed -e 's/^.*: *+\([0-9]*\)\..*$/\1/'
+}
 icon() {
-    temp="$(sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*..\).*$/\1/' | grep -o '^..')"
+    temp="$(get_temp)"
     case 1 in
         $(($temp < 40))) icon=$ramp1 ;;
         $(($temp < 50))) icon=$ramp2 ;;
@@ -50,16 +57,16 @@ icon() {
     echo "$icon"
 }
 short() {
-    sensors | grep -v 'ERROR' | grep Package | sed -e 's/^.*: \++\([0-9]*\.[0-9]*.\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g'
+    echo "$(get_temp)$degree"
 }
 long() {
-    sensors | grep -v 'ERROR' | grep 'Package\|Core' | sed -e 's/^.*: \++\([0-9]*\.[0-9]*.\).*$/\1/' | sed -e 's/\(\.[0-9]\)//g' | tr '\n' ' '
+    sensors |& grep -v 'ERROR' | grep 'Package\|Core' | sed -e "s/^.*: *+\([0-9]*\).*$/\1${degree}/" | tr '\n' ' '
 }
 display(){
     mode="$1"
     case $mode in
         'short') temp="$(icon) $(short)" ;;
-        'long') temp="$(icon) $(long)" ;;
+        'long')  temp="$(icon) $(long)"  ;;
         *) help && exit 1 ;;
     esac
     echo "$temp"
@@ -69,6 +76,7 @@ main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
         [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
+        echo "$dmode"
         display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
@@ -82,4 +90,4 @@ main() {
     fi
 }
 
-main "$1"
+main "$@"
