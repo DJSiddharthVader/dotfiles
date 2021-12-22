@@ -75,10 +75,15 @@ font-weather-huge= Weather Icons:style=Regular:size=27;3
 ;font-main-huge = Retron2000:style=Regular:pixelsize=11:antialias=false;3
 
 ;; Thin
+;; Apple ][
+;font-main = Apple ][:style=Regular:size=7:antialias=true:autohint=true;3
+;font-main-large = Apple ][:style=Regular:size=10:antialias=true:autohint=true;2
+;font-main-huge = Apple ][:style=Regular:size=11:antialias=true:autohint=true;3
+
 ;; MineCraftia
 font-main = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
-font-main-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;12
-font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
+;font-main-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;11
+;font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
 
 ;; Nitendo DS BIOS
 ;font-main = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
@@ -96,6 +101,11 @@ font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
 ;font-main-huge = Terminus:style=Regular:pixelsize=14;1
 
 ;; Pixel Gaming
+;; PKMN RBYGSC 
+;font-main = PKMN RBYGSC:style=Regular:size=7:antialias=true:autohint=true;2
+font-main-large = PKMN RBYGSC:style=Regular:size=11:antialias=true:autohint=true;3
+font-main-huge =PKMN RBYGSC:style=Regular:size=9:antialias=false:autohint=true;3
+
 ;; Retro Gaming
 ;font-main = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
 ;font-main-large = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
@@ -124,8 +134,8 @@ font-powerline-large = FiraCode Nerd Font Mono:style=Regular:size=23:antialias=t
 font-powerline-huge = FiraCode Nerd Font Mono:style=Regular:size=25:antialias=true;9 
 ; Long scrolling text, (smaller and mono-spaced)
 font-focused = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
-font-focused-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;7
-font-focused-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
+font-focused-large = MineCraftia:style=Regular:pixelsize=11;antialias=false;10
+font-focused-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;10
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
 font-scrolling-large = Terminus:style=Regular:pixelsize=18;2
 font-scrolling-huge = Terminus:style=Regular:pixelsize=23;2
