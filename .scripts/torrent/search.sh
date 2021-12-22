@@ -2,7 +2,7 @@
 # set -euo pipefail
 shopt -s extglob
 
-MAX_PAGES=5 # max number of results pages to parse when searching
+MAX_PAGES=3 # max number of results pages to parse when searching
 
 search() {
     # download search results for query
@@ -15,10 +15,13 @@ search() {
     ~/.scripts/torrent/search_kickass.sh "$query" "$MAX_PAGES" >> "$results" 
     echo "Got kickass results" 1>&2
     # formatted_results=$(mktemp)
-    formatted_results=results.tsv
-    paste <(seq 001 "$(wc -l "$results" | cut -d' ' -f1)") $results \
+    formatted_results=~/dotfiles/.scripts/torrent/results.tsv
+    ids="$(seq 001 "$(wc -l "$results" | cut -d' ' -f1)")"  # make id for each torrent
+    hashes="$(cut -f1 $results | sed -e 's/^.*btih:\([A-Z0-9]*\).*$/\1/')" # torrent hash for dedup
+    # paste <(echo "$ids") $results \
+    paste <(echo "$hashes") <(echo "$ids") $results \
+            | sort -t$'\t' -k1,1 -u | cut -f 2- \
             | tr -s ' ' \
-            | sort -t$'\t' -k2 -u \
             | sort -t$'\t' -k5 -gr >| $formatted_results  
     # pick result(s)
     if [[ "$(wc -l $formatted_results | cut -d' ' -f1)" -lt 2 ]]; then  
@@ -27,7 +30,7 @@ search() {
     else
         # format results nicelly in columns, sort be seeders
         chosen="$(cut -f1,3- "$formatted_results" \
-                  | sed 's/ *\t */=|/g' | column -s'=' -t \
+            | sed 's/ *\(\t\) */\1|/g' | column -s$'\t' -t \
                   | rofi -dmenu -multi-select -lines 25 -width 80 -p "Pick Torrent")"
     fi
     [[ -z "$chosen" ]] && echo "no queries selected, exiting" && exit 0  # exit if no results chosen
