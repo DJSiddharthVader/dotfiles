@@ -30,22 +30,6 @@ extract_from_page() {
          | tr '\n' '\t' \
          | sed -e 's/[\t \r]*--[\t \r]*/\n/g' 
 }
-# get_magnet() {
-#     grep "title=\"Magnet link\"" "${1:-}" | head -1 \
-#          | sed -e 's/^.*href=\"\(.*announce\).*$/\1/'
-# }
-# get_magnets() {
-#     links="$(grep -A1 'class=\"torrentname\"' "${1:-}" | grep 'href' \
-#              | sed -e 's/^.*<a href="\/\(.*\)" .*$/\1/')"
-#     magnets=""
-#     while read link; do
-#         magnet="$(curl -Ss -A "$USER_AGENT" "$BASE_RESULT_URL/$link/" \
-#                   | grep 'magnet' | head -1 \
-#                   | sed -e 's/^.*href="\(magnet[^"<>]*\)".*$/\1/')"
-#         [[ -n "$magnet" ]] && magnets="$magnets$magnet\n"
-#     done <<< "$(echo $links | tr ' ' '\n')"
-#     echo -e "$magnets" 
-# }
 get_magnets() {
     grep 'Torrent magnet link' "${1:-}" \
          | sed -e 's/^.*href="https:\/\/mylink.cx\/?url=\([^ ]*\)".*$/\1/' \
