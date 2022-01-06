@@ -191,4 +191,3 @@ case 1 in
 esac
 
 main "$mode" "$change"
-
