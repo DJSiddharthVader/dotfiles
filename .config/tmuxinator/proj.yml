@@ -1,8 +1,8 @@
 # /home/sidreed/.config/tmuxinator/proj.yml
 
 name: proj
-root: ~/Projects/Automation
-pre_window: conda deactivate; conda activate proj_automation; clear
+root: ~/Projects/Music-Getter
+pre_window: conda deactivate; conda activate Music-Getter; clear
 
 windows:
   - git:
@@ -12,15 +12,9 @@ windows:
         - 
   - code: 
       layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
-      root: ~/Projects/Automation/src
+      root: ~/Projects/Music-Getter/src
 
       panes:
         - vim
         -
-  - writing: 
-      panes:
-        - vi README.md
-        - vi Documents/report.md
-  - lab: 
-      panes:
-        - jupyter-lab 
+  - test: 
