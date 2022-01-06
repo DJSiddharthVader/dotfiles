@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -uo pipefail
 shopt -s extglob
 
 MODE_FILE="$HOME/dotfiles/.config/polybar/modules.mode"
@@ -33,7 +33,8 @@ help() {
         pause   | pause all torrents
         resume  | resume all torrents
         stats   | update up/download stats csv file
-        table   | print formatted table of torrents filtered
+        table   | print formatted table of torrents 
+        filter  | print table of torrents filtered
                 | by criteria i.e. {ratio|done|undone|error}
         del     | deleted torrents by criteria (same as table)
 "
@@ -201,7 +202,7 @@ display() {
             seed="$(echo "$states" | grep -c 'Seeding')"
             idle="$(echo "$states" | grep -c 'Idle')"
             both="$(echo "$states" | grep -c 'Both')"
-            msg="$down $seed  $idle" $both
+            msg="$down $seed  $idle $both"
             ;;
         *) echo 'display fail' && help && exit 1 ;;
     esac
@@ -231,7 +232,8 @@ filter_table() {
         done) table="$(format_table | cut -f1,2,9 | grep '100%')" ;;
         undone) table="$(format_table | cut -f1,2,9 | grep -v '100%')" ;;
         error) table="$(format_table | grep '\*' | cut -f 1,2,9 | tr -d '*')" ;;
-        *) echo "Invalid del mode $mode, must be {error|done|undone|ratio}" && exit 1 ;;
+        all)  table="$(format_table)" ;;
+        *) echo "Invalid del mode $mode, must be {all|error|done|undone|ratio}" && exit 1 ;;
     esac
     echo "$table" | grep -vP 'None'
 }
@@ -256,7 +258,6 @@ search() {
     done
     echo "Added all torrents"
 }
-
 
 main() {
     # to avoid strict errors from -euo
@@ -291,7 +292,8 @@ main() {
         'stats'  ) update_stats ;;
         'display') display "$(getMode)" "$unit" ;;
         'current') echo "Current default is $(getMode)" ;;
-        'table'  ) filter_table "$2" | column -s$'\t' -t ;;
+        'table'  ) filter_table 'all' | column -s$'\t' -t ;;
+        'filter' ) filter_table "$2";;
         'del'    ) delete_torrents "$2" ;;
         *) # change/set display mode
             tmp="@($(echo ${MODES[*]} | sed -e 's/ /|/g'))"
