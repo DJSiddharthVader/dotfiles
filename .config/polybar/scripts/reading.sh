@@ -7,7 +7,7 @@ browser="firefox"
 thresh=50
 
 help() {
-    echo "Error Usage: $0 {update|pick|open|display}"
+    echo "Error Usage: $0 {print|display|open|next|update}"
 }
 getArticle() {
     grep '^reading:' "$mode_file" | cut -d':' -f2- | cut -d'~' -f1
@@ -33,7 +33,7 @@ update() {
                    | perl -pe 's/,\n/~/'               \
                    | tr -s ' ' ' '                    >| $readings
 }
-pick() {
+next() {
     setReading "$(cat $readings | shuf -n1)"
     #restart zscroll with new article so scroll updates
     killall -q "$(basename $0)" > /dev/null 2>&1
@@ -62,7 +62,6 @@ display() {
         getArticle
     fi
 }
-
 main() {
     mode="$1"
     case "$mode" in
@@ -70,7 +69,7 @@ main() {
         'update' ) update ;;
         'print'  ) print ;;
         'open'   ) open ;;
-        'pick'   ) pick ;;
+        'next'   ) next;;
         *        ) help && exit 1 ;;
     esac
 }
