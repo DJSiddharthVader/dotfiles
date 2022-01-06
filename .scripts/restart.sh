@@ -1,6 +1,12 @@
 #!/bin/bash
 services=(compton pulse wifi)
 
+# how to fix H2P bluetooth headphones
+# 0. disconnect heaphones
+# 1. kill/start pulseaudio
+# 2. systemctl restart bluetooth
+# 3. connecct headphones
+
 help() {
     echo "Error: usage $0 \$SERVICE {stop|start|restart}"
 }
