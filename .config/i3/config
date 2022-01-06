@@ -53,6 +53,8 @@ exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay back
 exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh laptop
 #Launch browser
 exec --no-startup-id firefox --browser
+#Launch syncthing
+exec --no-startup-id syncthing
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
