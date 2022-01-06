@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
@@ -39,26 +40,49 @@ disk() {
     #-f2 is used disk space
     #-f3 is free disk space
     #-f4 is percent used
-    df -h | grep "$1$" | tr -s ' ' '\t' | cut -f2-5 | cut -f"$2"
+    size="$(df | grep "$1$" | tr -s ' ' '\t' | cut -f2-5 | cut -f"$2")"
+    # # chose the scale for display and format
+    TB_size="$(echo 1 | numfmt --from-unit="Ti" --to-unit="Ki")"
+    GB3_size="$(echo 100 | numfmt --from-unit="Gi" --to-unit="Ki")"
+    case 1 in 
+        $(( $size > $TB_size )))
+            scale="Ti"
+            fmt="%.2f"
+            ;;
+        $(( $size > $GB3_size )))
+            scale="Gi"
+            fmt="%.1f"
+            ;;
+        *) 
+            scale="Gi"
+            fmt="%.2f"
+            ;;
+    esac
+    echo "$size ${scale}" | numfmt --from-unit=Ki --to-unit="$scale" --format "$fmt"
 }
 percent_free() {
-    disk "$1" 4 | sed -e 's/\([0-9]*\)%/100-\1/' | bc | sed -e 's/^\([0-9]\)$/0\1/' | sed -e 's/$/%/'
+    disk "$1" 4 \
+        | sed -e 's/\([0-9]*\)%/100-\1/' \
+        | bc \
+        | sed -e 's/^\([0-9]\)$/0\1/' \
+        | sed -e 's/$/%/'
 }
 display() {
     mode="$1"
     msg=""
     dirs="$(df -h | grep '/dev/sd.. ' | grep -v 'efi' | rev | cut -d' ' -f1 | rev)"
     for dir in ${dirs[@]}; do
+
         case "$mode" in
-            'percent') drive="$(percent_free "$dir")" ;;
-            'amount' ) drive="$(disk "$dir" 3)" ;;
-            'used'   ) drive="Used: $(disk "$dir" 2) $(disk "$dir" 4)" ;;
-            'free'   ) drive="Free: $(percent_free "$dir") $(disk "$dir" 3)" ;;
-            'amounts') drive="Used: $(disk "$dir" 2) Free: $(disk "$dir" 3)" ;;
-            'all'    ) drive="Used: $(disk "$dir" 2) $(disk "$dir" 4) Free: $(disk "$dir" 3) $(percent_free "$dir")" ;;
+            'percent') space="$(percent_free "$dir")" ;;
+            'amount' ) space="$(disk "$dir" 3)" ;;
+            'used'   ) space="Used: $(disk "$dir" 2) $(disk "$dir" 4)" ;;
+            'free'   ) space="Free: $(percent_free "$dir") $(disk "$dir" 3)" ;;
+            'amounts') space="Used: $(disk "$dir" 2) Free: $(disk "$dir" 3)" ;;
+            'all'    ) space="Used: $(disk "$dir" 2) $(disk "$dir" 4) Free: $(disk "$dir" 3) $(percent_free "$dir")" ;;
             *) help && exit 1 ;;
         esac
-        msg="$msg/${dir##*/} $drive "
+        msg="$msg/${dir##*/} $space "
     done
     echo "$msg" | sed -s 's/ *$//'
 }
@@ -66,8 +90,8 @@ display() {
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
-        [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
-        display "$dmode" 2> /dev/null
+        [[ -z "${2:-}" ]] && dmode="$(getMode)" || dmode="$2"
+        display "$dmode"
     else
         tmp="@($(echo ${modes[*]} | sed -e 's/ /|/g'))"
         case "$mode" in
