@@ -93,3 +93,4 @@ Anaconda*
 .config/monitors.xml
 .config/user-dirs.locale
 .config/nvim/plugged/
+.scripts/torrent/results.tsv
