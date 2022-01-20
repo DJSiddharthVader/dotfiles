@@ -47,7 +47,7 @@ exec --no-startup-id sudo mount -a
 #Composite manager:
 exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
 #connect to external monitors
-exec --no-startup-id ~/dotfiles/.scripts/monitor.sh laptop
+exec --no-startup-id ~/dotfiles/.scripts/monitor.sh auto
 #Launch Polybar and set wallpaper
 exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay back
 exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh laptop
@@ -63,8 +63,7 @@ for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
 exec $term -n dropdown -e tmuxinator start scratch
-#cheatsheets
-for_window [instance="cheatsheet"] floating enable
+for_window [instance="cheatsheet"] floating enable #cheatsheets
 
 ##---Music-----------------#
 #Music player daemon and sound:
@@ -125,14 +124,14 @@ bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
 
 ##---Letter Key Bindings---#
 bindsym $mod+q         kill
-#bindsym $mod+Shift+q
+bindsym $mod+Shift+q   move scratchpad
 bindsym $mod+w         exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w   exec --no-startup-id ~/Apps/tor-browser_en-US/Browser/start-tor-browser
 bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
 bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
-bindsym $mod+t         exec ~/.torrent.sh -m search
+bindsym $mod+t         exec ~/Projects/torrent.sh/transmission.sh -m search
 #bindsym $mod+Shift+t  layout toggle
 bindsym $mod+y         resize shrink width 5 px or 5 ppt
 bindsym $mod+Shift+y   resize grow width 5 px or 5 ppt
@@ -183,25 +182,6 @@ bindsym $mod+m        [instance="music"] scratchpad show; [instance="music"] mov
 #bindsym $mod+asciitilde
 
 ##---Workspace Bindings----#
-# Shortcuts
-bindsym $mod+Home		    workspace $ws1
-bindsym $mod+Shift+Home		move container to workspace $ws1
-bindsym $mod+End		    workspace $ws10
-bindsym $mod+Shift+End		move container to workspace $ws10
-bindsym $mod+Prior		    workspace prev
-bindsym $mod+Shift+Prior	move container to workspace prev
-bindsym $mod+Next		    workspace next
-bindsym $mod+Shift+Next		move container to workspace next
-bindsym $mod+Tab		    workspace back_and_forth
-bindsym $mod+XF86Back		workspace prev
-#bindsym $mod+Shift+XF86Back
-bindsym $mod+XF86Forward	workspace next
-#bindsym $mod+Shift+XF86Forward
-bindsym $mod+semicolon		workspace next
-bindsym $mod+apostrophe		split horizontal ;; exec $term
-bindsym $mod+slash		    split vertical ;; exec $term
-bindsym $mod+Shift+slash	kill
-bindsym $mod+backslash		workspace back_and_forth
 #Set workspaces
 set $ws1 "1"
 set $ws2 "2"
@@ -235,6 +215,21 @@ bindsym $mod+Shift+7	move container to workspace $ws7
 bindsym $mod+Shift+8	move container to workspace $ws8
 bindsym $mod+Shift+9	move container to workspace $ws9
 bindsym $mod+Shift+0	move container to workspace $ws10
+# Switch with numpad
+bindsym Mod2+KP_1 workspace $ws1
+bindsym Mod2+KP_2 workspace $ws2
+bindsym Mod2+KP_3 workspace $ws3
+bindsym Mod2+KP_4 workspace $ws4
+bindsym Mod2+KP_5 workspace $ws5
+bindsym Mod2+KP_6 workspace $ws6
+bindsym Mod2+KP_7 workspace $ws7
+bindsym Mod2+KP_8 workspace $ws8
+bindsym Mod2+KP_9 workspace $ws9
+bindsym Mod2+KP_0 workspace $ws10
+# Shortcuts
+bindsym $mod+Tab		    workspace back_and_forth
+bindsym $mod+apostrophe		split horizontal ;; exec $term
+bindsym $mod+slash		    split vertical ;; exec $term
 
 ##---Arrow Keys------------#
 bindsym $mod+Left		    focus left
@@ -254,11 +249,11 @@ bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
 #bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 #bindsym $mod+F2		restart
 #bindsym $mod+F3		exec --no-startup-id displayselect
-bindsym $mod+F4		exec --no-startup-id $hibernate
+bindsym $mod+F4		   exec --no-startup-id $hibernate
 #bindsym $mod+F5
 #bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
-#bindsym $mod+F7     exec -no-startup-id compton
-bindsym $mod+F8		exec --no-startup-id $netrefresh
+#bindsym $mod+F7        exec -no-startup-id compton
+bindsym $mod+F8		   exec --no-startup-id $netrefresh
 #bindsym $mod+F9		exec --no-startup-id sudo mount -a
 #bindsym $mod+F10
 #bindsym $mod+F11
