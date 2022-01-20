@@ -1,10 +1,10 @@
 #!/bin/bash
-home="/home/sidreed"
+home=~
 backup_drive="/media/4tbdrive"
 rsync_cmd="rsync -a --ignore-existing --info=progress2"
 to_sync=(Apps CMU_MSCB Music Pictures)
-to_update=(Games Documents Projects Reading ToOrganize Torrent)
-to_ignore=(dotfiles)
+to_update=(Backups Games Documents Projects Reading ToOrganize Torrents)
+to_ignore=(dotfiles .steam)
 
 
 help() {
@@ -23,11 +23,13 @@ update() {
     done
 }
 backup() {
+    mountpoint $backup_drive && drive="$backup_drive" || drive="$home"
+    backup_file="$drive/Backups/homedirE560_$(date +'%Y%m%d-%H%M').tar.gz"
+    echo "Backing up to $backup_file"
     exclude_flags="$(echo ${to_sync[@]} ${to_update[@]} ${to_ignore[@]} | sed -e "s:[^ ]*:--exclude=${home}\/&:g")"    
-    total_size="$(du -sb $exclude_flags "$home" | awk '{print $1}' 2> /dev/null)"
-    tar -pcf - $exclude_flags "$home" \
-        | pv -s $total_size \
-        | gzip > "$backup_drive/Backups/homedirE560_$(date +'%Y-%m-%d-%H-%M').tar.gz"
+    tar -pcf - --ignore-failed-read --warning=none $exclude_flags $home \
+        | pv -s "$(du -sh $exclude_flags $home 2> /dev/null | awk '{print $1}')" \
+        | gzip -9 > $backup_file
 }
 main(){
     mode="$1"
