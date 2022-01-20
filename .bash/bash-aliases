@@ -3,7 +3,7 @@ alias ls='ls -X --color=auto --group-directories-first'
 alias ll='ls -alF --color=auto --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
-alias lc='colorls -A --sd'
+alias lc='ls | wc -l'
 
 #Typos
 alias r,='rm'
@@ -28,43 +28,40 @@ alias com='git commit'
 alias bra='git branch'
 alias chk='git checkout'
 alias gst='git status'
-alias gsl='~/.scripts/commit-status.sh status'
-alias gsw='watch -n2 "~/.scripts/commit-status.sh status"'
+alias gsl='commit-status.sh status'
+alias gsw='watch -n2 "commit-status.sh status"'
 
 #Apps
-alias pipes='~/Apps/pipes.sh/pipes.sh'
 alias man='tldr'
 alias top='htop'
 alias pdf='zathura'
-alias tsm="transmission-remote"
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 alias mx='tmuxinator'
 alias ta='tmux a -t'
 alias go="/usr/local/go/bin/go"
+alias tt='taskwarior-tui'
+alias notes='notes.sh'
+alias vt='mullvad.sh toggle'
+alias tsm="transmission-remote"
+alias tro='transmission.sh'
 
 #Shorten
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
-alias lc='ls | wc -l'
 alias rs='source ~/.bashrc'
 alias con='conda activate'
 alias cof='conda deactivate'
 alias copy='xclip -sel clip'
-alias notes='~/.scripts/notes.sh'
-alias school='cd /home/sidreed/CMU_MSCB/Current/'
 alias pt='ping 8.8.8.8'
+alias school='cd ~/CMU_MSCB/Current/'
 alias md='sudo mount /dev/sdb1 /media/4tbdrive/'
 alias ud='sudo umount /media/4tbdrive/'
-alias vt='~/.scripts/mullvad.sh toggle'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
-alias tro='~/Projects/torrent.sh/transmission.sh'
 
 #Print
-alias cfh="grep -c '^>'"
-alias shln="ls -la | grep '\-\>'"
-alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
 alias bgal='feh -g 640x480 -d /home/sidreed/Pictures/wallpapers/*'
+alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
 alias tl="transmission-remote -tall -l | less"
 alias tv="watch -n1 'transmission-remote -tall -l | grep -v Idle | grep -v Stopped'"
