@@ -1,0 +1,195 @@
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt,letter]{article}
+%Layout/Spacing
+\documentclass[10pt,letter]{article}
+\usepackage[margin=1cm]{geometry} %sets margins
+\usepackage[compact]{titlesec}%sets margins
+\usepackage{setspace} %singles spacing
+\usepackage{fullpage} %use entire page
+\usepackage{amsmath} %for math command
+%Graphics
+\usepackage{graphicx} %for inserting pics
+\usepackage{pgfplots} %for simple plots
+\usepackage[section]{placeins} %for FloatBarrier
+\usepackage[linguistics]{forest} %for forests
+\usepackage{tikz}% for flow chart
+\usetikzlibrary{shapes,arrows,positioning,fit,quotes,shapes.misc}% for flow chart
+%Tables
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+%References
+\usepackage[natbib=true,style=authoryear,backend=biber,useprefix=true]{biblatex}
+\addbibresource{refs.bib}
+
+% Inserting figures with text around them
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+This is above the image
+%include figure
+\begin{center}
+\FloatBarrier
+\begin{figure}[htb!]
+    \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{example.png}}
+    \caption{This is a caption}
+    \ref{fig}
+\end{figure}
+\FloatBarrier
+\end{center}
+This is bellow the image and references figure \label{fig}
+
+% Newtwork diagrams
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{tikz-network}
+\begin{tikzpicture}
+    \Vertex[x=0,y=0,label=00]{A}
+    \Vertex[x=2,y=0,label=01]{B}
+    \Vertex[x=0,y=2,label=10]{C}
+    \Vertex[x=2,y=2,label=11]{D}
+    \Edge[Direct,loopposition=-180](A)(A)
+    \Edge[Direct](D)(D)
+    \Edge[Direct](A)(B)
+    \Edge[Direct](C)(A)
+    \Edge[Direct,bend=15](C)(B)
+    \Edge[Direct,bend=15](B)(C)
+    \Edge[Direct](B)(D)
+    \Edge[Direct](D)(C)
+\end{tikzpicture}
+
+% Simple Plot
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{pgfplots} %for simple plots
+\begin{documents}
+%Tikz pgfplots
+\begin{center}
+\begin{tikzpicture}
+    \begin{axis}[ xlabel = $N_e$, ylabel = $\mu$]
+        \addplot[color=blue]{-x};
+    \end{axis}
+\end{tikzpicture}
+\hspace{0.5in}
+\begin{tikzpicture}
+    \begin{axis}[ xlabel = $N_e$, ylabel = Generation Time]
+        \addplot[color=blue]{-x};
+    \end{axis}
+\end{tikzpicture}
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[xlabel = Generation Time,ylabel = $\mu$]
+            \addplot[color=red]{x};
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+
+% Pseudocode
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+Pseudocode for this algorithm is as follows
+\begin{algorithm}
+\caption{Find $r(e) \forall\; e \in T$}
+    \begin{algorithmic}
+        \STATE $r_e \leftarrow \{t_i:t_i\} \;\forall\; t \in E(T)$ // associative array for all edges in $T$
+        \STATE $E' \leftarrow sort(E(G) - E(T))$ // sorted (ascending) list of edges of $G$ excluding edges in $T$
+        \FOR {$t \in E(T)$}
+            \STATE $T' \leftarrow T - t$ // $T'$ has 2 connected components $T_!, T_2$
+            \FOR {$e =\{v,w\} \in E'$}
+                \STATE // if edge $e$ connects both components of $T'$
+                \IF{$v \in T_1 \land w \in T_2$}
+                    \STATE $r_e[t] \leftarrow e$
+                \ENDIF
+            \ENDFOR
+        \ENDFOR
+        \RETURN $r_e$ //associative array where keys are edges in $T$ and values are replacement edges from $G$
+    \end{algorithmic}
+\end{algorithm}
+
+% Tables
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{booktabs}
+\begin{center}
+    \begin{tabular}{@{}lcccc@{}}
+        \toprule
+                 &\multicolumn{4}{c}{Environment} \\
+        \cmidrule(r){2-5}
+        Genotype & $E_n$ & $E_p$ & $E_a$ & $E_b$ \\
+        \midrule
+        RTT & & & & \\
+        RTt & & & & \\
+        Rtt & & & & \\
+        rTT & & & & \\
+        rTt & & & & \\
+        rtt & & & & \\
+        \bottomrule
+    \end{tabular}
+\end{center}
+
+%Alternative Table
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{array}
+
+%regular table
+\begin{center}
+    \begin{tabular}{l|r r r}
+        column title 1 & column title 1 &  column title 3 &  column title 4 \\
+        \hline
+                       &                &                 &                 \\
+                       &                &                 &                 \\
+                       &                &                 &                 \\
+                       &                &                 &                 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+%4 column 4 row table
+%``Observed'' spans 3 columns in the first row
+%multirow spans the row and the row beneath it
+%cline creates line spanning only columns 2 to 4
+\begin{center}
+    \begin{tabular}{c c c c}
+                           &                        &\multicolumn{2}{c}{Observed}\\
+                           & \multicolumn{1}{c|}{}  & 0          & 1\\\cline{2-4}
+     \multirow{2}{*}{True} & \multicolumn{1}{c|}{0} & 1          & 0\\
+                           & \multicolumn{1}{c|}{1} & $\delta_i$ & $1 - \delta_i$\\
+    \end{tabular}
+\end{center}
+
+% Tree Diagram
+\usepackage[linguistics]{forest} %for forests
+\begin{center}
+    \scalebox{2.0}{
+    \begin{forest}
+        for tree={
+            if n children=0{
+                font=\itshape,
+                tier=terminal, %lines up all tips together
+            }{},
+        }
+        [
+         [
+          [Old World Monkeys
+           [Apes
+            [
+             [Human]
+             [
+              [Chimp]
+              [Bonobo]
+             ]
+            ]
+            [Orangutan]
+           ]
+           [Macaque]
+          ]
+          [Prosiminans
+           [Howler]
+          ]
+         ]
+         [Tarsiers
+          [Lemur]
+         ]
+        ]
+    \end{forest}}
+\end{center}
+

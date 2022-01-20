@@ -1,5 +1,5 @@
 #!/bin/bash
-cheat_sheet_dir="$HOME/Documents/cheatsheets"
+cheat_sheet_dir="$HOME/.cheatsheets"
 vimconfig="$HOME/dotfiles/.config/nvim/cheat_vimrc"
 pdfgeom="=1000x800"
 termgeom="=100x50"
@@ -15,9 +15,9 @@ open() {
     [[ -z "$sheet" ]] && echo "no selection" && exit
     ext="${sheet##*.}"
     case "$ext" in
-        'pdf') tabbed -n 'cheatsheet' -g "$pdfgeom"  zathura "$sheet" -e ;;
-        'txt') st     -n 'cheatsheet' -g "$termgeom" -e nvim -R -u "$vimconfig" "$sheet" ;;
-        'md' ) st     -n 'cheatsheet' -g "$termgeom" -e sh -c "pandoc $sheet | w3m -T text/html" ;;
+        pdf) tabbed -n 'cheatsheet' -g "$pdfgeom"  zathura "$sheet" -e ;;
+        txt|tex) st -n 'cheatsheet' -g "$termgeom" -e nvim -R -u "$vimconfig" "$sheet" ;;
+        md ) st -n 'cheatsheet' -g "$termgeom" -e sh -c "pandoc $sheet | w3m -T text/html" ;;
         *) echo "Error: invalid extension in $1" && exit 1 ;;
     esac
     #i3-msg floating enable > /dev/null
