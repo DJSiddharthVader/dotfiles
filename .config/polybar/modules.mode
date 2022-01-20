@@ -1,6 +1,6 @@
 bar:cross
 separator:arrow_tail
-wallpaper_index:155
+wallpaper_index:246
 wifi:standardd
 songnames:static
 date:time
@@ -10,7 +10,7 @@ temperature:short
 disk:amount
 uptime:day
 torrent:speed
-reading:Material design charts and Data visualization encyclopedia~https://medium.com/@kamushken/material-design-charts-and-data-visualization-patterns-a9bfe8336ec7
+reading:Jarek Duda shows polynomial algorithm handling hardest cases of graph isomorphism problem : compsci~https://www.reddit.com/r/compsci/comments/9hpwwe/jarek_duda_shows_polynomial_algorithm_handling/
 battery:all
 focus_thresh:40
 mullvad:location

@@ -9,32 +9,35 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-4,30fold
-31,41fold
-42,46fold
-47,95fold
-96,108fold
-109,124fold
-125,139fold
-140,152fold
-153,174fold
-175,177fold
-178,180fold
-181,183fold
-184,187fold
-188,227fold
-228,249fold
+3,29fold
+30,40fold
+41,45fold
+46,81fold
+82,94fold
+95,110fold
+111,125fold
+126,138fold
+139,160fold
+161,163fold
+164,166fold
+167,169fold
+170,173fold
+174,213fold
+214,235fold
 let &fdl = &fdl
-47
+46
 normal! zo
-let s:l = 250 - ((97 * winheight(0) + 6) / 12)
+139
+normal! zo
+214
+normal! zo
+let s:l = 216 - ((66 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 250
-normal! 016|
+keepjumps 216
+normal! 023|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

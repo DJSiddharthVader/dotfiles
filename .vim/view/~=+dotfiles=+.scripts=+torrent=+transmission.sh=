@@ -1,191 +1,75 @@
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 argglobal
-setlocal keymap=
-setlocal noarabic
-setlocal autoindent
-setlocal backupcopy=
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal nocindent
-setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=#%s
-setlocal complete=.,w,b,u,t
-setlocal concealcursor=
-setlocal conceallevel=1
-setlocal completefunc=
-setlocal nocopyindent
-setlocal nocursorbind
-setlocal nocursorcolumn
-setlocal cursorline
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal expandtab
-if &filetype != 'sh'
-setlocal filetype=sh
-endif
-setlocal fillchars=
-setlocal fixendofline
-setlocal foldcolumn=1
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=MyFoldText()
-setlocal formatexpr=
-setlocal formatoptions=cqt
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=GetShIndent()
-setlocal indentkeys=0{,0},0),0],!^F,o,O,e,0=then,0=do,0=else,0=elif,0=fi,0=esac,0=done,0=end,),0=;;,0=;&,0=fin,0=fil,0=fip,0=fir,0=fix
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal lispwords=
-setlocal nolist
-setlocal listchars=
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=bin,hex
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-setlocal relativenumber
-setlocal norightleft
-setlocal rightleftcmd=search
-setlocal scrollback=-1
-setlocal noscrollbind
-setlocal scrolloff=-1
-setlocal shiftwidth=4
-setlocal sidescrolloff=-1
-setlocal signcolumn=auto
-setlocal nosmartindent
-setlocal softtabstop=4
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal spelloptions=
-setlocal statusline=%!airline#statusline(1)
-setlocal suffixesadd=
-setlocal noswapfile
-setlocal synmaxcol=3000
-if &syntax != 'sh'
-setlocal syntax=sh
-endif
-setlocal tagfunc=
-setlocal tabstop=4
-setlocal tagcase=
-setlocal tags=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal undolevels=-123456
-setlocal winblend=0
-setlocal winhighlight=
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
 silent! normal! zE
-14,36fold
-37,43fold
-14,43fold
-44,61fold
-62,64fold
-44,64fold
-65,67fold
+14,41fold
+42,48fold
+49,66fold
+67,69fold
 70,72fold
-73,79fold
-70,79fold
-80,87fold
-88,104fold
-69,105fold
-107,114fold
-115,125fold
-126,131fold
-138,146fold
-147,157fold
-158,165fold
-166,177fold
-178,186fold
-187,195fold
-132,199fold
-106,200fold
-202,204fold
-205,211fold
-212,215fold
-216,226fold
-227,238fold
-239,247fold
-201,248fold
-251,254fold
-255,273fold
-274,298fold
-250,299fold
+75,77fold
+78,89fold
+90,101fold
+102,118fold
+74,119fold
+121,132fold
+133,143fold
+144,149fold
+155,162fold
+163,172fold
+173,179fold
+180,190fold
+191,198fold
+199,206fold
+150,210fold
+120,211fold
+213,215fold
+216,222fold
+223,226fold
+227,239fold
+240,251fold
+252,260fold
+212,261fold
+263,266fold
+267,285fold
+286,312fold
+262,313fold
 let &fdl = &fdl
-14
+74
 normal! zo
-44
-normal! zo
-69
-normal! zo
-70
-normal! zo
-69
+74
 normal! zc
-106
+120
 normal! zo
-132
+150
 normal! zo
-132
+150
 normal! zc
-106
+120
 normal! zc
-201
+212
 normal! zo
-201
+212
 normal! zc
-250
+262
 normal! zo
-250
+262
 normal! zc
-let s:l = 250 - ((242 * winheight(0) + 29) / 59)
+let s:l = 212 - ((200 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 250
-normal! 0
+keepjumps 212
+normal! 01|
 let &g:so = s:so_save | let &g:siso = s:siso_save
+set hlsearch
 nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

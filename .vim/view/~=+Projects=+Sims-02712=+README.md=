@@ -14,12 +14,12 @@ normal! zo
 normal! zo
 28
 normal! zc
-let s:l = 119 - ((118 * winheight(0) + 13) / 26)
+let s:l = 18 - ((17 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 119
-normal! 039|
+keepjumps 18
+normal! 01|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 nohlsearch

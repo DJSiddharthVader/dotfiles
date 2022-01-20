@@ -14,83 +14,100 @@ silent! normal! zE
 18,22fold
 24,27fold
 28,31fold
-32,55fold
-56,61fold
-62,65fold
-66,75fold
-23,76fold
-8,77fold
-79,110fold
-111,136fold
-137,165fold
-166,194fold
-195,220fold
-78,221fold
-223,238fold
-239,253fold
-254,263fold
-264,278fold
-279,293fold
-294,308fold
-309,317fold
-222,318fold
-320,335fold
-336,350fold
-351,365fold
-366,380fold
-319,381fold
-383,405fold
-406,469fold
-470,482fold
-483,495fold
-496,541fold
-542,562fold
-563,583fold
-584,602fold
-603,621fold
-622,640fold
-641,686fold
-687,704fold
-706,724fold
-725,742fold
-743,761fold
-762,780fold
-781,799fold
-800,815fold
-816,834fold
-835,853fold
-854,871fold
-872,889fold
-890,912fold
-913,931fold
-932,939fold
-382,940fold
-942,961fold
-962,982fold
-983,1013fold
-1014,1037fold
-941,1038fold
+33,48fold
+49,54fold
+55,65fold
+66,76fold
+77,102fold
+103,123fold
+32,124fold
+125,130fold
+131,134fold
+135,141fold
+23,142fold
+8,143fold
+145,176fold
+177,202fold
+203,231fold
+232,260fold
+261,286fold
+144,287fold
+289,304fold
+305,319fold
+320,329fold
+330,344fold
+345,359fold
+360,374fold
+375,383fold
+288,384fold
+386,401fold
+402,416fold
+417,431fold
+432,446fold
+385,447fold
+449,471fold
+472,535fold
+536,548fold
+549,561fold
+562,607fold
+608,628fold
+629,649fold
+650,668fold
+669,687fold
+688,706fold
+707,752fold
+753,770fold
+772,790fold
+791,808fold
+809,827fold
+828,846fold
+847,865fold
+866,881fold
+882,900fold
+901,919fold
+920,937fold
+938,955fold
+956,978fold
+979,997fold
+998,1005fold
+1006,1016fold
+448,1017fold
+1019,1038fold
+1039,1059fold
+1060,1090fold
+1091,1114fold
+1018,1115fold
 let &fdl = &fdl
 8
 normal! zo
 23
 normal! zo
-62
+32
 normal! zo
-78
-normal! zo
-78
+32
 normal! zc
-222
-normal! zo
-222
+23
 normal! zc
-let s:l = 64 - ((57 * winheight(0) + 11) / 22)
+8
+normal! zc
+144
+normal! zo
+144
+normal! zc
+288
+normal! zo
+288
+normal! zc
+448
+normal! zo
+448
+normal! zc
+let s:l = 8 - ((7 * winheight(0) + 20) / 41)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 64
-normal! 04|
+keepjumps 8
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

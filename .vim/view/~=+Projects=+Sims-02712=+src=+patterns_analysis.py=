@@ -9,16 +9,15 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-15,30fold
+16,40fold
+41,66fold
 let &fdl = &fdl
-15
-normal! zo
-let s:l = 17 - ((16 * winheight(0) + 20) / 40)
+let s:l = 2 - ((1 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 17
-normal! 060|
+keepjumps 2
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost
