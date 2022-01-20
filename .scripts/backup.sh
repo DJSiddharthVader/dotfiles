@@ -21,7 +21,6 @@ update() {
         echo "Updating $dir..."
         $rsync_cmd "$home/$dir" "$backup_drive"
     done
-    rm Backups/*
 }
 backup() {
     mountpoint $backup_drive && drive="$backup_drive" || drive="$home"
