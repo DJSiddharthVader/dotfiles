@@ -1,9 +1,9 @@
 #!/bin/bash
-laptop_screen="eDP-1"
-bar_manager_script="$HOME/dotfiles/.scripts/bar-manager.sh"
+LAPTOP_SCREEN="eDP-1"
+BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
 
 help() {
-    echo "Usage: $0 {auto|ext|hybrid|laptop}"
+    echo "Usage: $0 {auto|ext|hybrid|laptop|organize}"
 }
 resolution() {
     monitor="$1"
@@ -23,7 +23,7 @@ connectAudio() {
 disconnect(){
     # disconnect all external monitors except laptop screen
     while IFS= read -r monitor; do
-        if [[ $monitor != $laptop_screen ]]; then
+        if [[ $monitor != $LAPTOP_SCREEN ]]; then
             echo "disconnecting $monitor"
             xrandr --output $monitor --off
         fi
@@ -51,20 +51,20 @@ connect() {
     setup="$1"
     case "$setup" in
         hybrid)
-            connectToAll "$laptop_screen"
+            connectToAll "$LAPTOP_SCREEN"
             ;;
         ext)
             connectToAll ""
-            xrandr --output "$laptop_screen" --off
+            xrandr --output "$LAPTOP_SCREEN" --off
             ;;
         laptop)
-            xrandr --output "$laptop_screen" --mode "$(resolution $laptop_screen)" --primary
+            xrandr --output "$LAPTOP_SCREEN" --mode "$(resolution $LAPTOP_SCREEN)" --primary
             disconnect
             ;;
         mirror)
             while IFS= read -r monitor; do
                 resolution="$(resolution "$monitor")"
-                xrandr --output $monitor --mode "$resolution" --same-as $laptop_screen
+                xrandr --output $monitor --mode "$resolution" --same-as $LAPTOP_SCREEN
             done <<< "$(listMonitors)"
             ;;
         *) help && exit 1 ;;
@@ -72,7 +72,7 @@ connect() {
 }
 isConnected() {
     monitors="$(xrandr --listmonitors | head -1 | cut -d' ' -f2)"
-    laptop_connected="$(xrandr --listmonitors | grep -c $laptop_screen)"
+    laptop_connected="$(xrandr --listmonitors | grep -c $LAPTOP_SCREEN)"
     if [[ $monitors -eq 1 ]] && [[ $laptop_connected -eq 1 ]]; then
         echo 'false'
     else
@@ -87,7 +87,7 @@ organizeWorkspaces() {
             move_right=(2 3 4 6 8)
             ;;
         present)
-            move_left=(1)
+            move_left=()
             move_right=(3 6)
             ;;
         *) help && exit 1 ;;
@@ -106,19 +106,19 @@ main() {
     if [[ "$mode" = 'auto' ]]; then
         if [[ $(isConnected) = 'true' ]]; then # if already connected then disconnect
             connect laptop
-            $bar_manager_script style laptop
+            $BAR_MANAGER_SCRIPT style laptop
         else
             monitors="$(listMonitors | wc -l)" #external and laptop
             case $monitors in
                 4) connect ext # at home
-                   $bar_manager_script style cross
+                   $BAR_MANAGER_SCRIPT style cross
                    organizeWorkspaces 'home'
                    ;;
                 3) connect ext # some 2 monitor setup
-                   $bar_manager_script style float
+                   $BAR_MANAGER_SCRIPT style float
                    ;;
                 2) connect hybrid # presenting
-                   $bar_manager_script style press
+                   $BAR_MANAGER_SCRIPT style full
                    connectAudio hdmi
                    organizeWorkspaces 'present'
                    ;;
@@ -126,11 +126,13 @@ main() {
                 *) echo 'Error detecting monitors' && exit 1 ;;
             esac
         fi
+    elif [[ $mode = 'organize' ]]; then
+        organizeWorkspaces 'home'
     else
         connect "$mode"
         case "$mode" in
-            ext|hybrid) $bar_manager_script restart ;;
-            laptop) $bar_manager_script style laptop ;;
+            ext|hybrid) $BAR_MANAGER_SCRIPT restart ;;
+            laptop) $BAR_MANAGER_SCRIPT style laptop ;;
             *) help && exit 1 ;;
         esac
     fi
