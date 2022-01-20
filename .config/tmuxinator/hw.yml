@@ -11,12 +11,6 @@ windows:
       panes:
         - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
         - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-  - ML-10605:
-      root: home/sidreed/CMU_MSCB/Courses/ML-10605/Homework
-      layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
-      panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
   - Large_Data:
       root: home/sidreed/CMU_MSCB/Courses/ML_Large_Data-10605/Homework
       layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
