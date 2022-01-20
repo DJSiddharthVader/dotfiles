@@ -5,18 +5,33 @@ root: ~/CMU_MSCB/Current
 pre_window: conda deactivate; clear
 
 windows:
-  - code:
-      root: /home/sidreed/CMU_MSCB/Current/Bio_Simulation-02712/Homework
+  - Automation:
+      root: home/sidreed/CMU_MSCB/Courses/Automation-02750/Homework
       layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
       panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"; vi -p *.py
         - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-  - Simulations:
-      root: /home/sidreed/CMU_MSCB/Current/Bio_Simulation-02712/Homework
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+  - ML-10605:
+      root: home/sidreed/CMU_MSCB/Courses/ML-10605/Homework
       layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
       panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"; vi *.md
         - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-  - Genomics:
-      root: /home/sidreed/CMU_MSCB/Current/Comp_Genomics-03711/Homework
-      pre: cd "$(find . -maxdepth 1 | sort -n | tail -1)"; vi *.md
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+  - Large_Data:
+      root: home/sidreed/CMU_MSCB/Courses/ML_Large_Data-10605/Homework
+      layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
+      panes:
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+  - PGM:
+      root: home/sidreed/CMU_MSCB/Courses/PGM-10708/Homework
+      layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
+      panes:
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+  - Probability:
+      root: home/sidreed/CMU_MSCB/Courses/Probability_Modelling-36410/Homework
+      layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
+      panes:
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
