@@ -9,7 +9,7 @@ hst="$(echo -e '\u237E')"
 dir="$(echo -e '\u26E9')"
 # Module functions
 status_cmd="$HOME/dotfiles/.scripts/commit-status.sh"
-exitstatus() {
+exit_status() {
     case "$?" in
         0) icon="✔" ;;
         1) icon="✖ " ;;
@@ -17,12 +17,12 @@ exitstatus() {
     esac
     echo "$icon"
 }
-cenv() {
+conda_env() {
     snake_sym='\u2440'
     [[ -z "$CONDA_DEFAULT_ENV" ]]  && env="" || env="$snake_sym $CONDA_DEFAULT_ENV"
     echo -e "$env"
 }
-gits() {
+git_info() {
     #git symbols
     bsym='\u2325' # branch symbol
     committed_symbol='⇡' # dotted up arrow
@@ -105,13 +105,13 @@ prompt_command() {
     termwidth=${COLUMNS}
     case 1 in
         $(($termwidth < 40)))
-            modules="$(build_prompt "\$(exitstatus)" "$clk\@" "$dir \w" "\$(cenv)")"
+            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(conda_env)")"
             ;;
         $(($termwidth < 120)))
-            modules="$(build_prompt "\$(exitstatus)" "$clk\@" "$dir \w" "\$(cenv)" "\$(gits)")"
+            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(conda_env)" "\$(git_info)")"
             ;;
         *) # > 120
-            modules="$(build_prompt "\$(exitstatus)" "$clk\@" "$usr \u" "$hst \h" "$dir \w" "\$(cenv)" "\$(gits)")"
+            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$usr \u" "$hst \h" "$dir \w" "\$(conda_env)" "\$(git_info)")"
             ;;
     esac
     # format start and end of prompt to put info and entered text on different lines
