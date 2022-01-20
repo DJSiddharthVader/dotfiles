@@ -1,7 +1,7 @@
 #!/bin/bash
 home=~
 backup_drive="/media/4tbdrive"
-rsync_cmd="rsync -a --ignore-existing --info=progress2"
+rsync_cmd="rsync -ah --ignore-existing --info=progress2"
 to_sync=(Apps CMU_MSCB Music Pictures)
 to_update=(Backups Games Documents Projects Reading ToOrganize Torrents)
 to_ignore=(dotfiles .steam)
@@ -21,6 +21,7 @@ update() {
         echo "Updating $dir..."
         $rsync_cmd "$home/$dir" "$backup_drive"
     done
+    rm Backups/*
 }
 backup() {
     mountpoint $backup_drive && drive="$backup_drive" || drive="$home"
@@ -32,14 +33,15 @@ backup() {
         | gzip -9 > $backup_file
 }
 main(){
-    mode="$1"
-    case "$mode" in
-        'backup') backup ;;
-        'sync'  ) sync   ;;
-        'update') update ;;
-        'all')    backup && sync && update ;;
-        *) help && exit 1;;
-    esac
+    for mode in $@; do
+        case "$mode" in
+            'backup') backup ;;
+            'sync'  ) sync   ;;
+            'update') update ;;
+            'all')    backup && sync && update ;;
+            *) help && exit 1;;
+        esac
+    done
 }
 
-main "$1"
+main "$@"
