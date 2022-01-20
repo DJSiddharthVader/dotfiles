@@ -41,15 +41,15 @@ let s:ctermAlmostBlack = "235"
 let g:airline#themes#wal#palette = {}
 let s:modified = { 'airline_c': [s:gui01, '', s:cterm00, '', ''] }
 
-" Normal mode
 let s:C0 = [s:cterm00, s:cterm00, s:cterm07, s:cterm00]
-let s:C1 = [s:cterm00, s:cterm00, s:cterm00, s:cterm01]
+let s:C1 = [s:cterm00, s:cterm00, s:cterm07, s:cterm01]
 let s:C2 = [s:cterm00, s:cterm00, s:cterm00, s:cterm02]
 let s:C3 = [s:cterm00, s:cterm00, s:cterm00, s:cterm03]
 let s:C4 = [s:cterm00, s:cterm00, s:cterm00, s:cterm04]    
 let s:C5 = [s:cterm00, s:cterm00, s:cterm00, s:cterm05]
 let s:C6 = [s:cterm00, s:cterm00, s:cterm00, s:cterm06]
 let s:C7 = [s:cterm00, s:cterm00, s:cterm00, s:cterm07]
+" Normal mode
 let g:airline#themes#wal#palette.normal = airline#themes#generate_color_map(s:C1, s:C2, s:C3)
 let g:airline#themes#wal#palette.normal_modified = s:modified
 
@@ -67,8 +67,8 @@ let g:airline#themes#wal#palette.replace_modified = s:modified
 
 " Inactive mode
 let s:IN1 = [s:guiGray, s:gui01, s:ctermDarkGray, s:cterm07]
-let s:IN2 = [s:gui04, s:guiAlmostBlack, s:cterm04, s:ctermAlmostBlack]
-let s:IN3 = [s:gui05, s:guiAlmostBlack, s:cterm05, s:ctermAlmostBlack]
+let s:IN2 = [s:gui04, s:guiAlmostBlack, s:cterm00, s:ctermAlmostBlack]
+let s:IN3 = [s:gui05, s:guiAlmostBlack, s:cterm00, s:ctermAlmostBlack]
 let g:airline#themes#wal#palette.inactive = airline#themes#generate_color_map(s:IN1, s:IN2, s:IN3)
 let g:airline#themes#wal#palette.inactive_modified = s:modified
 
