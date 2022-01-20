@@ -6,27 +6,32 @@ pre_window: conda deactivate; clear
 
 windows:
   - Automation:
-      root: home/sidreed/CMU_MSCB/Courses/Automation-02750/Notes
+      root: /home/sidreed/CMU_MSCB/Courses/Automation-02750/Notes
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
+        -
   - ML-10605:
-      root: home/sidreed/CMU_MSCB/Courses/ML-10605/Notes
+      root: /home/sidreed/CMU_MSCB/Courses/ML-10605/Notes
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
+        -
   - Large_Data:
-      root: home/sidreed/CMU_MSCB/Courses/ML_Large_Data-10605/Notes
+      root: /home/sidreed/CMU_MSCB/Courses/ML_Large_Data-10605/Notes
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
+        -
   - PGM:
-      root: home/sidreed/CMU_MSCB/Courses/PGM-10708/Notes
+      root: /home/sidreed/CMU_MSCB/Courses/PGM-10708/Notes
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
+        -
   - Probability:
-      root: home/sidreed/CMU_MSCB/Courses/Probability_Modelling-36410/Notes
+      root: /home/sidreed/CMU_MSCB/Courses/Probability_Modelling-36410/Notes
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
+        -
