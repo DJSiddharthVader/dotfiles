@@ -4,7 +4,6 @@
 ;
 ;   The README contains alot of information
 ;=====================================================
-
 ;global settings
 [settings]
 screenchange-reload = false
@@ -25,12 +24,13 @@ include-file = ~/.cache/wal/polybarColors.wal
 font-icon = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
 font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
 font-icon-huge = FontAwesome:format=truetype:style=Regular:size=27:antialias=true;4
+
 ; Weather Icons
 font-weather = Weather Icons:style=Regular;3
 font-weather-large = Weather Icons:style=Regular:size=15;3
 font-weather-huge= Weather Icons:style=Regular:size=27;3
+
 ; Text Fonts
-;; Gothic
 ;; PixelSleigh
 ;font-main = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
 ;font-main-large = PixelSleigh:style=Regular:pixelsize=10:antialias=true;1
@@ -128,10 +128,12 @@ font-overflow-large = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=19:antial
 font-overflow-huge = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=29:antialias=true;1
 ;font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
 ;font-overflow = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+
 ; Powerline Separators
 font-powerline = FiraCode Nerd Font Mono:style=Regular:size=15:antialias=true;3
 font-powerline-large = FiraCode Nerd Font Mono:style=Regular:size=23:antialias=true;3
 font-powerline-huge = FiraCode Nerd Font Mono:style=Regular:size=25:antialias=true;9 
+
 ; Long scrolling text, (smaller and mono-spaced)
 font-focused = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 font-focused-large = MineCraftia:style=Regular:pixelsize=11;antialias=false;10
@@ -139,6 +141,7 @@ font-focused-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;10
 font-scrolling = Terminus:style=Regular:pixelsize=13;2
 font-scrolling-large = Terminus:style=Regular:pixelsize=18;2
 font-scrolling-huge = Terminus:style=Regular:pixelsize=23;2
+
 
 
 ;bar formatting
@@ -939,9 +942,9 @@ format-suffix-background = ${colors.transparent}
 [module/torrent]
 type = custom/script
 tail = true
-exec = ~/.torrent.sh -m display
-click-left = ~/.torrent.sh -m next
-click-right = ~/.torrent.sh -m prev
+exec = transmission.sh -m display
+click-left = transmission.sh -m next
+click-right = transmission.sh -m prev
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.torrent-color}
