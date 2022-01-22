@@ -1,7 +1,7 @@
 # vim: filetype=i3
 ##---i3 options------------#
 #Window options
-border_radius 3
+#border_radius 3
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 for_window [instance="protonvpn"] floating enable
