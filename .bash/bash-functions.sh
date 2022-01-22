@@ -36,24 +36,6 @@ mvpr() {
     done
     echo ''
 }
-undock() {
-    # disconnect laptop from home setup
-    #sudo umount -a
-    ~/.scripts/monitor.sh laptop
-    ~/.scripts/lock.sh
-}
-mnn() {
-    name="$1"
-    num="$(find ./Notes -name '*.md' | sort -n | tail -1 | sed -e 's/^.*N\([0-9]*\)-.*$/\1/')"
-    num=$(($num+1))
-    num="$(printf %02d $num)" # pad 0
-    file="./Notes/N$num-$name.md"
-    touch $file
-    echo "# $name" | tr '_' ' ' >| $file
-    lec_notes="$(find ./Lectures -name "*$num*")"
-    echo "[Lectures Notes]($(readlink -e $lec_notes))" >> $file
-    echo "$file $lec_notes $num $name"
-}
 hw() {
     #compile HW assignments with pandoc tempate
     mdfile="$(find . -type f -name '*HW*.md')" #hw answers in current dir
