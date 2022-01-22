@@ -40,8 +40,8 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 #Torrent daemon:
 exec --no-startup-id ~/.torrent.sh -m start
-#express vpn
-exec --no-startup-id ~/.scripts/mullvad.sh connect
+#Start VPN
+#exec --no-startup-id ~/.scripts/mullvad.sh connect
 #Mount other drives:
 exec --no-startup-id sudo mount -a
 #Composite manager:
@@ -126,12 +126,12 @@ bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
 bindsym $mod+q         kill
 bindsym $mod+Shift+q   move scratchpad
 bindsym $mod+w         exec --no-startup-id firefox --browser
-bindsym $mod+Shift+w   exec --no-startup-id ~/Apps/tor-browser_en-US/Browser/start-tor-browser
+bindsym $mod+Shift+w   exec --no-startup-id ~/bin/tor-browser_en-US/Browser/start-tor-browser
 bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
 bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
-bindsym $mod+t         exec ~/Projects/torrent.sh/transmission.sh -m search
+bindsym $mod+t         exec transmission.sh -m search
 #bindsym $mod+Shift+t  layout toggle
 bindsym $mod+y         resize shrink width 5 px or 5 ppt
 bindsym $mod+Shift+y   resize grow width 5 px or 5 ppt
