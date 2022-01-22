@@ -7,11 +7,9 @@ on_project_start: wal -R -e -n -q &
 
 windows:
   - fetch: neofetch
-  - media:
-      panes:
-        - watch -n1 'transmission-remote -tall -l | grep -v Idle | grep -v Stopped'
-        - cd Torrents
-  - tasks:
+  - school:
       root: ~/CMU_MSCB/Current/
+        - 
+  - tasks:
         - taskwarrior-tui
   - scratch:
