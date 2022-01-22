@@ -84,7 +84,7 @@ organizeWorkspaces() {
     case "$mode" in
         home) 
             move_left=(1)
-            move_right=(2 3 4 6 8)
+            move_right=(4 6 8 2)
             ;;
         present)
             move_left=()
