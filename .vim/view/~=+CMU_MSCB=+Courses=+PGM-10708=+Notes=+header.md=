@@ -1,42 +1,19 @@
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 argglobal
-setlocal fdm=manual
-setlocal fde=0
+setlocal fdm=expr
+setlocal fde=pandoc#folding#FoldExpr()
 setlocal fmr={{{,}}}
 setlocal fdi=#
 setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-silent! normal! zE
-3,29fold
-30,40fold
-41,45fold
-46,81fold
-82,94fold
-95,110fold
-111,125fold
-126,138fold
-139,160fold
-161,163fold
-164,166fold
-167,169fold
-170,173fold
-174,213fold
-214,235fold
-let &fdl = &fdl
-46
-normal! zo
-139
-normal! zo
-214
-normal! zo
-let s:l = 216 - ((42 * winheight(0) + 4) / 9)
+let s:l = 2 - ((1 * winheight(0) + 16) / 33)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 216
-normal! 023|
+keepjumps 2
+normal! 051|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 nohlsearch

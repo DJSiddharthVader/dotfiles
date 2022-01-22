@@ -20,15 +20,14 @@ silent! normal! zE
 82,103fold
 104,140fold
 let &fdl = &fdl
-104
-normal! zo
-let s:l = 129 - ((10 * winheight(0) + 11) / 23)
+let s:l = 87 - ((82 * winheight(0) + 11) / 23)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 129
-normal! 07|
+keepjumps 87
+normal! 01|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

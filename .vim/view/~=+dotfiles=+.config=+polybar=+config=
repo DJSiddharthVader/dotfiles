@@ -9,105 +9,124 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-9,13fold
-14,17fold
-18,22fold
-24,27fold
-28,31fold
-33,48fold
-49,54fold
-55,65fold
-66,76fold
-77,102fold
-103,123fold
-32,124fold
-125,130fold
-131,134fold
-135,141fold
-23,142fold
-8,143fold
-145,176fold
-177,202fold
-203,231fold
-232,260fold
-261,286fold
-144,287fold
-289,304fold
-305,319fold
-320,329fold
-330,344fold
-345,359fold
-360,374fold
-375,383fold
-288,384fold
-386,401fold
-402,416fold
-417,431fold
-432,446fold
-385,447fold
-449,471fold
-472,535fold
-536,548fold
-549,561fold
-562,607fold
-608,628fold
-629,649fold
-650,668fold
-669,687fold
-688,706fold
-707,752fold
-753,770fold
-772,790fold
-791,808fold
-809,827fold
-828,846fold
-847,865fold
-866,881fold
-882,900fold
-901,919fold
-920,937fold
-938,955fold
-956,978fold
-979,997fold
-998,1005fold
-1006,1016fold
-448,1017fold
-1019,1038fold
-1039,1059fold
-1060,1090fold
-1091,1114fold
-1018,1115fold
+8,12fold
+13,16fold
+17,21fold
+23,27fold
+28,32fold
+34,38fold
+39,43fold
+44,48fold
+50,54fold
+55,60fold
+61,65fold
+66,71fold
+72,76fold
+78,82fold
+83,87fold
+88,92fold
+93,97fold
+98,102fold
+104,108fold
+109,113fold
+114,118fold
+119,123fold
+33,124fold
+125,131fold
+132,136fold
+137,144fold
+22,145fold
+7,146fold
+148,179fold
+180,205fold
+206,234fold
+235,263fold
+264,289fold
+147,290fold
+292,307fold
+308,322fold
+323,332fold
+333,347fold
+348,362fold
+363,378fold
+379,387fold
+291,388fold
+390,405fold
+406,420fold
+421,435fold
+436,450fold
+389,451fold
+453,475fold
+476,539fold
+540,552fold
+553,565fold
+566,611fold
+612,632fold
+633,653fold
+654,672fold
+673,691fold
+692,710fold
+711,756fold
+757,774fold
+776,794fold
+795,812fold
+813,831fold
+832,850fold
+851,869fold
+870,885fold
+886,904fold
+905,923fold
+924,941fold
+942,959fold
+960,982fold
+983,1001fold
+1002,1009fold
+1010,1020fold
+452,1021fold
+1023,1042fold
+1043,1063fold
+1064,1094fold
+1095,1118fold
+1022,1119fold
 let &fdl = &fdl
-8
+7
 normal! zo
-23
+22
 normal! zo
-32
+33
 normal! zo
-32
+33
 normal! zc
-23
+22
 normal! zc
-8
+7
 normal! zc
-144
+147
 normal! zo
-144
+147
 normal! zc
-288
+291
 normal! zo
-288
+291
 normal! zc
-448
+389
 normal! zo
-448
+389
 normal! zc
-let s:l = 8 - ((7 * winheight(0) + 20) / 41)
+452
+normal! zo
+452
+normal! zc
+1022
+normal! zo
+1022
+normal! zc
+let s:l = 1 - ((0 * winheight(0) + 27) / 55)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 8
-normal! 0
+keepjumps 1
+normal! 026|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

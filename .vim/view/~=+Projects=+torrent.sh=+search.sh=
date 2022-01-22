@@ -9,19 +9,21 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-7,23fold
-24,36fold
-37,45fold
-6,46fold
+8,25fold
+26,38fold
+39,47fold
+7,48fold
 let &fdl = &fdl
-6
+7
 normal! zo
-let s:l = 1 - ((0 * winheight(0) + 8) / 17)
+7
+normal! zc
+let s:l = 2 - ((1 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 011|
+keepjumps 2
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 nohlsearch
