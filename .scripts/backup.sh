@@ -2,9 +2,9 @@
 home=~
 backup_drive="/media/4tbdrive"
 rsync_cmd="rsync -ah --ignore-existing --info=progress2"
-to_sync=(Apps CMU_MSCB Music Pictures)
-to_update=(Backups Games Documents Projects Reading ToOrganize Torrents)
-to_ignore=(dotfiles .steam)
+to_sync=(CMU_MSCB Music Pictures)
+to_update=(Backups Games Documents Projects Reading ToOrganize)
+to_ignore=(dotfiles .steam Torrents)
 
 
 help() {
