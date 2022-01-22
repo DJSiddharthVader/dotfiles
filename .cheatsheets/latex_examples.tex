@@ -23,10 +23,38 @@
 \usepackage[natbib=true,style=authoryear,backend=biber,useprefix=true]{biblatex}
 \addbibresource{refs.bib}
 
-% Inserting figures with text around them
+% Math Stuff 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Piecewise function
+\[\mu(g,e) = \begin{dcases}
+           \mu_R & r \in g, e \neq E_a \\
+    \sqrt{\mu_R} & r \in g, e = E_a \\
+           \mu_r & R \in g, e \neq E_a \\
+    \sqrt{\mu_r} & R \in g, e = E_a \\
+          \end{dcases}\]
+
+% Labelled matrix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+$$\begin{blockarray}{c|cccccccc}
+& D& E& F& I& L& Q& V& W \\
+\hline
+\begin{block}{c|cccccccc}
+%  D E F I L Q V W
+D&0&1&0&0&0&0&0&0\\
+E&1&6&0&0&0&1&0&0\\
+F&0&0&4&0&0&0&0&1\\
+I&0&0&0&0&0&0&1&0\\
+L&0&0&0&0&0&0&1&0\\
+Q&0&1&0&0&0&0&0&0\\
+V&0&0&0&1&1&0&6&0\\
+W&0&0&1&0&0&0&0&4\\
+\end{block}
+\end{blockarray}$$
+
+% Figures 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Text around figures
 This is above the image
-%include figure
 \begin{center}
 \FloatBarrier
 \begin{figure}[htb!]
@@ -37,6 +65,23 @@ This is above the image
 \FloatBarrier
 \end{center}
 This is bellow the image and references figure \label{fig}
+%% subfigures
+\FloatBarrier
+\begin{figure}[htb!]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./figures/Singular_Antibiotic.png}}
+        \caption{Single Antibiotic Event, event starts at green dotted line and ends at red dotted line.l=50}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.45\textwidth}
+        \centering
+        \makebox[\textwidth][c]{\includegraphics[width=\linewidth]{./figures/Singular_Phage.png}}
+        \caption{Single Phage Event, event starts at green dotted line and ends at red dotted line. l=50}
+    \end{subfigure}
+    \caption{Single event simulations.}
+\end{figure}
+\FloatBarrier
 
 % Newtwork diagrams
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,58 +150,8 @@ Pseudocode for this algorithm is as follows
     \end{algorithmic}
 \end{algorithm}
 
-% Tables
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{booktabs}
-\begin{center}
-    \begin{tabular}{@{}lcccc@{}}
-        \toprule
-                 &\multicolumn{4}{c}{Environment} \\
-        \cmidrule(r){2-5}
-        Genotype & $E_n$ & $E_p$ & $E_a$ & $E_b$ \\
-        \midrule
-        RTT & & & & \\
-        RTt & & & & \\
-        Rtt & & & & \\
-        rTT & & & & \\
-        rTt & & & & \\
-        rtt & & & & \\
-        \bottomrule
-    \end{tabular}
-\end{center}
-
-%Alternative Table
-\usepackage{tabularx}
-\usepackage{multirow}
-\usepackage{array}
-
-%regular table
-\begin{center}
-    \begin{tabular}{l|r r r}
-        column title 1 & column title 1 &  column title 3 &  column title 4 \\
-        \hline
-                       &                &                 &                 \\
-                       &                &                 &                 \\
-                       &                &                 &                 \\
-                       &                &                 &                 \\
-        \hline
-    \end{tabular}
-\end{center}
-
-%4 column 4 row table
-%``Observed'' spans 3 columns in the first row
-%multirow spans the row and the row beneath it
-%cline creates line spanning only columns 2 to 4
-\begin{center}
-    \begin{tabular}{c c c c}
-                           &                        &\multicolumn{2}{c}{Observed}\\
-                           & \multicolumn{1}{c|}{}  & 0          & 1\\\cline{2-4}
-     \multirow{2}{*}{True} & \multicolumn{1}{c|}{0} & 1          & 0\\
-                           & \multicolumn{1}{c|}{1} & $\delta_i$ & $1 - \delta_i$\\
-    \end{tabular}
-\end{center}
-
 % Tree Diagram
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage[linguistics]{forest} %for forests
 \begin{center}
     \scalebox{2.0}{
