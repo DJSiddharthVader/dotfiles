@@ -10,22 +10,22 @@ windows:
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
-        -
+        - cd ..
   - Large_Data:
       root: /home/sidreed/CMU_MSCB/Courses/ML_Large_Data-10605/Notes
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
-        -
+        - cd ..
   - PGM:
       root: /home/sidreed/CMU_MSCB/Courses/PGM-10708/Notes
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
-        -
+        - cd ..
   - Probability:
       root: /home/sidreed/CMU_MSCB/Courses/Probability_Modelling-36410/Notes
       layout: 3fb0,74x38,0,0[74x33,0,0,79,74x4,0,34,82]
       panes:
         - vi -p $(find ./Notes -maxdepth 1 | sort -n | tail -3)
-        -
+        - cd ..
