@@ -123,9 +123,8 @@ launchBar() {
     bartype="$1"
     m="$2" # monitor
     res="$(getResolution $m | cut -d'x' -f1)"
-    if [[ $m = $primary_screen ]]; then
-        MONITOR=$m polybar laptop-top &
-        MONITOR=$m polybar laptop-bottom &
+    if [[ $bartype = "mini" ]]; then
+        MONITOR=$m polybar mini &
     elif [[ $res -lt $res_limit ]]; then
         # if resolution is too low use trimmed bar
         tmp="@($(echo ${compact_bars[*]} | sed -e 's/ /|/g'))"
@@ -140,25 +139,32 @@ launchBar() {
                 ;;
         esac
     else
-        MONITOR=$m polybar "$bartype"-top &
-        MONITOR=$m polybar "$bartype"-bottom &
+        if [[ $m = $primary_screen ]]; then
+            MONITOR=$m polybar laptop-top &
+            MONITOR=$m polybar laptop-bottom &
+        else
+            MONITOR=$m polybar "$bartype"-top &
+            MONITOR=$m polybar "$bartype"-bottom &
+        fi
     fi
 }
 launchAllBars() {
     mode="$1"
     # cycle modes
-    tmp="@($(echo "none|${styles[*]}" | sed -e 's/ /|/g'))"
+    tmp="@($(echo "${styles[*]}" | sed -e 's/ /|/g'))"
     case "$mode" in
         'stay') dmode="$(getMode 'style')" ;;
         'next') dmode="$(cycle 'next' styles 'style')" ;;
         'prev') dmode="$(cycle 'prev' styles 'style')" ;;
          $tmp ) dmode="$mode" ;; #capture any valid mode passed
+         none) dmode="none" ;; 
         *) echo "Error: Invalid style" && help && exit 1 ;;
     esac
     setMode 'style' "$dmode" # set defualt polybar style
     # launch bars
     killall -q polybar && sleep 0.001 # Terminate already running bar instances
     case "$dmode" in
+        none) sleep 1 ;;
         cross)
             monitor=$(getActiveMonitors)
             m1="$(echo $monitor | cut -d' ' -f1)"
@@ -175,7 +181,6 @@ launchAllBars() {
             done
             ;;
         press) launchBar float $primary_screen ;; #only put bar on laptop
-        none) sleep 1 ;;
         *) echo "Error: Invalid style" && help && exit 1 ;;
     esac
     # change size of some module depending on the bartype
