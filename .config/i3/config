@@ -39,7 +39,7 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 #Torrent daemon:
-exec --no-startup-id ~/.torrent.sh -m start
+exec --no-startup-id transmission.sh -m start
 #Start VPN
 #exec --no-startup-id ~/.scripts/mullvad.sh connect
 #Mount other drives:
@@ -49,8 +49,7 @@ exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
 #connect to external monitors
 exec --no-startup-id ~/dotfiles/.scripts/monitor.sh auto
 #Launch Polybar and set wallpaper
-exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay back
-exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh laptop
+exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
 #Launch browser
 exec --no-startup-id firefox --browser
 #Launch syncthing
@@ -226,6 +225,18 @@ bindsym Mod2+KP_7 workspace $ws7
 bindsym Mod2+KP_8 workspace $ws8
 bindsym Mod2+KP_9 workspace $ws9
 bindsym Mod2+KP_0 workspace $ws10
+# Move with numpad
+bindsym Mod2+Shift+KP_1  move container to workspace $ws1
+bindsym Mod2+Shift+KP_2  move container to workspace $ws2
+bindsym Mod2+Shift+KP_3  move container to workspace $ws3
+bindsym Mod2+Shift+KP_4  move container to workspace $ws4
+bindsym Mod2+Shift+KP_5  move container to workspace $ws5
+bindsym Mod2+Shift+KP_6  move container to workspace $ws6
+bindsym Mod2+Shift+KP_7  move container to workspace $ws7
+bindsym Mod2+Shift+KP_8  move container to workspace $ws8
+bindsym Mod2+Shift+KP_9  move container to workspace $ws9
+bindsym Mod2+Shift+KP_0  move container to workspace $ws10
+
 # Shortcuts
 bindsym $mod+Tab		    workspace back_and_forth
 bindsym $mod+apostrophe		split horizontal ;; exec $term
