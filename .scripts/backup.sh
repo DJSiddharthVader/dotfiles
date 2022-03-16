@@ -3,8 +3,8 @@ home=~
 backup_drive="/media/4tbdrive"
 rsync_cmd="rsync -ah --ignore-existing --info=progress2"
 to_sync=(CMU_MSCB Music Pictures)
-to_update=(Backups Games Documents Projects Reading ToOrganize)
-to_ignore=(dotfiles .steam Torrents)
+to_update=(Backups Games Documents Projects Reading)
+to_ignore=(dotfiles .steam Torrents ToOrganize)
 
 
 help() {
@@ -37,7 +37,7 @@ main(){
             'backup') backup ;;
             'sync'  ) sync   ;;
             'update') update ;;
-            'all')    backup && sync && update ;;
+            'all')    update && sync && backup;;
             *) help && exit 1;;
         esac
     done
