@@ -42,7 +42,7 @@ lockbox() {
 main(){
     # actions for locking
     mpc pause > /dev/null 2>&1
-    bw lock # lock bitwarden
+    # bw lock # lock bitwarden
     ~/.config/polybar/scripts/pulseaudio-control.sh mute
     #~/.scripts/mullvad.sh disconnect
     #prep lockscreen
@@ -51,7 +51,7 @@ main(){
     scrot "$screen"
     convert "$screen" -scale 20% -scale 500% -draw "fill $background fill-opacity 0.8 $rectangles" "$screen.png"
     #lock command
-    $HOME/Apps/i3lock-color/build/i3lock     \
+    $HOME/bin/i3lock-color/build/i3lock     \
         -i "$screen.png" -t                  \
         --indpos='x+290:h-80'                \
         --noinputtext=''                     \
