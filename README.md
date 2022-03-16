@@ -1,3 +1,142 @@
 # dotfiles
 
-[Theming script in action](https://www.youtube.com/watch?v=wSyKs3Cp3us)
+- [Theming script in action](https://www.youtube.com/watch?v=wSyKs3Cp3us)
+
+## File List
+
+- .ascii
+- .bash/
+  - bash-aliases
+  - bash-functions.sh
+  - bash-prompt.sh
+  - dircolors_256
+- .bashrc
+- .cheatsheets/
+- .config/
+  - awesome/
+  - cava/
+  - compton.conf
+  - dunst/dunstrc
+  - fontconfig/
+  - gtk-2.0/settings.ini
+  - gtk-3.0/settings.ini
+  - gtk-4.0/settings.ini
+  - htop/htoprc
+  - i3/config
+  - mpd/
+  - neofetch/config
+  - nvim/
+    - autoload/
+    - cheat_vimrc
+    - colors/
+    - init.vim
+    - plugged/goyo.vim
+    - plugged/limelight.vim
+    - spell/
+    - syntax/
+    - view/
+  - polybar/
+    - bars/
+    - config
+    - modules.mode
+    - scripts/
+      - battery.sh
+      - cpumonitor.sh
+      - current-window.sh
+      - date.sh
+      - disk.sh
+      - expressvpn.sh
+      - gamma.sh
+      - memory.sh
+      - mpdscroll.sh
+      - network.sh
+      - pulseaudio-control.sh
+      - reading.sh
+      - temperature.sh
+      - transmission.sh
+      - uptimemonitor.sh
+      - weather.sh
+    - separators.mode
+  - qpdfview/
+  - ranger/
+  - rofi/ 
+    - config
+    - config.rasi
+  - tmuxinator/
+    - advent.yml
+    - hw.yml
+    - notes.yml
+    - proj.yml
+    - scratch.yml
+    - ta.yml
+    - visuals.yml
+    - visuals_1080.yml
+  - transmission-daemon/
+    - settings.json
+    - stats.tsv
+  - wal/
+    - templates/colors-rofi-custom.rasi
+    - templates/colors.oomox
+    - templates/polybarColors.wal
+  - zathura/zathurarc
+- .css/
+  - pandoc-notes.css
+  - userChrome.css
+  - userContent.css
+.gitconfig
+.gitignore
+- .ncmpcpp/
+  - bindings
+  - config
+- .scripts/
+  - backup.sh
+  - bar-manager.sh
+  - bitwarden.sh
+  - bluetooth.sh
+  - cheat.sh
+  - commit-status.sh
+  - init-new-gitrepo.sh
+  - lock.sh
+  - low-battery.sh
+  - monitor.sh
+  - mullvad.sh
+  - music_utils/
+  - notes-pandoc-filter.py
+  - notes.sh
+  - pywalHotkey.uc.js
+  - quote.sh
+  - restart.sh
+  - wallpaper.sh
+  - zathura.sh
+- .taskrc
+- tmux.conf
+- tmux/
+  - plugins/tmux-prefix-highlight
+  - plugins/tmux-resurrect
+  - plugins/tpm
+  - plugins/vim-tmux-navigator
+  - tmux-install.sh
+  - tmux-prompt.sh
+- .vim
+  - R/
+  - after/ftplugin/tex.vim
+  - autoload/airline/themes/wal.vim
+  - bundle/
+    - syntastic/
+    - vim-airline/
+    - vim-commentary/
+    - vim-pandoc/
+    - vim-pandoc-syntax/
+    - vim-startify/
+    - vim-surround/
+    - vimtex/
+  - colors/
+  - doc/
+  - ftdetect/
+  - ftplugin/
+  - plugged/
+  - R/
+  - spell/
+  - syntax/
+  - view/
+
