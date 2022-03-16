@@ -1,8 +1,10 @@
 #!/bin/bash
-threshes=(10 15 20 25)
+THRESH=25
+
 send_notif() {
-    msg="$1"
-    notify-send "$msg" -u critical
+    notify-send "$1" -u critical 
+    mpv --volume=50 "$HOME/.varfiles/low_battery_alert.flac" > /dev/null 2>&1
+
 }
 get_status() {
     acpi -b | grep -v 'unavailable' | sed -e 's/^.* \([^ ]*harging\).*$/\1/'
@@ -13,14 +15,11 @@ get_percent() {
 main() {
     while true; do
         if [[ "$(get_status)" == "Discharging" ]]; then
-            for thresh in ${threshes[@]}; do
-                if (( $(get_percent) < $thresh )) ; then
-                    send_notif "Battery < $thresh%"
-                    break
-                fi
-            done
+            if (( $(get_percent) < $THRESH )) ; then
+                send_notif "Battery < $(get_percent)%"
+            fi
         fi
-        sleep 30
+        sleep 60
     done
 }
 
