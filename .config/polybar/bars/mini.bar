@@ -1,0 +1,76 @@
+height = 22
+y-offset = 0
+radius = 5.0
+tray-transparent = true
+border-top-size = 0
+border-bottom-size = 0
+
+i3-prefix = ${colors.rightprefix}
+i3-suffix =
+i3-color = ${colors.col1}
+i3-color-2 = ${colors.col2}
+i3-underline = ${colors.col1}
+i3-text-color = ${colors.foreground}
+i3-underline-2 = ${colors.col2}
+i3-text-color-2 =  ${colors.foreground}
+
+date-prefix =
+date-suffix = ${colors.leftsuffix}
+date-color = ${colors.col3}
+date-underline = ${colors.col3}
+date-text-color =  ${colors.foreground}
+
+battery-prefix = ${colors.rightprefix}
+battery-suffix = ${colors.rightsuffix}
+battery-color = ${colors.col8}
+battery-underline =
+battery-text-color = ${colors.foreground}
+
+volume-prefix =
+volume-suffix =
+volume-color = ${colors.col4}
+volume-underline = ${colors.col4}
+volume-text-color = ${colors.foreground}
+
+xbacklight-prefix = ${colors.leftprefix}
+xbacklight-suffix = ${colors.leftsuffix}
+xbacklight-color = ${colors.col2}
+xbacklight-underline =
+xbacklight-text-color = ${colors.foreground}
+
+pulseaudio-control-prefix = ${colors.leftprefix}
+pulseaudio-control-suffix = ${colors.leftsuffix}
+pulseaudio-control-color = ${colors.col3}
+pulseaudio-control-underline =
+pulseaudio-control-text-color = ${colors.foreground}
+
+wlan-prefix =
+wlan-suffix =
+wlan-color = ${colors.col5}
+wlan-underline = ${colors.col5}
+wlan-text-color = ${colors.foreground}
+
+bluetooth-prefix =
+bluetooth-suffix =
+bluetooth-color = ${colors.col7}
+bluetooth-underline = ${colors.col7}
+bluetooth-text-color = ${colors.foreground}
+
+memory-prefix = ${colors.rightprefix}
+memory-suffix = ${colors.rightsuffix}
+memory-color = ${colors.col2}
+memory-underline =
+memory-text-color = ${colors.foreground}
+
+cpu-prefix = ${colors.rightprefix}
+cpu-suffix = ${colors.rightsuffix}
+cpu-color = ${colors.col3}
+cpu-underline =
+cpu-text-color = ${colors.foreground}
+
+weather-prefix = ${colors.rightprefix}
+weather-suffix = ${colors.rightsuffix}
+weather-color = ${colors.col7}
+weather-underline =
+weather-text-color = ${colors.foreground}
+
