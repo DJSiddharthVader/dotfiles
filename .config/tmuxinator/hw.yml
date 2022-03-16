@@ -2,30 +2,22 @@
 
 name: hw
 root: ~/CMU_MSCB/Current
-pre_window: conda deactivate; clear
+pre_window: clear
 
 windows:
-  - Automation:
+  - jupyter:
+      root: /home/sidreed/CMU_MSCB/Courses
+      panes:
+        - cd Automation-02750/Homework; conda deactivate; conda activate auto02750
+  - Auto:
       root: /home/sidreed/CMU_MSCB/Courses/Automation-02750/Homework
       layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
       panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-  - Large_Data:
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)";clear
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"; conda activate auto02750; clear
+  - LD:
       root: /home/sidreed/CMU_MSCB/Courses/ML_Large_Data-10605/Homework
       layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
       panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-  - PGM:
-      root: /home/sidreed/CMU_MSCB/Courses/PGM-10708/Homework
-      layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
-      panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-  - Probability:
-      root: /home/sidreed/CMU_MSCB/Courses/Probability_Modelling-36410/Homework
-      layout: 4750,74x38,0,0[74x27,0,0,42,74x10,0,28,46]
-      panes:
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
-        - cd "$(find . -maxdepth 1 | sort -n | tail -1)"
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)";clear
+        - cd "$(find . -maxdepth 1 | sort -n | tail -1)";clear
