@@ -19,10 +19,10 @@ status() {
 }
 connect() {
     mullvad connect
-    ~/.torrent.sh resume > /dev/null 2>&1
+    transmission.sh resume > /dev/null 2>&1
 }
 disconnect() {
-    ~/.torrent.sh pause > /dev/null 2>&1
+    transmission.sh pause > /dev/null 2>&1
     mullvad disconnect
 }
 
