@@ -17,7 +17,7 @@ margin-bottom = 1
 [colors]
 ;hack for getting colors to read from Xressources
 include-file = ~/dotfiles/.config/polybar/separators.mode
-include-file = ~/.cache/wal/polybarColors.wal
+include-file = ~/.cache/wal/polybar-wal.theme
 
 [fonts]
 ; Font Awesome Icons
@@ -376,14 +376,13 @@ modules-left = date battery memory cpu temperature xkeyboard disk uptime weather
 modules-center =
 modules-right = reading
 
-;;minimal
-[bar/minimal]
+;;mini
+[bar/mini]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/minimal.bar
-bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading wall
+include-file = ~/dotfiles/.config/polybar/bars/mini.bar
+modules-center = i3 i3rightcap weather cpu memory pulseaudio-control backlight-acpi battery dateleftcap date 
+;modules-left = 
+;modules-right = 
 
 
 ;compact bars
@@ -482,15 +481,15 @@ strip-wsnumbers = true
 format = <label-state> <label-mode>
 ws-icon-1 = 1;I 
 ws-icon-2 = 2;II 
-ws-icon-3 = 3;III 
-ws-icon-4 = 4;IV 
-ws-icon-5 = 5;V 
+ws-icon-3 = 3;III 
+ws-icon-4 = 4;IV  
+ws-icon-5 = 5;V 
 ws-icon-6 = 6;VI 
-ws-icon-7 = 7;VII 
+ws-icon-7 = 7;VII 
 ws-icon-8 = 8;VIII 
 ws-icon-9 = 9;IX 
 ws-icon-0 = 10;X ?
-;         
+;         
 ;ws-icon-1 = 1;1 
 ;ws-icon-2 = 2;2 
 ;ws-icon-3 = 3;3 
@@ -1007,16 +1006,38 @@ content-background = ${root.leftcap-color}
 content-foreground = ${root.leftcap-text-color}
 content-underline = ${root.leftcap-underline}
 
+[module/i3rightcap]
+type = custom/text
+content = " "
+content-font = 5
+content-background = ${root.i3-color}
+content-foreground = ${root.i3-text-color}
+content-underline = ${root.i3-underline}
+content-prefix = ${colors.rightsuffix}
+content-prefix-background = ${colors.transparent}
+content-prefix-foreground = ${root.i3-color} 
+
+[module/dateleftcap]
+type = custom/text
+content = " "
+content-font = 5
+content-background = ${root.date-color}
+content-foreground = ${root.date-text-color}
+content-underline = ${root.date-underline}
+content-prefix = ${colors.leftprefix}
+content-prefix-background = ${colors.transparent}
+content-prefix-foreground = ${root.date-color} 
+
 [module/mpdleftcap]
 type = custom/text
 content = " "
 content-font = 5
 content-background = ${root.mpd-color}
 content-foreground = ${root.mpd-text-color}
+content-underline = ${root.mpd-underline}
 content-prefix = ${colors.leftprefix}
 content-prefix-background = ${colors.transparent}
 content-prefix-foreground = ${root.mpd-color} 
-content-underline = ${root.mpd-underline}
 
 
 ;depreciated
