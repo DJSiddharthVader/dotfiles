@@ -32,17 +32,18 @@ disconnect(){
 connectToAll() {
     primary="$1"
     prev=""
+    echo "$(listMonitors)"
     while IFS= read -r monitor; do
         resolution="$(resolution "$monitor")"
         echo "$monitor $resolution"
-        if [[ -z "$prev" ]]; then
-            if [[ -z "$primary" ]]; then
+        if [[ $monitor = $primary ]]; then
+            xrandr --output $monitor --mode "$resolution" --primary
+        else
+            if [[ -z "$prev" ]]; then
                 xrandr --output $monitor --mode "$resolution" --primary
             else
-                xrandr --output $monitor --mode "$resolution" --right-of $primary
+                xrandr --output $monitor --mode "$resolution" --right-of "$prev"
             fi
-        else
-            xrandr --output $monitor --mode "$resolution" --right-of $prev
         fi
         prev=$monitor
     done <<< "$(listMonitors)"
@@ -84,7 +85,7 @@ organizeWorkspaces() {
     case "$mode" in
         home) 
             move_left=(1)
-            move_right=(4 6 8 2)
+            move_right=(2 3 6)
             ;;
         present)
             move_left=()
