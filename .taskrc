@@ -23,19 +23,80 @@ data.location=/home/sidreed/.task
 #data.location=~/.local/share/task
 #hooks.location=~/.config/task/hooks
 
-# Color theme (uncomment one to use)
-#include light-16.theme
-#include light-256.theme
-#include dark-16.theme
-#include dark-256.theme
-#include dark-red-256.theme
-#include dark-green-256.theme
-#include dark-blue-256.theme
-#include dark-violets-256.theme
-#include dark-yellow-green.theme
-#include dark-gray-256.theme
-#include dark-gray-blue-256.theme
-#include solarized-dark-256.theme
-#include solarized-light-256.theme
-#include no-color.theme
+#rule.precedence.color=deleted,completed,active,keyword.,tag.,project.,overdue,scheduled,due.today,due,blocked,blocking,recurring,tagged,uda.
+uda.taskwarrior-tui.task-report.next.filter=status:pending
+uda.taskwarrior-tui.task-report.auto-insert-double-quotes-on-add=false
+uda.taskwarrior-tui.task-report.auto-insert-double-quotes-on-annotate=false
+uda.taskwarrior-tui.task-report.auto-insert-double-quotes-on-log=false
+uda.taskwarrior-tui.task-report.show-info=false
+uda.taskwarrior-tui.calendar.months-per-row=2
 
+# General decoration
+color.label.sort=bold color4
+color.alternate=bold on color2
+color.header=bold color1 on color6
+color.label=bold color6 on color2
+color.footnote=bold color3 on color7
+color.warning=bold bold color6 on color7
+color.error=bold color7 on red
+color.debug=bold color4 on color7
+
+# Task state
+color.completed=bold color0 on color7
+#color.deleted=
+color.scheduled=bold on color3 on color7
+color.active=bold color4 on color7
+color.recurring=bold color5 on color7
+#color.until=
+#color.blocked=
+#color.blocking=
+
+# Project
+# color.project.none=bold color2
+
+# Priority
+color.uda.priority.H= on color6
+color.uda.priority.M= on color4
+color.uda.priority.L= on color2
+
+# Tags
+#color.tag.next=
+#color.tag.none=
+color.tagged=bold color6
+
+# Due
+color.due.today=red
+#color.due=
+#color.overdue=
+
+# Report: burndown
+color.burndown.done=on 
+color.burndown.pending=on 
+color.burndown.started=on 
+
+# Report: history
+#color.history.add=
+#color.history.delete=
+#color.history.done=
+
+# Report: summary
+color.summary.background=bold color7 
+color.summary.bar=bold color0 on color7
+
+# Command: calendar
+color.calendar.due.today=bold color5 
+color.calendar.due=bold color1 on color0
+color.calendar.holiday=bold color2 on color1
+color.calendar.overdue=bold color2 on color9
+color.calendar.today=bold color0 on color7
+color.calendar.weekend=bold on color3
+#color.calendar.weeknumber=bold 
+
+# Command: sync
+#color.sync.added=
+#color.sync.changed=
+#color.sync.rejected=
+
+# Command: undo
+color.undo.after=bold color2
+color.undo.before=bold color1
