@@ -29,7 +29,7 @@ notes() {
     # pandoc compiles md notes to html/pdf
     pandoc -s ./Notes/*.md -f markdown+pipe_tables --filter "$FILTER" --mathjax --toc --toc-depth 2 -c "$CSS" -o "$name"
     # open notes page in browser
-    window_id="$(xwininfo -tree -root | grep -i "$(echo $pattern | tr '_' ' ')" | grep -o '0x[0-9a-zA-Z]*' | head -1)"
+    window_id="$(xwininfo -tree -root | grep "$(echo $pattern | grep -o '[0-9]*')" | grep -o '0x[0-9a-zA-Z]*' | head -1)"
     if [ -n "$window_id" ]; then # is notes tab already open
         # refresh open tab
         xdotool key --window "$window_id" --clearmodifiers "ctrl+r" # refresh already open tab
