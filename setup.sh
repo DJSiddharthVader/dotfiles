@@ -15,11 +15,11 @@ rm -rf ~/.git*
 #     wget "$NVIM_BINARY"
 #     cp ~/nvim-linux64/bin/nvim ~/bin/
 # fi
-sudo yum -y install ninja-build libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip patch gettext curl
-git clone https://github.com/neovim/neovim
-cd neovim/ && make
-sudo make install
-
-# install neovim plugins
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim -c 'PlugInstall'
+#sudo yum -y install ninja-build libtool autoconf automake cmake gcc gcc-c++ make pkgconfig unzip patch gettext curl
+#git clone https://github.com/neovim/neovim
+#cd neovim/ && make
+#sudo make install
+#
+## install neovim plugins
+#curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+#vim -c 'PlugInstall'
