@@ -7,10 +7,6 @@ alias lc='ls | wc -l'
 
 #Typos
 alias r,='rm'
-alias e='nvim'
-alias bi='nvim'
-alias vi='nvim'
-alias vim='nvim'
 alias mc='mv'
 
 #Options

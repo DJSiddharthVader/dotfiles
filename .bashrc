@@ -39,11 +39,6 @@ if [ "$TERM" = "linux" ]; then
 fi
 
 # }}}
-## Import colorscheme from 'wal' asynchronously
-# &   # Run the process in the background.
-# ( ) # Hide shell job control messages.
-(cat ~/.cache/wal/sequences &)
-
 ## Exports
 
 # Default browser
@@ -224,34 +219,3 @@ if which systemctl &>/dev/null; then
         sudo systemctl daemon-reload
     }
 fi
-
-## Set PATH variable
-#export GOPATH="$(echo $HOME/Documents/CMU_MSCB/Courses/Programming-02601/{Class,Homework,Project} | sed -e 's/ /:/g')"
-export GOPATH="$HOME/CMU_MSCB/Courses/Programming-02601/:$HOME/Projects/musman/:$HOME/Projects/go/src"
-#PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-#PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-#PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-#PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
-#export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
-#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
-export PATH="$HOME/.scripts:$PATH"
-PATH=$(echo $PATH | awk -v RS=: -v ORS=: '!($0 in a) {a[$0]; print}') #remove duplicate entries in path
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/sidreed/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/sidreed/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/sidreed/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/sidreed/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-# print a random quote on new terminal launch
-~/.scripts/quote.sh
