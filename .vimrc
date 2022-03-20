@@ -124,9 +124,9 @@ colorscheme angr
 " colorscheme kanagawa
 
 " always transparent background
-highlight Normal guibg=none
-highlight NonText guibg=none
-au ColorScheme * hi Normal ctermbg=none guibg=none
+"highlight Normal guibg=none
+"highlight NonText guibg=none
+"au ColorScheme * hi Normal ctermbg=none guibg=none
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
