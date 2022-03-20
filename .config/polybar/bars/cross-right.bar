@@ -78,3 +78,15 @@ reading-suffix = ${colors.leftsuffix}
 reading-color = ${colors.col11}
 reading-underline =
 reading-text-color = ${colors.foreground}
+
+mpd-prefix =
+mpd-suffix = ${colors.leftsuffix}
+mpd-color = ${colors.col7}
+mpd-underline =
+mpd-text-color = ${colors.foreground}
+
+songnames-prefix = ${colors.leftprefix}
+songnames-suffix =
+songnames-color = ${colors.col7}
+songnames-underline =
+songnames-text-color = ${colors.foreground}
