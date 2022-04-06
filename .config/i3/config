@@ -41,7 +41,7 @@ exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 #Torrent daemon:
 exec --no-startup-id transmission.sh -m start
 #Start VPN
-#exec --no-startup-id ~/.scripts/mullvad.sh connect
+exec --no-startup-id ~/.scripts/mullvad.sh connect
 #Mount other drives:
 exec --no-startup-id sudo mount -a
 #Composite manager:
