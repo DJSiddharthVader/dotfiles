@@ -166,12 +166,13 @@ launchAllBars() {
     case "$dmode" in
         none) sleep 1 ;;
         cross)
-            monitor=$(getActiveMonitors)
-            m1="$(echo $monitor | cut -d' ' -f1)"
-            m2="$(echo $monitor | cut -d' ' -f2)"
+            monitors=$(getActiveMonitors)
+            echo "$monitors"
+            m1="$(echo $monitors | cut -d' ' -f1)"
+            m2="$(echo $monitors | cut -d' ' -f2)"
             MONITOR="$m1" polybar cross-left &
             MONITOR="$m2" polybar cross-right &
-            for m in $(echo $monitor | cut -d' ' -f3-); do
+            for m in $(echo $monitors | cut -d' ' -f3-); do
                 launchBar float $m
             done
             ;;
