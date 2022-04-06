@@ -32,6 +32,7 @@ backup() {
         | gzip -9 > $backup_file
 }
 main(){
+    [[ -z "$@" ]] && help && exit 0
     for mode in $@; do
         case "$mode" in
             'backup') backup ;;
