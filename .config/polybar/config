@@ -328,7 +328,7 @@ modules-left = i3 focused focused-name applauncher pulseaudio-control wlan mullv
 [bar/cross-right]
 inherit = section/cross
 include-file = ~/dotfiles/.config/polybar/bars/cross-right.bar
-modules-right = songnames mpd torrent weather uptime disk xkeyboard temperature cpu memory battery date i3
+modules-right = torrent weather uptime disk xkeyboard temperature cpu memory battery date i3
 
 ;;standard
 [bar/standard-top]
@@ -380,7 +380,7 @@ modules-right = reading
 [bar/mini]
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/mini.bar
-modules-center = i3 i3rightcap weather cpu memory pulseaudio-control backlight-acpi battery dateleftcap date 
+modules-center = i3 i3rightcap torrent weather cpu memory pulseaudio-control backlight-acpi battery dateleftcap date 
 ;modules-left = 
 ;modules-right = 
 
