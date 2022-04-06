@@ -74,3 +74,8 @@ weather-color = ${colors.col7}
 weather-underline =
 weather-text-color = ${colors.foreground}
 
+torrent-prefix = ${colors.rightprefix}
+torrent-suffix = ${colors.rightsuffix}
+torrent-color = ${colors.col8}
+torrent-underline =
+torrent-text-color = ${colors.foreground}
