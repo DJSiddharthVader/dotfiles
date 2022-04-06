@@ -15,7 +15,7 @@ setMode() {
 }
 
 status() {
-    mullvad status | sed -e 's/^.*: \(\S*\)\b.*$/\1/'
+    mullvad status | grep -o '[^ ]*onnect[^ ]*' | tr -d ' '
 }
 connect() {
     mullvad connect
