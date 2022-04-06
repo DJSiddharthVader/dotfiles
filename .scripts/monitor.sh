@@ -10,7 +10,7 @@ resolution() {
     xrandr | sed -ne "/$monitor/,/connected/p" | sort -n | tail -1 | grep -ao '[0-9]*x[0-9_\.]*'
 }
 listMonitors() {
-    xrandr | grep ' connected' | sort -r | cut -d' ' -f1 | tr -d ' '
+    xrandr | grep ' connected' | sort -r | cut -d' ' -f1 | tr -d ' ' 
 }
 connectAudio() {
     mode="$1"
@@ -32,17 +32,20 @@ disconnect(){
 connectToAll() {
     primary="$1"
     prev=""
-    echo "$(listMonitors)"
+    if [[ -n $primary ]]; then
+        xrandr --output $primary --mode $(resolution $primary) --primary
+        prev=$primary
+    fi
     while IFS= read -r monitor; do
-        resolution="$(resolution "$monitor")"
-        echo "$monitor $resolution"
+        resolution=$(resolution $monitor)
         if [[ $monitor = $primary ]]; then
-            xrandr --output $monitor --mode "$resolution" --primary
+            continue 
         else
-            if [[ -z "$prev" ]]; then
-                xrandr --output $monitor --mode "$resolution" --primary
+            echo "$monitor $resolution | $prev"
+            if [[ -z $prev ]]; then
+                xrandr --output $monitor --mode $resolution --primary
             else
-                xrandr --output $monitor --mode "$resolution" --right-of "$prev"
+                xrandr --output $monitor --mode $resolution --right-of $prev
             fi
         fi
         prev=$monitor
@@ -85,11 +88,11 @@ organizeWorkspaces() {
     case "$mode" in
         home) 
             move_left=(1)
-            move_right=(2 3 6)
+            move_right=(2 3 5 6 7)
             ;;
         present)
             move_left=()
-            move_right=(3 6)
+            move_right=(3 5 6)
             ;;
         *) help && exit 1 ;;
     esac
@@ -116,12 +119,12 @@ main() {
                    organizeWorkspaces 'home'
                    ;;
                 3) connect ext # some 2 monitor setup
+                   connectAudio hdmi
                    $BAR_MANAGER_SCRIPT style float
                    ;;
                 2) connect hybrid # presenting
-                   $BAR_MANAGER_SCRIPT style full
-                   connectAudio hdmi
-                   organizeWorkspaces 'present'
+                   $BAR_MANAGER_SCRIPT style laptop
+                   # organizeWorkspaces 'present'
                    ;;
                 1) echo 'No monitors connected' && exit 0 ;;
                 *) echo 'Error detecting monitors' && exit 1 ;;
