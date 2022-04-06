@@ -131,11 +131,11 @@ bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
 bindsym $mod+t         exec transmission.sh -m search
-#bindsym $mod+Shift+t  layout toggle
+bindsym $mod+Shift+t   layout toggle
 bindsym $mod+y         resize shrink width 5 px or 5 ppt
 bindsym $mod+Shift+y   resize grow width 5 px or 5 ppt
 bindsym $mod+u         [instance="dropdown"] scratchpad show,move position center
-#bindsym $mod+Shift+u
+bindsym $mod+Shift+u   sticky toggle
 bindsym $mod+i         resize shrink height 5 px or 5 ppt
 bindsym $mod+Shift+i   resize grow height 5 px or 5 ppt
 bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu style
