@@ -4,7 +4,7 @@ shopt -s extglob
 # Styles
 script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-styles=(float standard text cross press full mini laptop)
+styles=(float text underline cross press full mini laptop)
 compact_bars=(laptop mini)
 res_limit=1400
 primary_screen="eDP-1"
