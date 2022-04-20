@@ -114,9 +114,10 @@ setWallpaper() {
     feh --bg-scale "$wallpaper_file" #set wallpaper
 }
 colorFirefox() {
-    window_id="$(xwininfo -tree -root | grep -i '\"Navigator\" \"Firefox\"' | grep -o '0x[0-9a-Z]*' | head -1)" #get window id for a firefox windown (doesnt matter which one)
-    xdotool key --window "$window_id" --clearmodifiers "ctrl+h" # send ctrl+h keypress to firefox window
-    # this triggers a script to reload the colors.css style sheet, which is produced by pywal
+    # get window id for a firefox window
+    window_id="$(xwininfo -tree -root | grep -i '\"Navigator\" \"Firefox\"' | grep -o '0x[0-9a-Z]* ' | head -1)" 
+    # send keypress to firefox window, triggers a script to reload the colors.css style sheet produced by pywal
+    xdotool key --window $window_id --clearmodifiers "ctrl+h" # send ctrl+h keypress to firefox window
 }
 changeColors() {
     image="$1"
@@ -184,7 +185,7 @@ main() {
 case 1 in
     $(( $# == 1 )))
         mode="$1"
-        change="back"
+        change="both"
         ;;
     $(( $# == 2 )))
         mode="$1"
