@@ -119,7 +119,7 @@ main() {
                    organizeWorkspaces 'home'
                    ;;
                 3) connect ext # some 2 monitor setup
-                   connectAudio hdmi
+                   # connectAudio hdmi
                    $BAR_MANAGER_SCRIPT style float
                    ;;
                 2) connect hybrid # presenting
