@@ -1,0 +1,148 @@
+i3-prefix =
+i3-suffix =
+i3-color = ${colors.transparent}
+i3-color-2 = ${colors.transparent}
+i3-underline = ${colors.col1}
+i3-text-color = ${root.foreground}
+i3-underline-2 = ${colors.col2}
+i3-text-color-2 = ${colors.col2}
+
+focused-prefix =
+focused-suffix =
+focused-color = ${colors.transparent}
+focused-underline = ${colors.col3}
+focused-text-color = ${root.foreground}
+
+focused-name-prefix = ${colors.rightprefix}
+focused-name-suffix = ${colors.rightsuffix}
+
+applauncher-prefix =
+applauncher-suffix =
+applauncher-color = ${colors.transparent}
+applauncher-underline = ${colors.col1}
+applauncher-text-color = ${root.foreground}
+
+gamma-prefix =
+gamma-suffix =
+gamma-color = ${colors.transparent}
+gamma-underline = ${colors.col2}
+gamma-text-color = ${root.foreground}
+
+volume-prefix =
+volume-suffix =
+volume-color = ${colors.transparent}
+volume-underline = ${colors.col3}
+volume-text-color = ${root.foreground}
+
+pulseaudio-control-prefix =
+pulseaudio-control-suffix =
+pulseaudio-control-color = ${colors.transparent}
+pulseaudio-control-underline = ${colors.col3}
+pulseaudio-control-text-color = ${root.foreground}
+
+wlan-prefix =
+wlan-suffix =
+wlan-color = ${colors.transparent}
+wlan-underline = ${colors.col4}
+wlan-text-color = ${root.foreground}
+
+protonvpn-prefix =
+protonvpn-suffix =
+protonvpn-color = ${colors.transparent}
+protonvpn-underline = ${colors.col5}
+protonvpn-text-color = ${root.foreground}
+
+mullvad-prefix =
+mullvad-suffix =
+mullvad-color = ${colors.transparent}
+mullvad-underline = ${colors.col5}
+mullvad-text-color = ${root.foreground}
+
+bluetooth-prefix =
+bluetooth-suffix =
+bluetooth-color = ${colors.transparent}
+bluetooth-underline = ${colors.col6}
+bluetooth-text-color = ${root.foreground}
+
+mpd-prefix =
+mpd-suffix =
+mpd-color = ${colors.transparent}
+mpd-underline = ${colors.col7}
+mpd-text-color = ${root.foreground}
+
+songnames-prefix =
+songnames-suffix =
+songnames-color = ${colors.transparent}
+songnames-underline = ${colors.col7}
+songnames-text-color = ${root.foreground}
+
+
+date-prefix =
+date-suffix =
+date-color = ${colors.transparent}
+date-underline = ${colors.col1}
+date-text-color = ${root.foreground}
+
+battery-prefix = 
+battery-suffix = 
+battery-color = ${colors.transparent}
+battery-underline = ${colors.col6}
+battery-text-color = ${root.foreground}
+
+memory-prefix =
+memory-suffix =
+memory-color = ${colors.transparent}
+memory-underline = ${colors.col2}
+memory-text-color = ${root.foreground}
+
+cpu-prefix =
+cpu-suffix =
+cpu-color = ${colors.transparent}
+cpu-underline = ${colors.col3}
+cpu-text-color = ${root.foreground}
+
+temperature-prefix =
+temperature-suffix =
+temperature-color = ${colors.transparent}
+temperature-underline = ${colors.col4}
+temperature-text-color = ${root.foreground}
+
+xkeyboard-prefix =
+xkeyboard-suffix =
+xkeyboard-color = ${colors.alert}
+
+disk-prefix =
+disk-suffix =
+disk-color = ${colors.transparent}
+disk-underline = ${colors.col5}
+disk-text-color = ${root.foreground}
+
+uptime-prefix =
+uptime-suffix =
+uptime-color = ${colors.transparent}
+uptime-underline = ${colors.col6}
+uptime-text-color = ${root.foreground}
+
+weather-prefix =
+weather-suffix =
+weather-color = ${colors.transparent}
+weather-underline = ${colors.col7}
+weather-text-color = ${root.foreground}
+
+torrent-prefix =
+torrent-suffix =
+torrent-color = ${colors.transparent}
+torrent-underline = ${colors.col8}
+torrent-text-color = ${root.foreground}
+
+wall-prefix =
+wall-suffix =
+wall-color = ${colors.transparent}
+wall-underline = ${colors.col1}
+wall-text-color = ${root.foreground}
+
+reading-prefix =
+reading-suffix =
+reading-color = ${colors.transparent}
+reading-underline = ${colors.col2}
+reading-text-color = ${root.foreground}

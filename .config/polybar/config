@@ -203,7 +203,7 @@ font-4 = ${fonts.font-powerline-huge}
 font-5 = ${fonts.font-scrolling-huge}
 font-6 = ${fonts.font-focused-huge}
 
-[section/standard]
+[section/text]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
 cursor-click = pointer
@@ -220,19 +220,19 @@ border-left-size = 10
 padding = 1
 module-margin = 1
 line-size = 0
-background = ${colors.transparent}
+background = ${colors.clear0}
 foreground = ${colors.foreground}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
 font-0 = ${fonts.font-icon-large}
 font-1 = ${fonts.font-weather-large}
-font-2 = ${fonts.font-main-large}
-font-3 = ${fonts.font-overflow-large}
+font-2 = ${fonts.font-main}
+font-3 = ${fonts.font-overflow}
 font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-scrolling}
 font-6 = ${fonts.font-focused}
 
-[section/text]
+[section/underline]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
 cursor-click = pointer
@@ -246,17 +246,17 @@ border-bottom-size = 5
 width = 100%
 border-right-size = 10
 border-left-size = 10
-line-size = 5
+line-size = 3.5
 module-margin = 1
 padding = 1
-background = ${colors.transparent}
-foreground = ${colors.foreground}
+background = ${colors.clear0}
+foreground = ${colors.foreground-white}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
 font-0 = ${fonts.font-icon-large}
 font-1 = ${fonts.font-weather-large}
-font-2 = ${fonts.font-main-large}
-font-3 = ${fonts.font-overflow-large}
+font-2 = ${fonts.font-main}
+font-3 = ${fonts.font-overflow}
 font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-scrolling}
 font-6 = ${fonts.font-focused-large}
@@ -292,14 +292,14 @@ font-6 = ${fonts.font-focused-large}
 ;;float
 [bar/float-top]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float-top.bar
+include-file = ~/dotfiles/.config/polybar/bars/float.bar
 fixed-center = true
 modules-left = i3 focused focused-name
 modules-center =
 modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
 [bar/float-bottom]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/float.bar
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
@@ -308,13 +308,13 @@ modules-right = reading
 ;;full
 [bar/full-top]
 inherit = section/full
-include-file = ~/dotfiles/.config/polybar/bars/full-top.bar
+include-file = ~/dotfiles/.config/polybar/bars/full.bar
 modules-left = i3 focused focused-name
 modules-center =
 modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control gamma applauncher
 [bar/full-bottom]
 inherit = section/full
-include-file = ~/dotfiles/.config/polybar/bars/full-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/full.bar
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
@@ -323,38 +323,38 @@ modules-right = reading wall
 ;;cross
 [bar/cross-left]
 inherit = section/cross
-include-file = ~/dotfiles/.config/polybar/bars/cross-left.bar
+include-file = ~/dotfiles/.config/polybar/bars/cross.bar
 modules-left = i3 focused focused-name applauncher pulseaudio-control wlan mullvad bluetooth reading
 [bar/cross-right]
 inherit = section/cross
-include-file = ~/dotfiles/.config/polybar/bars/cross-right.bar
+include-file = ~/dotfiles/.config/polybar/bars/cross.bar
 modules-right = torrent weather uptime disk xkeyboard temperature cpu memory battery date i3
-
-;;standard
-[bar/standard-top]
-inherit = section/standard
-include-file = ~/dotfiles/.config/polybar/bars/standard-top.bar
-modules-left = i3 focused focused-name
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
-[bar/standard-bottom]
-inherit = section/standard
-include-file = ~/dotfiles/.config/polybar/bars/standard-bottom.bar
-bottom = true
-modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading wall
 
 ;;text
 [bar/text-top]
 inherit = section/text
-include-file = ~/dotfiles/.config/polybar/bars/text-top.bar
+include-file = ~/dotfiles/.config/polybar/bars/text.bar
 modules-left = i3 focused focused-name
 modules-center =
 modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
 [bar/text-bottom]
 inherit = section/text
-include-file = ~/dotfiles/.config/polybar/bars/text-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/text.bar
+bottom = true
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
+modules-center =
+modules-right = reading wall
+
+;;underline
+[bar/underline-top]
+inherit = section/underline
+include-file = ~/dotfiles/.config/polybar/bars/underline.bar
+modules-left = i3 focused focused-name
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
+[bar/underline-bottom]
+inherit = section/underline
+include-file = ~/dotfiles/.config/polybar/bars/underline.bar
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
@@ -363,14 +363,14 @@ modules-right = reading wall
 ;;laptop
 [bar/laptop-top]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float-top.bar
+include-file = ~/dotfiles/.config/polybar/bars/float.bar
 modules-left = i3 focused leftcap
 modules-center =
 ;modules-right = mpdleftcap mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 modules-right = songnames mpd mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/laptop-bottom]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/float.bar
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
@@ -389,14 +389,14 @@ modules-center = i3 i3rightcap torrent weather cpu memory pulseaudio-control bac
 ;;float
 [bar/compact-float-top]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float-top.bar
+include-file = ~/dotfiles/.config/polybar/bars/float.bar
 fixed-center = true
 modules-left = i3 focused leftcap
 modules-center =
 modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
 [bar/compact-float-bottom]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/float.bar
 bottom = true
 modules-left = date memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
@@ -405,28 +405,13 @@ modules-right = reading
 ;;full
 [bar/compact-full-top]
 inherit = section/full
-include-file = ~/dotfiles/.config/polybar/bars/full-top.bar
+include-file = ~/dotfiles/.config/polybar/bars/full.bar
 modules-left = i3 focused leftcap
 modules-center =
 modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control gamma applauncher
 [bar/compact-full-bottom]
 inherit = section/full
-include-file = ~/dotfiles/.config/polybar/bars/full-bottom.bar
-bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather
-modules-center =
-modules-right = reading
-
-;;standard
-[bar/compact-standard-top]
-inherit = section/standard
-include-file = ~/dotfiles/.config/polybar/bars/standard-top.bar
-modules-left = i3 focused
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
-[bar/compact-standard-bottom]
-inherit = section/standard
-include-file = ~/dotfiles/.config/polybar/bars/standard-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/full.bar
 bottom = true
 modules-left = date memory cpu temperature xkeyboard disk uptime weather
 modules-center =
@@ -435,15 +420,30 @@ modules-right = reading
 ;;text
 [bar/compact-text-top]
 inherit = section/text
-include-file = ~/dotfiles/.config/polybar/bars/text-top.bar
+include-file = ~/dotfiles/.config/polybar/bars/text.bar
 modules-left = i3 focused
 modules-center =
 modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
 [bar/compact-text-bottom]
 inherit = section/text
-include-file = ~/dotfiles/.config/polybar/bars/text-bottom.bar
+include-file = ~/dotfiles/.config/polybar/bars/text.bar
 bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
+modules-center =
+modules-right = reading
+
+;;underline
+[bar/compact-underline-top]
+inherit = section/underline
+include-file = ~/dotfiles/.config/polybar/bars/underline.bar
+modules-left = i3 focused
+modules-center =
+modules-right = songnames mpd mullvad wlan pulseaudio-control applauncher
+[bar/compact-underline-bottom]
+inherit = section/underline
+include-file = ~/dotfiles/.config/polybar/bars/underline.bar
+bottom = true
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
 modules-right = reading
 
@@ -983,7 +983,7 @@ format-suffix-background = ${colors.transparent}
 type = custom/script
 tail = true
 exec = ~/dotfiles/.config/polybar/scripts/reading.sh display
-click-left = ~/dotfiles/.config/polybar/scripts/reading.sh pick
+click-left = ~/dotfiles/.config/polybar/scripts/reading.sh next
 click-right = ~/dotfiles/.config/polybar/scripts/reading.sh open
 format = " %{T6}<label> %{T-}"
 format-prefix-font = 5

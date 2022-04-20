@@ -16,6 +16,7 @@ tertiary = {color3}
 alert = #ff0000
 
 foreground = #000
+foreground-white = #B4B4B4
 foreground-alt = #444
 
 col1 = {color1}

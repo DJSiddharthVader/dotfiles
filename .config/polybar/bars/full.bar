@@ -77,3 +77,70 @@ songnames-underline =
 songnames-text-color = ${colors.foreground}
 
 
+date-prefix = ${colors.rightprefix}
+date-suffix = ${colors.rightsuffix}
+date-color = ${colors.col1}
+date-underline =
+date-text-color = ${colors.foreground}
+
+memory-prefix = ${colors.rightprefix}
+memory-suffix = ${colors.rightsuffix}
+memory-color = ${colors.col2}
+memory-underline =
+memory-text-color = ${colors.foreground}
+
+cpu-prefix = ${colors.rightprefix}
+cpu-suffix = ${colors.rightsuffix}
+cpu-color = ${colors.col3}
+cpu-underline =
+cpu-text-color = ${colors.foreground}
+
+temperature-prefix = ${colors.rightprefix}
+temperature-suffix = ${colors.rightsuffix}
+temperature-color = ${colors.col4}
+temperature-underline =
+temperature-text-color = ${colors.foreground}
+
+xkeyboard-prefix = ${colors.rightprefix}
+xkeyboard-suffix = ${colors.rightsuffix}
+xkeyboard-color = ${colors.alert}
+xkeyboard-underline =
+xkeyboard-text-color = ${colors.foreground}
+
+disk-prefix = ${colors.rightprefix}
+disk-suffix = ${colors.rightsuffix}
+disk-color = ${colors.col5}
+disk-underline =
+disk-text-color = ${colors.foreground}
+
+uptime-prefix = ${colors.rightprefix}
+uptime-suffix = ${colors.rightsuffix}
+uptime-color = ${colors.col6}
+uptime-underline =
+uptime-text-color = ${colors.foreground}
+
+weather-prefix = ${colors.rightprefix}
+weather-suffix = ${colors.rightsuffix}
+weather-color = ${colors.col7}
+weather-underline =
+weather-text-color = ${colors.foreground}
+
+torrent-prefix = ${colors.rightprefix}
+torrent-suffix = ${colors.rightsuffix}
+torrent-color = ${colors.col8}
+torrent-underline =
+torrent-text-color = ${colors.foreground}
+
+wall-prefix = ${colors.leftprefix}
+wall-suffix = ${colors.leftsuffix}
+wall-color = ${colors.col1}
+wall-underline =
+wall-text-color = ${colors.foreground}
+
+reading-prefix = ${colors.leftprefix}
+reading-suffix = ${colors.leftsuffix}
+reading-color = ${colors.col2}
+reading-underline =
+reading-text-color = ${colors.foreground}
+
+

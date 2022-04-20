@@ -77,3 +77,72 @@ songnames-underline =
 songnames-text-color = ${colors.col8}
 
 
+date-prefix =
+date-suffix =
+date-color = ${colors.transparent}
+date-underline = ${colors.col1}
+date-text-color = ${colors.col1}
+
+battery-prefix = 
+battery-suffix =
+battery-color = ${colors.transparent}
+battery-underline = ${colors.col6}
+battery-text-color = ${colors.col6}
+
+memory-prefix =
+memory-suffix =
+memory-color = ${colors.transparent}
+memory-underline = ${colors.col2}
+memory-text-color = ${colors.col2}
+
+cpu-prefix =
+cpu-suffix =
+cpu-color = ${colors.transparent}
+cpu-underline = ${colors.col3}
+cpu-text-color = ${colors.col3}
+
+temperature-prefix =
+temperature-suffix =
+temperature-color = ${colors.transparent}
+temperature-underline = ${colors.col4}
+temperature-text-color = ${colors.col4}
+
+xkeyboard-prefix =
+xkeyboard-suffix =
+xkeyboard-color = ${colors.alert}
+
+disk-prefix =
+disk-suffix =
+disk-color = ${colors.transparent}
+disk-underline = ${colors.col5}
+disk-text-color = ${colors.col5}
+
+uptime-prefix =
+uptime-suffix =
+uptime-color = ${colors.transparent}
+uptime-underline = ${colors.col6}
+uptime-text-color = ${colors.col6}
+
+weather-prefix =
+weather-suffix =
+weather-color = ${colors.transparent}
+weather-underline = ${colors.col7}
+weather-text-color = ${colors.col7}
+
+torrent-prefix =
+torrent-suffix =
+torrent-color = ${colors.transparent}
+torrent-underline = ${colors.col8}
+torrent-text-color = ${colors.col8}
+
+wall-prefix =
+wall-suffix =
+wall-color = ${colors.transparent}
+wall-underline = ${colors.col1}
+wall-text-color = ${colors.col1}
+
+reading-prefix =
+reading-suffix =
+reading-color = ${colors.transparent}
+reading-underline = ${colors.col2}
+reading-text-color = ${colors.col2}
