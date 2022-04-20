@@ -91,12 +91,15 @@ set statusline+=%*
 
 "let g:airline_theme="wal_airline"
 let g:airline_theme="wal"
-" since these does not auto update an open nvim instances colors using 
-let g:airline#extensions#tabline#show_buffers = 0
-let g:airline_stl_path_style = 'short'
+" Enable the list of buffers
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+let g:airline#extensions#tabline#show_buffers = 1
+let g:airline_stl_path_style = 'short'
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
 let g:airline_powerline_fonts=1
 "let g:airline#extensions#tabline#formatter = 'unique_tail'
  
@@ -125,7 +128,6 @@ let g:startify_custom_header = [
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
 let g:pydocstring_formatter = 'sphinx'
 nnoremap <silent> <leader>pd :Pydocstring<cr>
-
 " => LSP options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua << EOF

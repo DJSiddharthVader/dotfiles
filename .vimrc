@@ -7,6 +7,38 @@ set updatetime=1000
 " Sets how many lines of history VIM has to remember
 set history=500
 
+" => Editing mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" With a map leader it's possible to do extra key combinations
+" like <leader>w saves the current file
+let mapleader = ","
+let g:mapleader = ","
+
+" map increment/decrement to Alt as C-a is my tmux leader key
+nnoremap <C-i> <C-a>
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" better pattern searchin
+nnoremap n nzzzv
+
+" Remap VIM 0 to first non-blank character
+"map 0 ^
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <M-j> mz:m+<cr>`z
+nmap <M-k> mz:m-2<cr>`z
+vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
+vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+
+" Delete trailing white space on save, useful for Python and CoffeeScript ;)
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge
+  exe "normal `z"
+endfunc
+autocmd BufWrite *.py :call DeleteTrailingWS()
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Set 7 lines to the cursor - when moving vertically using j/k
@@ -177,6 +209,38 @@ set formatoptions=cqt
 set noshiftround
 " => Moving around, tabs, windows and buffers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" This allows buffers to be hidden if you've modified a buffer.
+" This is almost a must if you wish to use buffers in this way.
+set hidden
+
+" To open a new empty buffer
+" This replaces :tabnew which I used to bind to this mapping
+nmap <leader>T :enew<cr>
+
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>
+
+" Move to the next buffer
+map <leader>l :bnext<CR>
+
+" Move to the previous buffer
+map <leader>h :bprevious<CR>
+
+" Close the current buffer and move to the previous one
+" This replicates the idea of closing a tab
+map <leader>bq :bp <BAR> bd #<CR>
+
+" Show all open buffers and their status
+map <leader>bl :ls<CR>
+"
+" Specify the behavior when switching between buffers
+try
+  set switchbuf=useopen,usetab,newtab
+  set stal=2
+catch
+endtry
+
 " Set to auto read when a file is changed from the outside
 set autoread
 
@@ -197,37 +261,24 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" Close the current buffer
-map <leader>bd :Bclose<cr>
-
-" Close all the buffers
-map <leader>ba :bufdo bd<cr>
-
-" Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>t<leader> :tabnext
+" " Useful mappings for managing tabs
+" map <leader>tn :tabnew<cr>
+" map <leader>to :tabonly<cr>
+" map <leader>tc :tabclose<cr>
+" map <leader>tm :tabmove
+" map <leader>t<leader> :tabnext
 
 " Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
-nmap <leader>tl :exe "tabn ".g:lasttab<CR>
-au TabLeave * let g:lasttab = tabpagenr()
+" let g:lasttab = 1
+" nmap <leader>tl :exe "tabn ".g:lasttab<CR>
+" au TabLeave * let g:lasttab = tabpagenr()
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+" map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
 " Switch CWD to the directory of the open buffer
-map <leader>cd :cd %:p:h<cr>:pwd<cr>
-
-" Specify the behavior when switching between buffers
-try
-  set switchbuf=useopen,usetab,newtab
-  set stal=2
-catch
-endtry
+" map <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
@@ -236,38 +287,7 @@ autocmd BufReadPost *
       \ endif
 " Remember info about open buffers on close
 set viminfo^=%
-" => Editing mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
 
-" map increment/decrement to Alt as C-a is my tmux leader key
-nnoremap <C-i> <C-a>
-
-" Fast saving
-nmap <leader>w :w!<cr>
-
-" better pattern searchin
-nnoremap n nzzzv
-
-" Remap VIM 0 to first non-blank character
-"map 0 ^
-
-" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <M-j> mz:m+<cr>`z
-nmap <M-k> mz:m-2<cr>`z
-vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart mappings on the command line
