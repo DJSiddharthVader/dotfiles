@@ -1,0 +1,149 @@
+applauncher-prefix = ${colors.rightprefix}
+applauncher-suffix = ${colors.rightsuffix}
+applauncher-color = ${colors.col1}
+applauncher-underline =
+applauncher-text-color = ${colors.foreground}
+
+i3-prefix = ${colors.rightprefix}
+i3-suffix = ${colors.rightsuffix}
+i3-color = ${colors.col2}
+i3-color-2 = ${colors.col1}
+i3-underline =
+i3-text-color = ${colors.foreground}
+i3-underline-2 =
+i3-text-color-2 =
+
+focused-prefix = ${colors.rightprefix}
+focused-suffix = ${colors.rightsuffix}
+focused-color = ${colors.col3}
+focused-underline =
+focused-text-color = ${colors.foreground}
+
+focused-name-prefix = ${colors.rightprefix}
+focused-name-suffix = ${colors.rightsuffix}
+
+gamma-prefix = ${colors.rightprefix}
+gamma-suffix = ${colors.rightsuffix}
+gamma-color = ${colors.col4}
+gamma-underline =
+gamma-text-color = ${colors.foreground}
+
+volume-prefix = ${colors.rightprefix}
+volume-suffix = ${colors.rightsuffix}
+volume-color = ${colors.col5}
+volume-underline =
+volume-text-color = ${colors.foreground}
+
+pulseaudio-control-prefix = ${colors.rightprefix}
+pulseaudio-control-suffix = ${colors.rightsuffix}
+pulseaudio-control-color = ${colors.col5}
+pulseaudio-control-underline =
+pulseaudio-control-text-color = ${colors.foreground}
+
+wlan-prefix = ${colors.rightprefix}
+wlan-suffix = ${colors.rightsuffix}
+wlan-color = ${colors.col6}
+wlan-underline =
+wlan-text-color = ${colors.foreground}
+
+protonvpn-prefix = ${colors.rightprefix}
+protonvpn-suffix = ${colors.rightsuffix}
+protonvpn-color = ${colors.col7}
+protonvpn-underline =
+protonvpn-text-color = ${colors.foreground}
+
+mullvad-prefix = ${colors.rightprefix}
+mullvad-suffix = ${colors.rightsuffix}
+mullvad-color = ${colors.col7}
+mullvad-underline =
+mullvad-text-color = ${colors.foreground}
+
+bluetooth-prefix = ${colors.rightprefix}
+bluetooth-suffix = ${colors.rightsuffix}
+bluetooth-color = ${colors.col8}
+bluetooth-underline =
+bluetooth-text-color = ${colors.foreground}
+
+reading-prefix = ${colors.rightprefix}
+reading-suffix = ${colors.rightsuffix}
+reading-color = ${colors.col11}
+reading-underline =
+reading-text-color = ${colors.foreground}
+
+date-prefix = ${colors.leftprefix}
+date-suffix = ${colors.leftsuffix}
+date-color = ${colors.col2}
+date-underline =
+date-text-color = ${colors.foreground}
+
+battery-prefix = ${colors.leftprefix}
+battery-suffix = ${colors.leftsuffix}
+battery-color = ${colors.col8}
+battery-underline =
+battery-text-color = ${colors.foreground}
+
+memory-prefix = ${colors.leftprefix}
+memory-suffix = ${colors.leftsuffix}
+memory-color = ${colors.col3}
+memory-underline =
+memory-text-color = ${colors.foreground}
+
+cpu-prefix = ${colors.leftprefix}
+cpu-suffix = ${colors.leftsuffix}
+cpu-color = ${colors.col4}
+cpu-underline =
+cpu-text-color = ${colors.foreground}
+
+temperature-prefix = ${colors.leftprefix}
+temperature-suffix = ${colors.leftsuffix}
+temperature-color = ${colors.col5}
+temperature-underline =
+temperature-text-color = ${colors.foreground}
+
+xkeyboard-prefix = ${colors.leftprefix}
+xkeyboard-suffix = ${colors.leftsuffix}
+xkeyboard-color = ${colors.alert}
+xkeyboard-underline =
+xkeyboard-text-color = ${colors.foreground}
+
+disk-prefix = ${colors.leftprefix}
+disk-suffix = ${colors.leftsuffix}
+disk-color = ${colors.col6}
+disk-underline =
+disk-text-color = ${colors.foreground}
+
+uptime-prefix = ${colors.leftprefix}
+uptime-suffix = ${colors.leftsuffix}
+uptime-color = ${colors.col7}
+uptime-underline =
+uptime-text-color = ${colors.foreground}
+
+weather-prefix = ${colors.leftprefix}
+weather-suffix = ${colors.leftsuffix}
+weather-color = ${colors.col8}
+weather-underline =
+weather-text-color = ${colors.foreground}
+
+torrent-prefix = ${colors.leftprefix}
+torrent-suffix = ${colors.leftsuffix}
+torrent-color = ${colors.col9}
+torrent-underline =
+torrent-text-color = ${colors.foreground}
+
+wall-prefix = ${colors.leftprefix}
+wall-suffix = ${colors.leftsuffix}
+wall-color = ${colors.col10}
+wall-underline =
+wall-text-color = ${colors.foreground}
+
+mpd-prefix =
+mpd-suffix = ${colors.leftsuffix}
+mpd-color = ${colors.col7}
+mpd-underline =
+mpd-text-color = ${colors.foreground}
+
+songnames-prefix = ${colors.leftprefix}
+songnames-suffix =
+songnames-color = ${colors.col7}
+songnames-underline =
+songnames-text-color = ${colors.foreground}
