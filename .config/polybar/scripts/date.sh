@@ -2,7 +2,8 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(time date numeric full) #no spaces in mode titles
+modes=(time date numeric full bar_time bar_date bar_full) # no spaces in mode titles
+BAR_WIDTH="5"
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -32,14 +33,49 @@ setMode() {
     sed -i "/^date:/s/:.*/:$1/" "$mode_file"
 }
 
+compute_frac() {
+    echo "$1" | sed -e "s/\(.*\)/scale=5; \1 \/ $2/" | bc
+}
+days_in_month() {
+    cal $(date +"%m %Y") | awk 'NF {DAYS = $NF}; END {print DAYS}'
+}
+get_progress() {
+    mode="$1"
+    info="$(date +'%j:%d:%u:%H:%M')"
+    case "$mode" in
+        year ) field=1; denom=366 ;;
+        month) field=2; denom=$(days_in_month) ;;
+        week ) field=3; denom=7 ;;
+        day  ) field=4; denom=23 ;;
+        hour ) field=5; denom=59 ;;
+    esac
+    compute_frac "$(echo $info | cut -d':' -f$field)" "$denom"
+}
+make_bar() {
+    progress=$(get_progress $1)
+    echo $progress
+}
+progress() {
+    mode="$1"
+    case $mode in 
+        year ) prefix="Y" ;;
+        month) prefix="M" ;;
+        week ) prefix="W" ;;
+        day  ) prefix="D" ;;
+        hour ) prefix="H" ;;
+    esac
+    echo "$prefix[$(make_bar $mode $BAR_WIDTH)]"
+}
 display() {
-    # 
     mode="$1"
     case "$mode" in
-        'time'   ) msg=" $(date +'%I:%M')" ;;
-        'date'   ) msg=" $(date +'%B %d %Y')" ;;
-        'numeric') msg=" $(date +'%I:%M')  $(date +'%d/%m/%Y')" ;;
-        'full'   ) msg=" $(date +'%I:%M')  $(date +'%A, %B %d %Y')" ;;
+        time    ) msg=" $(date +'%I:%M')" ;;
+        date    ) msg=" $(date +'%B %d %Y')" ;;
+        numeric ) msg=" $(date +'%I:%M')  $(date +'%d/%m/%Y')" ;;
+        full    ) msg=" $(date +'%I:%M')  $(date +'%A, %B %d %Y')" ;;
+        bar_time) msg=" $(progress 'hour') $(progress 'day')" ;;
+        bar_date) msg=" $(progress 'week') $(progress 'month') $(progress 'year')" ;;
+        bar_full) msg=" $(progress 'hour') $(progress 'day')  $(progress 'month') $(progress 'year')" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
@@ -61,5 +97,5 @@ main() {
     fi
 }
 
-main "$1"
+main "$@"
 
