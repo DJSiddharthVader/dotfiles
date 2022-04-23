@@ -89,6 +89,12 @@ battery-color = ${colors.transparent}
 battery-underline = ${colors.col6}
 battery-text-color = ${colors.col6}
 
+xbacklight-prefix = 
+xbacklight-suffix = 
+xbacklight-color = ${colors.transparent}
+xbacklight-underline = ${colors.col2}
+xbacklight-text-color = ${colors.col2}
+
 memory-prefix =
 memory-suffix =
 memory-color = ${colors.transparent}

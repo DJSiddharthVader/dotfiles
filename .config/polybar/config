@@ -336,7 +336,7 @@ inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text.bar
 modules-left = i3 focused focused-name
 modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/text-bottom]
 inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text.bar
@@ -351,7 +351,7 @@ inherit = section/underline
 include-file = ~/dotfiles/.config/polybar/bars/underline.bar
 modules-left = i3 focused focused-name
 modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/underline-bottom]
 inherit = section/underline
 include-file = ~/dotfiles/.config/polybar/bars/underline.bar
@@ -423,7 +423,7 @@ inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text.bar
 modules-left = i3 focused
 modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/compact-text-bottom]
 inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text.bar
@@ -438,7 +438,7 @@ inherit = section/underline
 include-file = ~/dotfiles/.config/polybar/bars/underline.bar
 modules-left = i3 focused
 modules-center =
-modules-right = songnames mpd mullvad wlan pulseaudio-control applauncher
+modules-right = songnames mpd mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/compact-underline-bottom]
 inherit = section/underline
 include-file = ~/dotfiles/.config/polybar/bars/underline.bar

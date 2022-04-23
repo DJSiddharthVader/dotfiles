@@ -22,6 +22,12 @@ applauncher-color = ${colors.transparent}
 applauncher-underline = ${colors.col1}
 applauncher-text-color = ${root.foreground}
 
+xbacklight-prefix = 
+xbacklight-suffix =
+xbacklight-color = ${colors.transparent}
+xbacklight-underline = ${colors.col2}
+xbacklight-text-color = ${colors.foreground}
+
 gamma-prefix =
 gamma-suffix =
 gamma-color = ${colors.transparent}
