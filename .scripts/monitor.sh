@@ -37,10 +37,12 @@ connectToAll() {
         prev=$primary
     fi
     while IFS= read -r monitor; do
-        resolution=$(resolution $monitor)
         if [[ $monitor = $primary ]]; then
             continue 
+        elif [[ $monitor = $LAPTOP_SCREEN ]]; then
+            continue 
         else
+            resolution=$(resolution $monitor)
             echo "$monitor $resolution | $prev"
             if [[ -z $prev ]]; then
                 xrandr --output $monitor --mode $resolution --primary
