@@ -32,6 +32,9 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
+" Substitute in line 
+nnoremap gs :%s/\<<c-r><c-w>\>//g<left><left>
+
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 func! DeleteTrailingWS()
   exe "normal mz"
@@ -217,7 +220,6 @@ set hidden
 " This replaces :tabnew which I used to bind to this mapping
 nmap <leader>T :enew<cr>
 
-
 " Close the current buffer
 map <leader>bd :Bclose<cr>
 
@@ -232,7 +234,8 @@ map <leader>h :bprevious<CR>
 map <leader>bq :bp <BAR> bd #<CR>
 
 " Show all open buffers and their status
-map <leader>bl :ls<CR>
+" map <leader>bl :ls<CR>
+nnoremap <leader>bl :ls<CR>:b<space>
 "
 " Specify the behavior when switching between buffers
 try
