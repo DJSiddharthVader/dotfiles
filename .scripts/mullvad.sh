@@ -18,6 +18,10 @@ status() {
     mullvad status | grep -o '[^ ]*onnect[^ ]*' | tr -d ' '
 }
 connect() {
+    location=$1
+    if [[ -n $location ]]; then
+        mullvad relay set location $location
+    fi
     mullvad connect
     transmission.sh resume > /dev/null 2>&1
 }
@@ -30,7 +34,7 @@ toggle() {
     [[ "$(status)" =~ "Disconnected" ]] && connect || disconnect
 }
 restart() {
-   toggle && toggle
+   disconnect && connect
 }
 display() {
     mode="$1"
@@ -48,11 +52,12 @@ display() {
 }
 main() {
     mode="$1"
+    location="$2"
     case $mode in
         'status'    ) status        ;;
         'restart'   ) restart       ;;
         'toggle'    ) toggle        ;;
-        'connect'   ) connect       ;;
+        'connect'   ) connect "$2"  ;;
         'disconnect') disconnect    ;;
         'display') # display vpn data
             [[ -z "$2" ]] && dmode="$(getMode)" || dmode="$2"
@@ -77,4 +82,4 @@ main() {
     esac
 }
 
-main "$1"
+main "$@"
