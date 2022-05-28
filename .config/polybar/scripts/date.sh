@@ -2,8 +2,11 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(time date numeric full bar_time bar_date bar_full) # no spaces in mode titles
-BAR_WIDTH="5"
+modes=(time numeric time_bar date date_bar full full_bar)
+#RAMP=(▁ ▏ ▎ ▍ ▌ ▊ █)
+RAMP=(▁ ░ ▒ ▓ █)
+#RAMP=(▁ ▃ ▄ ▅ ▆ ▇ █)
+BAR_WIDTH="10"
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -33,49 +36,64 @@ setMode() {
     sed -i "/^date:/s/:.*/:$1/" "$mode_file"
 }
 
-compute_frac() {
-    echo "$1" | sed -e "s/\(.*\)/scale=5; \1 \/ $2/" | bc
-}
 days_in_month() {
     cal $(date +"%m %Y") | awk 'NF {DAYS = $NF}; END {print DAYS}'
 }
+get_denom(){
+    mode="$1"
+    case "$mode" in
+        year ) denom=366 ;;
+        month) denom=$(days_in_month) ;;
+        week ) denom=7 ;;
+        day  ) denom=24 ;;
+        hour ) denom=60 ;;
+    esac
+    echo "$denom"
+}
 get_progress() {
     mode="$1"
-    info="$(date +'%j:%d:%u:%H:%M')"
     case "$mode" in
-        year ) field=1; denom=366 ;;
-        month) field=2; denom=$(days_in_month) ;;
-        week ) field=3; denom=7 ;;
-        day  ) field=4; denom=23 ;;
-        hour ) field=5; denom=59 ;;
+        year ) field=1 ;; 
+        month) field=2 ;;
+        week ) field=3 ;;
+        day  ) field=4 ;;
+        hour ) field=5 ;;
     esac
-    compute_frac "$(echo $info | cut -d':' -f$field)" "$denom"
+    time="$(date +'%j:%d:%u:%H:%M' | cut -d':' -f$field)"
+    echo $time
 }
 make_bar() {
-    progress=$(get_progress $1)
-    echo $progress
-}
-progress() {
-    mode="$1"
-    case $mode in 
-        year ) prefix="Y" ;;
-        month) prefix="M" ;;
-        week ) prefix="W" ;;
-        day  ) prefix="D" ;;
-        hour ) prefix="H" ;;
-    esac
-    echo "$prefix[$(make_bar $mode $BAR_WIDTH)]"
+    time="$(get_progress $1)"
+    total="$(get_denom $1)"
+    inc_size=$(echo "$total / $BAR_WIDTH" | bc)
+    full_pips=$(($time / $inc_size))
+    bar=""
+    for i in $(seq 1 $BAR_WIDTH); do
+        if [[ $i -le $full_pips ]]; then
+            bar="$bar${RAMP[${#RAMP[@]}-1]}"
+        elif [[ $i -eq $(($full_pips + 1)) ]]; then 
+            remainder=$(echo "$time % $inc_size" | bc)
+            percent=$(echo "scale=2; $remainder / $inc_size" | bc)
+            final_pip=$(echo "$percent * ${#RAMP[@]} / 1" | bc)
+            bar="$bar${RAMP[$final_pip]}"
+        else # left pad with spaces to be correct width
+            bar="$bar${RAMP[0]}"
+        fi
+    done
+    echo "$bar"
 }
 display() {
     mode="$1"
     case "$mode" in
         time    ) msg=" $(date +'%I:%M')" ;;
+        time_bar) msg=" $(date +'%I:%M') $(make_bar 'day')" ;;
         date    ) msg=" $(date +'%B %d %Y')" ;;
+        date_bar) msg=" $(date +'%B %d %Y')$(make_bar 'month')";;
         numeric ) msg=" $(date +'%I:%M')  $(date +'%d/%m/%Y')" ;;
         full    ) msg=" $(date +'%I:%M')  $(date +'%A, %B %d %Y')" ;;
-        bar_time) msg=" $(progress 'hour') $(progress 'day')" ;;
-        bar_date) msg=" $(progress 'week') $(progress 'month') $(progress 'year')" ;;
-        bar_full) msg=" $(progress 'hour') $(progress 'day')  $(progress 'month') $(progress 'year')" ;;
+        full_bar) msg=" $(date +'%I:%M')$(make_bar 'day')"  $(date +'%A, %B %d %Y')"$(make_bar 'year')";;
+        hour_bar) msg="$(make_bar 'hour')" ;;
+        day_bar) msg="$(make_bar 'day')" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
