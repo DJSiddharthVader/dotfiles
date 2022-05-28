@@ -32,6 +32,9 @@ alias gsl='commit-status.sh status'
 alias gsw='watch -n2 "commit-status.sh status"'
 
 #Apps
+alias cp='ptcp'
+alias cat='bat --paging=never'
+alias less='bat'
 alias man='tldr'
 alias top='htop'
 alias pdf='zathura'
