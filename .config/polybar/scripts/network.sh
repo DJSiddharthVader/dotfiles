@@ -6,27 +6,9 @@ modes=(sleek standard text name strength ip all)
 interface="wlp1s0"
 pipurl="ifconfig.co"
 # Ramp Icons
-## Segmented Block
-#ramp1="𝍥"
-#ramp2="䷒"
-#ramp3="䷊"
-#ramp4="䷡"
-#ramp5="䷀"
-#ramp6="䷪"
-## Lines
-#ramp1=" "
-#ramp2="⎽"
-#ramp3="⎽"
-#ramp4="⎼"
-#ramp5="⎯"
-#ramp6="⎻"
-## Block │
-ramp1="▃"
-ramp2="▄"
-ramp3="▅"
-ramp4="▆"
-ramp5="▇"
-ramp6="█"
+#RAMP=("𝍥" "䷒" "䷊" "䷡" "䷀")
+#RAMP=(  ⎽ ⎽ ⎼ ⎯ ⎻)
+RAMP=(▃ ▄ ▅ ▆ ▇ █)
 
 
 help() {
@@ -83,12 +65,12 @@ strength() {
 icon() {
     percent=$(strength)
     case 1 in
-        $(($percent <  50))) icon="$ramp1" ;;
-        $(($percent <  60))) icon="$ramp2" ;;
-        $(($percent <  70))) icon="$ramp3" ;;
-        $(($percent <  80))) icon="$ramp4" ;;
-        $(($percent <  90))) icon="$ramp5" ;;
-        $(($percent < 101))) icon="$ramp6" ;;
+        $(($percent <  50))) icon="${RAMP[0]}" ;;
+        $(($percent <  60))) icon="${RAMP[1]}" ;;
+        $(($percent <  70))) icon="${RAMP[2]}" ;;
+        $(($percent <  80))) icon="${RAMP[3]}" ;;
+        $(($percent <  90))) icon="${RAMP[4]}" ;;
+        $(($percent < 101))) icon="${RAMP[5]}" ;;
     esac
     echo "$icon" #▎
 }
