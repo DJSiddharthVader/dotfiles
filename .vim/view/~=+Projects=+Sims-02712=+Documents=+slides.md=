@@ -10,6 +10,8 @@ setlocal fdn=20
 setlocal fen
 22
 normal! zo
+39
+normal! zo
 65
 normal! zo
 67
@@ -30,12 +32,12 @@ normal! zo
 normal! zo
 145
 normal! zo
-let s:l = 145 - ((136 * winheight(0) + 28) / 56)
+let s:l = 41 - ((29 * winheight(0) + 26) / 52)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 145
-normal! 03|
+keepjumps 41
+normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 nohlsearch

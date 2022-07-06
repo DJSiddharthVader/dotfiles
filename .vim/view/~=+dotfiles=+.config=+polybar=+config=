@@ -49,45 +49,47 @@ silent! normal! zE
 333,347fold
 348,362fold
 363,378fold
-379,387fold
-291,388fold
-390,405fold
-406,420fold
-421,435fold
-436,450fold
-389,451fold
-453,475fold
-476,539fold
-540,552fold
-553,565fold
-566,611fold
-612,632fold
-633,653fold
-654,672fold
-673,691fold
-692,710fold
-711,756fold
-757,774fold
-776,794fold
-795,812fold
-813,831fold
-832,850fold
-851,869fold
-870,885fold
-886,904fold
-905,923fold
-924,941fold
-942,959fold
-960,982fold
-983,1001fold
-1002,1009fold
-1010,1020fold
-452,1021fold
-1023,1042fold
-1043,1063fold
-1064,1094fold
-1095,1118fold
-1022,1119fold
+379,386fold
+291,387fold
+389,404fold
+405,419fold
+420,434fold
+435,449fold
+388,450fold
+452,474fold
+475,538fold
+539,551fold
+552,564fold
+565,610fold
+611,631fold
+632,652fold
+653,671fold
+672,690fold
+691,709fold
+710,755fold
+756,773fold
+775,793fold
+794,811fold
+812,830fold
+831,849fold
+850,868fold
+869,884fold
+885,903fold
+904,922fold
+923,940fold
+941,958fold
+959,981fold
+982,1000fold
+1001,1008fold
+1009,1019fold
+1020,1030fold
+1031,1041fold
+451,1042fold
+1044,1063fold
+1064,1084fold
+1085,1115fold
+1116,1139fold
+1043,1140fold
 let &fdl = &fdl
 7
 normal! zo
@@ -109,24 +111,24 @@ normal! zc
 normal! zo
 291
 normal! zc
-389
+388
 normal! zo
-389
+388
 normal! zc
-452
+451
 normal! zo
-452
+451
 normal! zc
-1022
+1043
 normal! zo
-1022
+1043
 normal! zc
-let s:l = 1 - ((0 * winheight(0) + 27) / 55)
+let s:l = 1 - ((0 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
-normal! 026|
+normal! 09|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

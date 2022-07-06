@@ -1,0 +1,38 @@
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+argglobal
+setlocal fdm=expr
+setlocal fde=pandoc#folding#FoldExpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+1
+normal! zo
+16
+normal! zo
+26
+normal! zo
+26
+normal! zc
+60
+normal! zo
+69
+normal! zo
+69
+normal! zo
+69
+normal! zo
+78
+normal! zo
+let s:l = 71 - ((56 * winheight(0) + 20) / 40)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 71
+normal! 031|
+let &g:so = s:so_save | let &g:siso = s:siso_save
+set hlsearch
+doautoall SessionLoadPost
+" vim: set ft=vim :

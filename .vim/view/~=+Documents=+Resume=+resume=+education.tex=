@@ -9,8 +9,10 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
+4,13fold
+14,24fold
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 7) / 15)
+let s:l = 1 - ((0 * winheight(0) + 7) / 14)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt

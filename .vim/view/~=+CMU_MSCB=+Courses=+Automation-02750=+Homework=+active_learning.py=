@@ -1,0 +1,115 @@
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+argglobal
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+silent! normal! zE
+19,40fold
+41,53fold
+54,64fold
+65,75fold
+76,78fold
+18,79fold
+81,100fold
+101,126fold
+127,138fold
+139,151fold
+152,174fold
+80,175fold
+177,188fold
+189,203fold
+204,214fold
+176,215fold
+217,232fold
+234,255fold
+256,283fold
+284,303fold
+304,330fold
+233,331fold
+333,355fold
+356,383fold
+384,407fold
+408,443fold
+332,444fold
+446,449fold
+450,468fold
+445,469fold
+471,491fold
+492,511fold
+470,513fold
+515,522fold
+523,530fold
+531,543fold
+514,544fold
+216,545fold
+547,575fold
+576,621fold
+546,622fold
+624,639fold
+640,660fold
+661,687fold
+688,706fold
+707,745fold
+746,765fold
+623,766fold
+768,785fold
+767,785fold
+let &fdl = &fdl
+18
+normal! zo
+18
+normal! zc
+80
+normal! zo
+80
+normal! zc
+176
+normal! zo
+216
+normal! zo
+233
+normal! zo
+332
+normal! zo
+332
+normal! zc
+445
+normal! zo
+445
+normal! zc
+470
+normal! zo
+470
+normal! zc
+514
+normal! zo
+531
+normal! zo
+546
+normal! zo
+546
+normal! zc
+623
+normal! zo
+623
+normal! zc
+767
+normal! zo
+767
+normal! zc
+let s:l = 541 - ((524 * winheight(0) + 20) / 41)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 541
+normal! 07|
+lcd ~/dotfiles/.config/nvim
+let &g:so = s:so_save | let &g:siso = s:siso_save
+set hlsearch
+doautoall SessionLoadPost
+" vim: set ft=vim :

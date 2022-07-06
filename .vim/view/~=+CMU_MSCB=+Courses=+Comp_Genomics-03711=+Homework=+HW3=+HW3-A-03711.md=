@@ -26,13 +26,14 @@ normal! zo
 normal! zo
 136
 normal! zo
-let s:l = 158 - ((18 * winheight(0) + 22) / 44)
+let s:l = 152 - ((14 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 158
+keepjumps 152
 normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :
