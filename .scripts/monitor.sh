@@ -90,11 +90,11 @@ organizeWorkspaces() {
     case "$mode" in
         home) 
             move_left=(1)
-            move_right=(2 3 5 6 7)
+            move_right=(2 5 6 7 9)
             ;;
-        present)
+        work)
+            move_right=(3 5 6 7 8)
             move_left=()
-            move_right=(3 5 6)
             ;;
         *) help && exit 1 ;;
     esac
@@ -120,20 +120,16 @@ main() {
                    $BAR_MANAGER_SCRIPT style cross
                    organizeWorkspaces 'home'
                    ;;
-                3) connect ext # some 2 monitor setup
-                   # connectAudio hdmi
-                   $BAR_MANAGER_SCRIPT style float
-                   ;;
                 2) connect hybrid # presenting
                    $BAR_MANAGER_SCRIPT style laptop
-                   # organizeWorkspaces 'present'
+                   organizeWorkspaces 'work'
                    ;;
                 1) echo 'No monitors connected' && exit 0 ;;
                 *) echo 'Error detecting monitors' && exit 1 ;;
             esac
         fi
     elif [[ $mode = 'organize' ]]; then
-        organizeWorkspaces 'home'
+        organizeWorkspaces "$2"
     else
         connect "$mode"
         case "$mode" in
