@@ -6,7 +6,7 @@ modes=(time numeric time_bar date date_bar full full_bar)
 #RAMP=(▁ ▏ ▎ ▍ ▌ ▊ █)
 RAMP=(▁ ░ ▒ ▓ █)
 #RAMP=(▁ ▃ ▄ ▅ ▆ ▇ █)
-BAR_WIDTH="10"
+DEFAULT_BAR_WIDTH="12"
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -44,7 +44,6 @@ get_denom(){
     case "$mode" in
         year ) denom=366 ;;
         month) denom=$(days_in_month) ;;
-        week ) denom=7 ;;
         day  ) denom=24 ;;
         hour ) denom=60 ;;
     esac
@@ -55,7 +54,6 @@ get_progress() {
     case "$mode" in
         year ) field=1 ;; 
         month) field=2 ;;
-        week ) field=3 ;;
         day  ) field=4 ;;
         hour ) field=5 ;;
     esac
@@ -63,12 +61,12 @@ get_progress() {
     echo $time
 }
 make_bar() {
-    time="$(get_progress $1)"
-    total="$(get_denom $1)"
-    inc_size=$(echo "$total / $BAR_WIDTH" | bc)
-    full_pips=$(($time / $inc_size))
+    timescale="$1"; bar_width="$DEFAULT_BAR_WIDTH"
+    time="$(get_progress $timescale)"; total="$(get_denom $timescale)"
+    inc_size=$(echo "scale=2; $total / $bar_width" | bc)
+    full_pips=$(echo "scale=0; $time / $inc_size" | bc)
     bar=""
-    for i in $(seq 1 $BAR_WIDTH); do
+    for i in $(seq 1 $bar_width); do
         if [[ $i -le $full_pips ]]; then
             bar="$bar${RAMP[${#RAMP[@]}-1]}"
         elif [[ $i -eq $(($full_pips + 1)) ]]; then 
@@ -92,8 +90,10 @@ display() {
         numeric ) msg=" $(date +'%I:%M')  $(date +'%d/%m/%Y')" ;;
         full    ) msg=" $(date +'%I:%M')  $(date +'%A, %B %d %Y')" ;;
         full_bar) msg=" $(date +'%I:%M')$(make_bar 'day')"  $(date +'%A, %B %d %Y')"$(make_bar 'year')";;
-        hour_bar) msg="$(make_bar 'hour')" ;;
-        day_bar) msg="$(make_bar 'day')" ;;
+        bar_hour) msg="$(make_bar 'hour')" ;;
+        bar_day) msg="$(make_bar 'day')" ;;
+        bar_month) msg="$(make_bar 'month')" ;;
+        bar_year) msg="$(make_bar 'year')" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
@@ -116,4 +116,3 @@ main() {
 }
 
 main "$@"
-
