@@ -121,7 +121,7 @@ colorFirefox() {
 }
 changeColors() {
     image="$1"
-    wal -geni "$image"  # use wal to generate colorschemes from image
+    wal -n -e -i "$image"  # use wal to generate colorschemes from image
     zathura.sh # re-write zathura config with new colors
     if [[ -z "$(pgrep 'polybar')" ]]; then
         bar-manager.sh style stay 
