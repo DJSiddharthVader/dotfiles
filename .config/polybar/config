@@ -21,7 +21,7 @@ include-file = ~/.cache/wal/polybar-wal.theme
 
 [fonts]
 ; Font Awesome Icons
-font-icon = FontAwesome:format=truetype:style=Regular:size=12:antialias=false;3
+font-icon = FontAwesome:format=truetype:style=Regular:size=11:antialias=false;3
 font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
 font-icon-huge = FontAwesome:format=truetype:style=Regular:size=27:antialias=true;4
 
@@ -220,7 +220,7 @@ border-left-size = 10
 padding = 1
 module-margin = 1
 line-size = 0
-background = ${colors.clear0}
+background = ${colors.transparent0}
 foreground = ${colors.foreground}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
@@ -239,18 +239,18 @@ cursor-click = pointer
 enable-ipc = true
 fixed-center = false
 dim-value = 0
-radius = 5
+radius = 0
 height = 3.25%
-border-top-size = 5
-border-bottom-size = 5
+border-top-size = 0
+border-bottom-size = 0
 width = 100%
 border-right-size = 10
 border-left-size = 10
-line-size = 3.5
+line-size = 5
 module-margin = 1
-padding = 1
-background = ${colors.clear0}
-foreground = ${colors.foreground-white}
+padding = 0
+background = ${colors.transparent}
+foreground = #000
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
 font-0 = ${fonts.font-icon-large}
@@ -479,27 +479,17 @@ wrapping-scroll = false
 pin-workspaces = true
 strip-wsnumbers = true
 format = <label-state> <label-mode>
-ws-icon-1 = 1;I 
+ws-icon-1 = 1;I 
 ws-icon-2 = 2;II 
-ws-icon-3 = 3;III 
-ws-icon-4 = 4;IV  
+ws-icon-3 = 3;III 
+ws-icon-4 = 4;IV 
 ws-icon-5 = 5;V 
-ws-icon-6 = 6;VI 
-ws-icon-7 = 7;VII 
-ws-icon-8 = 8;VIII 
-ws-icon-9 = 9;IX 
+ws-icon-6 = 6;VI  
+ws-icon-7 = 7;VII 
+ws-icon-8 = 8;VIII  
+ws-icon-9 = 9;IX  
 ws-icon-0 = 10;X ?
-;         
-;ws-icon-1 = 1;1 
-;ws-icon-2 = 2;2 
-;ws-icon-3 = 3;3 
-;ws-icon-4 = 4;4 
-;ws-icon-5 = 5;5 
-;ws-icon-6 = 6;6 
-;ws-icon-7 = 7;7 
-;ws-icon-8 = 8;8 
-;ws-icon-9 = 9;9 
-;ws-icon-0 = 10;10 
+;                    
 ; Only show workspaces on the same output as the bar
 label-mode-padding = 0
 label-mode-foreground = #000
@@ -582,7 +572,7 @@ menu-1-2-exec = inkscape &
 menu-1-3 = ""
 menu-1-3-exec = firefox --browser &
 menu-1-4 = ""
-menu-1-4-exec = /home/sidreed/Apps/tor-browser_en-US/Browser/start-tor-browser &
+menu-1-4-exec = /home/sidreed/bin/tor-browser_en-US/Browser/start-tor-browser &
 menu-1-5 = ""
 menu-1-5-exec = steam &
 menu-1-6 = ""
@@ -598,15 +588,15 @@ menu-2-3-exec = systemctl suspend
 format-underline = ${root.applauncher-underline}
 label-separator-foreground = ${colors.foreground}
 format-prefix-font = 5
-format-suffix-font = 5
-format-background = ${root.applauncher-color}
-format-foreground = ${root.applauncher-text-color}
 format-prefix = ${root.applauncher-prefix}
 format-prefix-foreground = ${root.applauncher-color}
 format-prefix-background = ${colors.transparent}
+format-suffix-font = 5
 format-suffix = ${root.applauncher-suffix}
 format-suffix-foreground = ${root.applauncher-color}
 format-suffix-background = ${colors.transparent}
+format-background = ${root.applauncher-color}
+format-foreground = ${root.applauncher-text-color}
 
 [module/xbacklight]
 type = internal/xbacklight
