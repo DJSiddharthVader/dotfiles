@@ -62,6 +62,7 @@ alias md='sudo mount /dev/sdb1 /media/4tbdrive/'
 alias ud='sudo umount /media/4tbdrive/'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
+alias portal='curl -v http://detectportal.firefox.com/canonical.html'
 
 #Print
 alias bgal='feh -g 640x480 -d /home/sidreed/Pictures/wallpapers/*'
