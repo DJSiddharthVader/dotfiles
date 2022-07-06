@@ -2,141 +2,133 @@
 
 - [Theming script in action](https://www.youtube.com/watch?v=wSyKs3Cp3us)
 
-## File List
-
-- .ascii
-- .bash/
-  - bash-aliases
-  - bash-functions.sh
-  - bash-prompt.sh
-  - dircolors_256
-- .bashrc
-- .cheatsheets/
-- .config/
-  - awesome/
-  - cava/
-  - compton.conf
-  - dunst/dunstrc
-  - fontconfig/
-  - gtk-2.0/settings.ini
-  - gtk-3.0/settings.ini
-  - gtk-4.0/settings.ini
-  - htop/htoprc
-  - i3/config
-  - mpd/
-  - neofetch/config
-  - nvim/
-    - autoload/
-    - cheat_vimrc
-    - colors/
-    - init.vim
-    - plugged/goyo.vim
-    - plugged/limelight.vim
-    - spell/
-    - syntax/
-    - view/
-  - polybar/
-    - bars/
-    - config
-    - modules.mode
-    - scripts/
-      - battery.sh
-      - cpumonitor.sh
-      - current-window.sh
-      - date.sh
-      - disk.sh
-      - expressvpn.sh
-      - gamma.sh
-      - memory.sh
-      - mpdscroll.sh
-      - network.sh
-      - pulseaudio-control.sh
-      - reading.sh
-      - temperature.sh
-      - transmission.sh
-      - uptimemonitor.sh
-      - weather.sh
-    - separators.mode
-  - qpdfview/
-  - ranger/
-  - rofi/ 
-    - config
-    - config.rasi
-  - tmuxinator/
-    - advent.yml
-    - hw.yml
-    - notes.yml
-    - proj.yml
-    - scratch.yml
-    - ta.yml
-    - visuals.yml
-    - visuals_1080.yml
-  - transmission-daemon/
-    - settings.json
-    - stats.tsv
-  - wal/
-    - templates/colors-rofi-custom.rasi
-    - templates/colors.oomox
-    - templates/polybarColors.wal
-  - zathura/zathurarc
-- .css/
-  - pandoc-notes.css
-  - userChrome.css
-  - userContent.css
+- `.ascii/` ascii drawings used for `quote.sh` script
+- `.bash/`
+  - `bash-aliases` all bash aliases I use
+  - `bash-functions.sh` short functions that are to complicated to be aliases but too short to be scrpipts
+  - `bash-prompt.sh` - script to print my bash prompt with all the colors and info
+  - `dircolors_256` define colors for ls
+- `.bashrc` my bash config file
+- `.cheatsheets/` directory of cheatsheets for various programs/libraries I use, reference them with `cheat.sh`
+- `.config/` 
+  - `awesome/` AwesomeWM config dir, never actually used it but installed it
+  - `cava/config` cava music visualizer config
+  - `compton.conf` compton compositor config for shadows, transparency, window decorations etc.
+  - `dunst/dunstrc` dunst notification manager config, same as default
+  - `fontconfig/`
+  - `gtk-2.0/settings.ini` setting to automatically update colorschemes of GTK 2.0 apps with `wallpaper.sh`
+  - `gtk-3.0/settings.ini` setting to automatically update colorschemes of GTK 3.0 apps with `wallpaper.sh`
+  - `gtk-4.0/settings.ini` setting to automatically update colorschemes of GTK 4.0 apps with `wallpaper.sh`
+  - `htop/htoprc` config for htop display
+  - `i3/config` config for i3 window manager
+  - `mpd/`
+    - `mpd.conf` config for music player daemon, mainly same as default but changed music dir and visualzier default
+  - `neofetch/config` neofetch config, added some custom modules from bash scripts I use
+  - `nvim/`
+    - `autoload/` plugins loaded on start
+    - `cheat_vimrc` vim config file for displaying cheatsheets with `cheat.sh`
+    - `colors/` colorschemes, mainly unused as I stick with my main theme an dupdate airline colors to match my wallpaper automatically
+    - `init.vim` neovim config file, mainly contians plugin options and most vim specific settings are in my `.vimrc`
+    - `plugged/` plugins
+    - `spell/` spell files and saved terms
+    - `syntax/` for NvimR plugin
+    - `view/` saved folds for vim files
+  - `polybar/` 
+    - `bars/` different visual specifications for polybar
+    - `config` main config file, contains different bars, fonts and custom modules
+    - `modules.mode` custom file specifying display options for custom modules that use scripts in the `./scripts` dir
+    - `separators.mode` custom file specifying display options for the bar itself
+    - `scripts/` custom scripts for displaying info in polybar, you can see usage instructions for each script by just calling it without arguments
+      - `battery.sh` display battery usage and time left
+      - `cpumonitor.sh` display cpu usage
+      - `current-window.sh` display currently focused window, workspace and icon for i3
+      - `date.sh` print the time/date and a progress bar for the day
+      - `disk.sh` print disk usage for all mounted drives
+      - `expressvpn.sh` (depreciated) script to control/display expressvpn status
+      - `gamma.sh` control screen gamma value, like controlling brightness for external monitors with software
+      - `memory.sh` display RAM usage
+      - `mpdscroll.sh` display currently playing music and scroll the text
+      - `network.sh` display wifi connection and strength
+      - `pulseaudio-control.sh` display/control pulseaudio and volume
+      - `reading.sh` display a clickable article from my reading list
+      - `temperature.sh` display cpu temperature(s)
+      - `transmission.sh` display torrent downloading info
+      - `uptimemonitor.sh` display current time since last restart
+      - `weather.sh` display the current weather and temperature
+  - `qpdfview/` config for qpdfview pdf viewer
+  - `ranger/` ranger file viewer config, same as default
+  - `rofi/` rofi interactive menu config
+  - `tmuxinator/` tmuxinator sessions, saved tmux sessions and layouts
+    - `scratch.yml`
+    - `visuals.yml`
+    - `visuals_1080.yml`
+  - `transmission-daemon/`
+    - `settings.json`
+    - `stats.tsv`
+  - `wal/`
+    - `templates/`
+      - `colors-rofi-custom.rasi`
+      - `colors.oomox`
+      - `polybarColors.wal`
+  - `zathura/zathurarc`
+- `.css/`
+  - `pandoc-notes.css`
+  - `userChrome.css`
+  - `userContent.css`
 .gitconfig
 .gitignore
-- .ncmpcpp/
-  - bindings
-  - config
-- .scripts/
-  - backup.sh
-  - bar-manager.sh
-  - bitwarden.sh
-  - bluetooth.sh
-  - cheat.sh
-  - commit-status.sh
-  - init-new-gitrepo.sh
-  - lock.sh
-  - low-battery.sh
-  - monitor.sh
-  - mullvad.sh
-  - music_utils/
-  - notes-pandoc-filter.py
-  - notes.sh
-  - pywalHotkey.uc.js
-  - quote.sh
-  - restart.sh
-  - wallpaper.sh
-  - zathura.sh
-- .taskrc
-- tmux.conf
-- tmux/
-  - plugins/tmux-prefix-highlight
-  - plugins/tmux-resurrect
-  - plugins/tpm
-  - plugins/vim-tmux-navigator
-  - tmux-install.sh
-  - tmux-prompt.sh
-- .vim
-  - R/
-  - after/ftplugin/tex.vim
-  - autoload/airline/themes/wal.vim
-  - bundle/
-    - syntastic/
-    - vim-airline/
-    - vim-commentary/
-    - vim-pandoc/
-    - vim-pandoc-syntax/
-    - vim-startify/
-    - vim-surround/
-    - vimtex/
-  - colors/
-  - doc/
-  - ftdetect/
-  - ftplugin/
-  - plugged/
-  - R/
-  - spell/
-  - syntax/
-  - view/
-
+- `.ncmpcpp/`
+  - `bindings`
+  - `config`
+- `.scripts/`
+  - `backup.sh`
+  - `bar-manager.sh`
+  - `bitwarden.sh`
+  - `bluetooth.sh`
+  - `cheat.sh`
+  - `commit-status.sh`
+  - `init-new-gitrepo.sh`
+  - `lock.sh`
+  - `low-battery.sh`
+  - `monitor.sh`
+  - `mullvad.sh`
+  - `music_utils/`
+  - `notes-pandoc-filter.py`
+  - `notes.sh`
+  - `pywalHotkey.uc.js`
+  - `quote.sh`
+  - `restart.sh`
+  - `wallpaper.sh`
+  - `zathura.sh`
+- `.taskrc`
+- `tmux.conf`
+- `tmux/`
+  - `plugins/`
+    - `tmux-prefix-highlight`
+    - `tmux-resurrect`
+    - `tpm`
+    - `vim-tmux-navigator`
+  - `tmux-install.sh`
+  - `tmux-prompt.sh`
+- `.vim`
+  - `R/`
+  - `after/ftplugin/tex.vim`
+  - `autoload/airline/themes/wal.vim`
+  - `bundle/`
+    - `syntastic/`
+    - `vim-airline/`
+    - `vim-commentary/`
+    - `vim-pandoc/`
+    - `vim-pandoc-syntax/`
+    - `vim-startify/`
+    - `vim-surround/`
+    - `vimtex/`
+  - `colors/`
+  - `doc/`
+  - `ftdetect/`
+  - `ftplugin/`
+  - `plugged/`
+  - `R/`
+  - `spell/`
+  - `syntax/`
+  - `view/`
