@@ -1,10 +1,9 @@
 #!/bin/bash
-home=~
 backup_drive="/media/4tbdrive"
 rsync_cmd="rsync -ah --ignore-existing --info=progress2"
-to_sync=(CMU_MSCB Music Pictures)
+to_sync=(Music Pictures)
 to_update=(Backups Games Documents Projects Reading)
-to_ignore=(dotfiles .steam Torrents ToOrganize)
+to_ignore=(dotfiles .steam Videos/Torrents Videos/ToOrganize)
 
 
 help() {
@@ -13,22 +12,22 @@ help() {
 sync() {
     for dir in ${to_sync[@]}; do
         echo "Syncing $dir..."
-        $rsync_cmd --delete "$home/$dir" "$backup_drive"
+        $rsync_cmd --delete "$HOME/$dir" "$backup_drive"
     done
 }
 update() {
     for dir in ${to_update[@]}; do
         echo "Updating $dir..."
-        $rsync_cmd "$home/$dir" "$backup_drive"
+        $rsync_cmd "$HOME/$dir" "$backup_drive"
     done
 }
 backup() {
-    mountpoint $backup_drive && drive="$backup_drive" || drive="$home"
+    mountpoint $backup_drive && drive="$backup_drive" || drive="$HOME"
     backup_file="$drive/Backups/homedirE560_$(date +'%Y%m%d-%H%M').tar.gz"
     echo "Backing up to $backup_file"
     exclude_flags="$(echo ${to_sync[@]} ${to_update[@]} ${to_ignore[@]} | sed -e "s:[^ ]*:--exclude=${home}\/&:g")"    
-    tar -pcf - --ignore-failed-read --warning=none $exclude_flags $home \
-        | pv -s "$(du -sh $exclude_flags $home 2> /dev/null | awk '{print $1}')" \
+    tar -pcf - --ignore-failed-read --warning=none $exclude_flags $HOME \
+        | pv -s "$(du -sh $exclude_flags $HOME 2> /dev/null | awk '{print $1}')" \
         | gzip -9 > $backup_file
 }
 main(){
