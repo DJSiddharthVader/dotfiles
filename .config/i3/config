@@ -52,6 +52,8 @@ exec --no-startup-id ~/dotfiles/.scripts/monitor.sh auto
 exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
 #Launch browser
 exec --no-startup-id firefox --browser
+#Launch slack
+exec --no-startup-id slack
 #Launch syncthing
 exec --no-startup-id syncthing
 
@@ -172,8 +174,8 @@ bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
 bindsym $mod+n         focus output right
 bindsym $mod+Shift+n   focus output left
-bindsym $mod+m        [instance="music"] scratchpad show; [instance="music"] move position center
-#bindsym $mod+Shift+m exec $mute
+bindsym $mod+m         [instance="music"] scratchpad show; [instance="music"] move position center
+bindsym $mod+Shift+m   exec --no-startup-id env LUTRIS_SKIP_INIT=1 lutris lutris:rungameid/3
 #bindsym $mod+Shift+Return
 #bindsym $mod+Shift+Escape
 #bindsym $mod+Shift+BackSpace
