@@ -22,14 +22,12 @@ silent! normal! zE
 let &fdl = &fdl
 3
 normal! zo
-10
-normal! zo
-let s:l = 15 - ((14 * winheight(0) + 19) / 38)
+let s:l = 8 - ((7 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 15
-normal! 0
+keepjumps 8
+normal! 012|
 lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch

@@ -1,6 +1,6 @@
-bar:text
+bar:laptop
 separator:arrow_tail
-wallpaper_index:192
+wallpaper_index:363
 wifi:standard
 songnames:static
 date:time_bar
@@ -10,7 +10,7 @@ temperature:short
 disk:amount
 uptime:day
 torrent:data
-reading:Material design charts and Data visualization encyclopedia~https://medium.com/@kamushken/material-design-charts-and-data-visualization-patterns-a9bfe8336ec7
+reading: Existence and implications of population variance structure | bioRxiv~https://www.biorxiv.org/content/10.1101/439661v1
 battery:all
-focus_thresh:80
+focus_thresh:40
 mullvad:location
