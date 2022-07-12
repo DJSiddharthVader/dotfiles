@@ -31,9 +31,11 @@ disconnect(){
 }
 connectToAll() {
     primary="$1"
+    args=("${@:2}")
     prev=""
     if [[ -n $primary ]]; then
-        xrandr --output $primary --mode $(resolution $primary) --primary
+        # xrandr --output $primary --mode $(resolution $primary) --primary" 
+        xrandr --output $primary --auto --primary 
         prev=$primary
     fi
     while IFS= read -r monitor; do
@@ -45,13 +47,17 @@ connectToAll() {
             resolution=$(resolution $monitor)
             echo "$monitor $resolution | $prev"
             if [[ -z $prev ]]; then
-                xrandr --output $monitor --mode $resolution --primary
+                # xrandr --output $primary --mode $resolution --primary
+                xrandr --output $monitor --auto --primary
             else
-                xrandr --output $monitor --mode $resolution --right-of $prev
+                # xrandr --output $primary --mode $resolution --right-of $prev
+                xrandr --output $monitor --auto --right-of $prev "${args[@]}"
             fi
         fi
         prev=$monitor
     done <<< "$(listMonitors)"
+    echo "$xrandr_cmd"
+    $xrandr_cmd
 }
 connect() {
     setup="$1"
@@ -66,6 +72,9 @@ connect() {
         laptop)
             xrandr --output "$LAPTOP_SCREEN" --mode "$(resolution $LAPTOP_SCREEN)" --primary
             disconnect
+            ;;
+        work)
+            connectToAll "$LAPTOP_SCREEN" --rotate right
             ;;
         mirror)
             while IFS= read -r monitor; do
@@ -93,7 +102,7 @@ organizeWorkspaces() {
             move_right=(2 5 6 7 9)
             ;;
         work)
-            move_right=(3 5 6 7 8)
+            move_right=(5 6 7 8)
             move_left=()
             ;;
         *) help && exit 1 ;;
@@ -120,7 +129,7 @@ main() {
                    $BAR_MANAGER_SCRIPT style cross
                    organizeWorkspaces 'home'
                    ;;
-                2) connect hybrid # presenting
+                2) connect work # at work setup
                    $BAR_MANAGER_SCRIPT style laptop
                    organizeWorkspaces 'work'
                    ;;
