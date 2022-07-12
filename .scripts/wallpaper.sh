@@ -111,7 +111,7 @@ setWallpaper() {
     image="$1"
     polybar-msg hook wall 1 # update polybar wallpaper module
     cp "$image" "$wallpaper_file" # copy to generic wallpaper location
-    feh --bg-scale "$wallpaper_file" #set wallpaper
+    feh --bg-tile "$wallpaper_file" # set wallpaper
 }
 colorFirefox() {
     # get window id for a firefox window
