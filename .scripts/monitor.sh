@@ -74,7 +74,7 @@ connect() {
             disconnect
             ;;
         work)
-            connectToAll "$LAPTOP_SCREEN" --rotate right
+            connectToAll "$LAPTOP_SCREEN" --rotate left
             ;;
         mirror)
             while IFS= read -r monitor; do
@@ -102,7 +102,7 @@ organizeWorkspaces() {
             move_right=(2 5 6 7 9)
             ;;
         work)
-            move_right=(5 6 7 8)
+            move_right=(3 5 6 7 8)
             move_left=()
             ;;
         *) help && exit 1 ;;
@@ -150,4 +150,4 @@ main() {
     $HOME/dotfiles/.scripts/wallpaper.sh stay back # set wallpaper on all screens
 }
 
-main "$1"
+main $@
