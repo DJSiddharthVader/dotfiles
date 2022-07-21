@@ -1,31 +1,33 @@
 #!/bin/bash
-backup_drive="/media/4tbdrive"
-rsync_cmd="rsync -ah --ignore-existing --info=progress2"
-to_sync=(Music Pictures)
-to_update=(Backups Games Documents Projects Reading)
-to_ignore=(dotfiles .steam Videos/Torrents Videos/ToOrganize)
+BACKUP_DRIVE="/media/4tbdrive"
+RSYNC_CMD="rsync -ah --ignore-existing --info=progress2"
+TO_SYNC=(Music Pictures)
+TO_UPDATE=(Backups Games Documents Projects Reading)
+TO_IGNORE=(dotfiles .steam Torrents Videos)
 
 
 help() {
     echo "Usage: ./$(basename $0) {backup|sync|update|all}"
 }
 sync() {
-    for dir in ${to_sync[@]}; do
+    mountpoint $BACKUP_DRIVE || return 0
+    for dir in ${TO_SYNC[@]}; do
         echo "Syncing $dir..."
-        $rsync_cmd --delete "$HOME/$dir" "$backup_drive"
+        $RSYNC_CMD --delete "$HOME/$dir" "$BACKUP_DRIVE"
     done
 }
 update() {
-    for dir in ${to_update[@]}; do
+    mountpoint $BACKUP_DRIVE || return 0
+    for dir in ${TO_UPDATE[@]}; do
         echo "Updating $dir..."
-        $rsync_cmd "$HOME/$dir" "$backup_drive"
+        $RSYNC_CMD "$HOME/$dir" "$BACKUP_DRIVE"
     done
 }
 backup() {
-    mountpoint $backup_drive && drive="$backup_drive" || drive="$HOME"
-    backup_file="$drive/Backups/homedirE560_$(date +'%Y%m%d-%H%M').tar.gz"
+    mountpoint $BACKUP_DRIVE && drive="$BACKUP_DRIVE" || drive="$HOME/Backups/homedir"
+    backup_file="$drive/homedirE560_$(date +'%Y%m%d-%H%M').tar.gz"
     echo "Backing up to $backup_file"
-    exclude_flags="$(echo ${to_sync[@]} ${to_update[@]} ${to_ignore[@]} | sed -e "s:[^ ]*:--exclude=${home}\/&:g")"    
+    exclude_flags="$(echo ${TO_SYNC[@]} ${TO_UPDATE[@]} ${TO_IGNORE[@]} | sed -e "s:[^ ]*:--exclude=${home}\/&:g")"    
     tar -pcf - --ignore-failed-read --warning=none $exclude_flags $HOME \
         | pv -s "$(du -sh $exclude_flags $HOME 2> /dev/null | awk '{print $1}')" \
         | gzip -9 > $backup_file
