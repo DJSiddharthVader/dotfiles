@@ -21,22 +21,22 @@ silent! normal! zE
 161,163fold
 164,166fold
 167,169fold
-170,173fold
-174,213fold
-214,236fold
+170,174fold
+175,214fold
+215,237fold
 let &fdl = &fdl
+41
+normal! zo
 46
 normal! zo
-139
+170
 normal! zo
-214
-normal! zo
-let s:l = 57 - ((56 * winheight(0) + 25) / 51)
+let s:l = 171 - ((110 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 57
-normal! 016|
+keepjumps 171
+normal! 023|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

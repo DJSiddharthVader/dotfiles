@@ -57,39 +57,39 @@ silent! normal! zE
 435,449fold
 388,450fold
 452,474fold
-475,538fold
-539,551fold
-552,564fold
-565,610fold
-611,631fold
-632,652fold
-653,671fold
-672,690fold
-691,709fold
-710,755fold
-756,773fold
-775,793fold
-794,811fold
-812,830fold
-831,849fold
-850,868fold
-869,884fold
-885,903fold
-904,922fold
-923,940fold
-941,958fold
-959,981fold
-982,1000fold
-1001,1008fold
-1009,1019fold
-1020,1030fold
-1031,1041fold
-451,1042fold
-1044,1063fold
-1064,1084fold
-1085,1115fold
-1116,1139fold
-1043,1140fold
+475,528fold
+529,541fold
+542,554fold
+555,600fold
+601,621fold
+622,642fold
+643,661fold
+662,680fold
+681,699fold
+700,745fold
+746,763fold
+765,783fold
+784,801fold
+802,820fold
+821,839fold
+840,858fold
+859,874fold
+875,893fold
+894,912fold
+913,930fold
+931,948fold
+949,971fold
+972,990fold
+991,998fold
+999,1009fold
+1010,1020fold
+1021,1031fold
+451,1032fold
+1034,1053fold
+1054,1074fold
+1075,1105fold
+1106,1129fold
+1033,1130fold
 let &fdl = &fdl
 7
 normal! zo
@@ -119,16 +119,16 @@ normal! zc
 normal! zo
 451
 normal! zc
-1043
+1033
 normal! zo
-1043
+1033
 normal! zc
-let s:l = 1 - ((0 * winheight(0) + 11) / 22)
+let s:l = 1 - ((0 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
-normal! 09|
+normal! 015|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

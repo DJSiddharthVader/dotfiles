@@ -24,13 +24,16 @@ let &fdl = &fdl
 normal! zo
 61
 normal! zo
-let s:l = 25 - ((24 * winheight(0) + 8) / 16)
+102
+normal! zo
+let s:l = 111 - ((6 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 25
-normal! 01|
+keepjumps 111
+normal! 077|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

@@ -1,14 +1,14 @@
 bar:laptop
 separator:arrow_tail
-wallpaper_index:363
+wallpaper_index:524
 wifi:standard
-songnames:static
+songnames:scroll
 date:time_bar
 memory:short
 cpu:short
 temperature:short
 disk:amount
-uptime:day
+uptime:hour
 torrent:data
 reading: Existence and implications of population variance structure | bioRxiv~https://www.biorxiv.org/content/10.1101/439661v1
 battery:all
