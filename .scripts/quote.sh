@@ -10,8 +10,10 @@
 #- build giberish genrator hmm for random quotes
 
 # Files & Dirs
-quote_files=(~/Documents/Notes/Quotes.md ~/.quotes) # all quotes start with " and have an author on the next line, no other lines should start with a "
-thinker_dir="$HOME/dotfiles/.ascii/thinkers" # dir with ascii art for various thinkers
+# all quotes start with " and have an author on the next line, no other lines should start with a "
+quote_files=(~/.varfiles/quotes.md ~/.varfiles/quotes.txt)
+# dir with ascii art for various thinkers
+thinker_dir="$HOME/dotfiles/.ascii/thinkers" 
 
 # Default Args
 colwrap=50
