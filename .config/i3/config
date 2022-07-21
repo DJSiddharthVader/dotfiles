@@ -38,24 +38,24 @@ exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 #launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
+#Composite manager:
+exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
+#connect to external monitors
+#exec --no-startup-id ~/dotfiles/.scripts/monitor.sh auto
+#Launch Polybar and set wallpaper
+exec --no-startup-id ~/.scripts/wallpaper.sh stay both
 #Torrent daemon:
 exec --no-startup-id transmission.sh -m start
 #Start VPN
 exec --no-startup-id ~/.scripts/mullvad.sh connect
 #Mount other drives:
 exec --no-startup-id sudo mount -a
-#Composite manager:
-exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
-#connect to external monitors
-exec --no-startup-id ~/dotfiles/.scripts/monitor.sh auto
-#Launch Polybar and set wallpaper
-exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
-#Launch browser
-exec --no-startup-id firefox --browser
-#Launch slack
-exec --no-startup-id slack
 #Launch syncthing
 exec --no-startup-id syncthing
+#Launch slack
+exec --no-startup-id slack
+#Launch browser
+exec --no-startup-id firefox --browser
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
@@ -68,10 +68,10 @@ for_window [instance="cheatsheet"] floating enable #cheatsheets
 
 ##---Music-----------------#
 #Music player daemon and sound:
-exec --no-startup-id [ ! -s ~/.config/mpd/pid ] && mpd
+exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
 #ncmpcpp scratch terminal
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
-for_window [instance="music"] resize set 600 600
+for_window [instance="music"] resize set 650 600
 for_window [instance="music"] floating enable
 for_window [instance="music"] move scratchpad
 for_window [instance="music"] border pixel 0
@@ -128,8 +128,8 @@ bindsym $mod+q         kill
 bindsym $mod+Shift+q   move scratchpad
 bindsym $mod+w         exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w   exec --no-startup-id ~/bin/tor-browser_en-US/Browser/start-tor-browser
-bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
-bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
+bindsym $mod+e         exec ~/.scripts/wallpaper.sh stay both
+bindsym $mod+Shift+e   exec ~/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
 bindsym $mod+t         exec transmission.sh -m search
