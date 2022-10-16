@@ -60,6 +60,7 @@ alias ud='sudo umount /media/4tbdrive/'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias portal='curl -v http://detectportal.firefox.com/canonical.html'
+alias feh='feh --scale-down -g 1080x1600 -d'
 
 #Print
 alias bgal='feh --scale-down -g 640x480 -d ~/Pictures/wallpapers/*'
