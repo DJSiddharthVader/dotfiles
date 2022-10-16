@@ -764,7 +764,7 @@ format-suffix-background = ${colors.transparent}
 
 [module/date]
 type = custom/script
-interval = 30
+tail = true
 exec = ~/dotfiles/.config/polybar/scripts/date.sh display
 click-left = ~/dotfiles/.config/polybar/scripts/date.sh next
 click-right = ~/dotfiles/.config/polybar/scripts/date.sh prev
@@ -931,9 +931,9 @@ format-suffix-background = ${colors.transparent}
 [module/torrent]
 type = custom/script
 tail = true
-exec = transmission.sh -m display
-click-left = transmission.sh -m next
-click-right = transmission.sh -m prev
+exec = ~/Projects/torrent.sh/transmission.sh -m display
+click-left = ~/Projects/torrent.sh/transmission.sh -m next
+click-right = ~/Projects/torrent.sh/transmission.sh -m prev
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.torrent-color}
