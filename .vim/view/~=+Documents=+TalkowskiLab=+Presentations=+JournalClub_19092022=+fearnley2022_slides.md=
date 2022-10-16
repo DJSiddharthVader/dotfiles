@@ -8,20 +8,45 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-1
+11
 normal! zo
-5
+41
 normal! zo
-19
+65
 normal! zo
-21
+67
 normal! zo
-let s:l = 23 - ((22 * winheight(0) + 18) / 36)
+67
+normal! zc
+75
+normal! zo
+75
+normal! zc
+65
+normal! zc
+97
+normal! zo
+99
+normal! zo
+108
+normal! zo
+121
+normal! zo
+128
+normal! zo
+130
+normal! zo
+148
+normal! zo
+157
+normal! zo
+let s:l = 157 - ((39 * winheight(0) + 20) / 40)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 23
-normal! 0205|
+keepjumps 157
+normal! 0
+lcd ~/Documents/TalkowskiLab/Presentations/JournalClub_19092022
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 nohlsearch

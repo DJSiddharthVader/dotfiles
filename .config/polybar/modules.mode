@@ -1,16 +1,16 @@
 bar:laptop
-separator:arrow_tail
-wallpaper_index:524
+separator:arrow_sym
+wallpaper_index:2072
 wifi:standard
 songnames:scroll
-date:time_bar
+date:time
 memory:short
 cpu:short
 temperature:short
 disk:amount
-uptime:hour
+uptime:day
 torrent:data
-reading: Existence and implications of population variance structure | bioRxiv~https://www.biorxiv.org/content/10.1101/439661v1
+reading:soft question - Awfully sophisticated proof for simple facts - MathOverflow~https://mathoverflow.net/questions/42512/awfully-sophisticated-proof-for-simple-facts/44742#44742
 battery:all
 focus_thresh:40
 mullvad:location
