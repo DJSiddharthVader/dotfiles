@@ -27,7 +27,7 @@ backup() {
     mountpoint $BACKUP_DRIVE && drive="$BACKUP_DRIVE" || drive="$HOME/Backups/homedir"
     backup_file="$drive/homedirE560_$(date +'%Y%m%d-%H%M').tar.gz"
     echo "Backing up to $backup_file"
-    exclude_flags="$(echo ${TO_SYNC[@]} ${TO_UPDATE[@]} ${TO_IGNORE[@]} | sed -e "s:[^ ]*:--exclude=${home}\/&:g")"    
+    exclude_flags="$(echo ${TO_SYNC[@]} ${TO_UPDATE[@]} ${TO_IGNORE[@]} | sed -e "s:[^ ]*:--exclude=${HOME}\/&:g")"
     tar -pcf - --ignore-failed-read --warning=none $exclude_flags $HOME \
         | pv -s "$(du -sh $exclude_flags $HOME 2> /dev/null | awk '{print $1}')" \
         | gzip -9 > $backup_file
@@ -36,9 +36,9 @@ main(){
     [[ -z "$@" ]] && help && exit 0
     for mode in $@; do
         case "$mode" in
-            'backup') backup ;;
             'sync'  ) sync   ;;
             'update') update ;;
+            'backup') backup ;;
             'all')    update && sync && backup;;
             *) help && exit 1;;
         esac
