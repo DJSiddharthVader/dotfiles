@@ -23,7 +23,7 @@ cycle() {
     idx=$(($idx -1)) #current mode idx
     case "$dir" in
          'next') idx=$(($idx + 1)) ;;
-         'prev') idx=$(($idx +${#modes[@]} -1)) ;;
+         'prev') idx=$(($idx + ${#modes[@]} - 1)) ;;
          *) echo "Error cycle takes {next|prev}" && exit 1 ;;
     esac
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
