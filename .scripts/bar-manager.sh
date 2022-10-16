@@ -1,7 +1,7 @@
 #!/bin/bash
 shopt -s extglob
 
-# STYLES
+# Styles
 script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 STYLES=(float text underline cross press full mini laptop)
@@ -22,6 +22,7 @@ separator_names=(arrow_tail
                  small_fade_in
                  big_fade
                  big_fade_in 
+                 spaces
                  none)
 separator_icons=("$dl$dl$dl"
                  "$dl$dl$dl"
@@ -34,6 +35,7 @@ separator_icons=("$dl$dl$dl"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
+                 " $dl$dl$dl "
                  "$dl$dl$dl")
 
 makeSeparatorTable() {
