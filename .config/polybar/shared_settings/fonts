@@ -1,0 +1,105 @@
+; Font Awesome Icons
+font-icon = FontAwesome:format=truetype:style=Regular:size=11:antialias=false;3
+font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
+font-icon-huge = FontAwesome:format=truetype:style=Regular:size=27:antialias=true;4
+; Weather Icons
+font-weather = Weather Icons:style=Regular;3
+font-weather-large = Weather Icons:style=Regular:size=15;3
+font-weather-huge= Weather Icons:style=Regular:size=27;3
+; Gothic Fonts
+;; PixelSleigh
+;font-main = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
+;font-main-large = PixelSleigh:style=Regular:pixelsize=10:antialias=true;1
+;font-main-huge = PixelSleigh:style=Regular:pixelsize=16:antialias=true;1
+;; GothicPixels
+;font-main = GothicPixels:style=Medium:pixelsize=11:antialias=false;3
+;font-main-large = GothicPixels:style=Medium:pixelsize=11:antialias=true;3
+;font-main-huge = GothicPixels:style=Medium:pixelsize=11:antialias=true;3
+;; Pixeled English Font
+;font-main = Pixeled English Font:style=Regular:pixelsize=11:antialias=false;3
+;font-main-large = Pixeled English Font:style=Regular:pixelsize=11:antialias=true;3
+;font-main-huge = Pixeled English Font:style=Regular:pixelsize=11:antialias=true;3
+
+; Misc
+;; Silom
+;font-main = Silom:style=Regular:pixelsize=12:antialias=false;3
+;font-main-large = Silom:style=Regular:pixelsize=12:antialias=false;3
+;font-main-huge = Silom:style=Regular:pixelsize=12:antialias=false;3
+
+; Shadowed
+;; Pixel Bit Advanced
+;font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
+;font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
+;font-main-huge = Pixel Bit Advanced:style=Regular:pixelsize=13:antialias=true;5
+;; Pixeliza20
+;font-main = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
+;font-main-large = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
+;font-main-huge = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
+
+; Thiccer
+;; Pixeltype
+;font-main = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
+;font-main-large = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
+;font-main-huge = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
+;; Retron2000
+;font-main = Retron2000:style=Regular:pixelsize=11:antialias=false;3
+;font-main-large = Retron2000:style=Regular:pixelsize=11:antialias=false;3
+;font-main-huge = Retron2000:style=Regular:pixelsize=11:antialias=false;3
+
+; Thin
+;; Apple ][
+;font-main = Apple ][:style=Regular:size=7:antialias=true:autohint=true;3
+;font-main-large = Apple ][:style=Regular:size=10:antialias=true:autohint=true;2
+;font-main-huge = Apple ][:style=Regular:size=11:antialias=true:autohint=true;3
+;; MineCraftia
+font-main = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+;font-main-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;11
+;font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
+;; Nitendo DS BIOS
+;font-main = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
+;font-main-large = Nintendo DS BIOS:style=Regular:pixelsize=22;antialias=false;3
+;font-main-huge = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
+;; PixelPlay
+;font-main = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
+;font-main-large = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
+;font-main-huge = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
+;; Terminus
+;font-main = Terminus:style=Regular:pixelsize=14;1
+;font-main-large = Terminus:style=Regular:pixelsize=14;1
+;font-main-huge = Terminus:style=Regular:pixelsize=14;1
+
+; Pixel Gaming
+;; PKMN RBYGSC 
+;font-main = PKMN RBYGSC:style=Regular:size=7:antialias=true:autohint=true;2
+font-main-large = PKMN RBYGSC:style=Regular:size=11:antialias=true:autohint=true;3
+font-main-huge =PKMN RBYGSC:style=Regular:size=9:antialias=false:autohint=true;3
+;; Retro Gaming
+;font-main = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
+;font-main-large = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
+;font-main-huge = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
+;; Press Start 2P
+;font-main = Press Start 2P:style=Regular:pixelsize=7;3
+;font-main-large = Press Start 2P:style=Regular:pixelsize=7;3
+;font-main-huge = Press Start 2P:style=Regular:pixelsize=7;3
+;; Pokemon Classic
+;font-main = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
+;font-main-large = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
+;font-main-huge = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
+
+; Backup Font,  avoids oversized icons from defualting to font-4
+font-overflow =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
+font-overflow-large = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=19:antialias=true;1
+font-overflow-huge = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=29:antialias=true;1
+;font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
+;font-overflow = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+; Powerline Separators
+font-powerline = FiraCode Nerd Font Mono:style=Regular:size=15:antialias=true;3
+font-powerline-large = FiraCode Nerd Font Mono:style=Regular:size=23:antialias=true;3
+font-powerline-huge = FiraCode Nerd Font Mono:style=Regular:size=25:antialias=true;9 
+; Long scrolling text, (smaller and mono-spaced)
+font-focused = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+font-focused-large = MineCraftia:style=Regular:pixelsize=11;antialias=false;10
+font-focused-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;10
+font-scrolling = Terminus:style=Regular:pixelsize=13;2
+font-scrolling-large = Terminus:style=Regular:pixelsize=18;2
+font-scrolling-huge = Terminus:style=Regular:pixelsize=23;2
