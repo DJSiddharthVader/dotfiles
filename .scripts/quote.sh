@@ -21,7 +21,6 @@ border_string="(~)~"
 thinker_offset="0.33"
 thinker_line=2
 
-
 help() {
     thinker_list="$(find $thinker_dir -type f -name "*.ascii" -exec basename {} \; | cut -d'.' -f1 | tr '\n' '|' | sed -e 's/|$//' )"
     echo "Print a quote and something thinking it (basically fortune | cowsay)
@@ -36,7 +35,6 @@ Usage: $0 [OPTIONS]
                 possible thinkers are {$thinker_list} or any filepath
         -h      print this message"
 }
-
 random_quote() {
     # pick random quote from local files
     quote="$(cat ${quote_files[@]} | grep '^"' | shuf -n1 | tr -d '"')"
@@ -112,7 +110,6 @@ display() {
     # print whatever is thinking the bubble
     thinker $thinker_file $thinker_offset $thinker_line $thinker_padding
 }
-
 main() {
     # pick random quote and thinker, will be updated if specified by a CLI flag
     quote_string="$(random_quote)"
