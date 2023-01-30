@@ -121,18 +121,18 @@ colorFirefox() {
 }
 changeColors() {
     image="$1"
-    wal -n -e -i "$image"  # use wal to generate colorschemes from image
+    wal -a 92 -n -e -i "$image"  # generate colorschemes 
     zathura.sh # re-write zathura config with new colors
     if [[ -z "$(pgrep 'polybar')" ]]; then
         bar-manager.sh style stay 
     else
         bar-manager.sh reload > /dev/null 2>&1 # reload polybar with new colors
     fi
-    colorFirefox # trigger reloading of colors.css in firefox
     ~/bin/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox # theme for GTK apps and whatnot
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
     # this must be run last since the timeout blocks anything after it from executing due to the set -e (script exists on error, including timeout)
     # if no timeout it would run infinitely and script would never finish
+    colorFirefox # trigger reloading of colors.css in firefox
 }
 wall() {
     mode="$1"
