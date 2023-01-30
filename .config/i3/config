@@ -5,6 +5,7 @@
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 for_window [instance="protonvpn"] floating enable
+for_window [instance="zoom"] floating enable
 set $mod Mod4
 set $term --no-startup-id st
 set $big_term --no-startup-id st -f "FiraCode Nerd Font:style=Regular:size=20:antialias=true:autohint=true"
@@ -17,6 +18,7 @@ focus_follows_mouse yes
 font "TerminessTTF Nerd Font:style=Regular:pixelsize=17:antialias=true;4"
 set $hibernate sudo systemctl suspend
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
+#force_xinerama yes DONT USE IT BREAKS MULTIMONITOR SUPPORT
 
 ##---Start up--------------#
 #lock after 45 mins of inactivity
@@ -59,7 +61,7 @@ exec --no-startup-id firefox --browser
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 725 500
+for_window [instance="dropdown"] resize set 800 550
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
@@ -67,16 +69,16 @@ exec $term -n dropdown -e tmuxinator start scratch
 for_window [instance="cheatsheet"] floating enable #cheatsheets
 
 ##---Music-----------------#
-#Music player daemon and sound:
+# Music player daemon and sound:
 exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
-#ncmpcpp scratch terminal
+# ncmpcpp scratch terminal
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
 for_window [instance="music"] resize set 650 600
 for_window [instance="music"] floating enable
 for_window [instance="music"] move scratchpad
 for_window [instance="music"] border pixel 0
 exec $term -n music -e $music
-#Music Commands
+# Music Commands
 set $pause --no-startup-id mpc toggle
 set $trupause --no-startup-id mpc pause
 set $next --no-startup-id mpc next
@@ -168,7 +170,7 @@ bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 #bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
-bindsym $mod+v         exec --no-startup-id ~/.scripts/bitwarden.sh
+bindsym $mod+v         exec --no-startup-id ~/bin/anyconnect-linux64-4.10.03104/vpn/vpnui
 #bindsym $mod+Shift+v
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
@@ -239,12 +241,8 @@ bindsym Mod2+Shift+KP_8  move container to workspace $ws8
 bindsym Mod2+Shift+KP_9  move container to workspace $ws9
 bindsym Mod2+Shift+KP_0  move container to workspace $ws10
 
-# Shortcuts
-bindsym $mod+Tab		    workspace back_and_forth
-bindsym $mod+apostrophe		split horizontal ;; exec $term
-bindsym $mod+slash		    split vertical ;; exec $term
-
 ##---Arrow Keys------------#
+bindsym $mod+Tab		    workspace back_and_forth
 bindsym $mod+Left		    focus left
 bindsym $mod+Down		    focus down
 bindsym $mod+Up			    focus up
