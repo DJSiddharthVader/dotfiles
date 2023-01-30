@@ -15,15 +15,11 @@ silent! normal! zE
 26,34fold
 35,46fold
 let &fdl = &fdl
-26
-normal! zo
-35
-normal! zo
-let s:l = 41 - ((8 * winheight(0) + 8) / 16)
+let s:l = 35 - ((29 * winheight(0) + 10) / 21)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 41
+keepjumps 35
 normal! 0
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch

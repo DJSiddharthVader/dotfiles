@@ -14,21 +14,20 @@ silent! normal! zE
 17,20fold
 21,23fold
 24,31fold
-32,40fold
-41,71fold
-72,77fold
-78,107fold
-108,129fold
-130,169fold
+32,53fold
+54,62fold
+63,103fold
+104,139fold
 let &fdl = &fdl
-21
+63
 normal! zo
-let s:l = 21 - ((20 * winheight(0) + 11) / 22)
+let s:l = 68 - ((47 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 21
-normal! 015|
+keepjumps 68
+normal! 0106|
+lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 nohlsearch

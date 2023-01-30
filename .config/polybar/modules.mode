@@ -1,16 +1,16 @@
 bar:laptop
-separator:arrow_sym
-wallpaper_index:2072
+separator:arrow_tail
+wallpaper_index:5025
 wifi:standard
 songnames:scroll
-date:time
+date:time_bar
 memory:short
 cpu:short
 temperature:short
 disk:amount
-uptime:day
-torrent:data
-reading:soft question - Awfully sophisticated proof for simple facts - MathOverflow~https://mathoverflow.net/questions/42512/awfully-sophisticated-proof-for-simple-facts/44742#44742
+uptime:hour
+torrent:speed
+reading:Towards Backwards-Compatible Data with Confounded Domain Adaptation~https://arxiv.org/abs/2203.12720
 battery:all
 focus_thresh:40
 mullvad:location
