@@ -23,7 +23,6 @@ isDeviceConnected() {
     status="$(echo -e "info $device" | bluetoothctl | grep Connected | cut -d':' -f2)"
     [[ "$status" =~ 'yes' ]] && echo "yes" || echo "no"
 }
-
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
     mpc pause
@@ -44,7 +43,6 @@ toggle() {
         *) echo "Error: invalid status message $status" && exit 1
     esac
 }
-
 getDeviceName() {
     mac="$1"
     echo -e "info $mac" | bluetoothctl | grep Name | cut -f2- -d' '
@@ -57,10 +55,8 @@ getConnectedDevice() {
             name="$name, $(getDeviceName $uuid)"
         fi
     done <<< "$(echo -e "paired-devices" | bluetoothctl | grep '^Device' | cut -f2 -d' ')"
-    name="$(echo $name | sed -e 's/^, //')"
-    [[ -n "$name" ]] && echo "$name" || echo "None"
+    [[ -n "$name" ]] && echo $name | sed -e 's/^[, ]*//' || echo "None"
 }
-
 main() {
     mode="$1"
     device="$2"
@@ -80,7 +76,8 @@ main() {
 
 if (( $# < 1 )); then
     mode="toggle"
-    device="5C:C6:E9:35:57:42" #For HRF 3000 headphones
+    device="5C:C6:E9:35:57:42" # HRF 3000
+    device="74:45:CE:F9:14:A8" # MTH20xBT
 else
     mode="$1"
     device="$2"
