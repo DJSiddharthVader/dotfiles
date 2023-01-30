@@ -6,7 +6,7 @@ script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 STYLES=(float text underline cross press full mini laptop)
 compact_bars=(laptop mini)
-RES_LIMIT=1400
+RES_LIMIT=1300
 PRIMARY_SCREEN="eDP-1"
 # Separators
 dl="."
@@ -112,12 +112,10 @@ rightprefix = \"$(echo "$icons" | cut -d"$dl" -f3)\"
 rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"
 " | sed -e 's/""//' >| "$separator_file"
 }
-getConnectedMonitors() {
-    xrandr |  grep ' connected' | sort -r | cut -d' ' -f1
-}
 getActiveMonitors() {
    # same as get all monitors but excludes eDP-1
-    xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev | sort -r
+   xrandr --query | grep " connected" | cut -d" " -f1
+
 }
 getResolution() {
     monitor="$1"
@@ -126,29 +124,31 @@ getResolution() {
 launchBar() {
     bartype="$1"
     m="$2" # monitor
+    export MONITOR="$m" 
+    echo $MONITOR
     res="$(getResolution $m | cut -d'x' -f1)"
     if [[ $bartype = "mini" ]]; then
-        MONITOR=$m polybar mini &
+        polybar mini &
     elif [[ $res -lt $RES_LIMIT ]]; then
         # if resolution is too low use trimmed bar
         tmp="@($(echo ${compact_bars[*]} | sed -e 's/ /|/g'))"
         case $bartype in
             $tmp) #already compact bartype
-                MONITOR=$m polybar "$bartype"-top &
-                MONITOR=$m polybar "$bartype"-bottom &
+                polybar "$bartype"-top &
+                polybar "$bartype"-bottom &
                 ;;
                *)
-                MONITOR=$m polybar compact-"$bartype"-top &
-                MONITOR=$m polybar compact-"$bartype"-bottom &
+                polybar compact-"$bartype"-top &
+                polybar compact-"$bartype"-bottom &
                 ;;
         esac
     else
         if [[ $m = $PRIMARY_SCREEN ]]; then
-            MONITOR=$m polybar laptop-top &
-            MONITOR=$m polybar laptop-bottom &
+            polybar laptop-top &
+            polybar laptop-bottom &
         else
-            MONITOR=$m polybar "$bartype"-top &
-            MONITOR=$m polybar "$bartype"-bottom &
+            polybar "$bartype"-top &
+            polybar "$bartype"-bottom &
         fi
     fi
 }
@@ -166,12 +166,11 @@ launchAllBars() {
     esac
     setMode 'style' "$dmode" # set defualt polybar style
     # launch bars
-    killall -q polybar && sleep 0.001 # Terminate already running bar instances
+    killall -q polybar && sleep 1 # Terminate already running bar instances
     case "$dmode" in
         none) sleep 1 ;;
         cross)
             monitors=$(getActiveMonitors)
-            echo "$monitors"
             m1="$(echo $monitors | cut -d' ' -f1)"
             m2="$(echo $monitors | cut -d' ' -f2)"
             MONITOR="$m1" polybar cross-left &
