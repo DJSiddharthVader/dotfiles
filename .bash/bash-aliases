@@ -32,10 +32,10 @@ alias gsl='commit-status.sh status'
 alias gsw='watch -n2 "commit-status.sh status"'
 
 #Apps
-alias cp='ptcp'
-alias cat='bat --paging=never'
-alias less='bat'
-alias man='tldr'
+# alias cp='ptcp'
+# alias cat='bat --paging=never'
+# alias less='bat'
+# alias man='tldr'
 alias top='htop'
 alias pdf='zathura'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
@@ -61,6 +61,7 @@ alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias portal='curl -v http://detectportal.firefox.com/canonical.html'
 alias feh='feh --scale-down -g 1080x1600 -d'
+alias vpn='/home/sidreed/bin/anyconnect-linux64-4.10.03104/vpn/vpn'
 
 #Print
 alias bgal='feh --scale-down -g 640x480 -d ~/Pictures/wallpapers/*'
