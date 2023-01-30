@@ -14,6 +14,7 @@ filetype plugin on
 filetype indent on
 
 call plug#begin('~/dotfiles/.config/nvim/plugged')
+    Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/nvim-lsp-installer'
     Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
@@ -128,6 +129,18 @@ let g:startify_custom_header = [
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
 let g:pydocstring_formatter = 'sphinx'
 nnoremap <silent> <leader>pd :Pydocstring<cr>
+" => NvimR
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let R_set_omnifunc = ["R", "rmd", "rnoweb", "rhelp", "rrst"]
+let R_auto_omni = ["R",  "rmd", "rnoweb", "rhelp", "rrst"]
+let maplocalleader = ';'
+let r_syntax_folding = 1
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+autocmd FileType R inoremap <buffer> > <Esc>:normal! a%>%<CR>a
+autocmd FileType rnoweb inoremap <buffer> > <Esc>:normal! a%>%<CR>a
+autocmd FileType rmd inoremap <buffer> > <Esc>:normal! a%>%<CR>a
+autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
 " => LSP options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua << EOF
