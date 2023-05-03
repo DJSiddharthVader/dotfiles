@@ -1,0 +1,178 @@
+i3-prefix = ${colors.rightprefix}
+i3-suffix = 
+i3-color = 
+i3-underline = 
+i3-overline = 
+i3-text-color = ${colors.col2}
+i3-color-2 = ${colors.col1}
+i3-underline-2 = ${colors.transparent0}
+i3-overline-2 = ${colors.transparent0}
+i3-text-color-2 = ${colors.col0}
+
+focused-prefix = 
+focused-suffix = ${colors.rightsuffix} 
+focused-color = 
+focused-underline = 
+focused-overline = 
+focused-text-color = ${colors.col3}
+
+focused-name-prefix = ${colors.rightsuffix}
+focused-name-suffix = 
+
+applauncher-prefix =${colors.leftprefix}
+applauncher-suffix = ${colors.leftsuffix}
+applauncher-color = 
+applauncher-underline = 
+applauncher-overline = 
+applauncher-text-color = ${colors.col1}
+
+gamma-prefix =${colors.leftprefix}
+gamma-suffix = ${colors.leftsuffix}
+gamma-color = 
+gamma-underline = 
+gamma-overline = 
+gamma-text-color = ${colors.col2}
+
+xbacklight-prefix = ${colors.leftprefix}
+xbacklight-suffix = ${colors.leftsuffix}
+xbacklight-color = 
+xbacklight-underline = 
+xbacklight-overline = 
+xbacklight-text-color = ${colors.col2}
+
+volume-prefix =${colors.leftprefix}
+volume-suffix = ${colors.leftsuffix}
+volume-color = 
+volume-underline = 
+volume-overline = 
+volume-text-color = ${colors.col3}
+
+pulseaudio-control-prefix =${colors.leftprefix}
+pulseaudio-control-suffix = ${colors.leftsuffix}
+pulseaudio-control-color = 
+pulseaudio-control-underline =
+pulseaudio-control-overline =
+pulseaudio-control-text-color = ${colors.col4}
+
+wlan-prefix =${colors.leftprefix}
+wlan-suffix = ${colors.leftsuffix}
+wlan-color = 
+wlan-underline = 
+wlan-overline = 
+wlan-text-color = ${colors.col5}
+
+protonvpn-prefix =${colors.leftprefix}
+protonvpn-suffix = ${colors.leftsuffix}
+protonvpn-color = 
+protonvpn-underline =
+protonvpn-overline =
+protonvpn-text-color = ${colors.col6}
+
+mullvad-prefix =${colors.leftprefix}
+mullvad-suffix = ${colors.leftsuffix}
+mullvad-color = 
+mullvad-underline =
+mullvad-overline =
+mullvad-text-color = ${colors.col6}
+
+bluetooth-prefix =${colors.leftprefix}
+bluetooth-suffix = ${colors.leftsuffix}
+bluetooth-color = 
+bluetooth-underline =
+bluetooth-overline =
+bluetooth-text-color = ${colors.col7}
+
+mpd-prefix =${colors.leftprefix}
+mpd-suffix = ${colors.leftsuffix}
+mpd-color = 
+mpd-underline =
+mpd-overline =
+mpd-text-color = ${colors.col8}
+
+songnames-prefix =${colors.leftprefix}
+songnames-suffix = ${colors.leftsuffix}
+songnames-color = 
+songnames-underline =
+songnames-overline =
+songnames-text-color = ${colors.col8}
+
+date-prefix =${colors.rightprefix}
+date-suffix = ${colors.rightsuffix}
+date-color = 
+date-underline =
+date-overline =
+date-text-color = ${colors.col1}
+
+battery-prefix = ${colors.rightprefix}
+battery-suffix = ${colors.rightsuffix}
+battery-color = 
+battery-underline =
+battery-overline =
+battery-text-color = ${colors.col6}
+
+memory-prefix =${colors.rightprefix}
+memory-suffix = ${colors.rightsuffix}
+memory-color = 
+memory-underline =
+memory-overline =
+memory-text-color = ${colors.col2}
+
+cpu-prefix =${colors.rightprefix}
+cpu-suffix = ${colors.rightsuffix}
+cpu-color = 
+cpu-underline =
+cpu-overline =
+cpu-text-color = ${colors.col3}
+
+temperature-prefix =${colors.rightprefix}
+temperature-suffix = ${colors.rightsuffix}
+temperature-color = 
+temperature-underline =
+temperature-overline =
+temperature-text-color = ${colors.col4}
+
+xkeyboard-prefix =${colors.rightprefix}
+xkeyboard-suffix = ${colors.rightsuffix}
+xkeyboard-color = ${colors.alert}
+
+disk-prefix =${colors.rightprefix}
+disk-suffix = ${colors.rightsuffix}
+disk-color = 
+disk-underline =
+disk-overline =
+disk-text-color = ${colors.col5}
+
+uptime-prefix =${colors.rightprefix}
+uptime-suffix = ${colors.rightsuffix}
+uptime-color = 
+uptime-underline =
+uptime-overline =
+uptime-text-color = ${colors.col6}
+
+weather-prefix =${colors.rightprefix}
+weather-suffix = ${colors.rightsuffix}
+weather-color = 
+weather-underline =
+weather-overline =
+weather-text-color = ${colors.col7}
+
+torrent-prefix =${colors.rightprefix}
+torrent-suffix = ${colors.rightsuffix}
+torrent-color = 
+torrent-underline =
+torrent-overline =
+torrent-text-color = ${colors.col8}
+
+wall-prefix =${colors.rightprefix}
+wall-suffix = ${colors.rightsuffix}
+wall-color = 
+wall-underline =
+wall-overline =
+wall-text-color = ${colors.col1}
+
+reading-prefix =${colors.leftprefix}
+reading-suffix = ${colors.leftsuffix}
+reading-color = 
+reading-underline =
+reading-overline =
+reading-text-color = ${colors.col2}

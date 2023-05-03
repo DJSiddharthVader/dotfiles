@@ -14,33 +14,77 @@ compositing-foreground = over
 margin-top = 1
 margin-bottom = 1
 
-[colors]
-;hack for getting colors to read from Xressources
-include-file = ~/dotfiles/.config/polybar/separators.mode
-include-file = ~/.cache/wal/polybar-wal.theme
-
 [fonts]
-; Font Awesome Icons
-font-icon = FontAwesome:format=truetype:style=Regular:size=11:antialias=false;3
-font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
-font-icon-huge = FontAwesome:format=truetype:style=Regular:size=27:antialias=true;4
-
-; Weather Icons
-font-weather = Weather Icons:style=Regular;3
-font-weather-large = Weather Icons:style=Regular:size=15;3
-font-weather-huge= Weather Icons:style=Regular:size=27;3
-
 ; Text Fonts
+;; Shadowed
+;; Pixel Bit Advanced
+;font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
+;font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
+;font-main-huge = Pixel Bit Advanced:style=Regular:pixelsize=13:antialias=true;5
+;; Pixeliza20
+;font-main = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
+;font-main-large = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
+;font-main-huge = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
+
+;; Thiccer
+;; Pixeltype
+;font-main = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
+;font-main-large = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
+;font-main-huge = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
+;; Retron2000
+;font-main = Retron2000:style=Regular:pixelsize=11:antialias=false;3
+;font-main-large = Retron2000:style=Regular:pixelsize=11:antialias=false;3
+;font-main-huge = Retron2000:style=Regular:pixelsize=11:antialias=false;3
+
+;; Pixel Thin
+;; Apple ][
+;font-main = Apple ][:style=Regular:size=7:antialias=true:autohint=true;3
+;font-main-large = Apple ][:style=Regular:size=10:antialias=true:autohint=true;2
+;font-main-huge = Apple ][:style=Regular:size=11:antialias=true:autohint=true;3
+;; MineCraftia
+font-main = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+;font-main-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;11
+;font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
+;; Nitendo DS BIOS
+;font-main = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
+;font-main-large = Nintendo DS BIOS:style=Regular:pixelsize=22;antialias=false;3
+;font-main-huge = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
+;; PixelPlay
+;font-main = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
+;font-main-large = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
+;font-main-huge = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
+;; Terminus
+;font-main = Terminus:style=Regular:pixelsize=14;1
+;font-main-large = Terminus:style=Regular:pixelsize=14;1
+;font-main-huge = Terminus:style=Regular:pixelsize=14;1
+
+;; Pixel Gaming
+;; PKMN RBYGSC 
+;font-main = PKMN RBYGSC:style=Regular:size=7:antialias=true:autohint=true;2
+font-main-large = PKMN RBYGSC:style=Regular:size=11:antialias=true:autohint=true;3
+font-main-huge =PKMN RBYGSC:style=Regular:size=9:antialias=false:autohint=true;3
+;; Retro Gaming
+;font-main = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
+;font-main-large = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
+;font-main-huge = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
+;; Press Start 2P
+;font-main = Press Start 2P:style=Regular:pixelsize=7;3
+;font-main-large = Press Start 2P:style=Regular:pixelsize=7;3
+;font-main-huge = Press Start 2P:style=Regular:pixelsize=7;3
+;; Pokemon Classic
+;font-main = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
+;font-main-large = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
+;font-main-huge = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
+
+;; Pixel Gohic
 ;; PixelSleigh
 ;font-main = PixelSleigh:style=Regular:pixelsize=8:antialias=true;1
 ;font-main-large = PixelSleigh:style=Regular:pixelsize=10:antialias=true;1
 ;font-main-huge = PixelSleigh:style=Regular:pixelsize=16:antialias=true;1
-
 ;; GothicPixels
 ;font-main = GothicPixels:style=Medium:pixelsize=11:antialias=false;3
 ;font-main-large = GothicPixels:style=Medium:pixelsize=11:antialias=true;3
 ;font-main-huge = GothicPixels:style=Medium:pixelsize=11:antialias=true;3
-
 ;; Pixeled English Font
 ;font-main = Pixeled English Font:style=Regular:pixelsize=11:antialias=false;3
 ;font-main-large = Pixeled English Font:style=Regular:pixelsize=11:antialias=true;3
@@ -52,75 +96,16 @@ font-weather-huge= Weather Icons:style=Regular:size=27;3
 ;font-main-large = Silom:style=Regular:pixelsize=12:antialias=false;3
 ;font-main-huge = Silom:style=Regular:pixelsize=12:antialias=false;3
 
-;; Shadowed
-;; Pixel Bit Advanced
-;font-main = Pixel Bit Advanced:style=Regular:pixelsize=9:antialias=true;4
-;font-main-large = Pixel Bit Advanced:style=Regular:pixelsize=11:antialias=true;4
-;font-main-huge = Pixel Bit Advanced:style=Regular:pixelsize=13:antialias=true;5
 
-;; Pixeliza20
-;font-main = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
-;font-main-large = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
-;font-main-huge = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
+; Font Awesome Icons
+font-icon = FontAwesome:format=truetype:style=Regular:size=11:antialias=false;3
+font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
+font-icon-huge = FontAwesome:format=truetype:style=Regular:size=27:antialias=true;4
 
-;; Thiccer
-;; Pixeltype
-;font-main = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
-;font-main-large = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
-;font-main-huge = Pixeltype:style=Refular:pixelsize=18:antialias=true;3
-
-;; Retron2000
-;font-main = Retron2000:style=Regular:pixelsize=11:antialias=false;3
-;font-main-large = Retron2000:style=Regular:pixelsize=11:antialias=false;3
-;font-main-huge = Retron2000:style=Regular:pixelsize=11:antialias=false;3
-
-;; Thin
-;; Apple ][
-;font-main = Apple ][:style=Regular:size=7:antialias=true:autohint=true;3
-;font-main-large = Apple ][:style=Regular:size=10:antialias=true:autohint=true;2
-;font-main-huge = Apple ][:style=Regular:size=11:antialias=true:autohint=true;3
-
-;; MineCraftia
-font-main = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
-;font-main-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;11
-;font-main-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;7
-
-;; Nitendo DS BIOS
-;font-main = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
-;font-main-large = Nintendo DS BIOS:style=Regular:pixelsize=22;antialias=false;3
-;font-main-huge = Nintendo DS BIOS:style=Regular:pixelsize=16;antialias=false;3
-
-;; PixelPlay
-;font-main = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
-;font-main-large = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
-;font-main-huge = PixelPlay:style=Regular:pixelsize=13:antialias=false;3
-
-;; Terminus
-;font-main = Terminus:style=Regular:pixelsize=14;1
-;font-main-large = Terminus:style=Regular:pixelsize=14;1
-;font-main-huge = Terminus:style=Regular:pixelsize=14;1
-
-;; Pixel Gaming
-;; PKMN RBYGSC 
-;font-main = PKMN RBYGSC:style=Regular:size=7:antialias=true:autohint=true;2
-font-main-large = PKMN RBYGSC:style=Regular:size=11:antialias=true:autohint=true;3
-font-main-huge =PKMN RBYGSC:style=Regular:size=9:antialias=false:autohint=true;3
-
-;; Retro Gaming
-;font-main = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
-;font-main-large = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
-;font-main-huge = Retro Gaming:style=Regular:pixelsize=9;antialias=false;2
-
-;; Press Start 2P
-;font-main = Press Start 2P:style=Regular:pixelsize=7;3
-;font-main-large = Press Start 2P:style=Regular:pixelsize=7;3
-;font-main-huge = Press Start 2P:style=Regular:pixelsize=7;3
-
-;; Pokemon Classic
-;font-main = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
-;font-main-large = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
-;font-main-huge = Pokemon Classic:style=Regular:pixelsize=8;antialias=false;1
-
+; Weather Icons
+font-weather = Weather Icons:style=Regular;3
+font-weather-large = Weather Icons:style=Regular:size=15;3
+font-weather-huge= Weather Icons:style=Regular:size=27;3
 
 ; Backup Font,  avoids oversized icons from defualting to font-4
 font-overflow =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
@@ -133,6 +118,10 @@ font-overflow-huge = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=29:antiali
 font-powerline = FiraCode Nerd Font Mono:style=Regular:size=15:antialias=true;3
 font-powerline-large = FiraCode Nerd Font Mono:style=Regular:size=23:antialias=true;3
 font-powerline-huge = FiraCode Nerd Font Mono:style=Regular:size=25:antialias=true;9 
+font-jp = Noto Sans CJK JP:style=Regular:size=14:antialias=true;3
+font-jp-bold = Noto Sans CJK JP:style=Bold:size=13:antialias=true;3
+font-jp-large = Noto Sans CJK JP:style=Regular:size=19:antialias=true;3
+;font-jp-bold = Noto Sans CJK JP:style=Bold:size=23:antialias=true;4
 
 ; Long scrolling text, (smaller and mono-spaced)
 font-focused = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
@@ -142,6 +131,11 @@ font-scrolling = Terminus:style=Regular:pixelsize=13;2
 font-scrolling-large = Terminus:style=Regular:pixelsize=18;2
 font-scrolling-huge = Terminus:style=Regular:pixelsize=23;2
 
+
+[colors]
+;hack for getting colors to read from Xressources
+include-file = ~/dotfiles/.config/polybar/separators.mode
+include-file = ~/.cache/wal/polybar-wal.theme
 
 
 ;bar formatting
@@ -154,11 +148,11 @@ fixed-center = false
 dim-value = 0
 width = 100%
 height = 24
-radius = 5.0
+radius = 5
 ;background
 background = ${colors.transparent}
 foreground = ${colors.foreground}
-tray-detached = false ;;
+tray-detached = false 
 module-margin = 0
 ;borders
 border-top-size = 5
@@ -166,16 +160,17 @@ border-bottom-size = 5
 border-left-size = 10
 border-right-size = 10
 border-color = ${colors.transparent}
-focused-name-format = "%{T7}<label>%{T-}"
+focused-name-format = "%{T5}<label>%{T-}"
 ;fonts
 font-0 = ${fonts.font-icon}
 font-1 = ${fonts.font-weather}
 font-2 = ${fonts.font-main}
 font-3 = ${fonts.font-overflow}
-font-4 = ${fonts.font-powerline}
-font-5 = ${fonts.font-scrolling}
-font-6 = ${fonts.font-focused}
-font-7 = ${fonts.font-icon}
+font-4 = ${fonts.font-scrolling}
+font-5 = ${fonts.font-powerline}
+font-6 = ${fonts.font-jp-bold}
+font-7 = ${fonts.font-focused}
+font-8 = ${fonts.font-icon}
 
 [section/full]
 monitor = ${env:MONITOR:}
@@ -200,8 +195,9 @@ font-1 = ${fonts.font-weather-huge}
 font-2 = ${fonts.font-main-huge}
 font-3 = ${fonts.font-overflow-huge}
 font-4 = ${fonts.font-powerline-huge}
-font-5 = ${fonts.font-scrolling-huge}
-font-6 = ${fonts.font-focused-huge}
+font-5 = ${fonts.font-jp}
+font-6 = ${fonts.font-scrolling}
+font-7 = ${fonts.font-focused}
 
 [section/text]
 monitor = ${env:MONITOR:}
@@ -228,9 +224,47 @@ font-0 = ${fonts.font-icon-large}
 font-1 = ${fonts.font-weather-large}
 font-2 = ${fonts.font-main}
 font-3 = ${fonts.font-overflow}
-font-4 = ${fonts.font-powerline-large}
-font-5 = ${fonts.font-scrolling}
-font-6 = ${fonts.font-focused}
+font-4 = ${fonts.font-scrolling}
+font-5 = ${fonts.font-powerline-large}
+font-6 = ${fonts.font-jp}
+font-7 = ${fonts.font-focused}
+
+[section/blocks]
+monitor = ${env:MONITOR:}
+cursor-scroll = ns-resize
+cursor-click = pointer
+enable-ipc = true
+fixed-center = false
+dim-value = 0
+width = 100%
+height = 30
+radius = 5
+; border between ends of monitor and bar top
+border-top-size = 5
+border-bottom-size = 5
+border-right-size = 10
+border-left-size = 10
+; space between end of bar and modules
+padding = 1pt
+; space between modules
+module-margin = 0
+; lines above each module
+line-size = 5px
+overline-color = ${colors.transparent0}
+underline-color = ${colors.transparent0}
+; default colors for text/bar
+background = ${colors.transparent0}
+foreground = ${colors.transparent0}
+focused-name-format = "%{T7}<label>%{T-}"
+;fonts
+font-0 = ${fonts.font-icon}
+font-1 = ${fonts.font-weather-large}
+font-2 = ${fonts.font-main}
+font-3 = ${fonts.font-overflow}
+font-4 = ${fonts.font-scrolling}
+font-5 = ${fonts.font-powerline}
+font-6 = ${fonts.font-jp-bold}
+font-7 = ${fonts.font-focused}
 
 [section/underline]
 monitor = ${env:MONITOR:}
@@ -258,8 +292,9 @@ font-1 = ${fonts.font-weather-large}
 font-2 = ${fonts.font-main}
 font-3 = ${fonts.font-overflow}
 font-4 = ${fonts.font-powerline-large}
-font-5 = ${fonts.font-scrolling}
-font-6 = ${fonts.font-focused-large}
+font-5 = ${fonts.font-jp}
+font-6 = ${fonts.font-scrolling}
+font-7 = ${fonts.font-focused}
 
 [section/cross]
 monitor = ${env:MONITOR:}
@@ -284,8 +319,9 @@ font-1 = ${fonts.font-weather-large}
 font-2 = ${fonts.font-main-large}
 font-3 = ${fonts.font-overflow-large}
 font-4 = ${fonts.font-powerline-large}
-font-5 = ${fonts.font-scrolling-large}
-font-6 = ${fonts.font-focused-large}
+font-5 = ${fonts.font-jp}
+font-6 = ${fonts.font-scrolling}
+font-7 = ${fonts.font-focused}
 
 
 ;bars
@@ -295,7 +331,7 @@ inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float.bar
 fixed-center = true
 monitor=${env:MONITOR:}
-modules-left = i3 focused focused-name
+modules-left = i3 focused 
 modules-center =
 modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
 [bar/float-bottom]
@@ -346,6 +382,21 @@ bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
 modules-right = reading wall
+
+;;blocks
+[bar/blocks-top]
+inherit = section/blocks
+include-file = ~/dotfiles/.config/polybar/bars/blocks.bar
+modules-left = i3 focused 
+modules-center =
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
+[bar/blocks-bottom]
+inherit = section/blocks
+include-file = ~/dotfiles/.config/polybar/bars/blocks.bar
+bottom = true
+modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
+modules-center =
+modules-right = reading 
 
 ;;underline
 [bar/underline-top]
@@ -456,21 +507,25 @@ label-focused = %index%
 label-focused-background = ${root.i3-color-2}
 label-focused-foreground = ${root.i3-text-color-2}
 label-focused-underline = ${root.i3-underline-2}
+label-focused-overline = ${root.i3-overline-2}
 label-focused-padding = 1
 label-occupied = %index%
 label-occupied-background = ${root.i3-color}
 label-occupied-foreground = ${root.i3-text-color}
 label-occupied-underline = ${root.i3-underline}
+label-occupied-overline = ${root.i3-overline}
 label-occupied-padding = 1
 label-urgent = %index%!
 label-urgent-background = ${colors.alert}
 label-urgent-foreground = ${colors.alert}
 label-urgent-underline = ${colors.alert}
+label-urgent-overline = ${colors.alert}
 label-urgent-padding = 1
 label-empty = %index%
 label-empty-background = ${root.i3-color-2}
 label-empty-foreground = ${root.i3-text-color-2}
 label-empty-underline = ${root.i3-underline-2}
+label-empty-overline = ${root.i3-overline-2}
 label-empty-padding = 1
 
 [module/i3]
@@ -479,7 +534,6 @@ index-sort = true
 wrapping-scroll = false
 pin-workspaces = true
 strip-wsnumbers = true
-format = <label-state> <label-mode>
 ws-icon-1 = 1;I 
 ws-icon-2 = 2;II 
 ws-icon-3 = 3;III 
@@ -499,46 +553,59 @@ label-focused = %icon%
 label-focused-background = ${module/bspwm.label-focused-background}
 label-focused-foreground = ${module/bspwm.label-focused-foreground}
 label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-overline = ${module/bspwm.label-focused-overline}
 label-focused-padding = ${module/bspwm.label-focused-padding}
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %icon%
 label-unfocused-background = ${module/bspwm.label-occupied-background}
 label-unfocused-foreground = ${module/bspwm.label-occupied-foreground}
 label-unfocused-underline = ${module/bspwm.label-occupied-underline}
+label-unfocused-overline = ${module/bspwm.label-occupied-overline}
 label-unfocused-padding = ${module/bspwm.label-occupied-padding}
 ;visible = Active workspace on unfocused monitor
 label-visible = %icon%
 label-visible-background = ${module/bspwm.label-empty-background}
 label-visible-foreground = ${module/bspwm.label-empty-foreground}
 label-visible-underline = ${module/bspwm.label-empty-underline}
+label-visible-overline = ${module/bspwm.label-empty-overline}
 label-visible-padding = 1
 ; urgent = Workspace with urgency hint set
 label-urgent = %icon%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-foreground = ${module/bspwm.label-urgent-foreground}
 label-urgent-underline = ${module/bspwm.label-urgent-underline}
+label-urgent-overline = ${module/bspwm.label-urgent-overline}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
-format-prefix-font = 5
-format-suffix-font = 5
+format = <label-state> <label-mode>
+label-underline = ${root.i3-underline}
+label-overline = ${root.i3-overline}
 format-prefix = ${root.i3-prefix}
-format-prefix-foreground = ${root.i3-color}
+format-prefix-foreground = ${root.i3-color-2}
 format-prefix-background = ${colors.transparent}
+format-prefix-font = 5
 format-suffix = ${root.i3-suffix}
-format-suffix-foreground = ${root.i3-color}
+format-suffix-foreground = ${root.i3-color-2}
 format-suffix-background = ${colors.transparent}
+format-suffix-font = 5
 
 [module/focused]
 type = custom/script
 tail = true
 exec = ~/dotfiles/.config/polybar/scripts/current-window.sh icon
 format = "  <label> "
+format-margin = 0
 format-background = ${root.focused-color}
 format-foreground = ${root.focused-text-color}
-format-underline = ${root.focused-underline}
+label-underline = ${root.focused-underline}
+label-overline = ${root.focused-overline}
 format-prefix-font = 5
 format-prefix = ${root.focused-prefix}
 format-prefix-foreground = ${root.focused-color}
 format-prefix-background = ${colors.transparent}
+format-suffix-font = 5
+format-suffix = ${root.focused-suffix}
+format-suffix-foreground = ${root.focused-color}
+format-suffix-background = ${colors.transparent}
 
 [module/focused-name]
 type = custom/script
@@ -547,7 +614,8 @@ exec = ~/dotfiles/.config/polybar/scripts/current-window.sh text
 format = ${root.focused-name-format}
 format-background = ${root.focused-color}
 format-foreground = ${root.focused-text-color}
-format-underline = ${root.focused-underline}
+label-underline = ${root.focused-underline}
+label-overline = ${root.focused-overline}
 format-suffix-font = 5
 format-suffix = ${root.focused-suffix}
 format-suffix-foreground = ${root.focused-color}
@@ -586,7 +654,8 @@ menu-2-2 = """
 menu-2-2-exec = ~/dotfiles/.scripts/wallpaper.sh next
 menu-2-3 = "⏼"
 menu-2-3-exec = systemctl suspend
-format-underline = ${root.applauncher-underline}
+label-underline = ${root.applauncher-underline}
+label-overline = ${root.applauncher-overline}
 label-separator-foreground = ${colors.foreground}
 format-prefix-font = 5
 format-prefix = ${root.applauncher-prefix}
@@ -604,17 +673,18 @@ type = internal/xbacklight
 enabele-scroll = true
 label = " %percentage%%"
 format = <label>
-format-prefix-font = 5
-format-suffix-font = 5
 format-background = ${root.xbacklight-color}
 format-foreground = ${root.xbacklight-text-color}
 format-underline = ${root.xbacklight-underline}
+format-overline = ${root.xbacklight-overline}
 format-prefix = ${root.xbacklight-prefix}
 format-prefix-foreground = ${root.xbacklight-color}
 format-prefix-background = ${colors.transparent}
+format-prefix-font = 5
 format-suffix = ${root.xbacklight-suffix}
 format-suffix-foreground = ${root.xbacklight-color}
 format-suffix-background = ${colors.transparent}
+format-suffix-font = 5
 [module/backlight-acpi]
 inherit = module/xbacklight
 type = internal/backlight
@@ -623,23 +693,25 @@ card = intel_backlight
 [module/pulseaudio-control]
 type = custom/script
 tail = true
+format = "<label>"
 exec = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh listen
 click-left = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh togmute
 click-right = pavucontrol &
 click-middle = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh next-sink
 scroll-up = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh up
 scroll-down = ~/dotfiles/.config/polybar/scripts/pulseaudio-control.sh down
-format-underline = ${root.pulseaudio-control-underline}
+label-underline = ${root.pulseaudio-control-underline}
+label-overline = ${root.pulseaudio-control-overline}
 format-background = ${root.pulseaudio-control-color}
 format-foreground = ${root.pulseaudio-control-text-color}
-format-prefix-font = 5
 format-prefix = ${root.pulseaudio-control-prefix}
 format-prefix-foreground = ${root.pulseaudio-control-color}
 format-prefix-background = ${colors.transparent}
+format-prefix-font = 5
 format-suffix = ${root.pulseaudio-control-suffix}
-format-suffix-font = 5
 format-suffix-foreground = ${root.pulseaudio-control-color}
 format-suffix-background = ${colors.transparent}
+format-suffix-font = 5
 
 [module/wlan]
 type = custom/script
@@ -652,7 +724,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.wlan-color}
 format-foreground = ${root.wlan-text-color}
-format-underline = ${root.wlan-underline}
+label-underline = ${root.wlan-underline}
+label-overline = ${root.wlan-overline}
 format-prefix = ${root.wlan-prefix}
 format-prefix-foreground = ${root.wlan-color}
 format-prefix-background = ${colors.transparent}
@@ -666,18 +739,19 @@ hook-0 = ~/dotfiles/.scripts/mullvad.sh display
 hook-1 = ~/dotfiles/.scripts/mullvad.sh toggle
 initial = 1
 click-left = polybar-msg hook mullvad 2
-format = " <output> "
-format-prefix-font = 5
-format-suffix-font = 5
+format = "<output> "
 format-background = ${root.mullvad-color}
 format-foreground = ${root.mullvad-text-color}
-format-underline = ${root.mullvad-underline}
+label-underline = ${root.mullvad-underline}
+label-overline = ${root.mullvad-overline}
 format-prefix = ${root.mullvad-prefix}
 format-prefix-foreground = ${root.mullvad-color}
 format-prefix-background = ${colors.transparent}
+format-prefix-font = 5
 format-suffix = ${root.mullvad-suffix}
 format-suffix-foreground = ${root.mullvad-color}
 format-suffix-background = ${colors.transparent}
+format-suffix-font = 5
 
 [module/bluetooth]
 type = custom/script
@@ -685,18 +759,19 @@ interval = 600
 exec = ~/dotfiles/.scripts/bluetooth.sh status
 click-left = ~/dotfiles/.scripts/bluetooth.sh
 click-right = ~/dotfiles/.scripts/bluetooth.sh disconnect
-format =" <label>"
-format-prefix-font = 5
-format-suffix-font = 5
+format ="<label>"
 format-background = ${root.bluetooth-color}
 format-foreground = ${root.bluetooth-text-color}
-format-underline = ${root.bluetooth-underline}
+label-underline = ${root.bluetooth-underline}
+label-overline = ${root.bluetooth-overline}
 format-prefix = ${root.bluetooth-prefix}
 format-prefix-foreground = ${root.bluetooth-color}
 format-prefix-background = ${colors.transparent}
+format-prefix-font = 5
 format-suffix = ${root.bluetooth-suffix}
 format-suffix-foreground = ${root.bluetooth-color}
 format-suffix-background = ${colors.transparent}
+format-suffix-font = 5
 
 [module/mpd]
 type = internal/mpd
@@ -713,6 +788,7 @@ format-online-suffix-font = 5
 format-online-foreground = ${root.mpd-text-color}
 format-online-background = ${root.mpd-color}
 format-online-underline = ${root.mpd-underline}
+format-online-overline = ${root.mpd-overline}
 format-online-prefix = ${root.mpd-prefix}
 format-online-prefix-foreground = ${root.mpd-color}
 format-online-prefix-background = ${colors.transparent}
@@ -754,7 +830,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.songnames-color}
 format-foreground = ${root.songnames-text-color}
-format-underline = ${root.songnames-underline}
+label-underline = ${root.songnames-underline}
+label-overline = ${root.songnames-overline}
 format-prefix = ${root.songnames-prefix}
 format-prefix-foreground = ${root.songnames-color}
 format-prefix-background = ${colors.transparent}
@@ -774,7 +851,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.date-color}
 format-foreground = ${root.date-text-color}
-format-underline = ${root.date-underline}
+label-underline = ${root.date-underline}
+label-overline = ${root.date-overline}
 format-prefix = ${root.date-prefix}
 format-prefix-foreground = ${root.date-color}
 format-prefix-background = ${colors.transparent}
@@ -788,17 +866,18 @@ tail = true
 exec = ~/dotfiles/.config/polybar/scripts/battery.sh display
 click-left = ~/dotfiles/.config/polybar/scripts/battery.sh next
 click-right = ~/dotfiles/.config/polybar/scripts/battery.sh prev
-format-prefix-font = 5
-format-suffix-font = 5
 format-background = ${root.battery-color}
 format-foreground = ${root.battery-text-color}
-format-underline = ${root.battery-underline}
+label-underline = ${root.date-underline}
+label-overline = ${root.date-overline}
 format-prefix = ${root.battery-prefix}
 format-prefix-foreground = ${root.battery-color}
 format-prefix-background = ${colors.transparent}
+format-prefix-font = 5
 format-suffix = ${root.battery-suffix}
 format-suffix-foreground = ${root.battery-color}
 format-suffix-background = ${colors.transparent}
+format-suffix-font = 5
 
 [module/memory]
 type = custom/script
@@ -811,7 +890,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.memory-color}
 format-foreground = ${root.memory-text-color}
-format-underline = ${root.memory-underline}
+label-underline = ${root.memory-underline}
+label-overline = ${root.memory-overline}
 format-prefix = ${root.memory-prefix}
 format-prefix-foreground = ${root.memory-color}
 format-prefix-background = ${colors.transparent}
@@ -830,7 +910,8 @@ click-left =  = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh next
 click-right = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh prev
 format-background = ${root.cpu-color}
 format-foreground = ${root.cpu-text-color}
-format-underline = ${root.cpu-underline}
+label-underline = ${root.cpu-underline}
+label-overline = ${root.cpu-overline}
 format-prefix = ${root.cpu-prefix}
 format-prefix-foreground = ${root.cpu-color}
 format-prefix-background = ${colors.transparent}
@@ -849,7 +930,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.temperature-color}
 format-foreground = ${root.temperature-text-color}
-format-underline = ${root.temperature-underline}
+label-underline = ${root.temperature-underline}
+label-overline = ${root.temperature-overline}
 format-prefix = ${root.temperature-prefix}
 format-prefix-foreground = ${root.temperature-color}
 format-prefix-background = ${colors.transparent}
@@ -884,7 +966,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.disk-color}
 format-foreground = ${root.disk-text-color}
-format-underline = ${root.disk-underline}
+label-underline = ${root.disk-underline}
+label-overline = ${root.disk-overline}
 format-prefix = ${root.disk-prefix}
 format-prefix-foreground = ${root.disk-color}
 format-prefix-background = ${colors.transparent}
@@ -903,7 +986,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.uptime-color}
 format-foreground = ${root.uptime-text-color}
-format-underline = ${root.uptime-underline}
+label-underline = ${root.uptime-underline}
+label-overline = ${root.uptime-overline}
 format-prefix = ${root.uptime-prefix}
 format-prefix-foreground = ${root.uptime-color}
 format-prefix-background = ${colors.transparent}
@@ -921,7 +1005,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.weather-color}
 format-foreground = ${root.weather-text-color}
-format-underline = ${root.weather-underline}
+label-underline = ${root.weather-underline}
+label-overline = ${root.weather-overline}
 format-prefix = ${root.weather-prefix}
 format-prefix-foreground = ${root.weather-color}
 format-prefix-background = ${colors.transparent}
@@ -939,7 +1024,8 @@ format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.torrent-color}
 format-foreground = ${root.torrent-text-color}
-format-underline = ${root.torrent-underline}
+label-underline = ${root.torrent-underline}
+label-overline = ${root.torrent-overline}
 format-prefix = ${root.torrent-prefix}
 format-prefix-foreground = ${root.torrent-color}
 format-prefix-background = ${colors.transparent}
@@ -957,12 +1043,13 @@ hook-3 = ~/dotfiles/.scripts/wallpaper.sh reload
 click-left =   polybar-msg hook wall 2 && sleep 1 && polybar-msg hook wall 1
 click-right =  polybar-msg hook wall 3 && sleep 1 && polybar-msg hook wall 1
 click-middle = polybar-msg hook wall 4 && sleep 1 && polybar-msg hook wall 1
-format = " %{T7}<output> %{T-}"
+format = "%{T5}<output> %{T-}"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.wall-color}
 format-foreground = ${root.wall-text-color}
-format-underline = ${root.wall-underline}
+label-underline = ${root.wall-underline}
+label-overline = ${root.wall-overline}
 format-prefix = ${root.wall-prefix}
 format-prefix-foreground = ${root.wall-color}
 format-prefix-background = ${colors.transparent}
@@ -976,12 +1063,13 @@ tail = true
 exec = ~/dotfiles/.config/polybar/scripts/reading.sh display
 click-left = ~/dotfiles/.config/polybar/scripts/reading.sh next
 click-right = ~/dotfiles/.config/polybar/scripts/reading.sh open
-format = " %{T6}<label> %{T-}"
+format = " %{T5}<label> %{T-}"
 format-prefix-font = 5
 format-suffix-font = 5
 format-background = ${root.reading-color}
 format-foreground = ${root.reading-text-color}
-format-underline = ${root.reading-underline}
+label-underline = ${root.reading-underline}
+label-overline = ${root.reading-overline}
 format-prefix = ${root.reading-prefix}
 format-prefix-foreground = ${root.reading-color}
 format-prefix-background = ${colors.transparent}
@@ -996,6 +1084,7 @@ content-font = 5
 content-background = ${root.leftcap-color}
 content-foreground = ${root.leftcap-text-color}
 content-underline = ${root.leftcap-underline}
+content-overline = ${root.leftcap-overline}
 
 [module/i3rightcap]
 type = custom/text
@@ -1004,6 +1093,7 @@ content-font = 5
 content-background = ${root.i3-color}
 content-foreground = ${root.i3-text-color}
 content-underline = ${root.i3-underline}
+content-overline = ${root.i3-overline}
 content-prefix = ${colors.rightsuffix}
 content-prefix-background = ${colors.transparent}
 content-prefix-foreground = ${root.i3-color} 
@@ -1015,6 +1105,7 @@ content-font = 5
 content-background = ${root.date-color}
 content-foreground = ${root.date-text-color}
 content-underline = ${root.date-underline}
+content-overline = ${root.date-overline}
 content-prefix = ${colors.leftprefix}
 content-prefix-background = ${colors.transparent}
 content-prefix-foreground = ${root.date-color} 
@@ -1026,6 +1117,7 @@ content-font = 5
 content-background = ${root.mpd-color}
 content-foreground = ${root.mpd-text-color}
 content-underline = ${root.mpd-underline}
+content-overline = ${root.mpd-overline}
 content-prefix = ${colors.leftprefix}
 content-prefix-background = ${colors.transparent}
 content-prefix-foreground = ${root.mpd-color} 

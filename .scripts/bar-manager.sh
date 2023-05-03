@@ -4,40 +4,40 @@ shopt -s extglob
 # Styles
 script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-STYLES=(float text underline cross press full mini laptop)
+STYLES=(float text blocks underline cross press full mini laptop)
 compact_bars=(laptop mini)
 RES_LIMIT=1300
 PRIMARY_SCREEN="eDP-1"
 # Separators
 dl="."
 separator_file="$HOME/dotfiles/.config/polybar/separators.mode"
-separator_names=(arrow_tail
-                 tail_sym
-                 arrow_sym
+separator_names=(sym_arrow
+                 sym_circle
+                 sym_tail
+                 sym_jojo
+                 arrow_tail
+                 circle_tail
                  trig_in
                  trig_out
-                 circle
-                 circle_tail
                  small_fade
-                 small_fade_in
                  big_fade
-                 big_fade_in 
                  spaces
-                 none)
-separator_icons=("$dl$dl$dl"
+                 none
+)
+separator_icons=("$dl$dl$dl"
+                 "$dl$dl$dl"
                  "$dl$dl$dl"
-                 "$dl$dl$dl"
+                 "『$dl』$dl『$dl』"
+                 "$dl$dl$dl"
+                 "$dl$dl$dl"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
-                 " $dl$dl$dl "
-                 "$dl$dl$dl"
                  "$dl$dl$dl"
-                 "$dl$dl$dl"
                  "$dl$dl$dl"
-                 "$dl$dl$dl"
                  " $dl$dl$dl "
-                 "$dl$dl$dl")
-
+                 "$dl$dl$dl"
+)
+# Help messages
 makeSeparatorTable() {
     separator_table="Name,|,Separators"
     for ((i=0; i<${#separator_names[@]}; i++)); do
@@ -55,7 +55,19 @@ help() {
                       "
     echo "$separator_table" | pr -T -o 22
 }
-
+rofiMenu() {
+    mode="$1"
+    if [[ $mode = 'style' ]]; then
+        STYLES+=("none")
+        style="$(printf '%s\n' ${STYLES[@]} | rofi -m -1 -width 20 -lines ${#STYLES[@]} -dmenu -p 'Pick Polybar Style')"
+        [[ -n $style ]] && launchAllBars $style
+    elif [[ $mode = 'sep' ]]; then
+        #separator="$(printf '%s\n' ${separator_names[@]} | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
+        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 25 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
+        [[ -n $separator ]] && separators $separator && launchAllBars 'stay'
+    fi
+}
+# Handle mode switching/getting/setting
 cycle() {
     # cycle through array elements either forwards or backwards
     # get index of current element in the array, find index for next/previous element and get the array value of that index and echo it
@@ -90,7 +102,7 @@ setMode() {
         sed -i "/^separator:/s/:.*/:$2/" "$mode_file"
     fi
 }
-
+# Actually launch/manage polybar instances
 separators() {
     mode="$1"
     tmp="@($(echo ${separator_names[*]} | sed -e 's/ /|/g'))"
@@ -143,13 +155,15 @@ launchBar() {
                 ;;
         esac
     else
-        if [[ $m = $PRIMARY_SCREEN ]]; then
-            polybar laptop-top &
-            polybar laptop-bottom &
-        else
-            polybar "$bartype"-top &
-            polybar "$bartype"-bottom &
-        fi
+        polybar "$bartype"-top &
+        polybar "$bartype"-bottom &
+        # if [[ $m = $PRIMARY_SCREEN ]]; then
+        #     polybar laptop-top &
+        #     polybar laptop-bottom &
+        # else
+        #     polybar "$bartype"-top &
+        #     polybar "$bartype"-bottom &
+        # fi
     fi
 }
 launchAllBars() {
@@ -192,18 +206,6 @@ launchAllBars() {
         standard|text) $script_dir/current-window.sh thresh 80 ;;
         *) $script_dir/current-window.sh thresh 40 ;;
     esac
-}
-rofiMenu() {
-    mode="$1"
-    if [[ $mode = 'style' ]]; then
-        STYLES+=("none")
-        style="$(printf '%s\n' ${STYLES[@]} | rofi -m -1 -width 20 -lines ${#STYLES[@]} -dmenu -p 'Pick Polybar Style')"
-        [[ -n $style ]] && launchAllBars $style
-    elif [[ $mode = 'sep' ]]; then
-        #separator="$(printf '%s\n' ${separator_names[@]} | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
-        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 25 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
-        [[ -n $separator ]] && separators $separator && launchAllBars 'stay'
-    fi
 }
 main() {
     mode="$1"
