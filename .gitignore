@@ -17,6 +17,9 @@ theme_change.mp4
 .config/transmission-daemon/dht.dat
 .config/kactivitymanagerdrc
 .config/qpdfview/shortcuts.conf
+.config/gthumb/
+.config/zoom.conf
+.config/htop/htoprc/
 .emacs.d/elpa
 .config/BraveSoftware
 .config/Epic
