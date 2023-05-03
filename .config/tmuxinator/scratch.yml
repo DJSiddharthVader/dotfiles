@@ -7,9 +7,6 @@ on_project_start: wal -R -e -n -q &
 
 windows:
   - fetch: neofetch
-  - media:
-      panes: 
-        - cd ~/Videos
-        - cd ~/Torrents
-  - work: cd Documents/TalkowskiLab
+  - media: cd ~/Torrents
+  - work: cd ~/TalkowskiLab/Projects
   - scratch:
