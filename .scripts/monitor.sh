@@ -3,7 +3,7 @@ LAPTOP_SCREEN="eDP-1"
 BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
 
 help() {
-    echo "Usage: $0 {auto|ext|hybrid|laptop|organize}"
+    echo "Usage: $0 {auto|home|proj|ext|hybrid|laptop|mirror|organize}"
 }
 isConnected() {
     monitors="$(xrandr --listmonitors | head -1 | cut -d' ' -f2)"
@@ -33,11 +33,15 @@ organizeWorkspaces() {
     mode="$1"
     case "$mode" in
         home) 
-            move_left=(2 3 5)
+            move_left=(1 2 5 6)
+            move_right=()
+            ;;
+        proj) 
+            move_left=(2 5 6)
             move_right=(1)
             ;;
         work)
-            move_right=(3 5 6 7 8)
+            move_right=(3 5 6)
             move_left=()
             ;;
         *) help && exit 1 ;;
@@ -64,10 +68,16 @@ connect() {
     case "$1" in
         home)
             xrandr --output $LAPTOP_SCREEN --primary --mode 1366x768 \
+                   --output DP-2 --left-of $LAPTOP_SCREEN --mode 1920x1080 
+            # connectAudio hdmi
+            organizeWorkspaces home
+            ;;
+        proj)
+            xrandr --output $LAPTOP_SCREEN --primary --mode 1366x768 \
                    --output DP-2 --left-of $LAPTOP_SCREEN --mode 1920x1080 \
                    --output HDMI-1 --left-of DP-2 --mode 1024x768 --scale 1.001x1.301 --panning 1024x768 #1920x1080 #1368x768
             # connectAudio hdmi
-            organizeWorkspaces home
+            organizeWorkspaces proj
             ;;
         work)
             xrandr --output $LAPTOP_SCREEN --auto --primary 
