@@ -20,14 +20,14 @@ silent! normal! zE
 39,52fold
 53,83fold
 let &fdl = &fdl
-53
+39
 normal! zo
-let s:l = 79 - ((14 * winheight(0) + 10) / 21)
+let s:l = 51 - ((50 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 79
-normal! 06|
+keepjumps 51
+normal! 012|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 nohlsearch

@@ -19,16 +19,13 @@ silent! normal! zE
 50,59fold
 60,75fold
 let &fdl = &fdl
-46
-normal! zo
-50
-normal! zo
-let s:l = 55 - ((24 * winheight(0) + 10) / 20)
+let s:l = 75 - ((74 * winheight(0) + 51) / 102)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 55
-normal! 02|
+keepjumps 75
+normal! 0
+lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

@@ -1,16 +1,16 @@
-bar:laptop
-separator:arrow_tail
-wallpaper_index:5025
+bar:blocks
+separator:sym_jojo
+wallpaper_index:7287
 wifi:standard
 songnames:scroll
-date:time_bar
+date:time
 memory:short
 cpu:short
 temperature:short
 disk:amount
 uptime:hour
 torrent:speed
-reading:Towards Backwards-Compatible Data with Confounded Domain Adaptation~https://arxiv.org/abs/2203.12720
+reading: Sequencing error profiles of Illumina sequencing instruments | NAR Genomics and Bioinformatics | Oxford Academic~https://academic.oup.com/nargab/article/3/1/lqab019/6193612
 battery:all
 focus_thresh:40
 mullvad:location
