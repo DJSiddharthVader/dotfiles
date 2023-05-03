@@ -48,7 +48,7 @@ display() {
             ;;
         Disconnected|Disconnecting) output="None" ;;
     esac
-    echo "$output" | tr -d '"'
+    echo " $output" | tr -d '"'
 }
 main() {
     mode="$1"
