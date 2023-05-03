@@ -153,7 +153,7 @@ bindsym $mod+Shift+s   gaps outer current plus 2
 bindsym $mod+d         move workspace to output right
 bindsym $mod+Shift+d   move workspace to output left
 bindsym $mod+f         fullscreen toggle
-#bindsym $mod+Shift+f
+bindsym $mod+Shift+f   exec --no-startup-id ~/dotfiles/.scripts/bluetooth.sh
 bindsym $mod+g         gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+g   gaps inner current set $defgaps; gaps outer current set $defgaps
 bindsym $mod+h         focus left
