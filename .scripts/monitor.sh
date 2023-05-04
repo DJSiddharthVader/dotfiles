@@ -116,20 +116,20 @@ main() {
     if [[ "$mode" = 'auto' ]]; then
         if isConnected ; then # if already connected then disconnect
             connect laptop
-            $BAR_MANAGER_SCRIPT style laptop
+            # $BAR_MANAGER_SCRIPT style laptop
         else
             monitors="$(listMonitors)" #external and laptop
             numMonitors="$(echo "$monitors" | wc -l)"
             case $numMonitors in
                 3) connect home
-                   $BAR_MANAGER_SCRIPT style laptop
+                   # $BAR_MANAGER_SCRIPT style laptop
                    ;;
                 2) if [[ "$(echo "$monitors" | grep -c HDMI)" -eq 0 ]]; then
                         connect work  # at work setup
-                        $BAR_MANAGER_SCRIPT style laptop
+                        # $BAR_MANAGER_SCRIPT style laptop
                    else
                         connect hybrid
-                        $BAR_MANAGER_SCRIPT style laptop
+                        # $BAR_MANAGER_SCRIPT style laptop
                    fi
                    ;;
                 1) echo 'No monitors connected' && exit 0 ;;

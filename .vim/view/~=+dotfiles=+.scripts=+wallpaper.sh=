@@ -13,7 +13,7 @@ silent! normal! zE
 29,35fold
 37,56fold
 57,60fold
-61,65fold
+62,66fold
 67,70fold
 71,74fold
 75,78fold
@@ -23,26 +23,24 @@ silent! normal! zE
 122,136fold
 137,152fold
 153,164fold
-166,183fold
+165,182fold
 let &fdl = &fdl
 6
+normal! zo
+110
 normal! zo
 122
 normal! zo
 137
 normal! zo
-153
-normal! zo
-166
-normal! zo
-let s:l = 124 - ((53 * winheight(0) + 11) / 22)
+let s:l = 127 - ((65 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 124
+keepjumps 127
 normal! 09|
+lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

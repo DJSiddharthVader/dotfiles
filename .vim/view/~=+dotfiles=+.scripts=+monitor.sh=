@@ -23,15 +23,16 @@ let &fdl = &fdl
 normal! zo
 67
 normal! zo
-let s:l = 68 - ((67 * winheight(0) + 11) / 22)
+114
+normal! zo
+let s:l = 119 - ((7 * winheight(0) + 19) / 38)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 68
-normal! 016|
+keepjumps 119
+normal! 0
 lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

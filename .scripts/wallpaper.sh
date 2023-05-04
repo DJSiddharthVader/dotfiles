@@ -5,26 +5,26 @@ thresh=50
 
 # Manage wallpaper and colorschemes
 
-#First the script creates a the $histfile, file (wallpapers.txt) which is just a list of paths to all wallpapers in $picdir.
-#It keeps track of the index of the current wallaper (line number in $histfile) in the $mode_file.
+# First the script creates a the $histfile, file (wallpapers.txt) which is just a list of paths to all wallpapers in $picdir.
+# It keeps track of the index of the current wallaper (line number in $histfile) in the $mode_file.
 #The index and $histfile easily allows one to switch between next and previous wallpaper by just changing the index, getting the wallpaer associated with that index and setting all colors and the wallpaper.
-#Since it uses `find` to generate the $histfile the directory structure of the $picdir can be arbitrairily complicated
+# Since it uses `find` to generate the $histfile the directory structure of the $picdir can be arbitrairily complicated
 #
-#One can also pass an explicit path to a file in the wallpapers dir and the script will handle the indexing accordingly i.e. `./wallpaper.sh path/to/image {font|back|both}`.
-#If one changed filenames or add new files inside $picdir you need to run with the rh arg to reset the $histfile, although this could probably be automated with `entr` or something like that to trigger rh when the $picdir directory contents changes
+# One can also pass an explicit path to a file in the wallpapers dir and the script will handle the indexing accordingly i.e. `./wallpaper.sh path/to/image {font|back|both}`.
+# If one changed filenames or add new files inside $picdir you need to run with the rh arg to reset the $histfile, although this could probably be automated with `entr` or something like that to trigger rh when the $picdir directory contents changes
 #
-#After getting the wallpaper image the script can set the wall paper and/or change the colorscheme for basically everything I use based on the wallpaper.
-#I use pywal to generate the color palette and colorscheme files based on the wallpaper image.
-#Then I run some commands (in changeColors()) to update the colors of apps, specifically
+# After getting the wallpaper image the script can set the wall paper and/or change the colorscheme for basically everything I use based on the wallpaper.
+# I use pywal to generate the color palette and colorscheme files based on the wallpaper image.
+# Then I run some commands (in changeColors()) to update the colors of apps, specifically
 #    - polybar (use custom pywal template and reload the bar, might not need the explicit reload if I use Xressources
 #    - GTK apps (generate oomox theme and xsettings for live update
 #    - Firefox (send keypress to firefox that triggers js to reload colors.css file)
 #    - zathura (re-write config with new colors using custom script, no live update)
 #
-#Default behaviour is to only change the wallpaper and then run `./wallpaper.sh` stay both to update the colors.
-#I do this since I often scroll through many images before settling on a wallpaper so avoids needlessly running the changeColors() function so many times.
-#You can easily scroll through wallpapers using `./wallpaper.sh` next and `./wallpaper.sh` prev and once you get one you like run `./wallpaper.sh stay both` to set the colorschemes.
-#For convieniece I have all of these bound to key in i3 because I am fickle and impatient.
+# Default behaviour is to only change the wallpaper and then run `./wallpaper.sh` stay both to update the colors.
+# I do this since I often scroll through many images before settling on a wallpaper so avoids needlessly running the changeColors() function so many times.
+# You can easily scroll through wallpapers using `./wallpaper.sh` next and `./wallpaper.sh` prev and once you get one you like run `./wallpaper.sh stay both` to set the colorschemes.
+# For convieniece I have all of these bound to key in i3 because I am fickle and impatient.
 
 # Vars
 picdir="$HOME/Pictures/wallpapers"
@@ -33,7 +33,7 @@ histfile="$HOME/.varfiles/wallpapers.txt"
 wallpaper_file="$HOME/.varfiles/wallpaper.png"
 icon=""
 
-
+# Help messages
 usage() {
     name="$(basename $0)"
     blnk="$(echo $name | sed -e 's/./ /g')"
@@ -58,12 +58,12 @@ appendHistory() {
     # append all wallpapers to history file (append list all wallpapers to history file in random order)
     find "$picdir" -maxdepth 99 -type f | shuf >> "$histfile"
 }
+# Set/Get wallpaper file and index 
 resetHistory() {
     # re-write history file (list all wallpapers to a file in random order)
     find "$picdir" -maxdepth 99 -type f | shuf >| "$histfile"
     setIndex 1
 }
-
 getIndex() {
     # get index of current wallpaper (read from config file
     grep '^wallpaper_index:' "$mode_file" | cut -d':' -f2
@@ -106,7 +106,7 @@ updateImageIndex() {
     esac
     echo "$index" # return new index
 }
-
+# change wallpaper, create colorscheme and apply to all apps/terminals/windows etc
 setWallpaper() {
     image="$1"
     polybar-msg hook wall 1 # update polybar wallpaper module
@@ -162,7 +162,6 @@ display() {
 #        printf "%-${thresh}s" "$wallpaper"
 #    fi
 }
-
 main() {
     [ "$(wc -l $histfile | cut -d' ' -f1)" -lt 1 ] && resetHistory
     if [[ -f "$1" || -d "$1" ]]; then
