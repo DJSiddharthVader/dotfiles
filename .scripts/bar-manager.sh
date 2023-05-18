@@ -4,7 +4,7 @@ shopt -s extglob
 # Styles
 script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-STYLES=(float text blocks underline cross press full mini laptop)
+STYLES=(float text blocks blocks2 underline cross press full mini laptop)
 compact_bars=(laptop mini)
 RES_LIMIT=1300
 PRIMARY_SCREEN="eDP-1"
@@ -12,9 +12,11 @@ PRIMARY_SCREEN="eDP-1"
 dl="."
 separator_file="$HOME/dotfiles/.config/polybar/separators.mode"
 separator_names=(sym_arrow
+                 sym_jojo
+                 sym_jojo_slim
+                 sym_jojo_block
                  sym_circle
                  sym_tail
-                 sym_jojo
                  arrow_tail
                  circle_tail
                  trig_in
@@ -25,9 +27,11 @@ separator_names=(sym_arrow
                  none
 )
 separator_icons=("$dl$dl$dl"
+                 "『$dl』$dl『$dl』"
+                 "｢$dl｣$dl｢$dl｣"
+                 "🭪『$dl』🭨$dl🭪『$dl』🭨"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
-                 "『$dl』$dl『$dl』"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
                  "$dl$dl$dl"

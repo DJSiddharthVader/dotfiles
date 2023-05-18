@@ -49,7 +49,7 @@ exec --no-startup-id ~/.scripts/wallpaper.sh stay both
 #Torrent daemon:
 exec --no-startup-id transmission.sh -m start
 #Start VPN
-exec --no-startup-id ~/.scripts/mullvad.sh connect
+#exec --no-startup-id ~/.scripts/mullvad.sh connect
 #Mount other drives:
 exec --no-startup-id sudo mount -a
 #Launch syncthing
