@@ -13,6 +13,9 @@ set history=500
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
+"
+" Easier escape
+inoremap jj <ESC>
 
 " map increment/decrement to Alt as C-a is my tmux leader key
 nnoremap <C-i> <C-a>
@@ -220,11 +223,13 @@ set hidden
 " This replaces :tabnew which I used to bind to this mapping
 nmap <leader>T :enew<cr>
 
+
 " Close the current buffer
 map <leader>bd :Bclose<cr>
 
 " Move to the next buffer
 map <leader>l :bnext<CR>
+nnoremap <TAB> :bn<CR>
 
 " Move to the previous buffer
 map <leader>h :bprevious<CR>
