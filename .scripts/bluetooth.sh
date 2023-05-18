@@ -21,7 +21,11 @@ changeOutput() {
 isDeviceConnected() {
     device="$1" #uuid
     status="$(echo -e "info $device" | bluetoothctl | grep Connected | cut -d':' -f2)"
-    [[ "$status" =~ 'yes' ]] && echo "$icon yes" || echo "$icon no"
+    [[ "$status" =~ 'yes' ]] && echo "yes" || echo "no"
+}
+get_status() {
+    device="$1" #uuid
+    [[ "$(isDeviceConnected $device)" == 'yes' ]] && echo "$icon $(getDeviceName $device)" || echo "$icon no"
 }
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
@@ -45,7 +49,7 @@ toggle() {
 }
 getDeviceName() {
     mac="$1"
-    echo -e "info $mac" | bluetoothctl | grep Name | cut -f2- -d' '
+    echo -e "info $mac" | bluetoothctl | grep Name | head -1 | cut -f2- -d' '
 }
 getConnectedDevice() {
     #check all paired devices and if connected and get name
@@ -74,17 +78,17 @@ main() {
     #polybar-msg hook bluetooth-ipc 1 &> /dev/null
 }
 
-# device="5C:C6:E9:35:57:42" # HRF 3000
-device="74:45:CE:F9:14:A8" # MTH20xBT
 if (( $# < 1 )); then
     mode="toggle"
+    # device="5C:C6:E9:35:57:42" # HRF 3000
+    device="74:45:CE:F9:14:A8" # MTH20xBT
 else
     mode="$1"
     device="$2"
 fi
 
 if [[ $mode == 'status' ]]; then
-    isDeviceConnected $device
+    get_status $device
 else
     main "$mode" "$device"
 fi
