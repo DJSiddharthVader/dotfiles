@@ -15,54 +15,69 @@ silent! normal! zE
 69,71fold
 72,74fold
 14,75fold
-77,79fold
-80,92fold
-93,103fold
-104,120fold
-76,121fold
-123,134fold
-135,148fold
-149,159fold
-160,165fold
-171,180fold
-181,193fold
-194,200fold
-201,208fold
-209,216fold
-217,225fold
-166,229fold
-122,230fold
-232,234fold
-235,237fold
-238,240fold
-241,247fold
-248,251fold
-252,264fold
-265,276fold
-277,287fold
-231,288fold
-290,293fold
-294,312fold
-313,341fold
-289,342fold
+77,81fold
+82,84fold
+85,97fold
+98,108fold
+109,125fold
+76,126fold
+128,140fold
+141,151fold
+152,157fold
+163,171fold
+172,182fold
+183,190fold
+191,198fold
+199,211fold
+212,220fold
+158,224fold
+127,225fold
+227,229fold
+230,232fold
+233,235fold
+236,242fold
+243,246fold
+247,259fold
+260,271fold
+272,282fold
+226,283fold
+285,289fold
+290,309fold
+313,339fold
+284,340fold
 let &fdl = &fdl
-122
+14
 normal! zo
-166
+14
+normal! zc
+76
 normal! zo
-166
+76
 normal! zc
-122
+127
+normal! zo
+158
+normal! zo
+158
 normal! zc
-let s:l = 1 - ((0 * winheight(0) + 10) / 20)
+127
+normal! zc
+284
+normal! zo
+285
+normal! zo
+313
+normal! zo
+284
+normal! zc
+let s:l = 1 - ((0 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
-normal! 011|
+normal! 0
 lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

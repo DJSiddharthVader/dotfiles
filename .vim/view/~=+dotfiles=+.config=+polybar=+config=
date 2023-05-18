@@ -9,126 +9,95 @@ setlocal fml=1
 setlocal fdn=20
 setlocal fen
 silent! normal! zE
-8,12fold
-13,16fold
-17,21fold
-23,27fold
-28,32fold
-34,38fold
-39,43fold
-44,48fold
-50,54fold
-55,60fold
-61,65fold
-66,71fold
-72,76fold
-78,82fold
-83,87fold
-88,92fold
-93,97fold
-98,102fold
-104,108fold
-109,113fold
-114,118fold
-119,123fold
-33,124fold
-125,131fold
-132,136fold
-137,144fold
-22,145fold
-7,146fold
-148,179fold
-180,205fold
-206,234fold
-235,263fold
-264,289fold
-147,290fold
-292,309fold
-310,324fold
-325,334fold
-335,349fold
-350,364fold
-365,379fold
-380,387fold
-291,388fold
-390,405fold
-406,420fold
-421,435fold
-436,450fold
-389,451fold
-453,475fold
-476,529fold
-530,542fold
-543,555fold
-556,601fold
-602,622fold
-623,643fold
-644,662fold
-663,681fold
-682,700fold
-701,746fold
-747,764fold
-766,784fold
-785,802fold
-803,821fold
-822,840fold
-841,859fold
-860,875fold
-876,894fold
+8,11fold
+12,14fold
+15,18fold
+22,25fold
+26,29fold
+31,34fold
+35,38fold
+40,43fold
+44,47fold
+48,51fold
+52,55fold
+56,59fold
+61,64fold
+65,68fold
+69,72fold
+73,76fold
+78,81fold
+82,85fold
+86,89fold
+91,94fold
+20,94fold
+96,99fold
+100,103fold
+104,109fold
+110,117fold
+118,124fold
+95,124fold
+19,125fold
+7,126fold
+128,160fold
+161,187fold
+188,217fold
+218,254fold
+255,286fold
+287,316fold
+317,343fold
+127,344fold
+346,363fold
+364,378fold
+379,388fold
+389,403fold
+404,418fold
+419,433fold
+434,448fold
+449,463fold
+464,471fold
+345,472fold
+474,489fold
+490,504fold
+505,519fold
+520,534fold
+473,535fold
+537,563fold
+564,623fold
+624,642fold
+643,656fold
+657,703fold
+704,725fold
+726,748fold
+749,768fold
+769,788fold
+789,808fold
+809,855fold
+856,874fold
+875,894fold
 895,913fold
-914,931fold
-932,949fold
-950,972fold
-973,991fold
-992,999fold
-1000,1010fold
-1011,1021fold
-1022,1032fold
-452,1033fold
-1035,1054fold
-1055,1075fold
-1076,1106fold
-1107,1130fold
-1034,1131fold
+914,933fold
+934,953fold
+954,973fold
+974,989fold
+990,1009fold
+1010,1029fold
+1030,1048fold
+1049,1067fold
+1068,1091fold
+1092,1111fold
+1112,1120fold
+1121,1129fold
+1130,1138fold
+1139,1147fold
+536,1148fold
 let &fdl = &fdl
-7
-normal! zo
-22
-normal! zo
-33
-normal! zo
-33
-normal! zc
-22
-normal! zc
-7
-normal! zc
-147
-normal! zo
-147
-normal! zc
-291
-normal! zo
-291
-normal! zc
-389
-normal! zo
-389
-normal! zc
-452
-normal! zo
-452
-normal! zc
-1034
-normal! zo
-1034
-normal! zc
-let s:l = 1 - ((0 * winheight(0) + 26) / 52)
+let s:l = 1 - ((0 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
 keepjumps 1
-normal! 0
+normal! 04|
+lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

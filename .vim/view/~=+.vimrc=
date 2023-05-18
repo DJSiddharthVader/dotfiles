@@ -10,33 +10,37 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 3,9fold
-10,44fold
-45,151fold
-152,180fold
-181,186fold
-187,212fold
-213,293fold
-294,307fold
-308,325fold
-326,342fold
-343,352fold
-355,359fold
-360,380fold
-381,387fold
-388,407fold
-408,414fold
-353,415fold
+10,47fold
+48,154fold
+155,183fold
+184,189fold
+190,215fold
+216,298fold
+299,312fold
+313,330fold
+331,347fold
+348,357fold
+360,364fold
+365,385fold
+386,392fold
+393,412fold
+413,419fold
+358,420fold
 let &fdl = &fdl
-353
+10
 normal! zo
-353
+216
+normal! zo
+358
+normal! zo
+358
 normal! zc
-let s:l = 10 - ((9 * winheight(0) + 25) / 51)
+let s:l = 232 - ((14 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 10
-normal! 01|
+keepjumps 232
+normal! 0
 lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch

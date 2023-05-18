@@ -1,6 +1,6 @@
 bar:blocks
 separator:sym_jojo
-wallpaper_index:7336
+wallpaper_index:7967
 wifi:standard
 songnames:scroll
 date:time
@@ -9,7 +9,7 @@ cpu:short
 temperature:short
 disk:amount
 uptime:hour
-torrent:speed
+torrent:data
 reading: Sequencing error profiles of Illumina sequencing instruments | NAR Genomics and Bioinformatics | Oxford Academic~https://academic.oup.com/nargab/article/3/1/lqab019/6193612
 battery:all
 focus_thresh:40
