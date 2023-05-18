@@ -116,7 +116,7 @@ main() {
     if [[ "$mode" = 'auto' ]]; then
         if isConnected ; then # if already connected then disconnect
             connect laptop
-            # $BAR_MANAGER_SCRIPT style laptop
+            $BAR_MANAGER_SCRIPT style stay
         else
             monitors="$(listMonitors)" #external and laptop
             numMonitors="$(echo "$monitors" | wc -l)"
@@ -136,14 +136,15 @@ main() {
                 *) echo 'Error detecting monitors' && exit 1 ;;
             esac
         fi
+        $BAR_MANAGER_SCRIPT style stay
     elif [[ $mode = 'organize' ]]; then
         organizeWorkspaces "$2"
     else
         connect "$mode"
-        case "$mode" in
-            ext|hybrid) $BAR_MANAGER_SCRIPT restart ;;
-            *) $BAR_MANAGER_SCRIPT style laptop ;;
-        esac
+        # case "$mode" in
+        #     ext|hybrid) $BAR_MANAGER_SCRIPT restart ;;
+        #     *) $BAR_MANAGER_SCRIPT style laptop ;;
+        # esac
     fi
     $HOME/dotfiles/.scripts/wallpaper.sh stay back  # set wallpaper on all screens
 }
