@@ -1,11 +1,13 @@
 #!/bin/bash
 set -e
-
-# source theme colors
+SCREEN="$HOME/.varfiles/screen.png"
+# source curremt theme colors
 tmp="$(mktemp)"
 tail -n+4 $HOME/.cache/wal/colors.sh >| $tmp
 source $tmp
-#colors,text,font
+# set colors for lock screen elements
+font="GohuFont 11 Nerd Font Mono:style=Regular:size=18"
+locktext="$(date +'%A, %B %d %Y' )"
 alpha="ff"
 background="$(echo "$color1" | tr -d '#')"
 background="$color1"
@@ -23,10 +25,6 @@ insidevercolor=00000000
 timecolor="$(echo "$foreground$alpha" | tr -d '#')"
 datecolor="$(echo "$foreground$alpha" | tr -d '#')"
 loginbox="$(echo "$color1 66" | tr -d ' #')"
-#loginbox=00000066
-font='Terminus:style=Bold'
-locktext="$(date +'%A, %B %d %Y' )"
-
 lockbox() {
     #drawing rectangles
     rectangles=" "
@@ -47,41 +45,40 @@ main(){
     #~/.scripts/mullvad.sh disconnect
     #prep lockscreen
     rectangles="$(lockbox)"
-    screen="$(mktemp).png"
-    scrot "$screen"
-    convert "$screen" -scale 20% -scale 500% -draw "fill $background fill-opacity 0.8 $rectangles" "$screen.png"
+    scrot -o "$SCREEN"
+    convert "$SCREEN" -scale 20% -scale 500% -draw "fill $background fill-opacity 0.8 $rectangles" "$SCREEN"
     #lock command
-    $HOME/bin/i3lock-color/build/i3lock     \
-        -i "$screen.png" -t                  \
-        --indpos='x+290:h-80'                \
-        --noinputtext=''                     \
-        --clock                              \
-        --timepos='x+115:h-80'               \
-        --timecolor="$timecolor"             \
-        --time-font="$font"                  \
-        --datestr "$locktext"                \
-        --datepos='x+145:h-60'               \
-        --datecolor="$datecolor"             \
-        --date-font="$font"                  \
-        --layout-font="$font"                \
-        --radius=25                          \
-        --ring-width=4                       \
-        --ringcolor=$ringcolor               \
-        --insidecolor=$insidecolor           \
-        --line-uses-inside                   \
-        --keyhlcolor=$keyhlcolor             \
-        --bshlcolor=$bshlcolor               \
-        --separatorcolor=$separatorcolor     \
-        --veriftext=''                       \
-        --verif-font="$font"                 \
-        --verifcolor="$verifcolor"           \
-        --ringvercolor=$ringvercolor         \
-        --insidevercolor=$insidevercolor     \
-        --wrongtext=''                       \
-        --wrong-font="$font"                 \
-        --wrongcolor="$wrongcolor"           \
-        --ringwrongcolor=$ringwrongcolor     \
-        --insidewrongcolor=$insidewrongcolor
+    i3lock                                    \
+        -i "$SCREEN"                          \
+        -t                                    \
+        --ind-pos='x+290:h-80'                \
+        --noinput-text=''                     \
+        --clock                               \
+        --time-pos='x+115:h-80'               \
+        --time-color="$timecolor"             \
+        --time-font="$font"                   \
+        --date-str "$locktext"                \
+        --date-pos='x+145:h-60'               \
+        --date-color="$datecolor"             \
+        --date-font="$font"                   \
+        --layout-font="$font"                 \
+        --radius=25                           \
+        --ring-width=4                        \
+        --ring-color=$ringcolor               \
+        --inside-color=$insidecolor           \
+        --line-uses-inside                    \
+        --keyhl-color=$keyhlcolor             \
+        --bshl-color=$bshlcolor               \
+        --separator-color=$separatorcolor     \
+        --verif-text=''                       \
+        --verif-font="$font"                  \
+        --verif-color="$verifcolor"           \
+        --ringver-color=$ringvercolor         \
+        --insidever-color=$insidevercolor     \
+        --wrong-text=''                       \
+        --wrong-font="$font"                  \
+        --wrong-color="$wrongcolor"           \
+        --ringwrong-color=$ringwrongcolor     \
+        --insidewrong-color=$insidewrongcolor
 }
-
 main
