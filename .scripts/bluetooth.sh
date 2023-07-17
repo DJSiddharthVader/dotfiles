@@ -68,16 +68,13 @@ main() {
         'connect') connect "$device" ;;
         'disconnect') disconnect "$device" ;;
         'toggle') toggle "$device" ;;
-        'status') getConnectedDevice ;;
+        'status') get_status "$device" ;;
+        # 'status') getConnectedDevice ;;
         *) help && exit 1 ;;
     esac
-    #case "$mode" in
-    #    connect|disconnect|toggle) ~/.scripts/bar-manager.sh reload ;;
-    #    *) ;;
-    #esac
     #polybar-msg hook bluetooth-ipc 1 &> /dev/null
 }
-
+# Set default args if not given
 if (( $# < 1 )); then
     mode="toggle"
     # device="5C:C6:E9:35:57:42" # HRF 3000
@@ -86,9 +83,5 @@ else
     mode="$1"
     device="$2"
 fi
-
-if [[ $mode == 'status' ]]; then
-    get_status $device
-else
-    main "$mode" "$device"
-fi
+# Main 
+main "$mode" "$device"
