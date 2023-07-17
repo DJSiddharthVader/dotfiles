@@ -1,7 +1,7 @@
 #!/bin/bash
 LAPTOP_SCREEN="eDP-1"
+LAPTOP_RESOLUTION="1920x1080"
 BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
-
 help() {
     echo "Usage: $0 {auto|home|proj|ext|hybrid|laptop|mirror|organize}"
 }
@@ -65,23 +65,36 @@ disconnect(){
     done <<< "$(listMonitors)"
 }
 connect() {
+    killall -q compton 
     case "$1" in
         home)
-            xrandr --output $LAPTOP_SCREEN --primary --mode 1366x768 \
-                   --output DP-2 --left-of $LAPTOP_SCREEN --mode 1920x1080 
+            xrandr --output $LAPTOP_SCREEN \
+                   --mode "$LAPTOP_RESOLUTION" \
+                   --primary \
+                   --output DP-2 \
+                   --mode 1920x1080 \
+                   --left-of $LAPTOP_SCREEN 
             # connectAudio hdmi
             organizeWorkspaces home
             ;;
         proj)
-            xrandr --output $LAPTOP_SCREEN --primary --mode 1366x768 \
-                   --output DP-2 --left-of $LAPTOP_SCREEN --mode 1920x1080 \
-                   --output HDMI-1 --left-of DP-2 --mode 1024x768 --scale 1.001x1.301 --panning 1024x768 #1920x1080 #1368x768
+            xrandr --output $LAPTOP_SCREEN \
+                   --mode "$LAPTOP_RESOLUTION" \
+                   --primary \
+                   --output DP-3 \
+                   --mode 1920x1080 \
+                   --left-of $LAPTOP_SCREEN 
             # connectAudio hdmi
             organizeWorkspaces proj
             ;;
         work)
-            xrandr --output $LAPTOP_SCREEN --auto --primary 
-            xrandr --output DP-2 --auto --right-of $LAPTOP_SCREEN --rotate left
+            xrandr --output $LAPTOP_SCREEN 
+                   --mode "$LAPTOP_RESOLUTION" \
+                   --primary \
+                   --output DP-3 \
+                   --auto \
+                   --right-of $LAPTOP_SCREEN \
+                   --rotate left
             organizeWorkspaces work
             ;;
         hybrid)
@@ -96,7 +109,8 @@ connect() {
             ;;
         ext)
             connect hybrid
-            xrandr --output "$LAPTOP_SCREEN" --off ;;
+            xrandr --output "$LAPTOP_SCREEN" --off 
+            ;;
         mirror)
             while IFS= read -r monitor; do
                 resolution="$(resolution "$monitor")"
@@ -104,49 +118,37 @@ connect() {
             done <<< "$(listMonitors)"
             ;;
         laptop)
-            xrandr --output "$LAPTOP_SCREEN" --mode "$(resolution $LAPTOP_SCREEN)" --primary
+            xrandr --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary
             disconnect
             connectAudio laptop
             ;;
         *) echo "invalid mode" && help && exit 1 ;;
     esac
+    compton &
 }
 main() {
     mode="$1"
     if [[ "$mode" = 'auto' ]]; then
         if isConnected ; then # if already connected then disconnect
             connect laptop
-            $BAR_MANAGER_SCRIPT style stay
         else
             monitors="$(listMonitors)" #external and laptop
             numMonitors="$(echo "$monitors" | wc -l)"
             case $numMonitors in
                 3) connect home
-                   # $BAR_MANAGER_SCRIPT style laptop
                    ;;
-                2) if [[ "$(echo "$monitors" | grep -c HDMI)" -eq 0 ]]; then
-                        connect work  # at work setup
-                        # $BAR_MANAGER_SCRIPT style laptop
-                   else
-                        connect hybrid
-                        # $BAR_MANAGER_SCRIPT style laptop
-                   fi
+                2) [[ "$(echo "$monitors" | grep -c HDMI)" -eq 0 ]] && connect work || connect hybrid
                    ;;
                 1) echo 'No monitors connected' && exit 0 ;;
                 *) echo 'Error detecting monitors' && exit 1 ;;
             esac
         fi
-        $BAR_MANAGER_SCRIPT style stay
     elif [[ $mode = 'organize' ]]; then
         organizeWorkspaces "$2"
     else
         connect "$mode"
-        # case "$mode" in
-        #     ext|hybrid) $BAR_MANAGER_SCRIPT restart ;;
-        #     *) $BAR_MANAGER_SCRIPT style laptop ;;
-        # esac
     fi
     $HOME/dotfiles/.scripts/wallpaper.sh stay back  # set wallpaper on all screens
+    $BAR_MANAGER_SCRIPT style stay
 }
-
 main $@
