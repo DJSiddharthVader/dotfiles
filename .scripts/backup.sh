@@ -1,7 +1,7 @@
 #!/bin/bash
 BACKUP_DRIVE="/media/4tbdrive"
 RSYNC_CMD="rsync -ah --ignore-existing --info=progress2"
-TO_SYNC=(Music Pictures)
+TO_SYNC=(Music Pictures .varfiles)
 TO_UPDATE=(Backups Games Documents Projects Reading)
 TO_IGNORE=(dotfiles .steam Torrents Videos)
 
