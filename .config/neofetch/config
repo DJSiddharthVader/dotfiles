@@ -19,13 +19,13 @@ print_info () {
     info title
     info underline
     info "Model" model
-    #info "Kernel" kernel
+    info "Kernel" kernel
     info "CPU" cpu
     info "GPU" gpu
-    info "Display" resolution
+    # info "Display" resolution
     info "OS" distro
     info "Package" packages
-    info "WM" wm
+    # info "WM" wm
     prin "Terminal" "$TERMINAL"
     info "Shell" shell
 #   info "Battery" battery
@@ -34,7 +34,7 @@ print_info () {
     prin "Wifi" "$(~/dotfiles/.config/polybar/scripts/network.sh display)"
     prin "VPN" "$(~/dotfiles/.scripts/mullvad.sh display)"
     prin "Torrent" "$(transmission.sh -u Gi -m datatotal -d)"
-    prin "Weather" "$(~/dotfiles/.config/polybar/scripts/weather.sh)"
+    # prin "Weather" "$(~/dotfiles/.config/polybar/scripts/weather.sh)"
     info cols
 #    info "Disk" disk
 #    info "Memory" memory
@@ -241,11 +241,11 @@ color_blocks="on"
 
 # Color block width in spaces
 # --block_width num
-block_width=3
+block_width=4
 
 # Color block height in lines
 # --block_height num
-block_height=2
+block_height=1
 # }}}
 # Progress Bars {{{
 

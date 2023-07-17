@@ -1,11 +1,9 @@
 #!/bin/bash
 set -euo pipefail
 shopt -s extglob
-
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=(percent amount used free amounts all)
 #icon=""
-
 help() {
     echo "Error: usage ./$(basename ${0:-}) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
 }
@@ -33,7 +31,6 @@ getMode() {
 setMode() {
     sed -i "/^disk:/s/:.*/:${1:-}/" "$mode_file"
 }
-
 disk() {
     # disk space for / partition
     #-f1 is total disk space
@@ -75,7 +72,7 @@ percent_free() {
 display() {
     mode="${1:-}"
     msg=""
-    dirs="$(df -h | grep '/dev/sd.. ' | grep -v 'efi' | rev | cut -d' ' -f1 | rev)"
+    dirs="$(df -h | grep '/dev/nv' | grep -v 'efi' | rev | cut -d' ' -f1 | rev)"
     for dir in ${dirs[@]}; do
         case "$mode" in
             'percent') space="$(percent_free "$dir")" ;;
@@ -90,7 +87,6 @@ display() {
     done
     echo "$msg" | sed -s 's/ *$//'
 }
-
 main() {
     mode="${1:-}"
     if [[ "$mode" == 'display' ]]; then
@@ -107,5 +103,4 @@ main() {
         setMode "$dmode"
     fi
 }
-
 main "$@"

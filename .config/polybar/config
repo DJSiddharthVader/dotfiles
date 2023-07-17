@@ -9,13 +9,16 @@
 screenchange-reload = false
 compositing-background = over
 compositing-foreground = over
+
 [global/wm]
 margin-top = 1
 margin-bottom = 1
+
 [colors]
 ;hack for getting colors to read from Xressources
 include-file = ~/dotfiles/.config/polybar/separators.mode
 include-file = ~/.cache/wal/polybar-wal.theme
+
 [fonts]
 ; Text Fonts
 ;; Shadowed
@@ -38,9 +41,9 @@ font-PiZa-huge = Pixeliza20:Regular=Medium:pixelsize=14:antialias=false;2
 ;font-Re20-huge = Retron2000:style=Regular:pixelsize=11:antialias=false;3
 ;; Pixel Thin
 ;; Apple ][
-font-Ap][ = Apple ][:style=Regular:size=7:antialias=true:autohint=true;3
-font-Ap][-large = Apple ][:style=Regular:size=10:antialias=true:autohint=true;2
-font-Ap][-huge = Apple ][:style=Regular:size=11:antialias=true:autohint=true;3
+font-ApII = Apple ][:style=Regular:size=7:antialias=true:autohint=true;3
+font-ApII-large = Apple ][:style=Regular:size=10:antialias=true:autohint=true;2
+font-ApII-huge = Apple ][:style=Regular:size=11:antialias=true:autohint=true;3
 ;; MineCraftia
 font-MiCr = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 font-MiCr-large = MineCraftia:style=Regular:pixelsize=14;antialias=false;11
@@ -59,7 +62,7 @@ font-TeRm-large = Terminus:style=Regular:pixelsize=14;1
 font-TeRm-huge = Terminus:style=Regular:pixelsize=14;1
 ;; Pixel Gaming
 ;; PKMN RBYGSC 
-font-PKRB = PKMN RBYGSC:style=Regular:size=8:antialias=true:autohint=true;3
+font-PKRB = PKMN RBYGSC:style=Regular:size=11:antialias=true:autohint=true;3
 font-PKRB-large = PKMN RBYGSC:style=Regular:size=11:antialias=true:autohint=true;3
 font-PKRB-huge =PKMN RBYGSC:style=Regular:size=9:antialias=false:autohint=true;3
 ;; Retro Gaming
@@ -83,10 +86,6 @@ font-PKRB-huge =PKMN RBYGSC:style=Regular:size=9:antialias=false:autohint=true;3
 font-GoPi = GothicPixels:style=Medium:pixelsize=11:antialias=false;3
 font-GoPi-large = GothicPixels:style=Medium:pixelsize=11:antialias=true;3
 font-GoPi-huge = GothicPixels:style=Medium:pixelsize=11:antialias=true;3
-;; Pixeled English Font
-font-PiEn = Pixeled English Font:style=Regular:pixelsize=11:antialias=false;3
-font-PiEn-large = Pixeled English Font:style=Regular:pixelsize=11:antialias=true;3
-font-PiEn-huge = Pixeled English Font:style=Regular:pixelsize=11:antialias=true;3
 ;; Misc
 ;; Silom
 ;font-SiLo = Silom:style=Regular:pixelsize=12:antialias=false;3
@@ -94,35 +93,24 @@ font-PiEn-huge = Pixeled English Font:style=Regular:pixelsize=11:antialias=true;
 ;font-SiLo-huge = Silom:style=Regular:pixelsize=12:antialias=false;3
 ; Icons/Overflow/Scrolling text fonts
 ; Font Awesome Icons
-font-icon = FontAwesome:format=truetype:style=Regular:size=11:antialias=false;3
-font-icon-large = FontAwesome:format=truetype:style=Regular:size=14:antialias=true;4
-font-icon-huge = FontAwesome:format=truetype:style=Regular:size=27:antialias=true;4
+font-icon = Font Awesome 6 Free:format=truetype:style=Regular:size=15:antialias=;3
+font-icon-large = Font Awesome 6 Free:format=truetype:style=Regular:size=14:antialias=true;4
+font-icon-huge = Font Awesome 6 Free:format=truetype:style=Regular:size=27:antialias=true;4
 ; Weather Icons
 font-weather = Weather Icons:style=Regular;3
 font-weather-large = Weather Icons:style=Regular:size=15;3
 font-weather-huge= Weather Icons:style=Regular:size=27;3
 ; Backup Font,  avoids oversized icons from defualting to font-4
-font-overflow =  3270Narrow Nerd Font Mono:style=Medium:pixelsize=15:antialias=true;1
-font-overflow-large = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=19:antialias=true;1
-font-overflow-huge = 3270Narrow Nerd Font Mono:style=Medium:pixelsize=29:antialias=true;1
-;font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
-;font-overflow = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=12;antialias=false;1
 ; Powerline Separators
-font-powerline = FiraCode Nerd Font Mono:style=Regular:size=15:antialias=true;3
-font-powerline-large = FiraCode Nerd Font Mono:style=Regular:size=23:antialias=true;3
-font-powerline-huge = FiraCode Nerd Font Mono:style=Regular:size=25:antialias=true;9 
-font-jp = Noto Sans CJK JP:style=Regular:size=17:antialias=true;4
-font-jp-bold = Noto Sans CJK JP:style=Bold:size=12:antialias=true;2
-font-jp-large = Noto Sans CJK JP:style=Regular:size=19:antialias=true;3
-;font-jp-bold = Noto Sans CJK JP:style=Bold:size=23:antialias=true;4
-; Long scrolling text, (smaller and mono-spaced)
+font-powerline = FiraCode Nerd Font Mono:style=Regular:size=21:antialias=true;4
+; Long scrolling text (small, mono-spaced)
 font-focused = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 font-focused-large = MineCraftia:style=Regular:pixelsize=11;antialias=false;10
 font-focused-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;10
-font-scrolling = Terminus:style=Regular:pixelsize=13;2
-font-scrolling-large = Terminus:style=Regular:pixelsize=18;2
-font-scrolling-huge = Terminus:style=Regular:pixelsize=23;2
-
+font-scrolling = Terminus (TTF):style=Regular:pixelsize=13;2
+font-scrolling-large = Terminus (TTF):style=Regular:pixelsize=18;2
+font-scrolling-huge = Terminus (TTF):style=Regular:pixelsize=23;2
 
 ;bar formatting
 [section/float]
@@ -133,7 +121,7 @@ enable-ipc = true
 fixed-center = false
 dim-value = 0
 width = 100%
-height = 24
+height = 30
 radius = 5
 ;background
 background = ${colors.transparent}
@@ -148,15 +136,14 @@ border-right-size = 10
 border-color = ${colors.transparent}
 focused-name-format = "%{T5}<label>%{T-}"
 ;fonts
-font-0 = ${fonts.font-icon}
-font-1 = ${fonts.font-weather}
-font-2 = ${fonts.font-main}
-font-3 = ${fonts.font-overflow}
+font-0 = ${fonts.font-PKRB}
+font-1 = ${fonts.font-icon}
+font-2 = ${fonts.font-overflow}
+font-3 = ${fonts.font-powerline}
 font-4 = ${fonts.font-scrolling}
-font-5 = ${fonts.font-powerline}
-font-6 = ${fonts.font-jp-bold}
+font-5 = ${fonts.font-weather-large}
+font-6 = Noto Sans CJK JP:style=Bold:size=17:antialias=true;2
 font-7 = ${fonts.font-focused}
-font-8 = ${fonts.font-icon}
 
 [section/full]
 monitor = ${env:MONITOR:}
@@ -260,7 +247,7 @@ enable-ipc = true
 fixed-center = false
 dim-value = 0
 width = 100%
-height = 24
+height = 35
 radius = 5
 ; border between ends of monitor and bar top
 border-top-size = 5
@@ -275,13 +262,13 @@ foreground = ${colors.transparent}
 border-color = ${colors.transparent}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
-font-0 = ${fonts.font-icon}
-font-1 = ${fonts.font-weather-large}
-font-2 = ${fonts.font-NiDs}
-font-3 = ${fonts.font-overflow}
+font-0 = ${fonts.font-PKRB}
+font-1 = ${fonts.font-icon}
+font-2 = ${fonts.font-overflow}
+font-3 = ${fonts.font-powerline}
 font-4 = ${fonts.font-scrolling}
-font-5 = ${fonts.font-powerline}
-font-6 = Noto Sans CJK JP:style=Bold:size=12:antialias=true;2
+font-5 = ${fonts.font-weather-large}
+font-6 = Noto Sans CJK JP:style=Bold:size=17:antialias=true;2
 font-7 = ${fonts.font-focused}
 
 [section/underline]
@@ -815,7 +802,7 @@ bar-progress-indicator = ":"
 bar-progress-fill = "|"
 bar-progress-empty = "."
 format-online = "[<bar-progress>]"
-format-online-font = 8
+format-online-font = 1
 format-online-foreground = ${root.mpd-text-color}
 format-online-background = ${root.mpd-color}
 format-online-underline = ${root.mpd-underline}
@@ -858,7 +845,7 @@ type = custom/script
 tail = true
 exec = ~/dotfiles/.config/polybar/scripts/mpdscroll.sh
 click-left = ~/dotfiles/.config/polybar/scripts/mpdscroll.sh toggle
-format = " %{T5}<label>%{T-} "
+format = " %{T5}<label>%{T-}  "
 format-background = ${root.songnames-color}
 format-foreground = ${root.songnames-text-color}
 label-underline = ${root.songnames-underline}
@@ -1031,7 +1018,7 @@ format-suffix-background = ${root.uptime-suffix-background}
 type = custom/script
 interval = 600
 exec = ~/dotfiles/.config/polybar/scripts/weather.sh
-label-font = 2
+label-font = 6
 label = "%output%"
 format-background = ${root.weather-color}
 format-foreground = ${root.weather-text-color}
@@ -1049,9 +1036,9 @@ format-suffix-background = ${root.weather-suffix-background}
 [module/torrent]
 type = custom/script
 tail = true
-exec = ~/Projects/torrent.sh/transmission.sh -m display
-click-left = ~/Projects/torrent.sh/transmission.sh -m next
-click-right = ~/Projects/torrent.sh/transmission.sh -m prev
+exec = ~/bin/torrent.sh/transmission.sh -m display
+click-left = ~/bin/torrent.sh/transmission.sh -m next
+click-right = ~/bin/torrent.sh/transmission.sh -m prev
 format-background = ${root.torrent-color}
 format-foreground = ${root.torrent-text-color}
 label-underline = ${root.torrent-underline}

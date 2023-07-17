@@ -1,30 +1,61 @@
 # vim: filetype=i3
+##--Plasma Integration------------------###
+# Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everything)
+exec --no-startup-id wmctrl -c Plasma
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+# >>> Window rules <<<
+# >>> Avoid tiling Plasma popups, dropdown windows, etc. <<<
+# For the first time, manually resize them, i3 will remember the setting for floating windows
+for_window [class="yakuake"] floating enable;
+for_window [class="lattedock"] floating enable;
+for_window [class="plasmashell"] floating enable;
+for_window [class="Kmix"] floating enable; border none
+for_window [class="kruler"] floating enable; border none
+for_window [class="Plasma"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position 1450px 20px
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+no_focus [class="plasmashell" window_type="notification"] 
+# >>> Avoid tiling for non-Plasma stuff <<<
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="About"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
 ##---i3 options------------#
 #Window options
-#border_radius 3
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 for_window [instance="protonvpn"] floating enable
 for_window [instance="zoom"] floating enable
 set $mod Mod4
 set $term --no-startup-id st
-set $big_term --no-startup-id st -f "FiraCode Nerd Font:style=Regular:size=20:antialias=true:autohint=true"
+set $big_term --no-startup-id st -f "FiraCode Nerd Font Mono:style=Regular:size=20:antialias=true:autohint=true"
 set $BROWSER firefox
 set $defgaps 5
 gaps inner $defgaps
 gaps outer $defgaps
 mouse_warping none
 focus_follows_mouse yes
-font "TerminessTTF Nerd Font:style=Regular:pixelsize=17:antialias=true;4"
+font "FiraCode Nerd Font Mono"
 set $hibernate sudo systemctl suspend
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
-#force_xinerama yes DONT USE IT BREAKS MULTIMONITOR SUPPORT
+# force_xinerama yes  # DONT USE IT BREAKS MULTIMONITOR SUPPORT
 
 ##---Start up--------------#
+# Set monitor resolution
+exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080
 #lock after 45 mins of inactivity
 exec_always --no-startup-id xautolock -time 45 -locker ~/dotfiles/.scripts/lock.sh -detectsleep
 #lock daemon to lock by listening to events
 #exec --no-startup-id xss-lock -l -- /home/sidreed/dotfiles/.scripts/lock.sh &
+exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/sidreed/dotfiles/.scripts/lock.sh --nofork &
 #Increase key rate
 exec --no-startup-id xset r rate 300 50
 #Pulseaudio
@@ -61,7 +92,7 @@ exec --no-startup-id firefox --browser
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 800 550
+for_window [instance="dropdown"] resize set 1150 775 
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
@@ -168,6 +199,7 @@ bindsym $mod+z         exec --no-startup-id ~/.scripts/monitor.sh auto
 bindsym $mod+Shift+z   exec --no-startup-id ~/.scripts/monitor.sh laptop
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 #bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
+bindsym $mod+Shift+x exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
 bindsym $mod+v         exec --no-startup-id ~/bin/anyconnect-linux64-4.10.03104/vpn/vpnui
@@ -260,11 +292,11 @@ bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
 #bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 #bindsym $mod+F2		restart
 #bindsym $mod+F3		exec --no-startup-id displayselect
-bindsym $mod+F4		   exec --no-startup-id $hibernate
+#bindsym $mod+F4		   exec --no-startup-id $hibernate
 #bindsym $mod+F5
 #bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
 #bindsym $mod+F7        exec -no-startup-id compton
-bindsym $mod+F8		   exec --no-startup-id $netrefresh
+#bindsym $mod+F8		   exec --no-startup-id $netrefresh
 #bindsym $mod+F9		exec --no-startup-id sudo mount -a
 #bindsym $mod+F10
 #bindsym $mod+F11
@@ -298,11 +330,11 @@ bindsym XF86AudioMicMute	    exec $micmute
 #bindsym XF86WebCam		        exec --no-startup-id camtoggle
 #bindsym XF86Mail		        exec $term -e neomutt
 #bindsym XF86Messenger		    exec $term -e weechat
-bindsym XF86Search		        exec $BROWSER https://duckduckgo.com
+#bindsym XF86Search		        exec $BROWSER https://duckduckgo.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id light -U 5
 bindsym XF86MonBrightnessUp	    exec --no-startup-id light -A 5
-bindsym XF86AudioMedia		    exec $music
-bindsym XF86Display		        exec --no-startup-id arandr
-bindsym XF86Documents		    exec $term -e ranger ~/Documents
+#bindsym XF86AudioMedia		    exec $music
+#bindsym XF86Display		        exec --no-startup-id arandr
+#bindsym XF86Documents		    exec $term -e ranger ~/Documents
 #bindsym XF86WLAN		        exec $netrefresh
 
