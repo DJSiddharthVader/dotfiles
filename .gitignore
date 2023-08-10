@@ -1,3 +1,5 @@
+.config/pavucontrol-qt/
+.config/qpdfview/qpdfview.conf
 .config/kdeglobals
 .config/kde.org/UserFeedback.org.kde.dolphin.conf
 .config/kconf_updaterc
