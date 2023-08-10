@@ -117,7 +117,7 @@ prompt_command() {
     # format start and end of prompt to put info and entered text on different lines
     start="$(setColor "41 0 01;31")$top$(setColor "0")"
     end="$(setColor "0 01;31")\n$bot "
-    term_text_formatting="$(setColor "0 01;31")"
+    term_text_formatting="$(setColor "0 01;36")"
     export PS1="$start$modules$end$term_text_formatting"
 }
 
