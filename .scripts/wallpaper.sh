@@ -51,11 +51,11 @@ usage() {
                               both updates the wallpaper and colorscheme
 "
 }
+# Handle indexing of wallpapers
 append_history() {
     # append all wallpapers to history file (append list all wallpapers to history file in random order)
     find "$WALLPAPER_DIR" -maxdepth 99 -type f | shuf >> "$HIST_FILE"
 }
-# Set/Get wallpaper file and index 
 reset_history() {
     # re-write history file (list all wallpapers to a file in random order)
     find "$WALLPAPER_DIR" -maxdepth 99 -type f | shuf >| "$HIST_FILE"
@@ -103,7 +103,7 @@ update_index() {
     esac
     echo "$index" # return new index
 }
-# change wallpaper, create colorscheme and apply to all apps/terminals/windows etc
+# Set wallpaper + update colors
 set_wallpaper() {
     image="$1"
     polybar-msg hook wall 1 # update polybar wallpaper module
@@ -127,9 +127,8 @@ change_colors() {
     fi
     ~/bin/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox  > /dev/null 2>&1 # theme for GTK apps and whatnot
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
-    # this must be run last since the timeout blocks anything after it from executing due to the set -e (script exists on error, including timeout)
-    # if no timeout it would run infinitely and script would never finish
-    change_firefox # trigger reloading of colors.css in firefox
+    # change_firefox # trigger reloading of colors.css in firefox
+    pywalfox update  # use addon to update FF colors
 }
 wall() {
     mode="$1"
@@ -159,6 +158,7 @@ display() {
 #        printf "%-${THRESH}s" "$wallpaper"
 #    fi
 }
+# main
 main() {
     [ "$(wc -l $HIST_FILE | cut -d' ' -f1)" -lt 1 ] && reset_history
     if [[ -f "$1" || -d "$1" ]]; then
