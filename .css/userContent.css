@@ -1,18 +1,23 @@
-body.loaded.dark {
-  color: var(--foreground) !important;
-  background-color: var(--background) !important;
+@-moz-document url-prefix("about:reader") {
+    /* body.dark { */
+    /*     background: var(--background) !important; */
+    /*     color: var(--color8) !important; */
+    /* } */
+    /* body.dark strong { */
+    /*     background: var(--background) !important; */
+    /*     color: var(--color5) !important; */
+    /* } */
+    /* body.dark h1 { */
+    /*     color: var(--color1) !important; */
+    /* } */
+    /* body.dark h2, body.dark h3, body.dark h4, body.dark h5, body.dark h6 { */
+    /*     color: var(--color4) !important; */
+    /* } */
+    body.sans-serif {
+        font-family: sans-serif !important;
+        font-size: 24px; !important;
+    }
+    body.serif {
+        font-family: serif !important;
+    }
 }
-
-body.loaded.dark h1 {
-  color: var(--color1) !important;
-}
-
-body.loaded.dark h2, body.loaded.dark h3, body.loaded.dark h4, body.loaded.dark h5, body.loaded.dark h6 {
-  color: var(--color4) !important;
-}
-
-body.loaded.dark strong {
-  color: var(--color5) !important;
-}
-
-
