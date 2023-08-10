@@ -22,27 +22,26 @@ print_info () {
     info "Kernel" kernel
     info "CPU" cpu
     info "GPU" gpu
-    # info "Display" resolution
+    info "Display" resolution
     info "OS" distro
     info "Package" packages
     # info "WM" wm
-    prin "Terminal" "$TERMINAL"
     info "Shell" shell
-#   info "Battery" battery
+    # prin "Terminal" "$TERMINAL"
+    # info "Font" font
+    # info "Terminal Font" termfont
     info "Uptime" uptime
+    prin "Memory" "$(~/dotfiles/.config/polybar/scripts/memory.sh display all_mem)"
     prin "Disk" "$(~/dotfiles/.config/polybar/scripts/disk.sh display)"
-    prin "Wifi" "$(~/dotfiles/.config/polybar/scripts/network.sh display)"
-    prin "VPN" "$(~/dotfiles/.scripts/mullvad.sh display)"
+    # prin "Wifi" "$(~/dotfiles/.config/polybar/scripts/network.sh display)"
+    # prin "VPN" "$(~/dotfiles/.scripts/mullvad.sh display)"
     prin "Torrent" "$(transmission.sh -u Gi -m datatotal -d)"
-    # prin "Weather" "$(~/dotfiles/.config/polybar/scripts/weather.sh)"
+    prin "Weather" "$(~/dotfiles/.config/polybar/scripts/weather.sh)"
     info cols
 #    info "Disk" disk
-#    info "Memory" memory
 #    info "CPU Usage" cpu_usage
-#    info "Font" font
 #    info "Local IP" localip
 #    info "Public IP" publicip
-#    info "Terminal Font" termfont
 #    info "Icons" icons
 #    info "WM Theme" wmtheme
 #    info "Theme" theme
