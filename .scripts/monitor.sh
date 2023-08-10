@@ -33,16 +33,16 @@ organizeWorkspaces() {
     mode="$1"
     case "$mode" in
         home) 
-            move_left=(1 2 5 6)
+            move_left=(1 2 4)
             move_right=()
-            ;;
-        proj) 
-            move_left=(2 5 6)
-            move_right=(1)
             ;;
         work)
             move_right=(3 5 6)
             move_left=()
+            ;;
+        proj) 
+            move_left=(2 5 6)
+            move_right=(1)
             ;;
         *) help && exit 1 ;;
     esac
@@ -65,36 +65,18 @@ disconnect(){
     done <<< "$(listMonitors)"
 }
 connect() {
-    killall -q compton 
     case "$1" in
         home)
-            xrandr --output $LAPTOP_SCREEN \
-                   --mode "$LAPTOP_RESOLUTION" \
-                   --primary \
-                   --output DP-2 \
-                   --mode 1920x1080 \
-                   --left-of $LAPTOP_SCREEN 
+            xrandr --verbose --output eDP-1 --off \
+                   --output DP-3-6-6 --mode 1920x1080 --pos 0x0 \
+                   --output DP-3-5-5 --mode 1920x1200 --rotate right --right-of DP-3-6-6
             # connectAudio hdmi
             organizeWorkspaces home
             ;;
-        proj)
-            xrandr --output $LAPTOP_SCREEN \
-                   --mode "$LAPTOP_RESOLUTION" \
-                   --primary \
-                   --output DP-3 \
-                   --mode 1920x1080 \
-                   --left-of $LAPTOP_SCREEN 
-            # connectAudio hdmi
-            organizeWorkspaces proj
-            ;;
         work)
-            xrandr --output $LAPTOP_SCREEN 
-                   --mode "$LAPTOP_RESOLUTION" \
-                   --primary \
-                   --output DP-3 \
-                   --auto \
-                   --right-of $LAPTOP_SCREEN \
-                   --rotate left
+            xrandr --output $LAPTOP_SCREEN --mode $LAPTOP_RESOLUTION --primary \
+                   --output DP-2 --auto \
+                   --right-of $LAPTOP_SCREEN --rotate left
             organizeWorkspaces work
             ;;
         hybrid)
@@ -124,7 +106,8 @@ connect() {
             ;;
         *) echo "invalid mode" && help && exit 1 ;;
     esac
-    compton &
+    sleep 3 && killall -q compton && sleep 1 && compton &
+    ~/.scripts/wallpaper.sh stay back
 }
 main() {
     mode="$1"
@@ -132,16 +115,21 @@ main() {
         if isConnected ; then # if already connected then disconnect
             connect laptop
         else
-            monitors="$(listMonitors)" #external and laptop
-            numMonitors="$(echo "$monitors" | wc -l)"
-            case $numMonitors in
-                3) connect home
-                   ;;
-                2) [[ "$(echo "$monitors" | grep -c HDMI)" -eq 0 ]] && connect work || connect hybrid
-                   ;;
-                1) echo 'No monitors connected' && exit 0 ;;
-                *) echo 'Error detecting monitors' && exit 1 ;;
+            wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
+            case $wifi in 
+                phswifi3) connect work ;;
+                NewTokyo03) connect home ;;
+                *) connect hybrid ;;
             esac
+            # numMonitors="$(echo "$monitors" | wc -l)"
+            # case $numMonitors in
+            #     3) connect home
+            #        ;;
+            #     2) [[ "$(echo "$monitors" | grep -c HDMI)" -eq 0 ]] && connect work || connect hybrid
+            #        ;;
+            #     1) echo 'No monitors connected' && exit 0 ;;
+            #     *) echo 'Error detecting monitors' && exit 1 ;;
+            # esac
         fi
     elif [[ $mode = 'organize' ]]; then
         organizeWorkspaces "$2"
