@@ -1,10 +1,7 @@
 # vim: filetype=i3
-##--Plasma Integration------------------###
+##--Plasma Integration-----#
 # Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everything)
 exec --no-startup-id wmctrl -c Plasma
-for_window [title="Desktop — Plasma"] kill; floating enable; border none
-# >>> Window rules <<<
-# >>> Avoid tiling Plasma popups, dropdown windows, etc. <<<
 # For the first time, manually resize them, i3 will remember the setting for floating windows
 for_window [class="yakuake"] floating enable;
 for_window [class="lattedock"] floating enable;
@@ -32,7 +29,6 @@ for_window [window_type="menu"] floating enable
 #Window options
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
-for_window [instance="protonvpn"] floating enable
 for_window [instance="zoom"] floating enable
 set $mod Mod4
 set $term --no-startup-id st
@@ -46,16 +42,14 @@ focus_follows_mouse yes
 font "FiraCode Nerd Font Mono"
 set $hibernate sudo systemctl suspend
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
-# force_xinerama yes  # DONT USE IT BREAKS MULTIMONITOR SUPPORT
 
 ##---Start up--------------#
 # Set monitor resolution
-exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080
+exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
 #lock after 45 mins of inactivity
 exec_always --no-startup-id xautolock -time 45 -locker ~/dotfiles/.scripts/lock.sh -detectsleep
 #lock daemon to lock by listening to events
-#exec --no-startup-id xss-lock -l -- /home/sidreed/dotfiles/.scripts/lock.sh &
-exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/sidreed/dotfiles/.scripts/lock.sh --nofork &
+exec --no-startup-id xss-lock -l -- /home/sidreed/dotfiles/.scripts/lock.sh &
 #Increase key rate
 exec --no-startup-id xset r rate 300 50
 #Pulseaudio
@@ -73,26 +67,28 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 #Composite manager:
 exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
-#connect to external monitors
-#exec --no-startup-id ~/dotfiles/.scripts/monitor.sh auto
 #Launch Polybar and set wallpaper
 exec --no-startup-id ~/.scripts/wallpaper.sh stay both
-#Torrent daemon:
-exec --no-startup-id transmission.sh -m start
-#Start VPN
-#exec --no-startup-id ~/.scripts/mullvad.sh connect
-#Mount other drives:
-exec --no-startup-id sudo mount -a
-#Launch syncthing
-exec --no-startup-id syncthing
 #Launch slack
 exec --no-startup-id slack
 #Launch browser
-exec --no-startup-id firefox --browser
+#exec --no-startup-id firefox --browser
+
+#exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/sidreed/dotfiles/.scripts/lock.sh --nofork &
+# Set sleep after X seconds
+#exec --no-startup-id xset s 1800
+#Torrent daemon:
+#exec --no-startup-id transmission.sh -m start
+#Start VPN
+#exec --no-startup-id ~/.scripts/mullvad.sh connect
+#Mount other drives:
+#exec --no-startup-id sudo mount -a
+#Launch syncthing
+#exec --no-startup-id syncthing
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 1150 775 
+for_window [instance="dropdown"] resize set 1350 950 
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
