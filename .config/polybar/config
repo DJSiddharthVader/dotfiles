@@ -112,6 +112,7 @@ font-scrolling = Terminus (TTF):style=Regular:pixelsize=13;2
 font-scrolling-large = Terminus (TTF):style=Regular:pixelsize=18;2
 font-scrolling-huge = Terminus (TTF):style=Regular:pixelsize=23;2
 
+
 ;bar formatting
 [section/float]
 monitor = ${env:MONITOR:}
@@ -143,33 +144,6 @@ font-3 = ${fonts.font-powerline}
 font-4 = ${fonts.font-scrolling}
 font-5 = ${fonts.font-weather-large}
 font-6 = Noto Sans CJK JP:style=Bold:size=17:antialias=true;2
-font-7 = ${fonts.font-focused}
-
-[section/full]
-monitor = ${env:MONITOR:}
-cursor-scroll = ns-resize
-cursor-click = pointer
-enable-ipc = true
-dim-value = 0
-width = 100%
-height = 3.25%
-radius = 0
-module-margin = 0
-background = ${colors.transparent1}
-foreground = ${colors.foreground}
-border-top-size = 0
-border-bottom-size = 0
-border-left-size = 0
-border-right-size = 0
-focused-name-format = "%{T7}<label>%{T-}"
-;fonts
-font-0 = ${fonts.font-icon-huge}
-font-1 = ${fonts.font-weather-huge}
-font-2 = ${fonts.font-main-huge}
-font-3 = ${fonts.font-overflow-huge}
-font-4 = ${fonts.font-powerline-huge}
-font-5 = ${fonts.font-jp-bold}
-font-6 = ${fonts.font-scrolling}
 font-7 = ${fonts.font-focused}
 
 [section/text]
@@ -328,7 +302,6 @@ font-5 = ${fonts.font-jp-bold}
 font-6 = ${fonts.font-scrolling}
 font-7 = ${fonts.font-focused}
 
-
 ;bars
 ;;float
 [bar/float-top]
@@ -347,21 +320,6 @@ bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
 modules-right = reading
-
-;;full
-[bar/full-top]
-inherit = section/full
-include-file = ~/dotfiles/.config/polybar/bars/full.bar
-modules-left = i3 focused focused-name
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control gamma applauncher
-[bar/full-bottom]
-inherit = section/full
-include-file = ~/dotfiles/.config/polybar/bars/full.bar
-bottom = true
-modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading wall
 
 ;;cross
 [bar/cross-left]
@@ -433,21 +391,6 @@ modules-left = date battery memory cpu temperature xkeyboard disk uptime weather
 modules-center =
 modules-right = reading wall
 
-;;laptop
-[bar/laptop-top]
-inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float.bar
-modules-left = i3 focused leftcap
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
-[bar/laptop-bottom]
-inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float.bar
-bottom = true
-modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading
-
 ;;mini
 [bar/mini]
 inherit = section/float
@@ -455,69 +398,6 @@ include-file = ~/dotfiles/.config/polybar/bars/mini.bar
 modules-center = i3 i3rightcap torrent weather cpu memory pulseaudio-control backlight-acpi battery dateleftcap date 
 ;modules-left = 
 ;modules-right = 
-
-
-;compact bars
-;;float
-[bar/compact-float-top]
-inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float.bar
-fixed-center = true
-modules-left = i3 focused leftcap
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control applauncher
-[bar/compact-float-bottom]
-inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/float.bar
-bottom = true
-modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading
-
-;;full
-[bar/compact-full-top]
-inherit = section/full
-include-file = ~/dotfiles/.config/polybar/bars/full.bar
-modules-left = i3 focused leftcap
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control gamma applauncher
-[bar/compact-full-bottom]
-inherit = section/full
-include-file = ~/dotfiles/.config/polybar/bars/full.bar
-bottom = true
-modules-left = date memory cpu temperature xkeyboard disk uptime weather
-modules-center =
-modules-right = reading
-
-;;text
-[bar/compact-text-top]
-inherit = section/text
-include-file = ~/dotfiles/.config/polybar/bars/text.bar
-modules-left = i3 focused
-modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
-[bar/compact-text-bottom]
-inherit = section/text
-include-file = ~/dotfiles/.config/polybar/bars/text.bar
-bottom = true
-modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading
-
-;;underline
-[bar/compact-underline-top]
-inherit = section/underline
-include-file = ~/dotfiles/.config/polybar/bars/underline.bar
-modules-left = i3 focused
-modules-center =
-modules-right = songnames mpd mullvad wlan pulseaudio-control backlight-acpi applauncher
-[bar/compact-underline-bottom]
-inherit = section/underline
-include-file = ~/dotfiles/.config/polybar/bars/underline.bar
-bottom = true
-modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
-modules-center =
-modules-right = reading
 
 
 ;modules
@@ -1036,9 +916,9 @@ format-suffix-background = ${root.weather-suffix-background}
 [module/torrent]
 type = custom/script
 tail = true
-exec = ~/bin/torrent.sh/transmission.sh -m display
-click-left = ~/bin/torrent.sh/transmission.sh -m next
-click-right = ~/bin/torrent.sh/transmission.sh -m prev
+exec = ~/bin/transmission.sh -m display
+click-left = ~/bin/transmission.sh -m next
+click-right = ~/bin/transmission.sh -m prev
 format-background = ${root.torrent-color}
 format-foreground = ${root.torrent-text-color}
 label-underline = ${root.torrent-underline}
