@@ -120,13 +120,13 @@ separators() {
     idx="$(echo ${separator_names[@]/$dmode//} | cut -d/ -f1 | wc -w | tr -d ' ')"
     icons="${separator_icons[$idx]}"
     setMode 'separator' "$dmode"
-    echo "$dmode
+    echo "; $dmode
 ; icons to delimit polybar modules
 leftprefix = \"$(echo "$icons" | cut -d"$dl" -f1)\"
 leftsuffix = \"$(echo "$icons" | cut -d"$dl" -f2)\"
 rightprefix = \"$(echo "$icons" | cut -d"$dl" -f3)\"
-rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"
-" | sed -e 's/""//' >| "$separator_file"
+rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"" |\
+    sed -e 's/""//' >| "$separator_file"
 }
 getActiveMonitors() {
    # same as get all monitors but excludes eDP-1
