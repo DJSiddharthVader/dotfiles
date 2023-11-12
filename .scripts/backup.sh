@@ -23,7 +23,7 @@ update() {
     done
 }
 backup() {
-    mountpoint $BACKUP_DRIVE && drive="$BACKUP_DRIVE" || drive="$HOME/Backups/homedir"
+    mountpoint $BACKUP_DRIVE && drive="$BACKUP_DRIVE/Backups" || exit 1
     backup_file="$drive/homedirE560_$(date +'%Y%m%d-%H%M').tar.gz"
     echo "Backing up to $backup_file"
     exclude_flags="$(echo ${TO_SYNC[@]} ${TO_UPDATE[@]} ${TO_IGNORE[@]} | sed -e "s:[^ ]*:--exclude=${HOME}\/&:g")"
