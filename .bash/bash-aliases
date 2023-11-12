@@ -4,7 +4,6 @@ alias ll='ls -alF --color=auto --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 alias lc='ls | wc -l'
-
 #Typos
 alias r,='rm'
 alias e='nvim'
@@ -12,11 +11,9 @@ alias bi='nvim'
 alias vi='nvim'
 alias vim='nvim'
 alias mc='mv'
-
 #Options
 alias rm='rm -i'
 alias tmux='tmux -2'
-
 #Git
 alias grm='git rm'
 alias add='git add'
@@ -30,7 +27,6 @@ alias chk='git checkout'
 alias gst='git status'
 alias gsl='commit-status.sh status'
 alias gsw='watch -n2 "commit-status.sh status"'
-
 #Apps
 # alias cp='ptcp'
 # alias cat='bat --paging=never'
@@ -48,22 +44,21 @@ alias notes='notes.sh'
 alias vt='mullvad.sh toggle'
 alias tsm="transmission-remote"
 alias tro='transmission.sh'
-
 #Shorten
+alias xc='xrandr| grep " con"'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias rs='source ~/.bashrc'
 alias copy='xclip -sel clip'
 alias pt='ping 8.8.8.8'
-alias md='sudo mount /dev/sdb1 /media/4tbdrive/'
+alias md='sudo mount /dev/sda1 /media/4tbdrive/'
 alias ud='sudo umount /media/4tbdrive/'
 alias haud='pactl set-card-profile 0 output:hdmi-stereo'
 alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias portal='curl -v http://detectportal.firefox.com/canonical.html'
 alias feh='feh --scale-down -g 1080x1600 -d'
 alias vpn='/home/sidreed/bin/anyconnect-linux64-4.10.03104/vpn/vpn'
-
 #Print
 alias bgal='feh --scale-down -g 640x480 -d ~/Pictures/wallpapers/*'
 alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
