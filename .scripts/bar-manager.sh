@@ -1,6 +1,5 @@
 #!/bin/bash
 shopt -s extglob
-
 # Styles
 script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
@@ -226,5 +225,4 @@ main() {
         esac
     fi
 }
-
 main "$@"
