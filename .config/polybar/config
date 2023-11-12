@@ -9,16 +9,13 @@
 screenchange-reload = false
 compositing-background = over
 compositing-foreground = over
-
 [global/wm]
 margin-top = 1
 margin-bottom = 1
-
 [colors]
 ;hack for getting colors to read from Xressources
 include-file = ~/dotfiles/.config/polybar/separators.mode
 include-file = ~/.cache/wal/polybar-wal.theme
-
 [fonts]
 ; Text Fonts
 ;; Shadowed
@@ -111,8 +108,6 @@ font-focused-huge = MineCraftia:style=Regular:pixelsize=25;antialias=false;10
 font-scrolling = Terminus (TTF):style=Regular:pixelsize=13;2
 font-scrolling-large = Terminus (TTF):style=Regular:pixelsize=18;2
 font-scrolling-huge = Terminus (TTF):style=Regular:pixelsize=23;2
-
-
 ;bar formatting
 [section/float]
 monitor = ${env:MONITOR:}
@@ -145,7 +140,6 @@ font-4 = ${fonts.font-scrolling}
 font-5 = ${fonts.font-weather-large}
 font-6 = Noto Sans CJK JP:style=Bold:size=17:antialias=true;2
 font-7 = ${fonts.font-focused}
-
 [section/text]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
@@ -175,7 +169,6 @@ font-4 = ${fonts.font-scrolling}
 font-5 = ${fonts.font-powerline-large}
 font-6 = ${fonts.font-jp}
 font-7 = ${fonts.font-focused}
-
 [section/blocks]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
@@ -212,7 +205,6 @@ font-4 = ${fonts.font-scrolling}
 font-5 = ${fonts.font-powerline}
 font-6 = ${fonts.font-jp}
 font-7 = ${fonts.font-focused}
-
 [section/blocks2]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
@@ -221,7 +213,7 @@ enable-ipc = true
 fixed-center = false
 dim-value = 0
 width = 100%
-height = 35
+height = 25
 radius = 5
 ; border between ends of monitor and bar top
 border-top-size = 5
@@ -236,15 +228,14 @@ foreground = ${colors.transparent}
 border-color = ${colors.transparent}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
-font-0 = ${fonts.font-PKRB}
-font-1 = ${fonts.font-icon}
-font-2 = ${fonts.font-overflow}
-font-3 = ${fonts.font-powerline}
-font-4 = ${fonts.font-scrolling}
-font-5 = ${fonts.font-weather-large}
-font-6 = Noto Sans CJK JP:style=Bold:size=17:antialias=true;2
-font-7 = ${fonts.font-focused}
-
+font-0 = PKMN RBYGSC:style=Regular:size=9:antialias=true:autohint=true;4
+font-1 = Font Awesome 6 Free:format=truetype:style=Regular:size=11:antialias=;4
+font-2 = Bitstream Vera Sans Mono:style=Roman:pixelsize=11;antialias=false;1
+font-3 = FiraCode Nerd Font Mono:style=Regular:size=18:antialias=true;4
+font-4 = Terminus (TTF):style=Regular:pixelsize=13;2
+font-5 = Weather Icons:style=Regular:size=12;3
+font-6 = Noto Sans CJK JP:style=Bold:size=13:antialias=true;3
+font-7 = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 [section/underline]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
@@ -274,7 +265,6 @@ font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-jp-bold}
 font-6 = ${fonts.font-scrolling}
 font-7 = ${fonts.font-focused}
-
 [section/cross]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
@@ -301,7 +291,6 @@ font-4 = ${fonts.font-powerline-large}
 font-5 = ${fonts.font-jp-bold}
 font-6 = ${fonts.font-scrolling}
 font-7 = ${fonts.font-focused}
-
 ;bars
 ;;float
 [bar/float-top]
@@ -311,7 +300,7 @@ fixed-center = true
 monitor=${env:MONITOR:}
 modules-left = i3 focused 
 modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
+modules-right = bluetooth mullvad wlan pulseaudio-control backlight applauncher
 [bar/float-bottom]
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float.bar
@@ -319,87 +308,79 @@ monitor=${env:MONITOR:}
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
-modules-right = reading
-
+modules-right = wall
 ;;cross
 [bar/cross-left]
 inherit = section/cross
 include-file = ~/dotfiles/.config/polybar/bars/cross.bar
-modules-left = i3 focused focused-name applauncher pulseaudio-control wlan mullvad bluetooth reading
+modules-left = i3 focused focused-name applauncher pulseaudio-control wlan mullvad bluetooth wall
 [bar/cross-right]
 inherit = section/cross
 include-file = ~/dotfiles/.config/polybar/bars/cross.bar
 modules-right = torrent weather uptime disk xkeyboard temperature cpu memory battery date i3
-
 ;;text
 [bar/text-top]
 inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text.bar
 modules-left = i3 focused focused-name
 modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight applauncher
 [bar/text-bottom]
 inherit = section/text
 include-file = ~/dotfiles/.config/polybar/bars/text.bar
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
-modules-right = reading wall
-
+modules-right = wall
 ;;blocks
 [bar/blocks-top]
 inherit = section/blocks
 include-file = ~/dotfiles/.config/polybar/bars/blocks.bar
 modules-left = i3 focused 
 modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight applauncher
 [bar/blocks-bottom]
 inherit = section/blocks
 include-file = ~/dotfiles/.config/polybar/bars/blocks.bar
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
-modules-right = reading 
-
+modules-right = wall
 ;;blocks2
 [bar/blocks2-top]
 inherit = section/blocks2
 include-file = ~/dotfiles/.config/polybar/bars/blocks2.bar
 modules-left = i3 focused i3cap
 modules-center =
-modules-right = songnamescap songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
+modules-right = bluetoothcap bluetooth mullvad wlan pulseaudio-control backlight applauncher
 [bar/blocks2-bottom]
 inherit = section/blocks2
 include-file = ~/dotfiles/.config/polybar/bars/blocks2.bar
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent torrentcap
 modules-center =
-modules-right = readcap reading 
-
+modules-right = songnamescap songnames mpd
 ;;underline
 [bar/underline-top]
 inherit = section/underline
 include-file = ~/dotfiles/.config/polybar/bars/underline.bar
 modules-left = i3 focused focused-name
 modules-center =
-modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight-acpi applauncher
+modules-right = songnames mpd bluetooth mullvad wlan pulseaudio-control backlight applauncher
 [bar/underline-bottom]
 inherit = section/underline
 include-file = ~/dotfiles/.config/polybar/bars/underline.bar
 bottom = true
 modules-left = date battery memory cpu temperature xkeyboard disk uptime weather torrent
 modules-center =
-modules-right = reading wall
-
+modules-right = wall
 ;;mini
 [bar/mini]
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/mini.bar
-modules-center = i3 i3rightcap torrent weather cpu memory pulseaudio-control backlight-acpi battery dateleftcap date 
+modules-center = i3 i3rightcap torrent weather cpu memory pulseaudio-control backlight battery dateleftcap date 
 ;modules-left = 
 ;modules-right = 
-
-
 ;modules
 [module/bspwm]
 type = internal/bspwm
@@ -427,7 +408,6 @@ label-empty-foreground = ${root.i3-text-color-2}
 label-empty-underline = ${root.i3-underline-2}
 label-empty-overline = ${root.i3-overline-2}
 label-empty-padding = 1
-
 [module/i3]
 type = internal/i3
 index-sort = true
@@ -487,7 +467,6 @@ format-suffix = ${root.i3-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.i3-suffix-foreground}
 format-suffix-background = ${root.i3-suffix-background}
-
 [module/focused]
 type = custom/script
 tail = true
@@ -506,7 +485,6 @@ format-suffix-font = 6
 format-suffix = ${root.focused-suffix}
 format-suffix-foreground =  ${root.focused-suffix-foreground}
 format-suffix-background =  ${root.focused-suffix-background}
-
 [module/focused-name]
 type = custom/script
 tail = true
@@ -520,7 +498,6 @@ format-suffix-font = 6
 format-suffix = ${root.focused-suffix}
 format-suffix-foreground = ${root.focused-name-suffix-foreground}
 format-suffix-background = ${root.focused-name-suffix-background}
-
 [module/applauncher]
 type = custom/menu
 expand-right = true
@@ -567,12 +544,14 @@ format-suffix-foreground = ${root.applauncher-suffix-foreground}
 format-suffix-background = ${root.applauncher-suffix-background}
 format-background = ${root.applauncher-color}
 format-foreground = ${root.applauncher-text-color}
-
-[module/xbacklight]
-type = internal/xbacklight
-enabele-scroll = true
-label = " %percentage%%"
-format = <label>
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+use-actual-brightness = false
+poll-interval = 0
+enable-scroll = true
+scroll-interval = 5
+format = " <label>%"
 format-background = ${root.xbacklight-color}
 format-foreground = ${root.xbacklight-text-color}
 format-underline = ${root.xbacklight-underline}
@@ -585,11 +564,6 @@ format-suffix = ${root.xbacklight-suffix}
 format-suffix-foreground = ${root.xbacklight-suffix-foreground}
 format-suffix-background = ${root.xbacklight-suffix-background}
 format-suffix-font = 6
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
 [module/pulseaudio-control]
 type = custom/script
 tail = true
@@ -612,7 +586,6 @@ format-suffix = ${root.pulseaudio-control-suffix}
 format-suffix-foreground = ${root.pulseaudio-control-suffix-foreground}
 format-suffix-background = ${root.pulseaudio-control-suffix-background}
 format-suffix-font = 6
-
 [module/wlan]
 type = custom/script
 interval = 1
@@ -632,13 +605,12 @@ format-suffix-font = 6
 format-suffix = ${root.wlan-suffix}
 format-suffix-foreground = ${root.wlan-suffix-foreground}
 format-suffix-background = ${root.wlan-suffix-background}
-
 [module/mullvad]
 type = custom/ipc
 hook-0 = ~/dotfiles/.scripts/mullvad.sh display
 hook-1 = ~/dotfiles/.scripts/mullvad.sh toggle
 initial = 1
-click-left = polybar-msg hook mullvad 2
+click-left = "#mullvad.hook.1"
 format = "<output> "
 format-background = ${root.mullvad-color}
 format-foreground = ${root.mullvad-text-color}
@@ -652,14 +624,13 @@ format-suffix = ${root.mullvad-suffix}
 format-suffix-foreground = ${root.mullvad-suffix-foreground}
 format-suffix-background = ${root.mullvad-suffix-background}
 format-suffix-font = 6
-
 [module/bluetooth]
-type = custom/script
-interval = 600 
-exec = ~/dotfiles/.scripts/bluetooth.sh status
-click-left = ~/dotfiles/.scripts/bluetooth.sh
-click-right = ~/dotfiles/.scripts/bluetooth.sh disconnect
-format ="<label>"
+type = custom/ipc
+hook-0 = ~/dotfiles/.scripts/bluetooth.sh status
+hook-1 = ~/dotfiles/.scripts/bluetooth.sh toggle
+initial = 1
+click-left = "#bluetooth.hook.1"
+format ="<output>"
 format-background = ${root.bluetooth-color}
 format-foreground = ${root.bluetooth-text-color}
 label-underline = ${root.bluetooth-underline}
@@ -672,7 +643,6 @@ format-suffix = ${root.bluetooth-suffix}
 format-suffix-foreground = ${root.bluetooth-suffix-foreground}
 format-suffix-background = ${root.bluetooth-suffix-background}
 format-suffix-font = 6
-
 [module/mpd]
 type = internal/mpd
 host=localhost
@@ -719,7 +689,6 @@ icon-repeat = 
 icon-single = 
 toggle-on-foreground = ${colors.foreground}
 toggle-off-foreground = ${colors.foreground-alt}
-
 [module/songnames]
 type = custom/script
 tail = true
@@ -738,7 +707,6 @@ format-suffix-font = 6
 format-suffix = ${root.songnames-suffix}
 format-suffix-foreground = ${root.songnames-suffix-foreground}
 format-suffix-background = ${root.songnames-suffix-background}
-
 [module/date]
 type = custom/script
 tail = true
@@ -758,7 +726,6 @@ format-suffix = ${root.date-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.date-suffix-foreground}
 format-suffix-background = ${root.date-suffix-background}
-
 [module/battery]
 type = custom/script
 tail = true
@@ -777,7 +744,6 @@ format-suffix = ${root.battery-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.battery-suffix-foreground}
 format-suffix-background = ${root.battery-suffix-background}
-
 [module/memory]
 type = custom/script
 interval = 1
@@ -797,7 +763,6 @@ format-suffix = ${root.memory-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.memory-suffix-foreground}
 format-suffix-background = ${root.memory-suffix-background}
-
 [module/cpu]
 type = custom/script
 exec = ~/dotfiles/.config/polybar/scripts/cpumonitor.sh display
@@ -817,7 +782,6 @@ format-suffix = ${root.cpu-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.cpu-suffix-foreground}
 format-suffix-background = ${root.cpu-suffix-background}
-
 [module/temperature]
 type = custom/script
 tail = true
@@ -837,7 +801,6 @@ format-suffix = ${root.temperature-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.temperature-suffix-foreground}
 format-suffix-background = ${root.temperature-suffix-background}
-
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
@@ -853,7 +816,6 @@ indicator-icon-2 = num lock;-NL;+NL
 label-indicator-on-capslock =  " CapsLock "
 label-indicator-on-foreground = ${colors.foreground}
 label-indicator-on-background = #ff1100
-
 [module/disk]
 type = custom/script
 tail = true
@@ -873,7 +835,6 @@ format-suffix = ${root.disk-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.disk-suffix-foreground}
 format-suffix-background = ${root.disk-suffix-background}
-
 [module/uptime]
 type = custom/script
 interval = 600
@@ -893,7 +854,6 @@ format-suffix = ${root.uptime-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.uptime-suffix-foreground}
 format-suffix-background = ${root.uptime-suffix-background}
-
 [module/weather]
 type = custom/script
 interval = 600
@@ -912,7 +872,6 @@ format-suffix = ${root.weather-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.weather-suffix-foreground}
 format-suffix-background = ${root.weather-suffix-background}
-
 [module/torrent]
 type = custom/script
 tail = true
@@ -931,7 +890,6 @@ format-suffix = ${root.torrent-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.torrent-suffix-foreground}
 format-suffix-background = ${root.torrent-suffix-background}
-
 [module/wall]
 type = custom/ipc
 initial = 1
@@ -955,7 +913,6 @@ format-suffix = ${root.wall-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.wall-suffix-foreground}
 format-suffix-background = ${root.wall-suffix-background}
-
 [module/reading]
 type = custom/script
 tail = true
@@ -975,7 +932,6 @@ format-suffix = ${root.reading-suffix}
 format-suffix-font = 6
 format-suffix-foreground = ${root.reading-suffix-foreground}
 format-suffix-background = ${root.reading-suffix-background}
-
 [module/songnamescap]
 type = custom/text
 content = ""
@@ -984,32 +940,35 @@ content-background = ${colors.transparent}
 content-foreground = ${root.songnames-prefix-background} 
 content-underline = ${root.songnames-underline}
 content-overline = ${root.songnames-overline}
-
 [module/i3cap]
 type = custom/text
 content = " "
-content-font = 6
+content-font = 4
 content-background = ${colors.transparent}
 content-foreground = ${root.focused-color} 
 content-underline = ${root.i3-underline}
 content-overline = ${root.i3-overline}
-
 [module/torrentcap]
 type = custom/text
 content = " "
-content-font = 6
+content-font = 4
 content-background = ${colors.transparent}
 content-foreground = ${root.torrent-prefix-background} 
 content-underline = ${root.mpd-underline}
 content-overline = ${root.mpd-overline}
-
 [module/readcap]
 type = custom/text
 content = " "
-content-font = 6
+content-font = 4
 content-background = ${colors.transparent}
-content-foreground = ${root.reading-prefix-background} 
+content-foreground = ${root.wall-prefix-background} 
 content-underline = ${root.date-underline}
 content-overline = ${root.date-overline}
-
-
+[module/bluetoothcap]
+type = custom/text
+content = ""
+content-font = 4
+content-background = ${colors.transparent}
+content-foreground = ${root.bluetooth-prefix-background} 
+content-underline = ${root.bluetooth-underline}
+content-overline = ${root.bluetooth-overline}
