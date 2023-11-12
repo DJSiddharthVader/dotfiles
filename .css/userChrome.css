@@ -13,7 +13,7 @@
 /* nav bar extension overflow */
 #nav-bar-overflow-button { display: none !important; }
 /* Hide other misc buttons and icons */
-#reload-button { display: none; }
+/* #reload-button { display: none; } */
 #downloads-button { display: none; }
 #library-button { display: none; }
 #sidebar-button { display: none; }
