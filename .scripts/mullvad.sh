@@ -29,13 +29,13 @@ disconnect() {
     transmission.sh pause > /dev/null 2>&1
     mullvad disconnect
 }
-
 toggle() {
     [[ "$(status)" =~ "Disconnected" ]] && connect || disconnect
 }
 restart() {
    disconnect && connect
 }
+
 display() {
     mode="$1"
     case "$(status)" in
@@ -43,7 +43,7 @@ display() {
             info="$(curl -s ipinfo.io)"
             case "$1" in
                 'ip') output="$(echo "$info" | jq .ip)" ;;
-                'location') output="$(echo "$info" | jq .country)" ;;
+                'location') output="$(mullvad status | rev | cut -d',' -f-2 | rev)" ;;
             esac
             ;;
         Disconnected|Disconnecting) output="None" ;;
@@ -74,11 +74,11 @@ main() {
             setMode "$dmode"
             ;;
     esac
-    sleep 2
+    sleep 1
     case $mode in
-        toggle    ) polybar-msg hook mullvad 1 >| /dev/null ;;
-        connect   ) polybar-msg hook mullvad 1 >| /dev/null ;;
-        disconnect) polybar-msg hook mullvad 1 >| /dev/null ;;
+        toggle    ) polybar-msg action "#mullvad.hook.0" ;;
+        connect   ) polybar-msg action "#mullvad.hook.0" ;;
+        disconnect) polybar-msg action "#mullvad.hook.0" ;;
     esac
 }
 
