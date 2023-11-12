@@ -2,8 +2,6 @@
 .config/kcmfonts/
 .config/kuprc/
 .config/kdeglobals
-.config/gtk-3.0/settings.ini
-.config/gtk-4.0/settings.ini
 .config/pavucontrol-qt/
 .config/qpdfview/qpdfview.conf
 .config/kde.org/UserFeedback.org.kde.dolphin.conf
