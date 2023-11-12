@@ -65,14 +65,19 @@ main() {
     mode="$1"
     device="$2"
     case "$mode" in
-        'connect') connect "$device" ;;
-        'disconnect') disconnect "$device" ;;
-        'toggle') toggle "$device" ;;
-        'status') get_status "$device" ;;
+        connect) connect "$device" ;;
+        disconnect) disconnect "$device" ;;
+        toggle) toggle "$device" ;;
+        status) get_status "$device" ;;
         # 'status') getConnectedDevice ;;
         *) help && exit 1 ;;
     esac
-    #polybar-msg hook bluetooth-ipc 1 &> /dev/null
+    case "$mode" in
+        connect   ) polybar-msg action "#bluetooth.hook.0" ;;
+        disconnect) polybar-msg action "#bluetooth.hook.0" ;;
+        toggle    ) polybar-msg action "#bluetooth.hook.0" ;;
+    esac
+    
 }
 # Set default args if not given
 if (( $# < 1 )); then
