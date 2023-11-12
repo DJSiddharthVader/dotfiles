@@ -1,7 +1,6 @@
-; arrow_tail
+; sym_jojo
 ; icons to delimit polybar modules
-leftprefix = ""
-leftsuffix = ""
-rightprefix = ""
-rightsuffix = ""
-
+leftprefix = "『"
+leftsuffix = "』"
+rightprefix = "『"
+rightsuffix = "』"
