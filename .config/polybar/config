@@ -207,6 +207,7 @@ font-6 = ${fonts.font-jp}
 font-7 = ${fonts.font-focused}
 [section/blocks2]
 monitor = ${env:MONITOR:}
+wm-restack = i3
 cursor-scroll = ns-resize
 cursor-click = pointer
 enable-ipc = true
@@ -608,9 +609,8 @@ format-suffix-background = ${root.wlan-suffix-background}
 [module/mullvad]
 type = custom/ipc
 hook-0 = ~/dotfiles/.scripts/mullvad.sh display
-hook-1 = ~/dotfiles/.scripts/mullvad.sh toggle
 initial = 1
-click-left = "#mullvad.hook.1"
+click-left = ~/dotfiles/.scripts/mullvad.sh toggle
 format = "<output> "
 format-background = ${root.mullvad-color}
 format-foreground = ${root.mullvad-text-color}
@@ -627,9 +627,8 @@ format-suffix-font = 6
 [module/bluetooth]
 type = custom/ipc
 hook-0 = ~/dotfiles/.scripts/bluetooth.sh status
-hook-1 = ~/dotfiles/.scripts/bluetooth.sh toggle
 initial = 1
-click-left = "#bluetooth.hook.1"
+click-left = ~/dotfiles/.scripts/bluetooth.sh toggle
 format ="<output>"
 format-background = ${root.bluetooth-color}
 format-foreground = ${root.bluetooth-text-color}
@@ -874,7 +873,7 @@ format-suffix-foreground = ${root.weather-suffix-foreground}
 format-suffix-background = ${root.weather-suffix-background}
 [module/torrent]
 type = custom/script
-tail = true
+interval = 1
 exec = ~/bin/transmission.sh -m display
 click-left = ~/bin/transmission.sh -m next
 click-right = ~/bin/transmission.sh -m prev
