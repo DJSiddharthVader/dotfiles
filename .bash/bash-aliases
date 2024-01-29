@@ -44,6 +44,8 @@ alias notes='notes.sh'
 alias vt='mullvad.sh toggle'
 alias tsm="transmission-remote"
 alias tro='transmission.sh'
+alias sdn="standard-notes-3.181.31-linux-x86_64.AppImage"
+alias flr="Fluent.Reader.1.1.4.AppImage"
 #Shorten
 alias xc='xrandr| grep " con"'
 alias ..='cd ..'
