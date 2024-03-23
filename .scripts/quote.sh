@@ -1,21 +1,10 @@
 #!/bin/bash
-
-# TODO
-#- pull random quote from internet
-#- more formally systematize quote database
-#  - add/edit/delete entrires
-#  - fuzzy search for authors/words
-#  - fuzzy filter by authors/words
-#- build model to tag quotes, authors by category
-#- build giberish genrator hmm for random quotes
-
-# Files & Dirs
+# Data
 # all quotes start with " and have an author on the next line, no other lines should start with a "
 # quote_files=(~/.varfiles/quotes.md ~/.varfiles/quotes.txt)
 quote_files=(~/.varfiles/quotes.md)
 # dir with ascii art for various thinkers
 thinker_dir="$HOME/dotfiles/.ascii/thinkers" 
-
 # Default Args
 colwrap=50
 border_string="(~)~"
