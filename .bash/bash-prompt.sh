@@ -36,7 +36,7 @@ git_info() {
         [[ $branch = 'master' ]] && branch='m' # trim master to m
         prompt="$prompt($branch)" # current git branch
 
-        commits="$("$status_cmd" status | grep -o 'by [0-9]* commit' | cut -d' ' -f2)"
+        commits="$(git status | grep -o 'by [0-9]\+ commit' | cut -d' ' -f2)"
         if [[ -n "$commits" ]]; then # non-zero commits
            prompt="$prompt$committed_symbol$commits"
         fi
