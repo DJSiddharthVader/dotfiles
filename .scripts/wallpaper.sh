@@ -106,9 +106,9 @@ update_index() {
 # Set wallpaper + update colors
 set_wallpaper() {
     image="$1"
-    polybar-msg hook wall 1 # update polybar wallpaper module
-    cp "$image" "$WALLPAPER_FILE" # copy to generic wallpaper location
-    feh --bg-scale "$WALLPAPER_FILE" # set wallpaper
+    polybar-msg action "#wall.hook.0" # update polybar wallpaper module
+    cp "$image" "$WALLPAPER_FILE"     # copy to generic wallpaper location
+    feh --bg-scale "$WALLPAPER_FILE"  # set wallpaper
 }
 change_firefox() {
     # get window id for a firefox window
@@ -120,6 +120,7 @@ change_colors() {
     image="$1"
     wal -a 93 -n -e -i "$image"  # generate colorschemes 
     zathura.sh # re-write zathura config with new colors
+    xrdb ~/.cache/wal/colors.Xresources
     if [[ -z "$(pgrep 'polybar')" ]]; then
         bar-manager.sh style stay 
     else
@@ -128,7 +129,7 @@ change_colors() {
     ~/bin/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox  > /dev/null 2>&1 # theme for GTK apps and whatnot
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
     # change_firefox # trigger reloading of colors.css in firefox
-    pywalfox update  # use addon to update FF colors
+    # pywalfox update  # use addon to update FF colors
 }
 wall() {
     mode="$1"
@@ -147,7 +148,7 @@ wall() {
     esac
 }
 display() {
-    wallpaper="$(get_image_index "$(get_index)" | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')" # replace WALLPAPER_DIR with ... in wallpaper path
+    wallpaper="$(get_image_index "$(get_index)" | sed -E 's/^.*wallpapers\/(.*)$/...\/\1/')"  # replace WALLPAPER_DIR with ... in wallpaper path
     echo "$wallpaper"
 #    if [[ ${#wallpaper} -gt $THRESH ]]; then
 #        ( zscroll -l "$THRESH" -d 0.20 -b "" -a "" -p " /// " "$wallpaper" ) &
@@ -158,7 +159,7 @@ display() {
 #        printf "%-${THRESH}s" "$wallpaper"
 #    fi
 }
-# main
+# Main
 main() {
     [ "$(wc -l $HIST_FILE | cut -d' ' -f1)" -lt 1 ] && reset_history
     if [[ -f "$1" || -d "$1" ]]; then
@@ -168,16 +169,20 @@ main() {
     fi
     change="$2"
     case "$mode" in
-        rh            ) reset_history && exit 0               ;;
-        display       ) display && exit 0                    ;;
-        print         ) get_image_index "$(get_index)" && exit 0 ;;
-        reload        ) wall 'stay' 'both'                   ;;
+        rh            ) reset_history                        ;;
         path          ) wall "$1" "$change"                  ;;
         stay|prev|next) wall "$mode" "$change"               ;;
+        reload        ) wall 'stay' 'both'                   ;;
+        display       ) display                              ;;
+        print         ) get_image_index "$(get_index)"       ;;
         *) usage && exit 1 ;;
     esac
-}
+    # Update polybar module
+    # case "$mode" in
+    #     path|prev|next) polybar-msg action "#wallpaper.hook.0" ;;
+    # esac
 
+}
 case 1 in
     $(( $# == 1 )))
         mode="$1"

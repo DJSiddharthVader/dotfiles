@@ -25,7 +25,7 @@ isDeviceConnected() {
 }
 get_status() {
     device="$1" #uuid
-    [[ "$(isDeviceConnected $device)" == 'yes' ]] && echo "$icon $(getDeviceName $device)" || echo "$icon no"
+    [[ "$(isDeviceConnected $device)" == 'yes' ]] && echo "$icon $(getDeviceName $device)" || echo "$icon None"
 }
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
@@ -65,28 +65,26 @@ main() {
     mode="$1"
     device="$2"
     case "$mode" in
-        connect) connect "$device" ;;
-        disconnect) disconnect "$device" ;;
-        toggle) toggle "$device" ;;
-        status) get_status "$device" ;;
-        # 'status') getConnectedDevice ;;
+        connect   ) connect "$device" 
+                    sleep 1
+                    polybar-msg action "#bluetooth.hook.0" 
+            ;;
+        disconnect) disconnect "$device" 
+                    sleep 1
+                    polybar-msg action "#bluetooth.hook.0" 
+            ;;
+        toggle    ) toggle "$device" 
+                    sleep 1
+                    polybar-msg action "#bluetooth.hook.0" 
+            ;;
+        status    ) get_status "$device" 
+            ;;
         *) help && exit 1 ;;
     esac
-    case "$mode" in
-        connect   ) polybar-msg action "#bluetooth.hook.0" ;;
-        disconnect) polybar-msg action "#bluetooth.hook.0" ;;
-        toggle    ) polybar-msg action "#bluetooth.hook.0" ;;
-    esac
-    
 }
 # Set default args if not given
-if (( $# < 1 )); then
-    mode="toggle"
-    # device="5C:C6:E9:35:57:42" # HRF 3000
-    device="74:45:CE:F9:14:A8" # MTH20xBT
-else
-    mode="$1"
-    device="$2"
-fi
+[[ -n "$1" ]] && mode="$1" || mode='toggle'
+[[ -n "$2" ]] && device="$2" || device="74:45:CE:F9:14:A8" # MTH20xBT
+echo $mode $device
 # Main 
 main "$mode" "$device"
