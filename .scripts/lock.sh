@@ -2,9 +2,9 @@
 set -e
 # Variables
 SCREEN="$HOME/.varfiles/screen.png"
-FONT="GohuFont 11 Nerd Font Mono:style=Regular:size=18"
+FONT="GohuFont 11 Nerd Font Mono:style=Regular"
 DATE="$(date +'%A, %B %d %Y')"
-# source current theme colors
+# Source current theme colors
 tmp="$(mktemp)"
 tail -n+4 $HOME/.cache/wal/colors.sh >| $tmp
 source $tmp
@@ -20,51 +20,45 @@ lockbox() {
     done
     echo "$rectangles"
 }
-main(){
+lock(){
     # actions for locking
     mpc pause > /dev/null 2>&1
     # bw lock # lock bitwarden
     ~/.config/polybar/scripts/pulseaudio-control.sh mute
     # prep lockscreen
-    rectangles="$(lockbox)"
     scrot -o "$SCREEN"
     convert "$SCREEN" \
             -scale 20% \
             -scale 500% \
-            -draw "fill $color1 fill-opacity 0.85 $rectangles" \
             "$SCREEN"
+            # -draw "fill $color1 fill-opacity 0.85 $(lockbox)" \
     #lock command
-    i3lock                                    \
-        -i "$SCREEN"                          \
-        -e -f                                 \
-        --clock                               \
-        --radius=29                           \
-        --ring-width=7                        \
-        --ind-pos='x+290:h-80'                \
-        --time-pos='x+145:h-80'               \
-        --date-pos='x+145:h-55'               \
-        --noinput-text=''                     \
-        --verif-text=''                       \
-        --wrong-text='!!!'                    \
-        --date-str="$DATE"                    \
-        --layout-font="$FONT"                 \
-        --time-font="$FONT"                   \
-        --date-font="$FONT"                   \
-        --verif-font="$FONT"                  \
-        --wrong-font="$FONT"                  \
-        --time-color="$foreground"            \
-        --date-color="$foreground"            \
-        --ring-color=$color2                  \
-        --keyhl-color=$color3                 \
-        --bshl-color=$color4                  \
-        --wrong-color=$color5                 \
-        --ringwrong-color=$color5             \
-        --verif-color=$color6                 \
-        --ringver-color=$color6               \
-        --line-uses-inside                    \
-        --inside-color=00000000               \
-        --insidever-color=00000000            \
-        --separator-color=00000000            \
-        --insidewrong-color=00000000
+    i3lock                            \
+        --nofork                      \
+        --pass-volume-keys            \
+        -e                            \
+        -f                            \
+        --clock                       \
+        --time-color="$foreground"    \
+        --time-font="$FONT"           \
+        --time-size=75                \
+        --date-str="$DATE"            \
+        --date-font="$FONT"           \
+        --date-size=20                \
+        --date-color="$foreground"    \
+        --radius=200                  \
+        --ring-width=20               \
+        --ring-color=$color2          \
+        --inside-color=$color3        \
+        --verif-text='...'            \
+        --verif-color=$color4         \
+        --ringver-color=$color4       \
+        --insidever-color=$color4     \
+        --wrong-text='!!!'            \
+        --wrong-color=$color5         \
+        --ringwrong-color=$color5     \
+        --insidewrong-color=$color5   \
+        -i "$SCREEN"
+        # --no-verify                   \
 }
-main
+lock
