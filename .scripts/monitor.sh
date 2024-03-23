@@ -43,24 +43,17 @@ disconnect(){
 connect() {
     case "$1" in
         home)
-            m3="$(xrandr | grep 'DP-[2,3]-5-5 con' | cut -d' ' -f1)"
-            m2="${m1//5/6}"
             m1="$(xrandr | grep 'DP-[2,3] con' | cut -d' ' -f1)"
-            echo $m1 $m2 $m
+            m2="$(xrandr | grep 'DP-[2,3]-5-5 con' | cut -d' ' -f1)"
+            m3="${m2//5/6}"
+            echo $m1 $m2 $m3
             xrandr --verbose \
-                   --output eDP-1 --off \
-                   --output $m1 --mode 1920x1080 --rate 60\
-                   --output $m2 --mode 1920x1080 --right-of $m1 \
-                   --output $m3 --mode 1920x1200 --rotate right --right-of $m2
+                   --output $m1 --mode 1920x1080 \
+                   --output $m2 --mode 1920x1200 --right-of $m1 --rotate right \
+                   --output $m3 --mode 1920x1080 --right-of $m2 \
+                   --output eDP-1 --off
             # connect_audio hdmi
             organize_workspaces home
-            ;;
-        hmon)
-            xrandr --verbose --output eDP-1 --off \
-                   --output DP-3 --mode 1920x1080 \
-                   --output DP-2 --mode 1920x1200 --rotate right --right-of DP-3 
-            # connect_audio hdmi
-            organize_workspaces hmon
             ;;
         work)
             m1="$(xrandr | grep -v $LAPTOP_SCREEN | grep 'DP-.* con' | cut -d' ' -f1)"
@@ -73,8 +66,9 @@ connect() {
             prev=$LAPTOP_SCREEN
             while IFS= read -r monitor; do
                 if [[ $monitor != $LAPTOP_SCREEN ]]; then
-                    resolution="$(resolution "$monitor")"
-                    xrandr --output $monitor --mode "$resolution" --right-of $prev
+                    xrandr --output $monitor --right-of $prev
+                    # resolution="$(resolution "$monitor")"
+                    # xrandr --output $monitor --mode "$resolution" --right-of $prev
                     prev="$monitor"
                 fi
             done <<< "$(list_monitors)"
@@ -85,8 +79,7 @@ connect() {
             ;;
         mirror)
             while IFS= read -r monitor; do
-                resolution="$(resolution "$monitor")"
-                xrandr --output $monitor --mode "$resolution" --same-as $LAPTOP_SCREEN
+                xrandr --output $monitor --same-as $LAPTOP_SCREEN
             done <<< "$(list_monitors)"
             ;;
         laptop)
@@ -103,20 +96,16 @@ organize_workspaces() {
     mode="$1"
     case "$mode" in
         home) 
-            move_left=(3 5 6)
-            move_right=(2 4)
+            move_left=(1 0)
+            move_right=(2 5 8 9)
             ;;
         work)
-            move_right=(3 5 6)
+            move_right=(3 5 6 7 8 9)
             move_left=()
             ;;
         hmon)
             move_right=(3 5 6)
             move_left=()
-            ;;
-        proj) 
-            move_left=(2 3 5 6 0)
-            move_right=()
             ;;
         *) help && exit 1 ;;
     esac
@@ -167,7 +156,9 @@ main() {
     else
         connect "$mode"
     fi
-    $HOME/dotfiles/.scripts/wallpaper.sh stay back >& /dev/null  # set wallpaper on all screens
+    # Set wallpaper on all screens
+    $HOME/dotfiles/.scripts/wallpaper.sh stay back >& /dev/null  
+    # Launch status bars
     $BAR_MANAGER_SCRIPT style stay >& /dev/null
 }
 main $@
