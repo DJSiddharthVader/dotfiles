@@ -13,8 +13,34 @@ compositing-foreground = over
 margin-top = 1
 margin-bottom = 1
 [colors]
-;hack for getting colors to read from Xressources
+;polybar module separators
 include-file = ~/dotfiles/.config/polybar/separators.mode
+;load Xresources colors
+;foreground = #000
+;foreground-white = #B4B4B4
+;foreground-alt = #444
+;primary = ${xrdb:color1:#222}
+;secondary = ${xrdb:color2:#222}
+;tertiary = ${xrdb:color3:#222}
+;alert = #ff0000
+;transparent = #00000000
+;col0 = ${xrdb:color0:#222}
+;col1 = ${xrdb:color1:#222}
+;col2 = ${xrdb:color2:#222}
+;col3 = ${xrdb:color3:#222}
+;col4 = ${xrdb:color4:#222}
+;col5 = ${xrdb:color5:#222}
+;col6 = ${xrdb:color6:#222}
+;col7 = ${xrdb:color7:#222}
+;col8 = ${xrdb:color8:#222}
+;col9 = ${xrdb:color9:#222}
+;col10 = ${xrdb:color10:#222}
+;col11 = ${xrdb:color11:#222}
+;col12 = ${xrdb:color12:#222}
+;col13 = ${xrdb:color13:#222}
+;col14 = ${xrdb:color14:#222}
+;col15 = ${xrdb:color15:#222}
+;hack for getting colors to read from Xressources
 include-file = ~/.cache/wal/polybar-wal.theme
 [fonts]
 ; Text Fonts
@@ -117,7 +143,7 @@ enable-ipc = true
 fixed-center = false
 dim-value = 0
 width = 100%
-height = 30
+height = 25
 radius = 5
 ;background
 background = ${colors.transparent}
@@ -132,14 +158,15 @@ border-right-size = 10
 border-color = ${colors.transparent}
 focused-name-format = "%{T5}<label>%{T-}"
 ;fonts
-font-0 = ${fonts.font-PKRB}
-font-1 = ${fonts.font-icon}
-font-2 = ${fonts.font-overflow}
-font-3 = ${fonts.font-powerline}
-font-4 = ${fonts.font-scrolling}
-font-5 = ${fonts.font-weather-large}
-font-6 = Noto Sans CJK JP:style=Bold:size=17:antialias=true;2
-font-7 = ${fonts.font-focused}
+;fonts
+font-0 = PKMN RBYGSC:style=Regular:size=9:antialias=true:autohint=true;4
+font-1 = Font Awesome 6 Brands:format=truetype:style=Regular:size=11:antialias=;4
+font-2 = Bitstream Vera Sans Mono:style=Roman:pixelsize=11;antialias=false;1
+font-3 = FiraCode Nerd Font Mono:style=Regular:size=18:antialias=true;4
+font-4 = Terminus (TTF):style=Regular:pixelsize=13;2
+font-5 = Weather Icons:style=Regular:size=12;3
+font-6 = Noto Sans CJK JP:style=Bold:size=13:antialias=true;3
+font-7 = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 [section/text]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
@@ -230,7 +257,7 @@ border-color = ${colors.transparent}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
 font-0 = PKMN RBYGSC:style=Regular:size=9:antialias=true:autohint=true;4
-font-1 = Font Awesome 6 Free:format=truetype:style=Regular:size=11:antialias=;4
+font-1 = Font Awesome 6 Brands:format=truetype:style=Regular:size=11:antialias=;4
 font-2 = Bitstream Vera Sans Mono:style=Roman:pixelsize=11;antialias=false;1
 font-3 = FiraCode Nerd Font Mono:style=Regular:size=18:antialias=true;4
 font-4 = Terminus (TTF):style=Regular:pixelsize=13;2
@@ -301,7 +328,7 @@ fixed-center = true
 monitor=${env:MONITOR:}
 modules-left = i3 focused 
 modules-center =
-modules-right = bluetooth mullvad wlan pulseaudio-control backlight applauncher
+modules-right = songnamescap songnames mpd bluetooth mullvad wlan pulseaudio-control backlight applauncher
 [bar/float-bottom]
 inherit = section/float
 include-file = ~/dotfiles/.config/polybar/bars/float.bar
@@ -420,12 +447,12 @@ ws-icon-2 = 2;II 
 ws-icon-3 = 3;III 
 ws-icon-4 = 4;IV 
 ws-icon-5 = 5;V 
-ws-icon-6 = 6;VI  
+ws-icon-6 = 6;VI 
 ws-icon-7 = 7;VII 
-ws-icon-8 = 8;VIII  
-ws-icon-9 = 9;IX  
+ws-icon-8 = 8;VIII  
+ws-icon-9 = 9;IX  
 ws-icon-0 = 10;X ?
-;                    
+;                      󰄧 󰄨 󰄪 
 ; Only show workspaces on the same output as the bar
 label-mode-padding = 0
 label-mode-foreground = #000
@@ -552,7 +579,7 @@ use-actual-brightness = false
 poll-interval = 0
 enable-scroll = true
 scroll-interval = 5
-format = " <label>%"
+format = " <label>"
 format-background = ${root.xbacklight-color}
 format-foreground = ${root.xbacklight-text-color}
 format-underline = ${root.xbacklight-underline}
@@ -610,7 +637,7 @@ format-suffix-background = ${root.wlan-suffix-background}
 type = custom/ipc
 hook-0 = ~/dotfiles/.scripts/mullvad.sh display
 initial = 1
-click-left = ~/dotfiles/.scripts/mullvad.sh toggle
+click-left = ~/dotfiles/.scripts/mullvad.sh toggle &
 format = "<output> "
 format-background = ${root.mullvad-color}
 format-foreground = ${root.mullvad-text-color}
@@ -628,7 +655,7 @@ format-suffix-font = 6
 type = custom/ipc
 hook-0 = ~/dotfiles/.scripts/bluetooth.sh status
 initial = 1
-click-left = ~/dotfiles/.scripts/bluetooth.sh toggle
+click-left = ~/dotfiles/.scripts/bluetooth.sh toggle &
 format ="<output>"
 format-background = ${root.bluetooth-color}
 format-foreground = ${root.bluetooth-text-color}
@@ -893,12 +920,8 @@ format-suffix-background = ${root.torrent-suffix-background}
 type = custom/ipc
 initial = 1
 hook-0 = ~/dotfiles/.scripts/wallpaper.sh display
-hook-1 = ~/dotfiles/.scripts/wallpaper.sh prev back
-hook-2 = ~/dotfiles/.scripts/wallpaper.sh next back
-hook-3 = ~/dotfiles/.scripts/wallpaper.sh reload
-click-left =   polybar-msg hook wall 2 && sleep 1 && polybar-msg hook wall 1
-click-right =  polybar-msg hook wall 3 && sleep 1 && polybar-msg hook wall 1
-click-middle = polybar-msg hook wall 4 && sleep 1 && polybar-msg hook wall 1
+click-left = ~/dotfiles/.scripts/wallpaper.sh prev back &
+click-right = ~/dotfiles/.scripts/wallpaper.sh next back &
 format = "%{T5}<output> %{T-}"
 format-background = ${root.wall-color}
 format-foreground = ${root.wall-text-color}
