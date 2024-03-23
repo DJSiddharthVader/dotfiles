@@ -46,49 +46,62 @@ set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 set $size_change 10
 # amount to move window position per button press
 set $move_change 20
+# Set colors from Xresources
+set_from_resource $fg i3wm.color7 #ffffff
+set_from_resource $c5 i3wm.color5 #f0f0f0
+set_from_resource $c4 i3wm.color4 #f0f0f0
+set_from_resource $c3 i3wm.color3 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $c4     $fg  $bg       $bg
+client.focused_inactive $bg     $c5     $fg  $bg       $bg
+client.unfocused        $bg     $c3     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
 
 ##---Start up--------------#
 # Set monitor resolution
 exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
-#lock after inactivity
-#exec_always --no-startup-id xautolock -time 60 -locker ~/dotfiles/.scripts/lock.sh -detectsleep
-# Auto lock
-exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/sidreed/dotfiles/.scripts/lock.sh --nofork &
-# Set sleep after X seconds
+# Set blank after X seconds
 exec --no-startup-id xset s 3600
-#Increase key rate
+# Lock after inactivity
+exec --no-startup-id xidlehook --not-when-audio --not-when-fullscreen --timer 3600 '~/dotfiles/.scripts/lock.sh' ''
+# Increase key rate
 exec --no-startup-id xset r rate 300 50
-#Pulseaudio
+# Pulseaudio
 exec --no-startup-id pulseaudio --kill
-#Network Manager applet
+# Network Manager applet
 exec --no-startup-id nm-applet
-#Unclutter makes the mouse invisible after a brief period
+# Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
-#Disable touchpad when typing
+# Disable touchpad when typing
 exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
-#Kill refular notification daemon so dunst runs
+# Kill regular notification daemon so dunst runs
 exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
-#Launch low battery notifier script
+# Load Xresources
+exec --no-startup-id xrdb ~/.cache/wal/colors.Xresources
+# Launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
-#Composite manager:
+# Composite manager
 exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
-#Launch Polybar and set wallpaper
+# Launch Polybar and set wallpaper
 exec --no-startup-id ~/.scripts/wallpaper.sh stay both
-#Launch slack
+# Launch slack
 exec --no-startup-id slack
-#Launch browser
-#exec --no-startup-id firefox --browser
-#Launch syncthing
+# Launch syncthing
 exec --no-startup-id syncthing
-#Torrent daemon:
+#
+# Launch browser
+#exec --no-startup-id firefox --browser
+# Torrent daemon:
 #exec --no-startup-id transmission.sh -m start
-#Start VPN
+# Start VPN
 #exec --no-startup-id ~/.scripts/mullvad.sh connect
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 1400 1100 
+for_window [instance="dropdown"] resize set 1080 620 
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
