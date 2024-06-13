@@ -30,22 +30,24 @@ for_window [window_type="menu"] floating enable
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 for_window [instance="zoom"] floating enable
+workspace_layout stacking
 set $mod Mod4
-set $term --no-startup-id st
-set $big_term --no-startup-id st -f "FiraCode Nerd Font Mono:style=Regular:size=20:antialias=true:autohint=true"
-set $BROWSER firefox
 set $defgaps 5
 gaps inner $defgaps
 gaps outer $defgaps
 mouse_warping none
 focus_follows_mouse yes
 font "FiraCode Nerd Font Mono"
-set $hibernate sudo systemctl suspend
-set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 # amount to change window size per button press
 set $size_change 10
 # amount to move window position per button press
 set $move_change 20
+# Set reusable app launches
+set $BROWSER firefox
+set $term --no-startup-id st
+set $big_term --no-startup-id st -f "FiraCode Nerd Font Mono:style=Regular:size=20:antialias=true:autohint=true"
+set $hibernate sudo systemctl suspend
+set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 # Set colors from Xresources
 set_from_resource $fg i3wm.color7 #ffffff
 set_from_resource $c5 i3wm.color5 #f0f0f0
@@ -62,10 +64,11 @@ client.background       $bg
 ##---Start up--------------#
 # Set monitor resolution
 exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
-# Set blank after X seconds
-exec --no-startup-id xset s 3600
+# Lock screen & blank after 1 hour
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
 # Lock after inactivity
-exec --no-startup-id xidlehook --not-when-audio --not-when-fullscreen --timer 3600 '~/dotfiles/.scripts/lock.sh' ''
+exec --no-startup-id xidlehook --not-when-audio --not-when-fullscreen --timer 1800 '~/dotfiles/.scripts/lock.sh' ''
 # Increase key rate
 exec --no-startup-id xset r rate 300 50
 # Pulseaudio
@@ -301,11 +304,11 @@ bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
 #bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 #bindsym $mod+F2		restart
 #bindsym $mod+F3		exec --no-startup-id displayselect
-#bindsym $mod+F4		   exec --no-startup-id $hibernate
+#bindsym $mod+F4		exec --no-startup-id $hibernate
 #bindsym $mod+F5
 #bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
 #bindsym $mod+F7        exec -no-startup-id compton
-#bindsym $mod+F8		   exec --no-startup-id $netrefresh
+#bindsym $mod+F8		exec --no-startup-id $netrefresh
 #bindsym $mod+F9		exec --no-startup-id sudo mount -a
 #bindsym $mod+F10
 #bindsym $mod+F11
