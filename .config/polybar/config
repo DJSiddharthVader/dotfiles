@@ -444,15 +444,15 @@ pin-workspaces = true
 strip-wsnumbers = true
 ws-icon-1 = 1;I 
 ws-icon-2 = 2;II 
-ws-icon-3 = 3;III 
+ws-icon-3 = 3;III 
 ws-icon-4 = 4;IV 
 ws-icon-5 = 5;V 
-ws-icon-6 = 6;VI 
-ws-icon-7 = 7;VII 
-ws-icon-8 = 8;VIII  
-ws-icon-9 = 9;IX  
+ws-icon-6 = 6;VI 
+ws-icon-7 = 7;VII 
+ws-icon-8 = 8;VIII 
+ws-icon-9 = 9;IX 
 ws-icon-0 = 10;X ?
-;                      󰄧 󰄨 󰄪 
+;                      󰄧 󰄨 󰄪 
 ; Only show workspaces on the same output as the bar
 label-mode-padding = 0
 label-mode-foreground = #000
