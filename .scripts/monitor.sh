@@ -14,10 +14,6 @@ is_connected() {
         true
     fi
 }
-resolution() {
-    monitor="$1"
-    xrandr | sed -ne "/$monitor/,/connected/p" | sort -n | tail -1 | grep -ao '[0-9]*x[0-9_\.]*'
-}
 list_monitors() {
     # xrandr | grep ' connected' | sort -r | cut -d' ' -f1 | tr -d ' ' 
     # xrandr --listmonitors | tail -n+2 | grep -o '+\*[^ ]* ' | tr -d '*+ '
@@ -27,8 +23,9 @@ connect_audio() {
     mode="$1"
     case "$mode" in
         laptop) pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo ;;
-        hdmi) pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo  ;;
-        *) echo "Invalid mode use {laptop|hdmi}" && exit 1 ;;
+        hdmi  ) pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo  ;;
+        home  ) pacmd set-card-profile 0 output:hdmi-stereo-extra1+input:analog-stereo ;;
+        *) echo "Invalid mode use {laptop|hdmi|home}" && exit 1 ;;
     esac
 }
 disconnect(){
@@ -41,23 +38,35 @@ disconnect(){
     done <<< "$(list_monitors)"
 }
 connect() {
+    echo "mode: $1"
     case "$1" in
         home)
-            m1="$(xrandr | grep 'DP-[2,3] con' | cut -d' ' -f1)"
-            m2="$(xrandr | grep 'DP-[2,3]-5-5 con' | cut -d' ' -f1)"
-            m3="${m2//5/6}"
+            m1="$(xrandr | grep 'DP-[2,3]-5-5 con' | cut -d' ' -f1)"
+            m2="${m1//5/6}"
+            m3="$(xrandr | grep 'DP-[2,3] con' | cut -d' ' -f1)"
             echo $m1 $m2 $m3
+                   # --output $m3 --mode 1920x1080 --right-of $m2 \
             xrandr --verbose \
                    --output $m1 --mode 1920x1080 \
-                   --output $m2 --mode 1920x1200 --right-of $m1 --rotate right \
-                   --output $m3 --mode 1920x1080 --right-of $m2 \
+                   --output $m2 --mode 1920x1080 --right-of $m1 --rotate left \
+                   --output $m3 --mode 1920x1080 --right-of $m2 --rate 60.00 \
                    --output eDP-1 --off
-            # connect_audio hdmi
+            connect_audio home
             organize_workspaces home
+            ;;
+        shome)
+            m2="$(xrandr | grep 'DP-[2,3,4]-5-5 con' | cut -d' ' -f1)"
+            m1="${m2//5/6}"
+            echo $m1 $m2
+                   # --output $m3 --mode 1920x1080 --right-of $m2 \
+            xrandr --verbose \
+                   --output $m2 --mode 1920x1080 \
+                   --output $m1 --mode 1920x1080 --right-of $m2 --rotate left \
+                   --output eDP-1 --off
+            organize_workspaces work
             ;;
         work)
             m1="$(xrandr | grep -v $LAPTOP_SCREEN | grep 'DP-.* con' | cut -d' ' -f1)"
-            echo $m1
             xrandr --output $LAPTOP_SCREEN --mode $LAPTOP_RESOLUTION --primary \
                    --output $m1 --auto --right-of $LAPTOP_SCREEN --rotate left
             organize_workspaces work
@@ -66,9 +75,7 @@ connect() {
             prev=$LAPTOP_SCREEN
             while IFS= read -r monitor; do
                 if [[ $monitor != $LAPTOP_SCREEN ]]; then
-                    xrandr --output $monitor --right-of $prev
-                    # resolution="$(resolution "$monitor")"
-                    # xrandr --output $monitor --mode "$resolution" --right-of $prev
+                    xrandr --output $monitor --auto --right-of $prev
                     prev="$monitor"
                 fi
             done <<< "$(list_monitors)"
@@ -96,11 +103,17 @@ organize_workspaces() {
     mode="$1"
     case "$mode" in
         home) 
-            move_left=(1 0)
-            move_right=(2 5 8 9)
+            # move_left=(0 1)
+            # move_right=(2 3 5 6)
+            move_left=(2 3 5 6)
+            move_right=(4 7 8)
+            ;;
+        shome)
+            move_left=(1 4 7 )
+            move_right=()
             ;;
         work)
-            move_right=(3 5 6 7 8 9)
+            move_right=(3 5 6 8)
             move_left=()
             ;;
         hmon)
@@ -135,21 +148,11 @@ main() {
                 NewTokyo03) 
                     case $n_monitors in
                         3) connect home ;;
-                        2) connect proj ;;
-                        *) echo 'Error detecting monitors' && exit 1 ;;
-                    esac
+                        2) connect shome ;;
+                        *) echo 'Error detecting monitors' && exit 1 ;; esac
                     ;;
                 *) connect hybrid ;;
             esac
-            # numMonitors="$(echo "$monitors" | wc -l)"
-            # case $numMonitors in
-            #     3) connect home
-            #        ;;
-            #     2) [[ "$(echo "$monitors" | grep -c HDMI)" -eq 0 ]] && connect work || connect hybrid
-            #        ;;
-            #     1) echo 'No monitors connected' && exit 0 ;;
-            #     *) echo 'Error detecting monitors' && exit 1 ;;
-            # esac
         fi
     elif [[ $mode = 'organize' ]]; then
         organize_workspaces "$2"
