@@ -13,78 +13,30 @@ source $HOME/.vimrc
 filetype plugin on
 filetype indent on
 
+" => Manage Plugins (vim-plug)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enable plugins
 call plug#begin('~/dotfiles/.config/nvim/plugged')
-    Plug 'jalvesaq/Nvim-R', {'branch': 'stable'}
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/nvim-lsp-installer'
-    Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
-    Plug 'mhartington/formatter.nvim'
     Plug 'junegunn/goyo.vim'
     Plug 'junegunn/limelight.vim'
     Plug 'lervag/vimtex'
+    Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
     Plug 'vim-pandoc/vim-pandoc'
     Plug 'vim-pandoc/vim-pandoc-syntax'
     Plug 'vim-syntastic/syntastic'
+    Plug 'mhartington/formatter.nvim'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'mhinz/vim-startify'
     Plug 'tpope/vim-commentary'
-    Plug 'Vigemus/iron.nvim'
-cal plug#end()
-
-" => iron.nvim
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-lua << EOF
-local iron = require("iron.core")
-
-iron.setup {
-  config = {
-    -- Whether a repl should be discarded or not
-    scratch_repl = true,
-    -- Your repl definitions come here
-    repl_definition = {
-      sh = {
-        -- Can be a table or a function that
-        -- returns a table (see below)
-        command = {"zsh"}
-      }
-    },
-    -- How the repl window will be displayed
-    -- See below for more information
-    repl_open_cmd = require('iron.view').bottom(40),
-  },
-  -- Iron doesn't set keymaps by default anymore.
-  -- You can set them here or manually add keymaps to the functions in iron.core
-  keymaps = {
-    send_motion = "<space>sc",
-    visual_send = "<space>sc",
-    send_file = "<space>sf",
-    send_line = "<space>sl",
-    send_until_cursor = "<space>su",
-    send_mark = "<space>sm",
-    mark_motion = "<space>mc",
-    mark_visual = "<space>mc",
-    remove_mark = "<space>md",
-    cr = "<space>s<cr>",
-    interrupt = "<space>s<space>",
-    exit = "<space>sq",
-    clear = "<space>cl",
-  },
-  -- If the highlight is on, you can change how it looks
-  -- For the available options, check nvim_set_hl
-  highlight = {
-    italic = true
-  },
-  ignore_blank_lines = true, -- ignore blank lines when sending visual select lines
-}
-
--- iron also has a list of commands, see :h iron-commands for all available commands
-vim.keymap.set('n', '<space>rs', '<cmd>IronRepl<cr>')
-vim.keymap.set('n', '<space>rr', '<cmd>IronRestart<cr>')
-vim.keymap.set('n', '<space>rf', '<cmd>IronFocus<cr>')
-vim.keymap.set('n', '<space>rh', '<cmd>IronHide<cr>')
-EOF
-
+    " Plug 'Vigemus/iron.nvim'
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'R-nvim/cmp-r'
+    Plug 'R-nvim/R.nvim'
+call plug#end()
 " => Goyo + Limelight
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:goyo_width=100
@@ -183,20 +135,53 @@ let g:startify_custom_header = [
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
 let g:pydocstring_formatter = 'sphinx'
 nnoremap <silent> <leader>pd :Pydocstring<cr>
-
-" => NvimR
+" => tree-sitter
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  auto_install = true,
+  ensure_installed = { "r", "markdown_inline", "markdown", "rnoweb" },
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = true,
+  },
+  indent = {
+      enable = true
+  }
+}
+EOF
+" => R.nvim
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let maplocalleader=';'
+let config_tmux='false'
+let close_term='false'
 let R_set_omnifunc = ["R", "rmd", "rnoweb", "rhelp", "rrst"]
 let R_auto_omni = ["R",  "rmd", "rnoweb", "rhelp", "rrst"]
-let maplocalleader = ';'
 let r_syntax_folding = 1
-vmap <Space> <Plug>RDSendSelection
 nmap <Space> <Plug>RDSendLine
-autocmd FileType R inoremap <buffer> > <Esc>:normal! a%>%<CR>a
-autocmd FileType rnoweb inoremap <buffer> > <Esc>:normal! a%>%<CR>a
-autocmd FileType rmd inoremap <buffer> > <Esc>:normal! a%>%<CR>a
-autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
-
+vmap <Space> <Plug>RDSendSelection
+let assignment_keymap = '<LocalLeader>-'
+let pipe_keymap = '<LocalLeader>>'
+let pipe_version = 'magrittr'
+lua << EOF
+    require("r").setup({ 
+        setwd = 'file',
+        assignment_keymap = '<LocalLeader>a',
+        pipe_keymap = '<LocalLeader>m',
+        pipe_version = 'magrittr',
+    })
+    hook = {
+    on_filetype = function()
+       -- Creating maps to "<Plug>RDSendLine" and "<Plug>RSendSelection"
+       -- will prevent R.nvim of creating its default maps to them.
+        vim.api.nvim_buf_set_keymap(0, "n", "<Enter>", "<Plug>RDSendLine", {})
+        vim.api.nvim_buf_set_keymap(0, "v", "<Enter>", "<Plug>RSendSelection", {})
+    end,
+    }
+EOF
 " => LSP options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua << EOF
