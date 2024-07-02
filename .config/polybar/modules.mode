@@ -1,6 +1,6 @@
 bar:float
 separator:arrow_tail
-wallpaper_index:2155
+wallpaper_index:2198
 wifi:standard
 songnames:static
 date:time_bar
@@ -8,7 +8,7 @@ memory:free_pct
 cpu:short
 temperature:short
 disk:percent
-uptime:day
+uptime:hour
 torrent:speed
 reading: Stuxnet - Wikipedia~https://en.wikipedia.org/wiki/Stuxnet
 battery:all
