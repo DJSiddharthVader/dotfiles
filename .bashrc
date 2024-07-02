@@ -99,6 +99,9 @@ complete -cf sudo
 bind "set completion-ignore-case on"
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
+shopt -s cdable_vars 
+export xdp="/home/sidreed/TalkowskiLab/Projects/XDP"
+export scb="/home/sidreed/TalkowskiLab/Projects/NeuralBenchmarking"
 # }}}
 ## Better directory navigation {{{
 # Enter and list directory
