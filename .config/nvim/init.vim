@@ -6,6 +6,7 @@
 set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath=&runtimepath
 source ~/.vimrc
+set cursorcolumn
 
 " => Plugins 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -13,14 +14,15 @@ source ~/.vimrc
 filetype plugin on
 filetype indent on
 
-call plug#begin('~/dotfiles/.config/nvim/plugged')
+silent! call plug#begin('~/dotfiles/.config/nvim/plugged')
+    Plug 'jalvesaq/Nvim-R', {'tag': 'v0.9.14'}
+    " Plug 'junegunn/goyo.vim'
+    " Plug 'junegunn/limelight.vim'
+    " Plug 'lervag/vimtex'
     Plug 'neovim/nvim-lspconfig'
     Plug 'williamboman/nvim-lsp-installer'
     Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
     Plug 'mhartington/formatter.nvim'
-    Plug 'junegunn/goyo.vim'
-    Plug 'junegunn/limelight.vim'
-    Plug 'lervag/vimtex'
     Plug 'vim-pandoc/vim-pandoc'
     Plug 'vim-pandoc/vim-pandoc-syntax'
     Plug 'vim-syntastic/syntastic'
@@ -29,6 +31,11 @@ call plug#begin('~/dotfiles/.config/nvim/plugged')
     Plug 'mhinz/vim-startify'
     Plug 'tpope/vim-commentary'
 cal plug#end()
+
+" => OCSYank
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+vnoremap <leader>c :OSCYank<CR>
+nmap <leader>o <Plug>OSCYank
 
 " => Goyo + Limelight
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -63,13 +70,11 @@ augroup END
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:pymode_python = 'python3'
 let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_flake8_exec='/home/sidreed/anaconda3/bin/flake8'
-let g:syntastic_python_pylint_exec='/home/sidreed/anaconda3/bin/pylint'
 let g:syntastic_python_pylint_args='--disable=missing-docstring --errors-only'
-let g:syntastic_go_checkers= ['go', 'gofmt', 'govet']
+" let g:syntastic_go_checkers= ['go', 'gofmt', 'govet']
 let g:syntastic_enable_r_lintr_checker = 1
 let g:syntastic_R_checkers= ['lintr']
-let g:syntastic_markdown_checkers= ['mdl', 'proselint']
+" let g:syntastic_markdown_checkers= ['mdl', 'proselint']
 let g:syntastic_tex_checkers= ['chktex', 'proselint']
 let g:syntastic_bash_checkers= ['shellcheck']
 
@@ -128,6 +133,18 @@ let g:startify_custom_header = [
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 smarttab expandtab
 let g:pydocstring_formatter = 'sphinx'
 nnoremap <silent> <leader>pd :Pydocstring<cr>
+" => NvimR
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let R_set_omnifunc = ["R", "rmd", "rnoweb", "rhelp", "rrst"]
+let R_auto_omni = ["R",  "rmd", "rnoweb", "rhelp", "rrst"]
+let maplocalleader = ';'
+let r_syntax_folding = 1
+vmap <Space> <Plug>RDSendSelection
+nmap <Space> <Plug>RDSendLine
+autocmd FileType R inoremap <buffer> > <Esc>:normal! a%>%<CR>a
+autocmd FileType rnoweb inoremap <buffer> > <Esc>:normal! a%>%<CR>a
+autocmd FileType rmd inoremap <buffer> > <Esc>:normal! a%>%<CR>a
+autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
 " => LSP options
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 lua << EOF

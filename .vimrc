@@ -264,6 +264,9 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+set splitbelow
+set splitright
+
 " " Useful mappings for managing tabs
 " map <leader>tn :tabnew<cr>
 " map <leader>to :tabonly<cr>
@@ -290,6 +293,7 @@ autocmd BufReadPost *
       \ endif
 " Remember info about open buffers on close
 set viminfo^=%
+
 
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

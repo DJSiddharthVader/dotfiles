@@ -1,22 +1,20 @@
 #ls
-alias ls='ls -X --color=auto --group-directories-first'
-alias ll='ls -alF --color=auto --group-directories-first'
-alias la='ls -A'
-alias l='ls -CF'
+alias ls='ls -thX --color=auto --group-directories-first'
+alias ll='ls -thalF --color=auto --group-directories-first'
 alias lc='ls | wc -l'
-
+alias ld='find . -maxdepth 1 -type d'
 #Typos
 alias r,='rm'
-alias e='nvim'
-alias bi='nvim'
-alias vi='nvim'
-alias vim='nvim'
 alias mc='mv'
-
-#Options
+alias e='/PHShome/sr1068/tools/nvim-linux64/bin/nvim'
+alias bi='LD_LIBRARY_PATH=$HOME/.local/glibc2.14/lib /PHShome/sr1068/tools/nvim-inux64/bin/nvim'
+alias vi='LD_LIBRARY_PATH=$HOME/.local/glibc2.14/lib /PHShome/sr1068/tools/nvim-linux64/bin/nvim'
+# alias vi='/PHShome/sr1068/tools/nvim-linux64/bin/nvim'
+alias nvim='/PHShome/sr1068/tools/nvim-linux64/bin/nvim'
+alias tmux='/PHShome/sr1068/tools/squashfs-root/usr/bin/tmux -2'
 alias rm='rm -i'
-alias tmux='tmux -2'
-
+alias wj="watch 'bjobs -a'"
+alias ut="htop -u sr1068"
 #Git
 alias grm='git rm'
 alias add='git add'
@@ -28,26 +26,8 @@ alias com='git commit'
 alias bra='git branch'
 alias chk='git checkout'
 alias gst='git status'
-alias gsl='commit-status.sh status'
-alias gsw='watch -n2 "commit-status.sh status"'
-
-#Apps
-alias cp='ptcp'
-alias cat='bat --paging=never'
-alias less='bat'
-alias man='tldr'
-alias top='htop'
-alias pdf='zathura'
-alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
-alias mx='tmuxinator'
-alias ta='tmux a -t'
-alias go="/usr/local/go/bin/go"
-alias tt='taskwarrior-tui'
-alias notes='notes.sh'
-alias vt='mullvad.sh toggle'
-alias tsm="transmission-remote"
-alias tro='transmission.sh'
-
+alias gsl='~/dotfiles/.scripts/commit-status.sh status'
+alias gsw='watch -n2 "~/dotfiles/.scripts/commit-status.sh status"'
 #Shorten
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -55,17 +35,3 @@ alias ....='cd ../../..'
 alias rs='source ~/.bashrc'
 alias con='conda activate'
 alias cof='conda deactivate'
-alias copy='xclip -sel clip'
-alias pt='ping 8.8.8.8'
-alias school='cd ~/CMU_MSCB/Current/'
-alias md='sudo mount /dev/sdb1 /media/4tbdrive/'
-alias ud='sudo umount /media/4tbdrive/'
-alias haud='pactl set-card-profile 0 output:hdmi-stereo'
-alias aud='pactl set-card-profile 0 output:analog-stereo'
-alias portal='curl -v http://detectportal.firefox.com/canonical.html'
-
-#Print
-alias bgal='feh -g 640x480 -d /home/sidreed/Pictures/wallpapers/*'
-alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
-alias tl="transmission-remote -tall -l | less"
-alias tv="watch -n1 'transmission-remote -tall -l | grep -v Idle | grep -v Stopped'"

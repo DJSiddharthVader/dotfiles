@@ -1,4 +1,4 @@
-let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -22,6 +22,7 @@ setlocal concealcursor=
 setlocal conceallevel=0
 setlocal completefunc=youcompleteme#CompleteFunc
 setlocal nocopyindent
+setlocal cryptmethod=
 setlocal nocursorbind
 setlocal nocursorcolumn
 setlocal cursorline
@@ -34,8 +35,6 @@ setlocal expandtab
 if &filetype != 'sh'
 setlocal filetype=sh
 endif
-setlocal fillchars=
-setlocal fixendofline
 setlocal foldcolumn=1
 setlocal foldenable
 setlocal foldexpr=0
@@ -49,7 +48,6 @@ setlocal foldtext=foldtext()
 setlocal formatexpr=
 setlocal formatoptions=cqt
 setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
 setlocal grepprg=
 setlocal iminsert=0
 setlocal imsearch=-1
@@ -64,13 +62,11 @@ setlocal nolinebreak
 setlocal nolisp
 setlocal lispwords=
 setlocal nolist
-setlocal listchars=
-setlocal makeencoding=
 setlocal makeprg=
 setlocal matchpairs=(:),{:},[:]
 setlocal nomodeline
 setlocal modifiable
-setlocal nrformats=bin,octal,hex
+setlocal nrformats=octal,hex
 setlocal number
 setlocal numberwidth=4
 setlocal omnifunc=
@@ -82,19 +78,15 @@ setlocal noreadonly
 setlocal relativenumber
 setlocal norightleft
 setlocal rightleftcmd=search
-setlocal scrollback=-1
 setlocal noscrollbind
-setlocal scrolloff=-1
 setlocal shiftwidth=4
-setlocal sidescrolloff=-1
-setlocal signcolumn=auto
+setlocal noshortname
 setlocal nosmartindent
 setlocal softtabstop=4
 setlocal nospell
 setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
 setlocal spellfile=
 setlocal spelllang=en
-setlocal spelloptions=
 setlocal statusline=%!airline#statusline(1)
 setlocal suffixesadd=
 setlocal noswapfile
@@ -102,29 +94,34 @@ setlocal synmaxcol=3000
 if &syntax != 'sh'
 setlocal syntax=sh
 endif
-setlocal tagfunc=
 setlocal tabstop=4
-setlocal tagcase=
 setlocal tags=
 setlocal textwidth=0
 setlocal thesaurus=
 setlocal noundofile
 setlocal undolevels=-123456
-setlocal winblend=0
-setlocal winhighlight=
 setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let &fdl = &fdl
-let s:l = 10 - ((9 * winheight(0) + 28) / 56)
+4,29fold
+30,45fold
+46,89fold
+90,118fold
+119,133fold
+134,165fold
+166,167fold
+168,169fold
+170,171fold
+172,174fold
+175,179fold
+let s:l = 175 - ((172 * winheight(0) + 24) / 48)
 if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
+exe s:l
 normal! zt
-keepjumps 10
+175
 normal! 0
-let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
+let &so = s:so_save | let &siso = s:siso_save
 doautoall SessionLoadPost
 " vim: set ft=vim :
