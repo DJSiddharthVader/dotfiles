@@ -20,15 +20,28 @@ silent! normal! zE
 83,100fold
 101,116fold
 let &fdl = &fdl
-let s:l = 9 - ((8 * winheight(0) + 11) / 22)
+11
+normal! zo
+14
+normal! zo
+32
+normal! zo
+35
+normal! zo
+39
+normal! zo
+42
+normal! zo
+83
+normal! zo
+let s:l = 90 - ((40 * winheight(0) + 10) / 20)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 9
-normal! 021|
+keepjumps 90
+normal! 045|
 lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
-nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

@@ -23,7 +23,10 @@ isDeviceConnected() {
     status="$(echo -e "info $device" | bluetoothctl | grep Connected | cut -d':' -f2)"
     [[ "$status" =~ 'yes' ]] && echo "yes" || echo "no"
 }
-
+get_status() {
+    device="$1" #uuid
+    [[ "$(isDeviceConnected $device)" == 'yes' ]] && echo "$icon $(getDeviceName $device)" || echo "$icon None"
+}
 disconnect() {
     echo -e "disconnect\n" | bluetoothctl > /dev/null 2>&1
     mpc pause
@@ -44,10 +47,9 @@ toggle() {
         *) echo "Error: invalid status message $status" && exit 1
     esac
 }
-
 getDeviceName() {
     mac="$1"
-    echo -e "info $mac" | bluetoothctl | grep Name | cut -f2- -d' '
+    echo -e "info $mac" | bluetoothctl | grep Name | head -1 | cut -f2- -d' '
 }
 getConnectedDevice() {
     #check all paired devices and if connected and get name
@@ -57,34 +59,32 @@ getConnectedDevice() {
             name="$name, $(getDeviceName $uuid)"
         fi
     done <<< "$(echo -e "paired-devices" | bluetoothctl | grep '^Device' | cut -f2 -d' ')"
-    name="$(echo $name | sed -e 's/^, //')"
-    [[ -n "$name" ]] && echo "$name" || echo "None"
+    [[ -n "$name" ]] && echo "$icon $name" | sed -e 's/^[, ]*//' || echo "$icon None"
 }
-
 main() {
     mode="$1"
     device="$2"
     case "$mode" in
-        'connect') connect "$device" ;;
-        'disconnect') disconnect "$device" ;;
-        'toggle') toggle "$device" ;;
-        'status') getConnectedDevice ;;
+        connect   ) connect "$device" 
+                    sleep 1
+                    polybar-msg action "#bluetooth.hook.0" 
+            ;;
+        disconnect) disconnect "$device" 
+                    sleep 1
+                    polybar-msg action "#bluetooth.hook.0" 
+            ;;
+        toggle    ) toggle "$device" 
+                    sleep 1
+                    polybar-msg action "#bluetooth.hook.0" 
+            ;;
+        status    ) get_status "$device" 
+            ;;
         *) help && exit 1 ;;
     esac
-    #case "$mode" in
-    #    connect|disconnect|toggle) ~/.scripts/bar-manager.sh reload ;;
-    #    *) ;;
-    #esac
-    #polybar-msg hook bluetooth-ipc 1 &> /dev/null
 }
-
-if (( $# < 1 )); then
-    mode="toggle"
-    device="5C:C6:E9:35:57:42" #For HRF 3000 headphones
-else
-    mode="$1"
-    device="$2"
-fi
-
+# Set default args if not given
+[[ -n "$1" ]] && mode="$1" || mode='toggle'
+[[ -n "$2" ]] && device="$2" || device="74:45:CE:F9:14:A8" # MTH20xBT
+echo $mode $device
+# Main 
 main "$mode" "$device"
-

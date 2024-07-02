@@ -1,16 +1,15 @@
 #!/bin/bash
 shopt -s extglob
-
+# Icons
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=('icon' 'percent' 'time' 'text' 'all')
-#icons
-charging=""
+charging_icon=""
 ramp0=""
 ramp1=""
 ramp2=""
 ramp3=""
 ramp4=""
-
+# Code
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
 }
@@ -26,7 +25,7 @@ cycle() {
     idx=$(($idx -1)) #current mode idx
     case "$dir" in
          'next') idx=$(($idx + 1)) ;;
-         'prev') idx=$(($idx +${#modes[@]} -1)) ;;
+         'prev') idx=$(($idx + ${#modes[@]} -1)) ;;
          *) echo "Error cycle takes {next|prev}" && exit 1 ;;
     esac
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
@@ -39,44 +38,50 @@ setMode() {
     sed -i "/^battery:/s/:.*/:$1/" "$mode_file"
 }
 batinfo() {
-    acpi -b | grep -v 'rate information unavailable' | head -1
+    if [[ $(acpi -b | wc -l | cut -d' ' -f1) -eq 1 ]]; then
+        acpi -b 
+    else
+        acpi -b | grep -v 'rate information unavailable' | head -1
+    fi
 }
-percent()   {
-    batinfo | cut -d',' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}' | tr -d '%'
+get_percent() {
+    batinfo | cut -d',' -f2 | tr -d '[ %]'
 }
 time_left() {
-    batinfo | cut -d',' -f3 | cut -d' ' -f-2 | cut -d':' -f-2 | awk '{gsub(/^ +| +$/,"")} {print $0}'
+    batinfo | \
+        cut -d':' -f2- | \
+        cut -d',' -f3 | \
+        cut -d':' -f-2 | \
+        tr -d '[a-zA-z ]'
 }
-status() {
-    isCharging="$(batinfo | cut -d',' -f1 | cut -d':' -f2 | awk '{gsub(/^ +| +$/,"")} {print $0}')"
+get_status() {
+    isCharging="$(batinfo | cut -d':' -f2 | cut -d',' -f1 | tr -d ' ')"
     case "$isCharging" in
-        'Charging'|'Not charging') msg="$charging" ;;
+        'Charging'|'Not charging') msg="$charging_icon" ;;
         *) msg="" ;;
     esac
     echo "$msg"
 }
-icon() {
-    percent=$(percent)
-    case 1 in
-        $(($percent <= 20))) icon=$ramp0 ;;
-        $(($percent <= 40))) icon=$ramp1 ;;
-        $(($percent <= 60))) icon=$ramp2 ;;
-        $(($percent <= 80))) icon=$ramp3 ;;
-        $(($percent <= 100))) icon=$ramp4 ;;
-    esac
+get_icon() {
+    percent=$(get_percent)
+    [[ $percent -le 100 ]] && icon=$ramp4 
+    [[ $percent -le 80  ]] && icon=$ramp3
+    [[ $percent -le 60  ]] && icon=$ramp2 
+    [[ $percent -le 40  ]] && icon=$ramp1
+    [[ $percent -le 20  ]] && icon=$ramp0 
     echo "$icon"
 }
 display(){
     mode="$1"
     case $mode in
-        'icon'   ) bat="$(icon)" ;;
-        'percent') bat="$(icon) $(percent)%" ;;
-        'time'   ) bat="$(icon) $(time_left)" ;;
-        'text'   ) bat="$(percent)% $(time_left)" ;;
-        'all'    ) bat="$(icon) $(percent)% $(time_left)" ;;
+        'icon'   ) bat="$(get_icon)" ;;
+        'percent') bat="$(get_icon) $(get_percent)%" ;;
+        'time'   ) bat="$(get_icon) $(time_left)" ;;
+        'text'   ) bat="$(get_percent)% $(time_left)" ;;
+        'all'    ) bat="$(get_icon) $(get_percent)% $(time_left)" ;;
         *) help && exit 1 ;;
     esac
-    echo "$(status) $bat"
+    echo "$(get_status) $bat"
 }
 main() {
     mode="$1"
@@ -94,5 +99,4 @@ main() {
         setMode "$dmode"
     fi
 }
-
 main "$@"

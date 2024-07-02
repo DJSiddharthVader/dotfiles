@@ -1,9 +1,6 @@
 #!/bin/bash
 shopt -s extglob
-
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-#wsicon="" #$(echo -e '\uF260')"
-
 help() {
     echo "Usage: $0 {text|icon|both}"
 }
@@ -13,7 +10,6 @@ getThresh() {
 setThresh() {
     sed -i "/^focus_thresh:/s/:.*/:$1/" "$mode_file"
 }
-
 intToRoman() {
     case "$1" in
         1) numeral="I" ;;
@@ -94,5 +90,4 @@ display() {
         *) echo "$str" ;;
     esac
 }
-
-display "$1" "$2"
+display "$1" "$2" 2> /dev/null

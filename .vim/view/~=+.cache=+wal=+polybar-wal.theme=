@@ -10,12 +10,12 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 28 - ((27 * winheight(0) + 27) / 55)
+let s:l = 4 - ((3 * winheight(0) + 49) / 98)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 28
-normal! 04|
+keepjumps 4
+normal! 017|
 lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch

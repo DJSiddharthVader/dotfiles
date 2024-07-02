@@ -1,12 +1,11 @@
 #!/bin/bash
-
 #Vars
 API="https://api.openweathermap.org/data/2.5"
 KEY="f8411a3dd03e0674a17b8e736c2d0df5"
 CITY="Pittsburgh"
 UNITS="metric"
-SYMBOL="°"
-
+# SYMBOL="°"
+SYMBOL="'"
 icon() {
     case $1 in
         01d) icon="";;
@@ -48,7 +47,6 @@ main() {
     fi
     temp=$(echo "$weather" | jq ".main.temp" | cut -d "." -f 1)
     icon="$(icon "$(echo "$weather" | jq -r ".weather[0].icon")")"
-    echo "$icon $temp$SYMBOL"
+    echo "$icon $temp $SYMBOL"
 }
-
 main

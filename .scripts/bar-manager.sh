@@ -1,41 +1,46 @@
 #!/bin/bash
 shopt -s extglob
-
-# STYLES
+# Styles
 script_dir="$HOME/dotfiles/.config/polybar/scripts"
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-STYLES=(float text underline cross press full mini laptop)
+STYLES=(float text blocks blocks2 underline cross press full mini laptop)
 compact_bars=(laptop mini)
-RES_LIMIT=1400
+RES_LIMIT=1300
 PRIMARY_SCREEN="eDP-1"
 # Separators
 dl="."
 separator_file="$HOME/dotfiles/.config/polybar/separators.mode"
-separator_names=(arrow_tail
-                 tail_sym
-                 arrow_sym
+separator_names=(sym_arrow
+                 sym_jojo
+                 sym_jojo_slim
+                 sym_jojo_block
+                 sym_circle
+                 sym_tail
+                 arrow_tail
+                 circle_tail
                  trig_in
                  trig_out
-                 circle
-                 circle_tail
                  small_fade
-                 small_fade_in
                  big_fade
-                 big_fade_in 
-                 none)
-separator_icons=("$dl$dl$dl"
+                 spaces
+                 none
+)
+separator_icons=("$dl$dl$dl"
+                 "『$dl』$dl『$dl』"
+                 "｢$dl｣$dl｢$dl｣"
+                 "🭪『$dl』🭨$dl🭪『$dl』🭨"
+                 "$dl$dl$dl"
                  "$dl$dl$dl"
-                 "$dl$dl$dl"
+                 "$dl$dl$dl"
+                 "$dl$dl$dl"
                  "$dl$dl$dl"
                  "$dl$dl$dl"
-                 " $dl$dl$dl "
-                 "$dl$dl$dl"
                  "$dl$dl$dl"
-                 "$dl$dl$dl"
                  "$dl$dl$dl"
-                 "$dl$dl$dl"
-                 "$dl$dl$dl")
-
+                 " $dl$dl$dl "
+                 "$dl$dl$dl"
+)
+# Help messages
 makeSeparatorTable() {
     separator_table="Name,|,Separators"
     for ((i=0; i<${#separator_names[@]}; i++)); do
@@ -53,7 +58,19 @@ help() {
                       "
     echo "$separator_table" | pr -T -o 22
 }
-
+rofiMenu() {
+    mode="$1"
+    if [[ $mode = 'style' ]]; then
+        STYLES+=("none")
+        style="$(printf '%s\n' ${STYLES[@]} | rofi -m -1 -width 20 -lines ${#STYLES[@]} -dmenu -p 'Pick Polybar Style')"
+        [[ -n $style ]] && launchAllBars $style
+    elif [[ $mode = 'sep' ]]; then
+        #separator="$(printf '%s\n' ${separator_names[@]} | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
+        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 25 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
+        [[ -n $separator ]] && separators $separator && launchAllBars 'stay'
+    fi
+}
+# Handle mode switching/getting/setting
 cycle() {
     # cycle through array elements either forwards or backwards
     # get index of current element in the array, find index for next/previous element and get the array value of that index and echo it
@@ -88,7 +105,7 @@ setMode() {
         sed -i "/^separator:/s/:.*/:$2/" "$mode_file"
     fi
 }
-
+# Actually launch/manage polybar instances
 separators() {
     mode="$1"
     tmp="@($(echo ${separator_names[*]} | sed -e 's/ /|/g'))"
@@ -102,20 +119,18 @@ separators() {
     idx="$(echo ${separator_names[@]/$dmode//} | cut -d/ -f1 | wc -w | tr -d ' ')"
     icons="${separator_icons[$idx]}"
     setMode 'separator' "$dmode"
-    echo "$dmode
+    echo "; $dmode
 ; icons to delimit polybar modules
 leftprefix = \"$(echo "$icons" | cut -d"$dl" -f1)\"
 leftsuffix = \"$(echo "$icons" | cut -d"$dl" -f2)\"
 rightprefix = \"$(echo "$icons" | cut -d"$dl" -f3)\"
-rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"
-" | sed -e 's/""//' >| "$separator_file"
-}
-getConnectedMonitors() {
-    xrandr |  grep ' connected' | sort -r | cut -d' ' -f1
+rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"" |\
+    sed -e 's/""//' >| "$separator_file"
 }
 getActiveMonitors() {
    # same as get all monitors but excludes eDP-1
-    xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev | sort -r
+   xrandr --query | grep " connected" | cut -d" " -f1
+
 }
 getResolution() {
     monitor="$1"
@@ -124,30 +139,34 @@ getResolution() {
 launchBar() {
     bartype="$1"
     m="$2" # monitor
+    export MONITOR="$m" 
+    echo $MONITOR
     res="$(getResolution $m | cut -d'x' -f1)"
     if [[ $bartype = "mini" ]]; then
-        MONITOR=$m polybar mini &
+        polybar mini &
     elif [[ $res -lt $RES_LIMIT ]]; then
         # if resolution is too low use trimmed bar
         tmp="@($(echo ${compact_bars[*]} | sed -e 's/ /|/g'))"
         case $bartype in
             $tmp) #already compact bartype
-                MONITOR=$m polybar "$bartype"-top &
-                MONITOR=$m polybar "$bartype"-bottom &
+                polybar "$bartype"-top &
+                polybar "$bartype"-bottom &
                 ;;
                *)
-                MONITOR=$m polybar compact-"$bartype"-top &
-                MONITOR=$m polybar compact-"$bartype"-bottom &
+                polybar compact-"$bartype"-top &
+                polybar compact-"$bartype"-bottom &
                 ;;
         esac
     else
-        if [[ $m = $PRIMARY_SCREEN ]]; then
-            MONITOR=$m polybar laptop-top &
-            MONITOR=$m polybar laptop-bottom &
-        else
-            MONITOR=$m polybar "$bartype"-top &
-            MONITOR=$m polybar "$bartype"-bottom &
-        fi
+        polybar "$bartype"-top &
+        polybar "$bartype"-bottom &
+        # if [[ $m = $PRIMARY_SCREEN ]]; then
+        #     polybar laptop-top &
+        #     polybar laptop-bottom &
+        # else
+        #     polybar "$bartype"-top &
+        #     polybar "$bartype"-bottom &
+        # fi
     fi
 }
 launchAllBars() {
@@ -164,12 +183,11 @@ launchAllBars() {
     esac
     setMode 'style' "$dmode" # set defualt polybar style
     # launch bars
-    killall -q polybar && sleep 0.001 # Terminate already running bar instances
+    killall -q polybar && sleep 1 # Terminate already running bar instances
     case "$dmode" in
         none) sleep 1 ;;
         cross)
             monitors=$(getActiveMonitors)
-            echo "$monitors"
             m1="$(echo $monitors | cut -d' ' -f1)"
             m2="$(echo $monitors | cut -d' ' -f2)"
             MONITOR="$m1" polybar cross-left &
@@ -192,18 +210,6 @@ launchAllBars() {
         *) $script_dir/current-window.sh thresh 40 ;;
     esac
 }
-rofiMenu() {
-    mode="$1"
-    if [[ $mode = 'style' ]]; then
-        STYLES+=("none")
-        style="$(printf '%s\n' ${STYLES[@]} | rofi -m -1 -width 20 -lines ${#STYLES[@]} -dmenu -p 'Pick Polybar Style')"
-        [[ -n $style ]] && launchAllBars $style
-    elif [[ $mode = 'sep' ]]; then
-        #separator="$(printf '%s\n' ${separator_names[@]} | rofi -m -1 -width 15 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
-        separator="$(makeSeparatorTable | tail -n+2 | rofi -m -1 -width 25 -lines ${#separator_names[@]} -dmenu -p 'Pick Polybar Separator')"
-        [[ -n $separator ]] && separators $separator && launchAllBars 'stay'
-    fi
-}
 main() {
     mode="$1"
     option="$2"
@@ -219,5 +225,4 @@ main() {
         esac
     fi
 }
-
 main "$@"

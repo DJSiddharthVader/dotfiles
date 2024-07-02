@@ -3,14 +3,17 @@ i3-suffix =
 i3-color = ${colors.transparent}
 i3-color-2 = ${colors.transparent}
 i3-underline = ${colors.col1}
+i3-overline = ${colors.col1}
 i3-text-color = ${colors.col1}
 i3-underline-2 = ${colors.col2}
+i3-overline-2 = ${colors.col2}
 i3-text-color-2 = ${colors.col2}
 
 focused-prefix =
 focused-suffix =
 focused-color = ${colors.transparent}
 focused-underline =
+focused-overline =
 focused-text-color = ${colors.col3}
 
 focused-name-prefix = ${colors.rightprefix}
@@ -20,60 +23,70 @@ applauncher-prefix =
 applauncher-suffix =
 applauncher-color = ${colors.transparent}
 applauncher-underline = ${colors.col1}
+applauncher-overline = ${colors.col1}
 applauncher-text-color = ${colors.col1}
 
 gamma-prefix =
 gamma-suffix =
 gamma-color = ${colors.transparent}
 gamma-underline = ${colors.col2}
+gamma-overline = ${colors.col2}
 gamma-text-color = ${colors.col2}
 
 volume-prefix =
 volume-suffix =
 volume-color = ${colors.transparent}
 volume-underline = ${colors.col3}
+volume-overline = ${colors.col3}
 volume-text-color = ${colors.col3}
 
 pulseaudio-control-prefix =
 pulseaudio-control-suffix =
 pulseaudio-control-color = ${colors.transparent}
 pulseaudio-control-underline = ${colors.col4}
+pulseaudio-control-overline = ${colors.col4}
 pulseaudio-control-text-color = ${colors.col4}
 
 wlan-prefix =
 wlan-suffix =
 wlan-color = ${colors.transparent}
 wlan-underline = ${colors.col5}
+wlan-overline = ${colors.col5}
 wlan-text-color = ${colors.col5}
 
 protonvpn-prefix =
 protonvpn-suffix =
 protonvpn-color = ${colors.transparent}
 protonvpn-underline = ${colors.col6}
+protonvpn-overline = ${colors.col6}
 protonvpn-text-color = ${colors.col6}
 
 mullvad-prefix =
 mullvad-suffix =
 mullvad-color = ${colors.transparent}
 mullvad-underline = ${colors.col6}
+mullvad-overline = ${colors.col6}
 mullvad-text-color = ${colors.col6}
 
 bluetooth-prefix =
 bluetooth-suffix =
 bluetooth-color = ${colors.transparent}
 bluetooth-underline = ${colors.col7}
+bluetooth-overline = ${colors.col7}
 bluetooth-text-color = ${colors.col7}
 
 mpd-prefix =
 mpd-suffix =
 mpd-color = ${colors.transparent}
 mpd-underline = ${colors.col8}
+mpd-overline = ${colors.col8}
 mpd-text-color = ${colors.col8}
 
 songnames-prefix =
 songnames-suffix =
 songnames-color = ${colors.transparent}
 songnames-underline =
+songnames-overline =
 songnames-text-color = ${colors.col8}
 
 
@@ -81,36 +94,42 @@ date-prefix =
 date-suffix =
 date-color = ${colors.transparent}
 date-underline = ${colors.col1}
+date-overline = ${colors.col1}
 date-text-color = ${colors.col1}
 
 battery-prefix = 
 battery-suffix =
 battery-color = ${colors.transparent}
 battery-underline = ${colors.col6}
+battery-overline = ${colors.col6}
 battery-text-color = ${colors.col6}
 
 xbacklight-prefix = 
 xbacklight-suffix = 
 xbacklight-color = ${colors.transparent}
 xbacklight-underline = ${colors.col2}
+xbacklight-overline = ${colors.col2}
 xbacklight-text-color = ${colors.col2}
 
 memory-prefix =
 memory-suffix =
 memory-color = ${colors.transparent}
 memory-underline = ${colors.col2}
+memory-overline = ${colors.col2}
 memory-text-color = ${colors.col2}
 
 cpu-prefix =
 cpu-suffix =
 cpu-color = ${colors.transparent}
 cpu-underline = ${colors.col3}
+cpu-overline = ${colors.col3}
 cpu-text-color = ${colors.col3}
 
 temperature-prefix =
 temperature-suffix =
 temperature-color = ${colors.transparent}
 temperature-underline = ${colors.col4}
+temperature-overline = ${colors.col4}
 temperature-text-color = ${colors.col4}
 
 xkeyboard-prefix =
@@ -121,34 +140,40 @@ disk-prefix =
 disk-suffix =
 disk-color = ${colors.transparent}
 disk-underline = ${colors.col5}
+disk-overline = ${colors.col5}
 disk-text-color = ${colors.col5}
 
 uptime-prefix =
 uptime-suffix =
 uptime-color = ${colors.transparent}
 uptime-underline = ${colors.col6}
+uptime-overline = ${colors.col6}
 uptime-text-color = ${colors.col6}
 
 weather-prefix =
 weather-suffix =
 weather-color = ${colors.transparent}
 weather-underline = ${colors.col7}
+weather-overline = ${colors.col7}
 weather-text-color = ${colors.col7}
 
 torrent-prefix =
 torrent-suffix =
 torrent-color = ${colors.transparent}
 torrent-underline = ${colors.col8}
+torrent-overline = ${colors.col8}
 torrent-text-color = ${colors.col8}
 
 wall-prefix =
 wall-suffix =
 wall-color = ${colors.transparent}
 wall-underline = ${colors.col1}
+wall-overline = ${colors.col1}
 wall-text-color = ${colors.col1}
 
 reading-prefix =
 reading-suffix =
 reading-color = ${colors.transparent}
 reading-underline = ${colors.col2}
+reading-overline = ${colors.col2}
 reading-text-color = ${colors.col2}

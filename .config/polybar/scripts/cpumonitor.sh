@@ -1,9 +1,8 @@
 #!/bin/bash
 shopt -s extglob
-
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(short long)
-
+# modes=(short long)
+modes=(short)
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
 }
@@ -31,7 +30,6 @@ getMode() {
 setMode() {
     sed -i "/^cpu:/s/:.*/:$1/" "$mode_file"
 }
-
 display() {
     mode="$1"
     case $mode in
@@ -65,6 +63,4 @@ main() {
         setMode "$dmode"
     fi
 }
-
 main "$1"
-

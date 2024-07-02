@@ -1,0 +1,52 @@
+let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
+argglobal
+setlocal fdm=expr
+setlocal fde=pandoc#folding#FoldExpr()
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+11
+normal! zo
+13
+normal! zo
+23
+normal! zo
+28
+normal! zo
+40
+normal! zo
+42
+normal! zo
+47
+normal! zo
+55
+normal! zo
+60
+normal! zo
+68
+normal! zo
+70
+normal! zo
+81
+normal! zo
+86
+normal! zo
+97
+normal! zo
+104
+normal! zo
+let s:l = 104 - ((48 * winheight(0) + 25) / 51)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 104
+normal! 0
+lcd ~/Documents/TalkowskiLab/Presentations/JournalClub_19092022
+let &g:so = s:so_save | let &g:siso = s:siso_save
+set hlsearch
+nohlsearch
+doautoall SessionLoadPost
+" vim: set ft=vim :

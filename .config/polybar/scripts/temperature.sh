@@ -5,11 +5,16 @@ mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=(short long)
 #Icons
 degree="°"
-ramp1=""
-ramp2=""
-ramp3=""
-ramp4=""
-ramp5=""
+ramp1=""
+ramp2=""
+ramp3=""
+ramp4=""
+ramp5=""
+# ramp1=""
+# ramp2=""
+# ramp3=""
+# ramp4=""
+# ramp5=""
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -45,33 +50,32 @@ get_temp() {
         | grep Package \
         | sed -e 's/^.*: *+\([0-9]*\)\..*$/\1/'
 }
-icon() {
+get_icon() {
     temp="$(get_temp)"
     case 1 in
-        $(($temp < 40))) icon=$ramp1 ;;
-        $(($temp < 50))) icon=$ramp2 ;;
-        $(($temp < 60))) icon=$ramp3 ;;
-        $(($temp < 70))) icon=$ramp4 ;;
-        $(($temp < 80))) icon=$ramp5 ;;
+        $(($temp < 50))) icon=$ramp1 ;;
+        $(($temp < 60))) icon=$ramp2 ;;
+        $(($temp < 70))) icon=$ramp3 ;;
+        $(($temp < 80))) icon=$ramp4 ;;
+        *) icon=$ramp5 ;;
     esac
     echo "$icon"
 }
-short() {
+display_short() {
     echo "$(get_temp)$degree"
 }
-long() {
+display_long() {
     sensors |& grep -v 'ERROR' | grep 'Package\|Core' | sed -e "s/^.*: *+\([0-9]*\).*$/\1${degree}/" | tr '\n' ' '
 }
 display(){
     mode="$1"
     case $mode in
-        'short') temp="$(icon) $(short)" ;;
-        'long')  temp="$(icon) $(long)"  ;;
+        'short') temp="$(get_icon) $(display_short)" ;;
+        'long')  temp="$(get_icon) $(display_long)"  ;;
         *) help && exit 1 ;;
     esac
     echo "$temp"
 }
-
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then

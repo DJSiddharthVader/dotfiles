@@ -1,23 +1,31 @@
 #!/bin/bash
 LAPTOP_SCREEN="eDP-1"
+LAPTOP_RESOLUTION="1920x1080"
 BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
-
 help() {
-    echo "Usage: $0 {auto|ext|hybrid|laptop|organize}"
+    echo "Usage: $0 {auto|home|proj|ext|hybrid|laptop|mirror|organize}"
 }
-resolution() {
-    monitor="$1"
-    xrandr | sed -ne "/$monitor/,/connected/p" | sort -n | tail -1 | grep -ao '[0-9]*x[0-9_\.]*'
+is_connected() {
+    monitors="$(xrandr --listmonitors | head -1 | cut -d' ' -f2)"
+    laptop_connected="$(xrandr --listmonitors | grep -c $LAPTOP_SCREEN)"
+    if [[ $monitors -eq 1 ]] && [[ $laptop_connected -eq 1 ]]; then
+        false
+    else
+        true
+    fi
 }
-listMonitors() {
-    xrandr | grep ' connected' | sort -r | cut -d' ' -f1 | tr -d ' ' 
+list_monitors() {
+    # xrandr | grep ' connected' | sort -r | cut -d' ' -f1 | tr -d ' ' 
+    # xrandr --listmonitors | tail -n+2 | grep -o '+\*[^ ]* ' | tr -d '*+ '
+    xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev
 }
-connectAudio() {
+connect_audio() {
     mode="$1"
     case "$mode" in
-        laptop) pacmd set-card-profile 1 output:analog-stereo+input:analog-stereo ;;
-        hdmi) pacmd set-card-profile 1 output:hdmi-stereo+input:analog-stereo ;;
-        *) echo "Invalid mode use {laptop|hdmi}" && exit 1 ;;
+        laptop) pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo ;;
+        hdmi  ) pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo  ;;
+        home  ) pacmd set-card-profile 0 output:hdmi-stereo-extra2+input:analog-stereo ;;
+        *) echo "Invalid mode use {laptop|hdmi|home}" && exit 1 ;;
     esac
 }
 disconnect(){
@@ -27,73 +35,89 @@ disconnect(){
             echo "disconnecting $monitor"
             xrandr --output $monitor --off
         fi
-    done <<< "$(listMonitors)"
-}
-connectToAll() {
-    primary="$1"
-    prev=""
-    if [[ -n $primary ]]; then
-        xrandr --output $primary --mode $(resolution $primary) --primary
-        prev=$primary
-    fi
-    while IFS= read -r monitor; do
-        if [[ $monitor = $primary ]]; then
-            continue 
-        elif [[ $monitor = $LAPTOP_SCREEN ]]; then
-            continue 
-        else
-            resolution=$(resolution $monitor)
-            echo "$monitor $resolution | $prev"
-            if [[ -z $prev ]]; then
-                xrandr --output $monitor --mode $resolution --primary
-            else
-                xrandr --output $monitor --mode $resolution --right-of $prev
-            fi
-        fi
-        prev=$monitor
-    done <<< "$(listMonitors)"
+    done <<< "$(list_monitors)"
 }
 connect() {
-    setup="$1"
-    case "$setup" in
+    echo "mode: $1"
+    case "$1" in
+        home)
+            m1="$(xrandr | grep 'DP-[2,3]-5-5 con' | cut -d' ' -f1)"
+            m2="${m1//5/6}"
+            m3="$(xrandr | grep 'DP-[2,3] con' | cut -d' ' -f1)"
+            echo $m1 $m2 $m3
+                   # --output $m3 --mode 1920x1080 --right-of $m2 \
+            xrandr --verbose \
+                   --output $m1 --mode 1920x1080 \
+                   --output $m2 --mode 1920x1080 --right-of $m1 --rotate left \
+                   --output $m3 --mode 1920x1080 --right-of $m2 --rate 60.00 \
+                   --output eDP-1 --off
+            connect_audio home
+            organize_workspaces home
+            ;;
+        shome)
+            m2="$(xrandr | grep 'DP-[2,3,4]-5-5 con' | cut -d' ' -f1)"
+            m1="${m2//5/6}"
+            echo $m1 $m2
+                   # --output $m3 --mode 1920x1080 --right-of $m2 \
+            xrandr --verbose \
+                   --output $m2 --mode 1920x1080 \
+                   --output $m1 --mode 1920x1080 --right-of $m2 --rotate left \
+                   --output eDP-1 --off
+            organize_workspaces work
+            ;;
+        work)
+            m1="$(xrandr | grep -v $LAPTOP_SCREEN | grep 'DP-.* con' | cut -d' ' -f1)"
+            xrandr --output $LAPTOP_SCREEN --mode $LAPTOP_RESOLUTION --primary \
+                   --output $m1 --auto --right-of $LAPTOP_SCREEN --rotate left
+            organize_workspaces work
+            ;;
         hybrid)
-            connectToAll "$LAPTOP_SCREEN"
+            prev=$LAPTOP_SCREEN
+            while IFS= read -r monitor; do
+                if [[ $monitor != $LAPTOP_SCREEN ]]; then
+                    xrandr --output $monitor --auto --right-of $prev
+                    prev="$monitor"
+                fi
+            done <<< "$(list_monitors)"
             ;;
         ext)
-            connectToAll ""
-            xrandr --output "$LAPTOP_SCREEN" --off
-            ;;
-        laptop)
-            xrandr --output "$LAPTOP_SCREEN" --mode "$(resolution $LAPTOP_SCREEN)" --primary
-            disconnect
+            connect hybrid
+            xrandr --output "$LAPTOP_SCREEN" --off 
             ;;
         mirror)
             while IFS= read -r monitor; do
-                resolution="$(resolution "$monitor")"
-                xrandr --output $monitor --mode "$resolution" --same-as $LAPTOP_SCREEN
-            done <<< "$(listMonitors)"
+                xrandr --output $monitor --same-as $LAPTOP_SCREEN
+            done <<< "$(list_monitors)"
             ;;
-        *) help && exit 1 ;;
+        laptop)
+            xrandr --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary
+            disconnect
+            connect_audio laptop
+            ;;
+        *) echo "invalid mode" && help && exit 1 ;;
     esac
+    sleep 3 && killall -q compton && sleep 1 && compton &
+    ~/.scripts/wallpaper.sh stay back >& /dev/null
 }
-isConnected() {
-    monitors="$(xrandr --listmonitors | head -1 | cut -d' ' -f2)"
-    laptop_connected="$(xrandr --listmonitors | grep -c $LAPTOP_SCREEN)"
-    if [[ $monitors -eq 1 ]] && [[ $laptop_connected -eq 1 ]]; then
-        echo 'false'
-    else
-        echo 'true'
-    fi
-}
-organizeWorkspaces() {
+organize_workspaces() {
     mode="$1"
     case "$mode" in
         home) 
-            move_left=(1)
-            move_right=(2 5 6 7 9)
+            # move_left=(0 1)
+            # move_right=(2 3 5 6)
+            move_left=(2 3 5 6)
+            move_right=(4 7 8)
+            ;;
+        shome)
+            move_left=(1 4 7 )
+            move_right=()
             ;;
         work)
-            move_right=(3 5 6 7 8)
+            move_right=(3 5 6 8)
+            move_left=()
+            ;;
+        hmon)
+            move_right=(3 5 6)
             move_left=()
             ;;
         *) help && exit 1 ;;
@@ -109,36 +133,35 @@ organizeWorkspaces() {
 }
 main() {
     mode="$1"
-    if [[ "$mode" = 'auto' ]]; then
-        if [[ $(isConnected) = 'true' ]]; then # if already connected then disconnect
+    if [[ $mode = 'discon' ]]; then
+        disconnect
+        killall -q compton && compton &
+    elif [[ "$mode" = 'auto' ]]; then
+        if is_connected ; then # if already connected then disconnect
             connect laptop
-            $BAR_MANAGER_SCRIPT style laptop
         else
-            monitors="$(listMonitors | wc -l)" #external and laptop
-            case $monitors in
-                4) connect ext # at home
-                   $BAR_MANAGER_SCRIPT style cross
-                   organizeWorkspaces 'home'
-                   ;;
-                2) connect hybrid # presenting
-                   $BAR_MANAGER_SCRIPT style laptop
-                   organizeWorkspaces 'work'
-                   ;;
-                1) echo 'No monitors connected' && exit 0 ;;
-                *) echo 'Error detecting monitors' && exit 1 ;;
+            wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
+            n_monitors="$(xrandr | grep -v "$LAPTOP_SCREEN" | grep ' connected' | wc -l)"
+            echo $wifi $n_monitors
+            case $wifi in 
+                phswifi3) connect work ;;
+                NewTokyo03) 
+                    case $n_monitors in
+                        3) connect home ;;
+                        2) connect shome ;;
+                        *) echo 'Error detecting monitors' && exit 1 ;; esac
+                    ;;
+                *) connect hybrid ;;
             esac
         fi
     elif [[ $mode = 'organize' ]]; then
-        organizeWorkspaces "$2"
+        organize_workspaces "$2"
     else
         connect "$mode"
-        case "$mode" in
-            ext|hybrid) $BAR_MANAGER_SCRIPT restart ;;
-            laptop) $BAR_MANAGER_SCRIPT style laptop ;;
-            *) help && exit 1 ;;
-        esac
     fi
-    $HOME/dotfiles/.scripts/wallpaper.sh stay back # set wallpaper on all screens
+    # Set wallpaper on all screens
+    $HOME/dotfiles/.scripts/wallpaper.sh stay back >& /dev/null  
+    # Launch status bars
+    $BAR_MANAGER_SCRIPT style stay >& /dev/null
 }
-
-main "$1"
+main $@

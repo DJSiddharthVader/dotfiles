@@ -1,32 +1,13 @@
 #!/bin/bash
 set -e
-
-# source theme colors
+# Variables
+SCREEN="$HOME/.varfiles/screen.png"
+FONT="GohuFont 11 Nerd Font Mono:style=Regular"
+DATE="$(date +'%A, %B %d %Y')"
+# Source current theme colors
 tmp="$(mktemp)"
 tail -n+4 $HOME/.cache/wal/colors.sh >| $tmp
 source $tmp
-#colors,text,font
-alpha="ff"
-background="$(echo "$color1" | tr -d '#')"
-background="$color1"
-ringcolor="$(echo "$color2$alpha" | tr -d '#')"
-keyhlcolor="$(echo "$color3$alpha" | tr -d '#')"
-bshlcolor="$(echo "$color4$alpha" | tr -d '#')"
-insidecolor=00000000
-separatorcolor=00000000
-wrongcolor="$(echo "$color5$alpha" | tr -d '#')"
-ringwrongcolor="$(echo "$color5$alpha" | tr -d '#')"
-insidewrongcolor=00000000
-verifcolor="$(echo "$color6$alpha" | tr -d '#')"
-ringvercolor="$(echo "$color6$alpha" | tr -d '#')"
-insidevercolor=00000000
-timecolor="$(echo "$foreground$alpha" | tr -d '#')"
-datecolor="$(echo "$foreground$alpha" | tr -d '#')"
-loginbox="$(echo "$color1 66" | tr -d ' #')"
-#loginbox=00000066
-font='Terminus:style=Bold'
-locktext="$(date +'%A, %B %d %Y' )"
-
 lockbox() {
     #drawing rectangles
     rectangles=" "
@@ -39,49 +20,45 @@ lockbox() {
     done
     echo "$rectangles"
 }
-main(){
+lock(){
     # actions for locking
     mpc pause > /dev/null 2>&1
     # bw lock # lock bitwarden
     ~/.config/polybar/scripts/pulseaudio-control.sh mute
-    #~/.scripts/mullvad.sh disconnect
-    #prep lockscreen
-    rectangles="$(lockbox)"
-    screen="$(mktemp).png"
-    scrot "$screen"
-    convert "$screen" -scale 20% -scale 500% -draw "fill $background fill-opacity 0.8 $rectangles" "$screen.png"
+    # prep lockscreen
+    scrot -o "$SCREEN"
+    convert "$SCREEN" \
+            -scale 20% \
+            -scale 500% \
+            "$SCREEN"
+            # -draw "fill $color1 fill-opacity 0.85 $(lockbox)" \
     #lock command
-    $HOME/bin/i3lock-color/build/i3lock     \
-        -i "$screen.png" -t                  \
-        --indpos='x+290:h-80'                \
-        --noinputtext=''                     \
-        --clock                              \
-        --timepos='x+115:h-80'               \
-        --timecolor="$timecolor"             \
-        --time-font="$font"                  \
-        --datestr "$locktext"                \
-        --datepos='x+145:h-60'               \
-        --datecolor="$datecolor"             \
-        --date-font="$font"                  \
-        --layout-font="$font"                \
-        --radius=25                          \
-        --ring-width=4                       \
-        --ringcolor=$ringcolor               \
-        --insidecolor=$insidecolor           \
-        --line-uses-inside                   \
-        --keyhlcolor=$keyhlcolor             \
-        --bshlcolor=$bshlcolor               \
-        --separatorcolor=$separatorcolor     \
-        --veriftext=''                       \
-        --verif-font="$font"                 \
-        --verifcolor="$verifcolor"           \
-        --ringvercolor=$ringvercolor         \
-        --insidevercolor=$insidevercolor     \
-        --wrongtext=''                       \
-        --wrong-font="$font"                 \
-        --wrongcolor="$wrongcolor"           \
-        --ringwrongcolor=$ringwrongcolor     \
-        --insidewrongcolor=$insidewrongcolor
+    i3lock                            \
+        --nofork                      \
+        --pass-volume-keys            \
+        -e                            \
+        -f                            \
+        --clock                       \
+        --time-color="$foreground"    \
+        --time-font="$FONT"           \
+        --time-size=75                \
+        --date-str="$DATE"            \
+        --date-font="$FONT"           \
+        --date-size=20                \
+        --date-color="$foreground"    \
+        --radius=200                  \
+        --ring-width=20               \
+        --ring-color=$color2          \
+        --inside-color=$color3        \
+        --verif-text='...'            \
+        --verif-color=$color4         \
+        --ringver-color=$color4       \
+        --insidever-color=$color4     \
+        --wrong-text='!!!'            \
+        --wrong-color=$color5         \
+        --ringwrong-color=$color5     \
+        --insidewrong-color=$color5   \
+        -i "$SCREEN"
+        # --no-verify                   \
 }
-
-main
+lock

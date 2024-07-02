@@ -1,65 +1,110 @@
 # vim: filetype=i3
+##--Plasma Integration-----#
+# Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everything)
+exec --no-startup-id wmctrl -c Plasma
+# For the first time, manually resize them, i3 will remember the setting for floating windows
+for_window [class="yakuake"] floating enable;
+for_window [class="lattedock"] floating enable;
+for_window [class="plasmashell"] floating enable;
+for_window [class="Kmix"] floating enable; border none
+for_window [class="kruler"] floating enable; border none
+for_window [class="Plasma"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position 1450px 20px
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+no_focus [class="plasmashell" window_type="notification"] 
+# >>> Avoid tiling for non-Plasma stuff <<<
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_role="About"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+
 ##---i3 options------------#
-#Window options
-#border_radius 3
+# Window options
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
-for_window [instance="protonvpn"] floating enable
+for_window [instance="zoom"] floating enable
+workspace_layout stacking
 set $mod Mod4
-set $term --no-startup-id st
-set $big_term --no-startup-id st -f "FiraCode Nerd Font:style=Regular:size=20:antialias=true:autohint=true"
-set $BROWSER firefox
 set $defgaps 5
 gaps inner $defgaps
 gaps outer $defgaps
 mouse_warping none
 focus_follows_mouse yes
-font "TerminessTTF Nerd Font:style=Regular:pixelsize=17:antialias=true;4"
+font "FiraCode Nerd Font Mono"
+# amount to change window size per button press
+set $size_change 10
+# amount to move window position per button press
+set $move_change 20
+# Set reusable app launches
+set $BROWSER firefox
+set $term --no-startup-id st
+set $big_term --no-startup-id st -f "FiraCode Nerd Font Mono:style=Regular:size=20:antialias=true:autohint=true"
 set $hibernate sudo systemctl suspend
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
+# Set colors from Xresources
+set_from_resource $fg i3wm.color7 #ffffff
+set_from_resource $c5 i3wm.color5 #f0f0f0
+set_from_resource $c4 i3wm.color4 #f0f0f0
+set_from_resource $c3 i3wm.color3 #f0f0f0
+set_from_resource $bg i3wm.color2 #f0f0f0
+# class                 border  backgr. text indicator child_border
+client.focused          $bg     $c4     $fg  $bg       $bg
+client.focused_inactive $bg     $c5     $fg  $bg       $bg
+client.unfocused        $bg     $c3     $fg  $bg       $bg
+client.placeholder      $bg     $bg     $fg  $bg       $bg
+client.background       $bg
 
 ##---Start up--------------#
-#lock after 45 mins of inactivity
-exec_always --no-startup-id xautolock -time 45 -locker ~/dotfiles/.scripts/lock.sh -detectsleep
-#lock daemon to lock by listening to events
-#exec --no-startup-id xss-lock -l -- /home/sidreed/dotfiles/.scripts/lock.sh &
-#Increase key rate
+# Set monitor resolution
+exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
+# Lock screen & blank after 1 hour
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+# Lock after inactivity
+exec --no-startup-id xidlehook --not-when-audio --not-when-fullscreen --timer 1800 '~/dotfiles/.scripts/lock.sh' ''
+# Increase key rate
 exec --no-startup-id xset r rate 300 50
-#Pulseaudio
+# Pulseaudio
 exec --no-startup-id pulseaudio --kill
-#Network Manager applet
+# Network Manager applet
 exec --no-startup-id nm-applet
-#Unclutter makes the mouse invisible after a brief period
+# Unclutter makes the mouse invisible after a brief period
 exec --no-startup-id unclutter
-#disable touchpad when typing
+# Disable touchpad when typing
 exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
-#kill refular notification daemon so dunst runs
+# Kill regular notification daemon so dunst runs
 exec --no-startup-id killall -q notify-osd
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
-#launch low battery notifier script
+# Load Xresources
+exec --no-startup-id xrdb ~/.cache/wal/colors.Xresources
+# Launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
-#Torrent daemon:
-exec --no-startup-id transmission.sh -m start
-#Start VPN
-exec --no-startup-id ~/.scripts/mullvad.sh connect
-#Mount other drives:
-exec --no-startup-id sudo mount -a
-#Composite manager:
+# Composite manager
 exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
-#connect to external monitors
-exec --no-startup-id ~/dotfiles/.scripts/monitor.sh auto
-#Launch Polybar and set wallpaper
-exec --no-startup-id ~/dotfiles/.scripts/wallpaper.sh stay both
-#Launch browser
-exec --no-startup-id firefox --browser
-#Launch slack
+# Launch Polybar and set wallpaper
+exec --no-startup-id ~/.scripts/wallpaper.sh stay both
+# Launch slack
 exec --no-startup-id slack
-#Launch syncthing
+# Launch syncthing
 exec --no-startup-id syncthing
+#
+# Launch browser
+#exec --no-startup-id firefox --browser
+# Torrent daemon:
+#exec --no-startup-id transmission.sh -m start
+# Start VPN
+#exec --no-startup-id ~/.scripts/mullvad.sh connect
 
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 725 500
+for_window [instance="dropdown"] resize set 1080 620 
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
@@ -67,16 +112,16 @@ exec $term -n dropdown -e tmuxinator start scratch
 for_window [instance="cheatsheet"] floating enable #cheatsheets
 
 ##---Music-----------------#
-#Music player daemon and sound:
-exec --no-startup-id [ ! -s ~/.config/mpd/pid ] && mpd
-#ncmpcpp scratch terminal
+# Music player daemon and sound:
+exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
+# ncmpcpp scratch terminal
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
-for_window [instance="music"] resize set 600 600
+for_window [instance="music"] resize set 650 600
 for_window [instance="music"] floating enable
 for_window [instance="music"] move scratchpad
 for_window [instance="music"] border pixel 0
 exec $term -n music -e $music
-#Music Commands
+# Music Commands
 set $pause --no-startup-id mpc toggle
 set $trupause --no-startup-id mpc pause
 set $next --no-startup-id mpc next
@@ -128,18 +173,18 @@ bindsym $mod+q         kill
 bindsym $mod+Shift+q   move scratchpad
 bindsym $mod+w         exec --no-startup-id firefox --browser
 bindsym $mod+Shift+w   exec --no-startup-id ~/bin/tor-browser_en-US/Browser/start-tor-browser
-bindsym $mod+e         exec ~/dotfiles/.scripts/wallpaper.sh reload
-bindsym $mod+Shift+e   exec ~/dotfiles/.scripts/bar-manager.sh restart
+bindsym $mod+e         exec ~/.scripts/wallpaper.sh stay both
+bindsym $mod+Shift+e   exec ~/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
-bindsym $mod+t         exec transmission.sh -m search
+bindsym $mod+t         exec /home/sidreed/Projects/torrent.sh/transmission.sh -m search &
 bindsym $mod+Shift+t   layout toggle
-bindsym $mod+y         resize shrink width 5 px or 5 ppt
-bindsym $mod+Shift+y   resize grow width 5 px or 5 ppt
+bindsym $mod+y         resize shrink width $size_change px or $size_change ppt
+bindsym $mod+Shift+y   resize grow width $size_change px or $size_change ppt
 bindsym $mod+u         [instance="dropdown"] scratchpad show,move position center
 bindsym $mod+Shift+u   sticky toggle
-bindsym $mod+i         resize shrink height 5 px or 5 ppt
-bindsym $mod+Shift+i   resize grow height 5 px or 5 ppt
+bindsym $mod+i         resize shrink height $size_change px or $size_change ppt
+bindsym $mod+Shift+i   resize grow height $size_change px or $size_change ppt
 bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu style
 bindsym $mod+Shift+o   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu sep
 bindsym $mod+p         exec $pause
@@ -151,24 +196,25 @@ bindsym $mod+Shift+s   gaps outer current plus 2
 bindsym $mod+d         move workspace to output right
 bindsym $mod+Shift+d   move workspace to output left
 bindsym $mod+f         fullscreen toggle
-#bindsym $mod+Shift+f
+bindsym $mod+Shift+f   exec --no-startup-id ~/dotfiles/.scripts/bluetooth.sh
 bindsym $mod+g         gaps inner current set 0; gaps outer current set 0
 bindsym $mod+Shift+g   gaps inner current set $defgaps; gaps outer current set $defgaps
 bindsym $mod+h         focus left
-bindsym $mod+Shift+h   move left 10
+bindsym $mod+Shift+h   move left $move_change
 bindsym $mod+j         focus down
-bindsym $mod+Shift+j   move down 10
+bindsym $mod+Shift+j   move down $move_change
 bindsym $mod+k         focus up
-bindsym $mod+Shift+k   move up 10
+bindsym $mod+Shift+k   move up $move_change
 bindsym $mod+l         focus right
-bindsym $mod+Shift+l   move right 10
+bindsym $mod+Shift+l   move right $move_change
 bindsym $mod+z         exec --no-startup-id ~/.scripts/monitor.sh auto
 bindsym $mod+Shift+z   exec --no-startup-id ~/.scripts/monitor.sh laptop
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 #bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
+bindsym $mod+Shift+x   exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
-bindsym $mod+v         exec --no-startup-id ~/.scripts/bitwarden.sh
+bindsym $mod+v         exec --no-startup-id ~/bin/anyconnect-linux64-4.10.03104/vpn/vpnui
 #bindsym $mod+Shift+v
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
@@ -239,12 +285,8 @@ bindsym Mod2+Shift+KP_8  move container to workspace $ws8
 bindsym Mod2+Shift+KP_9  move container to workspace $ws9
 bindsym Mod2+Shift+KP_0  move container to workspace $ws10
 
-# Shortcuts
-bindsym $mod+Tab		    workspace back_and_forth
-bindsym $mod+apostrophe		split horizontal ;; exec $term
-bindsym $mod+slash		    split vertical ;; exec $term
-
 ##---Arrow Keys------------#
+bindsym $mod+Tab		    workspace back_and_forth
 bindsym $mod+Left		    focus left
 bindsym $mod+Down		    focus down
 bindsym $mod+Up			    focus up
@@ -262,11 +304,11 @@ bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
 #bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 #bindsym $mod+F2		restart
 #bindsym $mod+F3		exec --no-startup-id displayselect
-bindsym $mod+F4		   exec --no-startup-id $hibernate
+#bindsym $mod+F4		exec --no-startup-id $hibernate
 #bindsym $mod+F5
 #bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
 #bindsym $mod+F7        exec -no-startup-id compton
-bindsym $mod+F8		   exec --no-startup-id $netrefresh
+#bindsym $mod+F8		exec --no-startup-id $netrefresh
 #bindsym $mod+F9		exec --no-startup-id sudo mount -a
 #bindsym $mod+F10
 #bindsym $mod+F11
@@ -300,11 +342,11 @@ bindsym XF86AudioMicMute	    exec $micmute
 #bindsym XF86WebCam		        exec --no-startup-id camtoggle
 #bindsym XF86Mail		        exec $term -e neomutt
 #bindsym XF86Messenger		    exec $term -e weechat
-bindsym XF86Search		        exec $BROWSER https://duckduckgo.com
+#bindsym XF86Search		        exec $BROWSER https://duckduckgo.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id light -U 5
 bindsym XF86MonBrightnessUp	    exec --no-startup-id light -A 5
-bindsym XF86AudioMedia		    exec $music
-bindsym XF86Display		        exec --no-startup-id arandr
-bindsym XF86Documents		    exec $term -e ranger ~/Documents
+#bindsym XF86AudioMedia		    exec $music
+#bindsym XF86Display		        exec --no-startup-id arandr
+#bindsym XF86Documents		    exec $term -e ranger ~/Documents
 #bindsym XF86WLAN		        exec $netrefresh
 

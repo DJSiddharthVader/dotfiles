@@ -110,6 +110,7 @@ prompt_command() {
     start="$(setColor "41 0 01;31")$top$(setColor "0")"
     end="$(setColor "0 01;31")\n$bot "
     term_text_formatting="$(setColor "0 01;37")"
+    term_text_formatting="$(setColor "0 01;36")"
     export PS1="$start$modules$end$term_text_formatting"
 }
 PROMPT_COMMAND=prompt_command

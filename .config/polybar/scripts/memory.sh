@@ -1,11 +1,9 @@
 #!/bin/bash
 shopt -s extglob
-
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(free_all free_mem used_all used_mem percent data short)
+modes=(free_all free_pct free_mem used_all used_pct used_mem all_pct all_mem short)
 mem_unit="Gi"
 icon=""
-
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
 }
@@ -33,7 +31,6 @@ getMode() {
 setMode() {
     sed -i "/^memory:/s/:.*/:$1/" "$mode_file"
 }
-
 info() {
     unit="$2"
     cat /proc/meminfo | grep "$1" | sed -e 's/^[^0-9]*\([0-9]\+\) kB.*$/\1/' | numfmt --from-unit="Ki" --to-unit="$unit" --format="%.2f"
@@ -49,21 +46,22 @@ display() {
     unit="$2"
     mem_total="$(info 'MemTotal' "$unit")"
     mem_free="$(info  'MemAvailable' "$unit")"
-    swp_total="$(info 'SwapTotal' "$unit")"
-    swp_free="$(info  'SwapFree' "$unit")"
+    mem_used="$(data "$mem_total-$mem_free")"
+    # swp_total="$(info 'SwapTotal' "$unit")"
+    # swp_free="$(info  'SwapFree' "$unit")"
     case "$mode" in
-        'free_all') msg="$(perc "($mem_free)/$mem_total*100")% $(data $swp_free) $unit $(perc "($swp_free)/$swp_total*100")%" ;;
-        'free_mem') msg="$(perc "($mem_free)/$mem_total*100")% $(data $swp_free) $unit" ;;
-        'used_all') msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(data "$swp_total-$swp_free") $unit $(perc "($swp_total-$swp_free)/$swp_total*100")%" ;;
-        'used_mem') msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(data "$swp_total-$swp_free") $unit" ;;
-        'percent' ) msg="$(perc "($mem_total-$mem_free)/$mem_total*100")% $(perc "($swp_total-$swp_free)/$swp_total*100")%" ;;
-        'data'    ) msg="$(data "$mem_total-$mem_free") $unit $(data "$swp_total-$swp_free") $unit" ;;
-        'short'   ) msg="$(perc "($mem_total-$mem_free)/$mem_total*100")%" ;;
+        free_mem) msg="$mem_free $unit";;
+        free_pct) msg="$(perc "($mem_free)/$mem_total*100")%" ;;
+        free_all) msg="$mem_free $unit $(perc "($mem_free)/$mem_total*100")%" ;;
+        used_mem) msg="$mem_used $unit";;
+        used_pct) msg="$(perc "($mem_used)/$mem_total*100")%" ;;
+        used_all) msg="$mem_used $unit $(perc "($mem_used)/$mem_total*100")%" ;;
+        all_mem)  msg="$mem_used $unit $mem_free $unit";;
+        all_pct)  msg="$(perc "($mem_used)/$mem_total*100")% $(perc "($mem_free)/$mem_total*100")%" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
 }
-
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
@@ -82,4 +80,3 @@ main() {
 }
 
 main "$@"
-

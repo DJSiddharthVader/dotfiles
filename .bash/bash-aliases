@@ -15,6 +15,9 @@ alias tmux='/PHShome/sr1068/tools/squashfs-root/usr/bin/tmux -2'
 alias rm='rm -i'
 alias wj="watch 'bjobs -a'"
 alias ut="htop -u sr1068"
+#Options
+alias rm='rm -i'
+alias tmux='tmux -2'
 #Git
 alias grm='git rm'
 alias add='git add'
@@ -28,10 +31,30 @@ alias chk='git checkout'
 alias gst='git status'
 alias gsl='~/dotfiles/.scripts/commit-status.sh status'
 alias gsw='watch -n2 "~/dotfiles/.scripts/commit-status.sh status"'
+#Apps
+# alias cp='ptcp'
+# alias cat='bat --paging=never'
+# alias less='bat'
+# alias man='tldr'
+alias psf='find . -type f -maxdepth 99 -printf "%T@ %Tc %p\n" 2> /dev/null | sort -n'
+alias top='htop'
+alias pdf='zathura'
+alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
+alias mx='tmuxinator'
+alias ta='tmux a -t'
+alias go="/usr/local/go/bin/go"
+alias tt='taskwarrior-tui'
+alias notes='notes.sh'
+alias vt='mullvad.sh toggle'
+alias tsm="transmission-remote"
+alias tro='transmission.sh'
 #Shorten
+alias xc='xrandr| grep " con"'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias rs='source ~/.bashrc'
-alias con='conda activate'
-alias cof='conda deactivate'
+alias copy='xclip -sel clip'
+alias pt='ping 8.8.8.8'
+#Print
+alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"

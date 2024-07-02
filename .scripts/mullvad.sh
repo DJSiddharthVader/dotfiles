@@ -15,8 +15,36 @@ setMode() {
 }
 
 status() {
-    mullvad status | grep -o '[^ ]*onnect[^ ]*' | tr -d ' '
+    # mullvad status | grep -o '[^ ]*onnect[^ ]*' | tr -d ' '
+    mullvad status | head -1
 }
+display() {
+    mode="$1"
+    case "$(status)" in
+        Connected|Connecting)
+            case "$mode" in
+                'ip') 
+                    output="$(mullvad status
+                              | head -2
+                              | rev
+                              | cut -d' ' -f1
+                              | rev
+                            )" 
+                    ;;
+                'location') 
+                    output="$(mullvad status
+                              | head -2 
+                              | cut -d':' -f2 
+                              | grep -o '^[^ ].*[\.]'
+                            )"
+                    ;;
+            esac
+            ;;
+        Disconnected|Disconnecting) output="None" ;;
+    esac
+    echo " $output" | tr -d '"'
+}
+
 connect() {
     location=$1
     if [[ -n $location ]]; then
@@ -29,27 +57,13 @@ disconnect() {
     transmission.sh pause > /dev/null 2>&1
     mullvad disconnect
 }
-
 toggle() {
     [[ "$(status)" =~ "Disconnected" ]] && connect || disconnect
 }
 restart() {
    disconnect && connect
 }
-display() {
-    mode="$1"
-    case "$(status)" in
-        Connected|Connecting)
-            info="$(curl -s ipinfo.io)"
-            case "$1" in
-                'ip') output="$(echo "$info" | jq .ip)" ;;
-                'location') output="$(echo "$info" | jq .country)" ;;
-            esac
-            ;;
-        Disconnected|Disconnecting) output="None" ;;
-    esac
-    echo "$output" | tr -d '"'
-}
+
 main() {
     mode="$1"
     location="$2"
@@ -74,11 +88,11 @@ main() {
             setMode "$dmode"
             ;;
     esac
-    sleep 2
+    sleep 1
     case $mode in
-        toggle    ) polybar-msg hook mullvad 1 >| /dev/null ;;
-        connect   ) polybar-msg hook mullvad 1 >| /dev/null ;;
-        disconnect) polybar-msg hook mullvad 1 >| /dev/null ;;
+        toggle    ) polybar-msg action "#mullvad.hook.0" ;;
+        connect   ) polybar-msg action "#mullvad.hook.0" ;;
+        disconnect) polybar-msg action "#mullvad.hook.0" ;;
     esac
 }
 

@@ -10,22 +10,32 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 5,7fold
-8,11fold
-12,14fold
-15,22fold
-23,31fold
-32,55fold
-56,78fold
-79,87fold
-88,109fold
-110,142fold
+8,16fold
+17,20fold
+21,23fold
+24,31fold
+32,57fold
+58,66fold
+67,113fold
+114,150fold
 let &fdl = &fdl
-let s:l = 1 - ((0 * winheight(0) + 11) / 22)
+5
+normal! zo
+24
+normal! zo
+58
+normal! zo
+67
+normal! zo
+114
+normal! zo
+let s:l = 6 - ((5 * winheight(0) + 23) / 47)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 09|
+keepjumps 6
+normal! 05|
+lcd ~/dotfiles/.config/nvim
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
 doautoall SessionLoadPost

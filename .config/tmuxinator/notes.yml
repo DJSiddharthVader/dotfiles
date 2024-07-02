@@ -1,0 +1,11 @@
+# /home/sidreed/.config/tmuxinator/notes.yml
+
+name: notes
+root: ~/
+tmux_command: tmux -2 
+startup_window: journal
+
+windows:
+  - help: joplin help all | \less
+  - docs: 
+  - journal: joplin edit "$(date +'%Y%m%d')_journal"

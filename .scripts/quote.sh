@@ -1,24 +1,15 @@
 #!/bin/bash
-
-# TODO
-#- pull random quote from internet
-#- more formally systematize quote database
-#  - add/edit/delete entrires
-#  - fuzzy search for authors/words
-#  - fuzzy filter by authors/words
-#- build model to tag quotes, authors by category
-#- build giberish genrator hmm for random quotes
-
-# Files & Dirs
-quote_files=(~/Documents/Notes/Quotes.md ~/.quotes) # all quotes start with " and have an author on the next line, no other lines should start with a "
-thinker_dir="$HOME/dotfiles/.ascii/thinkers" # dir with ascii art for various thinkers
-
+# Data
+# all quotes start with " and have an author on the next line, no other lines should start with a "
+# quote_files=(~/.varfiles/quotes.md ~/.varfiles/quotes.txt)
+quote_files=(~/.varfiles/quotes.md)
+# dir with ascii art for various thinkers
+thinker_dir="$HOME/dotfiles/.ascii/thinkers" 
 # Default Args
 colwrap=50
 border_string="(~)~"
 thinker_offset="0.33"
 thinker_line=2
-
 
 help() {
     thinker_list="$(find $thinker_dir -type f -name "*.ascii" -exec basename {} \; | cut -d'.' -f1 | tr '\n' '|' | sed -e 's/|$//' )"
@@ -34,7 +25,6 @@ Usage: $0 [OPTIONS]
                 possible thinkers are {$thinker_list} or any filepath
         -h      print this message"
 }
-
 random_quote() {
     # pick random quote from local files
     quote="$(cat ${quote_files[@]} | grep '^"' | shuf -n1 | tr -d '"')"
@@ -110,7 +100,6 @@ display() {
     # print whatever is thinking the bubble
     thinker $thinker_file $thinker_offset $thinker_line $thinker_padding
 }
-
 main() {
     # pick random quote and thinker, will be updated if specified by a CLI flag
     quote_string="$(random_quote)"

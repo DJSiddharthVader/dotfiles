@@ -12,19 +12,18 @@ setlocal fen
 normal! zo
 57
 normal! zo
-198
+196
 normal! zo
-299
+292
 normal! zo
-347
-normal! zo
-let s:l = 348 - ((108 * winheight(0) + 11) / 22)
+let s:l = 60 - ((59 * winheight(0) + 11) / 22)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 348
-normal! 013|
+keepjumps 60
+normal! 030|
 let &g:so = s:so_save | let &g:siso = s:siso_save
 set hlsearch
+nohlsearch
 doautoall SessionLoadPost
 " vim: set ft=vim :

@@ -14,35 +14,33 @@ export LANG=C
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
 print_info () {
-    #prin
     prin
     info title
     info underline
     info "Model" model
-    #info "Kernel" kernel
+    info "Kernel" kernel
     info "CPU" cpu
     info "GPU" gpu
     info "Display" resolution
     info "OS" distro
     info "Package" packages
-    info "WM" wm
-    prin "Terminal" "$TERMINAL"
+    # info "WM" wm
     info "Shell" shell
-#   info "Battery" battery
+    # prin "Terminal" "$TERMINAL"
+    # info "Font" font
+    # info "Terminal Font" termfont
     info "Uptime" uptime
+    prin "Memory" "$(~/dotfiles/.config/polybar/scripts/memory.sh display all_mem)"
     prin "Disk" "$(~/dotfiles/.config/polybar/scripts/disk.sh display)"
-    prin "Wifi" "$(~/dotfiles/.config/polybar/scripts/network.sh display)"
-    prin "VPN" "$(~/dotfiles/.scripts/mullvad.sh display)"
+    # prin "Wifi" "$(~/dotfiles/.config/polybar/scripts/network.sh display)"
+    # prin "VPN" "$(~/dotfiles/.scripts/mullvad.sh display)"
     prin "Torrent" "$(transmission.sh -u Gi -m datatotal -d)"
     prin "Weather" "$(~/dotfiles/.config/polybar/scripts/weather.sh)"
     info cols
 #    info "Disk" disk
-#    info "Memory" memory
 #    info "CPU Usage" cpu_usage
-#    info "Font" font
 #    info "Local IP" localip
 #    info "Public IP" publicip
-#    info "Terminal Font" termfont
 #    info "Icons" icons
 #    info "WM Theme" wmtheme
 #    info "Theme" theme
@@ -241,11 +239,11 @@ color_blocks="on"
 
 # Color block width in spaces
 # --block_width num
-block_width=3
+block_width=4
 
 # Color block height in lines
 # --block_height num
-block_height=2
+block_height=1
 # }}}
 # Progress Bars {{{
 

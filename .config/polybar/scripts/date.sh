@@ -2,10 +2,10 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(time numeric time_bar date date_bar full full_bar)
+modes=(time time_bar date date_bar numeric full full_bar bar_hour bar_day bar_month bar_year)
 #RAMP=(▁ ▏ ▎ ▍ ▌ ▊ █)
-RAMP=(▁ ░ ▒ ▓ █)
 #RAMP=(▁ ▃ ▄ ▅ ▆ ▇ █)
+RAMP=(▁ ░ ▒ ▓ █)
 DEFAULT_BAR_WIDTH="12"
 
 help() {
@@ -13,21 +13,18 @@ help() {
 }
 cycle() {
     # cycle through modes either forwards or backwards
-    # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
-    # next mode index is:  (x+1) % n
-    # prev mode index is:  (x+n-1) % n
-    # x is current mode index, n is number of modes
     dir="$1"
     mode="$(getMode)"
-    idx="$(echo "${modes[*]}" | grep -o "^.*$mode" | tr ' ' '\n' | wc -l)"
-    idx=$(($idx -1)) #current mode idx
+    idx="$(echo "${modes[*]}" | grep -o "^.*$mode " | tr ' ' '\n' | wc -l)"
+    idx=$(( $idx - 2 ))
     case "$dir" in
-         'next') idx=$(($idx + 1)) ;;
-         'prev') idx=$(($idx +${#modes[@]} -1)) ;;
+         next) idx=$(($idx + 1)) ;;
+         prev) idx=$(($idx - 1)) ;;
          *) echo "Error cycle takes {next|prev}" && exit 1 ;;
     esac
-    next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
-    echo "${modes[$next_idx]}"
+    [[ $idx -lt 0 ]] && idx="$(( ${#modes[@]} - 1))" 
+    # echo "$dir ||| $mode ||| $idx ||| ${modes[$idx]}" >&2
+    echo "${modes[$idx]}"
 }
 getMode() {
     grep '^date:' "$mode_file" | cut -d':' -f2
@@ -35,7 +32,6 @@ getMode() {
 setMode() {
     sed -i "/^date:/s/:.*/:$1/" "$mode_file"
 }
-
 days_in_month() {
     cal $(date +"%m %Y") | awk 'NF {DAYS = $NF}; END {print DAYS}'
 }
@@ -114,5 +110,4 @@ main() {
         setMode "$dmode"
     fi
 }
-
 main "$@"

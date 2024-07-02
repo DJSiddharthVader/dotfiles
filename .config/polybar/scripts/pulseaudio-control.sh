@@ -7,7 +7,8 @@
 
 # Defaults for configurable values, expected to be set by command-line arguments
 AUTOSYNC="no"
-COLOR_MUTED="%{F#444}"
+# COLOR_MUTED="%{F#444}"
+COLOR_MUTED=""
 ICON_MUTED=""
 ICON_SINK=
 NOTIFICATIONS="no"
@@ -25,7 +26,8 @@ ICONS_VOLUME=(   )
 
 # Environment & global constants for the script
 export LANG=en_US  # Some calls depend on English outputs of pactl
-END_COLOR="%{F-}"  # For Polybar colors
+#END_COLOR="%{F-}"  # For Polybar colors
+END_COLOR=""  # For Polybar colors
 
 
 function getCurSink() {

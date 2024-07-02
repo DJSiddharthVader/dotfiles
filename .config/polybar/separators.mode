@@ -1,7 +1,6 @@
-arrow_tail
+; arrow_tail
 ; icons to delimit polybar modules
 leftprefix = ""
 leftsuffix = ""
 rightprefix = ""
 rightsuffix = ""
-
