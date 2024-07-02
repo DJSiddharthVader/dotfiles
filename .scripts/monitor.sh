@@ -24,7 +24,7 @@ connect_audio() {
     case "$mode" in
         laptop) pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo ;;
         hdmi  ) pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo  ;;
-        home  ) pacmd set-card-profile 0 output:hdmi-stereo-extra1+input:analog-stereo ;;
+        home  ) pacmd set-card-profile 0 output:hdmi-stereo-extra2+input:analog-stereo ;;
         *) echo "Invalid mode use {laptop|hdmi|home}" && exit 1 ;;
     esac
 }
