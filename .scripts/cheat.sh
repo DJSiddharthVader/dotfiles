@@ -1,8 +1,8 @@
 #!/bin/bash
 CHEAT_SHEET_DIR="$HOME/.cheatsheets"
-VIMCONFIG="$HOME/.config/nvim/cheat_vimrc"
+# VIMCONFIG="$HOME/.config/nvim/cheat_vimrc"
 PDFGEOM="=1000x800"
-TERMGEOM="=100x50"
+TERMGEOM="=80x50"
 
 pick() {
    sheet="$(find "$CHEAT_SHEET_DIR"/*.* -exec basename {} \; |\
@@ -17,6 +17,7 @@ open() {
     case "$ext" in
         pdf) tabbed -n 'cheatsheet' -g "$PDFGEOM"  zathura "$sheet" -e ;;
         txt|tex) st -n 'cheatsheet' -g "$TERMGEOM" -e nvim -R -u "$VIMCONFIG" "$sheet" ;;
+        sh) st -n 'cheatsheet' -g "$TERMGEOM" -e nvim -R "$sheet" ;;
         md ) st -n 'cheatsheet' -g "$TERMGEOM" -e sh -c "pandoc $sheet | w3m -T text/html" ;;
         *) echo "Error: invalid extension in $1" && exit 1 ;;
     esac
