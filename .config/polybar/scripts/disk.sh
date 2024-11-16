@@ -3,6 +3,7 @@ set -euo pipefail
 shopt -s extglob
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=(percent amount used free amounts all)
+modes=(percent_free amount_free both_free both_used amounts)
 #icon=""
 help() {
     echo "Error: usage ./$(basename ${0:-}) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
@@ -36,8 +37,8 @@ disk() {
     #-f1 is total disk space
     #-f2 is used disk space
     #-f3 is free disk space
-    #-f4 is percent used
-    size="$(df | grep "${1:-}$" | tr -s ' ' '\t' | cut -f2-5 | cut -f"${2:-}")"
+    #-f4 is just the full number
+    size="$(df | grep "${1:-} " | head -1 | tr -s ' ' '\t' | cut -f2-5 | cut -f"${2:-}")"
     if [[ "$2" == 4 ]]; then
         # just percentage, no scaling required
         echo "$size"
@@ -72,20 +73,22 @@ percent_free() {
 display() {
     mode="${1:-}"
     msg=""
-    dirs="$(df -h | grep '/dev/nv' | grep -v 'efi' | rev | cut -d' ' -f1 | rev)"
-    for dir in ${dirs[@]}; do
-        case "$mode" in
-            'percent') space="$(percent_free "$dir")" ;;
-            'amount' ) space="$(disk "$dir" 3)" ;;
-            'used'   ) space="Used: $(disk "$dir" 2) $(disk "$dir" 4)" ;;
-            'free'   ) space="Free: $(percent_free "$dir") $(disk "$dir" 3)" ;;
-            'amounts') space="Used: $(disk "$dir" 2) Free: $(disk "$dir" 3)" ;;
-            'all'    ) space="Used: $(disk "$dir" 2) $(disk "$dir" 4) Free: $(disk "$dir" 3) $(percent_free "$dir")" ;;
-            *) help && exit 1 ;;
-        esac
-        msg="$msg/${dir##*/} $space "
-    done
-    echo "$msg" | sed -s 's/ *$//'
+    disk '/dev/dm-0' 3
+    # dirs="$(df -h | grep '/$' | cut -d' ' -f1)"
+    # for dir in ${dirs[@]}; do
+    #     case "$mode" in
+    #         'percent_free') space="$(percent_free "$dir")" ;;
+    #         'amount_free' ) space="$(disk "$dir" 3)" ;;
+    #         'both_free'   ) space="Free: $(percent_free "$dir") $(disk "$dir" 3)" ;;
+    #         'both_used'   ) space="Used: $(disk "$dir" 2) $(disk "$dir" 4)" ;;
+    #         'amounts') space="Used: $(disk "$dir" 2) Free: $(disk "$dir" 3)" ;;
+    #         # 'all'    ) space="Used: $(disk "$dir" 2) $(disk "$dir" 4) Free: $(disk "$dir" 3) $(percent_free "$dir")" ;;
+    #         *) help && exit 1 ;;
+    #     esac
+    #     dir_name="$(df | grep "${dir}" | rev | cut -d' ' -f1 | rev)"
+    #     msg="$msg/${dir_name##*/} $space "
+    # done
+    # echo "$msg" | sed -s 's/ *$//'
 }
 main() {
     mode="${1:-}"
