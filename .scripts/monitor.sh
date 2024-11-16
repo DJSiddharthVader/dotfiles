@@ -72,13 +72,15 @@ connect() {
             organize_workspaces work
             ;;
         hybrid)
-            prev=$LAPTOP_SCREEN
+            prev="$LAPTOP_SCREEN"
             while IFS= read -r monitor; do
                 if [[ $monitor != $LAPTOP_SCREEN ]]; then
-                    xrandr --output $monitor --auto --right-of $prev
+                    # xrandr --output "$monitor" --auto --right-of "$prev"
+                    echo "xrandr --output $monitor --auto --right-of $prev"
                     prev="$monitor"
                 fi
             done <<< "$(list_monitors)"
+            exit 0
             ;;
         ext)
             connect hybrid
@@ -103,10 +105,10 @@ organize_workspaces() {
     mode="$1"
     case "$mode" in
         home) 
-            # move_left=(0 1)
-            # move_right=(2 3 5 6)
-            move_left=(2 3 5 6)
-            move_right=(4 7 8)
+            move_left=(0 1)
+            move_right=(2 3 5 6)
+            # move_left=(2 3 5 6)
+            # move_right=(4 7 8)
             ;;
         shome)
             move_left=(1 4 7 )
@@ -132,33 +134,44 @@ organize_workspaces() {
     done
 }
 main() {
+    # params used to deciede output behaviour automatically
+    wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
+    n_monitors="$(xrandr | grep -v "$LAPTOP_SCREEN" | grep ' connected' | wc -l)"
+    # How to connect tot external monitors
     mode="$1"
-    if [[ $mode = 'discon' ]]; then
-        disconnect
-        killall -q compton && compton &
-    elif [[ "$mode" = 'auto' ]]; then
-        if is_connected ; then # if already connected then disconnect
-            connect laptop
-        else
-            wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
-            n_monitors="$(xrandr | grep -v "$LAPTOP_SCREEN" | grep ' connected' | wc -l)"
-            echo $wifi $n_monitors
-            case $wifi in 
-                phswifi3) connect work ;;
-                NewTokyo03) 
-                    case $n_monitors in
-                        3) connect home ;;
-                        2) connect shome ;;
-                        *) echo 'Error detecting monitors' && exit 1 ;; esac
-                    ;;
-                *) connect hybrid ;;
-            esac
-        fi
-    elif [[ $mode = 'organize' ]]; then
-        organize_workspaces "$2"
-    else
-        connect "$mode"
-    fi
+    case "$mode" in
+        discon)
+            disconnect
+            killall -q compton && compton &
+            ;;
+        auto)
+            if is_connected ; then # if already connected then disconnect
+                connect laptop
+            else
+                echo $wifi $n_monitors
+                case $wifi in 
+                    phswifi3) 
+                        connect work 
+                        ;;
+                    NewTokyo03) 
+                        case $n_monitors in
+                            3) connect home ;;
+                            2) connect shome ;;
+                            *) echo 'Error detecting monitors' && exit 1 ;; esac
+                        ;;
+                    *) 
+                        connect hybrid 
+                        ;;
+                esac
+            fi
+            ;;
+        organize) 
+            organize_workspaces "$2"
+            ;;
+        *)  
+            connect "$mode" 
+            ;;
+    esac
     # Set wallpaper on all screens
     $HOME/dotfiles/.scripts/wallpaper.sh stay back >& /dev/null  
     # Launch status bars
