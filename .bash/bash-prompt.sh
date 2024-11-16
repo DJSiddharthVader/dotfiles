@@ -2,7 +2,8 @@
 text_font='07;40'
 pow_sep="$(echo -e '\uE0B0')" # "
 top="$(echo -e '╭\uE0B2')" # ┏
-bot="$(echo -e '╰\uE0B2\uE0C6')" # ┗
+# bot="$(echo -e '╰\uE0B2\uE0C6')" # ┗
+bot="$(echo -e '╰ ')"
 clk="$(echo -e '\u231B')"
 usr="$(echo -e '\u23FF')"
 hst="$(echo -e '\u237E')"
@@ -120,5 +121,4 @@ prompt_command() {
     term_text_formatting="$(setColor "0 01;36")"
     export PS1="$start$modules$end$term_text_formatting"
 }
-
 PROMPT_COMMAND=prompt_command
