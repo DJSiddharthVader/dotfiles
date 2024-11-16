@@ -2,12 +2,16 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set autochdir
+filetype plugin on
+filetype indent on
 set updatetime=1000
 " Sets how many lines of history VIM has to remember
 set history=500
 " => Editing mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " With a map leader it's possible to do extra key combinations
+filetype plugin indent on
 " like <leader>w saves the current file
 let mapleader = ","
 let g:mapleader = ","
@@ -198,8 +202,8 @@ set autoread
 map j gj
 map k gk
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
-map <space> /
-map <c-space> ?
+" map <space> /
+" map <c-space> ?
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 " Smart way to move between windows
@@ -207,6 +211,8 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+set splitbelow
+set splitright
 " " Useful mappings for managing tabs
 " map <leader>tn :tabnew<cr>
 " map <leader>to :tabonly<cr>
@@ -228,7 +234,7 @@ autocmd BufReadPost *
       \   exe "normal! g`\"" |
       \ endif
 " Remember info about open buffers on close
-set viminfo^=%
+" set viminfo^=%
 " => Command mode related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Smart mappings on the command line
@@ -338,3 +344,11 @@ function! CopyMatches(reg)
     execute 'let @'.reg.' = join(hits, "\n") . "\n"'
 endfunction
 command! -register CopyMatches call CopyMatches(<q-reg>)
+let g:startify_custom_header = readfile($HOME."/.config/nvim/startify.txt")
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
