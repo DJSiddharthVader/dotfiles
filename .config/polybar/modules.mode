@@ -1,13 +1,13 @@
 bar:float
 separator:arrow_tail
-wallpaper_index:2198
+wallpaper_index:3966
 wifi:standard
-songnames:static
+songnames:scroll
 date:time_bar
-memory:free_pct
+memory:used_pct
 cpu:short
 temperature:short
-disk:percent
+disk:amount
 uptime:hour
 torrent:speed
 reading: Stuxnet - Wikipedia~https://en.wikipedia.org/wiki/Stuxnet
