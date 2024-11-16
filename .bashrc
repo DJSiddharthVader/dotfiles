@@ -180,3 +180,18 @@ PATH="$(echo $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 
 # }}}
 # Print a random quote on new terminal launch
 ~/.scripts/quote.sh
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/sidreed/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/sidreed/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/sidreed/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/sidreed/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
