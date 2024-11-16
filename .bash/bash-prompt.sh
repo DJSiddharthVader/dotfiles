@@ -27,7 +27,7 @@ git_info() {
     #git symbols
     bsym='\u2325' # branch symbol
     committed_symbol='⇡' # dotted up arrow
-    staged_symbol='' # node
+    staged_symbol=' ' # node
     changed_symbol='∆' # delta
     added_symbol='+'
 
