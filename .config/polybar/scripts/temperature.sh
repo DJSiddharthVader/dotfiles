@@ -45,10 +45,8 @@ setMode() {
 }
 
 get_temp() {
-    sensors \
-        |& grep -v 'ERROR' \
-        | grep Package \
-        | sed -e 's/^.*: *+\([0-9]*\)\..*$/\1/'
+    # sensors | grep Composite | cut -d'C' -f3 | grep -o [0-9\.] | paste -sd '' | cut -d'.' -f1
+    sensors | grep 'Sensor 1' | cut -d':' -f2 | cut -d'(' -f1 | grep -o [0-9\.] | paste -sd '' | cut -d'.' -f1
 }
 get_icon() {
     temp="$(get_temp)"
