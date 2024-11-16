@@ -15,31 +15,6 @@ margin-bottom = 1
 [colors]
 ;polybar module separators
 include-file = ~/dotfiles/.config/polybar/separators.mode
-;load Xresources colors
-;foreground = #000
-;foreground-white = #B4B4B4
-;foreground-alt = #444
-;primary = ${xrdb:color1:#222}
-;secondary = ${xrdb:color2:#222}
-;tertiary = ${xrdb:color3:#222}
-;alert = #ff0000
-;transparent = #00000000
-;col0 = ${xrdb:color0:#222}
-;col1 = ${xrdb:color1:#222}
-;col2 = ${xrdb:color2:#222}
-;col3 = ${xrdb:color3:#222}
-;col4 = ${xrdb:color4:#222}
-;col5 = ${xrdb:color5:#222}
-;col6 = ${xrdb:color6:#222}
-;col7 = ${xrdb:color7:#222}
-;col8 = ${xrdb:color8:#222}
-;col9 = ${xrdb:color9:#222}
-;col10 = ${xrdb:color10:#222}
-;col11 = ${xrdb:color11:#222}
-;col12 = ${xrdb:color12:#222}
-;col13 = ${xrdb:color13:#222}
-;col14 = ${xrdb:color14:#222}
-;col15 = ${xrdb:color15:#222}
 ;hack for getting colors to read from Xressources
 include-file = ~/.cache/wal/polybar-wal.theme
 [fonts]
@@ -158,7 +133,6 @@ border-right-size = 10
 border-color = ${colors.transparent}
 focused-name-format = "%{T5}<label>%{T-}"
 ;fonts
-;fonts
 font-0 = PKMN RBYGSC:style=Regular:size=9:antialias=true:autohint=true;4
 font-1 = Font Awesome 6 Brands:format=truetype:style=Regular:size=11:antialias=;4
 font-2 = Bitstream Vera Sans Mono:style=Roman:pixelsize=11;antialias=false;1
@@ -188,14 +162,14 @@ background = ${colors.transparent0}
 foreground = ${colors.foreground}
 focused-name-format = "%{T7}<label>%{T-}"
 ;fonts
-font-0 = ${fonts.font-icon-large}
-font-1 = ${fonts.font-weather-large}
-font-2 = ${fonts.font-main}
-font-3 = ${fonts.font-overflow}
-font-4 = ${fonts.font-scrolling}
-font-5 = ${fonts.font-powerline-large}
-font-6 = ${fonts.font-jp}
-font-7 = ${fonts.font-focused}
+font-0 = PKMN RBYGSC:style=Regular:size=9:antialias=true:autohint=true;4
+font-1 = Font Awesome 6 Brands:format=truetype:style=Regular:size=11:antialias=;4
+font-2 = Bitstream Vera Sans Mono:style=Roman:pixelsize=11;antialias=false;1
+font-3 = FiraCode Nerd Font Mono:style=Regular:size=18:antialias=true;4
+font-4 = Terminus (TTF):style=Regular:pixelsize=13;2
+font-5 = Weather Icons:style=Regular:size=12;3
+font-6 = Noto Sans CJK JP:style=Bold:size=13:antialias=true;3
+font-7 = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 [section/blocks]
 monitor = ${env:MONITOR:}
 cursor-scroll = ns-resize
@@ -223,15 +197,15 @@ underline-color = ${colors.transparent0}
 background = ${colors.transparent0}
 foreground = ${colors.transparent0}
 focused-name-format = "%{T7}<label>%{T-}"
-;fonts
-font-0 = ${fonts.font-icon}
-font-1 = ${fonts.font-weather-large}
-font-2 = ${fonts.font-PiBi}
-font-3 = ${fonts.font-overflow}
-font-4 = ${fonts.font-scrolling}
-font-5 = ${fonts.font-powerline}
-font-6 = ${fonts.font-jp}
-font-7 = ${fonts.font-focused}
+; fonts
+font-0 = PKMN RBYGSC:style=Regular:size=9:antialias=true:autohint=true;4
+font-1 = Font Awesome 6 Brands:format=truetype:style=Regular:size=11:antialias=;4
+font-2 = Bitstream Vera Sans Mono:style=Roman:pixelsize=11;antialias=false;1
+font-3 = FiraCode Nerd Font Mono:style=Regular:size=18:antialias=true;4
+font-4 = Terminus (TTF):style=Regular:pixelsize=13;2
+font-5 = Weather Icons:style=Regular:size=12;3
+font-6 = Noto Sans CJK JP:style=Bold:size=13:antialias=true;3
+font-7 = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
 [section/blocks2]
 monitor = ${env:MONITOR:}
 wm-restack = i3
