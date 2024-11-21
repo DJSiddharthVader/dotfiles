@@ -45,7 +45,7 @@ export GDK_USE_XFT=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 # QT5 style
 # export QT_QPA_PLATFORMTHEME=gtk2
-export QT_QPA_PLATFORMTHEME=qt5ct
+# export QT_QPA_PLATFORMTHEME=qt5ct
 #export QT_STYLE_OVERRIDE=GTK+
 # Python,VIM and UTF-8
 export PYTHONIOENCODING=utf-8
@@ -176,7 +176,24 @@ fi
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
 export PATH="$HOME/.scripts:$PATH"
+export PATH=$PATH:/usr/local/go/bin
 PATH="$(echo $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')"
 # }}}
 # Print a random quote on new terminal launch
 ~/.scripts/quote.sh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/sid/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/sid/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/sid/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/sid/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
