@@ -87,7 +87,7 @@ build_prompt() {
         prompt="$prompt$f_prev$f_curr$module"
         i=$((1+i%8)) # modulo 7 since pywal colors go from 31-37, 41-47
     done
-    echo "$prompt$(setColor "0 3$((i-1))")$pow_sep"
+    echo "$prompt$(setColor "0 01;3$((i-1))")$pow_sep"
 }
 setOptions() {
     # Set how many dirs are shown in prompt path based on term width
