@@ -51,11 +51,12 @@ makeSeparatorTable() {
 }
 help() {
     separator_table="$(makeSeparatorTable)"
-    echo "Usage $(basename $0) CMD OPT
-                      menu  {style|sep}
-                      style {stay|next|prev} or {$(echo ${STYLES[*]} | tr ' ' '|')}
-                      sep   {stay|next|prev} or {$(echo ${separator_names[*]} | tr ' ' '|')}
-                      "
+    echo "
+Usage $(basename $0) CMD OPT
+      menu  {style|sep}
+      style {stay|next|prev} or {$(echo ${STYLES[*]} | tr ' ' '|')}
+      sep   {stay|next|prev} or {$(echo ${separator_names[*]} | tr ' ' '|')}
+"
     echo "$separator_table" | pr -T -o 22
 }
 rofiMenu() {
