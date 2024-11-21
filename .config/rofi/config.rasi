@@ -1,2 +1,15 @@
-window { width: env( WIDTH, 70%); }
+configuration {
+    font: "Terminus (TTF) 34";
+    icon-theme: "Paper";
+}
+window { 
+    width: env( WIDTH, 70%); 
+}
+scrollbar {
+    width:        4px ;
+    border:       0;
+    handle-color: @normal-foreground;
+    handle-width: 8px ;
+    padding:      0;
+}
 @import "~/.cache/wal/colors-rofi-custom.rasi"
