@@ -37,25 +37,19 @@ getMode() {
 setMode() {
     sed -i "/^battery:/s/:.*/:$1/" "$mode_file"
 }
-batinfo() {
-    if [[ $(acpi -b | wc -l | cut -d' ' -f1) -eq 1 ]]; then
-        acpi -b 
-    else
-        acpi -b | grep -v 'rate information unavailable' | head -1
-    fi
-}
 get_percent() {
-    batinfo | cut -d',' -f2 | tr -d '[ %]'
+    acpi -b | cut -d',' -f2 | tr -d '%'
 }
 time_left() {
-    batinfo | \
+    acpi -b | \
         cut -d':' -f2- | \
         cut -d',' -f3 | \
         cut -d':' -f-2 | \
+        sed 's/charging at zero rate - will never fully charge./Inf/' | \
         tr -d '[a-zA-z ]'
 }
 get_status() {
-    isCharging="$(batinfo | cut -d':' -f2 | cut -d',' -f1 | tr -d ' ')"
+    isCharging="$(acpi -b | cut -d':' -f2 | cut -d',' -f1 | tr -d ' ')"
     case "$isCharging" in
         'Charging'|'Not charging') msg="$charging_icon" ;;
         *) msg="" ;;
