@@ -1,5 +1,5 @@
 # vim: filetype=i3
-##--Plasma Integration-----#
+##---Plasma Integration----#
 # Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everything)
 exec --no-startup-id wmctrl -c Plasma
 # For the first time, manually resize them, i3 will remember the setting for floating windows
@@ -24,7 +24,6 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_role="About"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
-
 ##---i3 options------------#
 # Window options
 for_window [class="^.*"] border pixel 0
@@ -37,7 +36,7 @@ gaps inner $defgaps
 gaps outer $defgaps
 mouse_warping none
 focus_follows_mouse yes
-font "FiraCode Nerd Font Mono"
+font pango:FiraCode Nerd Font Mono 15
 # amount to change window size per button press
 set $size_change 10
 # amount to move window position per button press
@@ -45,22 +44,34 @@ set $move_change 20
 # Set reusable app launches
 set $BROWSER firefox
 set $term --no-startup-id st
-set $big_term --no-startup-id st -f "FiraCode Nerd Font Mono:style=Regular:size=20:antialias=true:autohint=true"
+set $big_term --no-startup-id st -f "FiraCode Nerd Font Mono:style=Regular:size=40:antialias=true:autohint=true"
 set $hibernate sudo systemctl suspend
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
-# Set colors from Xresources
-set_from_resource $fg i3wm.color7 #ffffff
-set_from_resource $c5 i3wm.color5 #f0f0f0
-set_from_resource $c4 i3wm.color4 #f0f0f0
-set_from_resource $c3 i3wm.color3 #f0f0f0
-set_from_resource $bg i3wm.color2 #f0f0f0
-# class                 border  backgr. text indicator child_border
-client.focused          $bg     $c4     $fg  $bg       $bg
-client.focused_inactive $bg     $c5     $fg  $bg       $bg
-client.unfocused        $bg     $c3     $fg  $bg       $bg
-client.placeholder      $bg     $bg     $fg  $bg       $bg
-client.background       $bg
-
+# Same logic applied to everything else.
+set_from_resource $term_background background
+set_from_resource $term_foreground foreground
+set_from_resource $term_color0     color0
+set_from_resource $term_color1     color1
+set_from_resource $term_color2     color2
+set_from_resource $term_color3     color3
+set_from_resource $term_color4     color4
+set_from_resource $term_color5     color5
+set_from_resource $term_color6     color6
+set_from_resource $term_color7     color7
+set_from_resource $term_color8     color8
+set_from_resource $term_color9     color9
+set_from_resource $term_color10    color10
+set_from_resource $term_color11    color11
+set_from_resource $term_color12    color12
+set_from_resource $term_color13    color13
+set_from_resource $term_color14    color14
+set_from_resource $term_color15    color15
+# class                 border           backgr.          text             indicator        child_border
+client.focused          $term_background $term_color4     $term_color0 $term_background $term_color4
+client.focused_inactive $term_background $term_color5     $term_color0 $term_background $term_color5
+client.unfocused        $term_background $term_color3     $term_color0 $term_background $term_color3
+client.placeholder      $term_background $term_background $term_color0 $term_background $term_background
+client.background       $term_background
 ##---Start up--------------#
 # Set monitor resolution
 exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
@@ -87,7 +98,7 @@ exec --no-startup-id xrdb ~/.cache/wal/colors.Xresources
 # Launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 # Composite manager
-exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
+exec --no-startup-id picom --config ~/dotfiles/.config/compton.conf
 # Launch Polybar and set wallpaper
 exec --no-startup-id ~/.scripts/wallpaper.sh stay both
 # Launch slack
@@ -101,16 +112,14 @@ exec --no-startup-id syncthing
 #exec --no-startup-id transmission.sh -m start
 # Start VPN
 #exec --no-startup-id ~/.scripts/mullvad.sh connect
-
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 1080 620 
+for_window [instance="dropdown"] resize set 1460 820
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
 exec $term -n dropdown -e tmuxinator start scratch
 for_window [instance="cheatsheet"] floating enable #cheatsheets
-
 ##---Music-----------------#
 # Music player daemon and sound:
 exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
@@ -154,7 +163,6 @@ bindsym $mod+bracketleft 	    exec $lilbak
 bindsym $mod+Shift+bracketleft 	exec $bigbak
 bindsym $mod+bracketright 	    exec $lilfor
 bindsym $mod+Shift+bracketright exec $bigfor
-
 ##---Basic Bindings--------#
 bindsym $mod+space		  focus mode_toggle
 bindsym $mod+Shift+space  floating toggle
@@ -167,7 +175,6 @@ bindsym $mod+Escape       workspace prev
 bindsym Print 	            exec --no-startup-id scrot
 bindsym $mod+Print 			exec --no-startup-id scrot -u
 bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
-
 ##---Letter Key Bindings---#
 bindsym $mod+q         kill
 bindsym $mod+Shift+q   move scratchpad
@@ -227,7 +234,6 @@ bindsym $mod+Shift+m   exec --no-startup-id env LUTRIS_SKIP_INIT=1 lutris lutris
 #bindsym $mod+Shift+BackSpace
 #bindsym $mod+grave
 #bindsym $mod+asciitilde
-
 ##---Workspace Bindings----#
 #Set workspaces
 set $ws1 "1"
@@ -284,7 +290,6 @@ bindsym Mod2+Shift+KP_7  move container to workspace $ws7
 bindsym Mod2+Shift+KP_8  move container to workspace $ws8
 bindsym Mod2+Shift+KP_9  move container to workspace $ws9
 bindsym Mod2+Shift+KP_0  move container to workspace $ws10
-
 ##---Arrow Keys------------#
 bindsym $mod+Tab		    workspace back_and_forth
 bindsym $mod+Left		    focus left
@@ -299,7 +304,6 @@ bindsym $mod+Ctrl+Left	    resize shrink width 10 px or 5 ppt
 bindsym $mod+Ctrl+Right     resize grow width 10 px or 5 ppt
 bindsym $mod+Ctrl+Down	    resize shrink height 10 px or 5 ppt
 bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
-
 ##---Function Buttons------#
 #bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 #bindsym $mod+F2		restart
@@ -313,7 +317,6 @@ bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
 #bindsym $mod+F10
 #bindsym $mod+F11
 #bindsym $mod+F12
-
 ##---Extra XF86 Keys-------#
 # These are the extra media keys that some keyboards have.
 bindsym XF86AudioMute           exec $mute
@@ -349,4 +352,3 @@ bindsym XF86MonBrightnessUp	    exec --no-startup-id light -A 5
 #bindsym XF86Display		        exec --no-startup-id arandr
 #bindsym XF86Documents		    exec $term -e ranger ~/Documents
 #bindsym XF86WLAN		        exec $netrefresh
-
