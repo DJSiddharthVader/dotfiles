@@ -22,7 +22,6 @@ shopt -s extglob # for pattern matching in case statements
 # I do this since I often scroll through many images before settling on a wallpaper so avoids needlessly running the change_colors() function so many times.
 # You can easily scroll through wallpapers using `./wallpaper.sh` next and `./wallpaper.sh` prev and once you get one you like run `./wallpaper.sh stay both` to set the colorschemes.
 # For convieniece I have all of these bound to key in i3 because I am fickle and impatient.
-
 # Vars
 THRESH=50
 WALLPAPER_DIR="$HOME/Pictures/wallpapers"
@@ -118,7 +117,7 @@ change_firefox() {
 }
 change_colors() {
     image="$1"
-    wal -a 93 -n -e -i "$image"  # generate colorschemes 
+    $HOME/miniconda3/bin/wal -a 93 -n -e -i "$image"  # generate colorschemes 
     zathura.sh # re-write zathura config with new colors
     xrdb ~/.cache/wal/colors.Xresources
     if [[ -z "$(pgrep 'polybar')" ]]; then
@@ -128,6 +127,7 @@ change_colors() {
     fi
     ~/bin/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox  > /dev/null 2>&1 # theme for GTK apps and whatnot
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
+    i3-msg reload # reload i3 window colors
     # change_firefox # trigger reloading of colors.css in firefox
     # pywalfox update  # use addon to update FF colors
 }
