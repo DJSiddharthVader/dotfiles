@@ -66,12 +66,12 @@ set_from_resource $term_color12    color12
 set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
-# class                 border           backgr.          text             indicator        child_border
-client.focused          $term_background $term_color4     $term_color0 $term_background $term_color4
-client.focused_inactive $term_background $term_color5     $term_color0 $term_background $term_color5
-client.unfocused        $term_background $term_color3     $term_color0 $term_background $term_color3
-client.placeholder      $term_background $term_background $term_color0 $term_background $term_background
-client.background       $term_background
+# class border backgr. text indicator child_border
+client.focused $term_background $term_color4 $term_color0 $term_background $term_color4
+client.focused_inactive $term_background $term_color5 $term_color0 $term_background $term_color5
+client.unfocused $term_background $term_color3 $term_color0 $term_background $term_color3
+client.placeholder $term_background $term_background $term_color0 $term_background $term_background
+client.background $term_background
 ##---Start up--------------#
 # Set monitor resolution
 exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
@@ -105,7 +105,6 @@ exec --no-startup-id ~/.scripts/wallpaper.sh stay both
 exec --no-startup-id slack
 # Launch syncthing
 exec --no-startup-id syncthing
-#
 # Launch browser
 #exec --no-startup-id firefox --browser
 # Torrent daemon:
@@ -114,7 +113,7 @@ exec --no-startup-id syncthing
 #exec --no-startup-id ~/.scripts/mullvad.sh connect
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 1460 820
+for_window [instance="dropdown"] resize set 1460 pt 920 pt
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
@@ -125,7 +124,7 @@ for_window [instance="cheatsheet"] floating enable #cheatsheets
 exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
 # ncmpcpp scratch terminal
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
-for_window [instance="music"] resize set 650 600
+for_window [instance="music"] resize set 1200 pt 1000 pt
 for_window [instance="music"] floating enable
 for_window [instance="music"] move scratchpad
 for_window [instance="music"] border pixel 0
@@ -142,13 +141,13 @@ set $lilbak --no-startup-id mpc seek -10
 set $bigbak --no-startup-id mpc seek -120
 set $beg --no-startup-id mpc seek 0%
 #For Alsa/Amixer
-set $inc --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 2
-set $biginc --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 5
-set $dec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 2
-set $bigdec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 5
-set $mute --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh togmute
-set $micmute --no-startup-id amixer set Capture toggle
-set $truemute --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh mute
+set $inc exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 2
+set $biginc exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 5
+set $dec exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 2
+set $bigdec exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 5
+set $mute exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh togmute
+set $micmute exec --no-startup-id amixer set Capture toggle
+set $truemute exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh mute
 #Volume keys
 bindsym $mod+equal          exec $inc
 bindsym $mod+Shift+equal    exec $biginc
@@ -221,8 +220,8 @@ bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 bindsym $mod+Shift+x   exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
-bindsym $mod+v         exec --no-startup-id ~/bin/anyconnect-linux64-4.10.03104/vpn/vpnui
-#bindsym $mod+Shift+v
+bindsym $mod+v         floating enable; sticky enable; resize set height 600 px; resize set width 800 px; move position 1755 px 1010 px
+#bindsym $mod+Shift+v   exec --no-startup-id ~/bin/anyconnect-linux64-4.10.03104/vpn/vpnui
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
 bindsym $mod+n         focus output right
@@ -305,18 +304,18 @@ bindsym $mod+Ctrl+Right     resize grow width 10 px or 5 ppt
 bindsym $mod+Ctrl+Down	    resize shrink height 10 px or 5 ppt
 bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
 ##---Function Buttons------#
-#bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
-#bindsym $mod+F2		restart
-#bindsym $mod+F3		exec --no-startup-id displayselect
-#bindsym $mod+F4		exec --no-startup-id $hibernate
-#bindsym $mod+F5
-#bindsym $mod+F6		exec --no-startup-id $term -e transmission-remote-cli
-#bindsym $mod+F7        exec -no-startup-id compton
-#bindsym $mod+F8		exec --no-startup-id $netrefresh
-#bindsym $mod+F9		exec --no-startup-id sudo mount -a
-#bindsym $mod+F10
-#bindsym $mod+F11
-#bindsym $mod+F12
+bindsym F1 $mute
+bindsym F2 $dec
+bindsym F3 $inc
+#bindsym F4	
+#bindsym F5
+#bindsym F6
+bindsym F7  exec --no-startup-id light -U 5
+bindsym F8  exec --no-startup-id light -A 5
+#bindsym F9
+#bindsym F10
+#bindsym F11
+#bindsym F12
 ##---Extra XF86 Keys-------#
 # These are the extra media keys that some keyboards have.
 bindsym XF86AudioMute           exec $mute
@@ -342,13 +341,11 @@ bindsym XF86AudioMicMute	    exec $micmute
 #bindsym XF86TouchpadOn		    exec --no-startup-id exec synclient TouchpadOff=0
 #bindsym XF86TouchpadOff		exec --no-startup-id exec synclient TouchpadOff=1
 #bindsym XF86Close		        kill
-#bindsym XF86WebCam		        exec --no-startup-id camtoggle
 #bindsym XF86Mail		        exec $term -e neomutt
-#bindsym XF86Messenger		    exec $term -e weechat
 #bindsym XF86Search		        exec $BROWSER https://duckduckgo.com
 bindsym XF86MonBrightnessDown	exec --no-startup-id light -U 5
 bindsym XF86MonBrightnessUp	    exec --no-startup-id light -A 5
 #bindsym XF86AudioMedia		    exec $music
-#bindsym XF86Display		        exec --no-startup-id arandr
+#bindsym XF86Display		    exec --no-startup-id arandr
 #bindsym XF86Documents		    exec $term -e ranger ~/Documents
 #bindsym XF86WLAN		        exec $netrefresh
