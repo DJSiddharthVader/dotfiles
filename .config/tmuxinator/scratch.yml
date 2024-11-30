@@ -6,7 +6,7 @@ tmux_options: -f ~/dotfiles/.tmux.conf
 on_project_start: wal -R -e -n -q &
 
 windows:
-  - fetch: echo; neofetch
+  - fetch: printf '%.0s\n' {1..4}; neofetch
   - media: cd ~/Torrents
-  - work: cd ~/TalkowskiLab/Projects/XDP
+  - work: cd ~/TalkowskiLab/Projects/HiC
   - scratch:
