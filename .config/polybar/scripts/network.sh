@@ -2,7 +2,7 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(sleek standard text name strength ip all)
+modes=(sleek standard name strength)
 interface="wlp1s0"
 pipurl="ifconfig.co"
 # Ramp Icons
@@ -79,11 +79,12 @@ display(){
     case $mode in
         'sleek' ) msg="$(icon) $(name)" ;;
         'standard') msg="$(icon) $(strength)% $(name)" ;;
-        'text'     ) msg="$(strength)% $(name) $(pip)" ;;
         'name'     ) msg="$(name)" ;;
         'strength' ) msg="$(strength)%" ;;
-        'ip'       ) msg="L:$(lip) P:$(pip)"  ;;
-        'all'      ) msg="$(icon) $(strength)% $(name) $(pip)" ;;
+        'all'      ) msg="$(icon) $(strength)% $(name)" ;;
+        # 'text'     ) msg="$(strength)% $(name) $(pip)" ;;
+        # 'ip'       ) msg="L:$(lip) P:$(pip)"  ;;
+        # 'all'      ) msg="$(icon) $(strength)% $(name) $(pip)" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
