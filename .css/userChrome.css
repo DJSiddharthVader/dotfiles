@@ -11,22 +11,23 @@
 /* Bookmark star button */
 #star-button{ display:none; }
 /* Add-ons puzzle piece button */
-#unified-extensions-button {  display: none !important;}
+/* #unified-extensions-button {  display: none !important;} */
 /* nav bar extension overflow */
 #nav-bar-overflow-button { display: none !important; }
 /* Hide other misc buttons and icons */
 /* #reload-button { display: none; } */
+#urlbar-zoom-button { display: none; }
+#urlbar-go-button { display: none; }
+#urlbar-bookmark-button { display: none; }
 #downloads-button { display: none; }
 #library-button { display: none; }
 #sidebar-button { display: none; }
-#urlbar-zoom-button { display: none; }
 #canvas-blocker-button { display: none; }
 #tracking-protection-icon-container { display: none; }
 #identity-box { display: none; }
 #pageActionButton { display: none; }
 #pocket-button { display: none; }
 /* Go to arrow button at the end of the urlbar when searching */
-#urlbar-go-button { display: none; }
 /* Bottom left page loading status or url preview */
 #statuspanel { display: none !important; }
 /* General Firefox menu button */
