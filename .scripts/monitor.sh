@@ -1,23 +1,26 @@
 #!/bin/bash
-LAPTOP_SCREEN="eDP-1"
-LAPTOP_RESOLUTION="1920x1080"
+# LAPTOP_SCREEN="eDP-1"
+# LAPTOP_RESOLUTION="1920x1080"
+LAPTOP_SCREEN="eDP"
+LAPTOP_RESOLUTION="2560x1600"
 BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
+
 help() {
     echo "Usage: $0 {auto|home|proj|ext|hybrid|laptop|mirror|organize}"
 }
+list_available_monitors() {
+    xrandr | grep '[^ ]\+ connected' | cut -d' ' -f1
+}
+list_active_monitors() {
+    xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev
+}
 is_connected() {
-    monitors="$(xrandr --listmonitors | head -1 | cut -d' ' -f2)"
-    laptop_connected="$(xrandr --listmonitors | grep -c $LAPTOP_SCREEN)"
-    if [[ $monitors -eq 1 ]] && [[ $laptop_connected -eq 1 ]]; then
+    monitors="$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)"
+    if [[ $laptop_connected -eq 1 ]]; then
         false
     else
         true
     fi
-}
-list_monitors() {
-    # xrandr | grep ' connected' | sort -r | cut -d' ' -f1 | tr -d ' ' 
-    # xrandr --listmonitors | tail -n+2 | grep -o '+\*[^ ]* ' | tr -d '*+ '
-    xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev
 }
 connect_audio() {
     mode="$1"
@@ -35,40 +38,41 @@ disconnect(){
             echo "disconnecting $monitor"
             xrandr --output $monitor --off
         fi
-    done <<< "$(list_monitors)"
+    done <<< "$(list_active_monitors)"
 }
 connect() {
     echo "mode: $1"
     case "$1" in
         home)
-            m1="$(xrandr | grep 'DP-[2,3]-5-5 con' | cut -d' ' -f1)"
-            m2="${m1//5/6}"
-            m3="$(xrandr | grep 'DP-[2,3] con' | cut -d' ' -f1)"
+            m1=""
+            m2=""
+            m3=""
             echo $m1 $m2 $m3
                    # --output $m3 --mode 1920x1080 --right-of $m2 \
             xrandr --verbose \
                    --output $m1 --mode 1920x1080 \
                    --output $m2 --mode 1920x1080 --right-of $m1 --rotate left \
                    --output $m3 --mode 1920x1080 --right-of $m2 --rate 60.00 \
-                   --output eDP-1 --off
+                   --output $LAPTOP_SCREEN --off
             connect_audio home
             organize_workspaces home
             ;;
         shome)
-            m2="$(xrandr | grep 'DP-[2,3,4]-5-5 con' | cut -d' ' -f1)"
-            m1="${m2//5/6}"
+            m1=""
+            m2=""
             echo $m1 $m2
-                   # --output $m3 --mode 1920x1080 --right-of $m2 \
             xrandr --verbose \
                    --output $m2 --mode 1920x1080 \
                    --output $m1 --mode 1920x1080 --right-of $m2 --rotate left \
-                   --output eDP-1 --off
+                   --output $LAPTOP_SCREEN --off
             organize_workspaces work
             ;;
         work)
-            m1="$(xrandr | grep -v $LAPTOP_SCREEN | grep 'DP-.* con' | cut -d' ' -f1)"
-            xrandr --output $LAPTOP_SCREEN --mode $LAPTOP_RESOLUTION --primary \
-                   --output $m1 --auto --right-of $LAPTOP_SCREEN --rotate left
+            m1="$(list_available_monitors | grep -v "$LAPTOP_SCREEN")"
+            echo $m1
+            xrandr --verbose \
+                --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary \
+                --output $m1 --mode 1920x1080 --right-of "$LAPTOP_SCREEN" --rotate left
             organize_workspaces work
             ;;
         hybrid)
