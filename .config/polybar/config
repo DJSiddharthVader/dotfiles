@@ -116,18 +116,17 @@ cursor-click = pointer
 enable-ipc = true
 fixed-center = false
 width = 100%
-height = 2.00%
+height = 24pt
 radius = 5
 ;background
 background = ${colors.transparent}
 foreground = ${colors.foreground}
-tray-detached = false 
 module-margin = 0
 ;borders
-border-top-size = 5
-border-bottom-size = 5
-border-left-size = 10
-border-right-size = 10
+border-top-size = 2pt
+border-bottom-size = 2pt
+border-left-size = 8pt
+border-right-size = 8pt
 border-color = ${colors.transparent}
 focused-name-format = "%{T5}<label>%{T-}"
 ;fonts
