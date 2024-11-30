@@ -2,12 +2,21 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        foldmethod = "expr",
-        foldexpr = "nvim_treesitter#foldexpr()",
         config = function ()
             require("nvim-treesitter.configs").setup({
-            ensure_installed = { "markdown", "markdown_inline", "r", "rnoweb", "yaml" },
-            highlight = { enable = true },
+                ensure_installed = { 
+                    "markdown", "markdown_inline", "r", "rnoweb", "yaml" 
+                },
+                highlight = { 
+                    enable = true,
+                    additional_vim_regex_highlighting = true,
+                },
+                indent = {
+                    enable = true
+                },
+                folding = {
+                    enable = true
+                },
             })
         end,
     }
