@@ -6,10 +6,10 @@ alias l='ls -CF'
 alias lc='ls | wc -l'
 #Typos
 alias r,='rm'
-alias e='nvim'
-alias bi='nvim'
-alias vi='nvim'
-alias vim='nvim'
+alias e='/home/sid/Apps/nvim-linux64/bin/nvim'
+alias bi='/home/sid/Apps/nvim-linux64/bin/nvim'
+alias vi='/home/sid/Apps/nvim-linux64/bin/nvim'
+alias vim='/home/sid/Apps/nvim-linux64/bin/nvim'
 alias mc='mv'
 #Options
 alias rm='rm -i'
@@ -28,41 +28,27 @@ alias gst='git status'
 alias gsl='commit-status.sh status'
 alias gsw='watch -n2 "commit-status.sh status"'
 #Apps
-# alias cp='ptcp'
-# alias cat='bat --paging=never'
-# alias less='bat'
-# alias man='tldr'
-alias psf='find . -type f -maxdepth 99 -printf "%T@ %Tc %p\n" 2> /dev/null | sort -n'
 alias top='htop'
 alias pdf='zathura'
 alias ncmpcpp='ncmpcpp -b ~/.ncmpcpp/bindings'
 alias mx='tmuxinator'
 alias ta='tmux a -t'
-alias go="/usr/local/go/bin/go"
-alias tt='taskwarrior-tui'
 alias notes='notes.sh'
-alias vt='mullvad.sh toggle'
-alias tsm="transmission-remote"
-alias tro='transmission.sh'
-alias sdn="standard-notes-3.181.31-linux-x86_64.AppImage"
-alias flr="Fluent.Reader.1.1.4.AppImage"
 #Shorten
-alias xc='xrandr| grep " con"'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias rs='source ~/.bashrc'
 alias copy='xclip -sel clip'
 alias pt='ping 8.8.8.8'
-alias md='sudo mount /dev/sda1 /media/4tbdrive/'
-alias ud='sudo umount /media/4tbdrive/'
-alias haud='pactl set-card-profile 0 output:hdmi-stereo'
-alias aud='pactl set-card-profile 0 output:analog-stereo'
 alias portal='curl -v http://detectportal.firefox.com/canonical.html'
 alias feh='feh --scale-down -g 1080x1600 -d'
-alias vpn='/home/sidreed/bin/anyconnect-linux64-4.10.03104/vpn/vpn'
 #Print
 alias bgal='feh --scale-down -g 640x480 -d ~/Pictures/wallpapers/*'
 alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
+# Torrent stuff
+alias vt='mullvad.sh toggle'
+alias tsm="transmission-remote"
+alias tro='transmission.sh'
 alias tl="transmission-remote -tall -l | less"
 alias tv="watch -n1 'transmission-remote -tall -l | grep -v Idle | grep -v Stopped'"
