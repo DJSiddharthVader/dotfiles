@@ -2,14 +2,9 @@ return {
   "R-nvim/R.nvim",
   lazy = false,
   opts = {
-    maplocalleader = ';',
     config_tmux = false,
+    editing_mode = "vi",
     close_term = false,
-    R_set_omnifunc = {"R", "rmd", "rnoweb", "rhelp", "rrst"},
-    R_auto_omni = {"R",  "rmd", "rnoweb", "rhelp", "rrst"},
-    -- r_syntax_folding = 1,
-    assignment_keymap = '<LocalLeader>a',
-    pipe_keymap = '<LocalLeader>w',
     pipe_version = 'magrittr',
     -- Create a table with the options to be passed to setup()
     R_args = { "--quiet", "--no-save" },
@@ -20,6 +15,9 @@ return {
         -- opportunity to create mappings local to buffers.
         vim.keymap.set("n", "<Space>", "<Plug>RDSendLine", { buffer = true })
         vim.keymap.set("v", "<Space>", "<Plug>RSendSelection", { buffer = true })
+        vim.keymap.set("v", "<LocalLeader>f", "<Plug>RFormat", { buffer = true })
+        vim.keymap.set("i", "<LocalLeader>a", "<Plug>RInsertAssign", { buffer = true })
+        vim.keymap.set("i", "<LocalLeader>w", "<Plug>RInsertPipe", { buffer = true })
 
         local wk = require("which-key")
         wk.add({
@@ -43,7 +41,7 @@ return {
     pdfviewer = "",
   },
   config = function(_, opts)
-    vim.g.rout_follow_colorscheme = true
+    vim.g.rout_follow_colorscheme = false
     require("r").setup(opts)
     require("r.pdf.generic").open = vim.ui.open
   end,
