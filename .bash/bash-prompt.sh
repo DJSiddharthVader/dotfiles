@@ -1,8 +1,9 @@
 # Prompt Symbols
 text_font='07;40'
 pow_sep="$(echo -e '\uE0B0')" # "
-top="$(echo -e '╭\uE0B2')" # ┏
-bot="$(echo -e '╰\uE0B2\uE0C6')" # ┗
+# top="$(echo -e '╭\uE0B2')" # ┏ bot="$(echo -e '╰\uE0B2\uE0C6')" # ┗
+top="$(echo -e '╭')" 
+bot="$(echo -e '╰ ')"
 clk="$(echo -e '\u231B')"
 usr="$(echo -e '\u23FF')"
 hst="$(echo -e '\u237E')"
@@ -116,9 +117,8 @@ prompt_command() {
     esac
     # format start and end of prompt to put info and entered text on different lines
     start="$(setColor "41 0 01;31")$top$(setColor "0")"
-    end="$(setColor "0 01;31")\n$bot "
+    end="$(setColor "0 01;31")\n$bot"
     term_text_formatting="$(setColor "0 01;36")"
     export PS1="$start$modules$end$term_text_formatting"
 }
-
 PROMPT_COMMAND=prompt_command
