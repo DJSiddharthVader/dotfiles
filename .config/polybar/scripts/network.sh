@@ -2,7 +2,8 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(sleek standard text name strength ip all)
+# modes=(sleek standard text name strength ip all)
+modes=(sleek standard name strength)
 interface="wlp1s0"
 pipurl="ifconfig.co"
 # Ramp Icons
