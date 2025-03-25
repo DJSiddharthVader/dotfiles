@@ -3,6 +3,9 @@ vim.cmd([[
 	let &packpath=&runtimepath
 	source $HOME/.vimrc
 ]])
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter.foldexpr()"
+vim.g.maplocalleader = ";"
+vim.g.rout_follow_colorscheme = true
+-- vim.o.foldmethod = "syntax"
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 require("config.lazy")
