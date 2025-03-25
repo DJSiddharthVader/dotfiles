@@ -1,6 +1,7 @@
 #!/bin/bash
 LAPTOP_SCREEN="eDP-1"
-LAPTOP_RESOLUTION="1920x1080"
+# LAPTOP_RESOLUTION="1920x1080"
+LAPTOP_RESOLUTION="1920x1200"
 BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
 help() {
     echo "Usage: $0 {auto|home|proj|ext|hybrid|laptop|mirror|organize}"
@@ -68,7 +69,7 @@ connect() {
         work)
             m1="$(xrandr | grep -v $LAPTOP_SCREEN | grep 'DP-.* con' | cut -d' ' -f1)"
             xrandr --output $LAPTOP_SCREEN --mode $LAPTOP_RESOLUTION --primary \
-                   --output $m1 --auto --right-of $LAPTOP_SCREEN --rotate left
+                   --output $m1 --mode 1920x1080 --right-of $LAPTOP_SCREEN --rotate left
             organize_workspaces work
             ;;
         hybrid)
@@ -105,13 +106,12 @@ organize_workspaces() {
     mode="$1"
     case "$mode" in
         home) 
-            move_left=(0 1)
+            move_left=(1)
             move_right=(2 3 5 6)
-            # move_left=(2 3 5 6)
-            # move_right=(4 7 8)
+            # move_right=(4 7 8 9 0)
             ;;
         shome)
-            move_left=(1 4 7 )
+            move_left=(1 4 7)
             move_right=()
             ;;
         work)
