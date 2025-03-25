@@ -29,7 +29,7 @@ for_window [window_type="menu"] floating enable
 # Window options
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
-for_window [instance="zoom"] floating enable
+# for_window [instance="zoom"] floating enable
 workspace_layout stacking
 set $mod Mod4
 set $defgaps 5
