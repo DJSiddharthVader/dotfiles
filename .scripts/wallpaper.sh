@@ -128,8 +128,9 @@ change_colors() {
     fi
     ~/bin/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox  > /dev/null 2>&1 # theme for GTK apps and whatnot
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
-    # change_firefox # trigger reloading of colors.css in firefox
-    # pywalfox update  # use addon to update FF colors
+    i3-msg reload
+    # restart firefox, extension automatically places windows correctly
+    pkill -f firefox && firefox 2>/dev/null &
 }
 wall() {
     mode="$1"
