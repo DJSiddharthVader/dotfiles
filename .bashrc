@@ -112,6 +112,12 @@ function cd() { builtin cd -- "$@" && { [ "$PS1" = "" ] || ls -hrt --color; }; }
 shopt -s dirspell
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2> /dev/null
+shopt -s cdable_vars
+export hic="$HOME/TalkowskiLab/Projects/HiC"
+export scb="$HOME/TalkowskiLab/Projects/NeuralBenchmarking"
+export docs="$HOME/Documents"
+export walls="$HOME/Pictures/wallpapers"
+export dwns="$HOME/Downloads"
 # }}}
 ## Aliases {{{
 [ -f $HOME/.bash/bash-aliases ] && source $HOME/.bash/bash-aliases
@@ -174,8 +180,8 @@ fi
 #PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 #export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
-export PATH="$HOME/.scripts:$PATH"
+export PATH="$HOME/.scripts:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
+# remove duplicate path entries
 PATH="$(echo $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')"
 # }}}
 # Print a random quote on new terminal launch
