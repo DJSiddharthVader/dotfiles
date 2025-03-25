@@ -84,7 +84,9 @@ main() {
 }
 # Set default args if not given
 [[ -n "$1" ]] && mode="$1" || mode='toggle'
-[[ -n "$2" ]] && device="$2" || device="74:45:CE:F9:14:A8" # MTH20xBT
+# [[ -n "$2" ]] && device="$2" || device="74:45:CE:F9:14:A8" # MTH20xBT
+[[ -n "$2" ]] && device="$2" || device="98:8E:79:00:DE:CF" # Qualidex
+# [[ -n "$2" ]] && device="$2" || device="5C:C6:E9:35:57:42" # HRF3000
 echo $mode $device
 # Main 
 main "$mode" "$device"
