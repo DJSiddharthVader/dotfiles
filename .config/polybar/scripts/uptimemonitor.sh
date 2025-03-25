@@ -35,8 +35,8 @@ setMode() {
 
 time_() {
     time_period="$1"
-    if [[ "$(uptime -p)" =~ "$time_period" ]]; then
-        time_passed="$(uptime -p | sed -rE "s/(^.*) ([0-9]{1,} $time_period).*$/\2/" | sed -re 's/[^0-9]//g')"
+    if [[ "$(uptime)" =~ "$time_period" ]]; then
+        time_passed="$(uptime | sed -rE "s/(^.*) ([0-9]{1,} $time_period).*$/\2/" | sed -re 's/[^0-9]//g')"
     else
         time_passed="0"
     fi
