@@ -40,7 +40,7 @@
     background-repeat: no-repeat !important;
     background-size: cover !important;
     background-position: center !important;
-    color: var(--color0) !important;
+    color: var(--color7) !important;
     font-smoothing: antialiased !important;
 }
 /* Format nav-bar region */
@@ -68,6 +68,7 @@
     font-weight: 1200 !important;
     font-size: 17pt !important;
     background: transparent !important;
+    color: var(--color7) !important;
 }
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-text,
@@ -115,8 +116,9 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
 #PersonalToolbar {
     background: transparent !important;
     font-family: "PKMN RBYGSC";
-    font-size: 16pt !important;
+    font-size: 18pt !important;
     font-weight: bold !important;
+    color: var(--color7) !important;
 }
 /* URL bar formating */
 #urlbar, #searchbar {
@@ -130,7 +132,7 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
     background-color: var(--color4) !important;
 }
 .urlbarView .searchbar-textbox{
-    color: var(--color0) !important; /* text */
+    color: var(--color7) !important; /* text */
 }
 .urlbarView {
     background: var(--color4) !important;
