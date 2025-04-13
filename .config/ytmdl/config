@@ -15,9 +15,6 @@
 # In case the path has spaces in in, include it in a " "
 # Following is a simple folder path example
 #
-#SONG_DIR = "~/Music/songs"
-#
-#************--------ADVANCED-------*********
 # If you want to save the song in custom folders than those can be
 # added to the name like the following example.
 # The possible values are following
@@ -29,8 +26,8 @@
 # TrackNumber --> Song Number in the album
 # ReleaseDate --> Song Release date
 #
-# Following is an example of the format
-SONG_DIR = "/home/sidreed/Music$Artist->Album->[Title]"
+# SONG_DIR = "~/Music/songs"
+SONG_DIR = "/home/sid/Music/songs$Artist->Album->Title"
 #
 #*****************************************#
 # The QUALITY is the quality of the song in kbps
@@ -40,7 +37,7 @@ SONG_DIR = "/home/sidreed/Music$Artist->Album->[Title]"
 #
 # Supported values are 320 and 192
 #
-#QUALITY = "320"
+QUALITY = "320"
 #
 #*****************************************#
 # The METADATA_PROVIDERS value is a comma separated
@@ -63,7 +60,7 @@ METADATA_PROVIDERS = "itunes, musicbrainz, deezer, saavn, gaana"
 # mp3, m4a, opus
 # ---------
 #
-#DEFAULT_FORMAT = "mp3"
+DEFAULT_FORMAT = "mp3"
 #
 #*****************************************#
 # What to do when something goes wrong while adding the metadata. This can
