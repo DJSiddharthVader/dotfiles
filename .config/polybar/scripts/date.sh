@@ -2,7 +2,8 @@
 shopt -s extglob
 
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(time time_bar date date_bar numeric full full_bar bar_hour bar_day bar_month bar_year)
+# modes=(time time_bar date date_bar numeric full full_bar bar_hour bar_day bar_month bar_year)
+modes=(time time_bar full full_bar)
 #RAMP=(▁ ▏ ▎ ▍ ▌ ▊ █)
 #RAMP=(▁ ▃ ▄ ▅ ▆ ▇ █)
 RAMP=(▁ ░ ▒ ▓ █)
