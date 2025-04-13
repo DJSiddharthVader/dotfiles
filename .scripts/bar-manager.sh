@@ -184,7 +184,7 @@ launchAllBars() {
     esac
     setMode 'style' "$dmode" # set defualt polybar style
     # launch bars
-    killall -q polybar && sleep 1 # Terminate already running bar instances
+    killall -9 polybar && sleep 1 # Terminate already running bar instances
     case "$dmode" in
         none) sleep 1 ;;
         cross)
