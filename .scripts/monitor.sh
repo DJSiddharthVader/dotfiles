@@ -4,23 +4,28 @@
 LAPTOP_SCREEN="eDP"
 LAPTOP_RESOLUTION="2560x1600"
 BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
-
 help() {
     echo "Usage: $0 {auto|home|proj|ext|hybrid|laptop|mirror|organize}"
 }
 list_available_monitors() {
-    xrandr | grep '[^ ]\+ connected' | cut -d' ' -f1
+    xrandr | grep '[^ ]\+ connected' | cut -d' ' -f1 | grep -v "$LAPTOP_SCREEN"
 }
 list_active_monitors() {
     xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev
 }
 is_connected() {
-    monitors="$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)"
-    if [[ $laptop_connected -eq 1 ]]; then
-        false
-    else
-        true
-    fi
+    [[ "$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)" -ge 1 ]]
+    # connected_monitors="$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)"
+    # if [[ $connected_monitors -ge 1 ]]; then 
+    #     true
+    # fi
+    # false 
+    # monitors="$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)"
+    # if [[ $monitors -eq 0 ]]; then
+    #     false
+    # else
+    #     true
+    # fi
 }
 connect_audio() {
     mode="$1"
@@ -44,9 +49,10 @@ connect() {
     echo "mode: $1"
     case "$1" in
         home)
-            m1=""
-            m2=""
-            m3=""
+            monitors="$(list_available_monitors)"
+            m1="$(echo "$monitors" | head -1)"
+            m2="$(echo "$monitors" | head -2)"
+            m3="$(echo "$monitors" | head -3)"
             echo $m1 $m2 $m3
                    # --output $m3 --mode 1920x1080 --right-of $m2 \
             xrandr --verbose \
@@ -68,11 +74,11 @@ connect() {
             organize_workspaces work
             ;;
         work)
-            m1="$(list_available_monitors | grep -v "$LAPTOP_SCREEN")"
+            m1="$(list_available_monitors)"
             echo $m1
             xrandr --verbose \
                 --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary \
-                --output $m1 --mode 1920x1080 --right-of "$LAPTOP_SCREEN" --rotate left
+                --output $m1 --mode 1920x1080 --scale 1.33x1.48 --right-of "$LAPTOP_SCREEN" --rotate left
             organize_workspaces work
             ;;
         hybrid)
@@ -82,7 +88,7 @@ connect() {
                     xrandr --output $monitor --auto --right-of $prev
                     prev="$monitor"
                 fi
-            done <<< "$(list_monitors)"
+            done <<< "$(list_available_monitors)"
             ;;
         ext)
             connect hybrid
@@ -91,10 +97,11 @@ connect() {
         mirror)
             while IFS= read -r monitor; do
                 xrandr --output $monitor --same-as $LAPTOP_SCREEN
-            done <<< "$(list_monitors)"
+            done <<< "$(list_available_monitors)"
             ;;
         laptop)
             xrandr --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary
+            # xrandr --output "$LAPTOP_SCREEN" --fb 3200x1800 --panning 3200x1800 --scale 1.25x1.25
             disconnect
             connect_audio laptop
             ;;
@@ -141,11 +148,13 @@ main() {
         disconnect
         killall -q compton && compton &
     elif [[ "$mode" = 'auto' ]]; then
+        echo "$(is_connected)"
         if is_connected ; then # if already connected then disconnect
+            echo 'thinks already connected'
             connect laptop
         else
             wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
-            n_monitors="$(xrandr | grep -v "$LAPTOP_SCREEN" | grep ' connected' | wc -l)"
+            n_monitors="$(xrandr | grep -v "$LAPTOP_SCREEN" | wc -l)"
             echo $wifi $n_monitors
             case $wifi in 
                 phswifi3) connect work ;;
