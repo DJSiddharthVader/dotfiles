@@ -220,8 +220,8 @@ bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 bindsym $mod+Shift+x   exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
-bindsym $mod+v         floating enable; sticky enable; resize set height 600 px; resize set width 800 px; move position 1755 px 1010 px
-#bindsym $mod+Shift+v   exec --no-startup-id ~/bin/anyconnect-linux64-4.10.03104/vpn/vpnui
+bindsym $mod+v   exec --no-startup-id /opt/cisco/anyconnect/bin/vpnui
+bindsym $mod+Shift+v         floating enable; sticky enable; resize set height 600 px; resize set width 800 px; move position 1755 px 1010 px
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
 bindsym $mod+n         focus output right
