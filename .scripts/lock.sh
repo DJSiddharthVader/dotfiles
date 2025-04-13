@@ -33,7 +33,7 @@ lock(){
             "$SCREEN"
             # -draw "fill $color1 fill-opacity 0.85 $(lockbox)" \
     #lock command
-    i3lock                            \
+    $HOME/Apps/i3lock-color/build/i3lock \
         --nofork                      \
         --pass-volume-keys            \
         -e                            \
