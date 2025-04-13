@@ -176,11 +176,10 @@ Anaconda*
 .config/fcitx5
 .config/kde.org
 .config/nvim/lazy-lock.json
-.config/nvim
-.config/nvim/lazy-lock.json
 .config/kconf_updaterc
 .config/kdeglobals
 .config/kinfocenterrc
 .config/plasmarc
 .config/konsolesshconfig
-.config/nvim/lazy-lock.json
+.config/yin_yang
+.config/MusicBrainz
