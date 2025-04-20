@@ -51,6 +51,7 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswi
 export PYTHONIOENCODING=utf-8
 # Ranger
 export RANGER_LOAD_DEFAULT_RC=FALSE
+export R_LIBS="$HOME/R/x86_64-pc-linux-gnu-library/4.4"
 # }}}
 ## BASH Options {{{
 shopt -s cdspell                 # Correct cd typos
@@ -112,6 +113,10 @@ function cd() { builtin cd -- "$@" && { [ "$PS1" = "" ] || ls -hrt --color; }; }
 shopt -s dirspell
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2> /dev/null
+shopt -s cdable_vars
+export scb="$HOME/TalkowskiLab/Projects/NeuralBenchmarking"
+export xdp="$HOME/TalkowskiLab/Projects/XDP"
+export hic="$HOME/TalkowskiLab/Projects/HiC"
 # }}}
 ## Aliases {{{
 [ -f $HOME/.bash/bash-aliases ] && source $HOME/.bash/bash-aliases
@@ -177,6 +182,7 @@ fi
 export PATH="$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
 export PATH="$HOME/.scripts:$PATH"
 export PATH=$PATH:/usr/local/go/bin
+export PATH="$PATH:$HOME/.cargo/bin"
 PATH="$(echo $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')"
 # }}}
 # Print a random quote on new terminal launch
