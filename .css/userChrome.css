@@ -56,11 +56,13 @@
 #nav-bar .toolbarbutton-1 > .toolbarbutton-badge-stack {
     height: 2.75rem !important;
     width:  2.75rem !important;
+    color: var(--color7) !important;
 }
 #nav-bar .toolbarbutton-1 image {
     height: 1.75rem !important;
     width:  1.75rem !important;
     background: transparent !important;
+    color: var(--color7) !important;
 }
 /* Button areas surrounding url text bar */
 #TabsToolbar {
@@ -75,6 +77,7 @@
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
     height: 3.5rem !important;
     width:  3.5rem !important;
+    color: var(--color7) !important;
 }
 .tabbrowser-tab[fadein]{ 
 /* safari style tab width */
@@ -91,6 +94,7 @@
 .toolbarbutton-icon .tab-icon-image {
     width: 22pt !important;
     height: 22pt !important;
+    color: var(--color7) !important;
 }
 /* Popup menus */
 menupopup, panel {
