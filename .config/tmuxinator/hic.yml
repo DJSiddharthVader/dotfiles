@@ -1,0 +1,11 @@
+# /home/sidreed/.config/tmuxinator/scratch.yml
+name: hic
+root: ~/TalkowskiLab/Projects/HiC
+tmux_options: -f ~/dotfiles/.tmux.conf
+on_project_start: wal -R -e -n -q && sshfs -o allow_others sr1068@eris2n6.research.partners.org:/data/talkowski/Samples/16p_HiC/ ./remote.16p
+windows:
+  - code: cd remote.16p/scripts
+  - notebook: cd remote.16p/notebooks
+  - git: cd remote.16p && lazygit
+  - scratch:
+  - README: vi remote.16p/README.md
