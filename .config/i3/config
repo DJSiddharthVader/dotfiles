@@ -79,7 +79,8 @@ exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 # Lock after inactivity
-exec --no-startup-id xidlehook --not-when-audio --not-when-fullscreen --timer 1800 '~/dotfiles/.scripts/lock.sh' ''
+exec --no-startup-id xidlehook --not-when-audio --not-when-fullscreen --timer 600 'systemctl suspend && /home/sid/dotfiles/.scripts/lock.sh'
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- '~/dotfiles/.scripts/lock.sh' --nofork
 # Increase key rate
 exec --no-startup-id xset r rate 300 50
 # Pulseaudio
