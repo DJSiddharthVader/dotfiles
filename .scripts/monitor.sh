@@ -1,9 +1,8 @@
 #!/bin/bash
-# LAPTOP_SCREEN="eDP-1"
-# LAPTOP_RESOLUTION="1920x1080"
 LAPTOP_SCREEN="eDP"
 LAPTOP_RESOLUTION="2560x1600"
 BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
+# Get info
 help() {
     echo "Usage: $0 {auto|home|proj|ext|hybrid|laptop|mirror|organize}"
 }
@@ -15,26 +14,17 @@ list_active_monitors() {
 }
 is_connected() {
     [[ "$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)" -ge 1 ]]
-    # connected_monitors="$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)"
-    # if [[ $connected_monitors -ge 1 ]]; then 
-    #     true
-    # fi
-    # false 
-    # monitors="$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)"
-    # if [[ $monitors -eq 0 ]]; then
-    #     false
-    # else
-    #     true
-    # fi
 }
+# Handle external devices
 connect_audio() {
     mode="$1"
     case "$mode" in
-        laptop) pacmd set-card-profile 0 output:analog-stereo+input:analog-stereo ;;
-        hdmi  ) pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo  ;;
-        home  ) pacmd set-card-profile 0 output:hdmi-stereo-extra2+input:analog-stereo ;;
-        *) echo "Invalid mode use {laptop|hdmi|home}" && exit 1 ;;
+        laptop) sink="alsa_output.pci-0000_c1_00.6.analog-stereo" ;;
+        home)   sink="alsa_output.pci-0000_c1_00.1.hdmi-stereo-extra2" ;;
+        hdmi)   sink="$(pactl list sinks | grep -E 'Name' | grep 'hdmi-' | cut -d':' -f2- | tr -d ' ')" ;;
+        *)      echo "Invalid mode use {laptop|hdmi|home}" && exit 1 ;;
     esac
+    pactl set-default-sink ${sink}
 }
 disconnect(){
     # disconnect all external monitors except laptop screen
@@ -47,36 +37,36 @@ disconnect(){
 }
 connect() {
     echo "mode: $1"
+    monitors="$(list_available_monitors)"
     case "$1" in
         home)
-            monitors="$(list_available_monitors)"
-            m1="$(echo "$monitors" | head -1)"
-            m2="$(echo "$monitors" | head -2)"
-            m3="$(echo "$monitors" | head -3)"
-            echo $m1 $m2 $m3
-                   # --output $m3 --mode 1920x1080 --right-of $m2 \
+            m3="$(echo "$monitors" | head -1)"
+            m2="$(echo "$monitors" | head -2 | tail -1)"
+            m1="$(echo "$monitors" | head -3 | tail -1)"
+            echo "$m1 ||| $m2 ||| $m3"
             xrandr --verbose \
-                   --output $m1 --mode 1920x1080 \
-                   --output $m2 --mode 1920x1080 --right-of $m1 --rotate left \
-                   --output $m3 --mode 1920x1080 --right-of $m2 --rate 60.00 \
+                   --output $m1 --mode 2560x1600_60.00 --rate 60 --dpi 96 \
+                   --output $m2 --mode 2560x1600_60.00 --rate 60 --dpi 96 --right-of $m1 --rotate left \
+                   --output $m3 --mode 3840x2160       --rate 60          --right-of $m2 \
                    --output $LAPTOP_SCREEN --off
             connect_audio home
             organize_workspaces home
             ;;
         shome)
-            m1=""
-            m2=""
-            echo $m1 $m2
+            m2="$(echo "$monitors" | head -1)"
+            m1="$(echo "$monitors" | head -2 | tail -1)"
+            echo "$m1 ||| $m2"
             xrandr --verbose \
-                   --output $m2 --mode 1920x1080 \
-                   --output $m1 --mode 1920x1080 --right-of $m2 --rotate left \
+                   --output $m1 --mode 2560x1600_60.00 --rate 60 --dpi 96 \
+                   --output $m2 --mode 2560x1600_60.00 --rate 60 --dpi 96 --right-of $m1 --rotate left \
                    --output $LAPTOP_SCREEN --off
             organize_workspaces work
             ;;
         work)
-            m1="$(list_available_monitors)"
+            m1="$(echo "$monitors" | head -1)"
             echo $m1
-            xrandr --verbose \
+            xrandr \
+                --verbose \
                 --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary \
                 --output $m1 --mode 1920x1080 --scale 1.33x1.48 --right-of "$LAPTOP_SCREEN" --rotate left
             organize_workspaces work
@@ -100,27 +90,44 @@ connect() {
             done <<< "$(list_available_monitors)"
             ;;
         laptop)
-            xrandr --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary
-            # xrandr --output "$LAPTOP_SCREEN" --fb 3200x1800 --panning 3200x1800 --scale 1.25x1.25
             disconnect
+            xrandr --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary
             connect_audio laptop
             ;;
         *) echo "invalid mode" && help && exit 1 ;;
     esac
-    sleep 3 && killall -q compton && sleep 1 && compton &
+    # sleep 3 && killall -q picom && sleep 1 && picom &
     ~/.scripts/wallpaper.sh stay back >& /dev/null
 }
 organize_workspaces() {
     mode="$1"
     case "$mode" in
         home) 
-            # move_left=(0 1)
-            # move_right=(2 3 5 6)
-            move_left=(2 3 5 6)
-            move_right=(4 7 8)
+            declare -A workspace_monitors=(
+                ["0"]="DisplayPort-11"
+                ["1"]="DisplayPort-1"
+                ["2"]="DisplayPort-9"
+                ["3"]="DisplayPort-9"
+                ["4"]="DisplayPort-11"
+                ["5"]="DisplayPort-9"
+                ["6"]="DisplayPort-9"
+                ["7"]="DisplayPort-11"
+                ["8"]="DisplayPort-11"
+                ["9"]="DisplayPort-11"
+            )
+            for workspace in "${!workspace_monitors[@]}"; do
+                monitor=${workspace_monitors[${workspace}]}
+                echo "${workspace} ||| ${monitor}"
+                i3-msg workspace ${workspace}
+                i3-msg move workspace to output ${monitor}
+            done
+            i3-msg workspace 1
+            i3-msg workspace 4
+            i3-msg workspace 2
+            return 
             ;;
         shome)
-            move_left=(1 4 7 )
+            move_left=(1 4 7)
             move_right=()
             ;;
         work)
@@ -142,36 +149,37 @@ organize_workspaces() {
         i3-msg move workspace to output right
     done
 }
+# Main
 main() {
     mode="$1"
-    if [[ $mode = 'discon' ]]; then
-        disconnect
-        killall -q compton && compton &
-    elif [[ "$mode" = 'auto' ]]; then
-        echo "$(is_connected)"
-        if is_connected ; then # if already connected then disconnect
-            echo 'thinks already connected'
-            connect laptop
-        else
-            wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
-            n_monitors="$(xrandr | grep -v "$LAPTOP_SCREEN" | wc -l)"
-            echo $wifi $n_monitors
-            case $wifi in 
-                phswifi3) connect work ;;
-                NewTokyo03) 
-                    case $n_monitors in
-                        3) connect home ;;
-                        2) connect shome ;;
-                        *) echo 'Error detecting monitors' && exit 1 ;; esac
-                    ;;
-                *) connect hybrid ;;
-            esac
-        fi
-    elif [[ $mode = 'organize' ]]; then
-        organize_workspaces "$2"
-    else
-        connect "$mode"
-    fi
+    case ${mode} in 
+        auto)
+            if is_connected ; then # if already connected then disconnect
+                echo 'thinks already connected'
+                connect laptop
+            else
+                wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
+                n_monitors="$(list_available_monitors | wc -l | tr -d ' ')"
+                echo "$wifi ||| $n_monitors"
+                case $wifi in 
+                    phswifi3) connect work ;;
+                    NewTokyo03) 
+                        case $n_monitors in
+                            3) connect home ;;
+                            2) connect shome ;;
+                            *) echo 'Error detecting monitors' && exit 1 ;; esac
+                        ;;
+                    *) connect hybrid ;;
+                esac
+            fi
+            ;;
+        list_av)  list_available_monitors ;;
+        list_ac)  list_active_monitors ;;
+        audio)    connect_audio "${2}" ;;
+        organize) organize_workspaces "$2" ;;
+        discon)   disconnect ;;
+        *)        connect "$mode" ;;
+    esac
     # Set wallpaper on all screens
     $HOME/dotfiles/.scripts/wallpaper.sh stay back >& /dev/null  
     # Launch status bars
