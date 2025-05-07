@@ -28,7 +28,7 @@ for_window [window_type="menu"] floating enable
 # Window options
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
-for_window [instance="zoom"] floating enable
+# for_window [instance="zoom"] floating enable
 workspace_layout stacking
 set $mod Mod4
 set $defgaps 5
@@ -75,6 +75,8 @@ client.background $term_background
 ##---Start up--------------#
 # Set monitor resolution
 exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
+assign [class="^Slack"] 6
+exec --no-startup-id ~/.scripts/monitor.sh laptop
 # Lock screen & blank after 1 hour
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
