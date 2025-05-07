@@ -6,6 +6,6 @@ on_project_start: wal -R -e -n -q && sshfs -o allow_others sr1068@eris2n6.resear
 windows:
   - code: cd remote.16p/scripts
   - notebook: cd remote.16p/notebooks
-  - git: cd remote.16p && lazygit
   - scratch:
-  - README: vi remote.16p/README.md
+  - TODO: vi TODO.md remote.16p/README.md
+  - git: cd remote.16p && lazygit
