@@ -6,7 +6,7 @@ mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 STYLES=(float text blocks blocks2 underline cross press full mini laptop)
 compact_bars=(laptop mini)
 RES_LIMIT=1300
-PRIMARY_SCREEN="eDP-1"
+PRIMARY_SCREEN="eDP"
 # Separators
 dl="."
 separator_file="$HOME/dotfiles/.config/polybar/separators.mode"
@@ -129,9 +129,8 @@ rightsuffix = \"$(echo "$icons" | cut -d"$dl" -f4)\"" |\
     sed -e 's/""//' >| "$separator_file"
 }
 getActiveMonitors() {
-   # same as get all monitors but excludes eDP-1
-   xrandr --query | grep " connected" | cut -d" " -f1
-
+    # same as get all monitors but excludes eDP-1
+    xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev
 }
 getResolution() {
     monitor="$1"
@@ -161,13 +160,6 @@ launchBar() {
     else
         polybar "$bartype"-top &
         polybar "$bartype"-bottom &
-        # if [[ $m = $PRIMARY_SCREEN ]]; then
-        #     polybar laptop-top &
-        #     polybar laptop-bottom &
-        # else
-        #     polybar "$bartype"-top &
-        #     polybar "$bartype"-bottom &
-        # fi
     fi
 }
 launchAllBars() {
@@ -183,8 +175,10 @@ launchAllBars() {
         *) echo "Error: Invalid style" && help && exit 1 ;;
     esac
     setMode 'style' "$dmode" # set defualt polybar style
+    # Terminate already running bar instances
+    killall -9 polybar 
+    wait
     # launch bars
-    killall -9 polybar && sleep 1 # Terminate already running bar instances
     case "$dmode" in
         none) sleep 1 ;;
         cross)
