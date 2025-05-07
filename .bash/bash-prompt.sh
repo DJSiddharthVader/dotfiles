@@ -110,6 +110,7 @@ prompt_command() {
             ;;
         $(($termwidth < 120)))
             modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(conda_env)" "\$(git_info)")"
+            # modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(conda_env)")"
             ;;
         *) # > 120
             modules="$(build_prompt "\$(exit_status)" "$clk\@" "$usr \u" "$hst \h" "$dir \w" "\$(conda_env)" "\$(git_info)")"
