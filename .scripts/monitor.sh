@@ -57,6 +57,15 @@ detect_mode() {
     fi
     echo "${mode}"
 }
+info() {
+    echo "Detected Mode:      $(detect_mode)
+Monitors Detected:  $(list_available_monitors)
+Is Connected:       $(is_connected && echo TRUE || echo FALSE)
+Active Displays:    $(list_active_monitors | paste -sd',')
+# of Monitors:      $(list_available_monitors | wc -l | tr -d ' ')
+Audio:              $(pactl get-default-sink)
+Wifi:               $(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
+}
 # Handle external devices
 connect_audio() {
     mode="$1"
