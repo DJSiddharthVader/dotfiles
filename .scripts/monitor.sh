@@ -38,10 +38,18 @@ is_connected() {
 connect_audio() {
     mode="$1"
     case "$mode" in
-        laptop) sink="alsa_output.pci-0000_c1_00.6.analog-stereo" ;;
-        home)   sink="alsa_output.pci-0000_c1_00.1.hdmi-stereo-extra2" ;;
-        hdmi)   sink="$(pactl list sinks | grep -E 'Name' | grep 'hdmi-' | cut -d':' -f2- | tr -d ' ')" ;;
-        *)      echo "Invalid mode use {laptop|hdmi|home}" && exit 1 ;;
+        home)   
+            sink="alsa_output.pci-0000_c1_00.1.hdmi-stereo-extra2" 
+            ;;
+        laptop|work) 
+            sink="alsa_output.pci-0000_c1_00.6.analog-stereo" 
+            ;;
+        shome|hybrid|ext|mirror)
+            sink="$(pactl list sinks short | cut -f2)"
+            ;;
+        *) 
+            echo "invalid mode" && help && exit 1 
+            ;;
     esac
     pactl set-default-sink ${sink}
 }
