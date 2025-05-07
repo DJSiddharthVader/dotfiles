@@ -74,14 +74,13 @@ client.placeholder $term_background $term_background $term_color0 $term_backgrou
 client.background $term_background
 ##---Start up--------------#
 # Set monitor resolution
-exec --no-startup-id xrandr --output eDP-1 --mode 1920x1080 &
 assign [class="^Slack"] 6
 exec --no-startup-id ~/.scripts/monitor.sh laptop
 # Lock screen & blank after 1 hour
 exec --no-startup-id xset s off
 exec --no-startup-id xset -dpms
 # Lock after inactivity
-exec --no-startup-id xidlehook --not-when-audio --not-when-fullscreen --timer 600 'systemctl suspend && /home/sid/dotfiles/.scripts/lock.sh'
+exec --no-startup-id xidlehook --not-when-audio --not-when-fullscreen --timer 600 '/home/sid/dotfiles/.scripts/lock.sh && systemctl suspend' ''
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- '~/dotfiles/.scripts/lock.sh' --nofork
 # Increase key rate
 exec --no-startup-id xset r rate 300 50
@@ -101,7 +100,7 @@ exec --no-startup-id xrdb ~/.cache/wal/colors.Xresources
 # Launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 # Composite manager
-exec --no-startup-id picom --config ~/dotfiles/.config/compton.conf
+exec --no-startup-id picom --daemon --config ~/dotfiles/.config/compton.conf
 # Launch Polybar and set wallpaper
 exec --no-startup-id ~/.scripts/wallpaper.sh stay both
 # Launch slack
@@ -116,7 +115,7 @@ exec --no-startup-id syncthing
 #exec --no-startup-id ~/.scripts/mullvad.sh connect
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
-for_window [instance="dropdown"] resize set 1460 pt 920 pt
+for_window [instance="dropdown"] resize set 1500 px 860 px
 for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
@@ -127,7 +126,7 @@ for_window [instance="cheatsheet"] floating enable #cheatsheets
 exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
 # ncmpcpp scratch terminal
 set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
-for_window [instance="music"] resize set 1200 pt 1000 pt
+for_window [instance="music"] resize set 1200 px 1000 px
 for_window [instance="music"] floating enable
 for_window [instance="music"] move scratchpad
 for_window [instance="music"] border pixel 0
@@ -186,7 +185,7 @@ bindsym $mod+e         exec ~/.scripts/wallpaper.sh stay both
 bindsym $mod+Shift+e   exec ~/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
-bindsym $mod+t         exec /home/sidreed/Projects/torrent.sh/transmission.sh -m search &
+bindsym $mod+t         exec ~/Projects/torrent.sh/transmission.sh -m search &
 bindsym $mod+Shift+t   layout toggle
 bindsym $mod+y         resize shrink width $size_change px or $size_change ppt
 bindsym $mod+Shift+y   resize grow width $size_change px or $size_change ppt
