@@ -1,7 +1,9 @@
 #!/bin/bash
 LAPTOP_SCREEN="eDP"
+FPS=60
+DPI=90
 LAPTOP_RESOLUTION="2560x1600"
-BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
+SCRIPT_DIR="${HOME}/dotfiles/.scripts"
 # Get info
 help() {
     echo "Automatically detect monitors available and what config to use
@@ -33,6 +35,27 @@ list_active_monitors() {
 }
 is_connected() {
     [[ "$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)" -ge 1 ]]
+}
+detect_mode() {
+    if is_connected ; then # if already connected then disconnect
+        wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
+        n_monitors="$(list_available_monitors | wc -l | tr -d ' ')"
+        case $wifi in 
+            phswifi3) mode="work" ;;
+            NewTokyo03) 
+                case $n_monitors in
+                    3) mode="home" ;;
+                    2) mode="shome" ;;
+                    1) echo 'Error: detected 0 monitors' && exit 1 ;; 
+                    *) echo 'Error detecting monitors' && exit 1 ;; 
+                esac
+                ;;
+            *) mode="hybrid" ;;
+        esac
+    else
+        mode="laptop"
+    fi
+    echo "${mode}"
 }
 # Handle external devices
 connect_audio() {
@@ -141,6 +164,14 @@ organize_workspaces() {
         *) help && return 1 ;;
     esac
 }
+clean_up() {
+    mode="${1}"
+    # Set wallpaper on all screens
+    ${SCRIPT_DIR}/wallpaper.sh stay back >& /dev/null  
+    ${SCRIPT_DIR}/bar-manager.sh restart >& /dev/null
+    connect_audio ${mode}
+    organize_workspaces ${mode}
+}
 disconnect(){
     # disconnect all external monitors except laptop screen
     while IFS= read -r monitor; do
@@ -149,6 +180,19 @@ disconnect(){
             xrandr --output $monitor --off
         fi
     done <<< "$(list_active_monitors)"
+}
+add_modes() {
+    x="${1}"
+    y="${2}"
+    fps="${3}"
+    monitors=${@:4}
+    modename="$(cvt ${x} ${y} ${fps} | tail -1 | cut -d ' ' -f2 | tr -d '"')"
+    modeline="$(cvt ${x} ${y} ${fps} | tail -1 | cut -d ' ' -f3-)"
+    xrandr --newmode ${modename} ${modeline}
+    for monitor in ${monitors[@]}; do
+        xrandr --addmode ${monitor} ${modename}
+    done
+    echo ${modename}
 }
 connect() {
     echo "mode: $1"
@@ -159,23 +203,23 @@ connect() {
             m2="$(echo "$monitors" | head -2 | tail -1)"
             m1="$(echo "$monitors" | head -3 | tail -1)"
             echo "$m1 ||| $m2 ||| $m3"
+            modename="$(add_modes 2560 1600 60 ${m1} ${m2})"
             xrandr --verbose \
-                   --output $m1 --mode 2560x1600_60.00 --rate 60 --dpi 96 \
-                   --output $m2 --mode 2560x1600_60.00 --rate 60 --dpi 96 --right-of $m1 --rotate left \
-                   --output $m3 --mode 3840x2160       --rate 60          --right-of $m2 \
-                   --output $LAPTOP_SCREEN --off
-            connect_audio home
-            organize_workspaces home
+                   --output ${m1} --mode ${modename} --rate ${FPS} --dpi ${DPI} \
+                   --output ${m2} --mode ${modename} --rate ${FPS} --dpi ${DPI} --right-of ${m1} --rotate left \
+                   --output ${m3} --mode 3840x2160   --rate ${FPS}              --right-of ${m2} \
+                   --output ${LAPTOP_SCREEN} --off
             ;;
         shome)
+            modename="$(cvt 2560 1600 ${FPS} | tail -1 | cut -d ' ' -f2 | tr -d '"')"
+            modeline="$(cvt 2560 1600 ${FPS} | tail -1 | cut -d ' ' -f3)"
             m2="$(echo "$monitors" | head -1)"
             m1="$(echo "$monitors" | head -2 | tail -1)"
-            echo "$m1 ||| $m2"
+            modename="$(add_modes 2560 1600 60 ${m1} ${m2})"
             xrandr --verbose \
-                   --output $m1 --mode 2560x1600_60.00 --rate 60 --dpi 96 \
-                   --output $m2 --mode 2560x1600_60.00 --rate 60 --dpi 96 --right-of $m1 --rotate left \
-                   --output $LAPTOP_SCREEN --off
-            organize_workspaces work
+                   --output ${m1} --mode ${modename} --rate ${FPS} --dpi ${DPI} \
+                   --output ${m2} --mode ${modename} --rate ${FPS} --dpi ${DPI} --right-of ${m1} --rotate left \
+                   --output ${LAPTOP_SCREEN} --off
             ;;
         work)
             m1="$(echo "$monitors" | head -1)"
@@ -184,7 +228,6 @@ connect() {
                 --verbose \
                 --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary \
                 --output $m1 --mode 1920x1080 --scale 1.33x1.48 --right-of "$LAPTOP_SCREEN" --rotate left
-            organize_workspaces work
             ;;
         hybrid)
             prev=$LAPTOP_SCREEN
@@ -207,7 +250,6 @@ connect() {
         laptop)
             disconnect
             xrandr --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary
-            connect_audio laptop
             ;;
         *) echo "invalid mode" && help && exit 1 ;;
     esac
@@ -217,38 +259,18 @@ connect() {
 }
 # Main
 main() {
-    mode="$1"
-    case ${mode} in 
-        auto)
-            if is_connected ; then # if already connected then disconnect
-                echo 'thinks already connected'
-                connect laptop
-            else
-                wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
-                n_monitors="$(list_available_monitors | wc -l | tr -d ' ')"
-                echo "$wifi ||| $n_monitors"
-                case $wifi in 
-                    phswifi3) connect work ;;
-                    NewTokyo03) 
-                        case $n_monitors in
-                            3) connect home ;;
-                            2) connect shome ;;
-                            *) echo 'Error detecting monitors' && exit 1 ;; esac
-                        ;;
-                    *) connect hybrid ;;
-                esac
-            fi
-            ;;
-        list_av)  list_available_monitors ;;
-        list_ac)  list_active_monitors ;;
-        audio)    connect_audio "${2}" ;;
-        organize) organize_workspaces "$2" ;;
-        discon)   disconnect ;;
-        *)        connect "$mode" ;;
+    cmd="${1}"
+    [[ -z "${2}" ]] && mode="$(detect_mode)" || mode="${2}"
+    case ${cmd} in 
+        connect)    connect ${mode} ;;
+        disconnect) disconnect ;;
+        info)       info ;;
+        "list_av")    list_available_monitors ;;
+        "list_ac")    list_active_monitors ;;
+        audio)      connect_audio ${mode} ;;
+        organize)   organize_workspaces ${mode} ;;
+        "post_clean") clean_up ${mode} ;;
+        *)          connect ${mode} ;;
     esac
-    # Set wallpaper on all screens
-    $HOME/dotfiles/.scripts/wallpaper.sh stay back >& /dev/null  
-    # Launch status bars
-    $BAR_MANAGER_SCRIPT style stay >& /dev/null
 }
 main ${@}
