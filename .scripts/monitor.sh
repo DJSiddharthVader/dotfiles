@@ -53,6 +53,94 @@ connect_audio() {
     esac
     pactl set-default-sink ${sink}
 }
+organize_workspaces() {
+    mode="$1"
+    monitors="$(list_active_monitors)"
+    case "$mode" in
+        home) 
+            m3="$(echo "$monitors" | head -1)"
+            m2="$(echo "$monitors" | head -2 | tail -1)"
+            m1="$(echo "$monitors" | head -3 | tail -1)"
+            declare -A workspace_monitors=(
+                ["0"]="${m1}"
+                ["1"]="${m3}"
+                ["2"]="${m1}"
+                ["3"]="${m1}"
+                ["4"]="${m1}"
+                ["5"]="${m2}"
+                ["6"]="${m2}"
+                ["7"]="${m1}"
+                ["8"]="${m1}"
+                ["9"]="${m1}"
+            )
+            for workspace in "${!workspace_monitors[@]}"; do
+                monitor=${workspace_monitors[${workspace}]}
+                echo "${workspace} ||| ${monitor}"
+                i3-msg workspace ${workspace}
+                i3-msg move workspace to output ${monitor}
+            done
+            i3-msg workspace 1
+            i3-msg workspace 4
+            i3-msg workspace 2
+            return 
+            ;;
+        shome)
+            m1="$(echo "$monitors" | head -1)"
+            m2="$(echo "$monitors" | head -2 | tail -1)"
+            declare -A workspace_monitors=(
+                ["0"]="${m1}"
+                ["1"]="${m1}"
+                ["2"]="${m2}"
+                ["3"]="${m1}"
+                ["4"]="${m1}"
+                ["5"]="${m2}"
+                ["6"]="${m2}"
+                ["7"]="${m1}"
+                ["8"]="${m1}"
+                ["9"]="${m1}"
+            )
+            for workspace in "${!workspace_monitors[@]}"; do
+                monitor=${workspace_monitors[${workspace}]}
+                echo "${workspace} ||| ${monitor}"
+                i3-msg workspace ${workspace}
+                i3-msg move workspace to output ${monitor}
+            done
+            i3-msg workspace 4
+            i3-msg workspace 5
+            return 
+            ;;
+        work)
+            m1="$(echo "$monitors" | head -1)"
+            m2="$(echo "$monitors" | head -2 | tail -1)"
+            echo "${m1} || ${m2}"
+            echo ${workspace_monitors[@]}
+            declare -A workspace_monitors=(
+                ["0"]="${m1}"
+                ["1"]="${m1}"
+                ["2"]="${m2}"
+                ["3"]="${m1}"
+                ["4"]="${m1}"
+                ["5"]="${m2}"
+                ["6"]="${m2}"
+                ["7"]="${m1}"
+                ["8"]="${m1}"
+                ["9"]="${m1}"
+            )
+            for workspace in "${!workspace_monitors[@]}"; do
+                monitor=${workspace_monitors[${workspace}]}
+                echo "${workspace} ||| ${monitor}"
+                i3-msg workspace ${workspace}
+                i3-msg move workspace to output ${monitor}
+            done
+            i3-msg workspace 4
+            i3-msg workspace 5
+            return 
+            ;;
+        hybrid|ext|mirror)
+            return ;;
+        *) help && return 1 ;;
+    esac
+}
 disconnect(){
     # disconnect all external monitors except laptop screen
     while IFS= read -r monitor; do
@@ -124,57 +212,8 @@ connect() {
         *) echo "invalid mode" && help && exit 1 ;;
     esac
     # sleep 3 && killall -q picom && sleep 1 && picom &
-    ~/.scripts/wallpaper.sh stay back >& /dev/null
-}
-organize_workspaces() {
-    mode="$1"
-    case "$mode" in
-        home) 
-            declare -A workspace_monitors=(
-                ["0"]="DisplayPort-11"
-                ["1"]="DisplayPort-1"
-                ["2"]="DisplayPort-9"
-                ["3"]="DisplayPort-9"
-                ["4"]="DisplayPort-11"
-                ["5"]="DisplayPort-9"
-                ["6"]="DisplayPort-9"
-                ["7"]="DisplayPort-11"
-                ["8"]="DisplayPort-11"
-                ["9"]="DisplayPort-11"
-            )
-            for workspace in "${!workspace_monitors[@]}"; do
-                monitor=${workspace_monitors[${workspace}]}
-                echo "${workspace} ||| ${monitor}"
-                i3-msg workspace ${workspace}
-                i3-msg move workspace to output ${monitor}
-            done
-            i3-msg workspace 1
-            i3-msg workspace 4
-            i3-msg workspace 2
-            return 
-            ;;
-        shome)
-            move_left=(1 4 7)
-            move_right=()
-            ;;
-        work)
-            move_right=(3 5 6 8)
-            move_left=()
-            ;;
-        hmon)
-            move_right=(3 5 6)
-            move_left=()
-            ;;
-        *) help && exit 1 ;;
-    esac
-    for ws in "${move_left[@]}"; do
-        i3-msg workspace "$ws"
-        i3-msg move workspace to output left
-    done
-    for ws in "${move_right[@]}"; do
-        i3-msg workspace "$ws"
-        i3-msg move workspace to output right
-    done
+    wait
+    clean_up ${mode}
 }
 # Main
 main() {
@@ -212,4 +251,4 @@ main() {
     # Launch status bars
     $BAR_MANAGER_SCRIPT style stay >& /dev/null
 }
-main $@
+main ${@}
