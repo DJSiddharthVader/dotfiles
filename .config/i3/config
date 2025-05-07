@@ -67,11 +67,11 @@ set_from_resource $term_color13    color13
 set_from_resource $term_color14    color14
 set_from_resource $term_color15    color15
 # class border backgr. text indicator child_border
-client.focused $term_background $term_color4 $term_color0 $term_background $term_color4
-client.focused_inactive $term_background $term_color5 $term_color0 $term_background $term_color5
-client.unfocused $term_background $term_color3 $term_color0 $term_background $term_color3
-client.placeholder $term_background $term_background $term_color0 $term_background $term_background
-client.background $term_background
+ client.focused $term_background $term_color4 $term_color0 $term_background $term_color4
+ client.focused_inactive $term_background $term_color5 $term_color0 $term_background $term_color5
+ client.unfocused $term_background $term_color3 $term_color0 $term_background $term_color3
+ client.placeholder $term_background $term_background $term_color0 $term_background $term_background
+ client.background $term_background 
 ##---Start up--------------#
 # Set monitor resolution
 assign [class="^Slack"] 6
@@ -108,7 +108,7 @@ exec --no-startup-id slack
 # Launch syncthing
 exec --no-startup-id syncthing
 # Launch browser
-#exec --no-startup-id firefox --browser
+#exec --no-startup-id $BROWSER
 # Torrent daemon:
 #exec --no-startup-id transmission.sh -m start
 # Start VPN
@@ -120,7 +120,7 @@ for_window [instance="dropdown"] floating enable
 for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
 exec $term -n dropdown -e tmuxinator start scratch
-for_window [instance="cheatsheet"] floating enable #cheatsheets
+# for_window [instance="cheatsheet"] floating enable #cheatsheets
 ##---Music-----------------#
 # Music player daemon and sound:
 exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
@@ -179,8 +179,8 @@ bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
 ##---Letter Key Bindings---#
 bindsym $mod+q         kill
 bindsym $mod+Shift+q   move scratchpad
-bindsym $mod+w         exec --no-startup-id firefox --browser
-bindsym $mod+Shift+w   exec --no-startup-id ~/bin/tor-browser_en-US/Browser/start-tor-browser
+bindsym $mod+w         exec --no-startup-id $BROWSER
+# bindsym $mod+Shift+w   exec --no-startup-id ~/Apps/tor-browser_en-US/Browser/start-tor-browser
 bindsym $mod+e         exec ~/.scripts/wallpaper.sh stay both
 bindsym $mod+Shift+e   exec ~/.scripts/bar-manager.sh restart
 bindsym $mod+r         exec rofi -show run
@@ -193,8 +193,8 @@ bindsym $mod+u         [instance="dropdown"] scratchpad show,move position cente
 bindsym $mod+Shift+u   sticky toggle
 bindsym $mod+i         resize shrink height $size_change px or $size_change ppt
 bindsym $mod+Shift+i   resize grow height $size_change px or $size_change ppt
-bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu style
-bindsym $mod+Shift+o   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu sep
+bindsym $mod+o         exec --no-startup-id ~/.scripts/bar-manager.sh menu style
+bindsym $mod+Shift+o   exec --no-startup-id ~/.scripts/bar-manager.sh menu sep
 bindsym $mod+p         exec $pause
 bindsym $mod+Shift+p   exec tabbed -c zathura -e
 bindsym $mod+a         gaps inner current minus 2
