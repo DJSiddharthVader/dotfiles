@@ -123,11 +123,11 @@ change_colors() {
     xrdb ~/.cache/wal/colors.Xresources
     i3-msg reload # reload i3 window colors
     if [[ -z "$(pgrep 'polybar')" ]]; then
-        bar-manager.sh style stay 
+        ~/dotfiles/.scripts/bar-manager.sh style stay 
     else
-        bar-manager.sh reload > /dev/null 2>&1 # reload polybar with new colors
+        ~/dotfiles/.scripts/bar-manager.sh reload >& /dev/null  # reload polybar with new colors
     fi
-    ~/bin/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox  > /dev/null 2>&1 # theme for GTK apps and whatnot
+    ~/Apps/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox  >& /dev/null  # theme for GTK apps and whatnot
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini # live reload all GTK app colors
     change_firefox # reload colors/wallpaper for firefox
     # pywalfox update  # use addon to update FF colors
