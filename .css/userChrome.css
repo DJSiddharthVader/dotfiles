@@ -75,8 +75,8 @@
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-text,
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
-    height: 3.5rem !important;
-    width:  3.5rem !important;
+    height: 4.5rem !important;
+    width:  4.5rem !important;
     color: var(--color7) !important;
 }
 .tabbrowser-tab[fadein]{ 
@@ -90,11 +90,12 @@
 }
 .tabbrowser-tab .tab-background[selected] {
     background: var(--color4) !important;
+    color: var(--color0) !important;
 }
 .toolbarbutton-icon .tab-icon-image {
     width: 22pt !important;
     height: 22pt !important;
-    color: var(--color7) !important;
+    color: var(--color0) !important;
 }
 /* Popup menus */
 menupopup, panel {
@@ -102,11 +103,11 @@ menupopup, panel {
     font-size: 18pt !important;
     font-weight: bold !important;
     --panel-background: var(--color2) !important;
-    --panel-color: var(--color4) !important;
+    --panel-color: var(--color0) !important;
 }
 menuitem:hover {
     background-color: var(--color2) !important;
-    color: var(--color4) !important;
+    color: var(--color0) !important;
 }
 menu:where([_moz-menuactive="true"]:not([disabled="true"])),
 menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
@@ -114,7 +115,7 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
     font-size: 18pt !important;
     font-weight: bold !important;
     background-color: var(--color2) !important;
-    color: var(--color4) !important;
+    color: var(--color0) !important;
 }
 /* Bookmarks bar */
 #PersonalToolbar {
@@ -128,18 +129,21 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
 #urlbar, #searchbar {
     max-height: 50pt !important;
     background: var(--color4) !important;
+    color: var(--color0) !important;
 }
 #urlbar, #searchbar .searchbar-textbox{
     max-height: 50pt;
     font-family: "PKMN RBYGSC";
     font-size: 20pt !important;
     background-color: var(--color4) !important;
+    color: var(--color0) !important;
 }
 .urlbarView .searchbar-textbox{
     color: var(--color7) !important; /* text */
 }
 .urlbarView {
     background: var(--color4) !important;
+    color: var(--color0) !important; /* text */
     opacity: 1 !important;
     border-bottom-left-radius: 15px !important;
     border-bottom-right-radius: 15px !important;
@@ -148,4 +152,5 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
 }
 #urlbar-input::selection {
     background-color: var(--color4) !important;
+    color: var(--color7) !important; /* text */
 }
