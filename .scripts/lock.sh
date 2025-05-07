@@ -33,7 +33,7 @@ lock(){
             "$SCREEN"
             # -draw "fill $color1 fill-opacity 0.85 $(lockbox)" \
     #lock command
-    $HOME/Apps/i3lock-color/build/i3lock \
+     systemctl suspend && $HOME/Apps/i3lock-color/build/i3lock \
         --nofork                      \
         --pass-volume-keys            \
         -e                            \
@@ -61,4 +61,6 @@ lock(){
         -i "$SCREEN"
         # --no-verify                   \
 }
-lock
+# systemctl suspend & lock
+lock 
+# systemctl suspend && lock
