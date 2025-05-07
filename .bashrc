@@ -45,8 +45,8 @@ export GDK_USE_XFT=1
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 # QT5 style
 # export QT_QPA_PLATFORMTHEME=gtk2
-# export QT_QPA_PLATFORMTHEME=qt5ct
-#export QT_STYLE_OVERRIDE=GTK+
+export QT_QPA_PLATFORMTHEME=qt5ct
+# export QT_STYLE_OVERRIDE=GTK+
 # Python,VIM and UTF-8
 export PYTHONIOENCODING=utf-8
 # Ranger
