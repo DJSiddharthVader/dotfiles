@@ -4,7 +4,26 @@ LAPTOP_RESOLUTION="2560x1600"
 BAR_MANAGER_SCRIPT="$HOME/dotfiles/.scripts/bar-manager.sh"
 # Get info
 help() {
-    echo "Usage: $0 {auto|home|proj|ext|hybrid|laptop|mirror|organize}"
+    echo "Automatically detect monitors available and what config to use
+Usage: $0 \${CMD} [\${MODE}]
+    CMDs:  {connect|disconnect|organize|audio|post_clean|info|list_av|list_ac}
+    MODEs: {home|hybrid|ext|mirror|laptop}
+    auto           Auto detect from the following list (hybrid > ext > mirror)
+                   note that any mode can be explicitly specified by doing
+                   \$ $0 connect ${mode}
+        home   3:  home config, 2 monitors + projector
+        hybrid *:  new workspaces per monitor, keep laptop screen on 
+        ext    *:  new workspaces per monitor, turn off laptop screen
+        mirror 1:  mirror laptop onto external display
+        laptop 0:  No monitors connected, just laptop
+    disconnect     disconnect all external monitors
+    organize       Organize workspaces on monitors (config specific)
+    audio          Switch audio output (config specific)
+    post_clean     Run organize+audio (config specific)
+    info           Print info used/relevant when handling monitor config
+    list_av        List monitors detected by xrandr
+    list_ac        List mointors actively displaying something
+"
 }
 list_available_monitors() {
     xrandr | grep '[^ ]\+ connected' | cut -d' ' -f1 | grep -v "$LAPTOP_SCREEN"
