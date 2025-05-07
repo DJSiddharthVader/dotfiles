@@ -132,24 +132,24 @@ for_window [instance="music"] move scratchpad
 for_window [instance="music"] border pixel 0
 exec $term -n music -e $music
 # Music Commands
-set $pause --no-startup-id mpc toggle
-set $trupause --no-startup-id mpc pause
-set $next --no-startup-id mpc next
-set $prev --no-startup-id mpc prev
-set $repeatone --no-startup-id mpc single
-set $lilfor --no-startup-id mpc seek +10
-set $bigfor --no-startup-id mpc seek +120
-set $lilbak --no-startup-id mpc seek -10
-set $bigbak --no-startup-id mpc seek -120
-set $beg --no-startup-id mpc seek 0%
+set  $pause     --no-startup-id mpc toggle  
+set  $trupause  --no-startup-id mpc pause   
+set  $next      --no-startup-id mpc next    
+set  $prev      --no-startup-id mpc prev    
+set  $repeatone --no-startup-id mpc single  
+set  $lilfor    --no-startup-id mpc seek +10
+set  $bigfor    --no-startup-id mpc seek +120
+set  $lilbak    --no-startup-id mpc seek -10
+set  $bigbak    --no-startup-id mpc seek -120
+set  $beg       --no-startup-id mpc seek 0%
 #For Alsa/Amixer
-set $inc exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 2
-set $biginc exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 5
-set $dec exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 2
-set $bigdec exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 5
-set $mute exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh togmute
-set $micmute exec --no-startup-id amixer set Capture toggle
-set $truemute exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh mute
+set $inc       exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up   --volume-step 2
+set $biginc    exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up   --volume-step 5
+set $dec       exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 2
+set $bigdec    exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 5
+set $mute      exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh togmute                 
+set $truemute  exec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh mute                    
+set $micmute   exec --no-startup-id amixer set Capture toggle
 #Volume keys
 bindsym $mod+equal          exec $inc
 bindsym $mod+Shift+equal    exec $biginc
@@ -222,10 +222,10 @@ bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 bindsym $mod+Shift+x   exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
-bindsym $mod+v   exec --no-startup-id /opt/cisco/anyconnect/bin/vpnui
-bindsym $mod+Shift+v         floating enable; sticky enable; resize set height 600 px; resize set width 800 px; move position 1755 px 1010 px
-bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
-bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
+bindsym $mod+v         exec --no-startup-id /opt/cisco/anyconnect/bin/vpnui
+bindsym $mod+Shift+v   floating enable; sticky enable; resize set height 600ppx; resize set width 800ppx; move position 1755ppx 1010ppx
+bindsym $mod+b         exec ~/.scripts/wallpaper.sh next back
+bindsym $mod+Shift+b   exec ~/.scripts/wallpaper.sh prev back
 bindsym $mod+n         focus output right
 bindsym $mod+Shift+n   focus output left
 bindsym $mod+m         [instance="music"] scratchpad show; [instance="music"] move position center
