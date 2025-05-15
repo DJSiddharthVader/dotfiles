@@ -57,11 +57,33 @@ detect_mode() {
     fi
     echo "${mode}"
 }
+pick_mode() {
+    if is_connected ; then # if already connected then disconnect
+        mode="laptop"
+    else
+        wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
+        n_monitors="$(list_available_monitors | wc -l | tr -d ' ')"
+        case $wifi in 
+            phswifi3) mode="work" ;;
+            NewTokyo03) 
+                case $n_monitors in
+                    3) mode="home" ;;
+                    2) mode="shome" ;;
+                    1) echo 'Error: detected 0 monitors' && exit 1 ;; 
+                    *) echo 'Error detecting monitors' && exit 1 ;; 
+                esac
+                ;;
+            *) mode="hybrid" ;;
+        esac
+    fi
+    echo "${mode}"
+}
 info() {
     echo "Detected Mode:      $(detect_mode)
-Monitors Detected:  $(list_available_monitors)
+Next Mode:          $(pick_mode)
+Monitors Detected:  $(list_available_monitors | paste -sd', ')
 Is Connected:       $(is_connected && echo TRUE || echo FALSE)
-Active Displays:    $(list_active_monitors | paste -sd',')
+Active Displays:    $(list_active_monitors | paste -sd', ')
 # of Monitors:      $(list_available_monitors | wc -l | tr -d ' ')
 Audio:              $(pactl get-default-sink)
 Wifi:               $(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
@@ -90,9 +112,9 @@ organize_workspaces() {
     monitors="$(list_active_monitors)"
     case "$mode" in
         home) 
-            m3="$(echo "$monitors" | head -1)"
+            m1="$(echo "$monitors" | head -1)"
             m2="$(echo "$monitors" | head -2 | tail -1)"
-            m1="$(echo "$monitors" | head -3 | tail -1)"
+            m3="$(echo "$monitors" | head -3 | tail -1)"
             declare -A workspace_monitors=(
                 ["0"]="${m1}"
                 ["1"]="${m3}"
@@ -204,9 +226,10 @@ add_modes() {
     echo ${modename}
 }
 connect() {
-    echo "mode: $1"
+    mode="${1}"
+    echo "mode: ${mode}"
     monitors="$(list_available_monitors)"
-    case "$1" in
+    case "${mode}" in
         home)
             m3="$(echo "$monitors" | head -1)"
             m2="$(echo "$monitors" | head -2 | tail -1)"
@@ -271,15 +294,15 @@ main() {
     cmd="${1}"
     [[ -z "${2}" ]] && mode="$(detect_mode)" || mode="${2}"
     case ${cmd} in 
-        connect)    connect ${mode} ;;
-        disconnect) disconnect ;;
-        info)       info ;;
+        connect)      connect $(pick_mode) ;;
+        disconnect)   disconnect ;;
+        audio)        connect_audio ${mode} ;;
+        organize)     organize_workspaces ${mode} ;;
+        "post_clean") clean_up ${mode} ;;
+        info)         info ;;
         "list_av")    list_available_monitors ;;
         "list_ac")    list_active_monitors ;;
-        audio)      connect_audio ${mode} ;;
-        organize)   organize_workspaces ${mode} ;;
-        "post_clean") clean_up ${mode} ;;
-        *)          connect ${mode} ;;
+        *)            connect ${cmd} ;;
     esac
 }
 main ${@}
