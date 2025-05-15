@@ -16,22 +16,20 @@ setMode() {
 
 status() {
     # mullvad status | grep -o '[^ ]*onnect[^ ]*' | tr -d ' '
-    mullvad status | head -1
+    mullvad status | head -1 | tr -d ' '
 }
 display() {
     mode="$1"
     case "$(status)" in
         Connected|Connecting)
             case "$mode" in
-                'ip') 
-                    output="$(mullvad status | head -2 | rev | cut -d' ' -f1 | rev)" 
-                    ;;
-                'location') 
-                    output="$(mullvad status | head -2 | cut -d':' -f2 | grep -o '^[^ ].*[\.]')"
-                    ;;
+                'ip') output="$(mullvad status | tail -1 | cut -d':' -f3 | tr -d ' ')" ;;
+                'location') output="$(mullvad status | head -2 | tail -1 | cut -d':' -f2 | tr -d ' ')" ;;
             esac
             ;;
-        Disconnected|Disconnecting) output="None" ;;
+        Disconnected|Disconnecting) 
+            output="None" 
+            ;;
     esac
     echo " $output" | tr -d '"'
 }
