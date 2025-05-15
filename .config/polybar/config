@@ -950,7 +950,7 @@ format-suffix-foreground = ${root.weather-suffix-foreground}
 format-suffix-background = ${root.weather-suffix-background}
 [module/torrent]
 type = custom/script
-interval = 600
+interval = 1
 exec = ~/bin/transmission.sh -m display
 click-left = ~/bin/transmission.sh -m next
 click-right = ~/bin/transmission.sh -m prev
