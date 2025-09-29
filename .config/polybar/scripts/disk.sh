@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+# set -euo pipefail
 shopt -s extglob
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=(percent amount used free amounts all)
@@ -37,7 +37,7 @@ disk() {
     #-f2 is used disk space
     #-f3 is free disk space
     #-f4 is percent used
-    size="$(df | grep "${1:-}$" | tr -s ' ' '\t' | cut -f2-5 | cut -f"${2:-}")"
+    size="$(df 2>/dev/null | grep "${1:-}$" | tr -s ' ' '\t' | cut -f2-5 | cut -f"${2:-}")"
     if [[ "$2" == 4 ]]; then
         # just percentage, no scaling required
         echo "$size"
@@ -72,7 +72,7 @@ percent_free() {
 display() {
     mode="${1:-}"
     msg=""
-    dirs="$(df -h | grep '/dev/nv' | grep -v 'efi' | rev | cut -d' ' -f1 | rev)"
+    dirs="$(df -h 2>/dev/null | grep '/dev/nv' | grep -v 'efi' | rev | cut -d' ' -f1 | rev)"
     for dir in ${dirs[@]}; do
         case "$mode" in
             'percent') space="$(percent_free "$dir")" ;;
