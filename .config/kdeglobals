@@ -136,7 +136,10 @@ ForegroundPositive=39,174,96
 ForegroundVisited=155,89,182
 
 [General]
+BrowserApplication=firefox.desktop
 ColorSchemeHash=0d37ac7d257c7643ff5540889d5368b99875ad6b
+TerminalApplication=/usr/local/bin/st
+TerminalService=/home/sidreed/.local/share/applications/st.desktop
 fixed=Terminess Nerd Font Mono,10,-1,5,57,0,0,0,0,0,Regular
 font=Terminess Nerd Font Mono,12,-1,5,57,0,0,0,0,0,Regular
 menuFont=Terminess Nerd Font Mono,10,-1,5,57,0,0,0,0,0,Regular
