@@ -1,7 +1,8 @@
 #!/bin/bash
 shopt -s extglob
 mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
-modes=(free_pct free_mem free_all all_mem)
+# modes=(free_pct free_mem free_all all_mem)
+modes=(used_pct all_mem)
 mem_unit="Gi"
 icon=""
 help() {
@@ -50,14 +51,14 @@ display() {
     # swp_total="$(info 'SwapTotal' "$unit")"
     # swp_free="$(info  'SwapFree' "$unit")"
     case "$mode" in
+        used_pct) msg="$(perc "($mem_used)/$mem_total*100")%" ;;
         free_pct) msg="$(perc "($mem_free)/$mem_total*100")%" ;;
         free_mem) msg="$mem_free $unit";;
         free_all) msg="$mem_free $unit $(perc "($mem_free)/$mem_total*100")%" ;;
         all_mem)  msg="$mem_used $unit $mem_free $unit";;
-        # used_mem) msg="$mem_used $unit";;
-        # used_pct) msg="$(perc "($mem_used)/$mem_total*100")%" ;;
-        # used_all) msg="$mem_used $unit $(perc "($mem_used)/$mem_total*100")%" ;;
-        # all_pct)  msg="$(perc "($mem_used)/$mem_total*100")% $(perc "($mem_free)/$mem_total*100")%" ;;
+        used_mem) msg="$mem_used $unit";;
+        used_all) msg="$mem_used $unit $(perc "($mem_used)/$mem_total*100")%" ;;
+        all_pct)  msg="$(perc "($mem_used)/$mem_total*100")% $(perc "($mem_free)/$mem_total*100")%" ;;
         *) help && exit 1 ;;
     esac
     echo "$msg"
