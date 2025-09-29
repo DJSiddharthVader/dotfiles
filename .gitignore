@@ -170,3 +170,6 @@ Anaconda*
 .config/Microsoft/
 .config/Signal/
 .config/joplin/
+.config/emaildefaults
+.config/Buckets
+.config/nvim/lazy-lock.json

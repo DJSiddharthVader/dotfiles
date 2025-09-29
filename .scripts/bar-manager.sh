@@ -10,35 +10,37 @@ PRIMARY_SCREEN="eDP-1"
 # Separators
 dl="."
 separator_file="$HOME/dotfiles/.config/polybar/separators.mode"
-separator_names=(sym_arrow
-                 sym_jojo
-                 sym_jojo_slim
-                 sym_jojo_block
-                 sym_circle
-                 sym_tail
-                 arrow_tail
-                 circle_tail
-                 trig_in
-                 trig_out
-                 small_fade
-                 big_fade
-                 spaces
-                 none
+separator_names=(
+    sym_arrow
+    sym_jojo
+    sym_jojo_slim
+    sym_jojo_block
+    sym_circle
+    sym_tail
+    arrow_tail
+    circle_tail
+    trig_in
+    trig_out
+    small_fade
+    big_fade
+    spaces
+    none
 )
-separator_icons=("$dl$dl$dl"
-                 "『$dl』$dl『$dl』"
-                 "｢$dl｣$dl｢$dl｣"
-                 "🭪『$dl』🭨$dl🭪『$dl』🭨"
-                 "$dl$dl$dl"
-                 "$dl$dl$dl"
-                 "$dl$dl$dl"
-                 "$dl$dl$dl"
-                 "$dl$dl$dl"
-                 "$dl$dl$dl"
-                 "$dl$dl$dl"
-                 "$dl$dl$dl"
-                 " $dl$dl$dl "
-                 "$dl$dl$dl"
+separator_icons=(
+    "$dl$dl$dl"
+    "『$dl』$dl『$dl』"
+    "｢$dl｣$dl｢$dl｣"
+    "🭪『$dl』🭨$dl🭪『$dl』🭨"
+    "$dl$dl$dl"
+    "$dl$dl$dl"
+    "$dl$dl$dl"
+    "$dl$dl$dl"
+    "$dl$dl$dl"
+    "$dl$dl$dl"
+    "$dl$dl$dl"
+    "$dl$dl$dl"
+    " $dl$dl$dl "
+    "$dl$dl$dl"
 )
 # Help messages
 makeSeparatorTable() {
@@ -183,7 +185,7 @@ launchAllBars() {
     esac
     setMode 'style' "$dmode" # set defualt polybar style
     # launch bars
-    killall -q polybar && sleep 1 # Terminate already running bar instances
+    killall -q polybar && sleep 3 # Terminate already running bar instances
     case "$dmode" in
         none) sleep 1 ;;
         cross)

@@ -42,7 +42,8 @@ export SYSTEMD_LESS=FRXMK journalctl
 # XFT fonts
 export GDK_USE_XFT=1
 # JAVA look and feel
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+# export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dswing.crossplatformlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true'
 # QT5 style
 # export QT_QPA_PLATFORMTHEME=gtk2
 export QT_QPA_PLATFORMTHEME=qt5ct
@@ -113,8 +114,10 @@ shopt -s dirspell
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2> /dev/null
 shopt -s cdable_vars
+export atac="$HOME/TalkowskiLab/Projects/ATAC"
 export hic="$HOME/TalkowskiLab/Projects/HiC"
 export scb="$HOME/TalkowskiLab/Projects/NeuralBenchmarking"
+export xdp2="$HOME/TalkowskiLab/Projects/XDP.Brains"
 export docs="$HOME/Documents"
 export walls="$HOME/Pictures/wallpapers"
 export dwns="$HOME/Downloads"

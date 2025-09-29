@@ -36,19 +36,17 @@ usage() {
     blnk="$(echo $name | sed -e 's/./ /g')"
     echo \
 "Usage: ./$name {path/to/image|rh|reload|display|prev|stay|next} {font|back|both}
-          $blnk rh                              reset wallpaper history
-          $blnk reload                          reload colors for current wallpaper
-          $blnk print                           print current wallpaper path
-          $blnk display                         fprint current wallpaper
-          $blnk path/to/image {font|back|both}  set the wallpaper using explicit path to image
-                                                can also specify just a directroy and a random
-                                                image from that dir will be chosen
-          $blnk prev          {font|back|both}  set the wallpaper to previous image
-          $blnk stay          {font|back|both}  keep current wallpaper
-          $blnk next          {font|back|both}  set the wallpaper to current wallpaper
-                              font updates the colorschemes but doesnt update the wallpaper with new image
-                              back updates the wallpaper but doesnt update the colorscheme with new image
-                              both updates the wallpaper and colorscheme
+    $blnk rh                            reset wallpaper history
+    $blnk reload                        reload colors for current wallpaper
+    $blnk print                         print current wallpaper path
+    $blnk display                       fprint current wallpaper
+    $blnk path/to/img {font|back|both}  set wallpaper using specific file
+    $blnk prev        {font|back|both}  set the wallpaper to previous image
+    $blnk stay        {font|back|both}  keep current wallpaper
+    $blnk next        {font|back|both}  set the wallpaper to current wallpaper
+                      font updates the colorschemes but not the wallpaper
+                      back updates the wallpaper but not the colorscheme
+                      both updates the wallpaper and the colorscheme
 "
 }
 # Handle indexing of wallpapers

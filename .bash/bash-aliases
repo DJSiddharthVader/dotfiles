@@ -24,6 +24,7 @@ alias gst='git status'
 alias gsl='commit-status.sh status'
 alias gsw='watch -n2 "commit-status.sh status"'
 #Apps
+alias sc='/home/sidreed/bin/sc-im/src/sc-im'
 # alias cp='ptcp'
 # alias cat='bat --paging=never'
 # alias less='bat'
