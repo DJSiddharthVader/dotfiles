@@ -1,0 +1,10 @@
+# /home/sidreed/.config/tmuxinator/scratch.yml
+
+name: scrna 
+root: ~/TalkowskiLab/Projects/NeuralBenchmarking
+tmux_options: -f ~/dotfiles/.tmux.conf
+on_project_start: wal -e -n -q && sshfs sr1068@eris2n5.research.partners.org:/data/talkowski/Samples/scRNA_benchmarks/ ./remote
+
+windows:
+  - scratch: 
+  - trajectory: 

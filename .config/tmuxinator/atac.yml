@@ -1,0 +1,12 @@
+# /home/sidreed/.config/tmuxinator/scratch.yml
+
+name: atac
+root: ~/TalkowskiLab/Projects/ATAC
+tmux_options: -f ~/dotfiles/.tmux.conf
+on_project_start: wal -e -n -q && sshfs sr1068@eris2n6.research.partners.org:/data/talkowski/Samples/16p_ATAC ./remote.16p/
+
+windows:
+  - git: lazygit remote.16p
+  - scratch: 
+  - notebook:
+

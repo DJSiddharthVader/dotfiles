@@ -7,6 +7,6 @@ on_project_start: wal -R -e -n -q &
 
 windows:
   - fetch: echo; neofetch
-  - media: cd ~/Torrents
+  - media: vi ~/Documents/Notes/media.tracker.tsv
   - work: cd ~/TalkowskiLab/Projects/HiC
   - scratch:
