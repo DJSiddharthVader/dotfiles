@@ -92,6 +92,7 @@ exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
 exec --no-startup-id ~/.scripts/wallpaper.sh stay both
 # Launch slack
 exec --no-startup-id slack
+assign [class="^Slack"] 6
 # Launch syncthing
 exec --no-startup-id syncthing
 #
@@ -101,7 +102,6 @@ exec --no-startup-id syncthing
 #exec --no-startup-id transmission.sh -m start
 # Start VPN
 #exec --no-startup-id ~/.scripts/mullvad.sh connect
-
 ##---Scratch Pad-----------#
 # tmux scratchpad floating terminal
 for_window [instance="dropdown"] resize set 1080 620 
@@ -110,7 +110,6 @@ for_window [instance="dropdown"] move scratchpad
 for_window [instance="dropdown"] border pixel 0
 exec $term -n dropdown -e tmuxinator start scratch
 for_window [instance="cheatsheet"] floating enable #cheatsheets
-
 ##---Music-----------------#
 # Music player daemon and sound:
 exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
@@ -154,7 +153,6 @@ bindsym $mod+bracketleft 	    exec $lilbak
 bindsym $mod+Shift+bracketleft 	exec $bigbak
 bindsym $mod+bracketright 	    exec $lilfor
 bindsym $mod+Shift+bracketright exec $bigfor
-
 ##---Basic Bindings--------#
 bindsym $mod+space		  focus mode_toggle
 bindsym $mod+Shift+space  floating toggle
@@ -167,7 +165,6 @@ bindsym $mod+Escape       workspace prev
 bindsym Print 	            exec --no-startup-id scrot
 bindsym $mod+Print 			exec --no-startup-id scrot -u
 bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
-
 ##---Letter Key Bindings---#
 bindsym $mod+q         kill
 bindsym $mod+Shift+q   move scratchpad
@@ -227,7 +224,6 @@ bindsym $mod+Shift+m   exec --no-startup-id env LUTRIS_SKIP_INIT=1 lutris lutris
 #bindsym $mod+Shift+BackSpace
 #bindsym $mod+grave
 #bindsym $mod+asciitilde
-
 ##---Workspace Bindings----#
 #Set workspaces
 set $ws1 "1"
@@ -284,7 +280,6 @@ bindsym Mod2+Shift+KP_7  move container to workspace $ws7
 bindsym Mod2+Shift+KP_8  move container to workspace $ws8
 bindsym Mod2+Shift+KP_9  move container to workspace $ws9
 bindsym Mod2+Shift+KP_0  move container to workspace $ws10
-
 ##---Arrow Keys------------#
 bindsym $mod+Tab		    workspace back_and_forth
 bindsym $mod+Left		    focus left
@@ -299,7 +294,6 @@ bindsym $mod+Ctrl+Left	    resize shrink width 10 px or 5 ppt
 bindsym $mod+Ctrl+Right     resize grow width 10 px or 5 ppt
 bindsym $mod+Ctrl+Down	    resize shrink height 10 px or 5 ppt
 bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
-
 ##---Function Buttons------#
 #bindsym $mod+F1		exec --no-startup-id mupdf ~/.config/i3/i3_guide.pdf
 #bindsym $mod+F2		restart
@@ -313,7 +307,6 @@ bindsym $mod+Ctrl+Up	    resize grow height 10 px or 5 ppt
 #bindsym $mod+F10
 #bindsym $mod+F11
 #bindsym $mod+F12
-
 ##---Extra XF86 Keys-------#
 # These are the extra media keys that some keyboards have.
 bindsym XF86AudioMute           exec $mute
@@ -349,4 +342,3 @@ bindsym XF86MonBrightnessUp	    exec --no-startup-id light -A 5
 #bindsym XF86Display		        exec --no-startup-id arandr
 #bindsym XF86Documents		    exec $term -e ranger ~/Documents
 #bindsym XF86WLAN		        exec $netrefresh
-
