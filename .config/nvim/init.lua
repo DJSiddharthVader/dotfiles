@@ -9,3 +9,42 @@ vim.g.rout_follow_colorscheme = true
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 require("config.lazy")
+-- local highlight = {
+--     "RainbowRed",
+--     "RainbowYellow",
+--     "RainbowBlue",
+--     "RainbowOrange",
+--     "RainbowGreen",
+--     "RainbowViolet",
+--     "RainbowCyan",
+-- }
+-- local hooks = require "ibl.hooks"
+-- hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+--     vim.api.nvim_set_hl(0, "RainbowRed", { fg = "#E06C75" })
+--     vim.api.nvim_set_hl(0, "RainbowYellow", { fg = "#E5C07B" })
+--     vim.api.nvim_set_hl(0, "RainbowBlue", { fg = "#61AFEF" })
+--     vim.api.nvim_set_hl(0, "RainbowOrange", { fg = "#D19A66" })
+--     vim.api.nvim_set_hl(0, "RainbowGreen", { fg = "#98C379" })
+--     vim.api.nvim_set_hl(0, "RainbowViolet", { fg = "#C678DD" })
+--     vim.api.nvim_set_hl(0, "RainbowCyan", { fg = "#56B6C2" })
+-- end)
+local highlight = {
+    "angr1",
+    "angr2",
+    "angr3",
+    "angr4",
+    "angr5",
+    "angr6",
+    "angr7",
+}
+local hooks = require "ibl.hooks"
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    vim.api.nvim_set_hl(0, "angr1", { fg = "#82c057" })
+    vim.api.nvim_set_hl(0, "angr2", { fg = "#87afdf" })
+    vim.api.nvim_set_hl(0, "angr3", { fg = "#87dfaf" })
+    vim.api.nvim_set_hl(0, "angr4", { fg = "#87dfdf" })
+    vim.api.nvim_set_hl(0, "angr5", { fg = "#95d5f1" })
+    vim.api.nvim_set_hl(0, "angr6", { fg = "#9d7ff2" })
+    vim.api.nvim_set_hl(0, "angr7", { fg = "#af97df" })
+end)
+require("ibl").setup()
