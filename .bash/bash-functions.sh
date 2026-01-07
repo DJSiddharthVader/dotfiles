@@ -1,4 +1,5 @@
 #!/bin/bash
+
 prog() { # progress bar, print at a given percent
     local w=60 p=$1;  shift
     # create a string of spaces, then change them to dots
@@ -28,6 +29,13 @@ mkref() {
     getref "$1" | sed -e "s/\(@article{\).*/\1${2},/"
 }
 fared() { # Find and remove empty directories
-    read -p "Delete all empty folders recursively [y/N]: " OPT
+    read -rp "Delete all empty folders recursively [y/N]: " OPT
     [[ $OPT == y ]] && find . -type d -empty -exec rm -fr {} \; &> /dev/null
 }
+
+dcols() {  # print column names and example data descriptively
+    tsv="$1"
+    rows="${2:-3}"
+    head -"${rows}" "$tsv" | tr '\t' '\n' | sed -e 's/\n$//' | pr -ts$'\t' --columns $rows | column -s$'\t' -t
+}
+
