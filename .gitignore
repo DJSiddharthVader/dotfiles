@@ -43,3 +43,9 @@
 theme_change.mp4
 .tmux/resurrect
 .vim/.netrwhist
+.config/qpdfview/qpdfview.conf
+.config/pavucontrol-qt/
+.config/powerdevilrc
+.config/powermanagementprofilesrc
+.config/transmission-daemon/stats.json
+.fonts/.uuid
