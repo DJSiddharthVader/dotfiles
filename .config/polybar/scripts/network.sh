@@ -7,9 +7,10 @@ modes=(sleek standard name strength)
 interface="wlp1s0"
 pipurl="ifconfig.co"
 # Ramp Icons
-#RAMP=("𝍥" "䷒" "䷊" "䷡" "䷀")
-#RAMP=(  ⎽ ⎽ ⎼ ⎯ ⎻)
-RAMP=(▃ ▄ ▅ ▆ ▇ █)
+# RAMP=("𝍥" "䷒" "䷊" "䷡" "䷀")
+# RAMP=(  ⎽ ⎽ ⎼ ⎯ ⎻)
+# RAMP=(▃ ▄ ▅ ▆ ▇ █)
+RAMP=(" " ▃ ▄ ▅ ▆ ▇)
 
 
 help() {

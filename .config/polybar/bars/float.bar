@@ -132,7 +132,7 @@ bluetooth-underline =
 bluetooth-overline =
 bluetooth-text-color = ${colors.foreground}
 
-mpd-prefix =
+mpd-prefix = ${colors.leftprefix}
 mpd-prefix-foreground = ${colors.col7}
 mpd-prefix-background = ${colors.transparent}
 mpd-suffix = ${colors.leftsuffix}
@@ -146,7 +146,7 @@ mpd-text-color = ${colors.foreground}
 songnames-prefix = ${colors.leftprefix}
 songnames-prefix-foreground = ${colors.col7}
 songnames-prefix-background = ${colors.transparent}
-songnames-suffix =
+songnames-suffix = ${colors.leftsuffix}
 songnames-suffix-foreground = ${colors.col7}
 songnames-suffix-background = ${colors.transparent}
 songnames-color = ${colors.col7}
