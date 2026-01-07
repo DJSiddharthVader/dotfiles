@@ -106,13 +106,16 @@ prompt_command() {
     termwidth=${COLUMNS}
     case 1 in
         $(($termwidth < 40)))
-            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(conda_env)")"
+            # modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(conda_env)")"
+            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w")"
             ;;
         $(($termwidth < 120)))
-            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(conda_env)" "\$(git_info)")"
+            # modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(conda_env)" "\$(git_info)")"
+            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$dir \w" "\$(git_info)")"
             ;;
         *) # > 120
-            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$usr \u" "$hst \h" "$dir \w" "\$(conda_env)" "\$(git_info)")"
+            # modules="$(build_prompt "\$(exit_status)" "$clk\@" "$usr \u" "$hst \h" "$dir \w" "\$(conda_env)" "\$(git_info)")"
+            modules="$(build_prompt "\$(exit_status)" "$clk\@" "$usr \u" "$hst \h" "$dir \w" "\$(git_info)")"
             ;;
     esac
     # format start and end of prompt to put info and entered text on different lines
