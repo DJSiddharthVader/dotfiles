@@ -45,7 +45,7 @@ set $move_change 20
 # Set reusable app launches
 set $BROWSER firefox
 set $term --no-startup-id st
-set $big_term --no-startup-id st -f "FiraCode Nerd Font Mono:style=Regular:size=20:antialias=true:autohint=true"
+set $big_term --no-startup-id st -f "FiraCode:style=Regular:size=20:antialias=true:autohint=true"
 set $hibernate sudo systemctl suspend
 set $netrefresh --no-startup-id sudo systemctl restart NetworkManager
 # Set colors from Xresources
@@ -211,7 +211,7 @@ bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 bindsym $mod+Shift+x   exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
-bindsym $mod+v         exec --no-startup-id ~/bin/anyconnect-linux64-4.10.03104/vpn/vpnui
+bindsym $mod+v         exec --no-startup-id /opt/cisco/anyconnect/bin/vpnui
 #bindsym $mod+Shift+v
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
