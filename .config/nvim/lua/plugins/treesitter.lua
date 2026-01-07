@@ -4,15 +4,15 @@ return {
         run = ":TSUpdate",
         opts = {
             require("nvim-treesitter.configs").setup({
-                -- ensure_installed = {
-                --     "markdown",
-                --     "markdown_inline",
-                --     "r",
-                --     "bash",
-                --     "python",
-                --     "rnoweb",
-                --     "yaml"
-                -- },
+                ensure_installed = {
+                    "markdown",
+                    "markdown_inline",
+                    "r",
+                    "bash",
+                    "python",
+                    "rnoweb",
+                    "yaml"
+                },
                 highlight = {
                     enable = true,
                     additional_vim_regex_highlighting = { 'markdown' },
