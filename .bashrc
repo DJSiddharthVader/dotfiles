@@ -183,7 +183,9 @@ fi
 #PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
 #export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
 #export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$HOME/.scripts:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH"
+export PATH="$HOME/.scripts:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/go/bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/bin/opener/bin"
 # remove duplicate path entries
 PATH="$(echo $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')"
 # }}}
@@ -204,3 +206,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+eval "$(uv generate-shell-completion bash)"

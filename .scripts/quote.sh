@@ -25,6 +25,7 @@ Usage: $0 [OPTIONS]
                 possible thinkers are {$thinker_list} or any filepath
         -h      print this message"
 }
+
 random_quote() {
     # pick random quote from local files
     quote="$(cat ${quote_files[@]} | grep '^"' | shuf -n1 | tr -d '"')"
@@ -35,12 +36,14 @@ random_quote() {
         echo "$quote\n  $author"
     fi
 }
+
 get_width() {
     # get width  of longest line (not including trailing spaces) of quote when wrapped to colwrap chars
     quote_string="$1"
     colwrap="$2"
     echo -e "$quote_string" | fold -w $colwrap -s | awk '{ print length }' | sort -n | tail -1
 }
+
 bubble() {
     # Arguments
     quote_string="$1"
@@ -63,6 +66,7 @@ bubble() {
     # Print bottom rule
     printf "%.0s$bottom_rule" $(seq 1 $box_width) | sed -e 's/^/ /' -e 's/$/ \n/'
 }
+
 thinker() {
     # Print text line and thinker, padding it to be positioned at some offset under the quote bubble
     thinker_file="$1" # ascii art file for the thinker
@@ -83,6 +87,7 @@ thinker() {
     fi
     pr -T -o $thinker_padding $thinker_file # "push" (left pad with spaces) thinker left
 }
+
 display() {
     # print quote in a though bubble and some ascii art thinking it
     quote_string="$1"
@@ -100,6 +105,7 @@ display() {
     # print whatever is thinking the bubble
     thinker $thinker_file $thinker_offset $thinker_line $thinker_padding
 }
+
 main() {
     # pick random quote and thinker, will be updated if specified by a CLI flag
     quote_string="$(random_quote)"

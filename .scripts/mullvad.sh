@@ -23,21 +23,8 @@ display() {
     case "$(status)" in
         Connected|Connecting)
             case "$mode" in
-                'ip') 
-                    output="$(mullvad status
-                              | head -2
-                              | rev
-                              | cut -d' ' -f1
-                              | rev
-                            )" 
-                    ;;
-                'location') 
-                    output="$(mullvad status
-                              | head -2 
-                              | cut -d':' -f2 
-                              | grep -o '^[^ ].*[\.]'
-                            )"
-                    ;;
+                'ip') output="$(mullvad status | head -2 | rev | cut -d' ' -f1 | rev)" ;;
+                'location') output="$(mullvad status | head -2 | cut -d':' -f2 | grep -o '^[^ ].*[\.]')" ;;
             esac
             ;;
         Disconnected|Disconnecting) output="None" ;;
