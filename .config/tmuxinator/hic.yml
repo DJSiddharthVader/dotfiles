@@ -1,12 +1,12 @@
 # /home/sidreed/.config/tmuxinator/scratch.yml
 
 name: hic
-root: ~/TalkowskiLab/Projects/hic
+root: ~/TalkowskiLab/Projects/HiC
 tmux_options: -f ~/dotfiles/.tmux.conf
-on_project_start: wal -e -n -q && sshfs sr1068@eris2n6.research.partners.org:/data/talkowski/samples/16p_hic ./remote.16p/
+on_project_start: wal -e -n -q 
 
 windows:
-  - git: # lazygit remote.16p
-  - readme: vi remote.16p/{TODO,README}.md
+  - README: vi remote.16p/README.md
+  - compartments:
   - scratch: 
-  - notebook:
+  - git: # lazygit remote.16p
