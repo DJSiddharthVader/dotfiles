@@ -31,7 +31,7 @@ export EDITOR="nvim"
 export VISUAL='nvim'
 export STEAM_RUNTIME=1
 # Default browser
-BROWSER="firefox"
+BROWSER="waterfox.bin"
 # MPD variables
 export MPD_PORT=6600
 export MPD_HOST=localhost
@@ -176,14 +176,7 @@ if which systemctl &>/dev/null; then
 fi
 # }}}
 ## Set PATH {{{
-# export GOPATH="$HOME/CMU_MSCB/Courses/Programming-02601/:$HOME/Projects/musman/:$HOME/Projects/go/src"
-#PERL5LIB="$HOME/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-#PERL_LOCAL_LIB_ROOT="$HOME/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-#PERL_MB_OPT="--install_base \"$HOME/perl5\""; export PERL_MB_OPT;
-#PERL_MM_OPT="INSTALL_BASE=$HOME/perl5"; export PERL_MM_OPT;
-#export PATH="$HOME/perl5/bin${PATH:+:${PATH}}"
-#export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-export PATH="$HOME/.scripts:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/go/bin:$PATH"
+export PATH="$HOME/.scripts:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/go/bin:$HOME/.cargo/bin:$PATH:$HOME/bin/nvim-linux-x86_64/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/bin/opener/bin"
 # remove duplicate path entries

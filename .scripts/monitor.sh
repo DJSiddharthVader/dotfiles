@@ -8,6 +8,7 @@ FPS=60
 DPI=90
 COMPOSITOR="picom"
 SCRIPT_DIR="${HOME}/dotfiles/.scripts"
+
 # Get info
 help() {
     echo "Automatically detect monitors available and what config to use
@@ -33,15 +34,19 @@ Usage: $0 \${CMD} [\${MODE}]
     list_ac        List mointors actively displaying something
 "
 }
+
 list_available_monitors() {
     xrandr | grep '[^ ]\+ connected' | cut -d' ' -f1 | grep -v "$LAPTOP_SCREEN"
 }
+
 list_active_monitors() {
     xrandr --listmonitors | tail -n+2 | rev | cut -d' ' -f1 | rev
 }
+
 is_connected() {
     [[ "$(list_active_monitors | grep -v "$LAPTOP_SCREEN" | wc -l)" -ge 1 ]]
 }
+
 detect_mode() {
     if is_connected ; then # if already connected then disconnect
         wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
@@ -63,6 +68,7 @@ detect_mode() {
     fi
     echo "${mode}"
 }
+
 pick_mode() {
     if is_connected ; then # if already connected then disconnect
         mode="laptop"
@@ -84,6 +90,7 @@ pick_mode() {
     fi
     echo "${mode}"
 }
+
 info() {
     echo "Detected Mode:      $(detect_mode)
 Next Mode:          $(pick_mode)
@@ -94,6 +101,7 @@ Active Displays:    $(list_active_monitors | paste -sd', ')
 Audio:              $(pactl get-default-sink)
 Wifi:               $(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
 }
+
 # Handle external devices
 connect_audio() {
     mode="$1"
@@ -113,6 +121,7 @@ connect_audio() {
     esac
     pactl set-default-sink ${sink}
 }
+
 organize_workspaces() {
     mode="$1"
     monitors="$(list_active_monitors)"
@@ -201,6 +210,7 @@ organize_workspaces() {
         *) echo "invalid organizing mode: ${mode}" && help && return 1 ;;
     esac
 }
+
 clean_up() {
     mode="${1}"
     # Set wallpaper on all screens
@@ -209,6 +219,7 @@ clean_up() {
     connect_audio ${mode}
     organize_workspaces ${mode}
 }
+
 disconnect(){
     # disconnect all external monitors except laptop screen
     while IFS= read -r monitor; do
@@ -218,9 +229,10 @@ disconnect(){
         fi
     done <<< "$(list_active_monitors)"
 }
+
 connect() {
     mode="${1}"
-    echo "mode: ${mode}"
+    echo "connection mode: ${mode}"
     killall -9 ${COMPOSITOR}
     monitors="$(list_available_monitors)"
     case "${mode}" in
@@ -286,6 +298,7 @@ connect() {
     ${COMPOSITOR} &
     clean_up ${mode}
 }
+
 # Main
 main() {
     cmd="${1}"
@@ -305,4 +318,5 @@ main() {
         *)          connect ${cmd} ;;
     esac
 }
+
 main ${@}

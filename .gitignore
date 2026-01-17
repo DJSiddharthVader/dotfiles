@@ -49,3 +49,6 @@ theme_change.mp4
 .config/powermanagementprofilesrc
 .config/transmission-daemon/stats.json
 .fonts/.uuid
+.config/polybar/modules.mode
+.config/polybar/separators.mode
+.config/polybar/modules.mode

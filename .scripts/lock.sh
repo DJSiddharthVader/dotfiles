@@ -6,10 +6,10 @@ FONT="GohuFont 11 Nerd Font Mono:style=Regular"
 DATE="$(date +'%A, %B %d %Y')"
 # Source current theme colors
 tmp="$(mktemp)"
-tail -n+4 $HOME/.cache/wal/colors.sh >| $tmp
-source $tmp
+tail -n+4 $HOME/.cache/wal/colors.sh >| ${tmp}
+source ${tmp}
 lockbox() {
-    #drawing rectangles
+    # drawing rectangles
     rectangles=" "
     SR="$(xrandr -q | grep ' connected' | grep -o '[0-9]*x[0-9]*+[0-9]*+[0-9]*')"
     for RES in $SR; do
@@ -27,12 +27,9 @@ lock(){
     ~/.config/polybar/scripts/pulseaudio-control.sh mute
     # prep lockscreen
     scrot -o "$SCREEN"
-    convert "$SCREEN" \
-            -scale 20% \
-            -scale 500% \
-            "$SCREEN"
-            # -draw "fill $color1 fill-opacity 0.85 $(lockbox)" \
-    #lock command
+    convert "$SCREEN" -scale 20% -scale 500% "$SCREEN"
+    # convert "$SCREEN" -scale 20% -scale 500% "$SCREEN" -draw "fill ${color1} fill-opacity 0.85 $(lockbox)"
+    # lock command
     i3lock                            \
         --nofork                      \
         --pass-volume-keys            \
@@ -61,4 +58,5 @@ lock(){
         -i "$SCREEN"
         # --no-verify                   \
 }
+
 lock

@@ -15,3 +15,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[credential]
+	helper = cache
+[safe]
+	directory = /home/sidreed/TalkowskiLab/Projects/HiC/remote.16p
