@@ -3,7 +3,7 @@ text_font='07;40'
 pow_sep="$(echo -e '\uE0B0')" # "
 # top="$(echo -e '╭\uE0B2')" # ┏ bot="$(echo -e '╰\uE0B2\uE0C6')" # ┗
 top="$(echo -e '╭')" 
-bot="$(echo -e '╰ ')"
+bot="$(echo -e '╰  ')"
 clk="$(echo -e '\u231B')"
 usr="$(echo -e '\u23FF')"
 hst="$(echo -e '\u237E')"
@@ -24,14 +24,14 @@ conda_env() {
     echo -e "$env"
 }
 git_info() {
-    #git symbols
+    # git symbols
     bsym='\u2325' # branch symbol
     committed_symbol='⇡' # dotted up arrow
     staged_symbol='' # node
     changed_symbol='∆' # delta
     added_symbol='+'
 
-    prompt="$bsym "
+    prompt="${bsym} "
     if [ -n "$(git branch 2> /dev/null)" ]; then
         branch="$(git branch 2> /dev/null | grep '\*' | cut -d' ' -f2)"
         [[ $branch = 'master' ]] && branch='m' # trim master to m
@@ -120,7 +120,7 @@ prompt_command() {
     esac
     # format start and end of prompt to put info and entered text on different lines
     start="$(setColor "41 0 01;31")$top$(setColor "0")"
-    end="$(setColor "0 01;31")\n$bot"
+    end="$(setColor "0 01;31")\n$bot "
     term_text_formatting="$(setColor "0 01;36")"
     export PS1="$start$modules$end$term_text_formatting"
 }
