@@ -1,2 +1,10 @@
 window { width: env( WIDTH, 70%); }
 @import "~/.cache/wal/colors-rofi-custom.rasi"
+configuration {
+    font: "PKMN RBYGSC 16";
+    show-icons: true;
+    drun-icon-theme: "Papirus-Dark";
+}
+element {
+  children: [element-icon, element-text];
+}
