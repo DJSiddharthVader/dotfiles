@@ -11,7 +11,7 @@ declare -A DOWNLOAD_DIRS=(
     ["ASMR"]="${HOME}/Phone/Audio.Content/ASMR"
     ["Background"]="${HOME}/Phone/Audio.Content/YT.Videos"
     ["Essays"]="${HOME}/Phone/Audio.Content/Essays"
-    ["Music"]="${HOME}/Phone/Music"
+    ["Music"]="${HOME}/Phone/Music/yt"
 )
 # How to format downloaded filepaths
 FORMAT_DELIM="^"
@@ -33,32 +33,37 @@ declare -A DOWNLOAD_ARCHIVES=(
 download_stuff() {
     stuff_name="${1}"
     # Check if stuff is in list
-    [[ -n ${SOURCE_PLAYLISTS[${stuff_name}]} ]] || echo "invalid name ${stuff_name}" && return 1
+    playlist="${SOURCE_PLAYLISTS[${stuff_name}]}"
+    [[ -n "${playlist}" ]] || (echo "invalid name ${stuff_name}" && return 1)
+    echo "${playlist}"
     download_dir="${DOWNLOAD_DIRS[${stuff_name}]}"
     format_str="${FORMAT_STRS[${stuff_name}]}"
     archive_file="${DOWNLOAD_ARCHIVES[${stuff_name}]}"
-    playlist="${SOURCE_PLAYLISTS[${stuff_name}]}"
     # Download new videos from each playlist to source dir with 
+    echo ${download_dir}
+    mkdir -p "${download_dir}"
     cd "${download_dir}" || return
-    youtube-dl                                                  \
-        -i                                                      \
-        -x                                                      \
-        --audio-quality 0                                       \
-        --audio-format 'mp3'                                    \
-        --prefer-ffmpeg                                         \
-        --geo-bypass                                            \
-        --yes-playlist                                          \
-        --playlist-reverse                                      \
-        --verbose                                               \
-        -o "${format_str}"                                      \
-        --download-archive "${archive_file}"                    \
+    youtube-dl                               \
+        -i                                   \
+        -x                                   \
+        --audio-quality 0                    \
+        --audio-format 'mp3'                 \
+        --prefer-ffmpeg                      \
+        --geo-bypass                         \
+        --yes-playlist                       \
+        --playlist-reverse                   \
+        --verbose                            \
+        -o "${format_str}"                   \
+        --skip-download                      \
         "${playlist}"
+        # --download-archive "${archive_file}" \
     cd - || return
 }
 
 main(){
-    for group in ${!SOURCE_PLAYLISTS[*]}; do
-        download_stuff "${group}"
+    for group in ${!SOURCE_PLAYLISTS[@]}; do
+        [[ "${group}" == "Music" ]] && download_stuff "${group}"
+        # download_stuff "${group}"
     done
 }
 
