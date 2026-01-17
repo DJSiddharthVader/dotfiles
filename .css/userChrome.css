@@ -1,5 +1,6 @@
 /* @namespace "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"; */
-@import url(colors.css);
+/* @import url(colors.css); */
+@import url(waterfox.css);
 /* HIDE BUTTONS */ 
 .bookmark-item .toolbarbutton-icon[label="Read Later"] { display: none !important; }
 /* hide window controls */
@@ -32,6 +33,7 @@
 #PanelUI-button { display: left; }
 #stop-button { display: none; }
 #home-button { display: none; }
+#star-button-box { display: none !important; }
 .toolbar{ display: none; }
 /* Firefox account button */
 #fxa-toolbar-menu-button { display: none; }
@@ -41,10 +43,16 @@
     background-size: cover !important;
     background-position: center !important;
     font-smoothing: antialiased !important;
-    color: var(--color0) !important;
+    /* color: var(--color0) !important; */
+    /* background: var(--color3transparent) !important; */
+    color: var(--color7) !important;
 }
 /* Format nav-bar region */
 #nav-bar {
+    background-image: var(--wallpaper) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
     box-shadow: 0 0 0 0px orange !important;
     background: transparent !important;
 }
@@ -54,26 +62,64 @@
 #nav-bar .toolbarbutton-1 > .toolbarbutton-icon,
 #nav-bar .toolbarbutton-1 > .toolbarbutton-text,
 #nav-bar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+    /* background: var(--color3transparent) !important; */
     height: 2.75rem !important;
     width:  2.75rem !important;
 }
 #nav-bar .toolbarbutton-1 image {
+    /* background: var(--color3transparent) !important; */
+    background: transparent !important;
     height: 1.75rem !important;
     width:  1.75rem !important;
-    background: transparent !important;
 }
-/* Button areas surrounding url text bar */
-#TabsToolbar {
-    background: transparent !important;
+/* Vertical Tabs */
+#sidebar {
+    /* background: transparent !important; */
+    background-image: var(--wallpaper) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+    font-smoothing: antialiased !important;
+    /* color: var(--color0) !important; */
     font-family: "PKMN RBYGSC";
     font-size: 13pt !important;
     font-weight: bolder !important;
     /* color: var(--color4) !important; */
     color: var(--color7) !important;
 }
+#sidebar-main {
+    /* background: transparent !important; */
+    background-image: var(--wallpaper) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+    font-smoothing: antialiased !important;
+    /* color: var(--color0) !important; */
+    font-family: "PKMN RBYGSC";
+    font-size: 13pt !important;
+    font-weight: bolder !important;
+    /* color: var(--color4) !important; */
+    color: var(--color7) !important;
+}
+#sidebar-main .tabbrowser-tab .tab-background:not([selected]) {
+    /* background: rgba(64, 64, 64, 0.7) !important; */
+    background: var(--color3transparent) !important;
+    color: var(--color7) !important;
+    /* background: var(--color3) !important; */
+    /* opacity: 0.7 !important; */
+}
+/* Button areas surrounding url text bar */
+#TabsToolbar {
+    font-family: "PKMN RBYGSC";
+    font-size: 15pt !important;
+    font-weight: bolder !important;
+    /* background: var(--color3transparent) !important; */
+    color: var(--color7) !important;
+}
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-text,
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-badge-stack {
+    /* background: var(--color3transparent) !important; */
     height: 3.5rem !important;
     width:  3.5rem !important;
 }
@@ -82,11 +128,6 @@
     max-width: 100vw !important; 
     border: none 
 }
-.tabbrowser-tab .tab-background:not([selected]) {
-/* set colors for tabs */ 
-    /* background: transparent !important; */
-    background: transparent !important;
-}
 .tabbrowser-tab .tab-background[selected] {
     background: var(--color4) !important;
 }
@@ -94,10 +135,10 @@
     width: 22pt !important;
     height: 22pt !important;
 }
-/* Popup menus */
 menupopup, panel {
+    padding-left: 10px !important; 
     font-family: "PKMN RBYGSC";
-    font-size: 12pt !important;
+    font-size: 14pt !important;
     font-weight: bold !important;
     --panel-background: var(--color2) !important;
     --panel-color: var(--color4) !important;
@@ -109,17 +150,23 @@ menuitem:hover {
 menu:where([_moz-menuactive="true"]:not([disabled="true"])),
 menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
     font-family: "PKMN RBYGSC";
-    font-size: 13pt !important;
+    font-size: 15pt !important;
     font-weight: bold !important;
     background-color: var(--color2) !important;
     color: var(--color4) !important;
 }
 /* Bookmarks bar */
 #PersonalToolbar {
-    background: transparent !important;
+    background-image: var(--wallpaper) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
     font-family: "PKMN RBYGSC";
     font-size: 12pt !important;
     font-weight: bold !important;
+}
+#PlacesToolbarItems > .bookmark-item {
+    background: var(--color3transparent) !important;
 }
 /* URL bar formating */
 #urlbar, #searchbar {
@@ -143,6 +190,7 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
     box-shadow: 10px 45px 146px -64px rgba(0, 0, 0, 0.65);
     width: 100% !important;
 }
+
 #urlbar-input::selection {
     background-color: var(--color4) !important;
 }
