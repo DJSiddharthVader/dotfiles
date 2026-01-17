@@ -1,14 +1,33 @@
 vim.cmd([[
 	set runtimepath^=~/.vim runtimepath+=~/.vim/after
 	let &packpath=&runtimepath
+    " automatically saves & loads folds when closing or opening a file
+    set viewoptions-=options
+    augroup remember_folds
+        autocmd!
+        autocmd BufWinLeave *.* mkview
+        autocmd BufWinEnter *.* silent! loadview
+    augroup END
+    " au BufRead * :loadview
+    au BufRead * normal zM
 	source $HOME/.vimrc
 ]])
 vim.g.maplocalleader = ";"
 vim.g.rout_follow_colorscheme = true
--- vim.o.foldmethod = "syntax"
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 require("config.lazy")
+-- highlighting
+vim.treesitter.start()
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { '<filetype>' },
+    callback = function() vim.treesitter.start() end,
+})
+-- folding
+vim.wo[0][0].foldmethod = 'expr'
+vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- indent
+vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 local highlight = {
     "angr1",
     "angr2",

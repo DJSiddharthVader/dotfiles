@@ -1,34 +1,17 @@
 return {
-    {
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-        opts = {
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "markdown",
-                    "markdown_inline",
-                    "r",
-                    "bash",
-                    "python",
-                    "rnoweb",
-                    "yaml"
-                },
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = { 'markdown' },
-                },
-                folding = { 
-                    -- disable = { "R" },
-                    enable = true
-                },
-                indent = { 
-                    enable = true 
-                    -- enable = false
-                },
-            })
-        },
-        config = function (_, opts)
-            require('nvim-treesitter.configs').setup(opts)
-        end,
-    }
+    "nvim-treesitter/nvim-treesitter",
+    branch = "main",
+    lazy = false,
+    build = ":TSUpdate",
+    config = function()
+        local langs = { "markdown", "markdown_inline", "r", "rnoweb", "yaml", "latex", "csv" }
+        require("nvim-treesitter").install(langs)
+
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = langs,
+            callback = function()
+                vim.treesitter.start()
+            end,
+        })
+    end,
 }
