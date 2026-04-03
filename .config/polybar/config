@@ -20,13 +20,16 @@ include-file = ~/.cache/wal/polybar-wal.theme
 [fonts]
 font-main = PKMN RBYGSC:style=Regular:size=9:antialias=true:autohint=true;4
 font-icons = FontAwesome:style=Regular:pixelsize=15:antialias=true:autohint=true;4
-font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=11;antialias=false;1
+font-overflow = Bitstream Vera Sans Mono:style=Roman:pixelsize=11;antialias=false;2
 ; font-overflow = Noto Sans Mono CJK JP:style=Regular:size=11:antialias=false;1
 font-powerline = PowerlineSymbols:style=Medium:size=18:antialias=true;4
 font-scrolling = Terminus (TTF):style=Regular:pixelsize=13;2
-font-weather = Weather Icons:style=Regular:size=14;3
+font-weather = Weather Icons:style=Regular:size=14;4
 font-powerline-extra = Powerline Extra Symbols:style=Regular:size=17:antialias=true;4
 font-focused = MineCraftia:style=Regular:pixelsize=9;antialias=false;7
+; font- = Font Awesome 6 Brands:format=truetype:style=Regular:size=11:antialias=;4
+; font- = FiraCode Nerd Font Mono:style=Regular:size=18:antialias=true;4
+font-jojo = Noto Sans CJK JP:style=Bold:size=13:antialias=true;3
 ;; Shadowed
 ;; Pixel Bit Advanced
 ;; Pixeliza20
@@ -139,7 +142,7 @@ font-0 = ${fonts.font-main}
 font-1 = ${fonts.font-icons}
 font-2 = ${fonts.font-overflow}
 font-3 = ${fonts.font-powerline-extra}
-font-4 = ${fonts.font-scrolling}
+font-4 = ${fonts.font-jojo}
 font-5 = ${fonts.font-weather}
 font-6 = ${fonts.font-powerline}
 font-7 = ${fonts.font-focused}
@@ -279,10 +282,12 @@ modules-right = wall
 ;;mini
 [bar/mini]
 inherit = section/float
-include-file = ~/dotfiles/.config/polybar/bars/mini.bar
-modules-center = i3 i3rightcap torrent weather cpu memory pulseaudio-control backlight battery dateleftcap date 
+include-file = ~/dotfiles/.config/polybar/bars/float.bar
+;modules-center =
 ;modules-left = 
 ;modules-right = 
+modules-left = i3 i3cap date battery memory xkeyboard 
+modules-right = wlan pulseaudio-control backlight 
 ;modules
 [module/bspwm]
 type = internal/bspwm
@@ -841,7 +846,7 @@ type = custom/text
 content = " "
 content-font = 4
 content-background = ${colors.transparent}
-content-foreground = ${root.focused-color} 
+content-foreground = ${root.i3-color} 
 content-underline = ${root.i3-underline}
 content-overline = ${root.i3-overline}
 [module/torrentcap]
