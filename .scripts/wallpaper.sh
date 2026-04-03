@@ -15,14 +15,14 @@ shopt -s extglob # for pattern matching in case statements
 
 # After getting the wallpaper image the script can set the wall paper and/or change the colorscheme for basically everything I use based on the wallpaper.
 # I use pywal to generate the color palette and colorscheme files based on the wallpaper image.
-# Then I run some commands (in change_colors()) to update the colors of apps, specifically
+# Then I run some commands (in update_theme()) to update the colors of apps, specifically
 #    - polybar (use custom pywal template and reload the bar, might not need the explicit reload if I use Xressources
 #    - GTK apps (generate oomox theme and xsettings for live update)
 #    - Firefox (send keypress to firefox that triggers js to reload colors.css file)
 #    - zathura (re-write config with new colors using custom script, no live update)
 
 # Default behaviour is to only change the wallpaper and then run `./wallpaper.sh` stay both to update the colors.
-# I do this since I often scroll through many images before settling on a wallpaper so avoids needlessly running the change_colors() function so many times.
+# I do this since I often scroll through many images before settling on a wallpaper so avoids needlessly running the update_theme() function so many times.
 # You can easily scroll through wallpapers using `./wallpaper.sh` next and `./wallpaper.sh` prev and once you get one you like run `./wallpaper.sh stay both` to set the colorschemes.
 # For convieniece I have all of these bound to key in i3 because I am fickle and impatient.
 
@@ -44,18 +44,21 @@ usage() {
     # name="$(basename $0)"
     # blnk="$(echo $name | sed -e 's/./ /g')"
     echo \
-"Usage: ./$name {path/to/image|rh|reload|display|prev|stay|next} {font|back|both}
-    rh                            reset wallpaper history
-    reload                        reload colors for current wallpaper
-    print                         print current wallpaper path
-    display                       fprint current wallpaper
-    path/to/img {font|back|both}  set wallpaper using specific file
-    prev        {font|back|both}  set the wallpaper to previous image
-    stay        {font|back|both}  keep current wallpaper
-    next        {font|back|both}  set the wallpaper to current wallpaper
-                font updates the colorschemes but not the wallpaper
-                back updates the wallpaper but not the colorscheme
-                both updates the wallpaper and the colorscheme
+"Usage: ./$name {path/to/image|rh|reload|display|prev|stay|next} {wall|color|theme|all}
+    rh                     reset wallpaper history
+    reload                 reload colors for current wallpaper
+    print                  print current wallpaper path
+    display                fprint current wallpaper
+    path/to/img {MODE_ARG} set wallpaper using specific file
+    prev        {MODE_ARG}
+    stay        {MODE_ARG}
+    next        {MODE_ARG} 
+
+    MODE_ARGS is 
+        wall)   change wallpaper only
+        color)  change colorscheme files only
+        theme) change wallpaper & colorscheme files
+        all)   change wallpaper & colorscheme files & restart apps
 "
 }
 
@@ -123,20 +126,6 @@ update_index() {
 ##########################################
 # Change colors of stuff
 ##########################################
-snapshot_browser_positions() {
-    i3-msg -t get_tree >| "${I3_WORKSPACE_JSON}"
-}
-
-restore_browser_positions(){
-    # class == "waterfox"
-    window_title="$(echo "title" | cut -d' ' -f1)"
-    window_ID=""
-    window_workspace=""
-    # i3-msg move "${title}" to "${window_workspace}
-    # i3-msg move "${window_id}" to "${window_workspace}"
-    # i3-msg move window with ${window_id} to workspace ${workspace}
-}
-
 set_wallpaper() {
     image="$1"
     # polybar-msg action "#wall.hook.0" # update polybar wallpaper module
@@ -145,7 +134,7 @@ set_wallpaper() {
     feh --bg-scale "$WALLPAPER_FILE"  # set wallpaper
 }
 
-change_colors() {
+update_theme() {
     image="$1"
     # generate colorschemes 
     wal -a 93 -n -e -i "$image"  
@@ -153,16 +142,36 @@ change_colors() {
     # theme for GTK apps and whatnot
     ~/bin/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1 
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini 
-    # restart firefox, extension automatically places windows correctly
-    snapshot_browser_positions
-    pkill -f waterfox && waterfox.bin 2>/dev/null &
-    restore_browser_positions
     # reload polybar with new colors
     [[ -z "$(pgrep 'polybar')" ]] && bar-manager.sh style stay || bar-manager.sh reload > /dev/null 2>&1 
     # reload i3 colors
     i3-msg reload
     # re-write zathura config with new colors
     zathura.sh 
+}
+
+save_browser_positions() {
+    i3-msg -t get_tree >| "${I3_WORKSPACE_JSON}"
+}
+
+restore_browser_positions(){
+    python3 ~/.scripts/restore.browser.positions.py
+    # class == "waterfox"
+    # window_title="$(echo "title" | cut -d' ' -f1)"
+    # window_ID=""
+    # window_workspace=""
+    # i3-msg move "${title}" to "${window_workspace}
+    # i3-msg move "${window_id}" to "${window_workspace}"
+    # i3-msg move window with ${window_id} to workspace ${workspace}
+}
+
+restart_apps() {
+    # restart firefox, extension automatically places windows correctly
+    save_browser_positions 
+    pkill -f waterfox && waterfox.bin 2>/dev/null &
+    restore_browser_positions
+    # reload obsidian.css
+    # obsidian reload
 }
 
 wall() {
@@ -175,12 +184,22 @@ wall() {
     # get image path of index
     image="$(get_image_index "$index")" 
     # default behaviour is to only change the wallpaper (background)
-    [ -z "$2" ] && change='back' || change="$2" 
-    case "$change" in
-        'font') change_colors "$image" ;;
-        'back') set_wallpaper "$image" ;;
-        'both') set_wallpaper "$image" && change_colors "$image" ;;
-        *) usage && exit 1 ;;
+    [ -z "$2" ] && change='wall' || change="$2" 
+    case ${change} in
+        wall)  set_wallpaper "$image"  ;;
+        color) update_theme "$image" ;;
+        theme)
+            set_wallpaper "$image" 
+            update_theme "$image"
+            ;;
+        all)
+            set_wallpaper "$image" 
+            update_theme "$image"
+            restart_apps
+            ;;
+        *) 
+            usage && exit 1 
+            ;;
     esac
 }
 
