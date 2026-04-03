@@ -101,19 +101,27 @@
     /* color: var(--color4) !important; */
     color: var(--color7) !important;
 }
-#sidebar-main .tabbrowser-tab .tab-background:not([selected]) {
+.tabbrowser-tab .tab-background:not([selected]) {
     /* background: rgba(64, 64, 64, 0.7) !important; */
     background: var(--color3transparent) !important;
     color: var(--color7) !important;
-    /* background: var(--color3) !important; */
-    /* opacity: 0.7 !important; */
+}
+.tabbrowser-tab .tab-background[selected] {
+    background: var(--color4) !important;
+}
+.toolbarbutton-icon .tab-icon-image {
+    width: 25pt !important;
+    height: 25pt !important;
+}
+#sidebar .tabbrowser-tab .tab-background:not([selected]) {
+    background: var(--color3transparent) !important;
+    color: var(--color7) !important;
 }
 /* Button areas surrounding url text bar */
 #TabsToolbar {
     font-family: "PKMN RBYGSC";
     font-size: 15pt !important;
     font-weight: bolder !important;
-    /* background: var(--color3transparent) !important; */
     color: var(--color7) !important;
 }
 #TabsToolbar .toolbarbutton-1 > .toolbarbutton-icon,
@@ -123,28 +131,17 @@
     height: 3.5rem !important;
     width:  3.5rem !important;
 }
-.tabbrowser-tab[fadein]{ 
-/* safari style tab width */
-    max-width: 100vw !important; 
-    border: none 
-}
-.tabbrowser-tab .tab-background[selected] {
-    background: var(--color4) !important;
-}
-.toolbarbutton-icon .tab-icon-image {
-    width: 22pt !important;
-    height: 22pt !important;
-}
 menupopup, panel {
     padding-left: 10px !important; 
     font-family: "PKMN RBYGSC";
     font-size: 14pt !important;
     font-weight: bold !important;
-    --panel-background: var(--color2) !important;
-    --panel-color: var(--color4) !important;
+    --panel-background: var(--color3transparent) !important;
+    --panel-color: var(--color7) !important;
+    /* --panel-color: var(--color4) !important; */
 }
 menuitem:hover {
-    background-color: var(--color2) !important;
+    background-color: var(--color3transparent) !important;
     color: var(--color4) !important;
 }
 menu:where([_moz-menuactive="true"]:not([disabled="true"])),
@@ -152,7 +149,7 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
     font-family: "PKMN RBYGSC";
     font-size: 15pt !important;
     font-weight: bold !important;
-    background-color: var(--color2) !important;
+    background-color: var(--color3transparent) !important;
     color: var(--color4) !important;
 }
 /* Bookmarks bar */
