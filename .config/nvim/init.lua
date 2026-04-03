@@ -48,3 +48,19 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
     vim.api.nvim_set_hl(0, "angr7", { fg = "#af97df" })
 end)
 require("ibl").setup()
+require('render-markdown').setup({
+    code = 
+        {
+            style = 'language',
+            -- disable_background = { 'all' },
+            -- width = 0
+        },
+    checkbox = 
+        { 
+            checked =
+                { 
+                    scope_highlight = '@markup.strikethrough',
+                    icon = '✔ '
+                },
+        },
+})
