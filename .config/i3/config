@@ -29,6 +29,8 @@ for_window [window_type="menu"] floating enable
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 # for_window [instance="zoom"] floating enable
+assign [class="obsidian"] $ws3
+assign [class="Slack"] $ws6
 workspace_layout stacking
 set $mod Mod4
 set $defgaps 5
@@ -84,17 +86,22 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id xrdb ~/.cache/wal/colors.Xresources
 # Launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
+# Launch browser
+exec --no-startup-id $BROWSER --browser
+# Launch firefox
+exec --no-startup-id firefox
+# Launch syncthing
+exec --no-startup-id syncthing --allow-newer-config
+# launch Slack
+exec --no-startup-id slack
+# launch Obsidian
+exec --no-startup-id obsidian
+# Set monitors
+exec --no-startup-id ~/.scripts/monitor.sh connect laptop
 # Composite manager
 exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
 # Launch Polybar and set wallpaper
-exec --no-startup-id ~/.scripts/wallpaper.sh stay both
-# Launch slack
-exec --no-startup-id slack
-assign [class="^Slack"] 6
-# Launch syncthing
-exec --no-startup-id syncthing
-# Launch browser
-exec --no-startup-id $BROWSER --browser
+exec --no-startup-id ~/.scripts/wallpaper.sh stay theme
 # Torrent daemon:
 # exec --no-startup-id transmission.sh -m start
 # Start VPN
@@ -167,8 +174,8 @@ bindsym $mod+q         kill
 bindsym $mod+Shift+q   move scratchpad
 bindsym $mod+w         exec --no-startup-id $BROWSER
 bindsym $mod+Shift+w   exec --no-startup-id ~/bin/tor-browser_en-US/Browser/start-tor-browser
-bindsym $mod+e         exec ~/.scripts/wallpaper.sh stay both
-bindsym $mod+Shift+e   exec ~/.scripts/bar-manager.sh restart
+bindsym $mod+e         exec ~/.scripts/wallpaper.sh stay all
+bindsym $mod+Shift+e   exec ~/.scripts/wallpaper.sh stay theme
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
 bindsym $mod+t         exec /home/sidreed/Projects/torrent.sh/transmission.sh -m search &
@@ -210,8 +217,8 @@ bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
 bindsym $mod+Shift+c   exec i3-msg reload
 bindsym $mod+v         exec --no-startup-id /opt/cisco/anyconnect/bin/vpnui
 #bindsym $mod+Shift+v
-bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next back
-bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev back
+bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next wall
+bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev wall
 bindsym $mod+n         focus output right
 bindsym $mod+Shift+n   focus output left
 bindsym $mod+m         [instance="music"] scratchpad show; [instance="music"] move position center
