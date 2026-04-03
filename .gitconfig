@@ -19,3 +19,4 @@
 	helper = cache
 [safe]
 	directory = /home/sidreed/TalkowskiLab/Projects/HiC/remote.16p
+	directory = /home/sidreed/TalkowskiLab/Projects/HiC/remote.wapl

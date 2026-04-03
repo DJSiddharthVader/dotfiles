@@ -6,7 +6,9 @@ tmux_options: -f ~/dotfiles/.tmux.conf
 on_project_start: wal -e -n -q 
 
 windows:
-  - README: vi remote.16p/README.md
-  - compartments:
-  - scratch: 
   - git: # lazygit remote.16p
+  - README:
+  - TADs:
+  - Compartment:
+  - TADCompare:
+  - cCRE Enrichment:
