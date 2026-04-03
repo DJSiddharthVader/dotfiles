@@ -6,7 +6,7 @@ HOME_MONITOR_RESOLUTION="1920x1080"
 PROJECTOR_RESOLUTION="1280x960"
 FPS=60
 DPI=90
-COMPOSITOR="picom"
+COMPOSITOR="compton"
 SCRIPT_DIR="${HOME}/dotfiles/.scripts"
 
 # Get info
@@ -77,7 +77,8 @@ pick_mode() {
         n_monitors="$(list_available_monitors | wc -l | tr -d ' ')"
         case $wifi in 
             phswifi3) mode="work" ;;
-            NewTokyo03) 
+            # NewTokyo03) 
+            TP-Link_8E6C) 
                 case $n_monitors in
                     3) mode="home" ;;
                     2) mode="shome" ;;
@@ -315,7 +316,8 @@ main() {
         info)       info ;;
         list_av)    list_available_monitors ;;
         list_ac)    list_active_monitors ;;
-        *)          connect ${cmd} ;;
+        *)          help ;;
+        # *)          connect ${cmd} ;;
     esac
 }
 
