@@ -107,7 +107,8 @@
     color: var(--color7) !important;
 }
 .tabbrowser-tab .tab-background[selected] {
-    background: var(--color4) !important;
+    background: var(--color7transparent) !important;
+    color: var(--color3transparent) !important;
 }
 .toolbarbutton-icon .tab-icon-image {
     width: 25pt !important;

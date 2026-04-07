@@ -86,6 +86,10 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id xrdb ~/.cache/wal/colors.Xresources
 # Launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
+# Composite manager
+exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
+# Set monitors
+exec --no-startup-id ~/.scripts/monitor.sh connect laptop
 # Launch browser
 exec --no-startup-id $BROWSER --browser
 # Launch firefox
@@ -96,10 +100,6 @@ exec --no-startup-id syncthing --allow-newer-config
 exec --no-startup-id slack
 # launch Obsidian
 exec --no-startup-id obsidian
-# Set monitors
-exec --no-startup-id ~/.scripts/monitor.sh connect laptop
-# Composite manager
-exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
 # Launch Polybar and set wallpaper
 exec --no-startup-id ~/.scripts/wallpaper.sh stay theme
 # Torrent daemon:
