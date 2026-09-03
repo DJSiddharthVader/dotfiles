@@ -52,3 +52,12 @@ theme_change.mp4
 .config/polybar/modules.mode
 .config/polybar/separators.mode
 .config/polybar/modules.mode
+/.config/Slack
+/.config/obsidian
+/.config/systemd/user/default.target.wants
+/.config/zoom
+/.config/zoom.conf
+/.config/zoomus.conf
+/.config/evolution/sources
+/.config/pavucontrol.ini
+/.config/ncmpcpp/error.log
