@@ -25,6 +25,7 @@ fi
 (cat ~/.cache/wal/sequences &)
 # }}}
 ## Exports {{{
+export OBSIDIAN_REST_API_KEY="89a26fd43976c422c189ca9a315f60ce4ca94c753c9de7f0427c0cd03944484a"
 export TERM='screen-256color'
 export TERMINAL='st'
 export EDITOR="nvim"
@@ -100,13 +101,11 @@ complete -cf sudo
 bind "set completion-ignore-case on"
 # Display matches for ambiguous patterns at first tab press
 bind "set show-all-if-ambiguous on"
-shopt -s cdable_vars 
-export xdp="/home/sidreed/TalkowskiLab/Projects/XDP"
-export scb="/home/sidreed/TalkowskiLab/Projects/NeuralBenchmarking"
 # }}}
 ## Better directory navigation {{{
 # Enter and list directory
 function cd() { builtin cd -- "$@" && { [ "$PS1" = "" ] || ls -hrt --color; }; }
+# eval "$(uv generate-shell-completion bash)"
 # Prepend cd to directory names automatically
 #shopt -s autocd 2> /dev/null
 # Correct spelling errors during tab-completion
@@ -114,13 +113,13 @@ shopt -s dirspell
 # Correct spelling errors in arguments supplied to cd
 shopt -s cdspell 2> /dev/null
 shopt -s cdable_vars
-export atac="$HOME/TalkowskiLab/Projects/ATAC"
-export hic="$HOME/TalkowskiLab/Projects/HiC"
-export scb="$HOME/TalkowskiLab/Projects/NeuralBenchmarking"
-export xdp2="$HOME/TalkowskiLab/Projects/XDP.Brains"
 export docs="$HOME/Documents"
-export walls="$HOME/Pictures/wallpapers"
 export dwns="$HOME/Downloads"
+export walls="$HOME/Pictures/wallpapers"
+export bsr="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1012-Biomedical.Science"
+export stats="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1715-Modern.Statistics.for.Modern.Biology"
+export rot="$HOME/Documents/PhD.Work/Roussous Rotation"
+# export tmp="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1021-Responsible.Conduct.of.Research"
 # }}}
 ## Aliases {{{
 #ls
@@ -224,27 +223,18 @@ if which systemctl &>/dev/null; then
 fi
 # }}}
 ## Set PATH {{{
-export PATH="$HOME/.scripts:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/go/bin:$HOME/.cargo/bin:$PATH:$HOME/bin/nvim-linux-x86_64/bin"
+# export PATH="$HOME/.scripts:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/go/bin:$HOME/.cargo/bin:$PATH:$HOME/bin/nvim-linux-x86_64/bin"
+export PATH="$HOME/.scripts:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+# export PATH="$HOME/go/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
-export PATH="$PATH:$HOME/bin/opener/bin"
+export PATH="/usr/local/bin:$PATH"
+# export PATH="$PATH:$HOME/bin/opener/bin"
 # remove duplicate path entries
 PATH="$(echo $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')"
 # }}}
-# Print a random quote on new terminal launch
+# Print a random quote on new terminal launch {{{
 ~/.scripts/quote.sh
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/sidreed/miniforge3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/sidreed/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/sidreed/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/sidreed/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-eval "$(uv generate-shell-completion bash)"
+# }}}
