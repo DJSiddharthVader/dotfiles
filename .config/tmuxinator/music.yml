@@ -1,0 +1,10 @@
+# /home/sidreed/.config/tmuxinator/music.yml
+
+name: music
+root: ~/
+tmux_options: -f ~/dotfiles/.tmux.conf
+on_project_start: wal -R -e -n -q &
+
+windows:
+  - ncmpcpp: ncmpcpp --config ~/.config/ncmpcpp/config -s playlist -b ~/.config/ncmpcpp/bindings
+

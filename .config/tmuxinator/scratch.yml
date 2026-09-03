@@ -6,7 +6,7 @@ tmux_options: -f ~/dotfiles/.tmux.conf
 on_project_start: wal -R -e -n -q &
 
 windows:
-  - fetch: echo; neofetch
-  - media: vi ~/Documents/Notes/media.tracker.tsv
-  - work: cd ~/TalkowskiLab/Projects/HiC
+  - fetch: clear; echo; neofetch
+  - class: cd ~/Mt.Sinai.PhD/Courses/Fall.2026/
+  - rotation: cd ~/Mt.Sinai.PhD/Rotations/Roussous
   - scratch:
