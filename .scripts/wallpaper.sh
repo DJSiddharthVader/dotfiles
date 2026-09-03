@@ -150,25 +150,10 @@ update_theme() {
     zathura.sh 
 }
 
-save_browser_positions() {
-    i3-msg -t get_tree >| "${I3_WORKSPACE_JSON}"
-}
-
-restore_browser_positions(){
-    python3 ~/.scripts/restore.browser.positions.py
-    # class == "waterfox"
-    # window_title="$(echo "title" | cut -d' ' -f1)"
-    # window_ID=""
-    # window_workspace=""
-    # i3-msg move "${title}" to "${window_workspace}
-    # i3-msg move "${window_id}" to "${window_workspace}"
-    # i3-msg move window with ${window_id} to workspace ${workspace}
-}
-
 restart_apps() {
     # restart firefox, extension automatically places windows correctly
     save_browser_positions 
-    pkill -f waterfox && waterfox.bin 2>/dev/null &
+    pkill -f waterfox-bin && waterfox-bin 2>/dev/null &
     restore_browser_positions
     # reload obsidian.css
     # obsidian reload
@@ -251,4 +236,5 @@ case 1 in
     $(( $# < 1  ))) usage && exit 1 ;;
     $(( $# > 2  ))) usage && exit 1 ;;
 esac
+
 main "$mode" "$change"
