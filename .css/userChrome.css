@@ -73,22 +73,8 @@
     width:  1.75rem !important;
 }
 /* Vertical Tabs */
-#sidebar {
-    /* background: transparent !important; */
-    background-image: var(--wallpaper) !important;
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-position: center !important;
-    font-smoothing: antialiased !important;
-    /* color: var(--color0) !important; */
-    font-family: "PKMN RBYGSC";
-    font-size: 13pt !important;
-    font-weight: bolder !important;
-    /* color: var(--color4) !important; */
-    color: var(--color7) !important;
-}
-#sidebar-main {
-    /* background: transparent !important; */
+#sidebar-container {
+    background: transparent !important;
     background-image: var(--wallpaper) !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
@@ -155,7 +141,7 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
 }
 /* Bookmarks bar */
 #PersonalToolbar {
-    background-image: var(--wallpaper) !important;
+    /* background-image: var(--wallpaper) !important; */
     background-repeat: no-repeat !important;
     background-size: cover !important;
     background-position: center !important;
