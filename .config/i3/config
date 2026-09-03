@@ -1,36 +1,12 @@
 # vim: filetype=i3
-##--Plasma Integration-----#
-# Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everything)
-exec --no-startup-id wmctrl -c Plasma
-# For the first time, manually resize them, i3 will remember the setting for floating windows
-for_window [class="yakuake"] floating enable;
-for_window [class="lattedock"] floating enable;
-for_window [class="plasmashell"] floating enable;
-for_window [class="Kmix"] floating enable; border none
-for_window [class="kruler"] floating enable; border none
-for_window [class="Plasma"] floating enable; border none
-for_window [class="Klipper"] floating enable; border none
-for_window [class="krunner"] floating enable; border none
-for_window [class="Plasmoidviewer"] floating enable; border none
-for_window [title="plasma-desktop"] floating enable; border none
-for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position 1450px 20px
-for_window [title="Desktop — Plasma"] kill; floating enable; border none
-no_focus [class="plasmashell" window_type="notification"] 
-# >>> Avoid tiling for non-Plasma stuff <<<
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="task_dialog"] floating enable
-for_window [window_role="Preferences"] floating enable
-for_window [window_role="About"] floating enable
-for_window [window_type="dialog"] floating enable
-for_window [window_type="menu"] floating enable
 ##---i3 options------------#
 # Window options
 for_window [class="^.*"] border pixel 0
 for_window [instance="feh"] floating enable
 # for_window [instance="zoom"] floating enable
-assign [class="obsidian"] $ws3
-assign [class="Slack"] $ws6
+assign [class="Zotero"] $ws7
+assign [class="obsidian"] $ws7
+assign [class="slack"] $ws8
 workspace_layout stacking
 set $mod Mod4
 set $defgaps 5
@@ -44,7 +20,7 @@ set $size_change 10
 # amount to move window position per button press
 set $move_change 20
 # Set reusable app launches
-set $BROWSER waterfox.bin
+set $BROWSER waterfox-bin
 set $term --no-startup-id st
 set $big_term --no-startup-id st -f "FiraCode:style=Regular:size=20:antialias=true:autohint=true"
 set $hibernate sudo systemctl suspend
@@ -86,22 +62,25 @@ exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 exec --no-startup-id xrdb ~/.cache/wal/colors.Xresources
 # Launch low battery notifier script
 exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
-# Composite manager
-exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
 # Set monitors
-exec --no-startup-id ~/.scripts/monitor.sh connect laptop
+exec --no-startup-id ~/.scripts/monitor.sh auto
+# Launch Polybar and set wallpaper
+exec --no-startup-id ~/.scripts/wallpaper.sh stay theme
 # Launch browser
 exec --no-startup-id $BROWSER --browser
 # Launch firefox
-exec --no-startup-id firefox
+exec --no-startup-id waterfox-bin
 # Launch syncthing
 exec --no-startup-id syncthing --allow-newer-config
 # launch Slack
 exec --no-startup-id slack
 # launch Obsidian
-exec --no-startup-id obsidian
-# Launch Polybar and set wallpaper
-exec --no-startup-id ~/.scripts/wallpaper.sh stay theme
+exec --no-startup-id /usr/bin/obsidian
+# launch zotero
+exec --no-startup-id zotero
+# Composite manager
+exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
+exec --no-startup-id picom --config ~/dotfiles/.config/compton.conf
 # Torrent daemon:
 # exec --no-startup-id transmission.sh -m start
 # Start VPN
@@ -165,30 +144,30 @@ bindsym $mod+Escape       workspace prev
 #STOP/HIDE EVERYTHING:
 #bindsym $mod+BackSpace
 # Print screen takes a screenshot.
-bindsym Print 	            exec --no-startup-id scrot
-bindsym $mod+Print 			exec --no-startup-id scrot -u
-bindsym $mod+Shift+Print 	exec --no-startup-id scrot -s
+bindsym Print 	         exec --no-startup-id scrot
+bindsym $mod+Print 		 exec --no-startup-id scrot -u
+bindsym $mod+Shift+Print exec --no-startup-id scrot -s
 ##---Letter Key Bindings---#
 bindsym $mod+q         kill
 bindsym $mod+Shift+q   move scratchpad
 bindsym $mod+w         exec --no-startup-id $BROWSER
-bindsym $mod+Shift+w   exec --no-startup-id ~/bin/tor-browser_en-US/Browser/start-tor-browser
+# bindsym $mod+Shift+w   exec --no-startup-id ~/bin/tor-browser_en-US/Browser/start-tor-browser
 bindsym $mod+e         exec ~/.scripts/wallpaper.sh stay all
 bindsym $mod+Shift+e   exec ~/.scripts/wallpaper.sh stay theme
 bindsym $mod+r         exec rofi -show run
 bindsym $mod+Shift+r   exec rofi -show window
-bindsym $mod+t         exec /home/sidreed/Projects/torrent.sh/transmission.sh -m search &
-bindsym $mod+Shift+t   layout toggle
+# bindsym $mod+t         exec /home/sidreed/Projects/torrent.sh/transmission.sh -m search &
+# bindsym $mod+Shift+t   layout toggle
 bindsym $mod+y         resize shrink width $size_change px or $size_change ppt
 bindsym $mod+Shift+y   resize grow width $size_change px or $size_change ppt
 bindsym $mod+u         [instance="dropdown"] scratchpad show,move position center
 bindsym $mod+Shift+u   sticky toggle
 bindsym $mod+i         resize shrink height $size_change px or $size_change ppt
 bindsym $mod+Shift+i   resize grow height $size_change px or $size_change ppt
-bindsym $mod+o         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu style
-bindsym $mod+Shift+o   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu sep
+bindsym $mod+o         exec --no-startup-id /usr/bin/obsidian
+# bindsym $mod+Shift+o   
 bindsym $mod+p         exec $pause
-bindsym $mod+Shift+p   exec tabbed -c zathura -e
+# bindsym $mod+Shift+p   
 bindsym $mod+a         gaps inner current minus 2
 bindsym $mod+Shift+a   gaps inner current plus 2
 bindsym $mod+s         gaps outer current minus 2
@@ -196,9 +175,9 @@ bindsym $mod+Shift+s   gaps outer current plus 2
 bindsym $mod+d         move workspace to output right
 bindsym $mod+Shift+d   move workspace to output left
 bindsym $mod+f         fullscreen toggle
-bindsym $mod+Shift+f   exec --no-startup-id ~/dotfiles/.scripts/bluetooth.sh
-bindsym $mod+g         gaps inner current set 0; gaps outer current set 0
-bindsym $mod+Shift+g   gaps inner current set $defgaps; gaps outer current set $defgaps
+# bindsym $mod+Shift+f   
+bindsym $mod+g         exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu style  
+bindsym $mod+Shift+g   exec --no-startup-id ~/dotfiles/.scripts/bar-manager.sh menu sep
 bindsym $mod+h         focus left
 bindsym $mod+Shift+h   move left $move_change
 bindsym $mod+j         focus down
@@ -210,18 +189,17 @@ bindsym $mod+Shift+l   move right $move_change
 bindsym $mod+z         exec --no-startup-id ~/.scripts/monitor.sh auto
 bindsym $mod+Shift+z   exec --no-startup-id ~/.scripts/monitor.sh laptop
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
-#bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
-bindsym $mod+Shift+x   exec --no-startup-id qdbus-qt5 org.kde.ksmserver /KSMServer org.kde.KSMServerInterface.logout -1 -1 -1
+# bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
-bindsym $mod+Shift+c   exec i3-msg reload
-bindsym $mod+v         exec --no-startup-id /opt/cisco/anyconnect/bin/vpnui
-#bindsym $mod+Shift+v
+# bindsym $mod+Shift+c   
+# bindsym $mod+v         
+# bindsym $mod+Shift+v
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next wall
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev wall
 bindsym $mod+n         focus output right
 bindsym $mod+Shift+n   focus output left
-bindsym $mod+m         [instance="music"] scratchpad show; [instance="music"] move position center
-bindsym $mod+Shift+m   exec --no-startup-id env LUTRIS_SKIP_INIT=1 lutris lutris:rungameid/3
+bindsym $mod+m         [instance="music"] scratchpad show,  move position center
+# bindsym $mod+Shift+m   
 #bindsym $mod+Shift+Return
 #bindsym $mod+Shift+Escape
 #bindsym $mod+Shift+BackSpace
