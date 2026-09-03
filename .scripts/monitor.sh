@@ -6,25 +6,24 @@ HOME_MONITOR_RESOLUTION="1920x1080"
 PROJECTOR_RESOLUTION="1280x960"
 FPS=60
 DPI=90
-COMPOSITOR="compton"
+# COMPOSITOR="compton"
+COMPOSITOR="picom"
 SCRIPT_DIR="${HOME}/dotfiles/.scripts"
 
-# Get info
 help() {
     echo "Automatically detect monitors available and what config to use
 Usage: $0 \${CMD} [\${MODE}]
-    CMDs:  {connect|disconnect|organize|audio|post_clean|info|list_av|list_ac}
-    MODEs: {home|shome|work|hybrid|ext|mirror|laptop}
-    auto           Auto detect from the following list (hybrid > ext > mirror)
-                   note that any mode can be explicitly specified by doing
-                   \$ $0 connect ${mode}
-        home   3:  home config, 2 monitors + projector
-        shome  2:  only use 2 monitors at home
-        work   2:  work config, 1 vertical monitor
-        hybrid *:  new workspaces per monitor, keep laptop screen on 
-        ext    *:  new workspaces per monitor, turn off laptop screen
-        mirror 1:  mirror laptop onto external display
-        laptop 0:  No monitors connected, just laptop
+    CMDs:  {auto|connect|disconnect|organize|audio|post_clean|info|list_av|list_ac}
+    auto   Auto detect from the following list (hybrid > ext > mirror) note that 
+           any mode can be explicitly specified by doing \$ $0 connect ${mode}
+    connect {home|shome|work|hybrid|ext|mirror|laptop}
+      - home   3:  home config, 2 monitors + projector
+      - shome  2:  only use 2 monitors at home
+      - work   2:  work config, 1 vertical monitor
+      - hybrid *:  new workspaces per monitor, keep laptop screen on 
+      - ext    *:  new workspaces per monitor, turn off laptop screen
+      - mirror 1:  mirror laptop onto external display
+      - laptop 0:  No monitors connected, just laptop
     disconnect     disconnect all external monitors
     organize       Organize workspaces on monitors (config specific)
     audio          Switch audio output (config specific)
@@ -76,12 +75,11 @@ pick_mode() {
         wifi="$(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
         n_monitors="$(list_available_monitors | wc -l | tr -d ' ')"
         case $wifi in 
-            phswifi3) mode="work" ;;
+            MSMC-green) mode="work" ;;
             # NewTokyo03) 
             TP-Link_8E6C) 
                 case $n_monitors in
                     3) mode="home" ;;
-                    2) mode="shome" ;;
                     1) echo 'Error: detected 0 monitors' && exit 1 ;; 
                     *) echo 'Error detecting monitors' && exit 1 ;; 
                 esac
@@ -103,7 +101,6 @@ Audio:              $(pactl get-default-sink)
 Wifi:               $(iwgetid | sed 's/^.*"\(.*\)"$/\1/')"
 }
 
-# Handle external devices
 connect_audio() {
     mode="$1"
     case "$mode" in
@@ -239,7 +236,7 @@ connect() {
     case "${mode}" in
         home)
             monitors=$(echo "$monitors" | grep -P 'DP-[2,3](-[5\-5,6\-6])?')
-            echo $monitors
+            # echo $monitors
             m3="$(echo "$monitors" | head -1)"
             m2="$(echo "$monitors" | head -2 | tail -1)"
             m1="$(echo "$monitors" | head -3 | tail -1)"
@@ -252,25 +249,13 @@ connect() {
                 --output ${m3} --mode ${PROJECTOR_RESOLUTION}    --rate ${FPS} --dpi ${DPI} --right-of ${m2} \
                 --output ${LAPTOP_SCREEN} --off
             ;;
-        shome)
-            monitors=$(echo "$monitors" | grep -P 'DP-[2,3]-[5\-5,6\-6]')
-            m2="$(echo "$monitors" | head -1)"
-            m1="$(echo "$monitors" | head -2 | tail -1)"
-            # echo "$monitors" 
-            # modename="$(add_modes 2560 1600 60 ${m1} ${m2})"
-            echo "${modename} | ${m1}  | ${m2}"
-            xrandr --verbose \
-                   --output ${m1} --mode ${HOME_MONITOR_RESOLUTION} --rate ${FPS} --dpi ${DPI} --primary --rotate left \
-                   --output ${m2} --mode ${HOME_MONITOR_RESOLUTION} --rate ${FPS} --dpi ${DPI} --right-of ${m1} \ # --rotate right \
-                   --output ${LAPTOP_SCREEN} --off
-            ;;
         work)
             m1="$(echo "$monitors" | head -1)"
             echo $m1
             xrandr \
                 --verbose \
                 --output "$LAPTOP_SCREEN" --mode "$LAPTOP_RESOLUTION" --primary \
-                --output $m1 --mode 1920x1080 --right-of "$LAPTOP_SCREEN" --rotate left
+                --output $m1 --mode 1920x1080 --right-of "$LAPTOP_SCREEN" 
             ;;
         hybrid)
             prev=$LAPTOP_SCREEN
@@ -300,14 +285,14 @@ connect() {
     clean_up ${mode}
 }
 
-# Main
 main() {
     cmd="${1}"
+    predicted_mode="$(pick_mode)"
     echo "Current Mode: $(detect_mode)"
-    echo "Auto Mode: $(pick_mode)"
+    echo "Auto Mode: ${predicted_mode}"
     [[ -z "${2}" ]] && mode="$(detect_mode)" || mode="${2}"
     case ${cmd} in 
-        auto)       connect $(pick_mode) ;;
+        auto)       connect ${predicted_mode} ;;
         connect)    connect ${mode} ;;
         disconnect) disconnect ;;
         audio)      connect_audio ${mode} ;;
