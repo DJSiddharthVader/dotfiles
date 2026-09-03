@@ -123,7 +123,55 @@ export walls="$HOME/Pictures/wallpapers"
 export dwns="$HOME/Downloads"
 # }}}
 ## Aliases {{{
-[ -f $HOME/.bash/bash-aliases ] && source $HOME/.bash/bash-aliases
+#ls
+alias ls='ls -X --color=auto --group-directories-first'
+alias ll='ls -alF --color=auto --group-directories-first'
+alias la='ls -A'
+alias l='ls -CF'
+alias lc='ls | wc -l'
+#Typos
+alias r,='rm -i'
+alias mc='mv'
+#Git
+alias grm='git rm'
+alias add='git add'
+alias log='git log'
+alias dif='git diff'
+alias push='git push'
+alias pull='git pull'
+alias com='git commit'
+alias bra='git branch'
+alias chk='git checkout'
+alias gst='git status'
+alias gsl='commit-status.sh status'
+alias gsw='watch -n2 "commit-status.sh status"'
+#Apps
+alias ms='mullvad status'
+alias md='mullvad disconnect'
+alias mc='mullvad connect'
+alias sc='/home/sidreed/bin/sc-im/src/sc-im'
+alias vi='nvim'
+alias rm='rm -i'
+# alias psf='find . -type f -maxdepth 99 -printf "%T@ %Tc %p\n" 2> /dev/null | sort -n'
+alias top='htop'
+alias pdf='zathura'
+alias mx='tmuxinator'
+alias ta='tmux a -t'
+#Shorten
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias rs='source ~/.bashrc'
+alias copy='xclip -sel clip'
+alias pt='ping 8.8.8.8'
+# alias portal='curl -v http://detectportal.firefox.com/canonical.html'
+alias feh='feh --scale-down -g 1080x1600 -d'
+alias vpn='/opt/cisco/anyconnect/bin/vpnui'
+#Print
+alias bgal='feh --scale-down -g 640x480 -d ~/Pictures/wallpapers/*'
+alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
+alias tl="transmission-remote -tall -l | less"
+alias tv="watch -n1 'transmission-remote -tall -l | grep -v Idle | grep -v Stopped'"
 # }}}
 ## Functions {{{
 [ -f $HOME/.bash/bash-functions.sh ] && source $HOME/.bash/bash-functions.sh
