@@ -1,0 +1,50 @@
+def_key "+"
+    show_clock
+def_key "="
+    volume_up
+
+def_key "j"
+    scroll_down
+def_key "k"
+    scroll_up
+
+def_key "ctrl-k"
+    page_up
+def_key "ctrl-j"
+    page_down
+
+def_key "K"
+    select_item
+    page_up
+def_key "J"
+    select_item
+    page_down
+def_key "ctrl-v"
+    select_range
+
+def_key "h"
+    previous_column
+def_key "l"
+    next_column
+
+def_key "."
+    show_lyrics
+
+def_key "n"
+    next_found_item
+def_key "N"
+    previous_found_item
+
+def_key "U"
+    move_sort_order_down
+def_key "I"
+    move_sort_order_up
+
+def_key "ctrl-d"
+    delete_playlist_items
+
+def_key "ctrl-d"
+    delete_browser_items
+
+def_key "ctrl-d"
+    delete_stored_playlist

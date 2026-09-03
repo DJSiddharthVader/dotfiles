@@ -118,45 +118,44 @@ for_window [instance="cheatsheet"] floating enable #cheatsheets
 # Music player daemon and sound:
 exec --no-startup-id [ ! -s ~/.config/mpd/mpd.pid ] && mpd
 # ncmpcpp scratch terminal
-set $music ncmpcpp --config ~/.ncmpcpp/config -s playlist -b ~/.ncmpcpp/bindings
-for_window [instance="music"] resize set 650 600
+for_window [instance="music"] resize set 1100 800
 for_window [instance="music"] floating enable
 for_window [instance="music"] move scratchpad
 for_window [instance="music"] border pixel 0
-exec $term -n music -e $music
+exec $term -n music -e tmuxinator start music
 # Music Commands
-set $pause --no-startup-id mpc toggle
-set $trupause --no-startup-id mpc pause
-set $next --no-startup-id mpc next
-set $prev --no-startup-id mpc prev
+set $pause     --no-startup-id mpc toggle
+set $trupause  --no-startup-id mpc pause
+set $next      --no-startup-id mpc next
+bindsym $mod+greater	        exec $next
+set $prev      --no-startup-id mpc prev
+bindsym $mod+less 	            exec $prev
 set $repeatone --no-startup-id mpc single
-set $lilfor --no-startup-id mpc seek +10
-set $bigfor --no-startup-id mpc seek +120
-set $lilbak --no-startup-id mpc seek -10
-set $bigbak --no-startup-id mpc seek -120
-set $beg --no-startup-id mpc seek 0%
+bindsym $mod+Shift+greater      exec $repeatone
+#For advancing forward/backward in an mpd song
+set $beg       --no-startup-id mpc seek 0%
+bindsym $mod+Shift+less	        exec $beg
+set $lilbak    --no-startup-id mpc seek -10
+bindsym $mod+bracketleft 	    exec $lilbak
+set $bigbak    --no-startup-id mpc seek -120
+bindsym $mod+Shift+bracketleft 	exec $bigbak
+set $lilfor    --no-startup-id mpc seek +10
+bindsym $mod+bracketright 	    exec $lilfor
+set $bigfor    --no-startup-id mpc seek +120
+bindsym $mod+Shift+bracketright exec $bigfor
 #For Alsa/Amixer
-set $inc --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 2
-set $biginc --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 5
-set $dec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 2
-set $bigdec --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 5
-set $mute --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh togmute
-set $micmute --no-startup-id amixer set Capture toggle
+set $mute     --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh togmute
+set $micmute  --no-startup-id amixer set Capture toggle
 set $truemute --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh mute
 #Volume keys
-bindsym $mod+equal          exec $inc
-bindsym $mod+Shift+equal    exec $biginc
-bindsym $mod+minus 		    exec $dec
-bindsym $mod+Shift+minus	exec $bigdec
-bindsym $mod+less 	    	exec $prev
-bindsym $mod+Shift+less		exec $beg
-bindsym $mod+greater		exec $next
-bindsym $mod+Shift+greater	exec $repeatone
-#For advancing forward/backward in an mpd song
-bindsym $mod+bracketleft 	    exec $lilbak
-bindsym $mod+Shift+bracketleft 	exec $bigbak
-bindsym $mod+bracketright 	    exec $lilfor
-bindsym $mod+Shift+bracketright exec $bigfor
+bindsym $mod+equal              exec $inc
+set $inc      --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 2
+bindsym $mod+Shift+equal        exec $biginc
+set $biginc   --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh up --volume-step 5
+bindsym $mod+minus 		        exec $dec
+set $dec      --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 2
+bindsym $mod+Shift+minus        exec $bigdec
+set $bigdec   --no-startup-id ~/.config/polybar/scripts/pulseaudio-control.sh down --volume-step 5
 ##---Basic Bindings--------#
 bindsym $mod+space		  focus mode_toggle
 bindsym $mod+Shift+space  floating toggle
