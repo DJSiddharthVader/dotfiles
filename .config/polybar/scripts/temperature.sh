@@ -5,20 +5,16 @@ mode_file="$HOME/dotfiles/.config/polybar/modules.mode"
 modes=(short long)
 #Icons
 degree="°"
-ramp1=""
-ramp2=""
-ramp3=""
-ramp4=""
-ramp5=""
-# ramp1=""
-# ramp2=""
-# ramp3=""
-# ramp4=""
-# ramp5=""
+ramp1=""
+ramp2=""
+ramp3=""
+ramp4=""
+ramp5=""
 
 help() {
     echo "Error: usage ./$(basename $0) {display|next|prev|$(echo ${modes[*]} | tr ' ' '|')}"
 }
+
 cycle() {
     # cycle through modes either forwards or backwards
     # get index of current mode in the modes array, find index for next/previous mode and get the array value of that index and echo it
@@ -37,9 +33,11 @@ cycle() {
     next_idx=$(($idx % ${#modes[@]})) #modulo to wrap back
     echo "${modes[$next_idx]}"
 }
+
 getMode() {
     grep '^temperature:' "$mode_file" | cut -d':' -f2
 }
+
 setMode() {
     sed -i "/^temperature:/s/:.*/:$1/" "$mode_file"
 }
@@ -50,6 +48,7 @@ get_temp() {
         | grep Package \
         | sed -e 's/^.*: *+\([0-9]*\)\..*$/\1/'
 }
+
 get_icon() {
     temp="$(get_temp)"
     case 1 in
@@ -61,12 +60,15 @@ get_icon() {
     esac
     echo "$icon"
 }
+
 display_short() {
     echo "$(get_temp)$degree"
 }
+
 display_long() {
     sensors |& grep -v 'ERROR' | grep 'Package\|Core' | sed -e "s/^.*: *+\([0-9]*\).*$/\1${degree}/" | tr '\n' ' '
 }
+
 display(){
     mode="$1"
     case $mode in
@@ -76,6 +78,7 @@ display(){
     esac
     echo "$temp"
 }
+
 main() {
     mode="$1"
     if [[ "$mode" == 'display' ]]; then
