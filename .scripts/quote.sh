@@ -20,7 +20,7 @@ Usage: $0 [OPTIONS]
         -q      quote (string, defualt is random from ${quote_file})
         -c      column wrap width for quote text (int, default $colwrap)
         -b      border string specifiying bubble boundaries (left top right bottom, no spaces, default is '$border_string')
-        -o      thinker offset from left side (float in [0,1], default is $thinker_line_offset)
+        -o      thinker offset from left side (any positive integer)
         -l      length of diagonal line connecting thinker to text box (int, default is $thinker_line)
         -t      thinker ascii art (file, defualt is random file from $thinker_dir)
                 possible thinkers are {$thinker_list} or any filepath
@@ -99,7 +99,8 @@ thinker() {
     # cat "${thinker_file}" 
     # while read i; do printf "%${thinker_line_offset}s ${i} \n"; done < "${thinker_file}"
     while IFS= read -r line; do 
-        printf "%${thinker_line_offset}s${line}\n"; 
+        printf "%${thinker_line_offset}s"
+        printf "%s\n" "${line}"
     done < "${thinker_file}"
 }
 
