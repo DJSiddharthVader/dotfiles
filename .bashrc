@@ -25,7 +25,7 @@ fi
 (cat ~/.cache/wal/sequences &)
 # }}}
 ## Exports {{{
-export OBSIDIAN_REST_API_KEY="89a26fd43976c422c189ca9a315f60ce4ca94c753c9de7f0427c0cd03944484a"
+export OBSIDIAN_REST_API_KEY="$(cat ~/.varfiles/obsidian.key)"
 export TERM='screen-256color'
 export TERMINAL='st'
 export EDITOR="nvim"
@@ -118,7 +118,7 @@ export dwns="$HOME/Downloads"
 export walls="$HOME/Pictures/wallpapers"
 export bsr="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1012-Biomedical.Science"
 export stats="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1715-Modern.Statistics.for.Modern.Biology"
-export rot="$HOME/Documents/PhD.Work/Roussous Rotation"
+export rot="$HOME/Mt.Sinai.PhD/Rotations/Roussous"
 # export tmp="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1021-Responsible.Conduct.of.Research"
 # }}}
 ## Aliases {{{
