@@ -1,4 +1,4 @@
-include /home/sidreed/.cache/zathura.colors
+include /home/vizier/.cache/zathura.colors
 #set recolor true
 set window-title-basename true
 set statusbar-basename false
