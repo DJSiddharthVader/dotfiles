@@ -116,7 +116,8 @@ shopt -s cdable_vars
 export docs="$HOME/Documents"
 export dwns="$HOME/Downloads"
 export walls="$HOME/Pictures/wallpapers"
-export bsr="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1012-Biomedical.Science"
+export class="$HOME/Mt.Sinai.PhD/Courses/Fall.2026"
+export bms="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1012-Biomedical.Science"
 export stats="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1715-Modern.Statistics.for.Modern.Biology"
 export rot="$HOME/Mt.Sinai.PhD/Rotations/Roussous"
 # export tmp="$HOME/Mt.Sinai.PhD/Courses/Fall.2026/BSR.1021-Responsible.Conduct.of.Research"
@@ -154,8 +155,10 @@ alias rm='rm -i'
 # alias psf='find . -type f -maxdepth 99 -printf "%T@ %Tc %p\n" 2> /dev/null | sort -n'
 alias top='htop'
 alias pdf='zathura'
-alias mx='tmuxinator'
 alias ta='tmux a -t'
+alias mx='tmuxinator'
+alias qo='~/.scripts/quote.sh'
+alias mpv="mpv --input-ipc-server=${MPV_SOCKET}"
 #Shorten
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -165,12 +168,11 @@ alias copy='xclip -sel clip'
 alias pt='ping 8.8.8.8'
 # alias portal='curl -v http://detectportal.firefox.com/canonical.html'
 alias feh='feh --scale-down -g 1080x1600 -d'
-alias vpn='/opt/cisco/anyconnect/bin/vpnui'
+alias fxpt="fxcss pick --theme ${HOME}/.waterfox/xzn6xean.default-release-1 --firefox ${HOME}/bin/waterfox-bin"
+alias fxw="fxcss pick --theme ${HOME}/.waterfox/xzn6xean.default-release-1 --firefox ${HOME}/bin/waterfox-bin"
 #Print
 alias bgal='feh --scale-down -g 640x480 -d ~/Pictures/wallpapers/*'
 alias fc-list="fc-list | cut -d':' -f2- | cut -d',' -f1"
-alias tl="transmission-remote -tall -l | less"
-alias tv="watch -n1 'transmission-remote -tall -l | grep -v Idle | grep -v Stopped'"
 # }}}
 ## Functions {{{
 [ -f $HOME/.bash/bash-functions.sh ] && source $HOME/.bash/bash-functions.sh
@@ -224,17 +226,19 @@ fi
 # }}}
 ## Set PATH {{{
 # export PATH="$HOME/.scripts:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$HOME/go/bin:$HOME/.cargo/bin:$PATH:$HOME/bin/nvim-linux-x86_64/bin"
-export PATH="$HOME/.scripts:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$PATH:$HOME/.scripts"
+export PATH="$PATH:$HOME/.local/bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
+export PATH="$PATH:/usr/local/bin"
 # export PATH="$HOME/go/bin:$PATH"
 export PATH="$PATH:/usr/local/go/bin"
-export PATH="/usr/local/bin:$PATH"
 # export PATH="$PATH:$HOME/bin/opener/bin"
+source ~/.venv/bin/activate 
 # remove duplicate path entries
 PATH="$(echo $PATH | awk -v RS=: '!($0 in a) {a[$0]; printf("%s%s", length(a) > 1 ? ":" : "", $0)}')"
 # }}}
 # Print a random quote on new terminal launch {{{
 ~/.scripts/quote.sh
 # }}}
+. "$HOME/.cargo/env"
