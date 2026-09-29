@@ -37,6 +37,27 @@
 .toolbar{ display: none; }
 /* Firefox account button */
 #fxa-toolbar-menu-button { display: none; }
+#customizableui-special-spring1,
+#customizableui-special-spring2 { 
+    display: none; 
+}
+#vertical-pinned-tabs-splitter { display: none; }
+#pinned-tabs-container { display: none; }
+#sidebar-tools-and-extensions-splitter {
+    background: var(--color3transparent) !important;
+}
+/* #placesContext { */
+/*     background: var(--color3transparent) !important; */
+/*     color: var(--color7) !important; */
+/* } */
+/* #contentAreaContextMenu { */
+/*     background: var(--color3transparent) !important; */
+/*     color: var(--color7) !important; */
+/* } */
+/* #toolbar-context-menu { */
+/*     background: var(--color3transparent) !important; */
+/*     color: var(--color7) !important; */
+/* } */
 #navigator-toolbox {
     background-image: var(--wallpaper) !important;
     background-repeat: no-repeat !important;
@@ -46,6 +67,9 @@
     /* color: var(--color0) !important; */
     /* background: var(--color3transparent) !important; */
     color: var(--color7) !important;
+}
+#main-window body {
+    background: var(--color3transparent) !important;
 }
 /* Format nav-bar region */
 #nav-bar {
@@ -96,10 +120,6 @@
     background: var(--color7transparent) !important;
     color: var(--color3transparent) !important;
 }
-.toolbarbutton-icon .tab-icon-image {
-    width: 25pt !important;
-    height: 25pt !important;
-}
 #sidebar .tabbrowser-tab .tab-background:not([selected]) {
     background: var(--color3transparent) !important;
     color: var(--color7) !important;
@@ -118,33 +138,73 @@
     height: 3.5rem !important;
     width:  3.5rem !important;
 }
-menupopup, panel {
-    padding-left: 10px !important; 
+/* menupopup, panel { */
+/*     padding-left: 10px !important; */ 
+/*     --panel-background: var(--color3transparent) !important; */
+/*     --panel-color: var(--color7) !important; */
+/*     /1* --panel-color: var(--color4) !important; *1/ */
+/* } */
+/* menuitem:hover { */
+/*     background-color: var(--color3transparent) !important; */
+/*     color: var(--color4) !important; */
+/* } */
+/* menu:where([_moz-menuactive="true"]:not([disabled="true"])), */
+/* menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) { */
+/*     font-family: "PKMN RBYGSC"; */
+/*     font-size: 15pt !important; */
+/*     font-weight: bold !important; */
+/*     background-color: var(--color3transparent) !important; */
+/*     color: var(--color4) !important; */
+/* } */
+/* menupopup.textbox-contextmenu { */
+/*     background: var(--color3transparent) !important; */
+/*     color: var(--color7) !important; */
+/* } */
+menupopup > *:not(label):not([disabled="true"]):not(.menu-iconic-left):not(.menu-accel-container):not(image):not(:hover) {
+    background-color: var(--color3transparent) !important;
+    color: var(--color7) !important;
+}
+menupopup:not(#BMB_bookmarksPopup) {
+    /* appearance: none !important; */
+    /* background-color: #F5F5F5 !important; */
+    /* background-color: var(--color3transparent) !important; */
+    color: var(--color7) !important;
     font-family: "PKMN RBYGSC";
     font-size: 14pt !important;
     font-weight: bold !important;
-    --panel-background: var(--color3transparent) !important;
-    --panel-color: var(--color7) !important;
-    /* --panel-color: var(--color4) !important; */
+    border: 0px solid var(--color3transparent) !important;
+    /* border: 10px solid transparent !important; */
+    /* border-radius: 15px !important; */
+    /* background-origin: border-box !important; */
+    /* background-clip: content-box, border-box !important; */
+    /* margin: -10px !important; */
 }
-menuitem:hover {
+.menupopup-arrowscrollbox:not([part="arrowscrollbox"]),
+.menupopup-arrowscrollbox[exportparts="scrollbox: arrowscrollbox-scrollbox"] {
     background-color: var(--color3transparent) !important;
-    color: var(--color4) !important;
+    appearance: none !important;
+    box-shadow: 0px 4px 6px -3px rgba(0,0,0,0.4) !important;
+    border-radius: 4px !important;
+    border: 0px solid var(--color3transparent) !important;
+    overflow: hidden !important;
 }
-menu:where([_moz-menuactive="true"]:not([disabled="true"])),
-menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
-    font-family: "PKMN RBYGSC";
-    font-size: 15pt !important;
-    font-weight: bold !important;
-    background-color: var(--color3transparent) !important;
-    color: var(--color4) !important;
+#toolbar-context-menu > menuitem > .menu-text,
+#toolbar-context-menu > menu > .menu-text,
+menupopup.textbox-contextmenu > menuitem > .menu-text,
+menupopup.textbox-contextmenu > menu > .menu-text,
+#contentAreaContextMenu > menuitem > .menu-text,
+#contentAreaContextMenu > menu > .menu-text {
+/* #placesContext > menuitem > .menu-text, */
+/* #placesContext > menu > .menu-text { */
+  padding-inline-start: 20px !important;
 }
 /* Bookmarks bar */
-#PersonalToolbar {
+#PersonalToolbarItems, #PersonalToolbar {
+    background: transparent !important;
     /* background-image: var(--wallpaper) !important; */
-    background-repeat: no-repeat !important;
-    background-size: cover !important;
-    background-position: center !important;
+    /* background-repeat: no-repeat !important; */
+    /* background-size: cover !important; */
+    /* background-position: center !important; */
     font-family: "PKMN RBYGSC";
     font-size: 12pt !important;
     font-weight: bold !important;
@@ -174,7 +234,6 @@ menuitem:where([_moz-menuactive="true"]:not([disabled="true"])) {
     box-shadow: 10px 45px 146px -64px rgba(0, 0, 0, 0.65);
     width: 100% !important;
 }
-
 #urlbar-input::selection {
     background-color: var(--color4) !important;
 }
