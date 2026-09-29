@@ -1,12 +1,5 @@
 # vim: filetype=i3
 ##---i3 options------------#
-# Window options
-for_window [class="^.*"] border pixel 0
-for_window [instance="feh"] floating enable
-# for_window [instance="zoom"] floating enable
-assign [class="Zotero"] $ws7
-assign [class="obsidian"] $ws7
-assign [class="slack"] $ws8
 workspace_layout stacking
 set $mod Mod4
 set $defgaps 5
@@ -37,6 +30,16 @@ client.focused_inactive $bg     $c5     $fg  $bg       $bg
 client.unfocused        $bg     $c3     $fg  $bg       $bg
 client.placeholder      $bg     $bg     $fg  $bg       $bg
 client.background       $bg
+##---App Specific options--------------#
+# Window options
+for_window [class="^.*"] border pixel 0
+for_window [instance="feh"] floating enable
+# for_window [instance="zoom"] floating enable
+for_window [title="Picture-in-Picture"] sticky enable
+assign [class="Buckets"] $ws8
+assign [class="Zotero"] $ws8
+assign [class="obsidian"] $ws8
+assign [class="slack"] $ws8
 ##---Start up--------------#
 # Set monitor resolution
 exec --no-startup-id xrandr --output eDP-1 --mode 1920x1200 &
@@ -55,8 +58,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id unclutter
 # Disable touchpad when typing
 exec --no-startup-id syndaemon -d -t -p ~/.config/i3/syndaemon.pid
-# Kill regular notification daemon so dunst runs
 exec --no-startup-id killall -q notify-osd
+# Kill regular notification daemon so dunst runs
 exec --no-startup-id dunst -config ~/.config/dunst/dunstrc
 # Load Xresources
 exec --no-startup-id xrdb ~/.cache/wal/colors.Xresources
@@ -66,21 +69,21 @@ exec --no-startup-id ~/dotfiles/.scripts/low-battery.sh &
 exec --no-startup-id ~/.scripts/monitor.sh auto
 # Launch Polybar and set wallpaper
 exec --no-startup-id ~/.scripts/wallpaper.sh stay theme
+# Composite manager
+# exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
+exec --no-startup-id picom --config ~/dotfiles/.config/compton.conf
 # Launch browser
 exec --no-startup-id $BROWSER --browser
-# Launch firefox
-exec --no-startup-id waterfox-bin
 # Launch syncthing
 exec --no-startup-id syncthing --allow-newer-config
 # launch Slack
 exec --no-startup-id slack
-# launch Obsidian
-exec --no-startup-id /usr/bin/obsidian
 # launch zotero
 exec --no-startup-id zotero
-# Composite manager
-exec --no-startup-id compton --config ~/dotfiles/.config/compton.conf
-exec --no-startup-id picom --config ~/dotfiles/.config/compton.conf
+# launch Buckets
+exec --no-startup-id buckets
+# launch Obsidian
+# exec --no-startup-id /usr/bin/obsidian
 # Torrent daemon:
 # exec --no-startup-id transmission.sh -m start
 # Start VPN
@@ -145,8 +148,8 @@ bindsym $mod+Escape       workspace prev
 bindsym Print 	         exec --no-startup-id scrot
 bindsym $mod+Print 		 exec --no-startup-id scrot -u
 bindsym $mod+Shift+Print exec --no-startup-id scrot -s
-##---Letter Key Bindings---#
 bindsym $mod+q         kill
+##---Letter Key Bindings---#
 bindsym $mod+Shift+q   move scratchpad
 bindsym $mod+w         exec --no-startup-id $BROWSER
 # bindsym $mod+Shift+w   exec --no-startup-id ~/bin/tor-browser_en-US/Browser/start-tor-browser
@@ -165,7 +168,7 @@ bindsym $mod+Shift+i   resize grow height $size_change px or $size_change ppt
 bindsym $mod+o         exec --no-startup-id /usr/bin/obsidian
 # bindsym $mod+Shift+o   
 bindsym $mod+p         exec $pause
-# bindsym $mod+Shift+p   
+# bindsym $mod+Shift+p   exec --no-startup-id ~/.scripts/copy.screenshot.sh
 bindsym $mod+a         gaps inner current minus 2
 bindsym $mod+Shift+a   gaps inner current plus 2
 bindsym $mod+s         gaps outer current minus 2
@@ -188,9 +191,9 @@ bindsym $mod+z         exec --no-startup-id ~/.scripts/monitor.sh auto
 bindsym $mod+Shift+z   exec --no-startup-id ~/.scripts/monitor.sh laptop
 bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 # bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
-bindsym $mod+c         exec --no-startup-id ~/.scripts/cheat.sh
-# bindsym $mod+Shift+c   
-# bindsym $mod+v         
+bindsym $mod+c         exec --no-startup-id ~/.scripts/copy.screenshot.sh
+bindsym $mod+Shift+c   exec --no-startup-id ~/.scripts/cheat.sh  
+bindsym $mod+v         exec --no-startup-id ~/.scripts/cornerify.sh
 # bindsym $mod+Shift+v
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next wall
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev wall
