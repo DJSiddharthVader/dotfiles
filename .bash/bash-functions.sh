@@ -71,3 +71,14 @@ dcols() {  # print column names and example data descriptively
     head -"${rows}" "$tsv" | tr '\t' '\n' | sed -e 's/\n$//' | pr -ts$'\t' --columns $rows | column -s$'\t' -t
 }
 
+setr() {
+    r_version="$(R -q -e 'message(paste(version$major, strsplit(version$minor, ".", fixed=TRUE)[[1]][[1]], sep="."))' 2>&1 1>/dev/null)"
+    arch="$(R -q -e 'message(version$arch)' 2>&1 1>/dev/null)"
+    distro="resolute"
+    # echo "$(pwd)/rv/library/${r_version}/${arch}/${distro}/:$R_LIBS"
+    project_path="$(pwd)/rv/library/${r_version}/${arch}/${distro}/"
+    home_path="${HOME}/R/x86_64-pc-linux-gnu-library/${r_version}/"
+    echo "${r_version}---${arch}---${distro}---"
+    export R_LIBS="${project_path}:${home_path}"
+}
+
