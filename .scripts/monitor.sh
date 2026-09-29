@@ -212,8 +212,8 @@ organize_workspaces() {
 clean_up() {
     mode="${1}"
     # Set wallpaper on all screens
-    ${SCRIPT_DIR}/wallpaper.sh stay back >& /dev/null  
-    ${SCRIPT_DIR}/bar-manager.sh restart >& /dev/null
+    ${SCRIPT_DIR}/wallpaper.sh stay back >& /dev/null && sleep 1
+    ${SCRIPT_DIR}/bar-manager.sh restart >& /dev/null && sleep 1
     connect_audio ${mode}
     organize_workspaces ${mode}
 }

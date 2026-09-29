@@ -30,11 +30,10 @@ shopt -s extglob # for pattern matching in case statements
 # Globals
 ##########################################
 THRESH=50
-WALLPAPER_DIR="$HOME/Pictures/wallpapers"
+WALLPAPER_DIR="$HOME/Wallpapers"
 MODE_FILE="$HOME/dotfiles/.config/polybar/modules.mode"
 HIST_FILE="$HOME/.varfiles/wallpapers.txt"
 WALLPAPER_FILE="$HOME/.varfiles/wallpaper.png"
-I3_WORKSPACE_JSON="$HOME/.varfiles/workspaces.json"
 ICON=""
 
 ##########################################
@@ -143,7 +142,7 @@ update_theme() {
     ~/bin/oomox-gtk-theme/change_color.sh -o pywal ~/.cache/wal/colors.oomox > /dev/null 2>&1 
     timeout 0.1s xsettingsd -c ~/.varfiles/gtkautoreload.ini 
     # reload polybar with new colors
-    [[ -z "$(pgrep 'polybar')" ]] && bar-manager.sh style stay || bar-manager.sh reload > /dev/null 2>&1 
+    [[ -z "$(pgrep 'polybar')" ]] && bar-manager.sh style stay || bar-manager.sh restart > /dev/null 2>&1
     # reload i3 colors
     i3-msg reload
     # re-write zathura config with new colors
@@ -152,11 +151,10 @@ update_theme() {
 
 restart_apps() {
     # restart firefox, extension automatically places windows correctly
-    save_browser_positions 
     pkill -f waterfox-bin && waterfox-bin 2>/dev/null &
-    restore_browser_positions
     # reload obsidian.css
     # obsidian reload
+    pkill -f thunderbird && thunderbird 2>/dev/null &
 }
 
 wall() {

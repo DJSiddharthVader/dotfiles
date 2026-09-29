@@ -84,7 +84,16 @@ rename_song_by_template() {
     # echo "${song_filepath}"
     # echo "${renameing_template}"
     mkdir -p "$(dirname "${renameing_template}")"
-    cp "${song_filepath}" "${renameing_template}"
+    if [[ "${song_filepath}" != "${renameing_template}" ]]; then
+        # echo "============DIFF=========================="
+        # echo "---${song_filepath}---"
+        # echo "---${renameing_template}---"
+        mv "${song_filepath}" "${renameing_template}"
+    # else 
+        # echo "=SAME=========================="
+        # echo "---${renameing_template}---"
+        # echo "---${song_filepath}---"
+    fi
 }
 
 rename_all_songs() {
