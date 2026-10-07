@@ -197,8 +197,8 @@ bindsym $mod+x         exec --no-startup-id ~/.scripts/lock.sh
 # bindsym $mod+Shift+x   exec $term -e tmuxinator start visuals -n visuals -p ~/dotfiles/.tmuxinator/visuals.yml
 bindsym $mod+c         exec --no-startup-id ~/.scripts/copy.screenshot.sh
 bindsym $mod+Shift+c   exec --no-startup-id ~/.scripts/cheat.sh  
-bindsym $mod+v         exec --no-startup-id ~/.scripts/cornerify.sh
-# bindsym $mod+Shift+v
+bindsym $mod+v         exec --no-startup-id ~/.scripts/cornerify.sh toggle
+bindsym $mod+Shift+v   exec --no-startup-id ~/.scripts/cornerify.sh next
 bindsym $mod+b         exec ~/dotfiles/.scripts/wallpaper.sh next wall
 bindsym $mod+Shift+b   exec ~/dotfiles/.scripts/wallpaper.sh prev wall
 bindsym $mod+n         focus output right
