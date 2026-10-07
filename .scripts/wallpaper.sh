@@ -152,9 +152,13 @@ update_theme() {
 restart_apps() {
     # restart firefox, extension automatically places windows correctly
     pkill -f waterfox-bin && waterfox-bin 2>/dev/null &
+    # re-launch thunderbird
+    pkill -f thunderbird && thunderbird 2>/dev/null &
+    pkill -f zotero && zotero 2>/dev/null &
+    pkill -f slack && slack 2>/dev/null &
+    
     # reload obsidian.css
     # obsidian reload
-    pkill -f thunderbird && thunderbird 2>/dev/null &
 }
 
 wall() {

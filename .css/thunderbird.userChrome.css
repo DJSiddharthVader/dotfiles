@@ -6,41 +6,8 @@
  *
  * Thunderbird profile customization preference:
  * https://support.mozilla.org/kb/config-editor
- *
- * The selectors below target Thunderbird's internal chrome UI. They are not
- * part of a stable public CSS API and may need adjustment after Thunderbird
- * upgrades.
  */
-
 @import url("colors.css");
-/* :root { */
-/*     --uc-bg: var(--background); */
-/*     --uc-bg-dark: var(--color0); */
-/*     --uc-bg-raised: var(--color8); */
-/*     --uc-bg-hover: var(--color2); */
-/*     --uc-bg-selected: var(--color1); */
-
-/*     --uc-text: var(--foreground); */
-/*     --uc-text-muted: var(--color4); */
-/*     --uc-text-bright: var(--color7); */
-
-/*     --uc-accent: var(--color6); */
-/*     --uc-accent-alt: var(--color5); */
-/*     --uc-border: var(--color8); */
-
-/*     --lwt-accent-color: var(--uc-bg-dark) !important; */
-/*     --lwt-text-color: var(--uc-text) !important; */
-/*     --toolbar-bgcolor: var(--uc-bg) !important; */
-/*     --toolbar-color: var(--uc-text) !important; */
-/*     --sidebar-background-color: var(--uc-bg-dark) !important; */
-/*     --sidebar-text-color: var(--uc-text) !important; */
-/*     --arrowpanel-background: var(--uc-bg-raised) !important; */
-/*     --arrowpanel-color: var(--uc-text) !important; */
-/*     --in-content-page-background: var(--uc-bg) !important; */
-/*     --in-content-text-color: var(--uc-text) !important; */
-/* } */
-
-
 /*
 * ==========================================================================
 * Core UI Theming
@@ -66,10 +33,13 @@
     color: var(--uc-text) !important;
 }
 
+/* #unifiedToolbarContainer { display:none !important; } */
+/* #spacesToolbar { display:none !important; } */
 #spacesToolbar {
-    border-color: transparent !important;
+    /* display: none !important; */ 
     /* background-color: transparent !important; */
-    background-color: var(--color2) !important; 
+    background-color: var(--color3) !important; 
+    border-color: transparent !important;
 }
 
 /* Toolbars */
@@ -93,7 +63,7 @@ toolbar,
 toolbarbutton,
 .toolbarbutton-1,
 button {
-    /* background: var(--color2) !important; */
+    /* background: var(--color3) !important; */
     /* color: transparent !important; */
     color: var(--uc-text) !important;
     fill: var(--uc-text) !important;
@@ -102,7 +72,7 @@ toolbarbutton:hover,
 .toolbarbutton-1:hover,
 button:hover {
     /* background-color: var(--uc-bg-hover) !important; */
-    background: var(--color3) !important;
+    background: var(--color2) !important;
     color: var(--uc-text-bright) !important;
     fill: var(--uc-text-bright) !important;
 }
@@ -115,15 +85,16 @@ toolbarbutton:active,
     color: var(--uc-text-bright) !important;
 }
 html body#paneLayout.layout-vertical div#folderPane div#folderPaneHeaderBar.sidebar-panel-header {
-    background-color: var(--color2) !important; 
+    background-color: var(--color3) !important; 
 }
 /* #tabs-toolbar, */ 
 html#messengerWindow body toolbox#navigation-toolbox vbox#titlebar toolbar#tabs-toolbar {
-    background-color: var(--color2) !important; 
+    background-color: var(--color3) !important; 
 }
 #tabmail-tabs,
 .tabmail-tabs {
-    background-color: var(--color2) !important;
+    /* background-color: var(--color2) !important; */
+    background-color: var(--color4) !important;
     /* background-color: transparent !important; */
     /* background-image: var(--wallpaper) !important; */
     /* background-position: center center !important; */
@@ -133,15 +104,15 @@ html#messengerWindow body toolbox#navigation-toolbox vbox#titlebar toolbar#tabs-
     color: var(--uc-text) !important;
 }
 .tabmail-tab:hover {
-    background-color: var(--color4) !important;
+    background-color: var(--color5) !important;
     color: var(--uc-text-bright) !important;
 }
 /* Active Thunderbird mail tab */
 #tabmail-tabs .tabmail-tab[selected] .tab-background,
 #tabmail-tabs .tabmail-tab[visuallyselected="true"] .tab-background,
 #tabmail-tabs .tabmail-tab[selected="true"] .tab-background {
-    /* background: var(--color3) !important; */
-    background-color: var(--color5) !important;
+    /* background: var(--color2) !important; */
+    background-color: var(--color4) !important;
     background-image: none !important;
     /* box-shadow: none !important; */
 }
@@ -172,7 +143,7 @@ html#messengerWindow body toolbox#navigation-toolbox vbox#titlebar toolbar#tabs-
     color: var(--uc-text) !important;
 }
 #folderTree treechildren::-moz-tree-row(hover) {
-    background-color: var(--color3) !important; 
+    background-color: var(--color2) !important; 
     /* background-color: var(--uc-bg-hover) !important; */
 }
 #folderTree treechildren::-moz-tree-row(selected) {
@@ -194,95 +165,30 @@ html body#paneLayout.layout-vertical div#threadPane,
 html body#paneLayout.layout-vertical div#threadPane div#threadPaneHeaderBar,
 html body#paneLayout.layout-vertical div#threadPane div#threadPaneHeaderBar.list-header-bar {
     /* background-color: transparent !important; */ 
-    background-color: var(--color2) !important; 
+    background-color: var(--color3) !important; 
     border-color: transparent !important; 
 }
 
-/* Message/thread pane */
-/* #threadPane, */
-/* #threadTree, */
-/* #threadTree treechildren, */
-/* #threadTree treechildren::-moz-tree-row { */
-/*     /1* background-color: transparent !important; *1/ */
-/*     /1* background-color: var(--background) !important; *1/ */
-/*     /1* background-image: var(--wallpaper) !important; *1/ */
-/*     /1* background-position: center center !important; *1/ */
-/*     /1* background-repeat: no-repeat !important; *1/ */
-/*     /1* background-size: cover !important; *1/ */
-/*     /1* background-attachment: fixed !important; *1/ */
-/*     background-color: var(--color2) !important; */ 
-/*     /1* background-color: transparent !important; *1/ */ 
-/*     color: var(--uc-text) !important; */
-/* } */
-/* #threadTree treechildren::-moz-tree-row(hover) { */
-/*     background-color: var(--color4) !important; */ 
-/*     /1* background-color: var(--uc-bg-hover) !important; *1/ */
-
-/* } */
-/* #threadTree treechildren::-moz-tree-row(selected) { */
-/*     background-color: var(--color5) !important; */ 
-/*     /1* background-color: var(--uc-bg-selected) !important; *1/ */
-/* } */
-/* #threadTree treechildren::-moz-tree-row(selected, focus) { */
-/*     background-color: var(--color6) !important; */ 
-/*     /1* background-color: var(--uc-accent-alt) !important; *1/ */
-/* } */
-/* #threadTree treechildren::-moz-tree-cell-text, */
-/* #threadTree treechildren::-moz-tree-cell-text(subjectCol), */
-/* #threadTree treechildren::-moz-tree-cell-text(senderCol), */
-/* #threadTree treechildren::-moz-tree-cell-text(dateCol) { */
-/*     color: var(--uc-text) !important; */
-/* } */
-/* #threadTree treechildren::-moz-tree-cell-text(selected), */
-/* #threadTree treechildren::-moz-tree-cell-text(selected, focus) { */
-/*     color: var(--uc-text-bright) !important; */
-/* } */
-/* #threadTree treechildren::-moz-tree-cell-text(unread) { */
-/*     background-color: var(--color5) !important; */ 
-/*     color: var(--uc-accent) !important; */
-/*     font-weight: bold !important; */
-/* } */
-/* #threadTree tbody[data-properties~="unread"], */
-/* #threadTree[rows="thread-card"] .card-layout[data-properties~="unread"] { */
-/*     background-color: var(--color5) !important; */ 
-/*     font-weight: bold; */
-/* } */
-/* html body#paneLayout.layout-vertical div#threadPane tree-view#threadTree.tree-view-scrollable-container table.tree-table.some-selected tbody tr td div.card-container { */
-/*     background-color: var(--color2) !important; */ 
-/* } */
-/* html body#paneLayout.layout-vertical div#threadPane tree-view#threadTree.tree-view-scrollable-container table.tree-table.some-selected tbody tr td div.card-container { */
-/*     background-color: var(--color2) !important; */ 
-/* } */
-/* Read message cards */
-/* #threadPane tr[is="thread-row"]:not([data-properties~="unread"]), */
-/* #threadPane tr[is="thread-row"][data-properties~="unread"] { */
-/*     color: var(--color0) !important; */
-/* } */
 #threadPane,
 #threadTree {
-    background-color: var(--color3) !important;
-}
-#threadTree [is="tree-view-table-body"] tr .card-container {
     background-color: var(--color2) !important;
 }
-/* #threadTree [is="tree-view-table-body"] tr[data-properties~="unread"] td[aria-selected="true"] .card-container, */
-/* #threadTree [is="tree-view-table-body"] tr[data-properties~="unread"].selected .card-container, */
-/* #threadPane tr[is="thread-card"]:not([data-properties~="unread"]), */
-/* #threadTree [is="tree-view-table-body"] tr[data-properties~="unread"] .card-container, */
-/* #threadTree tbody tr[data-properties~="unread"] > td > .card-container, */
-/* #threadPane .thread-card:not([data-properties~="unread"]), */
-/* #threadPane tr[is="thread-row"][data-properties~="unread"], */
-/* #threadPane .thread-card[data-properties~="unread"], */
-/* #threadPane [is="thread-card"][data-properties~="unread"] .thread-card-row, */
+#threadTree [is="tree-view-table-body"] tr .card-container {
+    /* padding: 0px !important; */
+    /* margin: 0px !important; */
+    /* height: 70% !important; */
+    background-color: var(--color3) !important;
+}
 #threadTree [is="tree-view-table-body"] tr[data-properties*="unread"] .card-container {
+    height: 100% !important;
     background-color: var(--color4) !important;
     font-weight: bold !important;
 }
 #threadTree [is="tree-view-table-body"] tr[aria-selected="true"] .card-container {
+    height: 100% !important;
     background-color: var(--color5) !important;
     font-weight: bold !important;
 }
-
 
 /* Message pane */
 #messagePane,
@@ -306,7 +212,7 @@ html body#paneLayout.layout-vertical div#threadPane div#threadPaneHeaderBar.list
 #header-view-toolbar {
     /* background-color: var(--uc-bg-dark) !important; */
     background-color: transparent !important;
-    /* background-color: var(--color2) !important; */
+    /* background-color: var(--color3) !important; */
     color: var(--uc-text) !important;
     border-color: var(--uc-border) !important;
 }
@@ -314,12 +220,12 @@ html body#paneLayout.layout-vertical div#threadPane div#threadPaneHeaderBar.list
 .headerName,
 .headerName:hover,
 .headerValue:hover {
-    background-color: var(--color3) !important;
+    background-color: var(--color2) !important;
     color: var(--uc-text) !important;
 }
 #expandedsubjectBox,
 #expandedsubjectBox .headerValue {
-    background-color: var(--color2) !important;
+    background-color: var(--color3) !important;
     color: var(--uc-accent) !important;
     font-weight: bold !important;
 }
@@ -333,12 +239,12 @@ html body#paneLayout.layout-vertical div#threadPane div#threadPaneHeaderBar.list
 }
 #quick-filter-bar toolbarbutton,
 #quick-filter-bar button {
-    background-color: var(--color2) !important;
+    background-color: var(--color3) !important;
     color: var(--uc-text) !important;
 }
 #quick-filter-bar toolbarbutton:hover,
 #quick-filter-bar button:hover {
-    background-color: var(--color3) !important;
+    background-color: var(--color2) !important;
     /* background-color: var(--uc-bg-hover) !important; */
     color: var(--uc-text) !important;
 }
@@ -350,7 +256,7 @@ input,
 #searchInput,
 menulist,
 select {
-    background-color: var(--color2) !important;
+    background-color: var(--color3) !important;
     /* background-color: transparent !important; */
     color: var(--uc-text) !important;
     border-color: var(--uc-border) !important;
@@ -411,21 +317,13 @@ separator,
 #statusTextBox {
     /* background-color: var(--uc-bg-dark) !important; */
     /* background-color: transparent !important; */
-    background-color: var(--color2) !important;
+    background-color: var(--color3) !important;
     color: var(--uc-text-muted) !important;
 }
 
 /* ==========================================================================
    MESSAGE PANE
    ========================================================================== */
-/*
- * #messagePane and #messagepanebox:
- * The outer chrome containers surrounding the displayed email.
- *
- * The wallpaper is applied here rather than directly to the message's HTML
- * document. This affects the message-pane background visible around messages
- * and behind transparent/plain-text message content.
- */
 #messagePane,
 #messagepanebox,
 #messagepaneboxwrapper,
@@ -439,50 +337,20 @@ separator,
     /* background-color: transparent !important; */
     color: var(--foreground) !important;
 }
-
-/*
- * #messagepane:
- * The browser element used to display the selected email.
- *
- * A transparent background allows the wallpaper from the surrounding message
- * pane to remain visible. Setting the browser itself to transparent is useful
- * for plain-text messages and for message content that does not paint an
- * opaque page background.
- */
 #messagepane {
     background-color: transparent !important;
     background-image: none !important;
     color: var(--foreground) !important;
 }
-
-/* #messageBrowser { */
-/* } */
-/* #msgHeaderView { */
-/* } */
-/* html body hbox#messagepaneboxwrapper vbox#messagepanebox vbox#singleMessage hbox#msgHeaderView.main-header-area header#messageHeader.message-header-container.message-header-large-subject.message-header-hide-label-column.message-header-show-recipient-avatar.message-header-show-sender-full-address.scrollable div#headerSenderToolbarContainer.message-header-row.header-row-reverse.message-header-wrap.items-center div#header-view-toolbox.header-buttons-container hbox#header-view-toolbar.header-buttons-container.themeable-brighttext, */
-/* html body hbox#messagepaneboxwrapper vbox#messagepanebox vbox#singleMessage hbox#msgHeaderView.main-header-area header#messageHeader.message-header-container.message-header-large-subject.message-header-hide-label-column.message-header-show-recipient-avatar.message-header-show-sender-full-address.scrollable div#headerSenderToolbarContainer.message-header-row.header-row-reverse.message-header-wrap.items-center div#expandedfromRow.header-row-grow div#expandedfromBox.multi-recipient-row ol.recipients-list { */
 #dateLabelSubject.message-header-datetime,
 #header-view-toolbox,
 #header-view-toolbox.header-buttons-container {
-    background-color: var(--color2) !important;
+    background-color: var(--color3) !important;
 }
-
 
 /* ==========================================================================
    CALENDAR BACKGROUND
    ========================================================================== */
-
-/*
- * #calendar-view-box:
- * The main calendar workspace containing the day, week, multiweek, and month
- * views.
- *
- * #month-view and #multiweek-view:
- * The month and multiweek calendar view containers.
- *
- * The image is applied to the view containers, while the individual calendar
- * cells are made transparent so the wallpaper remains visible.
- */
 #calendar-view-box,
 #calendar-view-box > *,
 #month-view,
@@ -496,11 +364,6 @@ separator,
     background-size: cover !important;
     /* background-color: transparent !important; */
 }
-
-/*
- * The calendar's internal scrolling/content areas can otherwise paint an
- * opaque background over the image.
- */
 #calendar-view-box .calendar-view,
 #calendar-view-box .calendar-view-inner,
 #month-view .calendar-view-inner,
@@ -508,21 +371,9 @@ separator,
     background-color: transparent !important;
 }
 
-
 /* ==========================================================================
    CALENDAR GRID
    ========================================================================== */
-
-/*
- * .calendar-month-day-box:
- * Individual day cells in Thunderbird's month and multiweek views.
- *
- * Transparent backgrounds expose the wallpaper. The border creates the
- * visible grid over the image.
- *
- * Thunderbird calendar customization examples:
- * https://connect.mozilla.org/t5/ideas/thunderbird-calendar-month-and-multi-week-view-suggestion-add-a/idi-p/37157
- */
 .calendar-month-day-box,
 .calendar-month-day-box-current-month,
 .calendar-month-day-box-other-month,
@@ -540,24 +391,12 @@ separator,
         transparent
     ) !important;
 }
-
-/*
- * Make the month-view and multiweek-view grid backgrounds transparent.
- * These selectors cover the grid rows and boxes used by Lightning's calendar
- * implementation.
- */
 #week-view *,
 #day-view *, 
 #month-view *,
 #multiweek-view * {
     background-color: transparent;
 }
-
-/*
- * Reapply the wallpaper to the view roots after making descendants
- * transparent. This prevents the broad transparency rule above from removing
- * the image from the actual calendar view.
- */
 #week-view,
 #day-view,
 #month-view,
@@ -569,15 +408,9 @@ separator,
     background-color: transparent;
 }
 
-
 /* ==========================================================================
    CALENDAR HEADERS AND DATE LABELS
    ========================================================================== */
-/*
- * Calendar day-name headers and date labels.
- * A subtle translucent background keeps text readable without hiding the
- * wallpaper.
- */
 .calendar-day-label-name,
 .calendar-month-day-box-date-label,
 .calendar-month-day-box-date-label-wrapper,
@@ -594,11 +427,6 @@ separator,
         transparent
     ) !important;
 }
-
-/*
- * Current day in month/multiweek view.
- * The accent color makes today visible while preserving the wallpaper.
- */
 .calendar-month-day-box-current-month[relation="today"],
 .calendar-month-day-box-day-off[relation="today"],
 .calendar-month-day-box-other-month[relation="today"] {
@@ -609,11 +437,6 @@ separator,
     ) !important;
     border: 2px solid var(--color6) !important;
 }
-
-/*
- * Days belonging to another month.
- * A darker translucent overlay visually separates them from the active month.
- */
 .calendar-month-day-box-other-month {
     background-color: color-mix(
         in srgb,
@@ -622,38 +445,23 @@ separator,
     ) !important;
 }
 
-
 /* ==========================================================================
    CALENDAR EVENT AREAS
    ========================================================================== */
-
-/*
- * .calendar-event-column:
- * The event area inside a calendar day. Keep it transparent so the wallpaper
- * and grid remain visible.
- */
 .calendar-event-column,
 .calendar-event-column-box,
 .calendar-event-box {
     background-color: transparent !important;
 }
-
-/*
- * Calendar events receive a translucent background for readability.
- * The event's own calendar color may override this in some Thunderbird
- * versions.
- */
 .calendar-event-box {
     background-color: color-mix(
         in srgb,
-        var(--color2) 76%,
+        var(--color3) 76%,
         transparent
     ) !important;
     border-color: var(--color6) !important;
     color: var(--foreground) !important;
 }
-
-/* Selected or hovered calendar events. */
 .calendar-event-box:hover,
 .calendar-event-box[selected="true"] {
     background-color: color-mix(
@@ -675,7 +483,6 @@ separator,
     background-color: var(--color8) !important;
     border-color: var(--color8) !important;
 }
-
 /* Keep calendar scrollbars compatible with the wallpaper theme. */
 #calendar-view-box scrollbar {
     background-color: color-mix(
@@ -696,23 +503,23 @@ separator,
 #calendar-view-box scrollbar thumb:hover {
     background-color: var(--color6) !important;
 }
-}
-html#messengerWindow body vbox#messengerBody hbox#tabmail-container tabmail#tabmail.printPreviewStack tabbox#tabmail-tabbox tabpanels#tabpanelcontainer.plain vbox#calendarTabPanel.deck-selected hbox#calendarContent hbox#calendarDisplayBox vbox#calendar-view-box div#calendarViewHeader div.navigation-inner-box div#calendarControls div.button-group,
-html#messengerWindow body vbox#messengerBody hbox#tabmail-container tabmail#tabmail.printPreviewStack tabbox#tabmail-tabbox tabpanels#tabpanelcontainer.plain vbox#calendarTabPanel.deck-selected hbox#calendarContent vbox#calSidebar {
-    /* background-image: var(--wallpaper) !important; */
-    /* background-position: center center !important; */
-    /* background-repeat: no-repeat !important; */
-    /* background-size: cover !important; */
-    /* background-attachment: fixed !important; */
-    /* background-color: transparent !important; */
-    background-color: var(--color3) !important; 
-    color: var(--foreground) !important; 
-}
-html#messengerWindow body vbox#messengerBody hbox#tabmail-container tabmail#tabmail.printPreviewStack tabbox#tabmail-tabbox tabpanels#tabpanelcontainer.plain vbox#calendarTabPanel.deck-selected hbox#calendarContent hbox#calendarDisplayBox vbox#calendar-view-box div#calendarViewHeader div.navigation-inner-box div#viewToggle.calview-toggle {
+#calendarTabPanel.deck-selected hbox#calendarContent hbox#calendarDisplayBox vbox#calendar-view-box div#calendarViewHeader div.navigation-inner-box div#viewToggle.calview-toggle {
     background-color: var(--color4) !important; 
     color: var(--foreground) !important; 
 }
-html#messengerWindow body vbox#messengerBody hbox#tabmail-container tabmail#tabmail.printPreviewStack tabbox#tabmail-tabbox tabpanels#tabpanelcontainer.plain vbox#calendarTabPanel.deck-selected hbox#calendarContent vbox#calSidebar calendar-modevbox#minimonth-pane vbox hbox#calMinimonthBox calendar-minimonth#calMinimonth div.minimonth-header.minimonth-month-box {
+#calSidebar calendar-modevbox#minimonth-pane vbox hbox#calMinimonthBox calendar-minimonth#calMinimonth div.minimonth-header.minimonth-month-box {
+    background-color: var(--color3) !important; 
+    color: var(--foreground) !important; 
+}
+
+#calendarTabPanel.deck-selected hbox#calendarContent vbox#calSidebar {
     background-color: var(--color2) !important; 
     color: var(--foreground) !important; 
+}
+.minimonth-cal-box {
+    background-color: var(--color4) !important; 
+}
+#calSidebar calendar-modevbox#minimonth-pane vbox hbox#calMinimonthBox calendar-minimonth#calMinimonth div.minimonth-header.minimonth-month-box { 
+/* #calMinimonth > div:nth-child(1) { */
+    background-color: var(--color4) !important; 
 }
